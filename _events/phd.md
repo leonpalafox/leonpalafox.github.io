@@ -1,7 +1,7 @@
 ---
-image: "/assets/images/timeline/telecom.png"
-date: "Octobre 2015"
-enddate: ""
+image: "/assets/images/timeline/todai.png"
+date: "March 2010"
+enddate: "March 2013"
 ---
 
-PhD Student @ Télécom ParisTech (Université Paris-Saclay).
+PhD Degree in Machine Learning @ The University of Tokyo.
