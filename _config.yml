@@ -89,8 +89,8 @@ analytics:
 author:
   name             : *name
   avatar           : "/assets/images/bio-photo.jpg"
-  bio              : I am a PhD student at Télécom ParisTech (Université Paris-Saclay).
-  location         : "Paris, FRANCE"
+  bio              : I am a Machine Learning Professor at Universidad Panamericana.
+  location         : "Mexico City, MEXICO"
   email            :
   uri              :
   bitbucket        :
@@ -99,13 +99,13 @@ author:
   flickr           :
   facebook         :
   foursquare       :
-  github           : "jacobmontiel"
+  github           : "leonpalafox"
   gitlab           :
   google_plus      :
   keybase          :
-  instagram        : "jacobmex"
+  instagram        : 
   lastfm           :
-  linkedin         : "jacobmontiel"
+  linkedin         : "leonpalafox"
   pinterest        :
   soundcloud       :
   stackoverflow    : # "123456/username" (the last part of your profile url, e.g. https://stackoverflow.com/users/123456/username)
