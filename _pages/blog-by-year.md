@@ -1,7 +1,7 @@
 ---
 layout: archive
-title: "News"
-permalink: news-by-year
+title: "Blog"
+permalink: blog-by-year
 classes: wide
 author_profile: true
 ---

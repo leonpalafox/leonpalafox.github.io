@@ -1,5 +1,5 @@
 ---
-# title:  "Jacob Montiel"
+# title:  "Leon Palafox"
 layout: splash
 permalink: /
 header:
@@ -7,7 +7,7 @@ header:
   overlay_filter: "0.2"
   overlay_image: /assets/images/header.jpg
   cta_label: "<i class='fab fa-github'></i> Github Repository"
-  cta_url: https://github.com/jacobmontiel
+  cta_url: https://github.com/leonpalafox
   caption: # "Photo credit: [**freepik**](https://www.freepik.com/free-vector/vector-abstract-color-waves-design-element_1306739.htm)"
 excerpt: ""
 ---

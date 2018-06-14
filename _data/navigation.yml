@@ -1,8 +1,8 @@
 main:
   - title: "About"
     url: /about
-  - title: "News"
-    url: /news-by-year
+  - title: "Blog"
+    url: /blog-by-year
   - title: "Teaching"
     url: /teaching
   - title: "Publications"
