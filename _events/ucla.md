@@ -1,5 +1,5 @@
 ---
-image: "/assets/images/timeline/ucla.png"
+image: "/assets/images/timeline/ucla.jpg"
 date: "February 2013"
 enddate: "April 2014"
 ---
