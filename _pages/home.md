@@ -12,6 +12,4 @@ header:
 excerpt: ""
 ---
 
-I am a Ph.D. student at [Télécom ParisTech](http://www.telecom-paristech.fr/eng){:target='_blank'} - [Université Paris-Saclay](https://www.universite-paris-saclay.fr/en){:target='_blank'} in the [Data, Intelligence and Graphs Team](https://dig.telecom-paristech.fr/blog/){:target='_blank'}{:target='_blank'}.
-
-I am the maintainer of [scikit-multiflow](https://scikit-multiflow.github.io/){:target='_blank'}.
+I am a Professor in Machine Learnign and Data Science at the [Universidad Panamericana](http://www.up.edu.mx/en/mexico){:target='_blank'} in the [AI and Data Science Team]{:target='_blank'}.
