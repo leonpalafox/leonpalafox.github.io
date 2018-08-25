@@ -10,7 +10,6 @@ author_profile: True
 I am a Professor at [Universidad Panamericana](http://www.up.edu.mx/en/mexico){:target='_blank'}
 
 
-
 ## Research
 
 My research interests are in the field of applied Machine Learning, some of my projects have involved :

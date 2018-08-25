@@ -1,2 +1,2 @@
-# jacobmontiel.github.io
-Jacob Montiel's personal webpage
+# leonpalafox.github.io
+Leon Palafox's Personnal webpage
