@@ -89,9 +89,9 @@ analytics:
 author:
   name             : *name
   avatar           : "/assets/images/bio-photo.png"
-  bio              : I am a Machine Learning Professor at Universidad Panamericana.
+  bio              : I am a Machine Learning Professor at Universidad Panamericana. I got my PhD at the University of Tokyo.
   location         : "Mexico City, MEXICO"
-  email            :
+  email            : lpalafox@up.edu.mx
   uri              :
   bitbucket        :
   codepen          :
@@ -108,10 +108,10 @@ author:
   linkedin         : "leonpalafox"
   pinterest        :
   soundcloud       :
-  stackoverflow    : # "123456/username" (the last part of your profile url, e.g. https://stackoverflow.com/users/123456/username)
+  stackoverflow    : "486262/leon-palafox"
   steam            : # "steamId" (the last part of your profile url, e.g. https://steamcommunity.com/id/steamId/)
   tumblr           :
-  twitter          :
+  twitter          : "leonpalafox"
   vine             :
   weibo            :
   xing             :
