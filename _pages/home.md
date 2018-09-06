@@ -12,4 +12,4 @@ header:
 excerpt: ""
 ---
 
-I am a Professor in Machine Learnign and Data Science at the [Universidad Panamericana](http://www.up.edu.mx/en/mexico){:target='_blank'} in the [AI and Data Science Team]{:target='_blank'}.
+I am a Professor in Machine Learnign and Data Science at the [Universidad Panamericana](http://www.up.edu.mx/en/mexico){:target='_blank'} in the AI and Data Science Team at the School of Engineering
