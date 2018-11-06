@@ -1,15 +1,17 @@
 ---
-# title:  "Leon Palafox"
+# title:  "Jacob Montiel"
 layout: splash
 permalink: /
 header:
   overlay_color: "#5e616c"
   overlay_filter: "0.2"
   overlay_image: /assets/images/header.jpg
-  cta_label: "<i class='fab fa-twitter-square'></i> Stream of thought"
-  cta_url: https://twitter.com/leonpalafox?lang=en
+  cta_label: "<i class='fab fa-github'></i> Github Repository"
+  cta_url: https://github.com/jacobmontiel
   caption: # "Photo credit: [**freepik**](https://www.freepik.com/free-vector/vector-abstract-color-waves-design-element_1306739.htm)"
 excerpt: ""
 ---
 
-I am a Professor in Machine Learnign and Data Science at the [Universidad Panamericana](http://www.up.edu.mx/en/mexico){:target='_blank'} in the AI and Data Science Team at the School of Engineering
+I am a Ph.D. student at [Télécom ParisTech](http://www.telecom-paristech.fr/eng){:target='_blank'} - [Université Paris-Saclay](https://www.universite-paris-saclay.fr/en){:target='_blank'} in the [Data, Intelligence and Graphs Team](https://dig.telecom-paristech.fr/blog/){:target='_blank'}{:target='_blank'}.
+
+I am the maintainer of [scikit-multiflow](https://scikit-multiflow.github.io/){:target='_blank'}.
