@@ -7,16 +7,16 @@ toc: True
 author_profile: True
 ---
 
-I am a Professor at [Universidad Panamericana](http://www.up.edu.mx/en/mexico){:target='_blank'}
-
-
+I am a Professor at [Universidad Panamericana](http://www.up.edu.mx/en/mexico){:target='_blank'} and leader of the [Machine Learning and Data Science Group](https://sites.google.com/up.edu.mx/mlpanamericana/home)
 ## Research
-
 My research interests are in the field of applied Machine Learning, some of my projects have involved :
-
 - Neuroscience
 - Astrophysics
 - Planetary Sciences
+
+I am currently engaged in the applications of Machine Learning in Gentrification, Educational profficency and detection of fake news.
+
+If you are interested in joining my group, please go to our [group](https://sites.google.com/up.edu.mx/mlpanamericana/home) webpage and send me an email. 
 
 ## Academia
 
