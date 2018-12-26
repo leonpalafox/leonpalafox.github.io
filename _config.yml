@@ -86,7 +86,7 @@ analytics:
 author:
   name             : *name
   avatar           : "/assets/images/bio-photo.png"
-  bio              : I am a Machine Learning Professor at Universidad Panamericana and head of the [Machine Learning and Data Science Group](https://sites.google.com/up.edu.mx/mlpanamericana/home). I got my PhD at the University of Tokyo.
+  bio              : I am a Machine Learning Professor at Universidad Panamericana. I got my PhD at the University of Tokyo.
   location         : "Mexico City, MEXICO"
   email            : lpalafox@up.edu.mx
   uri              :
