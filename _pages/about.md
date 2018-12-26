@@ -7,7 +7,7 @@ toc: True
 author_profile: True
 ---
 
-I am a Professor at [Universidad Panamericana](http://www.up.edu.mx/en/mexico){:target='_blank'} and leader of the [Machine Learning and Data Science Group](https://sites.google.com/up.edu.mx/mlpanamericana/home)
+I am a Professor at [Universidad Panamericana](http://www.up.edu.mx/en/mexico){:target='_blank'} and head of the [Machine Learning and Data Science Group](https://sites.google.com/up.edu.mx/mlpanamericana/home)
 ## Research
 My research interests are in the field of applied Machine Learning, some of my projects have involved :
 - Neuroscience
