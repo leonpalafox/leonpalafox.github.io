@@ -67,3 +67,9 @@ ___
 * Nasimul Noman, Leon Palafox, and Hitoshi Iba. Reconstruction of Gene Regulatory Networks from Gene Expression Data Using Decoupled Recurrent Neural Network Model. In Natural Computing and Beyond SE - 8, volume 6, pages 93-103. Springer Japan, 2013.
 
 * Nasimul Noman, Leon Palafox, and Hitoshi Iba. Inferring Genetic Networks with a Recurrent Neural Network Model Using Differential Evolution. In Nikola Kasabov, editor, Springer Handbook of Bio-/Neuroinformatics SE - 22, pages 355-373. Springer Berlin Heidelberg, 2014.
+
+* Scheidt, S. P., L. F. Palafox, C. W. Hamilton, and J. R. Zimbelman. "Automated Detection of Transverse Aeolian Ridges on Mars Using Convolutional Neural Networks and a Field-Based Terrestrial Orthoimage Training Set." In Fourth Annual International Planetary Dunes Workshop, vol. 1843, p. 8047. 2015.
+
+* Palafox, L. F., A. M. Alvarez, and C. W. Hamilton. "Automated Detection of Impact Craters and Volcanic Rootless Cones in Mars Satellite Imagery Using Convolutional Neural Networks and Support Vector Machines." In Lunar and Planetary Science Conference, vol. 46, p. 2316. 2015.
+
+* Avalos-Gauna, Edgar and Palafox, L.F. "Heat Transfer Coefficient Prediction of a Porous Material by Implementing a Machine Learning Model on a CFD Data Set." In Proceedings of the 6th International Conference of Fluid Flow, Heat and Mass Transfer (FFHMT'19), 2019
