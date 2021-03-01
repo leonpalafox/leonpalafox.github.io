@@ -12,4 +12,4 @@ header:
 excerpt: ""
 ---
 
-I am a Professor in Machine Learnign and Data Science at the [Universidad Panamericana](http://www.up.edu.mx/en/mexico){:target='_blank'} in the [Machine Learning and Data Science Team](https://sites.google.com/up.edu.mx/mlpanamericana/home) at the School of Engineering.
+I am a Director of Machine Learnign at the [Banorte Financial Group](http://www.banorte.com){:target='_blank'} I'm also a lecturer at [Universidad Panamericana](http://www.up.edu.mx)
