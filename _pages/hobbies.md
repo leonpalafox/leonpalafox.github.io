@@ -12,7 +12,7 @@ My Media Appareances
 
 I was interviewed by NVIDIA coorporation regarding our work th the Lunar and Planetary Laboratory at the University of Arizona. There I talked about our MarsNet, a Convolutional Neural Network capable of identifying multiple land features in the surface of Mars using images from the HiRISE instrument.
 
-<img class="timeline-logo" src="/assets/images/nvidia_photo.png" width="80" height="80">
+<img class="timeline-logo" src="/assets/images/nvidia_photo.png" width="500" height="200">
 
 - TVAzteca
 - Financiero
