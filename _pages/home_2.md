@@ -12,4 +12,4 @@ header:
 excerpt: ""
 ---
 
-I am a Director of Machine Learnign at the [Banorte Financial Group](http://www.banorte.com){:target='_blank'} I'm also a lecturer at [Universidad Panamericana](http://www.up.edu.mx)
+I am a Director of Machine Learnign at the [Grupo Salinas](https://www.gruposalinas.com/){:target='_blank'} I'm also a lecturer at [Universidad Panamericana](http://www.up.edu.mx)

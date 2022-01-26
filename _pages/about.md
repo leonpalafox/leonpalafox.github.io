@@ -7,7 +7,7 @@ toc: True
 author_profile: True
 ---
 
-I'm Machine Learning Director at Banorte Financial Group, leading all the initiatives that use AI at the core of the business. I'm a Lecturer at [Universidad Panamericana](http://www.up.edu.mx/en/mexico){:target='_blank'}.
+I'm Machine Learning Director at Salinas Corporate Group, leading all the initiatives that use AI at the core of the business. I'm a Lecturer at [Universidad Panamericana](http://www.up.edu.mx/en/mexico){:target='_blank'}.
 ## Research
 My research interests are in the field of applied Machine Learning, some of my projects have involved :
 - Neuroscience
