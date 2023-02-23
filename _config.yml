@@ -76,6 +76,7 @@ social:
   links: # An array of links to social media profiles
 
 # Analytics
+google_analytics:G-M9BV46V3PD
 analytics:
   provider               : false # false (default), "google", "google-universal", "custom"
   google:
