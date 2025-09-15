@@ -6,7 +6,7 @@ minimal_mistakes_skin: "default"
 locale: "en"
 title: "Leon Palafox"
 title_separator: "-"
-name: &name Leon Palafox
+name: "Leon Palafox"
 description: "Personal website."
 url: "https://leonpalafox.github.io"
 baseurl: "" # the subpath of your site, e.g. "/blog"
@@ -82,7 +82,7 @@ google_analytics: G-M9BV46V3PD
 
 # Site Author
 author:
-  name: *name
+  name: "Leon Palafox"
   avatar: "/assets/images/bio-photo.png"
   bio: "I'm Machine Learning Director at Banorte Financial Group. I got my PhD at the University of Tokyo and am a Lecturer on AI at Universidad Panamericana."
   location: "Mexico City, MEXICO"
