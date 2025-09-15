@@ -3,36 +3,59 @@ layout: single
 title: "About"
 permalink: about
 excerpt: "Bio."
-toc: True
-author_profile: True
+toc: true
+author_profile: true
 ---
 
-I'm Machine Learning Director at Salinas Corporate Group, leading all the initiatives that use AI at the core of the business. I'm a Lecturer at [Universidad Panamericana](http://www.up.edu.mx/en/mexico){:target='_blank'}.
-## Research
-My research interests are in the field of applied Machine Learning, some of my projects have involved :
-- Neuroscience
-- Astrophysics
-- Planetary Sciences
-- Financial Sciences
+I’m the **Director of the AI Innovation Lab at [GBM](https://www.gbm.com/)**, where I lead large-scale **personalization, recommender systems, embeddings, and experimentation platforms** for retail investing.  
+I’m also a **Lecturer at [Universidad Panamericana](http://www.up.edu.mx/en/mexico){:target='_blank'}** and a regular **columnist at *El Financiero*** on AI, data strategy, and innovation.
 
-I'm currently interested in the applications of Machine Learning toward social groups and financial applications.
+---
 
-## Academia
+## 🧠 Research
 
-I got my Bachelor's Degree from _Mexico's National Autonomous University_ (Mexico). I was a Research Intern at the _Institue of Applied Mathematics_ (Mexico). I obtained my Master’s Degree in Information Technologies from the _University of Tokyo_ (Japan), as fellow of the _Monbukagakusho Scholarship_ (Embassy Recommendation) from the Japanese Ministry of Education, Culture, Sports, Science and Technology. And my Phd from the same institution. I was a postdoctoral fellow at _The University of California, Los Angeles_ (USA) and at _The University of Arizona_. Then I was a Staff Scientist also at _The University of Arizona_
+My research interests lie in **applied Machine Learning**, especially in domains where data meets complex systems.  
+I’ve worked on projects across:
 
-## Industry
- I'm currently head of Machine Learning at Banorte FInancial Group. I worked at _San Luis Rassini_ as a data analys and strategy analyst. I also worked in _Rich IT_ as a Data Science Senior Consultant.
+- Neuroscience  
+- Astrophysics  
+- Planetary Sciences  
+- Financial Sciences  
 
-## Timeline
+I’m currently exploring how **Machine Learning can support decision-making in social and financial systems**, from investment analytics to recommender systems for retail platforms.
+
+---
+
+## 🎓 Academia
+
+I earned my **Bachelor’s Degree in Engineering from the _National Autonomous University of Mexico (UNAM)_**, graduating *Magna Cum Laude* and receiving the **Medalla Gabino Barreda** as the top student in my class.  
+I was a Research Intern at the _Institute of Applied Mathematics (Mexico)_, and earned both my **Master’s and PhD in Machine Learning and AI applied to Bioinformatics from the _University of Tokyo_ (Japan)**, funded by the prestigious **Monbukagakusho (MEXT) Scholarship** from the Japanese Ministry of Education.
+
+I later worked as a **postdoctoral researcher at the _University of California, Los Angeles (UCLA) School of Medicine_**, applying ML to neuroscience, and at the **_University of Arizona_**, where I applied ML to planetary sciences.  
+Afterward, I became a **Staff Scientist at the University of Arizona**.
+
+---
+
+## 💼 Industry
+
+I’ve worked at the intersection of AI, data strategy, and business for over a decade.  
+Currently I’m **Director of the AI Innovation Lab at GBM**, building internal AI capabilities and launching large-scale recommender systems and personalization engines.
+
+Previously, I served as:
+
+- **Head of AI at Grupo Salinas**
+- **Director of Machine Learning at Banorte Financial Group**
+- **Head of Data Science at Universidad Panamericana**
+- Data analyst and strategy analyst at **San Luis Rassini**
+- Senior Data Science Consultant at **Rich IT**
+
+---
+
+## 📅 Timeline
 
 <style type="text/css">
-  .timeline-logo   { float:left;
-             vertical-align: middle;
-             margin-right: 10px; }
-
-  .timeline-text { vertical-align: middle;
-            display: table-cell; }
+  .timeline-logo { float:left; vertical-align: middle; margin-right: 10px; }
+  .timeline-text { vertical-align: middle; display: table-cell; }
 </style>
 
 <div>
@@ -49,7 +72,7 @@ I got my Bachelor's Degree from _Mexico's National Autonomous University_ (Mexic
     </big>
     <div>
         <img class="timeline-logo" src="{{site.baseurl}}{{ event.image }}" width="80" height="80">
-        <span class="timleline-text"><small>{{ event.content }}</small></span>
+        <span class="timeline-text"><small>{{ event.content }}</small></span>
     </div>
     <br><br>
     {% endfor %}
