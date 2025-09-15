@@ -77,13 +77,14 @@ google_analytics: G-M9BV46V3PD
 author:
   name: "Leon Palafox"
   avatar: "/assets/images/bio-photo.png"
-  bio: "I'm Machine Learning Director at Banorte Financial Group. I got my PhD at the University of Tokyo and am a Lecturer on AI at Universidad Panamericana."
-  location: "Mexico City, MEXICO"
+  bio: "Director of the AI Innovation Lab at GBM. PhD from the University of Tokyo. Lecturer on AI at Universidad Panamericana and columnist at El Financiero."
+  location: "Mexico City, Mexico"
   email: lpalafox@up.edu.mx
   github: "leonpalafox"
   linkedin: "leonpalafox"
   stackoverflow: "486262/leon-palafox"
   twitter: "leonpalafox"
+
 
 # Reading Files
 include:
