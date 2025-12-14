@@ -1,5 +1,5 @@
 ---
-image: "/assets/images/timeline/algorithia.png"
+image: "/assets/images/timeline/novartis.png"
 date: "May 2024"
 enddate: "July 2025"
 ---
