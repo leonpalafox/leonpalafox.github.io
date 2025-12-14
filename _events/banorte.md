@@ -1,7 +1,7 @@
 ---
 image: "/assets/images/timeline/banorte.png"
 date: "July 2021"
-enddate: "Present"
+enddate: "October 2022"
 ---
 
 Machine Learning Director @ Banorte Financial Group.
