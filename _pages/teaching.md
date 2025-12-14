@@ -3,16 +3,44 @@ layout: single
 title: "Teaching"
 permalink: teaching
 classes: wide
-excerpt: "Teaching activities."
-toc: false
+excerpt: "Current courses and teaching materials."
+toc: true
 author_profile: True
 ---
-My current classes are:
 
-- [DS01] Introduction to Data Science ([2018](https://leonpalafox.github.io/dsclase/))
-- [DB01] Introduction to Databases ([2018](https://leonpalafox.github.io/dbclase/))
-- [ML01] Machine Learning ([2017](https://leonpalafox.github.io/mlclase/))
+## 👨‍🏫 Current Courses
 
+### Deep Learning
+**Universidad Panamericana** *Master's in Data Science*
 
-I have also been a lecturer for the following courses in the University of Arizona:
-- Machine Learning for Planetary Sciences (2016)
+A comprehensive journey through the foundations and state-of-the-art of Deep Neural Networks. We start from the mathematical basics of the single **Perceptron** and the Universal Approximation Theorem, moving through:
+* **Optimization:** Stochastic Gradient Descent, Adam, and backpropagation mechanics.
+* **Architectures:** CNNs for vision, RNNs/LSTMs for sequences.
+* **Modern Era:** Attention mechanisms and the **Transformer** architecture (BERT, GPT).
+* **Generative Models:** VAEs and GANs.
+
+### Deep Reinforcement Learning
+**Colegio de Matemáticas Bourbaki** *Specialized Advanced Track*
+
+An advanced course focusing on agents that learn from interaction. We cover the full spectrum of RL, balancing mathematical rigor with implementation:
+* **Foundations:** Markov Decision Processes (MDPs), Bellman Equations, and Q-Learning.
+* **Policy Gradients:** REINFORCE, Actor-Critic methods, and **PPO** (Proximal Policy Optimization).
+* **Deep RL:** DQN refinements, Double Q-Learning, and Offline RL strategies.
+* **Application:** Solving custom environments and optimization problems in finance and robotics.
+
+___
+
+## 📚 Course Archive & Resources
+
+Material from my previous courses, including slides, notebooks, and syllabi.
+
+* **[DS01] Introduction to Data Science** ([2018](https://leonpalafox.github.io/dsclase/))
+    * *Focus: Python stack (Pandas/Numpy), exploratory analysis, and data visualization.*
+* **[DB01] Introduction to Databases** ([2018](https://leonpalafox.github.io/dbclase/))
+    * *Focus: SQL, NoSQL, and data modeling for analytics.*
+* **[ML01] Machine Learning** ([2017](https://leonpalafox.github.io/mlclase/))
+    * *Focus: Supervised vs. Unsupervised learning, Scikit-learn, and model validation.*
+
+### Guest Lecturing
+* **Machine Learning for Planetary Sciences** (University of Arizona, 2016)
+    * *Guest lecturer on applying CNNs to HiRISE imagery for geological feature detection.*
