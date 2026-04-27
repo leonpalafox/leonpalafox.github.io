@@ -70,8 +70,11 @@ social:
   name:
   links:
 
-# Analytics (GA4)
-google_analytics: G-M9BV46V3PD
+analytics:
+  provider: "google-gtag"
+  google:
+    tracking_id: "G-XXXXXXXXXX"
+    anonymize_ip: false
 
 # Site Author
 author:
