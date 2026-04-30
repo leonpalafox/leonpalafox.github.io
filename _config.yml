@@ -94,6 +94,7 @@ include:
   - .htaccess
   - _pages
   - _events
+  - _courses
 exclude:
   - "*.sublime-project"
   - "*.sublime-workspace"
@@ -194,6 +195,9 @@ collections:
   events:
     output: true
     permalink: /:collection/:path/
+  courses:
+    output: true
+    permalink: /:collection/:path/
 
 # Defaults
 defaults:
@@ -213,3 +217,11 @@ defaults:
     values:
       layout: single
       author_profile: true
+  - scope:
+      path: ""
+      type: courses
+    values:
+      layout: single
+      author_profile: true
+      toc: true
+      classes: wide

@@ -10,7 +10,7 @@ author_profile: True
 
 ## 👨‍🏫 Current Courses
 
-### Deep Learning
+### [Deep Learning](/courses/deep-learning/)
 **Universidad Panamericana** *Master's in Data Science*
 
 A comprehensive journey through the foundations and state-of-the-art of Deep Neural Networks. We start from the mathematical basics of the single **Perceptron** and the Universal Approximation Theorem, moving through:
@@ -18,6 +18,15 @@ A comprehensive journey through the foundations and state-of-the-art of Deep Neu
 * **Architectures:** CNNs for vision, RNNs/LSTMs for sequences.
 * **Modern Era:** Attention mechanisms and the **Transformer** architecture (BERT, GPT).
 * **Generative Models:** VAEs and GANs.
+
+[**View syllabus and materials →**](/courses/deep-learning/)
+
+### [Machine Learning 2](/courses/machine-learning-2/)
+**Universidad Panamericana**
+
+The second course in the machine learning track at Universidad Panamericana, building on foundational ML to cover advanced supervised and unsupervised methods, model selection, and applied modeling workflows.
+
+[**View syllabus and materials →**](/courses/machine-learning-2/)
 
 ### Deep Reinforcement Learning
 **Colegio de Matemáticas Bourbaki** *Specialized Advanced Track*
