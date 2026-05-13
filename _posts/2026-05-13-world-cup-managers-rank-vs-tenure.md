@@ -12,6 +12,7 @@ tags: ['data-viz', 'football', 'world-cup']
 
 Long managerial tenures are rare among the teams headed to the 2026 World Cup. Each dot below is a qualified team: the x-axis is the FIFA ranking position (lower is better) and the y-axis is how many years the current manager has been in charge. Pick a team from the dropdown, or hover any dot to inspect it.
 
+{::nomarkdown}
 {% raw %}
 <div id="wcm-root" class="wcm-root">
   <div class="wcm-header">
@@ -64,7 +65,10 @@ Long managerial tenures are rare among the teams headed to the 2026 World Cup. E
     border-radius: 2px;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     margin: 24px 0;
+    box-sizing: border-box;
+    width: 100%;
   }
+  .wcm-root *, .wcm-root *::before, .wcm-root *::after { box-sizing: border-box; }
   .wcm-header { max-width: 880px; margin-bottom: 28px; }
   .wcm-kicker { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: #737373; margin-bottom: 10px; }
   .wcm-headline {
@@ -115,9 +119,9 @@ Long managerial tenures are rare among the teams headed to the 2026 World Cup. E
     .wcm-controls-left { flex-direction: row; align-items: center; gap: 10px; }
   }
 
-  .wcm-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
-  @media (min-width: 980px) {
-    .wcm-grid { grid-template-columns: 1fr 310px; }
+  .wcm-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  @media (min-width: 1100px) {
+    .wcm-grid { grid-template-columns: minmax(0, 1fr) 310px; }
   }
 
   .wcm-card {
@@ -125,11 +129,12 @@ Long managerial tenures are rare among the teams headed to the 2026 World Cup. E
     border: 1px solid #d4d4d4;
     border-radius: 2px;
     padding: 16px;
+    min-width: 0;
   }
   .wcm-card-note { background: rgba(255,255,255,0.5); padding: 20px; }
 
-  .wcm-chart-wrap { width: 100%; overflow-x: auto; }
-  #wcm-chart { min-width: 720px; width: 100%; height: auto; display: block; }
+  .wcm-chart-wrap { width: 100%; overflow-x: auto; min-width: 0; }
+  #wcm-chart { width: 100%; height: auto; display: block; }
 
   .wcm-side { display: flex; flex-direction: column; gap: 20px; }
   .wcm-eyebrow { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #737373; }
@@ -394,3 +399,4 @@ Long managerial tenures are rare among the teams headed to the 2026 World Cup. E
 })();
 </script>
 {% endraw %}
+{:/nomarkdown}
