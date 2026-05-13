@@ -119,10 +119,7 @@ Long managerial tenures are rare among the teams headed to the 2026 World Cup. E
     .wcm-controls-left { flex-direction: row; align-items: center; gap: 10px; }
   }
 
-  .wcm-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; }
-  @media (min-width: 1100px) {
-    .wcm-grid { grid-template-columns: minmax(0, 1fr) 310px; }
-  }
+  .wcm-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; }
 
   .wcm-card {
     background: #fbfaf7;
@@ -131,12 +128,20 @@ Long managerial tenures are rare among the teams headed to the 2026 World Cup. E
     padding: 16px;
     min-width: 0;
   }
-  .wcm-card-note { background: rgba(255,255,255,0.5); padding: 20px; }
+  .wcm-card-note { background: rgba(255,255,255,0.5); padding: 22px; }
 
   .wcm-chart-wrap { width: 100%; overflow-x: auto; min-width: 0; }
   #wcm-chart { width: 100%; height: auto; display: block; }
 
-  .wcm-side { display: flex; flex-direction: column; gap: 20px; }
+  .wcm-side {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+  @media (min-width: 760px) {
+    .wcm-side { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+    .wcm-source { grid-column: 1 / -1; }
+  }
   .wcm-eyebrow { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #737373; }
   .wcm-pullquote {
     font-family: Georgia, "Times New Roman", serif;
