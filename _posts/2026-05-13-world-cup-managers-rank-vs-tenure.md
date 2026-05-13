@@ -10,7 +10,7 @@ category: ['articulos']
 tags: ['data-viz', 'football', 'world-cup']
 ---
 
-Long managerial tenures are rare among the teams headed to the 2026 World Cup. Each bubble below is a qualified team: the x-axis is the FIFA ranking position (lower is better), the y-axis is how many years the current manager has been in charge, and the bubble size is the team's total World Cup appearances (through and including 2026). Pick a team from the dropdown, or hover any bubble to inspect it.
+Long managerial tenures are rare among the teams headed to the 2026 World Cup. Each bubble below is a qualified team: the x-axis is the FIFA ranking position (lower is better), the y-axis is how many years the current manager has been in charge, and the bubble size is the number of World Cup titles the team has won. Only eight nations have ever won the World Cup, so most bubbles are at the minimum size. Pick a team from the dropdown, or hover any bubble to inspect it.
 
 {::nomarkdown}
 {% raw %}
@@ -18,7 +18,7 @@ Long managerial tenures are rare among the teams headed to the 2026 World Cup. E
   <div class="wcm-header">
     <div class="wcm-kicker">2026 World Cup — Managers</div>
     <h2 class="wcm-headline">Long tenures are rare among World Cup managers.</h2>
-    <p class="wcm-lede">Each bubble is a qualified team. The x-axis shows FIFA ranking, where lower is better. The y-axis shows how long the current manager has been in charge, in years. Bubble size scales with total World Cup appearances, through and including 2026.</p>
+    <p class="wcm-lede">Each bubble is a qualified team. The x-axis shows FIFA ranking, where lower is better. The y-axis shows how long the current manager has been in charge, in years. Bubble size encodes the number of World Cup titles the team has won — only Brazil (5), Germany (4), Argentina (3), France (2), Uruguay (2), England (1) and Spain (1) have ever lifted the trophy among the 48 qualifiers.</p>
   </div>
 
   <div class="wcm-controls">
@@ -35,21 +35,23 @@ Long managerial tenures are rare among the teams headed to the 2026 World Cup. E
   <div class="wcm-grid">
     <div class="wcm-card wcm-card-chart">
       <div class="wcm-chart-wrap">
-        <svg id="wcm-chart" viewBox="0 0 980 560" role="img" aria-label="Scatter plot of FIFA ranking versus manager tenure for 2026 World Cup teams, with bubble size encoding World Cup appearances">
+        <svg id="wcm-chart" viewBox="0 0 980 560" role="img" aria-label="Scatter plot of FIFA ranking versus manager tenure for 2026 World Cup teams, with bubble size encoding World Cup titles won">
         </svg>
       </div>
       <div class="wcm-legend" aria-label="Bubble size legend">
-        <span class="wcm-legend-label">Bubble size = World Cup appearances:</span>
-        <svg class="wcm-legend-svg" viewBox="0 0 320 50" aria-hidden="true">
+        <span class="wcm-legend-label">Bubble size = World Cup titles won:</span>
+        <svg class="wcm-legend-svg" viewBox="0 0 360 60" aria-hidden="true">
           <g>
-            <circle cx="20" cy="28" r="5" fill="#9a958d" fill-opacity="0.55" stroke="#fbfaf7" stroke-width="1"></circle>
-            <text x="20" y="48" text-anchor="middle" class="wcm-legend-text">1</text>
-            <circle cx="100" cy="28" r="10.1" fill="#9a958d" fill-opacity="0.55" stroke="#fbfaf7" stroke-width="1"></circle>
-            <text x="100" y="48" text-anchor="middle" class="wcm-legend-text">5</text>
-            <circle cx="180" cy="28" r="14.8" fill="#9a958d" fill-opacity="0.55" stroke="#fbfaf7" stroke-width="1"></circle>
-            <text x="180" y="48" text-anchor="middle" class="wcm-legend-text">12</text>
-            <circle cx="270" cy="28" r="22" fill="#9a958d" fill-opacity="0.55" stroke="#fbfaf7" stroke-width="1"></circle>
-            <text x="270" y="48" text-anchor="middle" class="wcm-legend-text">23 (Brazil)</text>
+            <circle cx="20" cy="32" r="5" fill="#9a958d" fill-opacity="0.55" stroke="#fbfaf7" stroke-width="1"></circle>
+            <text x="20" y="55" text-anchor="middle" class="wcm-legend-text">0</text>
+            <circle cx="80" cy="32" r="12.6" fill="#9a958d" fill-opacity="0.55" stroke="#fbfaf7" stroke-width="1"></circle>
+            <text x="80" y="55" text-anchor="middle" class="wcm-legend-text">1</text>
+            <circle cx="150" cy="32" r="15.7" fill="#9a958d" fill-opacity="0.55" stroke="#fbfaf7" stroke-width="1"></circle>
+            <text x="150" y="55" text-anchor="middle" class="wcm-legend-text">2</text>
+            <circle cx="225" cy="32" r="18.2" fill="#9a958d" fill-opacity="0.55" stroke="#fbfaf7" stroke-width="1"></circle>
+            <text x="225" y="55" text-anchor="middle" class="wcm-legend-text">3</text>
+            <circle cx="300" cy="32" r="22" fill="#9a958d" fill-opacity="0.55" stroke="#fbfaf7" stroke-width="1"></circle>
+            <text x="300" y="55" text-anchor="middle" class="wcm-legend-text">5 (Brazil)</text>
           </g>
         </svg>
       </div>
@@ -67,7 +69,7 @@ Long managerial tenures are rare among the teams headed to the 2026 World Cup. E
         <div id="wcm-toplist" class="wcm-toplist"></div>
       </div>
 
-      <div class="wcm-source">Data: FIFA ranking position from the April 1, 2026 ranking set; manager tenure rounded as of May 13, 2026; World Cup appearances counted through and including 2026, including predecessor states (West Germany counted with Germany, Czechoslovakia with Czechia, Zaire with DR Congo).</div>
+      <div class="wcm-source">Data: FIFA ranking position from the April 1, 2026 ranking set; manager tenure rounded as of May 13, 2026; World Cup titles counted across all editions through 2022, with West Germany titles credited to Germany.</div>
     </div>
   </div>
 </div>
@@ -205,54 +207,54 @@ Long managerial tenures are rare among the teams headed to the 2026 World Cup. E
 <script>
 (function(){
   var data = [
-    { team: "Algeria", rank: 28, manager: "Vladimir Petković", tenure: 2.2, apps: 5 },
-    { team: "Argentina", rank: 3, manager: "Lionel Scaloni", tenure: 7.5, apps: 19 },
-    { team: "Australia", rank: 27, manager: "Tony Popović", tenure: 1.7, apps: 7 },
-    { team: "Austria", rank: 24, manager: "Ralf Rangnick", tenure: 4.0, apps: 8 },
-    { team: "Belgium", rank: 9, manager: "Rudi Garcia", tenure: 1.3, apps: 15 },
-    { team: "Bosnia and Herzegovina", rank: 65, manager: "Sergej Barbarez", tenure: 2.1, apps: 2 },
-    { team: "Brazil", rank: 6, manager: "Carlo Ancelotti", tenure: 1.0, apps: 23 },
-    { team: "Canada", rank: 30, manager: "Jesse Marsch", tenure: 2.0, apps: 3 },
-    { team: "Cabo Verde / Cape Verde", rank: 69, manager: "Bubista", tenure: 6.3, apps: 1 },
-    { team: "Colombia", rank: 13, manager: "Néstor Lorenzo", tenure: 3.8, apps: 7 },
-    { team: "Croatia", rank: 11, manager: "Zlatko Dalić", tenure: 8.6, apps: 7 },
-    { team: "Curaçao", rank: 82, manager: "Dick Advocaat", tenure: 0.0, apps: 1 },
-    { team: "Czechia", rank: 41, manager: "Miroslav Koubek", tenure: 0.4, apps: 10 },
-    { team: "DR Congo", rank: 46, manager: "Sébastien Desabre", tenure: 3.7, apps: 2 },
-    { team: "Ecuador", rank: 23, manager: "Sebastián Beccacece", tenure: 1.7, apps: 5 },
-    { team: "Egypt", rank: 29, manager: "Hossam Hassan", tenure: 2.2, apps: 4 },
-    { team: "England", rank: 4, manager: "Thomas Tuchel", tenure: 1.3, apps: 17 },
-    { team: "France", rank: 1, manager: "Didier Deschamps", tenure: 13.8, apps: 17 },
-    { team: "Germany", rank: 10, manager: "Julian Nagelsmann", tenure: 2.7, apps: 21 },
-    { team: "Ghana", rank: 74, manager: "Carlos Queiroz", tenure: 0.1, apps: 5 },
-    { team: "Haiti", rank: 83, manager: "Sébastien Migné", tenure: 1.9, apps: 2 },
-    { team: "Iran", rank: 21, manager: "Amir Ghalenoei", tenure: 3.2, apps: 7 },
-    { team: "Iraq", rank: 57, manager: "Graham Arnold", tenure: 1.0, apps: 2 },
-    { team: "Côte d’Ivoire / Ivory Coast", rank: 34, manager: "Emerse Faé", tenure: 2.3, apps: 4 },
-    { team: "Japan", rank: 18, manager: "Hajime Moriyasu", tenure: 7.8, apps: 8 },
-    { team: "Jordan", rank: 63, manager: "Jamal Sellami", tenure: 1.7, apps: 1 },
-    { team: "Korea Republic / South Korea", rank: 25, manager: "Hong Myung-bo", tenure: 1.8, apps: 12 },
-    { team: "Mexico", rank: 15, manager: "Javier Aguirre", tenure: 1.8, apps: 18 },
-    { team: "Morocco", rank: 8, manager: "Mohamed Ouahbi", tenure: 0.2, apps: 7 },
-    { team: "Netherlands", rank: 7, manager: "Ronald Koeman", tenure: 3.3, apps: 12 },
-    { team: "New Zealand", rank: 85, manager: "Darren Bazeley", tenure: 3.5, apps: 3 },
-    { team: "Norway", rank: 31, manager: "Ståle Solbakken", tenure: 5.4, apps: 4 },
-    { team: "Panama", rank: 33, manager: "Thomas Christiansen", tenure: 5.8, apps: 2 },
-    { team: "Paraguay", rank: 40, manager: "Gustavo Alfaro", tenure: 1.7, apps: 9 },
-    { team: "Portugal", rank: 5, manager: "Roberto Martínez", tenure: 3.3, apps: 9 },
-    { team: "Qatar", rank: 55, manager: "Julen Lopetegui", tenure: 1.0, apps: 2 },
-    { team: "Saudi Arabia", rank: 61, manager: "Hervé Renard", tenure: 1.6, apps: 7 },
-    { team: "Scotland", rank: 43, manager: "Steve Clarke", tenure: 7.0, apps: 9 },
-    { team: "Senegal", rank: 14, manager: "Pape Thiaw", tenure: 1.4, apps: 4 },
-    { team: "South Africa", rank: 60, manager: "Hugo Broos", tenure: 5.0, apps: 4 },
-    { team: "Spain", rank: 2, manager: "Luis de la Fuente", tenure: 3.4, apps: 17 },
-    { team: "Sweden", rank: 38, manager: "Graham Potter", tenure: 0.6, apps: 13 },
-    { team: "Switzerland", rank: 19, manager: "Murat Yakin", tenure: 4.7, apps: 13 },
-    { team: "Tunisia", rank: 44, manager: "Sabri Lamouchi", tenure: 0.3, apps: 7 },
-    { team: "Türkiye / Turkey", rank: 22, manager: "Vincenzo Montella", tenure: 2.7, apps: 3 },
-    { team: "Uruguay", rank: 17, manager: "Marcelo Bielsa", tenure: 3.0, apps: 15 },
-    { team: "United States", rank: 16, manager: "Mauricio Pochettino", tenure: 1.7, apps: 12 },
-    { team: "Uzbekistan", rank: 50, manager: "Fabio Cannavaro", tenure: 0.6, apps: 1 }
+    { team: "Algeria", rank: 28, manager: "Vladimir Petković", tenure: 2.2, titles: 0 },
+    { team: "Argentina", rank: 3, manager: "Lionel Scaloni", tenure: 7.5, titles: 3 },
+    { team: "Australia", rank: 27, manager: "Tony Popović", tenure: 1.7, titles: 0 },
+    { team: "Austria", rank: 24, manager: "Ralf Rangnick", tenure: 4.0, titles: 0 },
+    { team: "Belgium", rank: 9, manager: "Rudi Garcia", tenure: 1.3, titles: 0 },
+    { team: "Bosnia and Herzegovina", rank: 65, manager: "Sergej Barbarez", tenure: 2.1, titles: 0 },
+    { team: "Brazil", rank: 6, manager: "Carlo Ancelotti", tenure: 1.0, titles: 5 },
+    { team: "Canada", rank: 30, manager: "Jesse Marsch", tenure: 2.0, titles: 0 },
+    { team: "Cabo Verde / Cape Verde", rank: 69, manager: "Bubista", tenure: 6.3, titles: 0 },
+    { team: "Colombia", rank: 13, manager: "Néstor Lorenzo", tenure: 3.8, titles: 0 },
+    { team: "Croatia", rank: 11, manager: "Zlatko Dalić", tenure: 8.6, titles: 0 },
+    { team: "Curaçao", rank: 82, manager: "Dick Advocaat", tenure: 0.0, titles: 0 },
+    { team: "Czechia", rank: 41, manager: "Miroslav Koubek", tenure: 0.4, titles: 0 },
+    { team: "DR Congo", rank: 46, manager: "Sébastien Desabre", tenure: 3.7, titles: 0 },
+    { team: "Ecuador", rank: 23, manager: "Sebastián Beccacece", tenure: 1.7, titles: 0 },
+    { team: "Egypt", rank: 29, manager: "Hossam Hassan", tenure: 2.2, titles: 0 },
+    { team: "England", rank: 4, manager: "Thomas Tuchel", tenure: 1.3, titles: 1 },
+    { team: "France", rank: 1, manager: "Didier Deschamps", tenure: 13.8, titles: 2 },
+    { team: "Germany", rank: 10, manager: "Julian Nagelsmann", tenure: 2.7, titles: 4 },
+    { team: "Ghana", rank: 74, manager: "Carlos Queiroz", tenure: 0.1, titles: 0 },
+    { team: "Haiti", rank: 83, manager: "Sébastien Migné", tenure: 1.9, titles: 0 },
+    { team: "Iran", rank: 21, manager: "Amir Ghalenoei", tenure: 3.2, titles: 0 },
+    { team: "Iraq", rank: 57, manager: "Graham Arnold", tenure: 1.0, titles: 0 },
+    { team: "Côte d’Ivoire / Ivory Coast", rank: 34, manager: "Emerse Faé", tenure: 2.3, titles: 0 },
+    { team: "Japan", rank: 18, manager: "Hajime Moriyasu", tenure: 7.8, titles: 0 },
+    { team: "Jordan", rank: 63, manager: "Jamal Sellami", tenure: 1.7, titles: 0 },
+    { team: "Korea Republic / South Korea", rank: 25, manager: "Hong Myung-bo", tenure: 1.8, titles: 0 },
+    { team: "Mexico", rank: 15, manager: "Javier Aguirre", tenure: 1.8, titles: 0 },
+    { team: "Morocco", rank: 8, manager: "Mohamed Ouahbi", tenure: 0.2, titles: 0 },
+    { team: "Netherlands", rank: 7, manager: "Ronald Koeman", tenure: 3.3, titles: 0 },
+    { team: "New Zealand", rank: 85, manager: "Darren Bazeley", tenure: 3.5, titles: 0 },
+    { team: "Norway", rank: 31, manager: "Ståle Solbakken", tenure: 5.4, titles: 0 },
+    { team: "Panama", rank: 33, manager: "Thomas Christiansen", tenure: 5.8, titles: 0 },
+    { team: "Paraguay", rank: 40, manager: "Gustavo Alfaro", tenure: 1.7, titles: 0 },
+    { team: "Portugal", rank: 5, manager: "Roberto Martínez", tenure: 3.3, titles: 0 },
+    { team: "Qatar", rank: 55, manager: "Julen Lopetegui", tenure: 1.0, titles: 0 },
+    { team: "Saudi Arabia", rank: 61, manager: "Hervé Renard", tenure: 1.6, titles: 0 },
+    { team: "Scotland", rank: 43, manager: "Steve Clarke", tenure: 7.0, titles: 0 },
+    { team: "Senegal", rank: 14, manager: "Pape Thiaw", tenure: 1.4, titles: 0 },
+    { team: "South Africa", rank: 60, manager: "Hugo Broos", tenure: 5.0, titles: 0 },
+    { team: "Spain", rank: 2, manager: "Luis de la Fuente", tenure: 3.4, titles: 1 },
+    { team: "Sweden", rank: 38, manager: "Graham Potter", tenure: 0.6, titles: 0 },
+    { team: "Switzerland", rank: 19, manager: "Murat Yakin", tenure: 4.7, titles: 0 },
+    { team: "Tunisia", rank: 44, manager: "Sabri Lamouchi", tenure: 0.3, titles: 0 },
+    { team: "Türkiye / Turkey", rank: 22, manager: "Vincenzo Montella", tenure: 2.7, titles: 0 },
+    { team: "Uruguay", rank: 17, manager: "Marcelo Bielsa", tenure: 3.0, titles: 2 },
+    { team: "United States", rank: 16, manager: "Mauricio Pochettino", tenure: 1.7, titles: 0 },
+    { team: "Uzbekistan", rank: 50, manager: "Fabio Cannavaro", tenure: 0.6, titles: 0 }
   ];
 
   var keyLabels = {
@@ -270,11 +272,11 @@ Long managerial tenures are rare among the teams headed to the 2026 World Cup. E
   function xS(r){ return M.left + ((r - rankMin) / (rankMax - rankMin)) * PW; }
   function yS(t){ return M.top + PH - ((t - tenMin) / (tenMax - tenMin)) * PH; }
 
-  var appsMin = 1, appsMax = 23, rMin = 5, rMax = 22;
-  function rS(a){
-    if (a <= appsMin) return rMin;
-    if (a >= appsMax) return rMax;
-    return rMin + (rMax - rMin) * Math.sqrt((a - appsMin) / (appsMax - appsMin));
+  var titlesMin = 0, titlesMax = 5, rMin = 5, rMax = 22;
+  function rS(t){
+    if (t <= titlesMin) return rMin;
+    if (t >= titlesMax) return rMax;
+    return rMin + (rMax - rMin) * Math.sqrt(t / titlesMax);
   }
 
   var svgNS = "http://www.w3.org/2000/svg";
@@ -354,10 +356,10 @@ Long managerial tenures are rare among the teams headed to the 2026 World Cup. E
   }
 
   // sort bigger bubbles first so smaller ones paint on top and stay clickable
-  var paintOrder = data.slice().sort(function(a,b){ return b.apps - a.apps; });
+  var paintOrder = data.slice().sort(function(a,b){ return b.titles - a.titles; });
   for (var i = 0; i < paintOrder.length; i++){
     (function(d){
-      var baseR = rS(d.apps);
+      var baseR = rS(d.titles);
       var c = el("circle", {
         cx: xS(d.rank), cy: yS(d.tenure), r: baseR,
         fill: "#9a958d", "fill-opacity": 0.28,
@@ -386,7 +388,7 @@ Long managerial tenures are rare among the teams headed to the 2026 World Cup. E
       var isHov = hovered === d.team;
       var focus = selected === "all" || isSel || isHov;
       var showLabel = isSel || isHov || (selected === "all" && keyLabels[d.team]);
-      var baseR = rS(d.apps);
+      var baseR = rS(d.titles);
       var r = (isSel || isHov) ? baseR + 3 : baseR;
 
       var dot = dotMap[d.team];
@@ -405,7 +407,7 @@ Long managerial tenures are rare among the teams headed to the 2026 World Cup. E
       var d = null;
       for (var i = 0; i < data.length; i++) if (data[i].team === activeTeam) { d = data[i]; break; }
       if (d){
-        var wcLabel = d.apps === 1 ? "1 World Cup" : (d.apps + " World Cups");
+        var wcLabel = d.titles === 0 ? "no World Cup titles" : (d.titles === 1 ? "1 World Cup title" : (d.titles + " World Cup titles"));
         readout.innerHTML = "<strong>" + d.team + "</strong> · rank #" + d.rank + " · " + d.tenure.toFixed(1) + " yrs · " + wcLabel + " · " + d.manager;
         readout.classList.remove("is-on");
         // force reflow to restart animation
