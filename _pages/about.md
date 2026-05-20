@@ -43,11 +43,12 @@ Currently I’m **Director of the AI Innovation Lab at GBM**, building internal 
 
 Previously, I served as:
 
-- **Head of AI at Grupo Salinas**
+- **AI Innovation Lab Director at Novartis**
+- **AI Head at Algorithia (Grupo Salinas)**
 - **Director of Machine Learning at Banorte Financial Group**
-- **Head of Data Science at Universidad Panamericana**
-- Data analyst and strategy analyst at **San Luis Rassini**
-- Senior Data Science Consultant at **Rich IT**
+- **Machine Learning and Data Science Professor at Universidad Panamericana**
+- **Senior Data Science Consultant at Rich IT**
+- Data and Business Analyst at **San Luis Rassini**
 
 ---
 
@@ -59,15 +60,12 @@ Previously, I served as:
 </style>
 
 <div>
-    {% assign events = site.events | sort: 'date' %}
-    {% for event in site.events reversed %}
-    {% assign date = event.date | date: '%Y/%m' %}
-    {% assign enddate = event.enddate | date: '%Y/%m' %}
+    {% assign events = site.events | sort: 'date' | reverse %}
+    {% for event in events %}
     <big>{{ event.date | date: '%Y/%m' }}
     {% if event.enddate != blank %}
-        {% if date < enddate %} - {{ event.enddate | date: '%Y/%m' }}
-        {% endif %}
-    {% else %} - 
+         - {{ event.enddate | date: '%Y/%m' }}
+    {% else %} - Present
     {% endif %}
     </big>
     <div>

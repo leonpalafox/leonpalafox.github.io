@@ -1,7 +1,7 @@
 ---
 image: "/assets/images/timeline/gbm.png"
-date: "July 2025"
-enddate: "Present"
+date: "2025-07-01"
+enddate: ""
 ---
 
 AI Innovation Lab Director @ GBM.

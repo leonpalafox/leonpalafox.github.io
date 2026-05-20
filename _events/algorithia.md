@@ -1,7 +1,7 @@
 ---
 image: "/assets/images/timeline/algorithia.png"
-date: "October 2022"
-enddate: "May 2024"
+date: "2022-10-01"
+enddate: "2024-05-31"
 ---
 
 AI Head @ Algorithia

@@ -1,7 +1,7 @@
 ---
 image: "/assets/images/timeline/MEXT.png"
-date: "April 2007"
-enddate: "March 2013"
+date: "2007-04-01"
+enddate: "2013-03-31"
 ---
 
 Monbukagakusho Scholarship Fellow - Embassy recommendation.

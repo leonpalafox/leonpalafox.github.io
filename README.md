@@ -1,2 +1,2 @@
 # leonpalafox.github.io
-Leon Palafox's Personnal webpage
+Leon Palafox's personal webpage.

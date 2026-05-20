@@ -1,7 +1,7 @@
 ---
 image: "/assets/images/timeline/rassini.png"
-date: "February 2006"
-enddate: "February 2007"
+date: "2006-02-01"
+enddate: "2007-02-28"
 ---
 
 Data and Business Analyst @ San Luis Rassini.

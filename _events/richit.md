@@ -1,7 +1,7 @@
 ---
 image: "/assets/images/timeline/richit.png"
-date: "March 2017"
-enddate: "May 2018"
+date: "2017-03-01"
+enddate: "2018-05-31"
 ---
 
 Senior Data Science Consultant @ Rich IT.
