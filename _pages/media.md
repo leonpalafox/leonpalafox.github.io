@@ -3,6 +3,7 @@ layout: single
 title: "Media Appearances"
 permalink: media
 excerpt: "My media interactions, columns, and interviews."
+description: "Media appearances, interviews, talks, and public writing by León Palafox on AI, machine learning, data science, and financial technology."
 lang: en
 image: "/assets/images/header.jpg"
 toc: true

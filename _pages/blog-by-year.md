@@ -3,6 +3,7 @@ layout: archive
 title: "Blog"
 permalink: blog-by-year
 excerpt: "Year-by-year archive of Leon Palafox's articles on AI, data strategy, and innovation."
+description: "Articles by León Palafox on artificial intelligence, finance, data science, recommender systems, strategy, and technology."
 lang: en
 image: "/assets/images/header.jpg"
 classes: wide

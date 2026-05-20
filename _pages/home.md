@@ -1,19 +1,21 @@
 ---
-title: "Leon Palafox"
+title: "León Palafox | AI Strategy, Recommender Systems & Financial AI"
 layout: splash
 permalink: /
 lang: en
 image: "/assets/images/header.jpg"
+description: "León Palafox is an AI leader in Mexico focused on financial AI, recommender systems, personalization engines, MLOps, experimentation, and AI strategy."
 header:
+  hero_title: "AI Strategy and Recommender Systems for Finance"
   overlay_color: "#5e616c"
   overlay_filter: "0.25"
   overlay_image: /assets/images/header.jpg
   cta_label: "→ Stream of thought on X"
   cta_url: https://twitter.com/leonpalafox?lang=en
-excerpt: "AI leader building personalization & recommender systems at GBM. Lecturer at Universidad Panamericana. Columnist at El Financiero."
+excerpt: "León Palafox is an AI leader in Mexico focused on financial AI, recommender systems, personalization engines, MLOps, experimentation, and AI strategy."
 ---
 
-# Hi, I’m Leon 👋
+## Hi, I’m León
 
 I’m the **Director of the AI Innovation Lab at [GBM](https://www.gbm.com/)**, where I lead projects on **personalization engines, recommender systems, embeddings, and experimentation layers** for retail investing.  
 

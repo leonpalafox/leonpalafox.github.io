@@ -4,10 +4,10 @@ minimal_mistakes_skin: "default"
 
 # Site Settings
 locale: "en"
-title: "Leon Palafox"
+title: "León Palafox"
 title_separator: "-"
-name: "Leon Palafox"
-description: "AI leader building personalization and recommender systems at GBM. Lecturer at Universidad Panamericana. Columnist at El Financiero."
+name: "León Palafox"
+description: "León Palafox is an AI leader in Mexico focused on financial AI, recommender systems, personalization engines, MLOps, experimentation, and AI strategy."
 url: "https://www.leonpalafox.com"
 baseurl: "" # the subpath of your site, e.g. "/blog"
 repository: "leonpalafox/leonpalafox.github.io"
@@ -67,7 +67,7 @@ og_image: "/assets/images/header.jpg"
 
 social:
   type: "Person"
-  name: "Leon Palafox"
+  name: "León Palafox"
   links:
     - "https://www.leonpalafox.com/"
     - "https://www.linkedin.com/in/leonpalafox/"
@@ -82,7 +82,7 @@ analytics:
 
 # Site Author
 author:
-  name: "Leon Palafox"
+  name: "León Palafox"
   avatar: "/assets/images/bio-photo.png"
   bio: "Director of the AI Innovation Lab at GBM. PhD from the University of Tokyo. Lecturer on AI at Universidad Panamericana and columnist at El Financiero."
   location: "Mexico City, Mexico"

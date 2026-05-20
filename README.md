@@ -1,4 +1,4 @@
-# leonpalafox.github.io
+# leonpalafox.com
 Leon Palafox's personal webpage.
 
 ## SEO and Domain Notes

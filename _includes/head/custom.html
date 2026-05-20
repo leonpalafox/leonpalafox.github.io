@@ -24,24 +24,61 @@
 {% endif %}
 
 {% if page.url == "/" or page.url == "/about" %}
+{% assign person_id = site.url | append: "/#person" %}
+{% assign profile_page_id = canonical_url | append: "#profilepage" %}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Person",
-  "name": {{ site.author.name | jsonify }},
-  "url": {{ site.url | append: "/" | jsonify }},
-  "image": {{ site.author.avatar | absolute_url | jsonify }},
-  "description": {{ site.author.bio | jsonify }},
-  "jobTitle": "Director, AI Innovation Lab",
-  "affiliation": {
-    "@type": "Organization",
-    "name": "GBM"
-  },
-  "homeLocation": {
-    "@type": "Place",
-    "name": {{ site.author.location | jsonify }}
-  },
-  "sameAs": [{% for link in site.social.links %}{{ link | jsonify }}{% unless forloop.last %}, {% endunless %}{% endfor %}]
+  "@graph": [
+    {
+      "@type": "ProfilePage",
+      "@id": {{ profile_page_id | jsonify }},
+      "url": {{ canonical_url | jsonify }},
+      "name": {{ page.title | default: site.title | jsonify }},
+      "inLanguage": {{ page_lang | jsonify }},
+      "mainEntity": {
+        "@id": {{ person_id | jsonify }}
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": {{ person_id | jsonify }},
+      "name": {{ site.author.name | jsonify }},
+      "url": {{ site.url | append: "/" | jsonify }},
+      "image": {{ site.author.avatar | absolute_url | jsonify }},
+      "description": {{ site.author.bio | jsonify }},
+      "jobTitle": "Director of the AI Innovation Lab",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "GBM"
+      },
+      "alumniOf": [
+        {
+          "@type": "EducationalOrganization",
+          "name": "The University of Tokyo"
+        },
+        {
+          "@type": "EducationalOrganization",
+          "name": "UNAM"
+        }
+      ],
+      "knowsAbout": [
+        "Artificial Intelligence",
+        "Machine Learning",
+        "Recommender Systems",
+        "Financial AI",
+        "Data Strategy",
+        "MLOps",
+        "Experimentation",
+        "Personalization Engines"
+      ],
+      "homeLocation": {
+        "@type": "Place",
+        "name": {{ site.author.location | jsonify }}
+      },
+      "sameAs": [{% for link in site.social.links %}{{ link | jsonify }}{% unless forloop.last %}, {% endunless %}{% endfor %}]
+    }
+  ]
 }
 </script>
 {% endif %}

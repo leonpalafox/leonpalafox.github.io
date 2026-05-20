@@ -3,6 +3,7 @@ layout: single
 title: "About"
 permalink: about
 excerpt: "Professional bio, research background, and career timeline of Leon Palafox."
+description: "AI Innovation Lab Director at GBM, PhD from the University of Tokyo, lecturer at Universidad Panamericana, and columnist at El Financiero."
 lang: en
 image: "/assets/images/header.jpg"
 toc: true

@@ -4,6 +4,7 @@ title: "Publications & Research"
 permalink: publications
 classes: wide
 excerpt: "Academic publications and technical analysis."
+description: "Academic publications and industry writing by León Palafox on machine learning, AI, Mars imagery, bioinformatics, financial AI, and data strategy."
 lang: en
 image: "/assets/images/header.jpg"
 toc: true

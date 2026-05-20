@@ -4,6 +4,7 @@ title: "Teaching"
 permalink: teaching
 classes: wide
 excerpt: "Current courses and teaching materials."
+description: "Courses and materials by León Palafox on deep learning, machine learning, reinforcement learning, recommender systems, and applied AI."
 lang: en
 image: "/assets/images/header.jpg"
 toc: true
