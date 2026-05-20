@@ -1,6 +1,10 @@
 ---
 layout: single
 title: "LeCun apuesta por una IA más allá de los LLMs. México haría bien en tomar nota"
+excerpt: "Analisis de Leon Palafox sobre LeCun apuesta por una IA más allá de los LLMs. México haría bien en tomar nota."
+lang: es
+image: "/assets/images/header.jpg"
+last_modified_at: 2026-03-16
 toc: False
 author_profile: True
 category: ['articulos']

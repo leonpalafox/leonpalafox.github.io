@@ -1,6 +1,10 @@
 ---
 layout: single
 title: "La carrera de la IA cambió por completo"
+excerpt: "Analisis de Leon Palafox sobre La carrera de la IA cambió por completo."
+lang: es
+image: "/assets/images/header.jpg"
+last_modified_at: 2026-03-02
 toc: False
 author_profile: True
 category: ['articulos']

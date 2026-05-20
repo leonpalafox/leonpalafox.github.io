@@ -2,13 +2,15 @@
 layout: single
 title: "About"
 permalink: about
-excerpt: "Bio."
+excerpt: "Professional bio, research background, and career timeline of Leon Palafox."
+lang: en
+image: "/assets/images/header.jpg"
 toc: true
 author_profile: true
 ---
 
 I’m the **Director of the AI Innovation Lab at [GBM](https://www.gbm.com/)**, where I lead large-scale **personalization, recommender systems, embeddings, and experimentation platforms** for retail investing.  
-I’m also a **Lecturer at [Universidad Panamericana](http://www.up.edu.mx/en/mexico){:target='_blank'}** and a regular **columnist at *El Financiero*** on AI, data strategy, and innovation.
+I’m also a **Lecturer at [Universidad Panamericana](https://www.up.edu.mx/en/mexico){:target='_blank'}** and a regular **columnist at *El Financiero*** on AI, data strategy, and innovation.
 
 ---
 
@@ -69,7 +71,7 @@ Previously, I served as:
     {% endif %}
     </big>
     <div>
-        <img class="timeline-logo" src="{{site.baseurl}}{{ event.image }}" width="80" height="80">
+        <img class="timeline-logo" src="{{site.baseurl}}{{ event.image }}" width="80" height="80" alt="{{ event.content | strip_html | strip_newlines | normalize_whitespace }}">
         <span class="timeline-text"><small>{{ event.content }}</small></span>
     </div>
     <br><br>

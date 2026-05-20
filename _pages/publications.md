@@ -4,8 +4,10 @@ title: "Publications & Research"
 permalink: publications
 classes: wide
 excerpt: "Academic publications and technical analysis."
+lang: en
+image: "/assets/images/header.jpg"
 toc: true
-author_profile: True
+author_profile: true
 ---
 
 ## 🏭 Industry & Technical Analysis

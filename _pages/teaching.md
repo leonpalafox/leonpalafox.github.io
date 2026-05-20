@@ -4,8 +4,10 @@ title: "Teaching"
 permalink: teaching
 classes: wide
 excerpt: "Current courses and teaching materials."
+lang: en
+image: "/assets/images/header.jpg"
 toc: true
-author_profile: True
+author_profile: true
 ---
 
 ## 👨‍🏫 Current Courses
@@ -43,11 +45,11 @@ ___
 
 Material from my previous courses, including slides, notebooks, and syllabi.
 
-* **[DS01] Introduction to Data Science** ([2018](https://leonpalafox.github.io/dsclase/))
+* **[DS01] Introduction to Data Science** ([2018](https://www.leonpalafox.com/dsclase/))
     * *Focus: Python stack (Pandas/Numpy), exploratory analysis, and data visualization.*
-* **[DB01] Introduction to Databases** ([2018](https://leonpalafox.github.io/dbclase/))
+* **[DB01] Introduction to Databases** ([2018](https://www.leonpalafox.com/dbclase/))
     * *Focus: SQL, NoSQL, and data modeling for analytics.*
-* **[ML01] Machine Learning** ([2017](https://leonpalafox.github.io/mlclase/))
+* **[ML01] Machine Learning** ([2017](https://www.leonpalafox.com/mlclase/))
     * *Focus: Supervised vs. Unsupervised learning, Scikit-learn, and model validation.*
 
 ### Guest Lecturing

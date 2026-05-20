@@ -1,6 +1,10 @@
 ---
 layout: single
 title: "Es hora de mirar hacia adentro y garantizar el futuro de México"
+excerpt: "Analisis de Leon Palafox sobre Es hora de mirar hacia adentro y garantizar el futuro de México."
+lang: es
+image: "/assets/images/header.jpg"
+last_modified_at: 2026-01-19
 toc: False
 author_profile: True
 category: ['articulos']

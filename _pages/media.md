@@ -3,8 +3,10 @@ layout: single
 title: "Media Appearances"
 permalink: media
 excerpt: "My media interactions, columns, and interviews."
+lang: en
+image: "/assets/images/header.jpg"
 toc: true
-author_profile: True
+author_profile: true
 ---
 
 Here you can find a collection of my recent columns, podcast appearances, and interviews regarding Artificial Intelligence, Data Strategy, and the future of technology in Mexico and the world.
@@ -37,7 +39,7 @@ Interviews and panels where I discuss the state of AI in industry and academia.
 ### NVIDIA
 I was interviewed by NVIDIA corporation regarding our work with the Lunar and Planetary Laboratory at the University of Arizona. There I talked about our **MarsNet**, a Convolutional Neural Network capable of identifying multiple land features on the surface of Mars using images from the HiRISE instrument.
 
-<img class="timeline-logo" src="/assets/images/nvidia_photo.png" width="500" height="200">
+<img class="timeline-logo" src="/assets/images/nvidia_photo.png" width="500" height="200" alt="Leon Palafox interviewed by NVIDIA about MarsNet and machine learning for planetary sciences">
 
 ## 📰 Press Mentions
 * **Diario Digital / TV Azteca Context:** *"Imposible que la Inteligencia Artificial Domine y Destruya a los Humanos"* — [Read Article](https://diariodigitalmexico.com/imposible-que-la-inteligencia-artificial-domine-y-destruya-a-los-humanos-leon-palafox/)

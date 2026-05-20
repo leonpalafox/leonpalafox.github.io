@@ -1,6 +1,10 @@
 ---
 layout: single
 title: "World Cup Managers: Rank vs Tenure"
+excerpt: "Analysis by Leon Palafox on World Cup Managers: Rank vs Tenure."
+lang: en
+image: "/assets/images/header.jpg"
+last_modified_at: 2026-05-13
 date: 2026-05-13
 toc: False
 author_profile: True

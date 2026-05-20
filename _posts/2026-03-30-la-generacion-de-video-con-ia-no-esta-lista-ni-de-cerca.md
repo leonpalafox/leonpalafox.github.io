@@ -1,6 +1,10 @@
 ---
 layout: single
 title: "La generación de video con IA no está lista. Ni de cerca"
+excerpt: "Analisis de Leon Palafox sobre La generación de video con IA no está lista. Ni de cerca."
+lang: es
+image: "/assets/images/header.jpg"
+last_modified_at: 2026-03-30
 toc: False
 author_profile: True
 category: ['articulos']

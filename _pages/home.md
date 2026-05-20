@@ -2,6 +2,8 @@
 title: "Leon Palafox"
 layout: splash
 permalink: /
+lang: en
+image: "/assets/images/header.jpg"
 header:
   overlay_color: "#5e616c"
   overlay_filter: "0.25"
@@ -15,7 +17,7 @@ excerpt: "AI leader building personalization & recommender systems at GBM. Lectu
 
 I’m the **Director of the AI Innovation Lab at [GBM](https://www.gbm.com/)**, where I lead projects on **personalization engines, recommender systems, embeddings, and experimentation layers** for retail investing.  
 
-I also teach **Deep Learning** and **Machine Learning 2** at **[Universidad Panamericana](http://www.up.edu.mx)**, and **Deep Reinforcement Learning** at the **Colegio de Matemáticas Bourbaki**. I write about **AI, data strategy, and innovation** in *El Financiero*.
+I also teach **Deep Learning** and **Machine Learning 2** at **[Universidad Panamericana](https://www.up.edu.mx)**, and **Deep Reinforcement Learning** at the **Colegio de Matemáticas Bourbaki**. I write about **AI, data strategy, and innovation** in *El Financiero*.
 
 ---
 
@@ -32,6 +34,13 @@ I also teach **Deep Learning** and **Machine Learning 2** at **[Universidad Pana
 - **Personalization @ GBM:** Designed the “Genome” projects for investor profiles, built recommenders (KNN, ALS, BM25 + embeddings), and launched the **Mechagodzilla** experimentation layer.
 - **Teaching:** Developed and teach DL & RL courses at UP, including hands-on demos like market-making RL and VAEs.
 - **Writing:** Regular columnist at *El Financiero* on how to create real business value with AI.
+
+---
+
+### 🗂 Explore the blog
+- [Browse all posts by year](/blog-by-year)
+- [Browse posts by category](/categories/)
+- [Browse posts by tag](/tags/)
 
 ---
 

@@ -7,8 +7,8 @@ locale: "en"
 title: "Leon Palafox"
 title_separator: "-"
 name: "Leon Palafox"
-description: "Personal website."
-url: "https://leonpalafox.github.io"
+description: "AI leader building personalization and recommender systems at GBM. Lecturer at Universidad Panamericana. Columnist at El Financiero."
+url: "https://www.leonpalafox.com"
 baseurl: "" # the subpath of your site, e.g. "/blog"
 repository: "leonpalafox/leonpalafox.github.io"
 teaser:
@@ -51,24 +51,28 @@ atom_feed:
   path:
 
 # SEO Related
-google_site_verification:
-bing_site_verification:
+google_site_verification: ""
+bing_site_verification: ""
 yandex_site_verification:
 naver_site_verification:
 
 # Social Sharing
 twitter:
-  username:
+  username: "leonpalafox"
 facebook:
   username:
   app_id:
   publisher:
-og_image:
+og_image: "/assets/images/header.jpg"
 
 social:
-  type:
-  name:
+  type: "Person"
+  name: "Leon Palafox"
   links:
+    - "https://www.leonpalafox.com/"
+    - "https://www.linkedin.com/in/leonpalafox/"
+    - "https://twitter.com/leonpalafox"
+    - "https://github.com/leonpalafox"
 
 analytics:
   provider: "google-gtag"
@@ -93,8 +97,6 @@ author:
 include:
   - .htaccess
   - _pages
-  - _events
-  - _courses
 exclude:
   - "*.sublime-project"
   - "*.sublime-workspace"
@@ -154,7 +156,7 @@ sass:
 permalink: /:categories/:title/
 # paginate: 5
 # paginate_path: /page:num/
-timezone:
+timezone: "America/Mexico_City"
 
 # Plugins
 plugins:
@@ -208,20 +210,31 @@ defaults:
       layout: single
       author_profile: true
       read_time: true
+      lang: "es"
+      image: "/assets/images/header.jpg"
       comments:
       share:
-      related:
+      related: true
   - scope:
       path: ""
       type: pages
     values:
       layout: single
       author_profile: true
+      lang: "en"
+      image: "/assets/images/header.jpg"
   - scope:
       path: ""
       type: courses
     values:
       layout: single
       author_profile: true
+      lang: "en"
+      image: "/assets/images/header.jpg"
       toc: true
       classes: wide
+  - scope:
+      path: ""
+      type: events
+    values:
+      lang: "en"

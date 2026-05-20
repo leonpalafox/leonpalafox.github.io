@@ -3,6 +3,10 @@ main:
     url: /about
   - title: "Blog"
     url: /blog-by-year
+  - title: "Categories"
+    url: /categories/
+  - title: "Tags"
+    url: /tags/
   - title: "Teaching"
     url: /teaching
   - title: "Publications"

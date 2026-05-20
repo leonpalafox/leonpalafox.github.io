@@ -1,6 +1,10 @@
 ---
 layout: single
 title: "El fin del desarrollo de software tal como lo conocemos"
+excerpt: "Analisis de Leon Palafox sobre El fin del desarrollo de software tal como lo conocemos."
+lang: es
+image: "/assets/images/header.jpg"
+last_modified_at: 2026-02-02
 toc: False
 author_profile: True
 category: ['articulos']

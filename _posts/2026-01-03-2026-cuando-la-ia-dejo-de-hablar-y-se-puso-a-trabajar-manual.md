@@ -1,6 +1,10 @@
 ---
 layout: single
 title: "2026, Cuando la IA dejó de hablar y se puso a trabajar (Manual para no perderse)"
+excerpt: "Analisis de Leon Palafox sobre 2026, Cuando la IA dejó de hablar y se puso a trabajar (Manual para no perderse)."
+lang: es
+image: "/assets/images/header.jpg"
+last_modified_at: 2026-01-03
 toc: False
 author_profile: True
 category: ['articulos']

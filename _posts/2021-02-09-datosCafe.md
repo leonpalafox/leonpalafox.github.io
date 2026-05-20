@@ -1,6 +1,10 @@
 ---
 layout: single
 title: De datos y cafés, o cómo crear la bebida perfecta [Spanish]
+excerpt: "Analisis de Leon Palafox sobre De datos y cafés, o cómo crear la bebida perfecta."
+lang: es
+image: "/assets/images/header.jpg"
+last_modified_at: 2021-02-09
 toc: False
 author_profile: True
 category: ['articulos']

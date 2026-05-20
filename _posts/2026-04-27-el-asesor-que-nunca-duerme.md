@@ -1,6 +1,10 @@
 ---
 layout: single
 title: "El asesor que nunca duerme"
+excerpt: "Analisis de Leon Palafox sobre El asesor que nunca duerme."
+lang: es
+image: "/assets/images/header.jpg"
+last_modified_at: 2026-04-27
 toc: False
 author_profile: True
 category: ['articulos']

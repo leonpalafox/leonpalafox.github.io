@@ -1,6 +1,10 @@
 ---
 layout: single
 title: "México tiene la costumbre de regular el futuro como si fuera el pasado"
+excerpt: "Analisis de Leon Palafox sobre México tiene la costumbre de regular el futuro como si fuera el pasado."
+lang: es
+image: "/assets/images/header.jpg"
+last_modified_at: 2026-05-10
 toc: False
 author_profile: True
 category: ['articulos']

@@ -1,6 +1,10 @@
 ---
 layout: single
 title: "La IA se acerca a las AFORES de los mexicanos"
+excerpt: "Analisis de Leon Palafox sobre La IA se acerca a las AFORES de los mexicanos."
+lang: es
+image: "/assets/images/header.jpg"
+last_modified_at: 2026-04-13
 toc: False
 author_profile: True
 category: ['articulos']
