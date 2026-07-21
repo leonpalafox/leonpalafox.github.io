@@ -1,10 +1,13 @@
 ---
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
-import HeroArt from '../components/HeroArt.astro';
 import SectionHeading from '../components/SectionHeading.astro';
-import WorkThumb from '../components/WorkThumb.astro';
 import { kanjiYear } from '../lib/format';
+import heroSun from '../assets/hero-sun.png';
+import workPersonalization from '../assets/work-personalization.png';
+import workMlops from '../assets/work-mlops.png';
+import workRecsys from '../assets/work-recsys.png';
 
 const posts = (await getCollection('blog'))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
@@ -22,19 +25,19 @@ const selectedWork = [
   {
     title: 'Personalization at scale in financial services',
     href: '/about/#industry',
-    thumb: 'dots',
+    thumb: workPersonalization,
   },
   {
     title: 'From models to impact: MLOps for reliable AI',
     href: '/about/#industry',
-    thumb: 'chart',
+    thumb: workMlops,
   },
   {
     title: 'Building recommender systems people trust',
     href: '/publications/',
-    thumb: 'arch',
+    thumb: workRecsys,
   },
-] as const;
+];
 ---
 
 <Base title="León Palafox — AI Strategy and Recommender Systems for Finance">
@@ -58,8 +61,15 @@ const selectedWork = [
       </div>
 
       <div class="relative mx-auto w-full max-w-xl">
-        <HeroArt />
-        <div aria-hidden="true" class="absolute -right-2 top-1/2 hidden -translate-y-1/2 flex-col gap-10 2xl:flex">
+        <Image
+          src={heroSun}
+          alt="A textured vermillion sun rising behind a black halftone wave, inside thin orbit rings"
+          widths={[576, 1152]}
+          sizes="(min-width: 1024px) 576px, 90vw"
+          loading="eager"
+          class="h-auto w-full"
+        />
+        <div aria-hidden="true" class="absolute -right-14 top-1/2 hidden -translate-y-1/2 flex-col gap-10 2xl:flex">
           <p class="micro-label leading-5 text-muted">
             Signal<br />strength
             <span class="mt-1 block h-px w-4 bg-signal"></span>
@@ -129,9 +139,7 @@ const selectedWork = [
           selectedWork.map((work) => (
             <li>
               <a href={work.href} class="group flex items-center gap-5 py-5">
-                <span class="w-24 shrink-0 overflow-hidden" title="Placeholder artwork">
-                  <WorkThumb variant={work.thumb} />
-                </span>
+                <Image src={work.thumb} alt="" widths={[192]} sizes="96px" class="h-auto w-24 shrink-0" />
                 <span class="flex-1 text-[0.95rem] leading-snug">{work.title}</span>
                 <span aria-hidden="true" class="text-signal transition-transform group-hover:translate-x-1">→</span>
               </a>
