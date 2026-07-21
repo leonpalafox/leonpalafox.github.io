@@ -9,4 +9,4 @@ I am currently at the [RIIAA](https://riiaa.org/) conference. Which is the first
 However, I think they are inviting people that are no longer sensibilized with the current trends of ML and AI in the world. 
 
 
-![RIIAA conference at Universum](/images/riiaa.jpg)
+![RIIAA conference at Universum](../../assets/blog/riiaa.jpg)

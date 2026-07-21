@@ -26,4 +26,4 @@ Nota al pie, dos investigadores mexicanos cometieron errores garrafales en sus d
 
 En conclusión, me parece que el evento fue bueno, se juntó mucha energía y muchas personas, pero si me gustaría que la academia mexicana se viera más inyectada por esa juventud y energía.
 
-![Conferencia RIIAA en Universum](/images/riiaa.jpg)
+![Conferencia RIIAA en Universum](../../assets/blog/riiaa.jpg)

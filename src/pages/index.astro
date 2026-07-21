@@ -53,7 +53,7 @@ const selectedWork = [
         </p>
         <a
           href="/about/"
-          class="group mt-10 inline-flex items-center gap-3 bg-signal px-7 py-4 text-[0.95rem] font-medium text-white transition-colors hover:bg-signal-deep"
+          class="group mt-10 inline-flex items-center gap-3 bg-signal-deep px-7 py-4 text-[0.95rem] font-medium text-white transition-colors hover:brightness-90"
         >
           Explore my work
           <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
@@ -64,7 +64,7 @@ const selectedWork = [
         <Image
           src={heroSun}
           alt="A textured vermillion sun rising behind a black halftone wave, inside thin orbit rings"
-          widths={[576, 1152]}
+          widths={[384, 576, 1152]}
           sizes="(min-width: 1024px) 576px, 90vw"
           loading="eager"
           class="h-auto w-full"
@@ -141,7 +141,7 @@ const selectedWork = [
               <a href={work.href} class="group flex items-center gap-5 py-5">
                 <Image src={work.thumb} alt="" widths={[192]} sizes="96px" class="h-auto w-24 shrink-0" />
                 <span class="flex-1 text-[0.95rem] leading-snug">{work.title}</span>
-                <span aria-hidden="true" class="text-signal transition-transform group-hover:translate-x-1">→</span>
+                <span aria-hidden="true" class="text-signal-deep transition-transform group-hover:translate-x-1">→</span>
               </a>
             </li>
           ))
@@ -165,13 +165,13 @@ const selectedWork = [
                 <span class="flex-1 text-[0.95rem] leading-snug" lang={post.data.lang}>
                   {post.data.title}
                 </span>
-                <span aria-hidden="true" class="text-signal transition-transform group-hover:translate-x-1">→</span>
+                <span aria-hidden="true" class="text-signal-deep transition-transform group-hover:translate-x-1">→</span>
               </a>
             </li>
           ))
         }
       </ul>
-      <a href="/blog/" class="micro-label mt-6 inline-flex items-center gap-2 text-signal hover:text-signal-deep">
+      <a href="/blog/" class="micro-label mt-6 inline-flex items-center gap-2 text-signal-deep hover:text-signal">
         All posts <span aria-hidden="true">→</span>
       </a>
     </div>

@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import heroCollage from '../assets/hero-collage.png';
+import bioPhoto from '../assets/bio-photo.png';
 
 const logos = import.meta.glob<ImageMetadata>('../assets/logos/*.{png,jpg}', {
   eager: true,
@@ -138,7 +139,7 @@ const timeline = [
 
     <div class="relative flex flex-col px-6 py-12 sm:px-10 lg:min-h-[520px] lg:w-[62%] lg:px-14 lg:py-14">
       <header data-reveal>
-        <p class="micro-label flex items-center gap-3 text-signal">
+        <p class="micro-label flex items-center gap-3 text-signal-deep">
           <span>About</span>
           <span lang="ja" class="text-muted tracking-[0.2em]">略歴</span>
         </p>
@@ -153,11 +154,13 @@ const timeline = [
           <span aria-hidden="true" class="absolute -top-6 -left-3 h-[calc(100%+3rem)] w-px bg-ink/30"></span>
           <span aria-hidden="true" class="absolute -bottom-3 -right-6 h-px w-[calc(100%+3rem)] bg-ink/30"></span>
           <span aria-hidden="true" class="absolute -bottom-6 -right-3 h-[calc(100%+3rem)] w-px bg-ink/30"></span>
-          <img
-            src="/images/bio-photo.png"
+          <Image
+            src={bioPhoto}
             alt="Portrait of León Palafox"
-            class="aspect-[4/5] w-full object-cover mix-blend-multiply grayscale sepia-[.28] contrast-105"
+            widths={[176, 352]}
+            sizes="176px"
             loading="eager"
+            class="aspect-[4/5] w-full object-cover mix-blend-multiply grayscale sepia-[.28] contrast-105"
           />
         </figure>
 
@@ -213,7 +216,7 @@ const timeline = [
               >
                 {facet.glyph}
               </span>
-              <p class="micro-label flex items-center gap-3 text-signal">
+              <p class="micro-label flex items-center gap-3 text-signal-deep">
                 <span>{facet.en}</span>
                 <span lang="ja" class="text-muted tracking-[0.2em]">{facet.jp}</span>
               </p>
@@ -236,7 +239,7 @@ const timeline = [
                     </li>
                   ))}
                 </ul>
-                <p class="micro-label mt-5 text-signal">{facet.stat}</p>
+                <p class="micro-label mt-5 text-signal-deep">{facet.stat}</p>
                 <a
                   href={facet.href}
                   tabindex="-1"
@@ -253,7 +256,7 @@ const timeline = [
               </div>
             </div>
 
-            <p class="micro-label flex items-center gap-3 text-signal">
+            <p class="micro-label flex items-center gap-3 text-signal-deep">
               <span>{facet.en}</span>
               <span lang="ja" class="text-muted tracking-[0.2em]">{facet.jp}</span>
             </p>
@@ -326,7 +329,12 @@ const timeline = [
                   {item.from} — {item.to}
                 </span>
               </span>
-              {item.current && <span aria-label="Current role" class="size-1.5 shrink-0 rounded-full bg-signal" />}
+              {item.current && (
+                <span class="flex shrink-0 items-center gap-1.5">
+                  <span aria-hidden="true" class="size-1.5 rounded-full bg-signal" />
+                  <span class="sr-only">Current role</span>
+                </span>
+              )}
             </li>
           ))
         }

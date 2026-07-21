@@ -260,12 +260,12 @@ const sections = [
         <ul class="mt-8 max-w-3xl divide-y divide-hairline">
           {section.items.map((pub) => (
             <li class="flex gap-5 py-5">
-              <span class="micro-label w-12 shrink-0 pt-1 text-signal">{pub.year}</span>
+              <span class="micro-label w-12 shrink-0 pt-1 text-signal-deep">{pub.year}</span>
               <div class="flex-1">
                 {pub.href ? (
                   <a href={pub.href} class="group font-medium leading-snug hover:text-signal-deep">
                     {pub.title}
-                    <span aria-hidden="true" class="ml-2 inline-block text-signal transition-transform group-hover:translate-x-1">
+                    <span aria-hidden="true" class="ml-2 inline-block text-signal-deep transition-transform group-hover:translate-x-1">
                       →
                     </span>
                   </a>

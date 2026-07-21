@@ -16,7 +16,7 @@ const { title, description, pubDate, lang, tags } = post.data;
 <Base title={`${title} — León Palafox`} description={description ?? title} lang={lang}>
   <article class="px-6 py-14 sm:px-10 lg:px-14 lg:py-20">
     <header class="mx-auto max-w-2xl">
-      <p class="micro-label flex items-center gap-3 text-signal">
+      <p class="micro-label flex items-center gap-3 text-signal-deep">
         <time datetime={pubDate.toISOString().slice(0, 10)}>{fullDate(pubDate, lang)}</time>
         <span lang="ja" class="text-muted tracking-[0.2em]">{kanjiYear(pubDate)}</span>
       </p>
@@ -40,7 +40,7 @@ const { title, description, pubDate, lang, tags } = post.data;
     </div>
 
     <footer class="mx-auto mt-16 max-w-2xl border-t border-hairline pt-8">
-      <a href="/blog/" class="group micro-label inline-flex items-center gap-2 text-signal hover:text-signal-deep">
+      <a href="/blog/" class="group micro-label inline-flex items-center gap-2 text-signal-deep hover:text-signal">
         <span aria-hidden="true" class="transition-transform group-hover:-translate-x-1">←</span>
         All posts
       </a>

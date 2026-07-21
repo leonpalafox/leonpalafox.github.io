@@ -23,7 +23,7 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
                 aria-current={isActive(item.href) ? 'page' : undefined}
                 class:list={[
                   'transition-colors hover:text-signal',
-                  isActive(item.href) ? 'text-signal' : 'text-ink',
+                  isActive(item.href) ? 'text-signal-deep' : 'text-ink',
                 ]}
               >
                 {item.label}
