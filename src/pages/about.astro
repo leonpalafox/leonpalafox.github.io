@@ -31,18 +31,13 @@ const timeline = [
       src="/images/hero_1.png"
       alt=""
       aria-hidden="true"
-      class="pointer-events-none absolute inset-0 hidden h-full w-full object-cover object-right-top lg:block"
+      class="pointer-events-none absolute inset-0 hidden h-full w-full object-cover object-right-top lg:block [mask-image:radial-gradient(95%_130%_at_100%_18%,#000_38%,rgba(0,0,0,0.45)_52%,transparent_67%)]"
       loading="eager"
     />
-    <!-- Paper veil: guarantees a quiet zone for type at any width -->
+    <!-- Soft paper veil over the remaining fringe of the type zone -->
     <div
       aria-hidden="true"
-      class="pointer-events-none absolute inset-0 hidden bg-[linear-gradient(103deg,#f4ebd7_30%,rgba(244,235,215,0.9)_48%,rgba(244,235,215,0.55)_60%,transparent_76%)] lg:block"
-    >
-    </div>
-    <div
-      aria-hidden="true"
-      class="pointer-events-none absolute inset-x-0 bottom-0 hidden h-56 bg-[linear-gradient(to_top,rgba(244,235,215,0.8)_10%,rgba(244,235,215,0.35)_55%,transparent_100%)] lg:block"
+      class="pointer-events-none absolute inset-0 hidden bg-[linear-gradient(103deg,#f4ebd7_24%,rgba(244,235,215,0.6)_40%,transparent_58%)] lg:block"
     >
     </div>
 
@@ -68,7 +63,7 @@ const timeline = [
       </svg>
     </div>
 
-    <div class="relative flex flex-col px-6 py-12 sm:px-10 lg:min-h-[660px] lg:justify-between lg:px-14 lg:py-16">
+    <div class="relative flex flex-col px-6 py-12 sm:px-10 lg:min-h-[540px] lg:px-14 lg:py-14">
       <header>
         <p class="micro-label flex items-center gap-3 text-signal">
           <span>About</span>
@@ -78,7 +73,7 @@ const timeline = [
         <span aria-hidden="true" class="mt-6 block h-[3px] w-14 bg-signal"></span>
       </header>
 
-      <div class="mt-12 flex flex-col gap-10 sm:flex-row sm:items-end lg:mt-0 lg:gap-14">
+      <div class="mt-12 flex flex-col gap-10 sm:flex-row sm:items-end lg:gap-14">
         <!-- Portrait in a drafting frame -->
         <figure class="relative w-44 shrink-0 sm:w-52">
           <span aria-hidden="true" class="absolute -left-6 -top-3 h-px w-[calc(100%+3rem)] bg-ink/30"></span>
