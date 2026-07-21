@@ -66,7 +66,7 @@ const timeline = [
     </div>
 
     <div class="relative flex flex-col px-6 py-12 sm:px-10 lg:min-h-[520px] lg:w-[62%] lg:px-14 lg:py-14">
-      <header>
+      <header data-reveal>
         <p class="micro-label flex items-center gap-3 text-signal">
           <span>About</span>
           <span lang="ja" class="text-muted tracking-[0.2em]">略歴</span>
@@ -77,7 +77,7 @@ const timeline = [
 
       <div class="mt-12 flex flex-col gap-10 sm:flex-row sm:items-end lg:gap-12">
         <!-- Portrait in a drafting frame -->
-        <figure class="relative w-44 shrink-0">
+        <figure data-reveal style="--reveal-delay: 130ms" class="relative w-44 shrink-0">
           <span aria-hidden="true" class="absolute -left-6 -top-3 h-px w-[calc(100%+3rem)] bg-ink/30"></span>
           <span aria-hidden="true" class="absolute -top-6 -left-3 h-[calc(100%+3rem)] w-px bg-ink/30"></span>
           <span aria-hidden="true" class="absolute -bottom-3 -right-6 h-px w-[calc(100%+3rem)] bg-ink/30"></span>
@@ -90,7 +90,7 @@ const timeline = [
           />
         </figure>
 
-        <div class="max-w-md space-y-0 text-[0.98rem] leading-[1.75]">
+        <div data-reveal style="--reveal-delay: 260ms" class="max-w-md space-y-0 text-[0.98rem] leading-[1.75]">
           <p>
             I'm the <strong>Director of the AI Innovation Lab at <a class="text-signal-deep underline underline-offset-3 hover:text-signal" href="https://www.gbm.com/">GBM</a></strong>,
             where I lead large-scale personalization, recommender systems, embeddings, and experimentation
@@ -109,48 +109,54 @@ const timeline = [
   </section>
 
   <section class="border-b border-hairline px-6 py-14 sm:px-10 lg:px-14">
-    <SectionHeading title="Research" id="research" />
-    <div class="mt-8 max-w-2xl space-y-5 text-[1.05rem] leading-relaxed">
-      <p>
-        My research interest is applied machine learning, especially where data meets complex systems. I've worked
-        across neuroscience, astrophysics, planetary sciences, and finance.
-      </p>
-      <p>
-        Right now I'm exploring how machine learning can support decision-making in social and financial systems,
-        from investment analytics to recommender systems for retail platforms.
-      </p>
-    </div>
-  </section>
+    <div class="grid gap-6 lg:grid-cols-3">
+      <article id="research" data-reveal class="border border-hairline bg-paper p-7">
+        <p class="micro-label flex items-center gap-3 text-signal">
+          <span>Research</span>
+          <span lang="ja" class="text-muted tracking-[0.2em]">研究</span>
+        </p>
+        <h2 class="mt-3 text-xl font-semibold tracking-tight">
+          Where data meets complex systems
+          <span aria-hidden="true" class="mt-2.5 block h-[3px] w-8 bg-signal"></span>
+        </h2>
+        <p class="mt-4 text-sm leading-relaxed">
+          Applied machine learning across neuroscience, astrophysics, planetary sciences, and finance. Right now:
+          how ML can support decision-making in social and financial systems, from investment analytics to
+          recommenders for retail platforms.
+        </p>
+      </article>
 
-  <section class="border-b border-hairline px-6 py-14 sm:px-10 lg:px-14">
-    <SectionHeading title="Academia" id="academia" />
-    <div class="mt-8 max-w-2xl space-y-5 text-[1.05rem] leading-relaxed">
-      <p>
-        I earned my bachelor's degree in engineering from the National Autonomous University of Mexico (UNAM),
-        graduating Magna Cum Laude and receiving the Medalla Gabino Barreda as the top student in my class. I earned
-        my master's and PhD in machine learning applied to bioinformatics from the University of Tokyo, funded by
-        the Monbukagakusho (MEXT) scholarship of the Japanese Ministry of Education.
-      </p>
-      <p>
-        I later worked as a postdoctoral researcher at the UCLA School of Medicine, applying ML to neuroscience, and
-        at the University of Arizona, applying ML to planetary sciences, where I then became a staff scientist.
-      </p>
-    </div>
-  </section>
+      <article id="academia" data-reveal style="--reveal-delay: 90ms" class="border border-hairline bg-paper p-7">
+        <p class="micro-label flex items-center gap-3 text-signal">
+          <span>Academia</span>
+          <span lang="ja" class="text-muted tracking-[0.2em]">学界</span>
+        </p>
+        <h2 class="mt-3 text-xl font-semibold tracking-tight">
+          UNAM → Tokyo → UCLA → Arizona
+          <span aria-hidden="true" class="mt-2.5 block h-[3px] w-8 bg-signal"></span>
+        </h2>
+        <p class="mt-4 text-sm leading-relaxed">
+          Engineering at UNAM — Magna Cum Laude, Medalla Gabino Barreda. Master's and PhD in ML for bioinformatics
+          at the University of Tokyo on the Monbukagakusho (MEXT) scholarship. Postdocs applying ML to neuroscience
+          (UCLA School of Medicine) and planetary sciences (University of Arizona), then staff scientist.
+        </p>
+      </article>
 
-  <section class="border-b border-hairline px-6 py-14 sm:px-10 lg:px-14">
-    <SectionHeading title="Industry" id="industry" />
-    <div class="mt-8 max-w-2xl space-y-5 text-[1.05rem] leading-relaxed">
-      <p>
-        I've worked at the intersection of AI, data strategy, and business for over a decade. At GBM I direct the AI
-        Innovation Lab: the "Genome" investor-profile projects, recommenders built on KNN, ALS, and BM25 with
-        embeddings, and the <strong>Mechagodzilla</strong> experimentation layer that measures whether any of it
-        actually works.
-      </p>
-      <p>
-        Before GBM I directed the AI Innovation Lab at Novartis, headed AI at Algorithia (Grupo Salinas), and
-        directed Machine Learning at Banorte Financial Group.
-      </p>
+      <article id="industry" data-reveal style="--reveal-delay: 180ms" class="border border-hairline bg-paper p-7">
+        <p class="micro-label flex items-center gap-3 text-signal">
+          <span>Industry</span>
+          <span lang="ja" class="text-muted tracking-[0.2em]">産業</span>
+        </p>
+        <h2 class="mt-3 text-xl font-semibold tracking-tight">
+          A decade of AI that ships
+          <span aria-hidden="true" class="mt-2.5 block h-[3px] w-8 bg-signal"></span>
+        </h2>
+        <p class="mt-4 text-sm leading-relaxed">
+          At GBM: the "Genome" investor-profile projects, recommenders on KNN, ALS, and BM25 with embeddings, and
+          the <strong>Mechagodzilla</strong> experimentation layer that measures whether any of it works. Before:
+          AI Innovation Lab at Novartis, AI Head at Algorithia (Grupo Salinas), ML Director at Banorte.
+        </p>
+      </article>
     </div>
   </section>
 
@@ -159,15 +165,23 @@ const timeline = [
     <div class="relative mt-8 max-w-3xl">
       <ul class="divide-y divide-hairline">
         {
-          timeline.map((item) => (
-            <li class="group relative -mx-4 flex items-center gap-4 px-4 py-3.5 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] sm:gap-6 hover:z-10 hover:-translate-y-1 hover:scale-[1.02] hover:bg-[#faf7f0] hover:shadow-[0_14px_36px_rgba(20,20,18,0.13)]">
+          timeline.map((item, i) => (
+            <li
+              data-reveal
+              style={`--reveal-delay: ${Math.min(i * 45, 400)}ms`}
+              class="group relative -mx-4 flex items-center gap-4 px-5 py-3.5 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] sm:gap-6 hover:z-10 hover:-translate-y-1.5 hover:scale-[1.035] hover:bg-[#fbf8f1] hover:shadow-[0_22px_55px_rgba(20,20,18,0.20)]"
+            >
+              <span
+                aria-hidden="true"
+                class="absolute inset-y-2 left-0 w-[3px] origin-center scale-y-0 bg-signal transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-y-100"
+              />
               {item.logo ? (
                 <Image
                   src={item.logo}
                   alt={`${item.org} logo`}
                   widths={[80, 160]}
                   sizes="40px"
-                  class="size-10 shrink-0 object-contain opacity-75 mix-blend-multiply grayscale transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.35] group-hover:opacity-100 group-hover:grayscale-0"
+                  class="size-10 shrink-0 object-contain opacity-75 mix-blend-multiply grayscale transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.45] group-hover:opacity-100 group-hover:grayscale-0"
                 />
               ) : (
                 <span class="size-10 shrink-0" />
@@ -186,6 +200,48 @@ const timeline = [
           ))
         }
       </ul>
-
+    </div>
   </section>
 </Base>
+
+<style is:global>
+  @media (prefers-reduced-motion: no-preference) {
+    body.reveal-armed [data-reveal] {
+      opacity: 0;
+      transform: translateY(26px);
+      transition:
+        opacity 0.7s ease,
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      transition-delay: var(--reveal-delay, 0s);
+    }
+    body.reveal-armed [data-reveal].is-in {
+      opacity: 1;
+      transform: none;
+    }
+    /* Once revealed, hand transform control back to hover states */
+    body.reveal-armed li[data-reveal].is-in {
+      transition-delay: 0s;
+      transition-property: all;
+      transition-duration: 0.3s;
+    }
+  }
+</style>
+
+<script>
+  const reveals = document.querySelectorAll('[data-reveal]');
+  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.body.classList.add('reveal-armed');
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-in');
+            io.unobserve(entry.target);
+          }
+        }
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+    );
+    reveals.forEach((el) => io.observe(el));
+  }
+</script>
