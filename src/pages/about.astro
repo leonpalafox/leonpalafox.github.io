@@ -156,55 +156,36 @@ const timeline = [
 
   <section class="px-6 py-14 sm:px-10 lg:px-14">
     <SectionHeading title="Timeline" id="timeline" />
-    <ul class="mt-8 max-w-3xl divide-y divide-hairline">
-      {
-        timeline.map((item) => (
-          <li class="group relative flex items-center gap-4 py-3.5 transition-colors duration-200 sm:gap-6 xl:hover:bg-[#eeece4]">
-            {item.logo ? (
-              <Image
-                src={item.logo}
-                alt={`${item.org} logo`}
-                widths={[80]}
-                sizes="40px"
-                class="size-10 shrink-0 object-contain opacity-75 mix-blend-multiply grayscale transition-[filter,opacity] duration-200 group-hover:opacity-100 group-hover:grayscale-0"
-              />
-            ) : (
-              <span class="size-10 shrink-0" />
-            )}
-            <span class="micro-label hidden w-44 shrink-0 text-muted sm:block">
-              {item.from} — {item.to}
-            </span>
-            <span class="flex-1 leading-snug">
-              {item.role} <span class="text-muted">· {item.org}</span>
-              <span class="micro-label mt-0.5 block text-muted sm:hidden">
-                {item.from} — {item.to}
-              </span>
-            </span>
-            {item.current && <span aria-label="Current role" class="size-1.5 shrink-0 rounded-full bg-signal" />}
-
-            {item.logo && (
-              <div
-                aria-hidden="true"
-                class="pointer-events-none invisible absolute left-full top-1/2 z-10 ml-6 hidden w-64 -translate-y-1/2 translate-x-3 scale-[0.96] border border-hairline bg-sheet p-6 opacity-0 shadow-[0_16px_40px_rgba(20,20,18,0.14)] transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:visible group-hover:translate-x-0 group-hover:scale-100 group-hover:opacity-100 xl:block"
-              >
+    <div class="relative mt-8 max-w-3xl">
+      <ul class="divide-y divide-hairline">
+        {
+          timeline.map((item) => (
+            <li class="group relative -mx-4 flex items-center gap-4 px-4 py-3.5 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] sm:gap-6 hover:z-10 hover:-translate-y-1 hover:scale-[1.02] hover:bg-[#faf7f0] hover:shadow-[0_14px_36px_rgba(20,20,18,0.13)]">
+              {item.logo ? (
                 <Image
                   src={item.logo}
-                  alt=""
-                  widths={[160]}
-                  sizes="80px"
-                  class="size-20 object-contain mix-blend-multiply transition-transform delay-75 duration-300 ease-out group-hover:scale-105"
+                  alt={`${item.org} logo`}
+                  widths={[80, 160]}
+                  sizes="40px"
+                  class="size-10 shrink-0 object-contain opacity-75 mix-blend-multiply grayscale transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.35] group-hover:opacity-100 group-hover:grayscale-0"
                 />
-                <p class="mt-4 font-semibold leading-snug">{item.role}</p>
-                <p class="mt-1 text-sm text-muted">{item.org}</p>
-                <p class="micro-label mt-3 text-signal">
+              ) : (
+                <span class="size-10 shrink-0" />
+              )}
+              <span class="micro-label hidden w-44 shrink-0 text-muted transition-colors duration-300 sm:block group-hover:text-signal">
+                {item.from} — {item.to}
+              </span>
+              <span class="flex-1 leading-snug">
+                {item.role} <span class="text-muted">· {item.org}</span>
+                <span class="micro-label mt-0.5 block text-muted sm:hidden">
                   {item.from} — {item.to}
-                </p>
-                <span class="mt-3 block h-[2px] w-8 bg-signal" />
-              </div>
-            )}
-          </li>
-        ))
-      }
-    </ul>
+                </span>
+              </span>
+              {item.current && <span aria-label="Current role" class="size-1.5 shrink-0 rounded-full bg-signal" />}
+            </li>
+          ))
+        }
+      </ul>
+
   </section>
 </Base>
