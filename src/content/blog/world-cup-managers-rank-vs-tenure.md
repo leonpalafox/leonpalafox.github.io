@@ -62,6 +62,7 @@ Long managerial tenures are rare among the teams headed to the 2026 World Cup. E
     </div>
   </div>
 </div>
+
 <style>
   .wcm-root {
     background: #fbfaf7;
