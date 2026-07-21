@@ -199,7 +199,7 @@ const timeline = [
             <!-- Expanded panel: comes to the front over the neighbors on hover -->
             <div
               aria-hidden="true"
-              class="pointer-events-none invisible absolute -inset-x-5 -top-5 z-40 hidden origin-top scale-[0.96] border border-hairline bg-[#faf7f0] p-8 opacity-0 shadow-[0_36px_90px_rgba(20,20,18,0.28)] transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:visible group-hover:scale-100 group-hover:opacity-100 lg:block"
+              class="invisible absolute -inset-x-5 -top-5 z-40 hidden origin-top scale-[0.96] border border-hairline bg-[#faf7f0] p-8 opacity-0 shadow-[0_36px_90px_rgba(20,20,18,0.28)] transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:visible group-hover:scale-100 group-hover:opacity-100 lg:block"
             >
               <span class="absolute inset-x-0 top-0 h-[3px] bg-signal"></span>
               <span
@@ -232,6 +232,19 @@ const timeline = [
                   ))}
                 </ul>
                 <p class="micro-label mt-5 text-signal">{facet.stat}</p>
+                <a
+                  href={facet.href}
+                  tabindex="-1"
+                  class="group/link mt-6 inline-flex items-center gap-2.5 font-mono text-[0.82rem] font-medium uppercase tracking-[0.2em] text-signal transition-colors duration-300 hover:text-signal-deep"
+                >
+                  {facet.linkLabel}
+                  <span
+                    aria-hidden="true"
+                    class="transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/link:translate-x-2"
+                  >
+                    →
+                  </span>
+                </a>
               </div>
             </div>
 
@@ -257,10 +270,15 @@ const timeline = [
             </ul>
             <a
               href={facet.href}
-              class="micro-label mt-auto inline-flex items-center gap-2 pt-6 text-signal hover:text-signal-deep"
+              class="group/link mt-auto inline-flex items-center gap-2.5 pt-6 font-mono text-[0.82rem] font-medium uppercase tracking-[0.2em] text-signal transition-colors duration-300 hover:text-signal-deep"
             >
               {facet.linkLabel}
-              <span aria-hidden="true" class="transition-transform duration-300 group-hover:translate-x-1">→</span>
+              <span
+                aria-hidden="true"
+                class="transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-1 group-hover/link:translate-x-2"
+              >
+                →
+              </span>
             </a>
           </article>
         ))
