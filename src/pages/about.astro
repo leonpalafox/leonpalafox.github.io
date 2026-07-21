@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import SectionHeading from '../components/SectionHeading.astro';
+import heroCollage from '../assets/hero-collage.png';
 
 const logos = import.meta.glob<ImageMetadata>('../assets/logos/*.{png,jpg}', {
   eager: true,
@@ -101,20 +102,24 @@ const timeline = [
   <!-- Collage hero: recreates assets/hero_anout.png as a live composition -->
   <section class="relative overflow-hidden border-b border-hairline bg-[#f4ebd7]">
     <!-- Collage panel (lg+): owns the right side, melts into the paper on its left edge -->
-    <img
-      src="/images/hero_1.png"
+    <Image
+      src={heroCollage}
       alt=""
       aria-hidden="true"
-      class="pointer-events-none absolute inset-y-0 right-0 hidden h-full w-[44%] object-cover object-right lg:block [mask-image:linear-gradient(to_left,#000_72%,transparent_100%)]"
+      widths={[640, 1280]}
+      sizes="(min-width: 1024px) 44vw, 100vw"
       loading="eager"
+      class="pointer-events-none absolute inset-y-0 right-0 hidden h-full w-[44%] object-cover object-right lg:block [mask-image:linear-gradient(to_left,#000_72%,transparent_100%)]"
     />
 
     <!-- Banner crop of the collage (below lg) -->
-    <img
-      src="/images/hero_1.png"
+    <Image
+      src={heroCollage}
       alt="Paper collage of neural networks, market charts, books, and Mexico City architecture"
-      class="h-56 w-full object-cover object-right sm:h-72 lg:hidden"
+      widths={[768, 1280, 1672]}
+      sizes="100vw"
       loading="eager"
+      class="h-56 w-full object-cover object-right sm:h-72 lg:hidden"
     />
 
     <!-- Drafting-sketch decorations -->

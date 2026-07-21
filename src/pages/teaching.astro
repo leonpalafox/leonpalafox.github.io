@@ -1,7 +1,9 @@
 ---
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import SectionHeading from '../components/SectionHeading.astro';
+import heroCity from '../assets/hero-teaching.png';
 
 const courses = [
   {
@@ -79,11 +81,13 @@ const archive = [
   />
 
   <figure class="border-b border-hairline">
-    <img
-      src="/images/hero_2.png"
+    <Image
+      src={heroCity}
       alt="A bridge leading toward a luminous city, over a foreground of astronomical diagrams"
-      class="max-h-[420px] w-full object-cover"
+      widths={[720, 1288, 1672]}
+      sizes="(min-width: 1280px) 1288px, 100vw"
       loading="eager"
+      class="max-h-[420px] w-full object-cover"
     />
   </figure>
 
