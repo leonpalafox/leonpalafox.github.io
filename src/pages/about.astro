@@ -1,6 +1,5 @@
 ---
 import Base from '../layouts/Base.astro';
-import PageHero from '../components/PageHero.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 
 const timeline = [
@@ -25,40 +24,90 @@ const timeline = [
   title="About — León Palafox"
   description="Director of the AI Innovation Lab at GBM, PhD from the University of Tokyo, lecturer at Universidad Panamericana, and columnist at El Financiero."
 >
-  <PageHero
-    eyebrow="About"
-    jp="略歴"
-    title="Hi, I'm León."
-    description="I build AI that moves money wisely: personalization, recommender systems, and the experimentation platforms that keep them honest."
-  />
+  <!-- Collage hero: recreates assets/hero_anout.png as a live composition -->
+  <section class="relative overflow-hidden border-b border-hairline bg-[#f4ebd7]">
+    <!-- Collage canvas (lg+): the artwork is the section background -->
+    <img
+      src="/images/hero_1.png"
+      alt=""
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-0 hidden h-full w-full object-cover object-right-top lg:block"
+      loading="eager"
+    />
+    <!-- Paper veil: guarantees a quiet zone for type at any width -->
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-0 hidden bg-[linear-gradient(103deg,#f4ebd7_30%,rgba(244,235,215,0.9)_48%,rgba(244,235,215,0.55)_60%,transparent_76%)] lg:block"
+    >
+    </div>
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-x-0 bottom-0 hidden h-56 bg-[linear-gradient(to_top,rgba(244,235,215,0.8)_10%,rgba(244,235,215,0.35)_55%,transparent_100%)] lg:block"
+    >
+    </div>
 
-  <figure class="border-b border-hairline">
+    <!-- Banner crop of the collage (below lg) -->
     <img
       src="/images/hero_1.png"
       alt="Paper collage of neural networks, market charts, books, and Mexico City architecture"
-      class="max-h-[420px] w-full object-cover"
+      class="h-56 w-full object-cover object-right sm:h-72 lg:hidden"
       loading="eager"
     />
-  </figure>
 
-  <section class="grid gap-12 border-b border-hairline px-6 py-14 sm:px-10 lg:grid-cols-[240px_1fr] lg:px-14">
-    <img
-      src="/images/bio-photo.png"
-      alt="Portrait of León Palafox"
-      class="h-56 w-56 border border-hairline object-cover"
-      loading="lazy"
-    />
-    <div class="max-w-2xl space-y-5 text-[1.05rem] leading-relaxed">
-      <p>
-        I'm the <strong>Director of the AI Innovation Lab at <a class="text-signal-deep underline underline-offset-3 hover:text-signal" href="https://www.gbm.com/">GBM</a></strong>,
-        where I lead large-scale personalization, recommender systems, embeddings, and experimentation platforms
-        for retail investing.
-      </p>
-      <p>
-        I'm also a lecturer at <a class="text-signal-deep underline underline-offset-3 hover:text-signal" href="https://www.up.edu.mx/en/mexico">Universidad Panamericana</a>,
-        where I teach Deep Learning and Machine Learning, and I teach Deep Reinforcement Learning at Colegio de
-        Matemáticas Bourbaki. I write a regular column in <em>El Financiero</em> on AI, data strategy, and innovation.
-      </p>
+    <!-- Drafting-sketch decorations -->
+    <div aria-hidden="true" class="pointer-events-none absolute inset-0 hidden lg:block">
+      <div
+        class="absolute left-10 top-[46%] h-16 w-20 opacity-45"
+        style="background-image: radial-gradient(var(--color-ink) 1px, transparent 1px); background-size: 9px 9px;"
+      >
+      </div>
+      <div class="absolute -bottom-16 -left-12 size-44 rounded-full border border-ink/25"></div>
+      <div class="absolute bottom-24 left-16 size-14 rounded-full border border-ink/20"></div>
+      <svg class="absolute left-[46%] top-16 size-4 opacity-40" viewBox="0 0 16 16">
+        <path d="M8 0 V16 M0 8 H16" stroke="var(--color-ink)" stroke-width="1"></path>
+      </svg>
+    </div>
+
+    <div class="relative flex flex-col px-6 py-12 sm:px-10 lg:min-h-[660px] lg:justify-between lg:px-14 lg:py-16">
+      <header>
+        <p class="micro-label flex items-center gap-3 text-signal">
+          <span>About</span>
+          <span lang="ja" class="text-muted tracking-[0.2em]">略歴</span>
+        </p>
+        <h1 class="mt-5 text-4xl font-semibold leading-[1.02] tracking-[-0.02em] sm:text-5xl">Hi, I'm León.</h1>
+        <span aria-hidden="true" class="mt-6 block h-[3px] w-14 bg-signal"></span>
+      </header>
+
+      <div class="mt-12 flex flex-col gap-10 sm:flex-row sm:items-end lg:mt-0 lg:gap-14">
+        <!-- Portrait in a drafting frame -->
+        <figure class="relative w-44 shrink-0 sm:w-52">
+          <span aria-hidden="true" class="absolute -left-6 -top-3 h-px w-[calc(100%+3rem)] bg-ink/30"></span>
+          <span aria-hidden="true" class="absolute -top-6 -left-3 h-[calc(100%+3rem)] w-px bg-ink/30"></span>
+          <span aria-hidden="true" class="absolute -bottom-3 -right-6 h-px w-[calc(100%+3rem)] bg-ink/30"></span>
+          <span aria-hidden="true" class="absolute -bottom-6 -right-3 h-[calc(100%+3rem)] w-px bg-ink/30"></span>
+          <img
+            src="/images/bio-photo.png"
+            alt="Portrait of León Palafox"
+            class="aspect-[4/5] w-full object-cover mix-blend-multiply grayscale sepia-[.28] contrast-105"
+            loading="eager"
+          />
+        </figure>
+
+        <div class="max-w-lg space-y-0 text-[1.02rem] leading-relaxed">
+          <p>
+            I'm the <strong>Director of the AI Innovation Lab at <a class="text-signal-deep underline underline-offset-3 hover:text-signal" href="https://www.gbm.com/">GBM</a></strong>,
+            where I lead large-scale personalization, recommender systems, embeddings, and experimentation
+            platforms for retail investing.
+          </p>
+          <span aria-hidden="true" class="my-5 block h-[2px] w-10 bg-[#c0952f]"></span>
+          <p>
+            I'm also a lecturer at <a class="text-signal-deep underline underline-offset-3 hover:text-signal" href="https://www.up.edu.mx/en/mexico">Universidad Panamericana</a>,
+            where I teach Deep Learning and Machine Learning, and I teach Deep Reinforcement Learning at Colegio
+            de Matemáticas Bourbaki. I write a regular column in <em>El Financiero</em> on AI, data strategy, and
+            innovation.
+          </p>
+        </div>
+      </div>
     </div>
   </section>
 
