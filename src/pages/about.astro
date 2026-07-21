@@ -1,22 +1,30 @@
 ---
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 
+const logos = import.meta.glob<ImageMetadata>('../assets/logos/*.{png,jpg}', {
+  eager: true,
+  import: 'default',
+});
+const logo = (name: string) => logos[`../assets/logos/${name}`];
+
 const timeline = [
-  { from: '2025.07', to: 'Present', role: 'AI Innovation Lab Director', org: 'GBM', current: true },
-  { from: '2024.05', to: '2025.07', role: 'AI Innovation Lab Director', org: 'Novartis' },
-  { from: '2022.10', to: '2024.05', role: 'AI Head', org: 'Algorithia (Grupo Salinas)' },
-  { from: '2021.07', to: '2022.10', role: 'Machine Learning Director', org: 'Banorte Financial Group' },
-  { from: '2018.05', to: '2020.06', role: 'ML & Data Science Professor', org: 'Universidad Panamericana' },
-  { from: '2017.03', to: '2018.05', role: 'Senior Data Science Consultant', org: 'Rich IT' },
-  { from: '2015.03', to: '2017.03', role: 'Staff Scientist', org: 'University of Arizona' },
-  { from: '2014.04', to: '2015.03', role: 'Postdoctoral Fellow', org: 'University of Arizona' },
-  { from: '2013.02', to: '2014.04', role: 'Postdoctoral Fellow', org: 'UCLA School of Medicine' },
-  { from: '2012.08', to: '2012.09', role: 'Research Intern', org: 'National Institute of Informatics' },
-  { from: '2010.03', to: '2013.03', role: 'PhD, Machine Learning', org: 'The University of Tokyo' },
-  { from: '2008.04', to: '2010.03', role: "Master's, Information Technologies", org: 'The University of Tokyo' },
-  { from: '2007.04', to: '2013.03', role: 'Monbukagakusho (MEXT) Scholarship Fellow', org: 'Government of Japan' },
-  { from: '2000.09', to: '2005.04', role: "Bachelor's, Engineering (Magna Cum Laude)", org: 'UNAM' },
+  { from: '2025.07', to: 'Present', role: 'AI Innovation Lab Director', org: 'GBM', logo: logo('gbm.png'), current: true },
+  { from: '2024.05', to: '2025.07', role: 'AI Innovation Lab Director', org: 'Novartis', logo: logo('novartis.png') },
+  { from: '2022.10', to: '2024.05', role: 'AI Head', org: 'Algorithia (Grupo Salinas)', logo: logo('algorithia.png') },
+  { from: '2021.07', to: '2022.10', role: 'Machine Learning Director', org: 'Banorte Financial Group', logo: logo('banorte.png') },
+  { from: '2018.05', to: '2020.06', role: 'ML & Data Science Professor', org: 'Universidad Panamericana', logo: logo('up.png') },
+  { from: '2017.03', to: '2018.05', role: 'Senior Data Science Consultant', org: 'Rich IT', logo: logo('richit.png') },
+  { from: '2015.03', to: '2017.03', role: 'Staff Scientist', org: 'University of Arizona', logo: logo('arizona.png') },
+  { from: '2014.04', to: '2015.03', role: 'Postdoctoral Fellow', org: 'University of Arizona', logo: logo('arizona.png') },
+  { from: '2013.02', to: '2014.04', role: 'Postdoctoral Fellow', org: 'UCLA School of Medicine', logo: logo('ucla.jpg') },
+  { from: '2012.08', to: '2012.09', role: 'Research Intern', org: 'National Institute of Informatics', logo: logo('nii.png') },
+  { from: '2010.03', to: '2013.03', role: 'PhD, Machine Learning', org: 'The University of Tokyo', logo: logo('todai.png') },
+  { from: '2008.04', to: '2010.03', role: "Master's, Information Technologies", org: 'The University of Tokyo', logo: logo('todai.png') },
+  { from: '2007.04', to: '2013.03', role: 'Monbukagakusho (MEXT) Scholarship Fellow', org: 'Government of Japan', logo: logo('MEXT.png') },
+  { from: '2006.02', to: '2007.02', role: 'Data & Business Analyst', org: 'San Luis Rassini', logo: logo('rassini.png') },
+  { from: '2000.09', to: '2005.04', role: "Bachelor's, Engineering (Magna Cum Laude)", org: 'UNAM', logo: logo('unam.png') },
 ];
 ---
 
@@ -151,14 +159,28 @@ const timeline = [
     <ul class="mt-8 max-w-3xl divide-y divide-hairline">
       {
         timeline.map((item) => (
-          <li class="flex flex-col gap-1 py-4 sm:flex-row sm:items-baseline sm:gap-6">
-            <span class="micro-label w-44 shrink-0 text-muted">
+          <li class="group flex items-center gap-4 py-3.5 sm:gap-6">
+            {item.logo ? (
+              <Image
+                src={item.logo}
+                alt={`${item.org} logo`}
+                widths={[80]}
+                sizes="40px"
+                class="size-10 shrink-0 object-contain opacity-75 mix-blend-multiply grayscale transition-[filter,opacity] duration-200 group-hover:opacity-100 group-hover:grayscale-0"
+              />
+            ) : (
+              <span class="size-10 shrink-0" />
+            )}
+            <span class="micro-label hidden w-44 shrink-0 text-muted sm:block">
               {item.from} — {item.to}
             </span>
             <span class="flex-1 leading-snug">
               {item.role} <span class="text-muted">· {item.org}</span>
+              <span class="micro-label mt-0.5 block text-muted sm:hidden">
+                {item.from} — {item.to}
+              </span>
             </span>
-            {item.current && <span aria-label="Current role" class="size-1.5 shrink-0 self-center rounded-full bg-signal" />}
+            {item.current && <span aria-label="Current role" class="size-1.5 shrink-0 rounded-full bg-signal" />}
           </li>
         ))
       }
