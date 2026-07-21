@@ -9,6 +9,57 @@ const logos = import.meta.glob<ImageMetadata>('../assets/logos/*.{png,jpg}', {
 });
 const logo = (name: string) => logos[`../assets/logos/${name}`];
 
+const facets = [
+  {
+    id: 'research',
+    en: 'Research',
+    jp: '研究',
+    glyph: '研',
+    title: 'Where data meets complex systems',
+    lead: 'Applied machine learning, pointed at whatever field has the hardest data.',
+    items: [
+      '<strong>Neuroscience</strong> — endovascular EEG signal quality at UCLA',
+      '<strong>Astrophysics</strong> — searching for exoplanets with deep learning',
+      '<strong>Planetary science</strong> — MarsNet: CNNs on HiRISE imagery of Mars',
+      '<strong>Finance</strong> — recommender systems and decision analytics for retail investors',
+    ],
+    href: '/publications/',
+    linkLabel: 'Publications',
+  },
+  {
+    id: 'academia',
+    en: 'Academia',
+    jp: '学界',
+    glyph: '学',
+    title: 'UNAM → Tokyo → UCLA → Arizona',
+    lead: 'Trained across three continents, funded by Japan, seasoned in the American Southwest.',
+    items: [
+      "<strong>B.Eng, UNAM</strong> — Magna Cum Laude, Medalla Gabino Barreda (top of class)",
+      "<strong>M.Sc &amp; PhD, University of Tokyo</strong> — ML for bioinformatics, Monbukagakusho (MEXT) scholar",
+      '<strong>Postdoc, UCLA School of Medicine</strong> — ML for neuroscience',
+      '<strong>Staff Scientist, University of Arizona</strong> — ML for planetary science',
+    ],
+    href: '/teaching/',
+    linkLabel: 'Teaching today',
+  },
+  {
+    id: 'industry',
+    en: 'Industry',
+    jp: '産業',
+    glyph: '産',
+    title: 'A decade of AI that ships',
+    lead: 'Models are the easy part; the job is products that move real money responsibly.',
+    items: [
+      '<strong>"Genome"</strong> — investor-profile projects powering personalization at GBM',
+      '<strong>Recommenders</strong> — KNN, ALS, and BM25 with embeddings, in production',
+      '<strong>Mechagodzilla</strong> — the experimentation layer that keeps it all honest',
+      '<strong>Previously</strong> — Novartis, Algorithia (Grupo Salinas), Banorte',
+    ],
+    href: '#timeline',
+    linkLabel: 'Full timeline',
+  },
+];
+
 const timeline = [
   { from: '2025.07', to: 'Present', role: 'AI Innovation Lab Director', org: 'GBM', logo: logo('gbm.png'), current: true },
   { from: '2024.05', to: '2025.07', role: 'AI Innovation Lab Director', org: 'Novartis', logo: logo('novartis.png') },
@@ -110,53 +161,56 @@ const timeline = [
 
   <section class="border-b border-hairline px-6 py-14 sm:px-10 lg:px-14">
     <div class="grid gap-6 lg:grid-cols-3">
-      <article id="research" data-reveal class="border border-hairline bg-paper p-7">
-        <p class="micro-label flex items-center gap-3 text-signal">
-          <span>Research</span>
-          <span lang="ja" class="text-muted tracking-[0.2em]">研究</span>
-        </p>
-        <h2 class="mt-3 text-xl font-semibold tracking-tight">
-          Where data meets complex systems
-          <span aria-hidden="true" class="mt-2.5 block h-[3px] w-8 bg-signal"></span>
-        </h2>
-        <p class="mt-4 text-sm leading-relaxed">
-          Applied machine learning across neuroscience, astrophysics, planetary sciences, and finance. Right now:
-          how ML can support decision-making in social and financial systems, from investment analytics to
-          recommenders for retail platforms.
-        </p>
-      </article>
+      {
+        facets.map((facet, i) => (
+          <article
+            id={facet.id}
+            data-reveal
+            style={`--reveal-delay: ${i * 90}ms`}
+            class="group relative flex flex-col overflow-hidden border border-hairline bg-paper p-7 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:bg-[#f9f6ef] hover:shadow-[0_20px_50px_rgba(20,20,18,0.14)]"
+          >
+            <span
+              aria-hidden="true"
+              class="absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 bg-signal transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-100"
+            />
+            <span
+              lang="ja"
+              aria-hidden="true"
+              class="pointer-events-none absolute -bottom-7 -right-3 select-none text-[7.5rem] font-semibold leading-none text-ink/[0.05] transition-all duration-500 group-hover:-translate-y-2 group-hover:text-signal/10"
+            >
+              {facet.glyph}
+            </span>
 
-      <article id="academia" data-reveal style="--reveal-delay: 90ms" class="border border-hairline bg-paper p-7">
-        <p class="micro-label flex items-center gap-3 text-signal">
-          <span>Academia</span>
-          <span lang="ja" class="text-muted tracking-[0.2em]">学界</span>
-        </p>
-        <h2 class="mt-3 text-xl font-semibold tracking-tight">
-          UNAM → Tokyo → UCLA → Arizona
-          <span aria-hidden="true" class="mt-2.5 block h-[3px] w-8 bg-signal"></span>
-        </h2>
-        <p class="mt-4 text-sm leading-relaxed">
-          Engineering at UNAM — Magna Cum Laude, Medalla Gabino Barreda. Master's and PhD in ML for bioinformatics
-          at the University of Tokyo on the Monbukagakusho (MEXT) scholarship. Postdocs applying ML to neuroscience
-          (UCLA School of Medicine) and planetary sciences (University of Arizona), then staff scientist.
-        </p>
-      </article>
-
-      <article id="industry" data-reveal style="--reveal-delay: 180ms" class="border border-hairline bg-paper p-7">
-        <p class="micro-label flex items-center gap-3 text-signal">
-          <span>Industry</span>
-          <span lang="ja" class="text-muted tracking-[0.2em]">産業</span>
-        </p>
-        <h2 class="mt-3 text-xl font-semibold tracking-tight">
-          A decade of AI that ships
-          <span aria-hidden="true" class="mt-2.5 block h-[3px] w-8 bg-signal"></span>
-        </h2>
-        <p class="mt-4 text-sm leading-relaxed">
-          At GBM: the "Genome" investor-profile projects, recommenders on KNN, ALS, and BM25 with embeddings, and
-          the <strong>Mechagodzilla</strong> experimentation layer that measures whether any of it works. Before:
-          AI Innovation Lab at Novartis, AI Head at Algorithia (Grupo Salinas), ML Director at Banorte.
-        </p>
-      </article>
+            <p class="micro-label flex items-center gap-3 text-signal">
+              <span>{facet.en}</span>
+              <span lang="ja" class="text-muted tracking-[0.2em]">{facet.jp}</span>
+            </p>
+            <h2 class="mt-3 text-xl font-semibold tracking-tight">
+              {facet.title}
+              <span
+                aria-hidden="true"
+                class="mt-2.5 block h-[3px] w-8 bg-signal transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:w-14"
+              />
+            </h2>
+            <p class="mt-4 text-sm leading-relaxed">{facet.lead}</p>
+            <ul class="mt-4 space-y-2 text-sm text-muted">
+              {facet.items.map((entry) => (
+                <li class="flex gap-2.5">
+                  <span aria-hidden="true" class="mt-[0.5em] size-1.5 shrink-0 bg-signal/70 transition-colors duration-300 group-hover:bg-signal" />
+                  <span set:html={entry} />
+                </li>
+              ))}
+            </ul>
+            <a
+              href={facet.href}
+              class="micro-label mt-auto inline-flex items-center gap-2 pt-6 text-signal hover:text-signal-deep"
+            >
+              {facet.linkLabel}
+              <span aria-hidden="true" class="transition-transform duration-300 group-hover:translate-x-1">→</span>
+            </a>
+          </article>
+        ))
+      }
     </div>
   </section>
 
