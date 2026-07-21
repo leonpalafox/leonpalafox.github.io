@@ -25,6 +25,11 @@ const facets = [
     ],
     href: '/publications/',
     linkLabel: 'Publications',
+    more: [
+      '30+ peer-reviewed papers — IEEE Trans. on Evolutionary Computation, MNRAS, Computers &amp; Geosciences, J. Neural Engineering',
+      'MarsNet drew NVIDIA coverage of the Lunar &amp; Planetary Laboratory work',
+    ],
+    stat: '30+ papers · 4 fields',
   },
   {
     id: 'academia',
@@ -41,6 +46,11 @@ const facets = [
     ],
     href: '/teaching/',
     linkLabel: 'Teaching today',
+    more: [
+      'PhD thesis: reverse-engineering gene regulatory networks with evolutionary and swarm methods',
+      'Today: Deep Learning and ML 2 at Universidad Panamericana; Deep RL at Colegio de Matemáticas Bourbaki',
+    ],
+    stat: '3 continents · MEXT scholar',
   },
   {
     id: 'industry',
@@ -57,6 +67,11 @@ const facets = [
     ],
     href: '#timeline',
     linkLabel: 'Full timeline',
+    more: [
+      'Built and led data science teams across banking, pharma, and retail investing',
+      'Stack: AWS pipelines, embedding services, experimentation and telemetry layers',
+    ],
+    stat: 'GBM · Novartis · Salinas · Banorte',
   },
 ];
 
@@ -167,7 +182,7 @@ const timeline = [
             id={facet.id}
             data-reveal
             style={`--reveal-delay: ${i * 90}ms`}
-            class="group relative flex flex-col overflow-hidden border border-hairline bg-paper p-7 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:bg-[#f9f6ef] hover:shadow-[0_20px_50px_rgba(20,20,18,0.14)]"
+            class="group relative flex flex-col border border-hairline bg-paper p-7 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:z-30 hover:-translate-y-1.5 hover:bg-[#f9f6ef] hover:shadow-[0_20px_50px_rgba(20,20,18,0.14)]"
           >
             <span
               aria-hidden="true"
@@ -176,10 +191,49 @@ const timeline = [
             <span
               lang="ja"
               aria-hidden="true"
-              class="pointer-events-none absolute -bottom-7 -right-3 select-none text-[7.5rem] font-semibold leading-none text-ink/[0.05] transition-all duration-500 group-hover:-translate-y-2 group-hover:text-signal/10"
+              class="pointer-events-none absolute -bottom-7 -right-3 select-none overflow-hidden text-[7.5rem] font-semibold leading-none text-ink/[0.05]"
             >
               {facet.glyph}
             </span>
+
+            <!-- Expanded panel: comes to the front over the neighbors on hover -->
+            <div
+              aria-hidden="true"
+              class="pointer-events-none invisible absolute -inset-x-5 -top-5 z-40 hidden origin-top scale-[0.96] border border-hairline bg-[#faf7f0] p-8 opacity-0 shadow-[0_36px_90px_rgba(20,20,18,0.28)] transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:visible group-hover:scale-100 group-hover:opacity-100 lg:block"
+            >
+              <span class="absolute inset-x-0 top-0 h-[3px] bg-signal"></span>
+              <span
+                lang="ja"
+                class="pointer-events-none absolute right-4 top-6 select-none text-[4.5rem] font-semibold leading-none text-signal/10"
+              >
+                {facet.glyph}
+              </span>
+              <p class="micro-label flex items-center gap-3 text-signal">
+                <span>{facet.en}</span>
+                <span lang="ja" class="text-muted tracking-[0.2em]">{facet.jp}</span>
+              </p>
+              <p class="mt-3 text-xl font-semibold tracking-tight">{facet.title}</p>
+              <p class="mt-3 text-sm leading-relaxed">{facet.lead}</p>
+              <ul class="mt-4 space-y-2 text-sm text-muted">
+                {facet.items.map((entry) => (
+                  <li class="flex gap-2.5">
+                    <span aria-hidden="true" class="mt-[0.5em] size-1.5 shrink-0 bg-signal" />
+                    <span set:html={entry} />
+                  </li>
+                ))}
+              </ul>
+              <div class="mt-5 border-t border-hairline pt-5">
+                <ul class="space-y-2 text-sm leading-relaxed">
+                  {facet.more.map((entry) => (
+                    <li class="flex gap-2.5">
+                      <span aria-hidden="true" class="mt-[0.55em] h-px w-4 shrink-0 bg-signal" />
+                      <span set:html={entry} />
+                    </li>
+                  ))}
+                </ul>
+                <p class="micro-label mt-5 text-signal">{facet.stat}</p>
+              </div>
+            </div>
 
             <p class="micro-label flex items-center gap-3 text-signal">
               <span>{facet.en}</span>
