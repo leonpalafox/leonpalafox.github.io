@@ -26,20 +26,14 @@ const timeline = [
 >
   <!-- Collage hero: recreates assets/hero_anout.png as a live composition -->
   <section class="relative overflow-hidden border-b border-hairline bg-[#f4ebd7]">
-    <!-- Collage canvas (lg+): the artwork is the section background -->
+    <!-- Collage panel (lg+): owns the right side, melts into the paper on its left edge -->
     <img
       src="/images/hero_1.png"
       alt=""
       aria-hidden="true"
-      class="pointer-events-none absolute inset-0 hidden h-full w-full object-cover object-right-top lg:block [mask-image:radial-gradient(95%_130%_at_100%_18%,#000_38%,rgba(0,0,0,0.45)_52%,transparent_67%)]"
+      class="pointer-events-none absolute inset-y-0 right-0 hidden h-full w-[44%] object-cover object-right lg:block [mask-image:linear-gradient(to_left,#000_72%,transparent_100%)]"
       loading="eager"
     />
-    <!-- Soft paper veil over the remaining fringe of the type zone -->
-    <div
-      aria-hidden="true"
-      class="pointer-events-none absolute inset-0 hidden bg-[linear-gradient(103deg,#f4ebd7_24%,rgba(244,235,215,0.6)_40%,transparent_58%)] lg:block"
-    >
-    </div>
 
     <!-- Banner crop of the collage (below lg) -->
     <img
@@ -58,12 +52,12 @@ const timeline = [
       </div>
       <div class="absolute -bottom-16 -left-12 size-44 rounded-full border border-ink/25"></div>
       <div class="absolute bottom-24 left-16 size-14 rounded-full border border-ink/20"></div>
-      <svg class="absolute left-[46%] top-16 size-4 opacity-40" viewBox="0 0 16 16">
+      <svg class="absolute left-[52%] top-14 size-4 opacity-40" viewBox="0 0 16 16">
         <path d="M8 0 V16 M0 8 H16" stroke="var(--color-ink)" stroke-width="1"></path>
       </svg>
     </div>
 
-    <div class="relative flex flex-col px-6 py-12 sm:px-10 lg:min-h-[540px] lg:px-14 lg:py-14">
+    <div class="relative flex flex-col px-6 py-12 sm:px-10 lg:min-h-[520px] lg:w-[62%] lg:px-14 lg:py-14">
       <header>
         <p class="micro-label flex items-center gap-3 text-signal">
           <span>About</span>
@@ -73,9 +67,9 @@ const timeline = [
         <span aria-hidden="true" class="mt-6 block h-[3px] w-14 bg-signal"></span>
       </header>
 
-      <div class="mt-12 flex flex-col gap-10 sm:flex-row sm:items-end lg:gap-14">
+      <div class="mt-12 flex flex-col gap-10 sm:flex-row sm:items-end lg:gap-12">
         <!-- Portrait in a drafting frame -->
-        <figure class="relative w-44 shrink-0 sm:w-52">
+        <figure class="relative w-44 shrink-0">
           <span aria-hidden="true" class="absolute -left-6 -top-3 h-px w-[calc(100%+3rem)] bg-ink/30"></span>
           <span aria-hidden="true" class="absolute -top-6 -left-3 h-[calc(100%+3rem)] w-px bg-ink/30"></span>
           <span aria-hidden="true" class="absolute -bottom-3 -right-6 h-px w-[calc(100%+3rem)] bg-ink/30"></span>
@@ -88,7 +82,7 @@ const timeline = [
           />
         </figure>
 
-        <div class="max-w-lg space-y-0 bg-[#f9f2e3] p-7 text-[0.95rem] leading-[1.75] shadow-[0_2px_14px_rgba(74,56,26,0.14)] sm:p-8">
+        <div class="max-w-md space-y-0 text-[0.98rem] leading-[1.75]">
           <p>
             I'm the <strong>Director of the AI Innovation Lab at <a class="text-signal-deep underline underline-offset-3 hover:text-signal" href="https://www.gbm.com/">GBM</a></strong>,
             where I lead large-scale personalization, recommender systems, embeddings, and experimentation
