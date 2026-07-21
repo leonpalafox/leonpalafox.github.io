@@ -1,0 +1,59 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import { kanjiYear, monthDay } from '../../lib/format';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const byYear = new Map<number, typeof posts>();
+for (const post of posts) {
+  const year = post.data.pubDate.getUTCFullYear();
+  if (!byYear.has(year)) byYear.set(year, []);
+  byYear.get(year)!.push(post);
+}
+---
+
+<Base
+  title="Blog — León Palafox"
+  description="Columns and notes on AI, data strategy, and innovation — most published in El Financiero."
+>
+  <PageHero
+    eyebrow="Blog"
+    jp="記事"
+    title="Writing"
+    description="Columns and notes on AI, data strategy, and innovation. Most of these ran in El Financiero, so the majority are in Spanish."
+  />
+
+  {
+    [...byYear.entries()].map(([year, yearPosts]) => (
+      <section class="border-b border-hairline px-6 py-10 last:border-b-0 sm:px-10 lg:px-14">
+        <h2 class="flex items-baseline gap-4">
+          <span class="text-3xl font-semibold tracking-tight">{year}</span>
+          <span lang="ja" class="text-sm text-muted">
+            {kanjiYear(yearPosts[0].data.pubDate)}
+          </span>
+          <span aria-hidden="true" class="inline-block size-1.5 translate-y-[-2px] rounded-full bg-signal" />
+        </h2>
+        <ul class="mt-6 divide-y divide-hairline">
+          {yearPosts.map((post) => (
+            <li>
+              <a href={`/blog/${post.id}/`} class="group flex items-baseline gap-5 py-4">
+                <span class="micro-label w-12 shrink-0 text-muted">{monthDay(post.data.pubDate)}</span>
+                <span class="flex-1 leading-snug" lang={post.data.lang}>
+                  {post.data.title}
+                </span>
+                <span class="micro-label hidden shrink-0 text-muted sm:inline">{post.data.lang}</span>
+                <span aria-hidden="true" class="shrink-0 text-signal transition-transform group-hover:translate-x-1">
+                  →
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))
+  }
+</Base>

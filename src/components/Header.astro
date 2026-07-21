@@ -1,0 +1,40 @@
+---
+const nav = [
+  { label: 'About', href: '/about/' },
+  { label: 'Blog', href: '/blog/' },
+  { label: 'Teaching', href: '/teaching/' },
+  { label: 'Publications', href: '/publications/' },
+  { label: 'Media', href: '/media/' },
+];
+const path = Astro.url.pathname;
+const isActive = (href: string) => path === href || (href !== '/' && path.startsWith(href));
+---
+
+<header class="border-b border-hairline">
+  <div class="flex flex-wrap items-center justify-between gap-x-8 gap-y-3 px-6 py-5 sm:px-10 lg:px-14">
+    <a href="/" class="text-lg font-semibold tracking-tight">León Palafox</a>
+    <nav aria-label="Main">
+      <ul class="flex flex-wrap items-center gap-x-7 gap-y-2 text-[0.9rem]">
+        {
+          nav.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                aria-current={isActive(item.href) ? 'page' : undefined}
+                class:list={[
+                  'transition-colors hover:text-signal',
+                  isActive(item.href) ? 'text-signal' : 'text-ink',
+                ]}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+        <li aria-hidden="true">
+          <span class="block size-3.5 rounded-full bg-signal"></span>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>

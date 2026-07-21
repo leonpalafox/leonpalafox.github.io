@@ -1,0 +1,76 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  lang?: string;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description = 'León Palafox — AI strategy, recommender systems, and personalization for finance. Director of the AI Innovation Lab at GBM, professor, and columnist at El Financiero.',
+  lang = 'en',
+  ogImage = '/images/hero_1.png',
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate" type="application/rss+xml" title="León Palafox" href={new URL('rss.xml', Astro.site)} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(ogImage, Astro.site)} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@leonpalafox" />
+    <meta name="generator" content={Astro.generator} />
+  </head>
+  <body class="bg-paper font-sans text-ink antialiased">
+    <div class="relative mx-auto max-w-[1480px]">
+      <!-- Left margin rail: rising signal, per the identity mockup -->
+      <div
+        aria-hidden="true"
+        class="absolute inset-y-0 left-0 hidden w-24 flex-col items-center justify-between py-16 xl:flex"
+      >
+        <div class="flex flex-col items-center gap-6">
+          <span class="h-16 w-px bg-ink/30"></span>
+          <span class="vertical-text text-sm tracking-[0.4em] text-ink/80" lang="ja">上昇する信号</span>
+          <span class="h-10 w-px bg-ink/30"></span>
+          <span class="vertical-text micro-label text-signal">Rising Signal</span>
+        </div>
+        <span class="border border-signal px-2 py-2.5 text-center text-sm leading-6 text-signal" lang="ja">
+          改<br />善
+        </span>
+      </div>
+
+      <div class="min-h-screen bg-sheet xl:mx-24 xl:border-x xl:border-hairline">
+        <a
+          href="#main"
+          class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:bg-signal focus:px-4 focus:py-2 focus:text-white"
+        >
+          Skip to content
+        </a>
+        <Header />
+        <main id="main">
+          <slot />
+        </main>
+        <Footer />
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,284 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+
+type Pub = { authors: string; title: string; venue: string; year: string; href?: string };
+
+const industry: Pub[] = [
+  {
+    authors: 'Leon Palafox',
+    title: 'Coatlicue: La soberanía digital de México requiere más que silicio',
+    venue: 'El Financiero',
+    year: '2025',
+    href: 'https://www.elfinanciero.com.mx/opinion/leon-palafox1/2025/12/08/coatlicue-la-soberania-digital-de-mexico-requiere-mas-que-silicio/',
+  },
+  {
+    authors: 'Leon Palafox',
+    title: 'La verdadera ventaja de la IA: no son los modelos, son los chips',
+    venue: 'El Financiero',
+    year: '2025',
+    href: 'https://www.elfinanciero.com.mx/opinion/leon-palafox1/2025/08/05/la-verdadera-ventaja-de-la-ia-no-son-los-modelos-son-los-chips/',
+  },
+  {
+    authors: 'Leon Palafox',
+    title: '¿Quién va a ganar la carrera de la IA? Aquellos que sepan usarla',
+    venue: 'El Financiero',
+    year: '2025',
+    href: 'https://www.elfinanciero.com.mx/opinion/leon-palafox/2025/07/23/quien-va-a-ganar-la-carrera-de-la-ia-aquellos-que-sepan-usarla/',
+  },
+  {
+    authors: 'Leon Palafox',
+    title: '¿Qué pasó en el 2023 con los grandes modelos de lenguaje?',
+    venue: 'El Financiero',
+    year: '2023',
+    href: 'https://www.elfinanciero.com.mx/opinion/leon-palafox/2023/12/26/que-paso-en-el-2023-con-los-grandes-modelos-de-lenguaje/',
+  },
+];
+
+const journals: Pub[] = [
+  {
+    authors: 'Avalos-Gauna, Edgar and Palafox, L.F.',
+    title:
+      'Heat Transfer Coefficient Prediction of a Porous Material by Implementing a Machine Learning Model on a CFD Data Set',
+    venue: "Proceedings of the 6th International Conference of Fluid Flow, Heat and Mass Transfer (FFHMT'19)",
+    year: '2019',
+  },
+  {
+    authors: 'Savage, Rodrigo, Leon Palafox, et al.',
+    title: 'A Bayesian Approach to Subkilometer Crater Shape Analysis Using Individual HiRISE Images',
+    venue: 'IEEE Transactions on Geoscience and Remote Sensing',
+    year: '2018',
+  },
+  {
+    authors: 'Leon Palafox, Christopher W. Hamilton, et al.',
+    title: 'Automated Detection of Geological Landforms on Mars using Convolutional Neural Networks',
+    venue: 'Computers & Geosciences 101: 48-56',
+    year: '2017',
+  },
+  {
+    authors: 'Pearson, Kyle A., Leon Palafox, and Caitlin A. Griffith',
+    title: 'Searching for exoplanets using artificial intelligence',
+    venue: 'Monthly Notices of the Royal Astronomical Society 474.1: 478-491',
+    year: '2017',
+  },
+  {
+    authors: 'He, Bryan D., Mosalam Ebrahimi, Leon Palafox, and Lakshminarayan Srinivasan',
+    title: 'Signal quality of endovascular electroencephalography',
+    venue: 'Journal of Neural Engineering 13, no. 1',
+    year: '2016',
+  },
+  {
+    authors: 'Wee-hong Ong, Leon Palafox, and Takafumi Koseki',
+    title: 'Autonomous Learning and Recognition of Human Action based on An Incremental Approach of Clustering',
+    venue: 'IEEJ Transactions on Electronics, Informations and Systems, 135(9):1136-1141',
+    year: '2015',
+  },
+  {
+    authors: 'Wee-hong Ong, Leon Palafox, and Takafumi Koseki',
+    title: 'An Incremental Approach of Clustering for Human Activity Discovery',
+    venue: 'IEEJ Transactions on Electronics, Informations and Systems, 134(11):1-6',
+    year: '2014',
+  },
+  {
+    authors: 'Nasimul Noman, Leon Palafox, and Hitoshi Iba',
+    title: 'Evolving genetic networks for synthetic biology',
+    venue: 'New Generation Computing, 31(2):71-88',
+    year: '2013',
+  },
+  {
+    authors: 'Wee-Hong Ong, Takafumi Koseki, and Leon Palafox',
+    title: 'An Unsupervised Approach for Human Activity Detection and Recognition',
+    venue: 'International Journal of Simulation-Systems, Science & Technology, 14(5)',
+    year: '2013',
+  },
+  {
+    authors: 'Wee-Hong Ong, Leon Palafox, and Takafumi Koseki',
+    title: 'Investigation of Feature Extraction for Unsupervised Learning in Human Activity Detection',
+    venue: 'Bulletin of Networking, Computing, Systems, and Software, 2(1):30-35',
+    year: '2013',
+  },
+  {
+    authors: 'Leon Palafox, H. Iba, and N. Noman',
+    title: 'Reverse Engineering of Gene Regulatory Networks using Dissipative Particle Swarm Optimization',
+    venue: 'IEEE Transactions on Evolutionary Computation, 17(4)',
+    year: '2012',
+  },
+  {
+    authors: 'Leon Palafox and Hideki Hashimoto',
+    title: '4W1H and particle swarm optimization for human activity recognition',
+    venue: 'Journal of Advanced Computational Intelligence and Intelligent Informatics, 15(7):793-799',
+    year: '2011',
+  },
+];
+
+const conferences: Pub[] = [
+  {
+    authors: 'Scheidt, S. P., L. F. Palafox, C. W. Hamilton, and J. R. Zimbelman',
+    title:
+      'Automated Detection of Transverse Aeolian Ridges on Mars Using Convolutional Neural Networks and a Field-Based Terrestrial Orthoimage Training Set',
+    venue: 'Fourth Annual International Planetary Dunes Workshop, vol. 1843, p. 8047',
+    year: '2015',
+  },
+  {
+    authors: 'Palafox, L. F., A. M. Alvarez, and C. W. Hamilton',
+    title:
+      'Automated Detection of Impact Craters and Volcanic Rootless Cones in Mars Satellite Imagery Using Convolutional Neural Networks and Support Vector Machines',
+    venue: 'Lunar and Planetary Science Conference, vol. 46, p. 2316',
+    year: '2015',
+  },
+  {
+    authors: 'Nasimul Noman, Leon Palafox, and Hitoshi Iba',
+    title: 'Inferring Genetic Networks with a Recurrent Neural Network Model Using Differential Evolution',
+    venue: 'Springer Handbook of Bio-/Neuroinformatics, pages 355-373',
+    year: '2014',
+  },
+  {
+    authors: 'Nasimul Noman, Leon Palafox, and Hitoshi Iba',
+    title:
+      'Reconstruction of Gene Regulatory Networks from Gene Expression Data Using Decoupled Recurrent Neural Network Model',
+    venue: 'Natural Computing and Beyond, volume 6, pages 93-103',
+    year: '2013',
+  },
+  {
+    authors: 'Wee Hong Ong, Takafumi Koseki, and Leon Palafox',
+    title: 'Unsupervised human activity detection with skeleton data from RGB-D sensor',
+    venue:
+      'Proceedings - 5th International Conference on Computational Intelligence, Communication Systems, and Networks (CICSyN), pages 30-35',
+    year: '2013',
+  },
+  {
+    authors: 'Leon Palafox',
+    title: 'Extending Population Based Incremental Learning using Dirichlet Processes',
+    venue: 'Information Sciences, pages 1686-1693',
+    year: '2013',
+  },
+  {
+    authors: 'Leon Palafox, Nasimul Noman, and Hitoshi Iba',
+    title: 'Study on the Use of Evolutionary Techniques for Inference in Gene Regulatory Networks',
+    venue: 'Natural Computing and Beyond, pages 82-92',
+    year: '2013',
+  },
+  {
+    authors: 'N Noman, Leon Palafox, and Hitoshi Iba',
+    title: 'On Model Selection Criteria in Reverse Engineering Gene Networks Using RNN Model',
+    venue: 'Convergence and Hybrid Information Technology, pages 155-164',
+    year: '2012',
+  },
+  {
+    authors: 'Leon Palafox and Hitoshi Iba',
+    title: 'Gene Regulatory Network Reverse Engineering using Population Based Incremental Learning and K-means',
+    venue: 'Genetic and Evolutionary Computation Conference',
+    year: '2012',
+  },
+  {
+    authors: 'Leon Palafox and Hitoshi Iba',
+    title:
+      'On the use of Population Based Incremental Learning to do Reverse Engineering on Gene Regulatory Networks',
+    venue: 'IEEE Congress on Evolutionary Computation (CEC)',
+    year: '2012',
+  },
+  {
+    authors: 'Vishal Soam, Leon Palafox, and Hitoshi Iba',
+    title: 'Multi-objective portfolio optimization and rebalancing using genetic algorithms with local search',
+    venue: 'IEEE Congress on Evolutionary Computation (CEC)',
+    year: '2012',
+  },
+  {
+    authors: 'Leon Palafox, Laszlo A. Jeni, and Hideki Hashimoto',
+    title: 'Using conditional random fields to validate observations in a 4W1H paradigm',
+    venue: '4th International Conference on Human System Interaction (HSI), pages 80-84',
+    year: '2011',
+  },
+  {
+    authors: 'Leon Palafox, Laszlo A. Jeni, Hideki Hashimoto, and Beom H. Lee',
+    title: '5W1H as a human activity recognition paradigm in the iSpace',
+    venue: '8th Asian Control Conference (ASCC), pages 712-718',
+    year: '2011',
+  },
+  {
+    authors: 'Peshala G Jayasekara, Leon Palafox, et al.',
+    title: 'Simultaneous localization assistance for multiple mobile robots using particle filter based target tracking',
+    venue: 'Fifth International Conference on Information and Automation for Sustainability, pages 469-474',
+    year: '2010',
+  },
+  {
+    authors: 'Leon Palafox and Hideki Hashimoto',
+    title: 'Human action recognition using wavelet signal analysis as an input in 4W1H',
+    venue: '8th IEEE International Conference on Industrial Informatics (INDIN), pages 679-684',
+    year: '2010',
+  },
+  {
+    authors: 'Leon Palafox and Hideki Hashimoto',
+    title: 'Human Action Recognition using 4W1H and Particle Swarm Optimization Clustering',
+    venue: 'Sensors (Peterborough, NH), pages 369-373',
+    year: '2010',
+  },
+  {
+    authors: 'Leon Palafox and Hideki Hashimoto',
+    title: 'A compressive sensing approach to the 4W1H architecture',
+    venue: 'IEEE International Conference on Industrial Technology, pages 1599-1603',
+    year: '2010',
+  },
+  {
+    authors: 'Leon Palafox and Hashimoto Hideki',
+    title: 'A movement profile detection system using self organized maps in the intelligent space',
+    venue: 'IEEE Workshop on Advanced Robotics and its Social Impacts (ARSO), pages 114-118',
+    year: '2009',
+  },
+];
+
+const sections = [
+  {
+    id: 'industry',
+    title: 'Industry & technical analysis',
+    intro:
+      'Recent work at the intersection of AI strategy, hardware, and sovereignty in the financial and enterprise sectors.',
+    items: industry,
+  },
+  { id: 'journals', title: 'Academic journals', intro: undefined, items: journals },
+  { id: 'conferences', title: 'Peer-reviewed conferences', intro: undefined, items: conferences },
+];
+---
+
+<Base
+  title="Publications — León Palafox"
+  description="Academic publications and industry writing by León Palafox on machine learning, Mars imagery, bioinformatics, financial AI, and data strategy."
+>
+  <PageHero
+    eyebrow="Publications"
+    jp="論文"
+    title="Publications & research"
+    description="From gene regulatory networks and Mars imagery to financial AI — the paper trail of fifteen years of applied machine learning."
+  />
+
+  {
+    sections.map((section) => (
+      <section class="border-b border-hairline px-6 py-14 last:border-b-0 sm:px-10 lg:px-14">
+        <SectionHeading title={section.title} id={section.id} />
+        {section.intro && <p class="mt-6 max-w-2xl leading-relaxed text-muted">{section.intro}</p>}
+        <ul class="mt-8 max-w-3xl divide-y divide-hairline">
+          {section.items.map((pub) => (
+            <li class="flex gap-5 py-5">
+              <span class="micro-label w-12 shrink-0 pt-1 text-signal">{pub.year}</span>
+              <div class="flex-1">
+                {pub.href ? (
+                  <a href={pub.href} class="group font-medium leading-snug hover:text-signal-deep">
+                    {pub.title}
+                    <span aria-hidden="true" class="ml-2 inline-block text-signal transition-transform group-hover:translate-x-1">
+                      →
+                    </span>
+                  </a>
+                ) : (
+                  <p class="font-medium leading-snug">{pub.title}</p>
+                )}
+                <p class="mt-1.5 text-sm text-muted">{pub.authors}</p>
+                <p class="mt-0.5 font-serif text-sm italic text-muted">{pub.venue}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))
+  }
+</Base>

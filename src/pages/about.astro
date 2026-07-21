@@ -1,0 +1,129 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+
+const timeline = [
+  { from: '2025.07', to: 'Present', role: 'AI Innovation Lab Director', org: 'GBM', current: true },
+  { from: '2024.05', to: '2025.07', role: 'AI Innovation Lab Director', org: 'Novartis' },
+  { from: '2022.10', to: '2024.05', role: 'AI Head', org: 'Algorithia (Grupo Salinas)' },
+  { from: '2021.07', to: '2022.10', role: 'Machine Learning Director', org: 'Banorte Financial Group' },
+  { from: '2018.05', to: '2020.06', role: 'ML & Data Science Professor', org: 'Universidad Panamericana' },
+  { from: '2017.03', to: '2018.05', role: 'Senior Data Science Consultant', org: 'Rich IT' },
+  { from: '2015.03', to: '2017.03', role: 'Staff Scientist', org: 'University of Arizona' },
+  { from: '2014.04', to: '2015.03', role: 'Postdoctoral Fellow', org: 'University of Arizona' },
+  { from: '2013.02', to: '2014.04', role: 'Postdoctoral Fellow', org: 'UCLA School of Medicine' },
+  { from: '2012.08', to: '2012.09', role: 'Research Intern', org: 'National Institute of Informatics' },
+  { from: '2010.03', to: '2013.03', role: 'PhD, Machine Learning', org: 'The University of Tokyo' },
+  { from: '2008.04', to: '2010.03', role: "Master's, Information Technologies", org: 'The University of Tokyo' },
+  { from: '2007.04', to: '2013.03', role: 'Monbukagakusho (MEXT) Scholarship Fellow', org: 'Government of Japan' },
+  { from: '2000.09', to: '2005.04', role: "Bachelor's, Engineering (Magna Cum Laude)", org: 'UNAM' },
+];
+---
+
+<Base
+  title="About — León Palafox"
+  description="Director of the AI Innovation Lab at GBM, PhD from the University of Tokyo, lecturer at Universidad Panamericana, and columnist at El Financiero."
+>
+  <PageHero
+    eyebrow="About"
+    jp="略歴"
+    title="Hi, I'm León."
+    description="I build AI that moves money wisely: personalization, recommender systems, and the experimentation platforms that keep them honest."
+  />
+
+  <figure class="border-b border-hairline">
+    <img
+      src="/images/hero_1.png"
+      alt="Paper collage of neural networks, market charts, books, and Mexico City architecture"
+      class="max-h-[420px] w-full object-cover"
+      loading="eager"
+    />
+  </figure>
+
+  <section class="grid gap-12 border-b border-hairline px-6 py-14 sm:px-10 lg:grid-cols-[240px_1fr] lg:px-14">
+    <img
+      src="/images/bio-photo.png"
+      alt="Portrait of León Palafox"
+      class="h-56 w-56 border border-hairline object-cover"
+      loading="lazy"
+    />
+    <div class="max-w-2xl space-y-5 text-[1.05rem] leading-relaxed">
+      <p>
+        I'm the <strong>Director of the AI Innovation Lab at <a class="text-signal-deep underline underline-offset-3 hover:text-signal" href="https://www.gbm.com/">GBM</a></strong>,
+        where I lead large-scale personalization, recommender systems, embeddings, and experimentation platforms
+        for retail investing.
+      </p>
+      <p>
+        I'm also a lecturer at <a class="text-signal-deep underline underline-offset-3 hover:text-signal" href="https://www.up.edu.mx/en/mexico">Universidad Panamericana</a>,
+        where I teach Deep Learning and Machine Learning, and I teach Deep Reinforcement Learning at Colegio de
+        Matemáticas Bourbaki. I write a regular column in <em>El Financiero</em> on AI, data strategy, and innovation.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-b border-hairline px-6 py-14 sm:px-10 lg:px-14">
+    <SectionHeading title="Research" id="research" />
+    <div class="mt-8 max-w-2xl space-y-5 text-[1.05rem] leading-relaxed">
+      <p>
+        My research interest is applied machine learning, especially where data meets complex systems. I've worked
+        across neuroscience, astrophysics, planetary sciences, and finance.
+      </p>
+      <p>
+        Right now I'm exploring how machine learning can support decision-making in social and financial systems,
+        from investment analytics to recommender systems for retail platforms.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-b border-hairline px-6 py-14 sm:px-10 lg:px-14">
+    <SectionHeading title="Academia" id="academia" />
+    <div class="mt-8 max-w-2xl space-y-5 text-[1.05rem] leading-relaxed">
+      <p>
+        I earned my bachelor's degree in engineering from the National Autonomous University of Mexico (UNAM),
+        graduating Magna Cum Laude and receiving the Medalla Gabino Barreda as the top student in my class. I earned
+        my master's and PhD in machine learning applied to bioinformatics from the University of Tokyo, funded by
+        the Monbukagakusho (MEXT) scholarship of the Japanese Ministry of Education.
+      </p>
+      <p>
+        I later worked as a postdoctoral researcher at the UCLA School of Medicine, applying ML to neuroscience, and
+        at the University of Arizona, applying ML to planetary sciences, where I then became a staff scientist.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-b border-hairline px-6 py-14 sm:px-10 lg:px-14">
+    <SectionHeading title="Industry" id="industry" />
+    <div class="mt-8 max-w-2xl space-y-5 text-[1.05rem] leading-relaxed">
+      <p>
+        I've worked at the intersection of AI, data strategy, and business for over a decade. At GBM I direct the AI
+        Innovation Lab: the "Genome" investor-profile projects, recommenders built on KNN, ALS, and BM25 with
+        embeddings, and the <strong>Mechagodzilla</strong> experimentation layer that measures whether any of it
+        actually works.
+      </p>
+      <p>
+        Before GBM I directed the AI Innovation Lab at Novartis, headed AI at Algorithia (Grupo Salinas), and
+        directed Machine Learning at Banorte Financial Group.
+      </p>
+    </div>
+  </section>
+
+  <section class="px-6 py-14 sm:px-10 lg:px-14">
+    <SectionHeading title="Timeline" id="timeline" />
+    <ul class="mt-8 max-w-3xl divide-y divide-hairline">
+      {
+        timeline.map((item) => (
+          <li class="flex flex-col gap-1 py-4 sm:flex-row sm:items-baseline sm:gap-6">
+            <span class="micro-label w-44 shrink-0 text-muted">
+              {item.from} — {item.to}
+            </span>
+            <span class="flex-1 leading-snug">
+              {item.role} <span class="text-muted">· {item.org}</span>
+            </span>
+            {item.current && <span aria-label="Current role" class="size-1.5 shrink-0 self-center rounded-full bg-signal" />}
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Base>

@@ -1,0 +1,152 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+
+const courses = [
+  {
+    name: 'Deep Learning',
+    org: 'Universidad Panamericana',
+    program: "Master's in Data Science",
+    href: 'https://www.leonpalafox.com/courses/deep-learning/',
+    blurb:
+      'From the single perceptron and the Universal Approximation Theorem to the state of the art.',
+    topics: [
+      'Optimization: SGD, Adam, and backpropagation mechanics',
+      'Architectures: CNNs for vision, RNNs/LSTMs for sequences',
+      'Attention and the Transformer architecture (BERT, GPT)',
+      'Generative models: VAEs and GANs',
+    ],
+  },
+  {
+    name: 'Machine Learning 2',
+    org: 'Universidad Panamericana',
+    program: "Master's in Data Science",
+    href: 'https://www.leonpalafox.com/courses/machine-learning-2/',
+    blurb:
+      'The second course in the ML track: advanced supervised and unsupervised methods, model selection, and applied modeling workflows.',
+    topics: [],
+  },
+  {
+    name: 'Deep Reinforcement Learning',
+    org: 'Colegio de Matemáticas Bourbaki',
+    program: 'Specialized advanced track',
+    href: undefined,
+    blurb: 'Agents that learn from interaction, balancing mathematical rigor with implementation.',
+    topics: [
+      'Foundations: MDPs, Bellman equations, and Q-learning',
+      'Policy gradients: REINFORCE, actor-critic, and PPO',
+      'Deep RL: DQN refinements, double Q-learning, offline RL',
+      'Applications: custom environments in finance and robotics',
+    ],
+  },
+];
+
+const archive = [
+  {
+    code: 'DS01',
+    name: 'Introduction to Data Science',
+    year: '2018',
+    href: 'https://www.leonpalafox.com/dsclase/',
+    focus: 'Python stack (Pandas/NumPy), exploratory analysis, and data visualization',
+  },
+  {
+    code: 'DB01',
+    name: 'Introduction to Databases',
+    year: '2018',
+    href: 'https://www.leonpalafox.com/dbclase/',
+    focus: 'SQL, NoSQL, and data modeling for analytics',
+  },
+  {
+    code: 'ML01',
+    name: 'Machine Learning',
+    year: '2017',
+    href: 'https://www.leonpalafox.com/mlclase/',
+    focus: 'Supervised vs. unsupervised learning, scikit-learn, and model validation',
+  },
+];
+---
+
+<Base
+  title="Teaching — León Palafox"
+  description="Courses by León Palafox on deep learning, machine learning, and reinforcement learning at Universidad Panamericana and Colegio de Matemáticas Bourbaki."
+>
+  <PageHero
+    eyebrow="Teaching"
+    jp="教育"
+    title="Principles over recipes."
+    description="Current courses, past materials, and the occasional guest lecture — always hands-on, always from the mathematics up."
+  />
+
+  <figure class="border-b border-hairline">
+    <img
+      src="/images/hero_2.png"
+      alt="A bridge leading toward a luminous city, over a foreground of astronomical diagrams"
+      class="max-h-[420px] w-full object-cover"
+      loading="eager"
+    />
+  </figure>
+
+  <section class="border-b border-hairline px-6 py-14 sm:px-10 lg:px-14">
+    <SectionHeading title="Current courses" />
+    <div class="mt-10 grid gap-6 lg:grid-cols-3">
+      {
+        courses.map((course) => (
+          <article class="flex flex-col border border-hairline bg-paper p-7">
+            <p class="micro-label text-signal">{course.org}</p>
+            <h3 class="mt-3 text-xl font-semibold tracking-tight">{course.name}</h3>
+            <p class="micro-label mt-1.5 text-muted">{course.program}</p>
+            <p class="mt-4 text-sm leading-relaxed">{course.blurb}</p>
+            {course.topics.length > 0 && (
+              <ul class="mt-4 space-y-1.5 text-sm text-muted">
+                {course.topics.map((topic) => (
+                  <li class="flex gap-2.5">
+                    <span aria-hidden="true" class="mt-[0.55em] size-1 shrink-0 rounded-full bg-signal" />
+                    {topic}
+                  </li>
+                ))}
+              </ul>
+            )}
+            {course.href && (
+              <a
+                href={course.href}
+                class="group micro-label mt-auto inline-flex items-center gap-2 pt-6 text-signal hover:text-signal-deep"
+              >
+                Syllabus & materials
+                <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
+              </a>
+            )}
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="border-b border-hairline px-6 py-14 sm:px-10 lg:px-14">
+    <SectionHeading title="Course archive" />
+    <ul class="mt-8 max-w-3xl divide-y divide-hairline">
+      {
+        archive.map((course) => (
+          <li>
+            <a href={course.href} class="group flex items-baseline gap-5 py-4">
+              <span class="micro-label w-12 shrink-0 text-signal">{course.code}</span>
+              <span class="flex-1 leading-snug">
+                {course.name} <span class="text-muted">({course.year})</span>
+                <span class="mt-1 block text-sm text-muted">{course.focus}</span>
+              </span>
+              <span aria-hidden="true" class="shrink-0 text-signal transition-transform group-hover:translate-x-1">→</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="px-6 py-14 sm:px-10 lg:px-14">
+    <SectionHeading title="Guest lecturing" />
+    <p class="mt-8 max-w-2xl text-[1.05rem] leading-relaxed">
+      <strong>Machine Learning for Planetary Sciences</strong> — University of Arizona, 2016. Guest lecturer on
+      applying CNNs to HiRISE imagery for geological feature detection.
+    </p>
+  </section>
+</Base>

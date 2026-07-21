@@ -1,0 +1,43 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-hairline">
+  <div class="grid gap-10 px-6 py-12 sm:px-10 md:grid-cols-3 lg:px-14">
+    <div class="space-y-3">
+      <p class="text-lg font-semibold tracking-tight">León Palafox</p>
+      <p class="max-w-[28ch] text-sm leading-relaxed text-muted">
+        AI strategy and recommender systems for finance, from Mexico City.
+      </p>
+    </div>
+    <nav aria-label="Footer">
+      <p class="micro-label mb-4 text-muted">Site</p>
+      <ul class="space-y-2 text-sm">
+        <li><a class="hover:text-signal" href="/about/">About</a></li>
+        <li><a class="hover:text-signal" href="/blog/">Blog</a></li>
+        <li><a class="hover:text-signal" href="/teaching/">Teaching</a></li>
+        <li><a class="hover:text-signal" href="/publications/">Publications</a></li>
+        <li><a class="hover:text-signal" href="/media/">Media</a></li>
+      </ul>
+    </nav>
+    <div>
+      <p class="micro-label mb-4 text-muted">Elsewhere</p>
+      <ul class="space-y-2 text-sm">
+        <li>
+          <a class="hover:text-signal" href="https://www.linkedin.com/in/leonpalafox/" rel="me">LinkedIn</a>
+        </li>
+        <li><a class="hover:text-signal" href="https://twitter.com/leonpalafox" rel="me">X / Twitter</a></li>
+        <li><a class="hover:text-signal" href="https://github.com/leonpalafox" rel="me">GitHub</a></li>
+        <li><a class="hover:text-signal" href="mailto:leon.palafox@gmail.com">Email</a></li>
+        <li><a class="hover:text-signal" href="/rss.xml">RSS</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="flex items-center justify-between border-t border-hairline px-6 py-4 sm:px-10 lg:px-14">
+    <p class="micro-label text-muted">© {year} León Palafox — Mexico City</p>
+    <p class="flex items-center gap-3">
+      <span class="border border-signal px-1.5 py-0.5 text-[0.65rem] text-signal" lang="ja" title="kaizen — continuous improvement">改善</span>
+      <span aria-hidden="true" class="block size-2 rounded-full bg-signal"></span>
+    </p>
+  </div>
+</footer>

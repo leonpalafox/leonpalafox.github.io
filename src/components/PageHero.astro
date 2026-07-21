@@ -1,0 +1,22 @@
+---
+// Standard inner-page opening: mono eyebrow with Japanese gloss, big title, red bar.
+interface Props {
+  eyebrow: string;
+  jp?: string;
+  title: string;
+  description?: string;
+}
+const { eyebrow, jp, title, description } = Astro.props;
+---
+
+<section class="border-b border-hairline px-6 py-14 sm:px-10 lg:px-14 lg:py-20">
+  <p class="micro-label flex items-center gap-3 text-signal">
+    <span>{eyebrow}</span>
+    {jp && <span lang="ja" class="text-muted tracking-[0.2em]">{jp}</span>}
+  </p>
+  <h1 class="mt-5 max-w-3xl text-4xl font-semibold leading-[1.02] tracking-[-0.02em] sm:text-5xl lg:text-6xl">
+    {title}
+  </h1>
+  <span aria-hidden="true" class="mt-6 block h-[3px] w-14 bg-signal"></span>
+  {description && <p class="mt-6 max-w-2xl text-lg leading-relaxed text-muted">{description}</p>}
+</section>

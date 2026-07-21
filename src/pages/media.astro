@@ -1,0 +1,170 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+
+const columns = [
+  {
+    year: '2025',
+    items: [
+      {
+        title: 'Coatlicue: La soberanía digital de México requiere más que silicio',
+        date: 'Dec 08',
+        href: 'https://www.elfinanciero.com.mx/opinion/leon-palafox1/2025/12/08/coatlicue-la-soberania-digital-de-mexico-requiere-mas-que-silicio/',
+      },
+      {
+        title: 'La verdadera ventaja de la IA: no son los modelos, son los chips',
+        date: 'Aug 05',
+        href: 'https://www.elfinanciero.com.mx/opinion/leon-palafox1/2025/08/05/la-verdadera-ventaja-de-la-ia-no-son-los-modelos-son-los-chips/',
+      },
+      {
+        title: '¿Quién va a ganar la carrera de la IA? Aquellos que sepan usarla',
+        date: 'Jul 23',
+        href: 'https://www.elfinanciero.com.mx/opinion/leon-palafox/2025/07/23/quien-va-a-ganar-la-carrera-de-la-ia-aquellos-que-sepan-usarla/',
+      },
+    ],
+  },
+  {
+    year: '2023–2024',
+    items: [
+      {
+        title: '¿Qué pasó en el 2023 con los grandes modelos de lenguaje?',
+        date: 'Dec 26',
+        href: 'https://www.elfinanciero.com.mx/opinion/leon-palafox/2023/12/26/que-paso-en-el-2023-con-los-grandes-modelos-de-lenguaje/',
+      },
+      {
+        title: 'El fin de semana que marcó el futuro de la IA en el mundo (OpenAI)',
+        date: 'Dec 05',
+        href: 'https://www.elfinanciero.com.mx/opinion/leon-palafox/2023/12/05/el-fin-de-semana-que-marco-el-futuro-de-la-ia-en-el-mundo/',
+      },
+      {
+        title: 'La Historia de la IA, México, y su lugar en el mundo',
+        date: 'Sep 19',
+        href: 'https://www.elfinanciero.com.mx/opinion/leon-palafox/2023/09/19/la-historia-de-la-ia-mexico-y-su-lugar-en-el-mundo-fin-de-la-historia/',
+      },
+    ],
+  },
+];
+
+const talks = [
+  {
+    outlet: 'Software Guru Data Day (2024)',
+    title: 'Panel: Habilidades matemáticas en la era de la Ciencia de Datos',
+    href: 'https://sg.com.mx/dataday/speakers/leon-palafox/',
+  },
+  {
+    outlet: 'Reporte Asia Podcast',
+    title: 'Sociedad 5.0 e Inteligencia Artificial',
+    href: 'https://reporteasia.com/destacado/2023/05/05/podcast-sociedad-5-0-e-inteligencia-artificial-por-aqui-asia/',
+  },
+  {
+    outlet: 'La Entrevista (Banco Cuscatlán)',
+    title: 'La inteligencia artificial no es infalible',
+    href: 'https://podcasts.apple.com/us/podcast/la-inteligencia-artificial-no-es-infalible/id1593431639',
+  },
+  {
+    outlet: 'YouTube Talk',
+    title: 'Impacto de las estrategias basadas en datos',
+    href: 'https://www.youtube.com/watch?v=i3oR-HcV86U',
+  },
+];
+---
+
+<Base
+  title="Media — León Palafox"
+  description="Media appearances, interviews, talks, and public writing by León Palafox on AI, machine learning, data science, and financial technology."
+>
+  <PageHero
+    eyebrow="Media"
+    jp="メディア"
+    title="Columns, podcasts & interviews"
+    description="Public conversations about artificial intelligence, data strategy, and the future of technology in Mexico and the world."
+  />
+
+  <section class="border-b border-hairline px-6 py-14 sm:px-10 lg:px-14">
+    <SectionHeading title="Columns — El Financiero" id="columns" />
+    <p class="mt-6 max-w-2xl leading-relaxed text-muted">
+      I write a regular column for <em>El Financiero</em> on the business impact of AI, sovereignty, and technical
+      strategy. Recent columns also appear on the <a href="/blog/" class="text-signal-deep underline underline-offset-3 hover:text-signal">blog</a>.
+    </p>
+    {
+      columns.map((group) => (
+        <div class="mt-8 max-w-3xl">
+          <h3 class="micro-label text-signal">{group.year}</h3>
+          <ul class="mt-3 divide-y divide-hairline">
+            {group.items.map((item) => (
+              <li>
+                <a href={item.href} class="group flex items-baseline gap-5 py-3.5">
+                  <span class="micro-label w-14 shrink-0 text-muted">{item.date}</span>
+                  <span class="flex-1 leading-snug" lang="es">
+                    {item.title}
+                  </span>
+                  <span aria-hidden="true" class="shrink-0 text-signal transition-transform group-hover:translate-x-1">
+                    →
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </section>
+
+  <section class="border-b border-hairline px-6 py-14 sm:px-10 lg:px-14">
+    <SectionHeading title="Podcasts & talks" id="talks" />
+    <ul class="mt-8 max-w-3xl divide-y divide-hairline">
+      {
+        talks.map((talk) => (
+          <li>
+            <a href={talk.href} class="group flex items-baseline gap-5 py-4">
+              <span class="flex-1 leading-snug">
+                <span class="font-medium" lang="es">{talk.title}</span>
+                <span class="mt-1 block text-sm text-muted">{talk.outlet}</span>
+              </span>
+              <span aria-hidden="true" class="shrink-0 text-signal transition-transform group-hover:translate-x-1">→</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="border-b border-hairline px-6 py-14 sm:px-10 lg:px-14">
+    <SectionHeading title="Research highlights" id="research-highlights" />
+    <div class="mt-8 grid max-w-4xl gap-8 md:grid-cols-[1fr_320px]">
+      <div class="space-y-4 text-[1.05rem] leading-relaxed">
+        <h3 class="text-lg font-semibold">NVIDIA</h3>
+        <p>
+          NVIDIA interviewed me about our work with the Lunar and Planetary Laboratory at the University of Arizona:
+          <strong>MarsNet</strong>, a convolutional neural network that identifies land features on the surface of
+          Mars from HiRISE imagery.
+        </p>
+      </div>
+      <img
+        src="/images/nvidia_photo.png"
+        alt="León Palafox interviewed by NVIDIA about MarsNet and machine learning for planetary sciences"
+        class="w-full border border-hairline object-cover"
+        loading="lazy"
+      />
+    </div>
+  </section>
+
+  <section class="px-6 py-14 sm:px-10 lg:px-14">
+    <SectionHeading title="Press mentions" id="press" />
+    <ul class="mt-8 max-w-3xl">
+      <li>
+        <a
+          href="https://diariodigitalmexico.com/imposible-que-la-inteligencia-artificial-domine-y-destruya-a-los-humanos-leon-palafox/"
+          class="group flex items-baseline gap-5 py-3.5"
+        >
+          <span class="flex-1 leading-snug">
+            <span class="font-medium" lang="es">"Imposible que la Inteligencia Artificial domine y destruya a los humanos"</span>
+            <span class="mt-1 block text-sm text-muted">Diario Digital / TV Azteca</span>
+          </span>
+          <span aria-hidden="true" class="shrink-0 text-signal transition-transform group-hover:translate-x-1">→</span>
+        </a>
+      </li>
+    </ul>
+  </section>
+</Base>
