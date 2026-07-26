@@ -1,0 +1,45 @@
+---
+// Cover plate for a post: the printed edition, pinned to the page with
+// registration marks. Portrait art is held to a column narrower than the body
+// so it reads as an inset tearsheet rather than a banner.
+import { Image } from 'astro:assets';
+import type { BlogAsset } from '../lib/assets';
+
+interface Props {
+  asset: BlogAsset;
+  /** Widest the plate is allowed to get. Portrait art wants less; landscape can take the full column. */
+  maxWidth?: string;
+}
+
+const { asset, maxWidth = '25rem' } = Astro.props;
+const { src, alt, caption, credit } = asset;
+const line = [caption, credit].filter(Boolean).join(' · ');
+---
+
+<figure class="mx-auto mt-12 max-w-2xl">
+  <div class="relative mx-auto w-full" style={`max-width: ${maxWidth}`}>
+    <!-- Registration marks, as on a press sheet -->
+    <span aria-hidden="true" class="pointer-events-none absolute -left-2 -top-2 h-6 w-px bg-signal sm:-left-3 sm:-top-3"></span>
+    <span aria-hidden="true" class="pointer-events-none absolute -left-2 -top-2 h-px w-6 bg-signal sm:-left-3 sm:-top-3"></span>
+    <span aria-hidden="true" class="pointer-events-none absolute -bottom-2 -right-2 h-6 w-px bg-signal sm:-bottom-3 sm:-right-3"></span>
+    <span aria-hidden="true" class="pointer-events-none absolute -bottom-2 -right-2 h-px w-6 bg-signal sm:-bottom-3 sm:-right-3"></span>
+
+    <Image
+      src={src}
+      alt={alt}
+      widths={[400, 800, 1120]}
+      sizes={`(min-width: 640px) ${maxWidth}, 100vw`}
+      loading="eager"
+      class="w-full border border-hairline bg-paper shadow-[0_1px_0_0_rgba(0,0,0,0.04),0_18px_40px_-28px_rgba(0,0,0,0.45)]"
+    />
+  </div>
+
+  {
+    line && (
+      <figcaption class="mx-auto mt-5 flex items-start gap-3" style={`max-width: ${maxWidth}`}>
+        <span aria-hidden="true" class="mt-[0.55em] h-px w-6 shrink-0 bg-hairline" />
+        <span class="micro-label text-muted">{line}</span>
+      </figcaption>
+    )
+  }
+</figure>
