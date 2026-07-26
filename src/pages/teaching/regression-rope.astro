@@ -1,0 +1,203 @@
+---
+import Base from '../../layouts/Base.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+---
+
+<Base
+  title="The jumping rope — León Palafox"
+  description="An interactive picture of regression uncertainty: a rope pinned at the observations thrashes where the data leaves it free, and settles as points are added."
+>
+  <section class="border-b border-hairline px-6 py-14 sm:px-10 lg:px-14 lg:py-20">
+    <p class="micro-label flex items-center gap-3 text-signal-deep">
+      <span>Interactive</span>
+      <span lang="ja" class="tracking-[0.2em] text-muted">縄跳び</span>
+    </p>
+    <h1 class="mt-5 max-w-3xl text-4xl font-semibold leading-[1.02] tracking-[-0.02em] sm:text-5xl lg:text-6xl">
+      The jumping rope
+    </h1>
+    <span aria-hidden="true" class="mt-6 block h-[3px] w-14 bg-signal"></span>
+    <p class="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
+      Regression is a rope held at the points you have measured. Where observations are close together the rope is
+      pinned and barely moves. Where they are far apart it thrashes — and that thrashing <em>is</em> the uncertainty in
+      your predictions.
+    </p>
+  </section>
+
+  <section class="border-b border-hairline px-6 py-12 sm:px-10 lg:px-14">
+    <div
+      data-rope
+      class="mx-auto max-w-5xl"
+      role="group"
+      aria-label="Interactive regression uncertainty visualisation"
+    >
+      <div class="relative aspect-[16/10] w-full border border-hairline bg-paper sm:aspect-[16/9]">
+        <canvas data-rope-canvas class="block size-full cursor-crosshair touch-manipulation"></canvas>
+
+        <p class="micro-label pointer-events-none absolute bottom-3 left-4 text-muted">Click the panel to pin a point</p>
+
+        <div class="pointer-events-none absolute right-4 top-3 text-right">
+          <p class="micro-label text-muted">Slack in the rope</p>
+          <p data-rope-readout class="mt-1 font-mono text-2xl leading-none text-signal-deep" aria-live="polite">±0.00</p>
+          <p class="micro-label mt-2 text-muted">
+            <span data-rope-count>2</span> observations
+          </p>
+        </div>
+      </div>
+
+      <noscript>
+        <p class="mt-4 border border-hairline bg-paper p-4 text-sm text-muted">
+          This visualisation needs JavaScript. The short version: with two observations the fitted curve is almost
+          unconstrained between them and swings wildly; each new observation shortens the leash until the curve barely
+          moves at all.
+        </p>
+      </noscript>
+
+      <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="flex flex-wrap items-center gap-2">
+          <button
+            data-rope-add
+            type="button"
+            class="micro-label border border-ink bg-ink px-3 py-2 text-paper transition-colors hover:bg-signal-deep hover:border-signal-deep"
+          >
+            Add observation
+          </button>
+          <button
+            data-rope-undo
+            type="button"
+            class="micro-label border border-hairline px-3 py-2 transition-colors hover:border-ink"
+          >
+            Undo
+          </button>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2">
+          <button
+            data-rope-reset
+            type="button"
+            class="micro-label border border-hairline px-3 py-2 transition-colors hover:border-ink"
+          >
+            Reset
+          </button>
+          <button
+            data-rope-play
+            type="button"
+            aria-pressed="true"
+            class="micro-label border border-hairline px-3 py-2 transition-colors hover:border-ink"
+          >
+            Pause
+          </button>
+        </div>
+
+        <label class="block">
+          <span class="micro-label text-muted">Rope stiffness</span>
+          <input
+            data-rope-stiffness
+            type="range"
+            min="0.18"
+            max="1.1"
+            step="0.01"
+            value="0.45"
+            class="mt-2 w-full accent-[#e2371b]"
+          />
+          <span class="mt-1 block text-xs text-muted">How hard the rope resists bending between pins.</span>
+        </label>
+
+        <label class="block">
+          <span class="micro-label text-muted">Pin tightness</span>
+          <input
+            data-rope-tightness
+            type="range"
+            min="0.02"
+            max="0.3"
+            step="0.005"
+            value="0.05"
+            class="mt-2 w-full accent-[#e2371b]"
+          />
+          <span class="mt-1 block text-xs text-muted">How firmly each observation holds the rope down.</span>
+        </label>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-b border-hairline px-6 py-14 sm:px-10 lg:px-14">
+    <SectionHeading title="What you are looking at" />
+    <div class="mt-8 grid gap-10 lg:grid-cols-3">
+      <div>
+        <p class="micro-label text-signal-deep">The ropes</p>
+        <p class="mt-3 text-sm leading-relaxed">
+          Seven red strands, each a curve that is fully consistent with the observations. They are not decoration: every
+          frame is an honest draw from the posterior, so wherever the strands separate, the data genuinely does not say
+          which one is right.
+        </p>
+      </div>
+      <div>
+        <p class="micro-label text-signal-deep">The band</p>
+        <p class="mt-3 text-sm leading-relaxed">
+          The ±2σ envelope — the region the rope stays inside about 95% of the time. Watch it pinch shut at each pin and
+          balloon in the gaps. The number in the corner is its average width, which is the one-line summary of how much
+          you still do not know.
+        </p>
+      </div>
+      <div>
+        <p class="micro-label text-signal-deep">The dark line</p>
+        <p class="mt-3 text-sm leading-relaxed">
+          The posterior mean — the single curve a normal regression would hand you. It is the least interesting object on
+          the screen. Reporting it alone is exactly the habit this picture is meant to break.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-6 py-14 sm:px-10 lg:px-14">
+    <SectionHeading title="Things worth trying" />
+    <ul class="mt-8 max-w-2xl space-y-4 text-sm leading-relaxed">
+      <li class="flex gap-3">
+        <span aria-hidden="true" class="mt-[0.6em] size-1 shrink-0 rounded-full bg-signal"></span>
+        <span>
+          Reset to two points and watch the middle. The rope is pinned at both ends and still swings almost as freely as
+          if you had measured nothing at all: at the midpoint those two observations close the band by under a tenth.
+          Two points say very little about what happens between them.
+        </span>
+      </li>
+      <li class="flex gap-3">
+        <span aria-hidden="true" class="mt-[0.6em] size-1 shrink-0 rounded-full bg-signal"></span>
+        <span>
+          Add points one at a time and watch the slack number fall. It drops fast and then barely at all: averaged over
+          many runs, the fifth observation buys about thirty times as much certainty as the twentieth. Most of what a
+          dataset can tell you arrives early.
+        </span>
+      </li>
+      <li class="flex gap-3">
+        <span aria-hidden="true" class="mt-[0.6em] size-1 shrink-0 rounded-full bg-signal"></span>
+        <span>
+          Pin several points close together on one side, then look at the far side. Clustered data collapses uncertainty
+          locally and does almost nothing for the region you never measured. This is what extrapolation costs.
+        </span>
+      </li>
+      <li class="flex gap-3">
+        <span aria-hidden="true" class="mt-[0.6em] size-1 shrink-0 rounded-full bg-signal"></span>
+        <span>
+          Now push stiffness up without touching the data. The slack collapses — on a fixed set of four points it runs
+          from about ±0.43 at the loosest setting to ±0.05 at the stiffest. You did not measure anything to earn that.
+          A stiff rope is just a strong prior that the truth is smooth, and if it is not, the narrow band is false
+          confidence. Note the rope stays curved throughout: stiffness buys smoothness, never straightness.
+        </span>
+      </li>
+    </ul>
+
+    <a
+      href="/teaching/"
+      class="group micro-label mt-12 inline-flex items-center gap-2 text-signal-deep hover:text-signal"
+    >
+      <span aria-hidden="true" class="transition-transform group-hover:-translate-x-1">←</span>
+      Teaching
+    </a>
+  </section>
+</Base>
+
+<script>
+  import { mountRopeScene } from '../../scripts/rope-scene';
+
+  const root = document.querySelector<HTMLElement>('[data-rope]');
+  if (root) mountRopeScene(root);
+</script>

@@ -16,7 +16,9 @@
     "@fontsource-variable/source-serif-4": "^5.0.0",
     "@fontsource/ibm-plex-mono": "^5.0.0",
     "@tailwindcss/vite": "^4.0.0",
+    "@types/three": "^0.185.1",
     "astro": "^5.0.0",
-    "tailwindcss": "^4.0.0"
+    "tailwindcss": "^4.0.0",
+    "three": "^0.185.1"
   }
 }
