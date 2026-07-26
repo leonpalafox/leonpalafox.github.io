@@ -1,11 +1,19 @@
 ---
+import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
+import { getAsset } from '../../lib/assets';
 import { kanjiYear, monthDay } from '../../lib/format';
 
 const posts = (await getCollection('blog')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+// Thumbnails are decorative here — the title they sit beside already says it, so alt is empty
+// rather than repeating it to a screen reader.
+const thumbs = new Map(
+  posts.filter((p) => p.data.cover).map((p) => [p.id, getAsset(p.data.cover!, { alt: '' }).src]),
 );
 
 const byYear = new Map<number, typeof posts>();
@@ -46,6 +54,17 @@ for (const post of posts) {
                   {post.data.title}
                 </span>
                 <span class="micro-label hidden shrink-0 text-muted sm:inline">{post.data.lang}</span>
+                {thumbs.has(post.id) && (
+                  <Image
+                    src={thumbs.get(post.id)!}
+                    alt=""
+                    aria-hidden="true"
+                    widths={[26, 52]}
+                    sizes="26px"
+                    loading="lazy"
+                    class="-my-1 h-8 w-[26px] shrink-0 self-center border border-hairline object-cover grayscale-[0.35] transition duration-300 group-hover:grayscale-0"
+                  />
+                )}
                 <span aria-hidden="true" class="shrink-0 text-signal-deep transition-transform group-hover:translate-x-1">
                   →
                 </span>
