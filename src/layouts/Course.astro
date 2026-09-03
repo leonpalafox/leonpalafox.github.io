@@ -1,0 +1,24 @@
+---
+import Base from './Base.astro';
+import PageHero from '../components/PageHero.astro';
+
+interface Props {
+  frontmatter: {
+    title: string;
+    description?: string;
+    heading?: string;
+    eyebrow?: string;
+    jp?: string;
+  };
+}
+
+const { frontmatter } = Astro.props;
+const { title, description, heading, eyebrow = 'Teaching', jp } = frontmatter;
+---
+
+<Base title={title} description={description}>
+  <PageHero eyebrow={eyebrow} jp={jp} title={heading ?? title} description={description} />
+  <div class="prose-post mx-auto max-w-3xl px-6 pb-20 sm:px-10 lg:px-14">
+    <slot />
+  </div>
+</Base>
