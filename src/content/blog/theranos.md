@@ -1,10 +1,11 @@
 ---
 title: "“Finge hasta que lo consigas”, el peligro de la Inteligencia Artificial"
+description: "La lección de Theranos y Elizabeth Holmes para la inteligencia artificial: cuando fingir hasta que lo consigas se vuelve peligroso."
 pubDate: 2022-01-11
 lang: es
 tags: ["mexico", "financiero", "theranos"]
 ---
-Nota: Artículo publicado en [El Financiero](https://www.elfinanciero.com.mx/opinion/leon-palafox/2022/01/25/banamex-y-la-batalla-por-la-supremacia-en-la-inteligencia-artificial-financiera/)
+Nota: Artículo publicado en [El Financiero](https://www.elfinanciero.com.mx/opinion/leon-palafox/2022/01/11/finge-hasta-que-lo-consigas-el-peligro-de-la-inteligencia-artificial/)
 
 Bienvenidas a todas las personas que han seguido esta columna fielmente a lo largo de un año ya. Espero que este nuevo 2022, esté lleno de sorpresas y pueda seguirlos ayudando y orientando en este turbio mundo de la Inteligencia Artificial.
 

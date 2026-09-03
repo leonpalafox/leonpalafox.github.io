@@ -1,5 +1,6 @@
 ---
 title: "Deshaciendo Mitos"
+description: "De la conferencia de Dartmouth a hoy: qué es y qué no es la inteligencia artificial, deshaciendo los mitos más comunes."
 pubDate: 2021-01-12
 lang: es
 tags: ["mexico", "financiero"]

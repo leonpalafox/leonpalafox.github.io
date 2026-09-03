@@ -1,5 +1,6 @@
 ---
 title: "El asesor que nunca duerme"
+description: "Citi Sky y la nueva generación de asesores con IA: el banquero humano no desaparece, se mueve al lugar donde agrega valor."
 pubDate: 2026-04-27
 lang: es
 tags: ["mexico", "financiero", "ia"]

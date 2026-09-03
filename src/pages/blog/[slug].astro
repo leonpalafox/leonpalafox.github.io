@@ -20,6 +20,22 @@ const asset = cover ? getAsset(cover, { alt: coverAlt, caption: coverCaption }) 
 // A post with cover art gets its own social preview instead of the site-wide one.
 const ogImage = asset ? (await getImage({ src: asset.src, width: 1200 })).src : undefined;
 
+// BlogPosting structured data, linked to the site-wide Person via its @id.
+const personId = new URL('#person', Astro.site).toString();
+const blogPostingJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  description: description ?? title,
+  datePublished: pubDate.toISOString(),
+  inLanguage: lang === 'es' ? 'es-MX' : 'en-US',
+  author: { '@id': personId },
+  publisher: { '@type': 'Organization', name: 'León Palafox', url: Astro.site.toString() },
+  mainEntityOfPage: new URL(`/blog/${post.id}/`, Astro.site).toString(),
+  image: new URL(ogImage ?? '/images/og-default.jpg', Astro.site).toString(),
+  wordCount: post.body ? post.body.trim().split(/\s+/).length : undefined,
+};
+
 const t = {
   es: { back: 'Todas las entradas', original: 'Publicado originalmente en' },
   en: { back: 'All posts', original: 'Originally published in' },
@@ -28,6 +44,7 @@ const translationLabel = translation?.label ?? (translation?.lang === 'en' ? 'Re
 ---
 
 <Base title={`${title} — León Palafox`} description={description ?? title} lang={lang} ogImage={ogImage}>
+  <script type="application/ld+json" set:html={JSON.stringify(blogPostingJsonLd)} />
   <article class="px-6 py-14 sm:px-10 lg:px-14 lg:py-20">
     <header class="mx-auto max-w-2xl">
       <p class="micro-label flex items-center gap-3 text-signal-deep">

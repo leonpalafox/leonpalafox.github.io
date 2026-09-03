@@ -1,5 +1,6 @@
 ---
 title: "Banamex y la batalla por la supremacía en la Inteligencia Artificial financiera"
+description: "La venta de Citibanamex y lo que significa para la batalla por la supremacía de la inteligencia artificial en la banca mexicana."
 pubDate: 2022-01-25
 lang: es
 tags: ["mexico", "financiero", "banamex"]

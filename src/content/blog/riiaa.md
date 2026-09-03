@@ -1,5 +1,6 @@
 ---
 title: "RIIAA @Universum in Mexico City"
+description: "Notes from RIIAA, the first conference dedicated to machine learning in Mexico, held at Universum in Mexico City."
 pubDate: 2018-08-25
 lang: en
 tags: ["mexico", "machine learning"]

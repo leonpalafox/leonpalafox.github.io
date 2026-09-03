@@ -1,5 +1,6 @@
 ---
 title: "RIIAA @Universum"
+description: "Lo bueno y lo malo de RIIAA, la primera conferencia de aprendizaje automático en México."
 pubDate: 2018-08-26
 lang: es
 tags: ["mexico", "machine learning"]

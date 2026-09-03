@@ -1,5 +1,6 @@
 ---
 title: "2026, Cuando la IA dejó de hablar y se puso a trabajar (Manual para no perderse)"
+description: "El 2026 marca el paso de los chatbots a los agentes que ejecutan trabajo real; un manual para entender los tres cambios que definirán a empresas y gobiernos."
 pubDate: 2026-01-03
 lang: es
 tags: ["mexico", "financiero", "ia"]

@@ -1,5 +1,6 @@
 ---
 title: "Los datos representan el mundo, y los modelos aprenden de los datos"
+description: "El sesgo en la inteligencia artificial y el debate sobre quién debe corregirlo: los datos o los diseñadores de los modelos."
 pubDate: 2021-02-23
 lang: es
 tags: ["mexico", "financiero"]

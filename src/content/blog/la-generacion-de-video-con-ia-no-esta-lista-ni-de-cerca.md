@@ -1,5 +1,6 @@
 ---
 title: "La generación de video con IA no está lista. Ni de cerca"
+description: "Por qué OpenAI apagó Sora: la generación de video con IA es impresionante, pero todavía no es un negocio."
 pubDate: 2026-03-30
 lang: es
 tags: ["mexico", "financiero", "ia"]

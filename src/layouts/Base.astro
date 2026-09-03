@@ -2,6 +2,8 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { getImage } from 'astro:assets';
+import bioPhoto from '../assets/bio-photo.png';
 
 interface Props {
   title: string;
@@ -12,12 +14,36 @@ interface Props {
 
 const {
   title,
-  description = 'León Palafox — AI strategy, recommender systems, and personalization for finance. Director of the AI Innovation Lab at GBM, professor, and columnist at El Financiero.',
+  description = 'León Palafox — AI strategy and recommender systems for finance. Director of the AI Innovation Lab at GBM, professor, and columnist at El Financiero.',
   lang = 'en',
-  ogImage = '/images/hero_1.png',
+  ogImage = '/images/og-default.jpg',
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
+
+// Site-wide Person entity (structured data) so name searches resolve to this site.
+const personImage = (await getImage({ src: bioPhoto, width: 512 })).src;
+const personId = new URL('#person', Astro.site).toString();
+const personJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  '@id': personId,
+  name: 'León Palafox',
+  jobTitle: 'Director, AI Innovation Lab',
+  worksFor: { '@type': 'Organization', name: 'GBM', url: 'https://www.gbm.com/' },
+  alumniOf: [
+    { '@type': 'CollegeOrUniversity', name: 'University of Tokyo' },
+    { '@type': 'CollegeOrUniversity', name: 'Universidad Nacional Autónoma de México' },
+  ],
+  url: Astro.site.toString(),
+  image: new URL(personImage, Astro.site).toString(),
+  sameAs: [
+    'https://www.linkedin.com/in/leonpalafox/',
+    'https://github.com/leonpalafox',
+    'https://twitter.com/leonpalafox',
+    'https://medium.com/@leonpalafox',
+  ],
+};
 ---
 
 <!doctype html>
@@ -38,7 +64,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:image" content={new URL(ogImage, Astro.site)} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@leonpalafox" />
+    <meta name="twitter:image" content={new URL(ogImage, Astro.site)} />
     <meta name="generator" content={Astro.generator} />
+    <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
     <link rel="preconnect" href="https://www.googletagmanager.com" />
     <link rel="preconnect" href="https://www.google-analytics.com" />
     <!-- Google Analytics 4 — same property as the previous site -->

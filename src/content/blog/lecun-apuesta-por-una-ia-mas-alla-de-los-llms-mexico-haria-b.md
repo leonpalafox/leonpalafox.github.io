@@ -1,5 +1,6 @@
 ---
 title: "LeCun apuesta por una IA más allá de los LLMs. México haría bien en tomar nota"
+description: "Yann LeCun apuesta por los world models más allá de los LLMs, y por qué México haría bien en seguir la jugada de cerca."
 pubDate: 2026-03-16
 lang: es
 tags: ["mexico", "financiero", "ia"]

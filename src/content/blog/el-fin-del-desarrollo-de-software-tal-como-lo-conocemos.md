@@ -1,5 +1,6 @@
 ---
 title: "El fin del desarrollo de software tal como lo conocemos"
+description: "Los agentes de programación están redefiniendo el desarrollo de software, y el programador que no se convierta en orquestador quedará obsoleto."
 pubDate: 2026-02-02
 lang: es
 tags: ["mexico", "financiero", "ia"]

@@ -1,5 +1,6 @@
 ---
 title: "World Cup Managers: Rank vs Tenure"
+description: "How the teams headed to the 2026 World Cup compare by FIFA ranking, manager tenure, and titles won."
 pubDate: 2026-05-13
 lang: en
 tags: ["data-viz", "football", "world-cup"]

@@ -1,5 +1,6 @@
 ---
 title: "La carrera de la IA cambió por completo"
+description: "La ruptura de Anthropic con el Departamento de Defensa y por qué la carrera de la IA dejó de ser solo una competencia técnica."
 pubDate: 2026-03-02
 lang: es
 tags: ["mexico", "financiero", "ia"]

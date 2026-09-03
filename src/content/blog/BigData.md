@@ -1,5 +1,6 @@
 ---
 title: "Big data e inteligencia artificial, dos lados de la misma moneda"
+description: "Por qué el big data y la inteligencia artificial son dos lados de la misma moneda: las 5 V de los datos y cómo se convierten en decisiones."
 pubDate: 2021-01-26
 lang: es
 tags: ["mexico", "financiero", "bigdata"]

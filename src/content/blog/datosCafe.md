@@ -1,5 +1,6 @@
 ---
 title: "De datos y cafés, o cómo crear la bebida perfecta"
+description: "Una taza de café para explicar cómo los datos y la inteligencia artificial recorren cada paso detrás de una decisión de negocio."
 pubDate: 2021-02-09
 lang: es
 tags: ["mexico", "financiero"]

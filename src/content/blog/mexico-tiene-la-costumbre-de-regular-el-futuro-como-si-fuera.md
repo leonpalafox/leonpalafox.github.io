@@ -1,5 +1,6 @@
 ---
 title: "México tiene la costumbre de regular el futuro como si fuera el pasado"
+description: "De la nube a la inteligencia artificial: por qué México insiste en regular el futuro con las reglas del pasado."
 pubDate: 2026-05-10
 lang: es
 tags: ["mexico", "financiero", "ia"]

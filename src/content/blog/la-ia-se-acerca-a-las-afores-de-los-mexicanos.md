@@ -1,5 +1,6 @@
 ---
 title: "La IA se acerca a las AFORES de los mexicanos"
+description: "Cómo el ahorro para el retiro de los mexicanos ya está financiando, sin que se note, la construcción de centros de datos de IA."
 pubDate: 2026-04-13
 lang: es
 tags: ["mexico", "financiero", "ia"]

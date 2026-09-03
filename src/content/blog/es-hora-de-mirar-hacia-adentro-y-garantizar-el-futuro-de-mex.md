@@ -1,5 +1,6 @@
 ---
 title: "Es hora de mirar hacia adentro y garantizar el futuro de México"
+description: "Más allá del nearshoring: la productividad estancada de México y los indicadores obsoletos que esconden la economía real del país."
 pubDate: 2026-01-19
 lang: es
 tags: ["mexico", "financiero", "ia"]
