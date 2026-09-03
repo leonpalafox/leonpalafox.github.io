@@ -35,6 +35,9 @@ export interface AssetEntry {
 
 /** Metadata for the images in src/assets/blog/. Keys must match an id from that folder. */
 const registry: Record<string, AssetEntry> = {
+  'mexico-industria-frente-a-pemex': {
+    alt: 'Una balanza enfrenta una plataforma petrolera deteriorada con una fábrica automatizada de robots y servidores, frente a la silueta del mapa de México.',
+  },
   'mercado-de-inteligencia': {
     alt: 'Portada de El Financiero: León Palafox frente a un pasillo de puestos que anuncian Kimi, GPT, Claude, Grok, Gemini y modelos abiertos, bajo el titular “Quién decide qué inteligencia compra su empresa”.',
     caption: 'El Financiero · 23 de julio de 2026',

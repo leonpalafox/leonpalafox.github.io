@@ -11,13 +11,14 @@ interface Props {
   maxWidth?: string;
 }
 
-const { asset, maxWidth = '25rem' } = Astro.props;
+const { asset, maxWidth } = Astro.props;
 const { src, alt, caption, credit } = asset;
+const resolvedMaxWidth = maxWidth ?? (src.width > src.height ? '42rem' : '25rem');
 const line = [caption, credit].filter(Boolean).join(' · ');
 ---
 
 <figure class="mx-auto mt-12 max-w-2xl">
-  <div class="relative mx-auto w-full" style={`max-width: ${maxWidth}`}>
+  <div class="relative mx-auto w-full" style={`max-width: ${resolvedMaxWidth}`}>
     <!-- Registration marks, as on a press sheet -->
     <span aria-hidden="true" class="pointer-events-none absolute -left-2 -top-2 h-6 w-px bg-signal sm:-left-3 sm:-top-3"></span>
     <span aria-hidden="true" class="pointer-events-none absolute -left-2 -top-2 h-px w-6 bg-signal sm:-left-3 sm:-top-3"></span>
@@ -28,7 +29,7 @@ const line = [caption, credit].filter(Boolean).join(' · ');
       src={src}
       alt={alt}
       widths={[400, 800, 1120]}
-      sizes={`(min-width: 640px) ${maxWidth}, 100vw`}
+      sizes={`(min-width: 640px) ${resolvedMaxWidth}, 100vw`}
       loading="eager"
       class="w-full border border-hairline bg-paper shadow-[0_1px_0_0_rgba(0,0,0,0.04),0_18px_40px_-28px_rgba(0,0,0,0.45)]"
     />
@@ -36,7 +37,7 @@ const line = [caption, credit].filter(Boolean).join(' · ');
 
   {
     line && (
-      <figcaption class="mx-auto mt-5 flex items-start gap-3" style={`max-width: ${maxWidth}`}>
+      <figcaption class="mx-auto mt-5 flex items-start gap-3" style={`max-width: ${resolvedMaxWidth}`}>
         <span aria-hidden="true" class="mt-[0.55em] h-px w-6 shrink-0 bg-hairline" />
         <span class="micro-label text-muted">{line}</span>
       </figcaption>

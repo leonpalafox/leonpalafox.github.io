@@ -4,6 +4,7 @@ description: "México podría impulsar su economía con IA aplicada a la manufac
 pubDate: 2026-09-02
 lang: es
 tags: ["mexico", "financiero", "ia"]
+cover: mexico-industria-frente-a-pemex
 source: "https://www.elfinanciero.com.mx/opinion/leon-palafox1/2026/09/02/mexico-esta-salvando-su-pasado-a-costa-de-su-futuro/"
 sourceName: "El Financiero"
 translation:

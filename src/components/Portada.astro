@@ -1,0 +1,490 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import { fullDate, monthDay } from '../lib/format';
+import { getAsset } from '../lib/assets';
+
+const posts = (await getCollection('blog'))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 6);
+
+const [lead, ...rest] = posts;
+
+function plainText(markdown: string): string {
+  return markdown
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, '')
+    .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
+    .replace(/<[^>]+>/g, '')
+    .replace(/[*_`#>~]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function excerpt(markdown: string, maxLength = 390): string {
+  const firstParagraph = markdown.split(/\n\s*\n/).find((block) => block.trim()) ?? '';
+  const text = plainText(firstParagraph);
+  if (text.length <= maxLength) return text;
+  return `${text.slice(0, maxLength).replace(/\s+\S*$/, '').trim()}…`;
+}
+
+const categoryLabels: Record<string, string> = {
+  ia: 'Inteligencia artificial',
+  nvidia: 'Tecnología y finanzas',
+  'data-viz': 'Datos',
+  football: 'Análisis',
+  'world-cup': 'Fútbol',
+  bigdata: 'Datos',
+  banamex: 'Banca',
+  theranos: 'Ética',
+};
+
+function categoryFor(tags: string[], lang: 'es' | 'en'): string {
+  const tag = tags.find((item) => !['mexico', 'financiero'].includes(item));
+  if (!tag) return lang === 'es' ? 'Opinión' : 'Essay';
+  return categoryLabels[tag] ?? tag.replaceAll('-', ' ');
+}
+
+function coverFor(post: (typeof rest)[number]) {
+  if (!post.data.cover) return undefined;
+  return getAsset(post.data.cover, {
+    alt: post.data.coverAlt,
+    caption: post.data.coverCaption,
+  });
+}
+
+const leadCover = lead.data.cover
+  ? getAsset(lead.data.cover, {
+      alt: lead.data.coverAlt,
+      caption: lead.data.coverCaption,
+    })
+  : undefined;
+const leadExcerpt = excerpt(lead.body);
+const leadMinutes = Math.max(3, Math.round(lead.body.split(/\s+/).length / 220));
+---
+
+<section aria-labelledby="writing-title" class="border-y border-hairline bg-sheet">
+  <div class="mx-auto max-w-[1240px] px-6 py-16 sm:px-10 lg:px-14 lg:py-24">
+    <header class="section-header">
+      <div>
+        <p class="micro-label text-signal-deep">Latest writing <span aria-hidden="true">/</span> <span lang="ja">最新</span></p>
+        <h2 id="writing-title" class="section-title">Ideas worth examining.</h2>
+      </div>
+      <div class="section-intro">
+        <p>Essays on artificial intelligence, finance, technology, and the decisions shaping Mexico.</p>
+        <a href="/blog/" class="all-posts-link">
+          View all columns <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </header>
+
+    <article class="lead-card">
+      {
+        leadCover && (
+          <div class="lead-cover">
+            <Image
+              src={leadCover.src}
+              alt={leadCover.alt}
+              widths={[640, 960, 1280, 1600]}
+              sizes="(min-width: 1480px) 1128px, (min-width: 1024px) calc(100vw - 304px), calc(100vw - 48px)"
+              loading="lazy"
+              class="h-full w-full object-cover"
+            />
+          </div>
+        )
+      }
+      <div class="lead-main">
+        <div class="article-meta">
+          <p>{categoryFor(lead.data.tags, lead.data.lang)}</p>
+          <p>{monthDay(lead.data.pubDate)}</p>
+        </div>
+        <a href={`/blog/${lead.id}/`} class="title-link" lang={lead.data.lang}>
+          <h3 class="lead-title">{lead.data.title}</h3>
+        </a>
+        {lead.data.description && <p class="lead-description" lang={lead.data.lang}>{lead.data.description}</p>}
+      </div>
+
+      <div class="lead-aside">
+        <div class="lead-number" aria-hidden="true">
+          <span>01</span>
+          <span class="signal-dot"></span>
+        </div>
+        <p class="lead-excerpt" lang={lead.data.lang}>{leadExcerpt}</p>
+        <div class="lead-footer">
+          <p class="micro-label text-muted">Por León Palafox</p>
+          <p class="micro-label text-muted">{leadMinutes} min read</p>
+        </div>
+      </div>
+    </article>
+
+    <div class="article-grid">
+      {
+        rest.map((post, index) => {
+          const cover = coverFor(post);
+          return (
+            <article class="article-card">
+              {cover && (
+                <div class="article-cover">
+                  <Image
+                    src={cover.src}
+                    alt={cover.alt}
+                    widths={[400, 640, 800]}
+                    sizes="(min-width: 1024px) 32vw, (min-width: 640px) 50vw, 100vw"
+                    loading="lazy"
+                    class="h-full w-full object-cover"
+                  />
+                </div>
+              )}
+              <div class="article-card-body">
+                <div class="article-meta">
+                  <p>{categoryFor(post.data.tags, post.data.lang)}</p>
+                  <p>{String(index + 2).padStart(2, '0')}</p>
+                </div>
+                <a href={`/blog/${post.id}/`} class="title-link" lang={post.data.lang}>
+                  <h3 class="article-title">{post.data.title}</h3>
+                </a>
+                {post.data.description && <p class="article-description" lang={post.data.lang}>{post.data.description}</p>}
+                <p class="article-date micro-label text-muted">{fullDate(post.data.pubDate, post.data.lang)}</p>
+              </div>
+            </article>
+          );
+        })
+      }
+    </div>
+
+    <footer class="section-footer">
+      <p class="micro-label text-muted">Six recent columns · Updated as published</p>
+      <p class="micro-label text-muted"><span lang="ja">改善</span> · Mexico City</p>
+    </footer>
+  </div>
+</section>
+
+<style>
+  .section-header {
+    display: grid;
+    gap: 2rem;
+    margin-bottom: clamp(3rem, 7vw, 5rem);
+  }
+
+  .section-title {
+    max-width: 10ch;
+    margin-top: 0.8rem;
+    font-family: var(--font-serif);
+    font-size: clamp(2.8rem, 7vw, 5.75rem);
+    font-weight: 500;
+    line-height: 0.94;
+    letter-spacing: -0.055em;
+    text-wrap: balance;
+  }
+
+  .section-intro {
+    align-self: end;
+    max-width: 31rem;
+    color: var(--color-muted);
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .all-posts-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-top: 1.25rem;
+    color: var(--color-ink);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .all-posts-link span {
+    color: var(--color-signal-deep);
+    font-size: 1rem;
+    transition: transform 180ms ease;
+  }
+
+  .all-posts-link:hover span {
+    transform: translate(0.15rem, -0.15rem);
+  }
+
+  .lead-card {
+    display: grid;
+    border-top: 1px solid var(--color-ink);
+    border-bottom: 1px solid var(--color-ink);
+  }
+
+  .lead-cover {
+    grid-column: 1 / -1;
+    aspect-ratio: 16 / 7;
+    overflow: hidden;
+    border-bottom: 1px solid var(--color-ink);
+    background: var(--color-paper);
+  }
+
+  .lead-cover :global(img) {
+    filter: saturate(0.88) contrast(0.98);
+    transition: filter 240ms ease, transform 500ms ease;
+  }
+
+  .lead-card:hover .lead-cover :global(img) {
+    filter: saturate(1) contrast(1);
+    transform: scale(1.008);
+  }
+
+  .lead-main,
+  .lead-aside {
+    min-width: 0;
+    padding-block: clamp(2.5rem, 6vw, 4.5rem);
+  }
+
+  .article-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    color: var(--color-signal-deep);
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    line-height: 1.5;
+    text-transform: uppercase;
+  }
+
+  .lead-title {
+    max-width: 13ch;
+    margin-top: 1.5rem;
+    font-family: var(--font-serif);
+    font-size: clamp(3rem, 7vw, 5.9rem);
+    font-weight: 520;
+    line-height: 0.92;
+    letter-spacing: -0.058em;
+    text-wrap: balance;
+  }
+
+  .lead-description {
+    max-width: 47rem;
+    margin-top: 1.75rem;
+    color: var(--color-muted);
+    font-family: var(--font-serif);
+    font-size: clamp(1.15rem, 2vw, 1.45rem);
+    font-style: italic;
+    line-height: 1.55;
+  }
+
+  .lead-number {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid var(--color-hairline);
+    color: var(--color-muted);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+  }
+
+  .signal-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 999px;
+    background: var(--color-signal);
+  }
+
+  .lead-excerpt {
+    margin-top: 1.5rem;
+    color: color-mix(in srgb, var(--color-ink) 88%, transparent);
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    line-height: 1.75;
+  }
+
+  .lead-footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .title-link {
+    display: block;
+  }
+
+  .title-link h3 {
+    transition: color 180ms ease;
+  }
+
+  .title-link:hover h3 {
+    color: var(--color-signal-deep);
+  }
+
+  .article-grid {
+    display: grid;
+    border-bottom: 1px solid var(--color-ink);
+  }
+
+  .article-card {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    border-bottom: 1px solid var(--color-hairline);
+  }
+
+  .article-card-body {
+    display: flex;
+    min-height: 22rem;
+    flex: 1;
+    flex-direction: column;
+    padding-block: 2.25rem;
+  }
+
+  .article-title {
+    max-width: 19ch;
+    margin-top: 1.2rem;
+    font-family: var(--font-serif);
+    font-size: clamp(1.75rem, 4.8vw, 2.6rem);
+    font-weight: 520;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    text-wrap: balance;
+  }
+
+  .article-description {
+    max-width: 48ch;
+    margin-top: 1.1rem;
+    color: var(--color-muted);
+    font-size: 0.92rem;
+    line-height: 1.65;
+  }
+
+  .article-date {
+    margin-top: auto;
+    padding-top: 2rem;
+  }
+
+  .article-cover {
+    height: 17rem;
+    overflow: hidden;
+    border-bottom: 1px solid var(--color-hairline);
+    background: var(--color-paper);
+  }
+
+  .article-cover :global(img) {
+    filter: grayscale(0.95) contrast(0.92);
+    transition: filter 240ms ease, transform 420ms ease;
+  }
+
+  .article-card:hover .article-cover :global(img) {
+    filter: grayscale(0.2) contrast(0.96);
+    transform: scale(1.015);
+  }
+
+  .section-footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .section-header {
+      grid-template-columns: minmax(0, 1.2fr) minmax(18rem, 0.8fr);
+      align-items: end;
+    }
+
+    .lead-card {
+      grid-template-columns: minmax(0, 1.65fr) minmax(18rem, 0.7fr);
+    }
+
+    .lead-main {
+      padding-right: clamp(2.5rem, 6vw, 5.5rem);
+    }
+
+    .lead-aside {
+      padding-left: clamp(2rem, 4vw, 3.5rem);
+      border-left: 1px solid var(--color-hairline);
+    }
+
+    .article-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .article-card:nth-child(odd) {
+      padding-right: 2rem;
+      border-right: 1px solid var(--color-hairline);
+    }
+
+    .article-card:nth-child(even) {
+      padding-left: 2rem;
+    }
+
+    .article-card:last-child {
+      grid-column: span 2;
+      padding-right: 0;
+      padding-left: 0;
+      border-right: 0;
+    }
+
+    .article-card:last-child .article-card-body {
+      min-height: 18rem;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .lead-cover {
+      aspect-ratio: 4 / 3;
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .article-grid {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+    }
+
+    .article-card,
+    .article-card:nth-child(odd),
+    .article-card:nth-child(even),
+    .article-card:last-child {
+      grid-column: auto;
+      padding-right: 2rem;
+      padding-left: 2rem;
+      border-right: 1px solid var(--color-hairline);
+    }
+
+    .article-card:nth-child(1) {
+      grid-column: span 7;
+      padding-left: 0;
+    }
+
+    .article-card:nth-child(2) {
+      grid-column: span 5;
+      padding-right: 0;
+      border-right: 0;
+    }
+
+    .article-card:nth-child(3),
+    .article-card:nth-child(4),
+    .article-card:nth-child(5) {
+      grid-column: span 4;
+    }
+
+    .article-card:nth-child(3) {
+      padding-left: 0;
+    }
+
+    .article-card:nth-child(5) {
+      padding-right: 0;
+      border-right: 0;
+    }
+
+    .article-card:nth-child(1) .article-title,
+    .article-card:nth-child(2) .article-title {
+      font-size: clamp(2.25rem, 3vw, 3.15rem);
+    }
+
+    .article-card-body {
+      min-height: 25rem;
+    }
+  }
+</style>

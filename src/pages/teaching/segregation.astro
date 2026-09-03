@@ -1,0 +1,493 @@
+---
+import Base from '../../layouts/Base.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import { CDMX_BOUNDARY_CREDIT } from '../../data/cdmx-alcaldias';
+---
+
+<Base
+  title="The segregated city — León Palafox"
+  description="Schelling's model of segregation: everyone only wants a few neighbors like them, yet the whole city separates into homogeneous clusters."
+>
+  <section class="border-b border-hairline px-6 py-14 sm:px-10 lg:px-14 lg:py-20">
+    <p class="micro-label flex items-center gap-3 text-signal-deep">
+      <span>Interactive</span>
+      <span lang="ja" class="tracking-[0.2em] text-muted">分離</span>
+    </p>
+    <h1 class="mt-5 max-w-3xl text-4xl font-semibold leading-[1.02] tracking-[-0.02em] sm:text-5xl lg:text-6xl">
+      The segregated city
+    </h1>
+    <span aria-hidden="true" class="mt-6 block h-[3px] w-14 bg-signal"></span>
+    <p class="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
+      Drawn as Mexico City's census blocks — its AGEBs — this is Schelling's model: nobody demands a homogeneous
+      neighborhood, each resident only wants a few neighbors like them, and still the city sorts itself into large
+      segregated districts.
+    </p>
+  </section>
+
+  <section class="border-b border-hairline px-4 py-8 sm:px-10 sm:py-12 lg:px-14">
+    <div data-seg class="seg-lab mx-auto max-w-6xl" role="group" aria-label="Interactive Schelling segregation model">
+      <div class="seg-lab__masthead">
+        <div>
+          <p class="micro-label text-signal-deep">Urban pattern laboratory · 01</p>
+          <p class="mt-1 text-sm text-muted">Schematic AGEB topology, Ciudad de México</p>
+        </div>
+        <div class="seg-status" aria-live="polite">
+          <span data-seg-status-dot class="seg-status__dot"></span>
+          <span data-seg-status>Running</span>
+        </div>
+      </div>
+
+      <div class="seg-lab__workspace">
+        <figure class="seg-map-frame min-w-0">
+          <div data-seg-stage class="seg-map-stage">
+            <canvas data-seg-canvas class="block h-auto w-full" aria-label="Schematic map of residential groups across Mexico City census areas"></canvas>
+            <div class="seg-map__north" aria-hidden="true">
+              <span>N</span>
+              <span class="seg-map__north-arrow"></span>
+            </div>
+            <p class="seg-map__place micro-label" aria-hidden="true">19.43° N · 99.13° W</p>
+            <div class="seg-map__caption" aria-hidden="true">
+              <span class="micro-label">CDMX</span>
+              <span>AGEB schematic</span>
+            </div>
+          </div>
+          <figcaption class="seg-map-key">
+            <span><i class="seg-key seg-key--a"></i>Group A</span>
+            <span><i class="seg-key seg-key--b"></i>Group B</span>
+            <span><i class="seg-key seg-key--vacant"></i>Vacant</span>
+            <span class="seg-map-key__note" title={CDMX_BOUNDARY_CREDIT}>Boundary: INEGI MG 2020 · simulated cells</span>
+          </figcaption>
+        </figure>
+
+        <aside class="seg-console">
+          <div class="seg-console__heading">
+            <p class="micro-label text-muted">Live census</p>
+            <p class="mt-1 text-sm">One move can alter an entire boundary.</p>
+          </div>
+
+          <dl class="seg-metrics">
+            <div class="seg-metric seg-metric--primary">
+              <dt>Unhappy</dt>
+              <dd data-seg-unhappy aria-live="polite">0</dd>
+            </div>
+            <div class="seg-metric">
+              <dt>Segregation</dt>
+              <dd data-seg-mix>50%</dd>
+            </div>
+            <div class="seg-metric">
+              <dt>Step</dt>
+              <dd data-seg-step>0</dd>
+            </div>
+          </dl>
+
+          <div class="seg-actions">
+            <button data-seg-run type="button" aria-pressed="true" class="seg-button seg-button--primary">Pause</button>
+            <button data-seg-step-button type="button" class="seg-button">Step</button>
+            <button data-seg-reshuffle type="button" class="seg-button">Reshuffle</button>
+          </div>
+
+          <label class="seg-control">
+            <span class="seg-control__label">
+              <span>Like-neighbor threshold</span>
+              <strong data-seg-threshold-val>3</strong>
+            </span>
+            <input data-seg-threshold type="range" min="0" max="8" step="1" value="3" />
+            <span class="seg-control__scale" aria-hidden="true"><i>0</i><i>4</i><i>8</i></span>
+            <span class="seg-control__help">How many of the eight adjacent areas must match.</span>
+          </label>
+
+          <label class="seg-control">
+            <span class="seg-control__label">
+              <span>Vacant lots</span>
+              <strong data-seg-vacant-val>20%</strong>
+            </span>
+            <input data-seg-vacant type="range" min="0.05" max="0.5" step="0.01" value="0.2" />
+            <span class="seg-control__scale" aria-hidden="true"><i>5%</i><i>25%</i><i>50%</i></span>
+            <span class="seg-control__help">Available areas residents can move into.</span>
+          </label>
+
+          <p class="seg-console__note">
+            The alcaldía boundary is official; the cells and residents are simulated.
+          </p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-b border-hairline px-6 py-14 sm:px-10 lg:px-14">
+    <SectionHeading title="What you are looking at" />
+    <div class="mt-8 grid gap-10 lg:grid-cols-3">
+      <div>
+        <p class="micro-label text-signal-deep">The map</p>
+        <p class="mt-3 text-sm leading-relaxed">
+          Charcoal and red residents on an irregular mosaic of blocks, like the census blocks (AGEBs) that tile Mexico
+          City, with some left vacant. This is Thomas Schelling's 1971 model — the simplest machine that still produces
+          segregated districts.
+        </p>
+      </div>
+      <div>
+        <p class="micro-label text-signal-deep">The one rule</p>
+        <p class="mt-3 text-sm leading-relaxed">
+          Each resident is content only if at least <em>n</em> of their immediate neighbors look like them; below that
+          they move to a vacant lot. That is the entire model — no group dislike, no landlord, no policy.
+        </p>
+      </div>
+      <div>
+        <p class="micro-label text-signal-deep">The surprise</p>
+        <p class="mt-3 text-sm leading-relaxed">
+          Set the threshold to a mild 3 and run it. Weak, tolerant preferences compound across many small moves into a
+          city that is almost fully separated. The Segregation readout climbs past 90% while nobody ever asked for that.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-6 py-14 sm:px-10 lg:px-14">
+    <SectionHeading title="Things worth trying" />
+    <ul class="mt-8 max-w-2xl space-y-4 text-sm leading-relaxed">
+      <li class="flex gap-3">
+        <span aria-hidden="true" class="mt-[0.6em] size-1 shrink-0 rounded-full bg-signal"></span>
+        <span><strong>Threshold 3, then run.</strong> Mild preference, hard separation. Watch the Unhappy counter fall as the board sorts itself.</span>
+      </li>
+      <li class="flex gap-3">
+        <span aria-hidden="true" class="mt-[0.6em] size-1 shrink-0 rounded-full bg-signal"></span>
+        <span><strong>Lower it to 1.</strong> Even "I just want one neighbor like me" is enough to start clustering — segregation does not require prejudice, only a mild comfort with sameness.</span>
+      </li>
+      <li class="flex gap-3">
+        <span aria-hidden="true" class="mt-[0.6em] size-1 shrink-0 rounded-full bg-signal"></span>
+        <span><strong>Crank it to 8.</strong> Everyone demands all eight neighbors look like them. The city never settles — it churns forever, because perfect homogeneity is unsatisfiable wherever a vacant lot exists.</span>
+      </li>
+      <li class="flex gap-3">
+        <span aria-hidden="true" class="mt-[0.6em] size-1 shrink-0 rounded-full bg-signal"></span>
+        <span><strong>Change the vacancy rate.</strong> More vacant lots let the city sort faster and more completely; fewer vacant lots freeze more mixing in place.</span>
+      </li>
+      <li class="flex gap-3">
+        <span aria-hidden="true" class="mt-[0.6em] size-1 shrink-0 rounded-full bg-signal"></span>
+        <span><strong>Pause and step by hand.</strong> Each step moves every unhappy resident once; watch the boundary between the two groups sharpen.</span>
+      </li>
+    </ul>
+
+    <a href="/teaching/" class="group micro-label mt-12 inline-flex items-center gap-2 text-signal-deep hover:text-signal">
+      <span aria-hidden="true" class="transition-transform group-hover:-translate-x-1">←</span>
+      Teaching
+    </a>
+  </section>
+</Base>
+
+<style>
+  .seg-lab {
+    min-width: 0;
+    border: 1px solid var(--color-hairline);
+    background: #eeebe3;
+    box-shadow: 0 22px 60px rgb(20 20 18 / 8%);
+  }
+
+  .seg-lab__masthead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    border-bottom: 1px solid #cfc9bc;
+    padding: 1rem 1.1rem;
+    background: rgb(255 255 255 / 42%);
+  }
+
+  .seg-status {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    gap: 0.55rem;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .seg-status__dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 999px;
+    background: var(--color-signal);
+    box-shadow: 0 0 0 4px rgb(226 55 27 / 12%);
+  }
+
+  .seg-status__dot[data-paused='true'] {
+    background: #77736b;
+    box-shadow: none;
+  }
+
+  .seg-lab__workspace {
+    display: grid;
+    min-width: 0;
+  }
+
+  .seg-map-frame {
+    padding: clamp(0.55rem, 2vw, 1.25rem);
+  }
+
+  .seg-map-stage {
+    position: relative;
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid #c5bfb2;
+    background: #ded9cd;
+  }
+
+  .seg-map__north {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    display: grid;
+    justify-items: center;
+    gap: 0.2rem;
+    color: #343330;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+  }
+
+  .seg-map__north-arrow {
+    width: 0;
+    height: 0;
+    border-right: 4px solid transparent;
+    border-bottom: 16px solid #343330;
+    border-left: 4px solid transparent;
+  }
+
+  .seg-map__place {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    color: rgb(52 51 48 / 70%);
+  }
+
+  .seg-map__caption {
+    position: absolute;
+    bottom: 0.9rem;
+    left: 1rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.65rem;
+    color: #343330;
+    font-size: 0.7rem;
+  }
+
+  .seg-map__caption .micro-label {
+    color: var(--color-signal-deep);
+  }
+
+  .seg-map-key {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.65rem 1rem;
+    padding: 0.85rem 0.2rem 0;
+    color: #5f5b54;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .seg-map-key > span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .seg-key {
+    display: inline-block;
+    width: 0.72rem;
+    height: 0.72rem;
+    border: 1px solid rgb(20 20 18 / 20%);
+  }
+
+  .seg-key--a { background: #243130; }
+  .seg-key--b { background: #de3b22; }
+  .seg-key--vacant { background: #f6f3eb; }
+
+  .seg-map-key__note {
+    margin-left: auto;
+    color: #858078;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  .seg-console {
+    min-width: 0;
+    border-top: 1px solid #cfc9bc;
+    padding: 1.25rem;
+    background: #f7f4ec;
+  }
+
+  .seg-console__heading {
+    padding-bottom: 1.1rem;
+    border-bottom: 1px solid #d8d2c6;
+  }
+
+  .seg-metrics {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 0.75fr;
+    margin-top: 1rem;
+    border: 1px solid #d2ccc0;
+  }
+
+  .seg-metric {
+    min-width: 0;
+    padding: 0.8rem;
+    border-left: 1px solid #d2ccc0;
+  }
+
+  .seg-metric:first-child { border-left: 0; }
+
+  .seg-metric dt {
+    color: #77736b;
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .seg-metric dd {
+    margin-top: 0.35rem;
+    font-family: var(--font-mono);
+    font-size: clamp(1.05rem, 3vw, 1.4rem);
+    line-height: 1;
+  }
+
+  .seg-metric--primary dd { color: var(--color-signal-deep); }
+
+  .seg-actions {
+    display: grid;
+    grid-template-columns: 1.1fr 0.8fr 1.15fr;
+    gap: 0.45rem;
+    margin-top: 1rem;
+  }
+
+  .seg-button {
+    min-width: 0;
+    border: 1px solid #bdb7aa;
+    padding: 0.72rem 0.45rem;
+    background: transparent;
+    font-family: var(--font-mono);
+    font-size: 0.59rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: border-color 160ms ease, background 160ms ease, color 160ms ease;
+  }
+
+  .seg-button:hover { border-color: var(--color-ink); }
+
+  .seg-button--primary {
+    border-color: #243130;
+    background: #243130;
+    color: #fffdf7;
+  }
+
+  .seg-button--primary:hover {
+    border-color: var(--color-signal-deep);
+    background: var(--color-signal-deep);
+  }
+
+  .seg-control {
+    display: block;
+    margin-top: 1.4rem;
+  }
+
+  .seg-control__label {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .seg-control__label strong {
+    color: var(--color-signal-deep);
+    font-size: 0.75rem;
+  }
+
+  .seg-control input[type='range'] {
+    width: 100%;
+    margin-top: 0.8rem;
+    accent-color: var(--color-signal);
+  }
+
+  .seg-control__scale {
+    display: flex;
+    justify-content: space-between;
+    color: #928d84;
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+  }
+
+  .seg-control__scale i { font-style: normal; }
+
+  .seg-control__help {
+    display: block;
+    margin-top: 0.45rem;
+    color: #716d65;
+    font-size: 0.72rem;
+    line-height: 1.45;
+  }
+
+  .seg-console__note {
+    margin-top: 1.5rem;
+    border-left: 2px solid var(--color-signal);
+    padding-left: 0.75rem;
+    color: #716d65;
+    font-size: 0.7rem;
+    line-height: 1.5;
+  }
+
+  @media (min-width: 900px) {
+    .seg-lab__workspace {
+      grid-template-columns: minmax(0, 1fr) 19rem;
+    }
+
+    .seg-console {
+      border-top: 0;
+      border-left: 1px solid #cfc9bc;
+    }
+
+    .seg-metrics {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .seg-metric:last-child {
+      grid-column: 1 / -1;
+      border-top: 1px solid #d2ccc0;
+      border-left: 0;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .seg-lab__masthead {
+      align-items: flex-start;
+      padding: 0.85rem;
+    }
+
+    .seg-lab__masthead .micro-label { font-size: 0.55rem; letter-spacing: 0.14em; }
+    .seg-lab__masthead p.mt-1 { font-size: 0.72rem; }
+    .seg-status { margin-top: 0.15rem; font-size: 0.55rem; }
+    .seg-map-frame { padding: 0.45rem; }
+    .seg-map__place { display: none; }
+    .seg-map__north { top: 0.7rem; left: 0.7rem; }
+    .seg-map__caption { bottom: 0.65rem; left: 0.7rem; }
+    .seg-map-key { padding-inline: 0.2rem; font-size: 0.56rem; }
+    .seg-map-key__note { width: 100%; margin-left: 0; }
+    .seg-console { padding: 1rem; }
+  }
+</style>
+
+<script>
+  import { mountSegregation } from '../../scripts/segregation';
+
+  const root = document.querySelector<HTMLElement>('[data-seg]');
+  if (root) mountSegregation(root);
+</script>
