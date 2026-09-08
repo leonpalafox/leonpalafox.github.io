@@ -1,0 +1,32 @@
+---
+interface Props {
+  items: { name: string; href: string }[];
+  lang: string;
+}
+
+const { items, lang } = Astro.props;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: items.map((item, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: item.name,
+    item: new URL(item.href, Astro.site).toString(),
+  })),
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd).replace(/</g, '\\u003c')} />
+<nav aria-label={lang === 'es' ? 'Ruta de navegación' : 'Breadcrumb'} class="border-b border-hairline px-6 py-3 text-sm text-muted sm:px-10 lg:px-14">
+  <ol class="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+    {items.map((item, index) => (
+      <li class="inline-flex min-w-0 items-baseline gap-2">
+        {index > 0 && <span aria-hidden="true">/</span>}
+        {index === items.length - 1
+          ? <span aria-current="page">{item.name}</span>
+          : <a href={item.href} class="underline underline-offset-4 hover:text-signal-deep">{item.name}</a>}
+      </li>
+    ))}
+  </ol>
+</nav>

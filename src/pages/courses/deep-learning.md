@@ -24,22 +24,18 @@ A comprehensive journey through the foundations and state-of-the-art of Deep Neu
 | 7 | Pretrained language models: BERT, GPT |
 | 8 | Generative models: VAEs and GANs |
 
-*(Replace this table with the actual schedule once finalized.)*
+*Provisional syllabus. The session schedule will be posted once finalized.*
 
 ## Materials
 
-- **Slides:**
-- **Notebooks:**
-- **Readings:**
+Slides, notebooks, and readings have not yet been posted.
 
 ## Assessment
 
-- Homework:
-- Project:
-- Final exam:
+Assessment details and grading weights have not yet been posted.
 
 ## Schedule & Office Hours
 
-- **Lectures:**
-- **Office hours:**
-- **Contact:**
+Lecture times and office hours have not yet been posted.
+
+**Contact:** [León Palafox](mailto:leon.palafox@gmail.com)

@@ -7,7 +7,7 @@ tags: ["mexico", "machine learning"]
 ---
 Como lo mencione en la entrada pasada, este fin de semana asistí al [RIIAA](https://riiaa.org/). Fue un evento donde asistieron multiples ponentes de lugares tan prominentes como Facebook y Deepmind. Y también fueron muchos investigadores y personas relacionadas al mundo de IA en México. Es la primera vez que tengo tanta exposición a un evento de este tipo en México y como en todo, tengo muy buenas y malas experiencias que contar:
 
-### Lo bueno.
+## Lo bueno.
 
 _Siempre que se externa una opinión acerca de algo, es mejor empezar con lo mejor._
 
@@ -17,7 +17,7 @@ Las dinámicas para socializar fueron bastante buenas, y pude platicar con mucha
 
 Pude conocer más de lo que se está haciendo y más de las personas involucradas en el ecosistema.
 
-### Lo malo
+## Lo malo
 
 Algunos de los ponentes no dieron platicas realmente innovadoras o creativas, en particular dos ponentes de muy alta alcurnia (no diré nombres), dieron sus pláticas de stack que siempre manejan. Los académicos en particular se redujeron a dar sus pláticas académicas, sin tener en cuenta la energía de la audiencia o la gran oportunidad que era tener este cuarto lleno de gente, entusiasmada por la IA, lo cual va de la mano con mi mayor crítica.
 

@@ -25,12 +25,18 @@ const personId = new URL('#person', Astro.site).toString();
 const blogPostingJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
+  '@id': new URL(`/blog/${post.id}/#article`, Astro.site).toString(),
   headline: title,
   description: description ?? title,
   datePublished: pubDate.toISOString(),
   inLanguage: lang === 'es' ? 'es-MX' : 'en-US',
-  author: { '@id': personId },
-  publisher: { '@type': 'Organization', name: 'León Palafox', url: Astro.site.toString() },
+  author: {
+    '@type': 'Person',
+    '@id': personId,
+    name: 'León Palafox',
+    url: new URL('/about/', Astro.site).toString(),
+  },
+  publisher: { '@id': personId },
   mainEntityOfPage: new URL(`/blog/${post.id}/`, Astro.site).toString(),
   image: new URL(ogImage ?? '/images/og-default.jpg', Astro.site).toString(),
   wordCount: post.body ? post.body.trim().split(/\s+/).length : undefined,
@@ -41,10 +47,19 @@ const t = {
   en: { back: 'All posts', original: 'Originally published in' },
 }[lang];
 const translationLabel = translation?.label ?? (translation?.lang === 'en' ? 'Read in English' : 'Leer en español');
+const related = (await getCollection('blog'))
+  .filter((candidate) => candidate.id !== post.id && candidate.data.lang === lang)
+  .map((candidate) => ({
+    post: candidate,
+    overlap: candidate.data.tags.filter((tag) => tags.includes(tag)).length,
+  }))
+  .sort((a, b) => b.overlap - a.overlap || b.post.data.pubDate.valueOf() - a.post.data.pubDate.valueOf())
+  .slice(0, 3)
+  .map(({ post }) => post);
 ---
 
-<Base title={`${title} — León Palafox`} description={description ?? title} lang={lang} ogImage={ogImage}>
-  <script type="application/ld+json" set:html={JSON.stringify(blogPostingJsonLd)} />
+<Base title={`${title} — León Palafox`} description={description ?? title} lang={lang} ogImage={ogImage} ogType="article" publishedTime={pubDate.toISOString()}>
+  <script type="application/ld+json" set:html={JSON.stringify(blogPostingJsonLd).replace(/</g, '\\u003c')} />
   <article class="px-6 py-14 sm:px-10 lg:px-14 lg:py-20">
     <header class="mx-auto max-w-2xl">
       <p class="micro-label flex items-center gap-3 text-signal-deep">
@@ -55,6 +70,10 @@ const translationLabel = translation?.label ?? (translation?.lang === 'en' ? 'Re
         {title}
       </h1>
       <span aria-hidden="true" class="mt-6 block h-[3px] w-14 bg-signal"></span>
+      <p class="mt-5 text-sm text-muted">
+        {lang === 'es' ? 'Por' : 'By'}{' '}
+        <a href="/about/" rel="author" class="text-signal-deep underline underline-offset-4">León Palafox</a>
+      </p>
       {
         tags.length > 0 && (
           <ul class="mt-6 flex flex-wrap gap-2">
@@ -73,6 +92,16 @@ const translationLabel = translation?.label ?? (translation?.lang === 'en' ? 'Re
     </div>
 
     <footer class="mx-auto mt-16 max-w-2xl border-t border-hairline pt-8">
+      {related.length > 0 && (
+        <section aria-labelledby="related-title" class="mb-8">
+          <h2 id="related-title" class="text-lg font-semibold">{lang === 'es' ? 'Seguir leyendo' : 'More to read'}</h2>
+          <ul class="mt-4 space-y-3">
+            {related.map((candidate) => (
+              <li><a href={`/blog/${candidate.id}/`} class="text-signal-deep underline underline-offset-4">{candidate.data.title}</a></li>
+            ))}
+          </ul>
+        </section>
+      )}
       {
         (source || translation) && (
           <ul class="mb-8 space-y-3">
@@ -95,7 +124,7 @@ const translationLabel = translation?.label ?? (translation?.lang === 'en' ? 'Re
             {source && (
               <li class="micro-label text-muted">
                 {t.original}{' '}
-                <a href={source} class="text-signal-deep hover:text-signal">
+                <a href={source} class="text-signal-deep underline underline-offset-4 hover:text-signal-deep">
                   {sourceName ?? new URL(source).hostname.replace(/^www\./, '')}
                 </a>
               </li>

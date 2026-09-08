@@ -4,7 +4,7 @@ import SectionHeading from '../../components/SectionHeading.astro';
 ---
 
 <Base
-  title="The jumping rope — León Palafox"
+  title="Interactive Regression Uncertainty — León Palafox"
   description="An interactive picture of regression uncertainty: a rope pinned at the observations thrashes where the data leaves it free, and settles as points are added."
 >
   <section class="border-b border-hairline px-6 py-14 sm:px-10 lg:px-14 lg:py-20">
@@ -30,8 +30,11 @@ import SectionHeading from '../../components/SectionHeading.astro';
       role="group"
       aria-label="Interactive regression uncertainty visualisation"
     >
-      <div class="relative aspect-[16/10] w-full border border-hairline bg-paper sm:aspect-[16/9]">
-        <canvas data-rope-canvas class="block size-full cursor-crosshair touch-manipulation"></canvas>
+      <p data-rope-error hidden role="status" class="mb-4 border border-hairline bg-paper p-4 text-sm">
+        The interactive view could not start. It needs a browser with WebGL enabled. Try reloading or using another browser; the explanation below is still available.
+      </p>
+      <div data-rope-stage class="relative aspect-[16/10] w-full border border-hairline bg-paper sm:aspect-[16/9]">
+        <canvas data-rope-canvas aria-label="Regression curve and uncertainty band. Use Add observation below to pin points without a pointer." class="block size-full cursor-crosshair touch-manipulation"></canvas>
 
         <p class="micro-label pointer-events-none absolute bottom-3 left-4 text-muted">Click the panel to pin a point</p>
 
@@ -199,5 +202,15 @@ import SectionHeading from '../../components/SectionHeading.astro';
   import { mountRopeScene } from '../../scripts/rope-scene';
 
   const root = document.querySelector<HTMLElement>('[data-rope]');
-  if (root) mountRopeScene(root);
+  if (root) {
+    try {
+      mountRopeScene(root);
+    } catch {
+      root.querySelector<HTMLElement>('[data-rope-error]')!.hidden = false;
+      root.querySelector<HTMLElement>('[data-rope-stage]')!.hidden = true;
+      root.querySelectorAll<HTMLButtonElement | HTMLInputElement>('button, input').forEach((control) => {
+        control.disabled = true;
+      });
+    }
+  }
 </script>

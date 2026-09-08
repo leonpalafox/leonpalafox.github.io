@@ -5,7 +5,7 @@ import { CDMX_BOUNDARY_CREDIT } from '../../data/cdmx-alcaldias';
 ---
 
 <Base
-  title="The segregated city — León Palafox"
+  title="Interactive Schelling Segregation Model — León Palafox"
   description="Schelling's model of segregation: everyone only wants a few neighbors like them, yet the whole city separates into homogeneous clusters."
 >
   <section class="border-b border-hairline px-6 py-14 sm:px-10 lg:px-14 lg:py-20">
@@ -37,6 +37,9 @@ import { CDMX_BOUNDARY_CREDIT } from '../../data/cdmx-alcaldias';
         </div>
       </div>
 
+      <noscript>
+        <p class="border-b border-hairline p-4 text-sm">This simulation needs JavaScript. Residents move when too few neighbors match their group; repeated moves can produce segregated clusters. Read the explanation below for more detail.</p>
+      </noscript>
       <div class="seg-lab__workspace">
         <figure class="seg-map-frame min-w-0">
           <div data-seg-stage class="seg-map-stage">
@@ -59,7 +62,7 @@ import { CDMX_BOUNDARY_CREDIT } from '../../data/cdmx-alcaldias';
           </figcaption>
         </figure>
 
-        <aside class="seg-console">
+        <div class="seg-console">
           <div class="seg-console__heading">
             <p class="micro-label text-muted">Live census</p>
             <p class="mt-1 text-sm">One move can alter an entire boundary.</p>
@@ -68,7 +71,7 @@ import { CDMX_BOUNDARY_CREDIT } from '../../data/cdmx-alcaldias';
           <dl class="seg-metrics">
             <div class="seg-metric seg-metric--primary">
               <dt>Unhappy</dt>
-              <dd data-seg-unhappy aria-live="polite">0</dd>
+              <dd data-seg-unhappy>0</dd>
             </div>
             <div class="seg-metric">
               <dt>Segregation</dt>
@@ -109,7 +112,7 @@ import { CDMX_BOUNDARY_CREDIT } from '../../data/cdmx-alcaldias';
           <p class="seg-console__note">
             The alcaldía boundary is official; the cells and residents are simulated.
           </p>
-        </aside>
+        </div>
       </div>
     </div>
   </section>
@@ -310,7 +313,7 @@ import { CDMX_BOUNDARY_CREDIT } from '../../data/cdmx-alcaldias';
 
   .seg-map-key__note {
     margin-left: auto;
-    color: #858078;
+    color: var(--color-muted);
     letter-spacing: 0;
     text-transform: none;
   }
@@ -343,7 +346,7 @@ import { CDMX_BOUNDARY_CREDIT } from '../../data/cdmx-alcaldias';
   .seg-metric:first-child { border-left: 0; }
 
   .seg-metric dt {
-    color: #77736b;
+    color: var(--color-muted);
     font-family: var(--font-mono);
     font-size: 0.58rem;
     letter-spacing: 0.12em;
@@ -421,7 +424,7 @@ import { CDMX_BOUNDARY_CREDIT } from '../../data/cdmx-alcaldias';
   .seg-control__scale {
     display: flex;
     justify-content: space-between;
-    color: #928d84;
+    color: var(--color-muted);
     font-family: var(--font-mono);
     font-size: 0.55rem;
   }

@@ -177,12 +177,10 @@ Bias/variance review, bootstrap aggregating, out-of-bag error, feature subsampli
 
 ## Assessment
 
-- Homework:
-- Project:
-- Final exam:
+Assessment details and grading weights have not yet been posted.
 
 ## Schedule & Office Hours
 
-- **Lectures:**
-- **Office hours:**
-- **Contact:**
+Lecture times and office hours have not yet been posted.
+
+**Contact:** [León Palafox](mailto:leon.palafox@gmail.com)

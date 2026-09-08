@@ -29,6 +29,6 @@ Una vez hechos estos análisis y modelos, podemos mostrar que la nueva bebida re
 
 De esta manera sistematizada y ordenada se deben de abordar los proyectos de Ciencias de Datos, no para garantizar que siempre se van a obtener resultados positivos, sino para garantizar que va a existir un aprendizaje institucional, y las decisiones se basarán en los datos. Así evitaremos repetir errores, y garantizar que la creación de valor fue dada de forma racional y no por suerte o casualidad.
 
-# Inteligencias Artificiales Peligrosas
+## Inteligencias Artificiales Peligrosas
 
 Estas semanas que pasaron, las acciones de la tienda Gamestop se incrementaron de manera vertiginosa. Mucho de esto se debió al accionar de usuarios de internet, pero también hubo una gran cantidad de algoritmos de Inteligencia Artificial que compraron la acción de manera automatizada y rápida para obtener ganancias para sus fondos de inversión.

@@ -3,7 +3,7 @@ const KANJI_DIGITS = ['〇', '一', '二', '三', '四', '五', '六', '七', '�
 /** 2026 → 二〇二六年, matching the vertical date treatment in the identity mockup. */
 export function kanjiYear(date: Date): string {
   return (
-    String(date.getFullYear())
+    String(date.getUTCFullYear())
       .split('')
       .map((d) => KANJI_DIGITS[Number(d)])
       .join('') + '年'

@@ -27,6 +27,6 @@ En mi opinión debemos tener un justo medio, donde el diseñador trate de usar d
 
 Al final del día, los modelos de IA no hacen más que replicar el mundo que existe ahí afuera y está en nosotros tratar de crear un mundo mejor.
 
-# Noticas éticas
+## Noticias éticas
 
 Google AI, la rama dedicada a la inteligencia artificial en Google está siendo fuertemente atacada por su decisión de terminar sus relaciones laborales con dos expertas en el campo de IA y Ética. Dicha decisión pone en evidencia que hoy en día, aún en algunas de las empresas más importantes de la tecnología, el tema de la ética en IA no se ha resuelto y requiere constante trabajo.

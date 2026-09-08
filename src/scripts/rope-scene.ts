@@ -228,6 +228,7 @@ export function mountRopeScene(root: HTMLElement): () => void {
   let targetX = 0;
   let targetY = 0;
   stage.addEventListener('pointermove', (ev) => {
+    if (reduceMotion) return;
     const r = stage.getBoundingClientRect();
     targetX = ((ev.clientX - r.left) / r.width - 0.5) * 0.55;
     targetY = ((ev.clientY - r.top) / r.height - 0.5) * -0.35;
