@@ -36,7 +36,11 @@ for (const slug of oldPostSlugs) {
 export default defineConfig({
   site: 'https://www.leonpalafox.com',
   redirects,
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      customPages: ['https://www.leonpalafox.com/pisa_results/'],
+    }),
+  ],
   vite: {
     plugins: [tailwindcss()],
   },
