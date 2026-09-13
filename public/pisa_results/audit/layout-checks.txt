@@ -1,0 +1,85 @@
+{
+  width: 320,
+  scrollWidth: 305,
+  mode: 'CSS1Compat',
+  rows: 91,
+  stats: 'OECD AVERAGE-35\n' +
+    '−2.8\n' +
+    'Not significant · 2022 to 2025\n' +
+    'ROSE\n' +
+    '16\n' +
+    'systems with a significant gain\n' +
+    'FELL\n' +
+    '11\n' +
+    'systems with a significant drop\n' +
+    'NOT SIGNIFICANT\n' +
+    '49\n' +
+    'insufficient evidence of a change\n' +
+    'NO COMPARISON\n' +
+    '15\n' +
+    'unavailable or excluded by OECD guidance'
+}
+{
+  width: 390,
+  scrollWidth: 390,
+  mode: 'CSS1Compat',
+  rows: 91,
+  stats: 'OECD AVERAGE-35\n' +
+    '−2.8\n' +
+    'Not significant · 2022 to 2025\n' +
+    'ROSE\n' +
+    '16\n' +
+    'systems with a significant gain\n' +
+    'FELL\n' +
+    '11\n' +
+    'systems with a significant drop\n' +
+    'NOT SIGNIFICANT\n' +
+    '49\n' +
+    'insufficient evidence of a change\n' +
+    'NO COMPARISON\n' +
+    '15\n' +
+    'unavailable or excluded by OECD guidance'
+}
+{
+  width: 768,
+  scrollWidth: 753,
+  mode: 'CSS1Compat',
+  rows: 91,
+  stats: 'OECD AVERAGE-35\n' +
+    '−2.8\n' +
+    'Not significant · 2022 to 2025\n' +
+    'ROSE\n' +
+    '16\n' +
+    'systems with a significant gain\n' +
+    'FELL\n' +
+    '11\n' +
+    'systems with a significant drop\n' +
+    'NOT SIGNIFICANT\n' +
+    '49\n' +
+    'insufficient evidence of a change\n' +
+    'NO COMPARISON\n' +
+    '15\n' +
+    'unavailable or excluded by OECD guidance'
+}
+{
+  width: 1440,
+  scrollWidth: 1425,
+  mode: 'CSS1Compat',
+  rows: 91,
+  stats: 'OECD AVERAGE-35\n' +
+    '−2.8\n' +
+    'Not significant · 2022 to 2025\n' +
+    'ROSE\n' +
+    '16\n' +
+    'systems with a significant gain\n' +
+    'FELL\n' +
+    '11\n' +
+    'systems with a significant drop\n' +
+    'NOT SIGNIFICANT\n' +
+    '49\n' +
+    'insufficient evidence of a change\n' +
+    'NO COMPARISON\n' +
+    '15\n' +
+    'unavailable or excluded by OECD guidance'
+}
+errors []

@@ -1,0 +1,92 @@
+{
+  "results": [
+    {
+      "per": "s",
+      "dom": "sci",
+      "sigOnly": false,
+      "status": "PASS"
+    },
+    {
+      "per": "s",
+      "dom": "sci",
+      "sigOnly": true,
+      "status": "PASS"
+    },
+    {
+      "per": "s",
+      "dom": "read",
+      "sigOnly": false,
+      "status": "PASS"
+    },
+    {
+      "per": "s",
+      "dom": "read",
+      "sigOnly": true,
+      "status": "PASS"
+    },
+    {
+      "per": "s",
+      "dom": "math",
+      "sigOnly": false,
+      "status": "PASS"
+    },
+    {
+      "per": "s",
+      "dom": "math",
+      "sigOnly": true,
+      "status": "PASS"
+    },
+    {
+      "per": "d",
+      "dom": "sci",
+      "sigOnly": false,
+      "status": "PASS"
+    },
+    {
+      "per": "d",
+      "dom": "sci",
+      "sigOnly": true,
+      "status": "PASS"
+    },
+    {
+      "per": "d",
+      "dom": "read",
+      "sigOnly": false,
+      "status": "PASS"
+    },
+    {
+      "per": "d",
+      "dom": "read",
+      "sigOnly": true,
+      "status": "PASS"
+    },
+    {
+      "per": "d",
+      "dom": "math",
+      "sigOnly": false,
+      "status": "PASS"
+    },
+    {
+      "per": "d",
+      "dom": "math",
+      "sigOnly": true,
+      "status": "PASS"
+    },
+    {
+      "theme": "light",
+      "accessibility": []
+    },
+    {
+      "theme": "dark",
+      "accessibility": []
+    }
+  ],
+  "interaction": {
+    "last": "Uzbekistan",
+    "zoom": "translate(-290.00,-126.00) scale(1.500)",
+    "reset": "translate(0.00,0.00) scale(1.000)",
+    "tip": "Ukrainian regions (17 of 27)No comparable resultMathematics 2025431.0Covers 17 of Ukraine’s 27 regions (wartime sample).",
+    "hidden": true
+  },
+  "errors": []
+}

@@ -1,0 +1,27 @@
+{
+  "ch2.xlsx": {
+    "url": "https://stat.link/xgs41b",
+    "sha256": "745b87d5fade4c7502a6fe788ec8f50e67f2922e7caeda6d72a749bf758e196e",
+    "retrieved": "2026-09-08"
+  },
+  "annex.xlsx": {
+    "url": "https://stat.link/mrq53f",
+    "sha256": "14e958538fc68dc4bf25b47ad11c4f3f90035873aa96616925e5cea0af242fb8",
+    "retrieved": "2026-09-08"
+  },
+  "report.pdf": {
+    "url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2026/09/pisa-2025-results-volume-i_5265bfb1/73451bc5-en.pdf",
+    "sha256": "77db30721a90b2f7f66da85f904b82c60a7d92686cac4920618647f990a64ae1",
+    "retrieved": "2026-09-08"
+  },
+  "w50.json": {
+    "url": "https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-50m.json",
+    "sha256": "04342cdc1e3016bcd7db1630de95684d67b79fe3c8c460321e87aef469502394",
+    "retrieved": "2026-09-08"
+  },
+  "pisa.txt": {
+    "url": "Derived from report.pdf with pdftotext -layout",
+    "sha256": "30137e20598dccb0c3c98d7aa4daeb72b035795af3d662f8ff24872d8a99c43a",
+    "retrieved": "2026-09-08"
+  }
+}

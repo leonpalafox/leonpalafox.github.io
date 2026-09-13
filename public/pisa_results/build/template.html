@@ -1,0 +1,866 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Explore PISA 2025 score changes, OECD decennial trends, and uncertainty using verified OECD tables.">
+<title>PISA 2025 Score Shifts</title>
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<link rel="preconnect" href="https://www.google-analytics.com">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-M9BV46V3PD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-M9BV46V3PD');
+</script>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&display=swap">
+<style>
+:root{
+  color-scheme: light;
+  --plane:#f2f4f7; --surface:#fbfbfc; --surface-2:#eef0f4;
+  --ink:#111419; --ink-2:#565c66; --ink-3:#858b96;
+  --rule:#dfe3e9; --rule-strong:#c6ccd6;
+  --accent:#2a78d6; --accent-ink:#1c5cab;
+  --up-1:#6da7ec; --up-2:#2a78d6; --up-3:#184f95;
+  --dn-1:#e78476; --dn-2:#c64a3d; --dn-3:#8c2920;
+  --mid:#cdccc3; --nodata:#e9ecf1; --coast:#fbfbfc;
+  --hatch:rgba(17,20,25,.34);
+  --shadow:0 1px 2px rgba(17,20,25,.05), 0 8px 24px -16px rgba(17,20,25,.30);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+    --plane:#0e1014; --surface:#171a1f; --surface-2:#1e222a;
+    --ink:#f3f5f8; --ink-2:#b2b9c4; --ink-3:#848b97;
+    --rule:#2a2f38; --rule-strong:#3b424e;
+    --accent:#3987e5; --accent-ink:#86b6ef;
+    --up-1:#256abf; --up-2:#3987e5; --up-3:#86b6ef;
+    --dn-1:#b43c31; --dn-2:#d6594b; --dn-3:#ec998d;
+    --mid:#565b62; --nodata:#272c34; --coast:#171a1f;
+    --hatch:rgba(243,245,248,.34);
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px -18px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --plane:#0e1014; --surface:#171a1f; --surface-2:#1e222a;
+  --ink:#f3f5f8; --ink-2:#b2b9c4; --ink-3:#848b97;
+  --rule:#2a2f38; --rule-strong:#3b424e;
+  --accent:#3987e5; --accent-ink:#86b6ef;
+  --up-1:#256abf; --up-2:#3987e5; --up-3:#86b6ef;
+  --dn-1:#b43c31; --dn-2:#d6594b; --dn-3:#ec998d;
+  --mid:#565b62; --nodata:#272c34; --coast:#171a1f;
+  --hatch:rgba(243,245,248,.34);
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px -18px rgba(0,0,0,.8);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--plane); color:var(--ink);
+  font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:15px; line-height:1.55; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1180px; margin:0 auto; padding:28px 20px 72px; display:flex; flex-direction:column; gap:26px}
+a{color:var(--accent-ink)}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:3px}
+.skip{position:absolute; left:-9999px; top:8px; background:var(--surface); padding:8px 14px; border:1px solid var(--rule); z-index:20}
+.skip:focus{left:20px}
+
+/* ---------- header ---------- */
+.eyebrow{
+  margin:0 0 10px; font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:11.5px;
+  letter-spacing:.13em; text-transform:uppercase; color:var(--ink-3);
+}
+h1{
+  margin:0; font-family:"IBM Plex Serif",Georgia,serif; font-weight:600;
+  font-size:clamp(30px,4.4vw,50px); line-height:1.06; letter-spacing:-.018em; text-wrap:balance;
+}
+.stand{margin:14px 0 0; max-width:62ch; font-size:16.5px; color:var(--ink-2)}
+.stand strong{color:var(--ink); font-weight:600}
+
+/* ---------- controls ---------- */
+.controls{
+  display:flex; flex-wrap:wrap; align-items:flex-end; gap:18px 26px;
+  padding:16px 18px; background:var(--surface); border:1px solid var(--rule);
+  border-radius:4px; box-shadow:var(--shadow);
+}
+.field{display:flex; flex-direction:column; gap:7px}
+.field > .lbl{
+  font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:10.5px; letter-spacing:.13em;
+  text-transform:uppercase; color:var(--ink-3);
+}
+.seg{display:flex; border:1px solid var(--rule-strong); border-radius:3px; overflow:hidden}
+.seg input{position:absolute; opacity:0; width:1px; height:1px}
+.seg label{
+  padding:7px 15px; font-size:14px; cursor:pointer; color:var(--ink-2); background:var(--surface);
+  border-right:1px solid var(--rule); user-select:none; white-space:nowrap;
+}
+.seg label:last-of-type{border-right:0}
+.seg label:hover{background:var(--surface-2); color:var(--ink)}
+.seg input:checked + label{background:var(--ink); color:var(--surface); font-weight:500}
+.seg input:focus-visible + label{outline:2px solid var(--accent); outline-offset:-2px}
+.check{display:flex; align-items:center; gap:9px; font-size:14px; color:var(--ink-2); cursor:pointer; padding-bottom:7px}
+.check input{width:16px; height:16px; accent-color:var(--accent)}
+
+/* ---------- stat strip ---------- */
+.stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px}
+.tile{
+  background:var(--surface); border:1px solid var(--rule); border-radius:4px;
+  padding:15px 16px 16px; display:flex; flex-direction:column; gap:4px; box-shadow:var(--shadow);
+}
+.tile .k{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:10.5px; letter-spacing:.11em; text-transform:uppercase; color:var(--ink-3)}
+.tile .v{font-size:34px; line-height:1.05; font-weight:600; letter-spacing:-.02em; font-variant-numeric:tabular-nums}
+.tile .s{font-size:13px; color:var(--ink-2)}
+.tile .v.up{color:var(--up-3)} .tile .v.dn{color:var(--dn-3)}
+
+/* ---------- map ---------- */
+figure{margin:0}
+.mapcard{background:var(--surface); border:1px solid var(--rule); border-radius:4px; box-shadow:var(--shadow); overflow:hidden}
+.maphead{display:flex; flex-wrap:wrap; gap:6px 18px; align-items:baseline; justify-content:space-between; padding:15px 18px 12px; border-bottom:1px solid var(--rule)}
+.maphead h2{margin:0; font-size:16px; font-weight:600; letter-spacing:-.01em}
+.maphead .sub{font-size:13px; color:var(--ink-2)}
+.mapbox{position:relative; background:var(--surface)}
+svg.map{display:block; width:100%; height:auto; touch-action:none; cursor:grab}
+svg.map.dragging{cursor:grabbing}
+.geo{fill:var(--nodata); stroke:var(--coast); stroke-width:.5; vector-effect:non-scaling-stroke}
+.geo.part{cursor:pointer}
+.geo.part:hover, .geo.hl{stroke:var(--ink); stroke-width:1.4}
+.geo.part:focus-visible{stroke:var(--ink); stroke-width:2; outline:none}
+.mk{stroke:var(--ink); stroke-width:1; vector-effect:non-scaling-stroke; cursor:pointer}
+.mk.hl, .mk:hover{stroke-width:2.2}
+.hatch-ov{pointer-events:none; stroke:none}
+.zoomctl{position:absolute; right:12px; top:12px; display:flex; flex-direction:column; gap:5px}
+.zoomctl button{
+  width:30px; height:30px; border:1px solid var(--rule-strong); background:var(--surface); color:var(--ink);
+  border-radius:3px; font-size:15px; line-height:1; cursor:pointer; font-family:inherit;
+}
+.zoomctl button:hover{background:var(--surface-2)}
+.tip{
+  position:absolute; pointer-events:none; opacity:0; transform:translate(-50%,-100%);
+  background:var(--ink); color:var(--surface); padding:9px 12px 10px; border-radius:4px;
+  font-size:13px; line-height:1.4; min-width:180px; max-width:270px; z-index:5;
+  box-shadow:0 8px 24px -10px rgba(0,0,0,.5); transition:opacity .1s linear;
+}
+.tip.on{opacity:1}
+.tip .n{font-weight:600; font-size:13.5px; margin-bottom:6px}
+.tip .big{font-size:22px; font-weight:600; letter-spacing:-.01em; font-variant-numeric:tabular-nums; display:flex; align-items:baseline; gap:7px}
+.tip .big em{font-style:normal; font-size:12px; font-weight:400; opacity:.75}
+.tip .row{display:flex; justify-content:space-between; gap:14px; font-variant-numeric:tabular-nums; opacity:.85}
+.tip .note{margin-top:7px; padding-top:6px; border-top:1px solid rgba(255,255,255,.18); font-size:11.5px; opacity:.78}
+:root[data-theme="dark"] .tip .note{border-top-color:rgba(0,0,0,.28)}
+
+/* ---------- legend ---------- */
+.legend{display:flex; flex-wrap:wrap; gap:18px 28px; align-items:flex-end; padding:14px 18px 16px; border-top:1px solid var(--rule)}
+.scale{display:flex; flex-direction:column; gap:6px}
+.scale .lbl{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:10.5px; letter-spacing:.11em; text-transform:uppercase; color:var(--ink-3)}
+.ramp{display:flex; width:392px; max-width:100%}
+.ramp .sw{flex:1; height:14px}
+.ticks{position:relative; height:14px; width:392px; max-width:100%;
+  font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:10.5px; color:var(--ink-2); font-variant-numeric:tabular-nums}
+.ticks span{position:absolute; top:0; transform:translateX(-50%); white-space:nowrap}
+.scale .ends{display:flex; justify-content:space-between; width:392px; max-width:100%;
+  font-size:11.5px; color:var(--ink-3)}
+.keys{display:flex; flex-direction:column; gap:6px; font-size:12.5px; color:var(--ink-2)}
+.keys div{display:flex; align-items:center; gap:8px}
+.keys i{width:18px; height:14px; display:inline-block; border:1px solid var(--rule-strong)}
+
+/* ---------- movers ---------- */
+.movers{display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:14px}
+.panel{background:var(--surface); border:1px solid var(--rule); border-radius:4px; box-shadow:var(--shadow); padding:16px 18px 18px}
+.panel h3{margin:0 0 2px; font-size:15px; font-weight:600}
+.panel .cap{margin:0 0 12px; font-size:12.5px; color:var(--ink-3)}
+.mlist{display:flex; flex-direction:column; gap:2px}
+.mrow{display:grid; grid-template-columns:minmax(96px,1.1fr) 1fr 52px; align-items:center; gap:10px; padding:3px 4px; border-radius:3px}
+.mrow:hover{background:var(--surface-2)}
+.mrow .nm{font-size:13px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.mrow .track{display:flex; height:9px}
+.mrow .track.neg{justify-content:flex-end}
+.mrow .bar{display:block; height:9px; border-radius:0 2px 2px 0}
+.mrow .bar.neg{border-radius:2px 0 0 2px}
+.mrow .val{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:12.5px; text-align:right; font-variant-numeric:tabular-nums; color:var(--ink-2)}
+.mrow.ns .nm, .mrow.ns .val{color:var(--ink-3)}
+
+/* ---------- table ---------- */
+.tablecard{background:var(--surface); border:1px solid var(--rule); border-radius:4px; box-shadow:var(--shadow); overflow:hidden}
+.tablehead{display:flex; flex-wrap:wrap; gap:6px 18px; align-items:baseline; justify-content:space-between; padding:15px 18px 13px; border-bottom:1px solid var(--rule)}
+.tablehead h2{margin:0; font-size:16px; font-weight:600}
+.tablehead .sub{font-size:13px; color:var(--ink-2)}
+.tscroll{overflow-x:auto; max-height:560px; overflow-y:auto}
+table{border-collapse:collapse; width:100%; font-size:13px}
+th,td{padding:7px 12px; text-align:right; white-space:nowrap; border-bottom:1px solid var(--rule)}
+th:first-child, td:first-child{text-align:left; position:sticky; left:0; background:var(--surface)}
+thead th{
+  position:sticky; top:0; z-index:2; background:var(--surface); border-bottom:1px solid var(--rule-strong);
+  font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--ink-3); font-weight:500;
+}
+thead th:first-child{z-index:3}
+th button{all:unset; cursor:pointer; display:inline-flex; align-items:center; gap:5px; font:inherit; color:inherit}
+th button:hover{color:var(--ink)}
+th[aria-sort] button{color:var(--ink)}
+td{font-variant-numeric:tabular-nums; color:var(--ink-2)}
+td.name{color:var(--ink); font-variant-numeric:normal}
+tbody tr:hover td, tbody tr:hover td:first-child{background:var(--surface-2)}
+.chip{display:inline-flex; align-items:center; gap:6px; justify-content:flex-end; min-width:62px}
+.chip b{font-weight:500; font-variant-numeric:tabular-nums}
+.dot{width:9px; height:9px; border-radius:2px; flex:none}
+.ns{color:var(--ink-3)}
+.flag{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:10px; color:var(--ink-3); margin-left:5px}
+
+/* ---------- notes ---------- */
+.notes{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:8px 34px; font-size:12.5px; color:var(--ink-2)}
+.notes > p{grid-column:1/-1}
+.notes h3{grid-column:1/-1; margin:0 0 2px; font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:10.5px; letter-spacing:.13em; text-transform:uppercase; color:var(--ink-3); font-weight:500}
+.notes p{margin:0 0 8px}
+hr.rule{border:0; border-top:1px solid var(--rule); margin:0}
+@media (prefers-reduced-motion:reduce){*{transition:none !important; animation:none !important}}
+@media (max-width:640px){
+  .mrow{grid-template-columns:minmax(80px,1fr) 1fr 46px}
+  .tile .v{font-size:28px}
+}
+/* Audit fixes: readable labels, responsive controls, and keyboard/touch access. */
+:root{--ink-3:#626976}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--ink-3:#a8b0bd}}
+:root[data-theme="dark"]{--ink-3:#a8b0bd}
+.wrap > *{min-width:0}
+.scale{width:min(392px,100%)}
+.ramp,.ticks,.scale .ends{width:100%}
+.movers{grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr))}
+.stats{grid-template-columns:repeat(auto-fit,minmax(min(180px,100%),1fr))}
+svg.map{touch-action:pan-y}
+.seg label{min-height:44px;display:flex;align-items:center}
+.zoomctl button{width:40px;height:40px}
+.coverage{margin:0 18px 14px;color:var(--ink-2);font-size:13px}
+.legend-detail{width:100%;font-size:12px;color:var(--ink-2)}
+.ns-tag{font-size:10px;margin-left:4px}
+.mrow .nm{white-space:normal;line-height:1.3}
+@media(max-width:640px){
+ .wrap{padding:20px 14px 40px;gap:18px}
+ .controls{padding:14px;gap:14px;width:100%}
+ .field{max-width:100%;width:100%}
+ .seg{flex-wrap:wrap}
+ .seg label{padding:8px 10px;flex:1;justify-content:center;font-size:13px}
+ .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .stats .tile:first-child{grid-column:1/-1}
+ .tile{padding:12px}
+ .legend{padding:14px;gap:16px}
+ .notes{grid-template-columns:1fr}
+ .zoomctl{right:6px;top:6px}
+ .zoomctl button{width:32px;height:32px}
+ td:first-child,th:first-child{max-width:150px;white-space:normal;min-width:120px}
+ .maphead .sub{max-width:34ch}
+}
+</style>
+</head>
+<body>
+<noscript><p>This interactive view requires JavaScript. <a href="build/pisa_data.json">Download the data and source references</a>.</p></noscript>
+
+<a class="skip" href="#table">Skip the map, go to the data table</a>
+
+<main class="wrap">
+  <header>
+    <p class="eyebrow">OECD PISA 2025 &middot; released 8 September 2026</p>
+    <h1>Where 15-year-olds gained ground, and where they lost it</h1>
+    <p class="stand">PISA 2025 tested about 760&nbsp;000 students across 91 education systems. Each nationally covered system is shaded by how far its mean score <strong>moved</strong> &mdash; blue for a rise, red for a fall &mdash; against the previous cycle, or across the past decade. These are changes in system averages, not the progress of the same students. Score levels appear in the table below.</p>
+  </header>
+
+  <div class="controls">
+    <div class="field">
+      <span class="lbl" id="lbl-domain">Subject</span>
+      <div class="seg" role="group" aria-labelledby="lbl-domain">
+        <input type="radio" name="domain" id="d-sci" value="sci" checked><label for="d-sci">Science</label>
+        <input type="radio" name="domain" id="d-read" value="read"><label for="d-read">Reading</label>
+        <input type="radio" name="domain" id="d-math" value="math"><label for="d-math">Mathematics</label>
+      </div>
+    </div>
+    <div class="field">
+      <span class="lbl" id="lbl-period">Change measured</span>
+      <div class="seg" role="group" aria-labelledby="lbl-period">
+        <input type="radio" name="period" id="p-s" value="s" checked><label for="p-s">2022 &rarr; 2025</label>
+        <input type="radio" name="period" id="p-d" value="d"><label for="p-d">Decade trend, 2015&ndash;2025</label>
+      </div>
+    </div>
+    <label class="check"><input type="checkbox" id="sigonly"> Highlight statistically significant changes</label>
+  </div>
+
+  <section class="stats" id="stats" aria-live="polite"></section>
+
+  <figure class="mapcard">
+    <div class="maphead">
+      <h2 id="map-title">Science, change from PISA 2022 to PISA 2025</h2>
+      <span class="sub" id="map-sub">Score points. Use + / − to zoom; drag with a mouse to pan.</span>
+    </div>
+    <div class="mapbox">
+      <svg class="map" id="map" role="group" aria-labelledby="map-title" aria-describedby="map-desc"></svg>
+      <p id="map-desc" hidden>Choropleth world map. Every value shown here is also listed in the data table below.</p>
+      <div class="tip" id="tip" role="status" aria-live="polite"></div>
+      <div class="zoomctl">
+        <button type="button" id="zin" aria-label="Zoom in">+</button>
+        <button type="button" id="zout" aria-label="Zoom out">&minus;</button>
+        <button type="button" id="zreset" aria-label="Reset the view" title="Reset">&#8634;</button>
+      </div>
+    </div>
+    <figcaption class="legend">
+      <div class="scale">
+        <span class="lbl">Score-point change</span>
+        <div class="ramp">
+          <span class="sw" style="background:var(--dn-3)"></span>
+          <span class="sw" style="background:var(--dn-2)"></span>
+          <span class="sw" style="background:var(--dn-1)"></span>
+          <span class="sw" style="background:var(--mid)"></span>
+          <span class="sw" style="background:var(--up-1)"></span>
+          <span class="sw" style="background:var(--up-2)"></span>
+          <span class="sw" style="background:var(--up-3)"></span>
+        </div>
+        <div class="ticks" aria-hidden="true">
+          <span style="left:14.28%">&minus;30</span><span style="left:28.57%">&minus;15</span><span style="left:42.86%">&minus;5</span><span style="left:57.14%">+5</span><span style="left:71.43%">+15</span><span style="left:85.71%">+30</span>
+        </div>
+        <div class="ends" aria-hidden="true"><span>Scores fell</span><span>Scores rose</span></div>
+      </div>
+      <div class="keys">
+        <div><i id="key-hatch"></i> <span id="key-hatch-text">Change is not statistically significant</span></div>
+        <div><i style="background:var(--nodata)"></i> No published comparison, excluded, or not participating</div>
+      </div>
+      <div class="legend-detail">Bands: ≤ −30 · (−30, −15] · (−15, −5] · (−5, +5) · [+5, +15) · [+15, +30) · ≥ +30. The middle band means a small estimate, not statistical certainty. Circles locate small systems and regional samples; they do not show the sampled area.</div>
+    </figcaption>
+    <p class="coverage" id="coverage"></p>
+  </figure>
+
+  <section class="movers">
+    <div class="panel">
+      <h3 id="gain-h">Biggest gains</h3>
+      <p class="cap" id="gain-c">Ten largest increases</p>
+      <div class="mlist" id="gainers"></div>
+    </div>
+    <div class="panel">
+      <h3 id="lose-h">Biggest losses</h3>
+      <p class="cap" id="lose-c">Ten largest declines</p>
+      <div class="mlist" id="losers"></div>
+    </div>
+  </section>
+
+  <section class="tablecard" id="table">
+    <div class="tablehead">
+      <h2>Every participating system</h2>
+      <span class="sub" id="table-sub">PISA 2025 means and selected-period changes. Click a column to sort.</span>
+    </div>
+    <div class="tscroll">
+      <table aria-label="PISA means and changes by education system">
+        <thead><tr id="thead-row"></tr></thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section class="notes">
+    <h3>How to read this</h3>
+    <div>
+      <p><strong>2022 &rarr; 2025</strong> is the difference between the two most recent cycles. <strong>Decade trend</strong> is the OECD&rsquo;s average decennial trend: a linear trend fitted across the PISA cycles from 2015 to 2025 and expressed as score points per decade, so it is not simply the 2015&ndash;2025 gap.</p>
+      <p>The OECD flags a change as statistically significant when it is distinguishable from zero at the 95% level. Systems whose change is not significant are hatched on the map and marked “NS” in the table &mdash; a non-significant estimate does not establish that performance was unchanged.</p>
+      <p>Regional samples use locator circles instead of shading their parent country: Beijing, Shanghai, Jiangsu and Zhejiang; 17 of Ukraine’s 27 regions; Dushanbe; and Iraqi Kurdistan. Select or focus a marker for coverage notes. Cyprus covers the area under the effective control of the Republic of Cyprus.</p>
+      <p>An asterisk marks a sampling caution. Albania’s trends are excluded under OECD reporting guidance. Viet Nam’s trends are unavailable after a change in test instruments. Uzbekistan’s reading and mathematics are withheld. Guatemala and Paraguay’s test-mode changes add uncertainty beyond the reported standard errors. See the Reader’s Guide, pp. 16–20.</p>
+    </div>
+    <div>
+      <p><strong>Source.</strong> OECD (2026), <em>PISA 2025 Results (Volume I): Future-Ready Students</em>. Mean scores from Tables I.B1.2a.1–4; changes, trend coefficients and standard errors from Tables I.B1.2a.36–38. Means were cross-checked with Table I.1; chapter-table changes and significance flags were checked against the annex. Comparisons are included separately for each subject.</p>
+      <p><a href="https://www.oecd.org/en/publications/pisa-2025-results-volume-i_73451bc5-en.html">PISA 2025 Results (Volume I)</a> &middot; <a href="https://www.oecd.org/en/data/datasets/pisa-2025-database.html">PISA 2025 Database</a></p>
+      <p><a href="https://stat.link/mrq53f">OECD annex workbook</a> · <a href="https://stat.link/xgs41b">Chapter workbook</a> · <a href="build/pisa_data.json">Download data with cell references</a> · <a href="audit/AUDIT.md">Audit findings</a></p>
+      <p>OECD changes use <strong>OECD average-35</strong>, the published fixed comparison group, rather than subtracting changing-membership OECD averages. “NS” means not statistically significant at 5%. Short-term tests use published difference standard errors; decade tests use published p-values. Displayed confidence intervals are approximate 95% intervals (estimate ± 1.96 × SE). Rankings order point estimates, not statistically established differences between systems.</p>
+      <p>Country outlines: Natural Earth, 1:50m, via world-atlas. Equal Earth projection &mdash; an equal-area world, so no country is inflated by where it sits.</p>
+      <p class="flag" style="margin-left:0">Verified against source files on 8 September 2026; figures rounded to one decimal place. Source snapshots and SHA-256 checksums accompany the build. OECD revisions require a new audit.</p>
+    </div>
+  <p>This is an adaptation of an original work by the OECD. The opinions expressed and arguments employed in this adaptation should not be reported as representing the official views of the OECD or of its Member countries.</p>
+  </section>
+</main>
+
+<script id="pisa-data" type="application/json">__PISA_DATA__</script>
+<script>
+(function(){
+"use strict";
+var DATA = JSON.parse(document.getElementById('pisa-data').textContent);
+var ROWS = DATA.rows, OECD = DATA.oecd, GEO = DATA.geo;
+var DOMAIN_NAME = {sci:'Science', read:'Reading', math:'Mathematics', cps:'Computational problem solving'};
+var PERIOD_NAME = {s:'change from PISA 2022 to PISA 2025', d:'decade trend, 2015\u20132025'};
+
+/* ---------- Equal Earth projection ---------- */
+var A1=1.340264, A2=-0.081106, A3=0.000893, A4=0.003796, S3=Math.sqrt(3);
+function project(lon, lat){
+  var p = lat*Math.PI/180, l = lon*Math.PI/180;
+  var t = Math.asin(Math.max(-1,Math.min(1, S3/2*Math.sin(p))));
+  var t2=t*t, t6=t2*t2*t2, t8=t6*t2;
+  var dy = A1 + 3*A2*t2 + 7*A3*t6 + 9*A4*t8;
+  return [2*S3*l*Math.cos(t)/(3*dy), t*(A1 + A2*t2 + A3*t6 + A4*t8)];
+}
+var LAT_TOP = 83.5, LAT_BOT = -57;
+/* Equal Earth is widest at the equator and tallest on the central meridian */
+var X0 = project(-180, 0)[0], X1 = project(180, 0)[0];
+var Y0 = project(0, LAT_TOP)[1], Y1 = project(0, LAT_BOT)[1];
+var VW = 1160, VH = Math.round(VW * (Y0 - Y1) / (X1 - X0));
+function sx(x){ return (x - X0) / (X1 - X0) * VW; }
+function sy(y){ return (Y0 - y) / (Y0 - Y1) * VH; }
+
+/* ---------- build paths once ---------- */
+var svg = document.getElementById('map');
+svg.setAttribute('viewBox', '0 0 ' + VW + ' ' + VH);
+var NS = 'http://www.w3.org/2000/svg';
+function el(n, attrs){ var e = document.createElementNS(NS, n); for(var k in attrs) e.setAttribute(k, attrs[k]); return e; }
+
+var defs = el('defs');
+var pat = el('pattern', {id:'hatch', width:7, height:7, patternUnits:'userSpaceOnUse', patternTransform:'rotate(45)'});
+pat.appendChild(el('rect', {width:7, height:7, fill:'none'}));
+pat.appendChild(el('line', {x1:0, y1:0, x2:0, y2:7, stroke:'var(--hatch)', 'stroke-width':1.1}));
+defs.appendChild(pat);
+var clip = el('clipPath', {id:'frame'});
+clip.appendChild(el('rect', {x:0, y:0, width:VW, height:VH}));
+defs.appendChild(clip);
+svg.appendChild(defs);
+document.getElementById('key-hatch').style.background =
+  'repeating-linear-gradient(45deg, var(--nodata) 0 2px, var(--ink-3) 2px 3.4px)';
+
+var zoomG = el('g', {'clip-path':'url(#frame)'});
+var panG = el('g');
+zoomG.appendChild(panG);
+svg.appendChild(zoomG);
+
+function pathFor(polys){
+  var d = [], i, j, k, ring, p;
+  for(i=0;i<polys.length;i++) for(j=0;j<polys[i].length;j++){
+    ring = polys[i][j];
+    if(ring.length < 3) continue;
+    for(k=0;k<ring.length;k++){
+      p = project(ring[k][0], ring[k][1]);
+      d.push((k ? 'L' : 'M') + sx(p[0]).toFixed(1) + ' ' + sy(p[1]).toFixed(1));
+    }
+    d.push('Z');
+  }
+  return d.join('');
+}
+function bboxOf(polys){
+  var mnx=1e9, mny=1e9, mxx=-1e9, mxy=-1e9, best=0, cx=0, cy=0;
+  for(var i=0;i<polys.length;i++){
+    var ring = polys[i][0], a=0, x0=1e9, y0=1e9, x1=-1e9, y1=-1e9;
+    for(var k=0;k<ring.length;k++){
+      var p = project(ring[k][0], ring[k][1]), X = sx(p[0]), Y = sy(p[1]);
+      if(X<x0)x0=X; if(X>x1)x1=X; if(Y<y0)y0=Y; if(Y>y1)y1=Y;
+      if(X<mnx)mnx=X; if(X>mxx)mxx=X; if(Y<mny)mny=Y; if(Y>mxy)mxy=Y;
+    }
+    a = (x1-x0)*(y1-y0);
+    if(a > best){ best = a; cx = (x0+x1)/2; cy = (y0+y1)/2; }
+  }
+  return {w: mxx-mnx, h: mxy-mny, cx: cx, cy: cy};
+}
+
+var byGeo = {};
+ROWS.forEach(function(r){ byGeo[r.geo] = r; });
+var NUDGE = {'Hong Kong':[13,7], 'Macao':[-13,7], 'Singapore':[-2,7], 'Malta':[0,4], 'Brunei':[10,4], 'Mauritius':[6,0], 'Luxembourg':[-7,-4], 'Qatar':[7,3], 'Cyprus':[5,-3], 'Palestine':[-6,-4], 'Lebanon':[-9,-2], 'Kosovo':[-6,2], 'Montenegro':[-9,1], 'Bahrain':[0,0]};
+var LOCATOR = {'China':[118,34], 'Ukraine':[30.5,50.4], 'Tajikistan':[68.8,38.6], 'Iraq':[44,36.2]};
+var nodes = [];   /* {row, path, marker} */
+
+Object.keys(GEO).forEach(function(name){
+  var d = pathFor(GEO[name]);
+  if(!d) return;
+  var row = byGeo[name] || null;
+  var p = el('path', {d:d, 'class':'geo' + (row ? ' part' : '')});
+  if(row){
+    p.setAttribute('tabindex', '0');
+    p.setAttribute('role', 'img');
+  }
+  panG.appendChild(p);
+  var node = {row:row, path:p, marker:null};
+  if(row){
+    var bb = bboxOf(GEO[name]);
+    if(row.partial || Math.max(bb.w, bb.h) < 9){
+      if(row.partial){var loc=LOCATOR[name], point=project(loc[0],loc[1]);bb.cx=sx(point[0]);bb.cy=sy(point[1]);p.removeAttribute('tabindex');p.setAttribute('aria-hidden','true');}
+      var n = NUDGE[name] || [0,0];
+      var c = el('circle', {cx:(bb.cx + n[0]).toFixed(1), cy:(bb.cy + n[1]).toFixed(1), r:4.6, 'class':'mk', tabindex:'0', role:'img'});
+      node.marker = c;
+    }
+    nodes.push(node);
+  }
+});
+nodes.forEach(function(n){ if(n.marker) panG.appendChild(n.marker); });
+
+/* ---------- scale ---------- */
+function binOf(v){
+  if(v === null || v === undefined) return null;
+  if(v >= 30) return 3; if(v >= 15) return 2; if(v >= 5) return 1;
+  if(v > -5) return 0;
+  if(v > -15) return -1; if(v > -30) return -2; return -3;
+}
+var BINCOLOR = {'3':'var(--up-3)','2':'var(--up-2)','1':'var(--up-1)','0':'var(--mid)','-1':'var(--dn-1)','-2':'var(--dn-2)','-3':'var(--dn-3)'};
+function colorFor(v, sig, sigOnly){
+  if(v === null || v === undefined) return 'var(--nodata)';
+  if(sigOnly && !sig) return 'var(--mid)';
+  return BINCOLOR[String(binOf(v))];
+}
+function fmt(v){ return (v > 0 ? '+' : v < 0 ? '\u2212' : '') + Math.abs(v).toFixed(1); }
+function change(row, dom, per){
+  var c = row[per] && row[per][dom];
+  return c ? {v:row.evidence[dom][per].value, sig:c[1]} : null;
+}
+
+/* ---------- state ---------- */
+var state = {dom:'sci', per:'s', sigOnly:false, sort:{key:'sci', dir:-1}};
+
+/* ---------- render: map ---------- */
+var overlays = [];
+function renderMap(){
+  overlays.forEach(function(o){ o.remove(); });
+  overlays = [];
+  nodes.forEach(function(n){
+    var c = change(n.row, state.dom, state.per);
+    var v = c ? c.v : null, sig = c ? c.sig : false;
+    var fill = colorFor(v, sig, state.sigOnly);
+    n.path.style.fill = n.row.partial ? 'var(--nodata)' : fill;
+    if(n.marker) n.marker.style.fill = fill;
+    var label = n.row.name + ': ' + (c ? fmt(v) + ' score points' + (sig ? '' : ', not statistically significant') : 'no comparable result');
+    n.path.setAttribute('aria-label', label);
+    if(n.marker) n.marker.setAttribute('aria-label', label);
+    if(c && !sig && !state.sigOnly){
+      var o = el('path', {d:n.path.getAttribute('d'), 'class':'geo hatch-ov', fill:'url(#hatch)'});
+      o.style.fill = 'url(#hatch)';
+      o.style.stroke = 'none';
+      if(!n.row.partial){panG.appendChild(o);overlays.push(o);}
+      if(n.marker){
+        var om = el('circle', {cx:n.marker.getAttribute('cx'), cy:n.marker.getAttribute('cy'), r:4.6, 'class':'hatch-ov'});
+        om.style.fill = 'url(#hatch)';
+        panG.appendChild(om);
+        overlays.push(om);
+      }
+    }
+  });
+}
+
+
+/* ---------- tooltip ---------- */
+var tip = document.getElementById('tip'), mapbox = svg.parentNode;
+function tipHTML(row){
+  tip.textContent = '';
+  var nm = document.createElement('div'); nm.className = 'n';
+  nm.textContent = row.name + (row.caution ? ' *' : '');
+  tip.appendChild(nm);
+  var c = change(row, state.dom, state.per);
+  var big = document.createElement('div'); big.className = 'big';
+  var strong = document.createElement('span');
+  if(c){
+    strong.textContent = fmt(c.v);
+    var em = document.createElement('em');
+    em.textContent = c.sig ? 'score points' : 'points, not significant';
+    big.appendChild(strong); big.appendChild(em);
+  }else{
+    strong.style.fontSize = '14px';
+    strong.style.fontWeight = '400';
+    strong.textContent = 'No comparable result';
+    big.appendChild(strong);
+  }
+  tip.appendChild(big);
+  var sub = document.createElement('div');
+  sub.className = 'row';
+  sub.style.marginTop = '6px';
+  var a = document.createElement('span'); a.textContent = DOMAIN_NAME[state.dom] + ' 2025';
+  var b = document.createElement('span'); b.textContent = row.m[state.dom] == null ? '\u2014' : Number(row.m[state.dom]).toFixed(1);
+  sub.appendChild(a); sub.appendChild(b);
+  tip.appendChild(sub);
+  if(c){
+    var e = row.evidence[state.dom][state.per];
+    var ci = document.createElement('div'); ci.className = 'note';
+    ci.textContent = 'Approx. 95% interval: ' + fmt(e.value - 1.96 * e.se) + ' to ' + fmt(e.value + 1.96 * e.se) + '. ' + (c.sig ? 'Significant at 5%.' : 'Not significant at 5%.');
+    tip.appendChild(ci);
+  }
+  var note = [row.partial, row.caution, row.note].filter(Boolean).join(' ');
+  if(note){
+    var nd = document.createElement('div'); nd.className = 'note'; nd.textContent = note;
+    tip.appendChild(nd);
+  }
+}
+function showTip(row, cx, cy){
+  tipHTML(row);
+  tip.classList.add('on');
+  var w = mapbox.clientWidth;
+  var half = tip.offsetWidth / 2;
+  var x = Math.max(half + 6, Math.min(w - half - 6, cx));
+  tip.style.left = x + 'px';
+  tip.style.top = Math.max(tip.offsetHeight + 6, cy - 12) + 'px';
+}
+function hideTip(){ tip.classList.remove('on'); }
+
+function bindHover(n){
+  function at(ev){
+    var r = mapbox.getBoundingClientRect();
+    showTip(n.row, ev.clientX - r.left, ev.clientY - r.top);
+    highlight(n.row.name);
+  }
+  [n.row.partial ? null : n.path, n.marker].forEach(function(t){
+    if(!t) return;
+    t.addEventListener('pointermove', at);
+    t.addEventListener('click', at);
+    t.addEventListener('pointerdown', function(ev){if(ev.pointerType === 'touch') at(ev);});
+    t.addEventListener('keydown', function(ev){ if(ev.key === 'Escape'){hideTip();highlight(null);} });
+    t.addEventListener('pointerleave', function(){ hideTip(); highlight(null); });
+    t.addEventListener('focus', function(){
+      var r = mapbox.getBoundingClientRect(), b = t.getBoundingClientRect();
+      showTip(n.row, b.left + b.width/2 - r.left, b.top - r.top);
+      highlight(n.row.name);
+    });
+    t.addEventListener('blur', function(){ hideTip(); highlight(null); });
+  });
+}
+nodes.forEach(bindHover);
+
+var byName = {};
+nodes.forEach(function(n){ byName[n.row.name] = n; });
+function highlight(name){
+  nodes.forEach(function(n){
+    var on = n.row.name === name;
+    n.path.classList.toggle('hl', on);
+    if(n.marker) n.marker.classList.toggle('hl', on);
+  });
+}
+
+/* ---------- zoom & pan ---------- */
+var view = {k:1, x:0, y:0};
+function applyView(){
+  svg.style.touchAction = view.k > 1 ? 'none' : 'pan-y';
+  panG.setAttribute('transform', 'translate(' + view.x.toFixed(2) + ',' + view.y.toFixed(2) + ') scale(' + view.k.toFixed(3) + ')');
+}
+function clampView(){
+  view.k = Math.max(1, Math.min(9, view.k));
+  var minX = VW - VW*view.k, minY = VH - VH*view.k;
+  view.x = Math.max(minX, Math.min(0, view.x));
+  view.y = Math.max(minY, Math.min(0, view.y));
+}
+function zoomAt(f, px, py){
+  var k0 = view.k;
+  view.k = Math.max(1, Math.min(9, view.k * f));
+  var r = view.k / k0;
+  view.x = px - r * (px - view.x);
+  view.y = py - r * (py - view.y);
+  clampView(); applyView();
+}
+function svgPoint(ev){
+  var r = svg.getBoundingClientRect();
+  return [(ev.clientX - r.left) / r.width * VW, (ev.clientY - r.top) / r.height * VH];
+}
+svg.addEventListener('pointerleave', function(){ hideTip(); highlight(null); });
+svg.addEventListener('wheel', function(ev){
+  if(!(ev.ctrlKey || ev.metaKey)) return;   /* plain scrolling still moves the page */
+  ev.preventDefault();
+  var p = svgPoint(ev);
+  zoomAt(ev.deltaY < 0 ? 1.18 : 1/1.18, p[0], p[1]);
+}, {passive:false});
+svg.addEventListener('dblclick', function(ev){
+  var p = svgPoint(ev);
+  zoomAt(ev.shiftKey ? 1/1.8 : 1.8, p[0], p[1]);
+});
+var drag = null;
+svg.addEventListener('pointerdown', function(ev){
+  if(ev.pointerType === 'touch' && view.k === 1) return;
+  drag = {x:ev.clientX, y:ev.clientY, vx:view.x, vy:view.y};
+  svg.classList.add('dragging');
+  svg.setPointerCapture(ev.pointerId);
+});
+svg.addEventListener('pointermove', function(ev){
+  if(!drag) return;
+  var r = svg.getBoundingClientRect();
+  view.x = drag.vx + (ev.clientX - drag.x) / r.width * VW;
+  view.y = drag.vy + (ev.clientY - drag.y) / r.height * VH;
+  clampView(); applyView();
+});
+['pointerup','pointercancel'].forEach(function(t){
+  svg.addEventListener(t, function(ev){ drag = null; svg.classList.remove('dragging'); });
+});
+document.getElementById('zin').onclick = function(){ zoomAt(1.5, VW/2, VH/2); };
+document.getElementById('zout').onclick = function(){ zoomAt(1/1.5, VW/2, VH/2); };
+document.getElementById('zreset').onclick = function(){ view = {k:1, x:0, y:0}; applyView(); };
+
+/* ---------- stats ---------- */
+function renderStats(){
+  var host = document.getElementById('stats');
+  host.textContent = '';
+  var vals = ROWS.map(function(r){ return {r:r, c:change(r, state.dom, state.per)}; }).filter(function(o){ return o.c; });
+  var up = vals.filter(function(o){ return o.c.sig && o.c.v > 0; }).length;
+  var dn = vals.filter(function(o){ return o.c.sig && o.c.v < 0; }).length;
+  var flat = vals.length - up - dn;
+  var oa = OECD[state.per][state.dom];
+  var tiles = [
+    {k:'OECD average-35', v:fmt(oa[0]), s:(oa[1] ? 'Significant · ' : 'Not significant · ') + (state.per === 's' ? '2022 to 2025' : 'points per decade'), cls: !oa[1] ? '' : oa[0] > 0 ? 'up' : 'dn'},
+    {k:'Rose', v:String(up), s:'systems with a significant gain', cls:'up'},
+    {k:'Fell', v:String(dn), s:'systems with a significant drop', cls:'dn'},
+    {k:'Not significant', v:String(flat), s:'insufficient evidence of a change', cls:''},
+    {k:'No comparison', v:String(ROWS.length - vals.length), s:'unavailable or excluded by OECD guidance', cls:''}
+  ];
+  tiles.forEach(function(t){
+    var d = document.createElement('div'); d.className = 'tile';
+    var k = document.createElement('span'); k.className = 'k'; k.textContent = t.k;
+    var v = document.createElement('span'); v.className = 'v ' + t.cls; v.textContent = t.v;
+    var s = document.createElement('span'); s.className = 's'; s.textContent = t.s;
+    d.appendChild(k); d.appendChild(v); d.appendChild(s);
+    host.appendChild(d);
+  });
+}
+
+/* ---------- movers ---------- */
+function renderMovers(){
+  var vals = ROWS.map(function(r){ return {r:r, c:change(r, state.dom, state.per)}; })
+                 .filter(function(o){ return o.c; })
+                 .sort(function(a,b){ return b.c.v - a.c.v; });
+  if(state.sigOnly) vals = vals.filter(function(o){ return o.c.sig; });
+  var top = vals.filter(function(o){return o.c.v > 0;}).slice(0, 10);
+  var bot = vals.filter(function(o){return o.c.v < 0;}).slice(-10).reverse();
+  var mx = Math.max.apply(null, vals.map(function(o){ return Math.abs(o.c.v); }));
+  function fill(hostId, list, neg){
+    var host = document.getElementById(hostId);
+    host.textContent = '';
+    if(!list.length) host.textContent = 'No estimates match this selection.';
+    list.forEach(function(o){
+      var row = document.createElement('div');
+      row.className = 'mrow' + (o.c.sig ? '' : ' ns');
+      var nm = document.createElement('span'); nm.className = 'nm';
+      nm.textContent = o.r.name + (o.r.caution ? ' *' : '') + (o.c.sig ? '' : ' (NS)');
+      row.title = [o.r.partial,o.r.caution,o.r.note].filter(Boolean).join(' ');
+      var track = document.createElement('span');
+      track.className = 'track' + (o.c.v < 0 ? ' neg' : '');
+      var bar = document.createElement('span');
+      bar.className = 'bar' + (o.c.v < 0 ? ' neg' : '');
+      bar.style.width = Math.max(2, Math.abs(o.c.v) / mx * 100) + '%';
+      bar.style.background = colorFor(o.c.v, o.c.sig, state.sigOnly);
+      track.appendChild(bar);
+      var val = document.createElement('span'); val.className = 'val'; val.textContent = fmt(o.c.v);
+      row.appendChild(nm); row.appendChild(track); row.appendChild(val);
+      row.addEventListener('pointerenter', function(){ highlight(o.r.name); });
+      row.addEventListener('pointerleave', function(){ highlight(null); });
+      host.appendChild(row);
+    });
+  }
+  fill('gainers', top, false);
+  fill('losers', bot, true);
+  var per = state.per === 's' ? 'since 2022' : 'per decade since 2015';
+  document.getElementById('gain-c').textContent = 'Up to ten largest ' + (state.sigOnly ? 'significant ' : '') + DOMAIN_NAME[state.dom].toLowerCase() + ' increases, ' + per;
+  document.getElementById('lose-c').textContent = 'Up to ten largest ' + (state.sigOnly ? 'significant ' : '') + DOMAIN_NAME[state.dom].toLowerCase() + ' declines, ' + per;
+}
+
+/* ---------- table ---------- */
+var COLS = [
+  {key:'name', label:'System', type:'name'},
+  {key:'sci', label:'Science 2025', type:'mean'},
+  {key:'read', label:'Reading 2025', type:'mean'},
+  {key:'math', label:'Maths 2025', type:'mean'},
+  {key:'cps', label:'Comp. problem solving', type:'mean'},
+  {key:'c_sci', label:'\u0394 Science', type:'chg', dom:'sci'},
+  {key:'c_read', label:'\u0394 Reading', type:'chg', dom:'read'},
+  {key:'c_math', label:'\u0394 Maths', type:'chg', dom:'math'}
+];
+function sortValue(r, col){
+  if(col.type === 'name') return r.name.toLowerCase();
+  if(col.type === 'mean') return r.m[col.key] == null ? null : r.m[col.key];
+  var c = change(r, col.dom, state.per);
+  return c ? c.v : null;
+}
+function renderTable(){
+  var head = document.getElementById('thead-row');
+  head.textContent = '';
+  COLS.forEach(function(col){
+    var th = document.createElement('th');
+    if(state.sort.key === col.key) th.setAttribute('aria-sort', state.sort.dir === 1 ? 'ascending' : 'descending');
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = (col.type === 'chg' ? (state.per === 's' ? 'Δ ' : 'Trend ') + DOMAIN_NAME[col.dom] : col.label) + (state.sort.key === col.key ? (state.sort.dir === 1 ? ' \u2191' : ' \u2193') : '');
+    b.onclick = function(){
+      if(state.sort.key === col.key) state.sort.dir *= -1;
+      else state.sort = {key:col.key, dir: col.type === 'name' ? 1 : -1};
+      renderTable();
+      head.querySelector('th[aria-sort] button').focus();
+    };
+    th.appendChild(b);
+    head.appendChild(th);
+  });
+  var col = COLS.filter(function(c){ return c.key === state.sort.key; })[0] || COLS[1];
+  var rows = ROWS.slice().sort(function(a,b){
+    var va = sortValue(a, col), vb = sortValue(b, col);
+    if(va === null && vb !== null) return 1;
+    if(vb === null && va !== null) return -1;
+    if(va < vb) return -state.sort.dir;
+    if(va > vb) return state.sort.dir;
+    return a.name.localeCompare(b.name);
+  });
+  var body = document.getElementById('tbody');
+  body.textContent = '';
+  rows.forEach(function(r){
+    var tr = document.createElement('tr');
+    var td = document.createElement('td'); td.className = 'name';
+    td.textContent = r.name;
+    td.title = [r.partial,r.caution,r.note].filter(Boolean).join(' ');
+    if(td.title) td.setAttribute('aria-label', r.name + '. ' + td.title);
+    if(r.caution){ var f = document.createElement('span'); f.className = 'flag'; f.textContent = '*'; td.appendChild(f); }
+    tr.appendChild(td);
+    ['sci','read','math','cps'].forEach(function(k){
+      var c = document.createElement('td');
+      c.textContent = r.m[k] == null ? '\u2014' : Number(r.m[k]).toFixed(1);
+      tr.appendChild(c);
+    });
+    ['sci','read','math'].forEach(function(k){
+      var c = document.createElement('td');
+      var ch = change(r, k, state.per);
+      if(!ch){ c.textContent = '\u2014'; c.className = 'ns'; }
+      else{
+        var wrap = document.createElement('span'); wrap.className = 'chip' + (ch.sig ? '' : ' ns');
+        var dot = document.createElement('span'); dot.className = 'dot';
+        dot.style.background = colorFor(ch.v, ch.sig, state.sigOnly);
+        var b = document.createElement('b'); b.textContent = fmt(ch.v);
+        var ev = r.evidence[k][state.per];
+        c.title = (ch.sig ? 'Significant' : 'Not statistically significant') + '; approximate 95% interval ' + fmt(ev.value - 1.96 * ev.se) + ' to ' + fmt(ev.value + 1.96 * ev.se);
+        c.setAttribute('aria-label', fmt(ch.v) + '. ' + c.title);
+        if(!ch.sig){ var tag = document.createElement('span'); tag.className='ns-tag';tag.textContent='NS'; b.appendChild(tag); }
+        wrap.appendChild(b); wrap.appendChild(dot);
+        c.appendChild(wrap);
+      }
+      tr.appendChild(c);
+    });
+    tr.addEventListener('pointerenter', function(){ highlight(r.name); });
+    tr.addEventListener('pointerleave', function(){ highlight(null); });
+    body.appendChild(tr);
+  });
+}
+
+/* ---------- wiring ---------- */
+function renderAll(){
+  hideTip(); highlight(null);
+  var kh = document.getElementById('key-hatch'), kt = document.getElementById('key-hatch-text');
+  if(state.sigOnly){
+    kh.style.background = 'var(--mid)';
+    kt.textContent = 'Non-significant estimate: color muted, not zero';
+  }else{
+    kh.style.background = 'repeating-linear-gradient(45deg, var(--nodata) 0 2px, var(--ink-3) 2px 3.4px)';
+    kt.textContent = 'Change is not statistically significant';
+  }
+  document.getElementById('map-title').textContent = DOMAIN_NAME[state.dom] + ', ' + PERIOD_NAME[state.per];
+  var available = ROWS.filter(function(r){return change(r,state.dom,state.per);}).length;
+  document.getElementById('coverage').textContent = available + ' of ' + ROWS.length + ' systems have a reported comparison for this subject and period. Missing comparisons are excluded from gain/loss counts and rankings. Rankings compare point estimates.';
+  document.getElementById('table-sub').textContent = 'PISA 2025 means; ' + (state.per === 's' ? 'Δ = 2025 minus 2022, score points.' : 'Trend = fitted score points per decade, 2015–2025 window.') + ' NS = not significant. Click a column to sort.';
+  renderMap(); renderStats(); renderMovers(); renderTable();
+}
+Array.prototype.forEach.call(document.querySelectorAll('input[name="domain"]'), function(i){
+  i.addEventListener('change', function(){ if(i.checked){ state.dom = i.value; renderAll(); } });
+});
+Array.prototype.forEach.call(document.querySelectorAll('input[name="period"]'), function(i){
+  i.addEventListener('change', function(){ if(i.checked){ state.per = i.value; renderAll(); } });
+});
+document.getElementById('sigonly').addEventListener('change', function(e){
+  state.sigOnly = e.target.checked; renderAll();
+});
+/* the browser may restore a previous radio selection on reload */
+var dsel = document.querySelector('input[name="domain"]:checked');
+var psel = document.querySelector('input[name="period"]:checked');
+if(dsel) state.dom = dsel.value;
+if(psel) state.per = psel.value;
+state.sigOnly = document.getElementById('sigonly').checked;
+applyView();
+renderAll();
+})();
+</script>
+
+</body>
+</html>
