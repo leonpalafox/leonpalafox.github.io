@@ -1,0 +1,116 @@
+{
+  "_comment": "Source registry for the NFL Power Rankings poll-of-polls. Add a source here, add its parser in pollofpolls/sources.py, then run: python3 run.py --validate",
+
+  "week": 2,
+  "season": 2026,
+
+  "sources": [
+    {
+      "id": "nflcom-shook",
+      "outlet": "NFL.com",
+      "analyst": "Nick Shook",
+      "kind": "analyst",
+      "url_tpl": "https://www.nfl.com/news/nfl-power-rankings-week-{week}-{season}-nfl-season",
+      "urls": [],
+      "extract": "nflcom_rank_marker",
+      "prior_weight": 1.0,
+      "tier": "League-owned editorial, weekly, explicit 1-32, stable templatable slug."
+    },
+    {
+      "id": "nflcom-reynolds",
+      "outlet": "NFL.com UK",
+      "analyst": "Neil Reynolds",
+      "kind": "analyst",
+      "url_tpl": "https://www.nfl.com/news/neil-reynolds-week-{week}-power-rankings-{season}",
+      "urls": [],
+      "extract": "nflcom_reynolds",
+      "prior_weight": 0.85,
+      "tier": "Second NFL.com desk, independent voice; weekly but irregular slug."
+    },
+    {
+      "id": "cbs-prisco",
+      "outlet": "CBS Sports",
+      "analyst": "Pete Prisco",
+      "kind": "analyst",
+      "url_tpl": "https://www.cbssports.com/nfl/news/priscos-nfl-week-{week}-power-rankings/",
+      "urls": ["https://www.cbssports.com/nfl/powerrankings/"],
+      "extract": "cbs_table",
+      "prior_weight": 1.0,
+      "tier": "Long-running analyst column; ranks render in a static HTML table."
+    },
+    {
+      "id": "si-orr",
+      "outlet": "Sports Illustrated",
+      "analyst": "Conor Orr",
+      "kind": "analyst",
+      "url_tpl": "",
+      "urls": [
+        "https://www.si.com/nfl/conor-orr-week-2-nfl-power-rankings-high-flying-bears-surge"
+      ],
+      "extract": "si_numbered",
+      "prior_weight": 0.9,
+      "tier": "Analyst column with explicit '1. Team (record)' headings."
+    },
+    {
+      "id": "usatoday-davis",
+      "outlet": "USA Today",
+      "analyst": "Nate Davis",
+      "kind": "analyst",
+      "url_tpl": "",
+      "urls": [
+        "https://www.usatoday.com/story/sports/nfl/columnist/nate-davis/2026/09/15/nfl-power-rankings-week-1-rams-seahawks-bills-bears-49ers/91758615007/"
+      ],
+      "extract": "usatoday_numbered",
+      "prior_weight": 0.9,
+      "tier": "National columnist. Slug week number lags the edition (see SOURCES.md)."
+    },
+    {
+      "id": "fox-vacchiano",
+      "outlet": "FOX Sports",
+      "analyst": "Ralph Vacchiano",
+      "kind": "analyst",
+      "url_tpl": "https://www.foxsports.com/stories/nfl/{season}-nfl-power-rankings-week-{week}-which-teams-suffered-worst-opening-losses",
+      "urls": [],
+      "extract": "fox_hash",
+      "prior_weight": 0.9,
+      "tier": "Reverse-order presentation (32 -> 1) with explicit '#N Team' markers."
+    },
+    {
+      "id": "sharp-summerlin",
+      "outlet": "Sharp Football Analysis",
+      "analyst": "Raymond Summerlin",
+      "kind": "analyst",
+      "url_tpl": "https://www.sharpfootballanalysis.com/analysis/nfl-power-rankings/",
+      "urls": [],
+      "extract": "sharp_embedded_table",
+      "prior_weight": 0.75,
+      "tier": "Single stable hub page updated weekly; embeds a JSON rank table."
+    },
+    {
+      "id": "thescore-staff",
+      "outlet": "theScore",
+      "analyst": "theScore NFL desk",
+      "kind": "panel",
+      "url_tpl": "",
+      "urls": [
+        "https://www.thescore.com/nfl/news/3454493/nfl-power-rankings-week-2-early-overreactions-for-every-team"
+      ],
+      "extract": "thescore_numbered",
+      "prior_weight": 0.8,
+      "tier": "Editorial panel; explicit 'N. Team (record)' plus 'Previous rank' blocks."
+    },
+    {
+      "id": "sportingnews-iyer",
+      "outlet": "Sporting News",
+      "analyst": "Vinnie Iyer",
+      "kind": "analyst",
+      "url_tpl": "",
+      "urls": [
+        "https://www.sportingnews.com/us/nfl/news/nfl-power-rankings-bills-49ers-steelers-rams-chargers-week-2/c66ef9551cbc48cdb0a11d75"
+      ],
+      "extract": "sportingnews_numbered",
+      "prior_weight": 0.85,
+      "tier": "Analyst column with explicit 'N. Team (previous ranking: M)' headings."
+    }
+  ]
+}

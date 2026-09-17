@@ -2,3 +2,11 @@ node_modules/
 dist/
 .astro/
 .DS_Store
+__pycache__/
+*.pyc
+
+# NFL poll of polls: raw scraped HTML is large and regenerable. The published
+# numbers and the ballots they came from are committed (src/data/*.json and
+# analysis/nfl-power-rankings/out/*.json); the cache exists so a run can be
+# replayed offline, and it is intentionally not tracked.
+analysis/nfl-power-rankings/cache/

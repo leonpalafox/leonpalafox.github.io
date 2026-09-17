@@ -1,0 +1,480 @@
+{
+  "k": 4.59,
+  "homeField": 2.56,
+  "sigma": 13.16,
+  "source": "median of per-season least-squares fits, 2000-2025",
+  "nGames": 6719,
+  "pooledLogLoss": 0.6124,
+  "pooledMarketLogLoss": 0.6085,
+  "sourceUrl": "cache/calibration/games.csv",
+  "seasons": [
+    {
+      "season": 2000,
+      "n": 248,
+      "k": 5.48,
+      "homeField": 3.08,
+      "sigma": 12.64,
+      "logLoss": 0.6089,
+      "accuracy": 0.6492,
+      "homeWinRate": 0.5565,
+      "coinFlipLogLoss": 0.6931,
+      "market": {
+        "logLoss": 0.6289,
+        "sigma": 14.0,
+        "n": 248,
+        "accuracy": 0.6492
+      },
+      "residualR2": 0.2697
+    },
+    {
+      "season": 2001,
+      "n": 248,
+      "k": 4.29,
+      "homeField": 2.18,
+      "sigma": 12.8,
+      "logLoss": 0.6111,
+      "accuracy": 0.7016,
+      "homeWinRate": 0.5484,
+      "coinFlipLogLoss": 0.6931,
+      "market": {
+        "logLoss": 0.6373,
+        "sigma": 14.0,
+        "n": 248,
+        "accuracy": 0.6492
+      },
+      "residualR2": 0.1765
+    },
+    {
+      "season": 2002,
+      "n": 256,
+      "k": 3.9,
+      "homeField": 2.44,
+      "sigma": 13.13,
+      "logLoss": 0.6406,
+      "accuracy": 0.625,
+      "homeWinRate": 0.5781,
+      "coinFlipLogLoss": 0.6931,
+      "market": {
+        "logLoss": 0.642,
+        "sigma": 14.0,
+        "n": 256,
+        "accuracy": 0.625
+      },
+      "residualR2": 0.1297
+    },
+    {
+      "season": 2003,
+      "n": 256,
+      "k": 4.08,
+      "homeField": 3.84,
+      "sigma": 13.72,
+      "logLoss": 0.6073,
+      "accuracy": 0.6602,
+      "homeWinRate": 0.6133,
+      "coinFlipLogLoss": 0.6931,
+      "market": {
+        "logLoss": 0.6132,
+        "sigma": 11.0,
+        "n": 256,
+        "accuracy": 0.6719
+      },
+      "residualR2": 0.1445
+    },
+    {
+      "season": 2004,
+      "n": 256,
+      "k": 4.17,
+      "homeField": 2.74,
+      "sigma": 12.95,
+      "logLoss": 0.6261,
+      "accuracy": 0.6562,
+      "homeWinRate": 0.5664,
+      "coinFlipLogLoss": 0.6931,
+      "market": {
+        "logLoss": 0.6224,
+        "sigma": 12.0,
+        "n": 256,
+        "accuracy": 0.6641
+      },
+      "residualR2": 0.1493
+    },
+    {
+      "season": 2005,
+      "n": 256,
+      "k": 5.15,
+      "homeField": 4.0,
+      "sigma": 13.01,
+      "logLoss": 0.5711,
+      "accuracy": 0.7109,
+      "homeWinRate": 0.5898,
+      "coinFlipLogLoss": 0.6931,
+      "market": {
+        "logLoss": 0.5722,
+        "sigma": 9.0,
+        "n": 256,
+        "accuracy": 0.7461
+      },
+      "residualR2": 0.2164
+    },
+    {
+      "season": 2006,
+      "n": 256,
+      "k": 3.79,
+      "homeField": 0.91,
+      "sigma": 13.47,
+      "logLoss": 0.6458,
+      "accuracy": 0.625,
+      "homeWinRate": 0.5312,
+      "coinFlipLogLoss": 0.6931,
+      "market": {
+        "logLoss": 0.6526,
+        "sigma": 17.5,
+        "n": 256,
+        "accuracy": 0.5938
+      },
+      "residualR2": 0.128
+    },
+    {
+      "season": 2007,
+      "n": 256,
+      "k": 5.9,
+      "homeField": 3.16,
+      "sigma": 13.3,
+      "logLoss": 0.5798,
+      "accuracy": 0.6875,
+      "homeWinRate": 0.5742,
+      "coinFlipLogLoss": 0.6931,
+      "market": {
+        "logLoss": 0.5778,
+        "sigma": 10.0,
+        "n": 256,
+        "accuracy": 0.6914
+      },
+      "residualR2": 0.2572
+    },
+    {
+      "season": 2008,
+      "n": 256,
+      "k": 5.05,
+      "homeField": 2.8,
+      "sigma": 13.75,
+      "logLoss": 0.5948,
+      "accuracy": 0.6719,
+      "homeWinRate": 0.5703,
+      "coinFlipLogLoss": 0.6931,
+      "market": {
+        "logLoss": 0.6009,
+        "sigma": 11.5,
+        "n": 256,
+        "accuracy": 0.6836
+      },
+      "residualR2": 0.1936
+    },
+    {
+      "season": 2009,
+      "n": 256,
+      "k": 5.7,
+      "homeField": 2.42,
+      "sigma": 14.6,
+      "logLoss": 0.5997,
+      "accuracy": 0.6914,
+      "homeWinRate": 0.5703,
+      "coinFlipLogLoss": 0.6931,
+      "market": {
+        "logLoss": 0.5755,
+        "sigma": 11.5,
+        "n": 256,
+        "accuracy": 0.6953
+      },
+      "residualR2": 0.2154
+    },
+    {
+      "season": 2010,
+      "n": 256,
+      "k": 4.19,
+      "homeField": 2.06,
+      "sigma": 13.94,
+      "logLoss": 0.6299,
+      "accuracy": 0.6641,
+      "homeWinRate": 0.5586,
+      "coinFlipLogLoss": 0.6931,
+      "market": {
+        "logLoss": 0.6269,
+        "sigma": 12.0,
+        "n": 256,
+        "accuracy": 0.6641
+      },
+      "residualR2": 0.1381
+    },
+    {
+      "season": 2011,
+      "n": 256,
+      "k": 5.04,
+      "homeField": 3.55,
+      "sigma": 13.53,
+      "logLoss": 0.6023,
+      "accuracy": 0.6719,
+      "homeWinRate": 0.5664,
+      "coinFlipLogLoss": 0.6931,
+      "market": {
+        "logLoss": 0.5936,
+        "sigma": 11.0,
+        "n": 256,
+        "accuracy": 0.668
+      },
+      "residualR2": 0.2075
+    },
+    {
+      "season": 2012,
+      "n": 256,
+      "k": 5.54,
+      "homeField": 2.68,
+      "sigma": 13.91,
+      "logLoss": 0.6083,
+      "accuracy": 0.6562,
+      "homeWinRate": 0.5703,
+      "coinFlipLogLoss": 0.6931,
+      "market": {
+        "logLoss": 0.6023,
+        "sigma": 10.5,
+        "n": 256,
+        "accuracy": 0.6406
+      },
+      "residualR2": 0.2129
+    },
+    {
+      "season": 2013,
+      "n": 256,
+      "k": 5.14,
+      "homeField": 3.41,
+      "sigma": 12.39,
+      "logLoss": 0.5893,
+      "accuracy": 0.6719,
+      "homeWinRate": 0.5977,
+      "coinFlipLogLoss": 0.6931,
+      "market": {
+        "logLoss": 0.5935,
+        "sigma": 10.5,
+        "n": 256,
+        "accuracy": 0.7109
+      },
+      "residualR2": 0.2348
+    },
+    {
+      "season": 2014,
+      "n": 256,
+      "k": 4.22,
+      "homeField": 2.7,
+      "sigma": 14.61,
+      "logLoss": 0.6147,
+      "accuracy": 0.6758,
+      "homeWinRate": 0.5664,
+      "coinFlipLogLoss": 0.6931,
+      "market": {
+        "logLoss": 0.6045,
+        "sigma": 10.5,
+        "n": 256,
+        "accuracy": 0.6641
+      },
+      "residualR2": 0.1289
+    },
+    {
+      "season": 2015,
+      "n": 256,
+      "k": 4.55,
+      "homeField": 1.71,
+      "sigma": 12.78,
+      "logLoss": 0.6192,
+      "accuracy": 0.6602,
+      "homeWinRate": 0.5391,
+      "coinFlipLogLoss": 0.6931,
+      "market": {
+        "logLoss": 0.6481,
+        "sigma": 14.5,
+        "n": 256,
+        "accuracy": 0.625
+      },
+      "residualR2": 0.1828
+    },
+    {
+      "season": 2016,
+      "n": 256,
+      "k": 3.87,
+      "homeField": 2.8,
+      "sigma": 11.78,
+      "logLoss": 0.6171,
+      "accuracy": 0.6406,
+      "homeWinRate": 0.5742,
+      "coinFlipLogLoss": 0.6931,
+      "market": {
+        "logLoss": 0.6302,
+        "sigma": 11.0,
+        "n": 256,
+        "accuracy": 0.6367
+      },
+      "residualR2": 0.1623
+    },
+    {
+      "season": 2017,
+      "n": 256,
+      "k": 4.46,
+      "homeField": 2.71,
+      "sigma": 13.34,
+      "logLoss": 0.6138,
+      "accuracy": 0.6875,
+      "homeWinRate": 0.5664,
+      "coinFlipLogLoss": 0.6931,
+      "market": {
+        "logLoss": 0.5813,
+        "sigma": 9.5,
+        "n": 256,
+        "accuracy": 0.7031
+      },
+      "residualR2": 0.1674
+    },
+    {
+      "season": 2018,
+      "n": 256,
+      "k": 4.24,
+      "homeField": 2.39,
+      "sigma": 13.18,
+      "logLoss": 0.6142,
+      "accuracy": 0.6602,
+      "homeWinRate": 0.5977,
+      "coinFlipLogLoss": 0.6931,
+      "market": {
+        "logLoss": 0.6096,
+        "sigma": 11.5,
+        "n": 256,
+        "accuracy": 0.6641
+      },
+      "residualR2": 0.1582
+    },
+    {
+      "season": 2019,
+      "n": 256,
+      "k": 5.35,
+      "homeField": -0.15,
+      "sigma": 13.05,
+      "logLoss": 0.6256,
+      "accuracy": 0.6562,
+      "homeWinRate": 0.5156,
+      "coinFlipLogLoss": 0.6931,
+      "market": {
+        "logLoss": 0.6121,
+        "sigma": 12.5,
+        "n": 256,
+        "accuracy": 0.6445
+      },
+      "residualR2": 0.2272
+    },
+    {
+      "season": 2020,
+      "n": 256,
+      "k": 4.64,
+      "homeField": 0.06,
+      "sigma": 12.75,
+      "logLoss": 0.6026,
+      "accuracy": 0.6797,
+      "homeWinRate": 0.4961,
+      "coinFlipLogLoss": 0.6931,
+      "market": {
+        "logLoss": 0.5924,
+        "sigma": 10.5,
+        "n": 256,
+        "accuracy": 0.6719
+      },
+      "residualR2": 0.1979
+    },
+    {
+      "season": 2021,
+      "n": 272,
+      "k": 4.94,
+      "homeField": 1.86,
+      "sigma": 13.92,
+      "logLoss": 0.6591,
+      "accuracy": 0.5919,
+      "homeWinRate": 0.5147,
+      "coinFlipLogLoss": 0.6931,
+      "market": {
+        "logLoss": 0.6242,
+        "sigma": 14.5,
+        "n": 272,
+        "accuracy": 0.6213
+      },
+      "residualR2": 0.186
+    },
+    {
+      "season": 2022,
+      "n": 271,
+      "k": 3.27,
+      "homeField": 2.12,
+      "sigma": 11.52,
+      "logLoss": 0.6338,
+      "accuracy": 0.6716,
+      "homeWinRate": 0.5572,
+      "coinFlipLogLoss": 0.6931,
+      "market": {
+        "logLoss": 0.605,
+        "sigma": 10.5,
+        "n": 271,
+        "accuracy": 0.6642
+      },
+      "residualR2": 0.1291
+    },
+    {
+      "season": 2023,
+      "n": 272,
+      "k": 4.1,
+      "homeField": 2.86,
+      "sigma": 13.3,
+      "logLoss": 0.6533,
+      "accuracy": 0.5993,
+      "homeWinRate": 0.5551,
+      "coinFlipLogLoss": 0.6931,
+      "market": {
+        "logLoss": 0.6229,
+        "sigma": 12.0,
+        "n": 272,
+        "accuracy": 0.6801
+      },
+      "residualR2": 0.1491
+    },
+    {
+      "season": 2024,
+      "n": 272,
+      "k": 5.41,
+      "homeField": 1.98,
+      "sigma": 12.59,
+      "logLoss": 0.5853,
+      "accuracy": 0.7059,
+      "homeWinRate": 0.5331,
+      "coinFlipLogLoss": 0.6931,
+      "market": {
+        "logLoss": 0.5809,
+        "sigma": 8.5,
+        "n": 272,
+        "accuracy": 0.7132
+      },
+      "residualR2": 0.242
+    },
+    {
+      "season": 2025,
+      "n": 272,
+      "k": 4.78,
+      "homeField": 2.28,
+      "sigma": 12.63,
+      "logLoss": 0.6055,
+      "accuracy": 0.6728,
+      "homeWinRate": 0.5368,
+      "coinFlipLogLoss": 0.6931,
+      "market": {
+        "logLoss": 0.6074,
+        "sigma": 11.0,
+        "n": 272,
+        "accuracy": 0.6544
+      },
+      "residualR2": 0.2059
+    }
+  ]
+}
