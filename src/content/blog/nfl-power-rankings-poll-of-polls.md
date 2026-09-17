@@ -11,7 +11,7 @@ Every Tuesday of the NFL season, a dozen outlets publish a power ranking. They d
 Nine ballots, 32 teams, Week 2 of the 2026 season. Seattle and Buffalo are separated by **0.002 rank standard deviations** — a statistical tie at the top. Pittsburgh is ranked as high as 13th and as low as 27th. That is not noise to be averaged away; it is the story.
 
 <nav class="toc" aria-label="Contents">
-  <details open>
+  <details>
     <summary>
       <span class="toc-kicker">Contents</span>
       <span class="toc-count">9 sections</span>
@@ -31,34 +31,43 @@ Nine ballots, 32 teams, Week 2 of the 2026 season. Seattle and Buffalo are separ
 </nav>
 
 <style>
+  /* Collapsed by default: on a long post the contents box only earns its space
+     when a reader asks for it. When open, only the list gets the padding below
+     the summary — a closed box should be a single tidy bar. */
   .toc {
     margin: 32px 0;
     border: 1px solid #e0dcd4; border-radius: 2px;
-    background: #fbfaf7; padding: 4px 22px 14px;
+    background: #fbfaf7; padding: 0 22px;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   }
+  .toc a { text-decoration: none; color: #0a0a0a; }
   .toc summary {
-    display: flex; align-items: baseline; gap: 12px;
-    padding: 12px 0 10px; cursor: pointer; list-style: none;
-    border-bottom: 1px solid #e0dcd4;
+    display: flex; align-items: baseline; gap: 10px;
+    padding: 14px 0; cursor: pointer; list-style: none;
+    min-height: 44px;  /* comfortable tap target */
   }
   .toc summary::-webkit-details-marker { display: none; }
+  .toc summary:hover .toc-kicker { color: #c2472f; }
   .toc summary::after {
-    content: "\25BE"; font-size: 10px; color: #6b6b6b; margin-left: 6px;
-    transition: transform 160ms ease-out;
+    content: "+"; font-size: 15px; line-height: 1; color: #6b6b6b;
+    margin-left: 10px; transition: color 140ms ease-out;
   }
-  .toc details:not([open]) summary::after { transform: rotate(-90deg); }
-  .toc-kicker { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: #0a0a0a; font-weight: 600; }
+  .toc details[open] summary::after { content: "\2212"; }  /* minus */
+  .toc details[open] summary { border-bottom: 1px solid #e0dcd4; }
+  .toc-kicker {
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: #0a0a0a; font-weight: 600; transition: color 140ms ease-out;
+  }
   .toc-count { font-size: 11px; color: #6b6b6b; margin-left: auto; }
-  .toc ol { list-style: none; margin: 4px 0 0; padding: 0; }
+  .toc ol { list-style: none; margin: 4px 0 0; padding: 0 0 14px; }
   .toc li { margin: 0; border-bottom: 1px solid #ece8e0; }
   .toc li:last-child { border-bottom: 0; }
-  .toc a {
+  .toc li a {
     display: grid; grid-template-columns: 32px 1fr; gap: 0 10px;
-    padding: 10px 0; text-decoration: none; color: #0a0a0a;
+    padding: 10px 0;
   }
-  .toc a:hover { color: #c2472f; }
-  .toc a:hover .toc-t { text-decoration: underline; text-underline-offset: 3px; }
+  .toc li a:hover { color: #c2472f; }
+  .toc li a:hover .toc-t { text-decoration: underline; text-underline-offset: 3px; }
   .toc-n {
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     font-size: 11px; color: #6b6b6b; padding-top: 3px;
@@ -66,7 +75,7 @@ Nine ballots, 32 teams, Week 2 of the 2026 season. Seattle and Buffalo are separ
   .toc-t { font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
   .toc-d { grid-column: 2; font-size: 12.5px; color: #6b6b6b; margin-top: 2px; }
   @media (max-width: 560px) {
-    .toc { padding: 4px 16px 12px; }
+    .toc { padding: 0 16px; }
     .toc-t { font-size: 14px; }
   }
 </style>
