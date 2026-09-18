@@ -270,6 +270,8 @@ Here is the consensus, with the spread across outlets shown for every team.
   .pop-td-field { text-align: right; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; letter-spacing: 0.08em; }
   .pop-td-field.is-in { color: #1f6f43; font-weight: 600; }
   .pop-td-field.is-out { color: #9a958d; }
+  .pop-table.is-playoff .pop-td-rank.is-seed { color: #1f6f43; }
+  .pop-table.is-playoff .pop-td-rank.is-bubble { color: #9a958d; }
   .pop-table tbody tr { border-bottom: 1px solid var(--hair); cursor: pointer; }
   .pop-table tbody tr:hover { background: rgba(194, 71, 47, 0.05); }
   .pop-table tbody tr.is-open { background: rgba(194, 71, 47, 0.08); }
@@ -499,6 +501,54 @@ Here is the consensus, with the spread across outlets shown for every team.
     return conferenceRank(index, teams[index].conference) <= FIELD_PER_CONFERENCE;
   }
 
+  // NFL seeding for one conference. Rows must already be in consensus order.
+  //
+  //   1-4  the four division winners, ordered among themselves by consensus
+  //   5-7  the best remaining teams, regardless of division
+  //
+  // This automatically caps a division at the four teams it could possibly
+  // send, because a division winner is always seeded ahead of its rivals and
+  // can therefore never occupy a wild card.
+  function seedConference(rows) {
+    // Sort first and never rely on the caller's order: a previous view may have
+    // physically re-appended these rows, and seeding off DOM order silently
+    // produced duplicated seeds on re-entry.
+    rows.sort(function (a, b) { return a._leagueRank - b._leagueRank; });
+
+    var byDivision = {};
+    for (var i = 0; i < rows.length; i++) {
+      var division = rows[i].getAttribute('data-div');
+      // In consensus order now, so the first team seen in a division is that
+      // division's highest-rated team and therefore its winner.
+      if (!byDivision[division]) { byDivision[division] = rows[i]; }
+    }
+    var winners = Object.keys(byDivision).map(function (d) { return byDivision[d]; });
+    winners.sort(function (a, b) { return a._leagueRank - b._leagueRank; });
+
+    for (var w = 0; w < winners.length; w++) {
+      winners[w]._seed = w + 1;
+      winners[w]._divisionWinner = true;
+      winners[w]._inField = true;
+    }
+
+    var seed = winners.length + 1;
+    for (var r = 0; r < rows.length && seed <= FIELD_PER_CONFERENCE; r++) {
+      if (rows[r]._inField) { continue; }   // division winners already placed
+      rows[r]._seed = seed++;
+      rows[r]._inField = true;
+    }
+
+    // Every row gets its conference standing (what the bubble is measured
+    // against) and a flag for whether it would have been a division winner.
+    for (var o = 0; o < rows.length; o++) {
+      rows[o]._confStanding = o + 1;
+      if (!rows[o]._inField) {
+        rows[o]._seed = null;
+        rows[o]._divisionWinner = false;
+      }
+    }
+  }
+
   function matchesFilter(row, filter) {
     if (filter === 'all') { return true; }
     if (filter === 'AFC' || filter === 'NFC') { return row.getAttribute('data-conf') === filter; }
@@ -518,10 +568,10 @@ Here is the consensus, with the spread across outlets shown for every team.
     for (var i = 0; i < rows.length; i++) { if (!rows[i]._leagueRank) { rows[i]._leagueRank = i + 1; } }
 
     if (filter === 'playoff') {
-      // Grouped by conference rather than division, because the field is
-      // granted per conference. Within a conference the rows are already in
-      // consensus order, so the first seven are the field and the next two are
-      // shown as the bubble.
+      // Real seeding, not a flat conference cut. The NFL gives the four
+      // division winners seeds 1-4 and fills 5-7 from the best remaining teams,
+      // so a weak division winner is seeded ahead of better-rated wild cards —
+      // a flat top seven cannot express that. See seedConference() below.
       var byConference = {};
       for (var p = 0; p < rows.length; p++) {
         var conf = rows[p].getAttribute('data-conf');
@@ -530,15 +580,18 @@ Here is the consensus, with the spread across outlets shown for every team.
       var confOrder = Object.keys(byConference).sort();
       for (var c = 0; c < confOrder.length; c++) {
         var confRows = byConference[confOrder[c]];
-        // Rank restarts inside each conference: a seed is a conference standing,
-        // so the seven IN rows read 1-7 and the bubble reads 8-9.
-        for (var q = 0; q < confRows.length; q++) {
-          confRows[q]._rank = q + 1;
-          confRows[q]._inField = q < FIELD_PER_CONFERENCE;
-        }
+        seedConference(confRows);
+        // Present the field by seed, as a bracket is read, rather than in
+        // consensus order — otherwise the seeds run 1, 4, 2, 5, 3 and the four
+        // division winners are not adjacent.
+        confRows.sort(function (a, b) {
+          var seedA = a._inField ? a._seed : 99;
+          var seedB = b._inField ? b._seed : 99;
+          return seedA - seedB;
+        });
       }
       return confOrder.map(function (name) {
-        return { label: name + ' — top ' + FIELD_PER_CONFERENCE + ' make it', rows: byConference[name] };
+        return { label: name + ' — four division winners, then three wild cards', rows: byConference[name] };
       });
     }
 
@@ -572,9 +625,16 @@ Here is the consensus, with the spread across outlets shown for every team.
     // Reading order is taken from data-index, never from the current DOM order:
     // rows are physically re-appended when a view regroups them, so DOM order
     // drifts between switches while data-index is fixed at render time.
+    // Derived state is recomputed from scratch every pass. Leaving _inField and
+    // _seed set from a previous view is how a team that qualified in one pass
+    // kept a seed in the next one.
     var all = body.querySelectorAll('tr[data-team]');
     for (var t = 0; t < all.length; t++) {
       all[t]._leagueRank = parseInt(all[t].getAttribute('data-index'), 10) + 1;
+      all[t]._inField = false;
+      all[t]._seed = null;
+      all[t]._divisionWinner = false;
+      all[t]._confStanding = null;
       all[t].style.display = matchesFilter(all[t], filter) ? '' : 'none';
     }
     all = Array.prototype.slice.call(all).sort(function (a, b) {
@@ -616,17 +676,37 @@ Here is the consensus, with the spread across outlets shown for every team.
     for (var v = 0; v < visible.length; v++) {
       var row = visible[v];
       var number = row.querySelector('.pop-td-rank');
-      if (number) { number.textContent = row._rank; }
       var panelColumn = row.querySelector('.pop-td-league');
-      if (panelColumn) {
-        panelColumn.textContent = (row._leagueRank === row._rank) ? '' : '#' + row._leagueRank;
-      }
       var fieldColumn = row.querySelector('.pop-td-field');
-      if (fieldColumn) {
-        // In/Out is drawn from the same conference rank the filter used, so the
-        // badge can never disagree with which rows are shown.
-        fieldColumn.textContent = playoffView ? (row._inField ? 'IN' : 'OUT') : '';
-        fieldColumn.className = 'pop-td-field' + (playoffView ? (row._inField ? ' is-in' : ' is-out') : '');
+
+      if (playoffView) {
+        // The rank column shows the *seed* for the seven qualifiers, and the
+        // conference standing for the teams just outside.
+        if (number) {
+          number.textContent = row._inField ? row._seed : row._confStanding;
+          number.className = 'pop-td-rank' + (row._inField ? ' is-seed' : ' is-bubble');
+        }
+        if (panelColumn) {
+          panelColumn.textContent = (row._leagueRank === row._rank && row._inField)
+            ? '' : '#' + row._leagueRank;
+        }
+        if (fieldColumn) {
+          fieldColumn.textContent = row._divisionWinner
+            ? 'DIV · IN' : (row._inField ? 'IN' : 'OUT');
+          fieldColumn.className = 'pop-td-field ' + (row._inField ? 'is-in' : 'is-out');
+        }
+      } else {
+        if (number) {
+          number.textContent = row._rank;
+          number.className = 'pop-td-rank';
+        }
+        if (panelColumn) {
+          panelColumn.textContent = (row._leagueRank === row._rank) ? '' : '#' + row._leagueRank;
+        }
+        if (fieldColumn) {
+          fieldColumn.textContent = '';
+          fieldColumn.className = 'pop-td-field';
+        }
       }
     }
     for (var x = 0; x < all.length; x++) {

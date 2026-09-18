@@ -178,23 +178,36 @@ head-to-head widget lists the week's slate and lets a reader build any matchup.
 
 ### The playoff filter
 
-A playoff field is **seven per conference**, not the top 14 overall — those are
-different sets, and conflating them put the wrong team on the bubble. The
-filter therefore ranks each team *within its own conference* and shows the top
-seven of each, plus two bubble teams per conference:
+The filter applies **NFL seeding rules**, not a flat cut of the top seven per
+conference. Those differ, and the difference is the whole point:
 
-- rows are grouped by conference, not division
-- ranks are conference standings, restarting at 1 in each conference
-- a `Field` column marks `IN` for the seven and `OUT` for the bubble, drawn from
-  the same conference rank the filter used, so the badge cannot disagree with
-  which rows are shown (that column exists only in this view)
+- seeds **1-4** go to the four division winners, ordered among themselves by
+  consensus. A weak division winner is therefore seeded ahead of better-rated
+  wild cards.
+- seeds **5-7** are the best remaining teams regardless of division.
 
-For 2026 Week 2 that reverses the old answer at the margin: Minnesota (NFC #7,
-league #15) is in and New England (AFC #8, league #13) is out.
+A flat top seven cannot express either property. It would seed a division
+winner behind a wild card from the same conference, and it would let a single
+division claim more teams than the bracket allows. Under real seeding a division
+can supply at most four teams, because its winner is always seeded first and so
+can never occupy a wild-card slot.
 
-Division winners are **not** given automatic berths. Doing that properly means
-seeding four division winners 1-4 by consensus and filling 5-7 from the
-remainder, which starts asserting tiebreakers the panel cannot support.
+For 2026 Week 2 the two rules disagree visibly: **Tampa Bay (Chicago's rival in
+the NFC South, rated #21 overall) is the 4th seed**, which pushes San Francisco
+(#4), the Rams (#6) and Detroit (#14) down to seeds 5, 6 and 7, and leaves
+Minnesota (#15) out entirely.
+
+Display choices that follow from the rule:
+
+- rows are grouped by conference and ordered **by seed**, as a bracket is read,
+  not by consensus rating
+- the `#` column shows the seed for the seven qualifiers and the conference
+  standing for the two bubble teams
+- a `Field` column marks `DIV · IN`, `IN` or `OUT` from the same computation
+  that selected the rows, so the badge cannot disagree with which rows are shown
+
+Ties inside a division or conference are broken by consensus rank alone. Real
+tiebreakers (head-to-head, division record, common games) are not modelled.
 
 ## Adding or changing sources
 
