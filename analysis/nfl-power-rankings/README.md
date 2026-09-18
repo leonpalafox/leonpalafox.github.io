@@ -169,12 +169,32 @@ so the page stays static and no Python runs at build time:
   record per game (`expectedMargin`, `homeWinProbability`, `pick`,
   `marketSpread`).
 
-The post renders two widgets from it. The consensus table has a table of
-contents above it and filter chips for conference, playoff picture and
-contested teams; a conference filter regroups the rows by division and
-renumbers them within the filtered set, keeping the league-wide rank in a
-separate `Panel` column so the anchor is never lost. The head-to-head widget
-lists the week's slate and lets a reader build any matchup.
+The post renders two widgets from it. The consensus table has a collapsed
+table of contents above it and filter chips for conference, playoff picture and
+contested teams. A conference filter regroups the rows by division; a filter
+that regroups renumbers rows within their group and keeps the league-wide rank
+in a separate `Panel` column, so the consensus anchor is never lost. The
+head-to-head widget lists the week's slate and lets a reader build any matchup.
+
+### The playoff filter
+
+A playoff field is **seven per conference**, not the top 14 overall — those are
+different sets, and conflating them put the wrong team on the bubble. The
+filter therefore ranks each team *within its own conference* and shows the top
+seven of each, plus two bubble teams per conference:
+
+- rows are grouped by conference, not division
+- ranks are conference standings, restarting at 1 in each conference
+- a `Field` column marks `IN` for the seven and `OUT` for the bubble, drawn from
+  the same conference rank the filter used, so the badge cannot disagree with
+  which rows are shown (that column exists only in this view)
+
+For 2026 Week 2 that reverses the old answer at the margin: Minnesota (NFC #7,
+league #15) is in and New England (AFC #8, league #13) is out.
+
+Division winners are **not** given automatic berths. Doing that properly means
+seeding four division winners 1-4 by consensus and filling 5-7 from the
+remainder, which starts asserting tiebreakers the panel cannot support.
 
 ## Adding or changing sources
 

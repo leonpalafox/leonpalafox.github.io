@@ -139,6 +139,7 @@ Here is the consensus, with the spread across outlets shown for every team.
           <th class="pop-th-num pop-hide-sm">Mean</th>
           <th class="pop-th-spread">Spread across nine outlets</th>
           <th class="pop-th-num" title="League-wide rank from the panel">Panel</th>
+          <th class="pop-th-num pop-playoff-only">Field</th>
           <th class="pop-th-num">P(No. 1)</th>        </tr>
       </thead>
       <tbody id="pop-body"></tbody>
@@ -263,6 +264,12 @@ Here is the consensus, with the spread across outlets shown for every team.
   .pop-th-rank { width: 34px; }
   .pop-th-num { text-align: right !important; }
   .pop-th-spread { width: 42%; min-width: 200px; }
+  .pop-playoff-only, .pop-td-field { display: none; }
+  .pop-table.is-playoff .pop-playoff-only,
+  .pop-table.is-playoff .pop-td-field { display: table-cell; }
+  .pop-td-field { text-align: right; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; letter-spacing: 0.08em; }
+  .pop-td-field.is-in { color: #1f6f43; font-weight: 600; }
+  .pop-td-field.is-out { color: #9a958d; }
   .pop-table tbody tr { border-bottom: 1px solid var(--hair); cursor: pointer; }
   .pop-table tbody tr:hover { background: rgba(194, 71, 47, 0.05); }
   .pop-table tbody tr.is-open { background: rgba(194, 71, 47, 0.08); }
@@ -463,6 +470,7 @@ Here is the consensus, with the spread across outlets shown for every team.
             '<span class="pop-band" style="left:' + scale(quartiles[0]) + '%;width:' + (scale(quartiles[1]) - scale(quartiles[0])) + '%"></span>' +
             dots + '</div></td>' +
           '<td class="pop-td-num pop-td-league pop-ci"></td>' +
+          '<td class="pop-td-field"></td>' +
           '<td class="pop-td-num">' + pct(t.pTop1) + contested + '</td>' +
         '</tr>';
     }
@@ -471,10 +479,33 @@ Here is the consensus, with the spread across outlets shown for every team.
 
   // Which rows pass the active filter. One predicate, used both to show/hide and
   // to insert the conference/division group headings when a conference is shown.
+  // Playoff field: seven per conference, which is what the NFL actually grants.
+  // The previous version took the top 14 overall, which is not the same thing —
+  // it produced an 8/6 split and so put the wrong team on the bubble.
+  var FIELD_PER_CONFERENCE = 7;
+  var BUBBLE_PER_CONFERENCE = 2;
+
+  function conferenceRank(index, conference) {
+    var seen = 0;
+    for (var i = 0; i < teams.length; i++) {
+      if (teams[i].conference !== conference) { continue; }
+      seen++;
+      if (i === index) { return seen; }
+    }
+    return seen;
+  }
+
+  function isAtHomeOnField(index) {
+    return conferenceRank(index, teams[index].conference) <= FIELD_PER_CONFERENCE;
+  }
+
   function matchesFilter(row, filter) {
     if (filter === 'all') { return true; }
     if (filter === 'AFC' || filter === 'NFC') { return row.getAttribute('data-conf') === filter; }
-    if (filter === 'playoff') { return parseInt(row.getAttribute('data-index'), 10) < 14; }
+    if (filter === 'playoff') {
+      var index = parseInt(row.getAttribute('data-index'), 10);
+      return conferenceRank(index, teams[index].conference) <= FIELD_PER_CONFERENCE + BUBBLE_PER_CONFERENCE;
+    }
     if (filter === 'contested') { return parseInt(row.getAttribute('data-spread'), 10) >= 10; }
     return true;
   }
@@ -485,6 +516,31 @@ Here is the consensus, with the spread across outlets shown for every team.
     // the filtered set*, not its league-wide rank. The league number is kept in
     // a column that fills in only when the two differ.
     for (var i = 0; i < rows.length; i++) { if (!rows[i]._leagueRank) { rows[i]._leagueRank = i + 1; } }
+
+    if (filter === 'playoff') {
+      // Grouped by conference rather than division, because the field is
+      // granted per conference. Within a conference the rows are already in
+      // consensus order, so the first seven are the field and the next two are
+      // shown as the bubble.
+      var byConference = {};
+      for (var p = 0; p < rows.length; p++) {
+        var conf = rows[p].getAttribute('data-conf');
+        (byConference[conf] = byConference[conf] || []).push(rows[p]);
+      }
+      var confOrder = Object.keys(byConference).sort();
+      for (var c = 0; c < confOrder.length; c++) {
+        var confRows = byConference[confOrder[c]];
+        // Rank restarts inside each conference: a seed is a conference standing,
+        // so the seven IN rows read 1-7 and the bubble reads 8-9.
+        for (var q = 0; q < confRows.length; q++) {
+          confRows[q]._rank = q + 1;
+          confRows[q]._inField = q < FIELD_PER_CONFERENCE;
+        }
+      }
+      return confOrder.map(function (name) {
+        return { label: name + ' — top ' + FIELD_PER_CONFERENCE + ' make it', rows: byConference[name] };
+      });
+    }
 
     if (filter === 'AFC' || filter === 'NFC') {
       var byDivision = {};
@@ -513,13 +569,17 @@ Here is the consensus, with the spread across outlets shown for every team.
 
     // League rank is cached on each row the first time it is read, so a later
     // reorder can never lose the league-wide anchor.
+    // Reading order is taken from data-index, never from the current DOM order:
+    // rows are physically re-appended when a view regroups them, so DOM order
+    // drifts between switches while data-index is fixed at render time.
     var all = body.querySelectorAll('tr[data-team]');
     for (var t = 0; t < all.length; t++) {
-      if (!all[t]._leagueRank) {
-        all[t]._leagueRank = parseInt(all[t].getAttribute('data-index'), 10) + 1;
-      }
+      all[t]._leagueRank = parseInt(all[t].getAttribute('data-index'), 10) + 1;
       all[t].style.display = matchesFilter(all[t], filter) ? '' : 'none';
     }
+    all = Array.prototype.slice.call(all).sort(function (a, b) {
+      return a._leagueRank - b._leagueRank;
+    });
 
     var visible = [];
     for (var i = 0; i < all.length; i++) { if (all[i].style.display !== 'none') { visible.push(all[i]); } }
@@ -538,7 +598,7 @@ Here is the consensus, with the spread across outlets shown for every team.
         var head = document.createElement('tr');
         head.className = 'pop-group-head';
         var cell = document.createElement('td');
-        cell.colSpan = 8;
+        cell.colSpan = 9;
         cell.textContent = groups[gi].label;
         head.appendChild(cell);
         body.appendChild(head);
@@ -549,6 +609,10 @@ Here is the consensus, with the spread across outlets shown for every team.
       }
     }
 
+    var playoffView = filter === 'playoff';
+    var table = body.closest('table');
+    if (table) { table.classList.toggle('is-playoff', playoffView); }
+
     for (var v = 0; v < visible.length; v++) {
       var row = visible[v];
       var number = row.querySelector('.pop-td-rank');
@@ -556,6 +620,19 @@ Here is the consensus, with the spread across outlets shown for every team.
       var panelColumn = row.querySelector('.pop-td-league');
       if (panelColumn) {
         panelColumn.textContent = (row._leagueRank === row._rank) ? '' : '#' + row._leagueRank;
+      }
+      var fieldColumn = row.querySelector('.pop-td-field');
+      if (fieldColumn) {
+        // In/Out is drawn from the same conference rank the filter used, so the
+        // badge can never disagree with which rows are shown.
+        fieldColumn.textContent = playoffView ? (row._inField ? 'IN' : 'OUT') : '';
+        fieldColumn.className = 'pop-td-field' + (playoffView ? (row._inField ? ' is-in' : ' is-out') : '');
+      }
+    }
+    for (var x = 0; x < all.length; x++) {
+      if (all[x].style.display === 'none') {
+        var hiddenField = all[x].querySelector('.pop-td-field');
+        if (hiddenField) { hiddenField.textContent = ''; }
       }
     }
 
@@ -622,7 +699,7 @@ Here is the consensus, with the spread across outlets shown for every team.
     }
     var tr = document.createElement('tr');
     tr.className = 'pop-ballots';
-    tr.innerHTML = '<td colspan="8"><div class="pop-ballots-inner">' +
+    tr.innerHTML = '<td colspan="9"><div class="pop-ballots-inner">' +
       '<div class="pop-ballot-head">' + logoTag(team.abbr, 'sm') +
         '<span>' + team.team + ' — every ballot</span></div>' + cells + '</div></td>';
     row.parentNode.insertBefore(tr, row.nextSibling);
