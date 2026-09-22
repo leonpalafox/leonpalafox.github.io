@@ -196,6 +196,12 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--validate", action="store_true", help="parse and validate only")
     parser.add_argument("--no-site", action="store_true", help="skip refreshing the site bundle")
     parser.add_argument("--no-schedule", action="store_true", help="skip the head-to-head slate")
+    parser.add_argument(
+        "--previous",
+        type=pathlib.Path,
+        default=None,
+        help="prior week's site bundle, for rank movement (default: bundled week-N-1, if present)",
+    )
     parser.add_argument("--bootstrap", type=int, default=4000, help="bootstrap resamples (default 4000)")
     parser.add_argument("--quiet", action="store_true")
     args = parser.parse_args(argv)
@@ -330,6 +336,23 @@ def main(argv: list[str] | None = None) -> int:
         print("\n--validate: no output written")
         return 0
 
+    # Movement needs the previous edition. Default to the bundle the site already
+    # has for week-1, so a weekly run needs no extra arguments.
+    previous_bundle = None
+    data_dir = HERE.parent.parent / "src" / "data"
+    previous_path = args.previous
+    if previous_path is None and week > 1:
+        candidate = data_dir / f"nfl-power-rankings-{season}-wk{week - 1:02d}.json"
+        if candidate.exists():
+            previous_path = candidate
+    if previous_path is not None:
+        if previous_path.exists():
+            previous_bundle = json.loads(previous_path.read_text(encoding="utf-8"))
+            print(f"\nmovement baseline: {previous_path.name} "
+                  f"(week {previous_bundle.get('week')})")
+        else:
+            print(f"\nmovement baseline missing: {previous_path}", file=sys.stderr)
+
     generated = report.utcnow()
     consensus_payload = {
         "week": week,
@@ -415,6 +438,7 @@ def main(argv: list[str] | None = None) -> int:
         model=model,
         h2h_method_note=H2H_METHOD_NOTE,
         schedule_source=schedule_source,
+        previous=previous_bundle,
     )
     report.write_json(out_dir / "site-data.json", site_bundle)
 

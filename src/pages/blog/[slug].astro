@@ -60,7 +60,10 @@ const related = (await getCollection('blog'))
 
 // Posts with an inline data widget need their payload on `window` before the
 // widget's module script runs, so it is injected here rather than in the body.
-const dataWidgetPosts = new Set(['nfl-power-rankings-poll-of-polls']);
+const dataWidgetPosts = new Set([
+  'nfl-power-rankings-poll-of-polls',
+  'nfl-power-rankings-week-3',
+]);
 const needsPollData = dataWidgetPosts.has(post.id);
 ---
 

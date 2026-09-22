@@ -1,9 +1,7 @@
 {
   "_comment": "Source registry for the NFL Power Rankings poll-of-polls. Add a source here, add its parser in pollofpolls/sources.py, then run: python3 run.py --validate",
-
-  "week": 2,
+  "week": 3,
   "season": 2026,
-
   "sources": [
     {
       "id": "nflcom-shook",
@@ -17,39 +15,43 @@
       "tier": "League-owned editorial, weekly, explicit 1-32, stable templatable slug."
     },
     {
-      "id": "nflcom-reynolds",
-      "outlet": "NFL.com UK",
-      "analyst": "Neil Reynolds",
-      "kind": "analyst",
-      "url_tpl": "https://www.nfl.com/news/neil-reynolds-week-{week}-power-rankings-{season}",
-      "urls": [],
-      "extract": "nflcom_reynolds",
-      "prior_weight": 0.85,
-      "tier": "Second NFL.com desk, independent voice; weekly but irregular slug."
-    },
-    {
       "id": "cbs-prisco",
       "outlet": "CBS Sports",
       "analyst": "Pete Prisco",
       "kind": "analyst",
       "url_tpl": "https://www.cbssports.com/nfl/news/priscos-nfl-week-{week}-power-rankings/",
-      "urls": ["https://www.cbssports.com/nfl/powerrankings/"],
+      "urls": [
+        "https://www.cbssports.com/nfl/powerrankings/"
+      ],
       "extract": "cbs_table",
       "prior_weight": 1.0,
-      "tier": "Long-running analyst column; ranks render in a static HTML table."
+      "tier": "Long-running analyst column; hub page carries the current week's table."
+    },
+    {
+      "id": "fox-vacchiano",
+      "outlet": "FOX Sports",
+      "analyst": "Ralph Vacchiano",
+      "kind": "analyst",
+      "url_tpl": "",
+      "urls": [
+        "https://www.foxsports.com/stories/nfl/2026-nfl-power-rankings-week-3-chiefs-back-bucs-broken"
+      ],
+      "extract": "si_numbered",
+      "prior_weight": 0.9,
+      "tier": "Analyst column. NOTE: switched from '#N Team' markup to 'N. Team' before week 3, so it now uses the numbered-table parser; FOX also renders client-side in some editions."
     },
     {
       "id": "si-orr",
       "outlet": "Sports Illustrated",
-      "analyst": "Conor Orr",
+      "analyst": "SI NFL desk",
       "kind": "analyst",
       "url_tpl": "",
       "urls": [
-        "https://www.si.com/nfl/conor-orr-week-2-nfl-power-rankings-high-flying-bears-surge"
+        "https://www.si.com/mx/americano/power-rankings-nfl-en-que-lugar-estan-campeones-seahawks"
       ],
       "extract": "si_numbered",
-      "prior_weight": 0.9,
-      "tier": "Analyst column with explicit '1. Team (record)' headings."
+      "prior_weight": 0.85,
+      "tier": "Weekly 1-32 ballot. Conor Orr's si.com/nfl column numbered only 31 teams in week 3 (skipped 30), so the complete SI edition is used instead."
     },
     {
       "id": "usatoday-davis",
@@ -58,22 +60,24 @@
       "kind": "analyst",
       "url_tpl": "",
       "urls": [
-        "https://www.usatoday.com/story/sports/nfl/columnist/nate-davis/2026/09/15/nfl-power-rankings-week-1-rams-seahawks-bills-bears-49ers/91758615007/"
+        "https://www.usatoday.com/story/sports/nfl/columnist/nate-davis/2026/09/22/nfl-power-rankings-week-3-rams-giants-seahawks-bills/91883591007/"
       ],
       "extract": "usatoday_numbered",
       "prior_weight": 0.9,
-      "tier": "National columnist. Slug week number lags the edition (see SOURCES.md)."
+      "tier": "National columnist. Slug week number can lag the edition; confirm from the headline."
     },
     {
-      "id": "fox-vacchiano",
-      "outlet": "FOX Sports",
-      "analyst": "Ralph Vacchiano",
+      "id": "sportingnews-iyer",
+      "outlet": "Sporting News",
+      "analyst": "Vinnie Iyer",
       "kind": "analyst",
-      "url_tpl": "https://www.foxsports.com/stories/nfl/{season}-nfl-power-rankings-week-{week}-which-teams-suffered-worst-opening-losses",
-      "urls": [],
-      "extract": "fox_hash",
-      "prior_weight": 0.9,
-      "tier": "Reverse-order presentation (32 -> 1) with explicit '#N Team' markers."
+      "url_tpl": "",
+      "urls": [
+        "https://www.sportingnews.com/us/nfl/news/nfl-power-rankings-seahawks-eagles-bengals-bears-ravens-week-3/d90bff1933f5da31944c9ae2"
+      ],
+      "extract": "sportingnews_numbered",
+      "prior_weight": 0.85,
+      "tier": "Analyst column with explicit 'N. Team (previous ranking: M)' headings."
     },
     {
       "id": "sharp-summerlin",
@@ -84,7 +88,7 @@
       "urls": [],
       "extract": "sharp_embedded_table",
       "prior_weight": 0.75,
-      "tier": "Single stable hub page updated weekly; embeds a JSON rank table."
+      "tier": "Single stable hub page updated weekly; embeds a JSON rank table. Check the 'Updated' date."
     },
     {
       "id": "thescore-staff",
@@ -93,24 +97,24 @@
       "kind": "panel",
       "url_tpl": "",
       "urls": [
-        "https://www.thescore.com/nfl/news/3454493/nfl-power-rankings-week-2-early-overreactions-for-every-team"
+        "https://www.thescore.com/nfl/news/3572171/nfl-power-rankings-week-3-a-reason-for-optimism-for-every-team"
       ],
       "extract": "thescore_numbered",
       "prior_weight": 0.8,
       "tier": "Editorial panel; explicit 'N. Team (record)' plus 'Previous rank' blocks."
     },
     {
-      "id": "sportingnews-iyer",
-      "outlet": "Sporting News",
-      "analyst": "Vinnie Iyer",
-      "kind": "analyst",
+      "id": "br-experts",
+      "outlet": "Bleacher Report",
+      "analyst": "B/R NFL staff",
+      "kind": "panel",
       "url_tpl": "",
       "urls": [
-        "https://www.sportingnews.com/us/nfl/news/nfl-power-rankings-bills-49ers-steelers-rams-chargers-week-2/c66ef9551cbc48cdb0a11d75"
+        "https://bleacherreport.com/articles/25501561-br-experts-week-3-nfl-power-rankings"
       ],
-      "extract": "sportingnews_numbered",
-      "prior_weight": 0.85,
-      "tier": "Analyst column with explicit 'N. Team (previous ranking: M)' headings."
+      "extract": "si_numbered",
+      "prior_weight": 0.8,
+      "tier": "Staff panel product; full 32-team ballot under numbered headings."
     }
   ]
 }

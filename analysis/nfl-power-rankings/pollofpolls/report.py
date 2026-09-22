@@ -220,6 +220,7 @@ def build_site_bundle(
     model=None,
     h2h_method_note: str = "",
     schedule_source: str = "",
+    previous: dict | None = None,
 ) -> dict:
     sources = list(panel.ballots)
     source_diag = {row["source"]: row for row in source_diagnostics(panel, rows)}
@@ -278,6 +279,37 @@ def build_site_bundle(
         for i, source in enumerate(sources)
     ]
 
+    movement = None
+    if previous:
+        previous_rank = {t["team"]: t["rank"] for t in previous.get("teams", [])}
+        previous_week = previous.get("week")
+        entries = []
+        for row in rows:
+            was = previous_rank.get(row.team)
+            if was is None:
+                continue
+            # Positive delta = climbed. Rank 1 is best, so a smaller number is up.
+            entries.append(
+                {
+                    "team": row.team,
+                    "abbr": TEAMS[row.team][0],
+                    "conference": TEAMS[row.team][1],
+                    "division": TEAMS[row.team][2],
+                    "rank": row.rank,
+                    "previousRank": was,
+                    "delta": was - row.rank,
+                }
+            )
+        entries.sort(key=lambda e: (-abs(e["delta"]), e["rank"]))
+        movement = {
+            "previousWeek": previous_week,
+            "biggestRiser": max(entries, key=lambda e: e["delta"]) if entries else None,
+            "biggestFaller": min(entries, key=lambda e: e["delta"]) if entries else None,
+            "unchanged": sum(1 for e in entries if e["delta"] == 0),
+            "moved": sum(1 for e in entries if e["delta"] != 0),
+            "entries": sorted(entries, key=lambda e: e["rank"]),
+        }
+
     head_to_head = None
     if matchups:
         head_to_head = {
@@ -310,6 +342,7 @@ def build_site_bundle(
         "season": season,
         "generated": generated.replace(microsecond=0).isoformat().replace("+00:00", "Z"),
         "method": method_note,
+        "movement": movement,
         "headToHead": head_to_head,
         "diagnostics": {
             "sources": diagnostics.n_sources,
