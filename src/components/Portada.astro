@@ -65,7 +65,7 @@ const leadCover = lead.data.cover
   : undefined;
 const leadExcerpt = excerpt(lead.body);
 const leadMinutes = Math.max(3, Math.round(lead.body.split(/\s+/).length / 220));
-// Portrait cover art cannot survive the lead's wide banner crop, so it is plated instead.
+// Portrait cover art is capped and centred rather than run full width, where it would be enormous.
 const leadCoverPortrait = leadCover ? leadCover.src.height > leadCover.src.width : false;
 ---
 
@@ -98,7 +98,7 @@ const leadCoverPortrait = leadCover ? leadCover.src.height > leadCover.src.width
                   : '(min-width: 1480px) 1128px, (min-width: 1024px) calc(100vw - 304px), calc(100vw - 48px)'
               }
               loading="lazy"
-              class={leadCoverPortrait ? 'h-auto w-full' : 'h-full w-full object-cover'}
+              class="h-auto w-full"
             />
           </div>
         )
@@ -226,7 +226,6 @@ const leadCoverPortrait = leadCover ? leadCover.src.height > leadCover.src.width
 
   .lead-cover {
     grid-column: 1 / -1;
-    aspect-ratio: 16 / 7;
     overflow: hidden;
     border-bottom: 1px solid var(--color-ink);
     background: var(--color-paper);
@@ -442,12 +441,6 @@ const leadCoverPortrait = leadCover ? leadCover.src.height > leadCover.src.width
     }
   }
 
-  @media (max-width: 767px) {
-    .lead-cover {
-      aspect-ratio: 4 / 3;
-    }
-  }
-
   @media (min-width: 1100px) {
     .article-grid {
       grid-template-columns: repeat(12, minmax(0, 1fr));
@@ -499,9 +492,9 @@ const leadCoverPortrait = leadCover ? leadCover.src.height > leadCover.src.width
     }
   }
 
-  /* Portrait cover art is plated whole on the sheet instead of cropped into the wide banner. */
+  /* Full-width cover art runs at its own aspect ratio; portrait art would be far too tall,
+     so it is capped and centred as a plate on the sheet. */
   .lead-cover.lead-cover--portrait {
-    aspect-ratio: auto;
     display: grid;
     place-items: center;
     padding-block: clamp(2.5rem, 6vw, 4rem);
