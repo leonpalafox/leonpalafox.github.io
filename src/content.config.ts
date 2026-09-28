@@ -9,6 +9,8 @@ const blog = defineCollection({
     pubDate: z.coerce.date(),
     lang: z.enum(['es', 'en']).default('es'),
     tags: z.array(z.string()).default([]),
+    // Pin this post to the lead slot of the homepage Portada, ahead of newer posts.
+    featured: z.boolean().default(false),
     // Where the piece first ran. sourceName is the outlet label; it falls back to the hostname.
     source: z.string().url().optional(),
     sourceName: z.string().optional(),

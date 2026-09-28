@@ -4,9 +4,14 @@ import { getCollection } from 'astro:content';
 import { fullDate, monthDay } from '../lib/format';
 import { getAsset } from '../lib/assets';
 
-const posts = (await getCollection('blog'))
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 6);
+const allPosts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+// A post flagged `featured` takes the lead slot; everything else stays in date order.
+const featured = allPosts.find((post) => post.data.featured);
+const ordered = featured ? [featured, ...allPosts.filter((post) => post.id !== featured.id)] : allPosts;
+const posts = ordered.slice(0, 6);
 
 const [lead, ...rest] = posts;
 
@@ -60,6 +65,8 @@ const leadCover = lead.data.cover
   : undefined;
 const leadExcerpt = excerpt(lead.body);
 const leadMinutes = Math.max(3, Math.round(lead.body.split(/\s+/).length / 220));
+// Portrait cover art cannot survive the lead's wide banner crop, so it is plated instead.
+const leadCoverPortrait = leadCover ? leadCover.src.height > leadCover.src.width : false;
 ---
 
 <section aria-labelledby="writing-title" class="border-y border-hairline bg-sheet">
@@ -80,14 +87,18 @@ const leadMinutes = Math.max(3, Math.round(lead.body.split(/\s+/).length / 220))
     <article class="lead-card">
       {
         leadCover && (
-          <div class="lead-cover">
+          <div class:list={['lead-cover', leadCoverPortrait && 'lead-cover--portrait']}>
             <Image
               src={leadCover.src}
               alt={leadCover.alt}
-              widths={[640, 960, 1280, 1600]}
-              sizes="(min-width: 1480px) 1128px, (min-width: 1024px) calc(100vw - 304px), calc(100vw - 48px)"
+              widths={leadCoverPortrait ? [320, 480, 640] : [640, 960, 1280, 1600]}
+              sizes={
+                leadCoverPortrait
+                  ? '(min-width: 768px) 32rem, 100vw'
+                  : '(min-width: 1480px) 1128px, (min-width: 1024px) calc(100vw - 304px), calc(100vw - 48px)'
+              }
               loading="lazy"
-              class="h-full w-full object-cover"
+              class={leadCoverPortrait ? 'h-auto w-full' : 'h-full w-full object-cover'}
             />
           </div>
         )
@@ -486,5 +497,18 @@ const leadMinutes = Math.max(3, Math.round(lead.body.split(/\s+/).length / 220))
     .article-card-body {
       min-height: 25rem;
     }
+  }
+
+  /* Portrait cover art is plated whole on the sheet instead of cropped into the wide banner. */
+  .lead-cover.lead-cover--portrait {
+    aspect-ratio: auto;
+    display: grid;
+    place-items: center;
+    padding-block: clamp(2.5rem, 6vw, 4rem);
+  }
+
+  .lead-cover.lead-cover--portrait :global(img) {
+    width: min(100%, 32rem);
+    height: auto;
   }
 </style>

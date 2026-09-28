@@ -38,6 +38,10 @@ const registry: Record<string, AssetEntry> = {
   'mexico-industria-frente-a-pemex': {
     alt: 'Una balanza enfrenta una plataforma petrolera deteriorada con una fábrica automatizada de robots y servidores, frente a la silueta del mapa de México.',
   },
+  'carrera-ia-sin-frenar': {
+    alt: 'Portada de El Financiero: un conductor al volante a 180 km/h en una carretera costera, con señales que a la izquierda prometen “Innovación”, “Prosperidad” y “Soluciones a grandes retos” y a la derecha advierten “Pérdida de control”, “Usos maliciosos” y “Competencia global sin límites”, bajo el titular “La carrera de la IA que nadie sabe frenar”.',
+    caption: 'El Financiero · 15 de septiembre de 2026',
+  },
   'mercado-de-inteligencia': {
     alt: 'Portada de El Financiero: León Palafox frente a un pasillo de puestos que anuncian Kimi, GPT, Claude, Grok, Gemini y modelos abiertos, bajo el titular “Quién decide qué inteligencia compra su empresa”.',
     caption: 'El Financiero · 23 de julio de 2026',
