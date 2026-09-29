@@ -84,7 +84,7 @@ Here is where the panel landed after Week 3.
       <div class="pop-podium-team">
         <span class="pop-podium-rank">1</span>
         <span class="pop-mark pop-mark--lg" id="pop-p1-logo"></span>
-        <span class="pop-podium-name">Seattle Seahawks</span>
+        <span class="pop-podium-name" id="pop-p1-name"></span>
       </div>
       <div class="pop-podium-meta">
         <span class="pop-podium-score" id="pop-p1-score"></span>
@@ -95,7 +95,7 @@ Here is where the panel landed after Week 3.
       <div class="pop-podium-team">
         <span class="pop-podium-rank">2</span>
         <span class="pop-mark pop-mark--lg" id="pop-p2-logo"></span>
-        <span class="pop-podium-name">Buffalo Bills</span>
+        <span class="pop-podium-name" id="pop-p2-name"></span>
       </div>
       <div class="pop-podium-meta">
         <span class="pop-podium-score" id="pop-p2-score"></span>
@@ -410,16 +410,34 @@ Here is where the panel landed after Week 3.
     if (p2) { p2.textContent = (second.score > 0 ? '+' : '') + second.score.toFixed(3); }
     document.getElementById('pop-p1-p').textContent = pct(first.pTop1) + ' chance of No. 1';
     document.getElementById('pop-p2-p').textContent = pct(second.pTop1) + ' chance of No. 1';
+    // Names come from the data too. Leaving them hardcoded in the markup meant
+    // the podium kept showing whatever two teams topped the first edition,
+    // next to the current week's logos and scores.
+    document.getElementById('pop-p1-name').textContent = first.team;
+    document.getElementById('pop-p2-name').textContent = second.team;
     document.getElementById('pop-p1-logo').innerHTML = logoTag(first.abbr, 'lg');
     document.getElementById('pop-p2-logo').innerHTML = logoTag(second.abbr, 'lg');
     var gap = Math.abs(first.score - second.score);
     var third = ranked[2];
     var nextGap = Math.abs(second.score - third.score);
-    var ratio = gap > 0 ? Math.round(nextGap / gap) : null;
-    document.getElementById('pop-tie-note').textContent =
-      'The top two are separated by ' + gap.toFixed(3) + ' rank standard deviations' +
-      (ratio ? ', against ' + nextGap.toFixed(3) + ' between second and third — a gap ' +
-        ratio + '× wider.' : '.');
+    var ratio = gap >= 0.05 ? Math.round(nextGap / gap) : null;
+    // Two different situations need different sentences: the leaders being
+    // level with each other, versus the leaders being clear of the field while
+    // second and third are level. The ratio decides which.
+    var ratio = nextGap / gap;
+    var note;
+    if (ratio >= 2) {
+      note = 'The top two are ' + gap.toFixed(3) + ' rank standard deviations apart, while ' +
+             'second and third are ' + nextGap.toFixed(3) + ' apart — ' + Math.round(ratio) +
+             '× wider. The pair are interchangeable with each other; the field behind them is not.';
+    } else if (ratio <= 0.5) {
+      note = 'The top two are ' + gap.toFixed(3) + ' apart, but second and third are only ' +
+             nextGap.toFixed(3) + ' apart, so the ordering behind the leader carries little weight.';
+    } else {
+      note = 'The top two are separated by ' + gap.toFixed(3) + ' rank standard deviations, ' +
+             'against ' + nextGap.toFixed(3) + ' between second and third.';
+    }
+    document.getElementById('pop-tie-note').textContent = note;
   }
 
   function renderRows() {

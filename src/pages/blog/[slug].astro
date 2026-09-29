@@ -60,16 +60,18 @@ const related = (await getCollection('blog'))
 
 // Posts with an inline data widget need their payload on `window` before the
 // widget's module script runs, so it is injected here rather than in the body.
-const dataWidgetPosts = new Set([
-  'nfl-power-rankings-poll-of-polls',
-  'nfl-power-rankings-week-3',
-  'nfl-power-rankings-week-4',
-]);
-const needsPollData = dataWidgetPosts.has(post.id);
+// The value is the week that post covers, so an archived edition keeps
+// rendering its own numbers after later weeks are built.
+const pollDataWeeks: Record<string, number> = {
+  'nfl-power-rankings-poll-of-polls': 2,
+  'nfl-power-rankings-week-3': 3,
+  'nfl-power-rankings-week-4': 4,
+};
+const pollDataWeek = pollDataWeeks[post.id];
 ---
 
 <Base title={`${title} — León Palafox`} description={description ?? title} lang={lang} ogImage={ogImage} ogType="article" publishedTime={pubDate.toISOString()}>
-  {needsPollData && <PollOfPollsData />}
+  {pollDataWeek !== undefined && <PollOfPollsData week={pollDataWeek} />}
   <script type="application/ld+json" set:html={JSON.stringify(blogPostingJsonLd).replace(/</g, '\\u003c')} />
   <article class="px-6 py-14 sm:px-10 lg:px-14 lg:py-20">
     <header class="mx-auto max-w-2xl">
