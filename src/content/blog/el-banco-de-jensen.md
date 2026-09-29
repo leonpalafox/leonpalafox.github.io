@@ -4,6 +4,7 @@ description: "Nvidia impulsa acuerdos para financiar chips y centros de datos, u
 pubDate: 2026-08-18
 lang: es
 tags: ["ia", "financiero", "nvidia"]
+cover: el-banco-de-jensen
 source: "https://www.elfinanciero.com.mx/opinion/leon-palafox1/2026/08/18/el-banco-de-jensen/"
 sourceName: "El Financiero"
 translation:

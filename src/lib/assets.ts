@@ -35,6 +35,9 @@ export interface AssetEntry {
 
 /** Metadata for the images in src/assets/blog/. Keys must match an id from that folder. */
 const registry: Record<string, AssetEntry> = {
+  'el-banco-de-jensen': {
+    alt: 'Una mano gigante coloca un chip de Nvidia sobre un banco de columnas clásicas, rodeado de torres góticas llenas de servidores con luces verdes; una figura diminuta espera al pie de la escalinata.',
+  },
   'mexico-industria-frente-a-pemex': {
     alt: 'Una balanza enfrenta una plataforma petrolera deteriorada con una fábrica automatizada de robots y servidores, frente a la silueta del mapa de México.',
   },
