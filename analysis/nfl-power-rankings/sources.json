@@ -1,25 +1,14 @@
 {
   "_comment": "Source registry for the NFL Power Rankings poll-of-polls. Add a source here, add its parser in pollofpolls/sources.py, then run: python3 run.py --validate",
-  "week": 3,
+  "week": 4,
   "season": 2026,
   "sources": [
-    {
-      "id": "nflcom-shook",
-      "outlet": "NFL.com",
-      "analyst": "Nick Shook",
-      "kind": "analyst",
-      "url_tpl": "https://www.nfl.com/news/nfl-power-rankings-week-{week}-{season}-nfl-season",
-      "urls": [],
-      "extract": "nflcom_rank_marker",
-      "prior_weight": 1.0,
-      "tier": "League-owned editorial, weekly, explicit 1-32, stable templatable slug."
-    },
     {
       "id": "cbs-prisco",
       "outlet": "CBS Sports",
       "analyst": "Pete Prisco",
       "kind": "analyst",
-      "url_tpl": "https://www.cbssports.com/nfl/news/priscos-nfl-week-{week}-power-rankings/",
+      "url_tpl": "https://www.cbssports.com/nfl/news/{season}-nfl-power-rankings-week-{week}-bills-vikings/",
       "urls": [
         "https://www.cbssports.com/nfl/powerrankings/"
       ],
@@ -34,24 +23,11 @@
       "kind": "analyst",
       "url_tpl": "",
       "urls": [
-        "https://www.foxsports.com/stories/nfl/2026-nfl-power-rankings-week-3-chiefs-back-bucs-broken"
+        "https://www.foxsports.com/stories/nfl/2026-nfl-power-rankings-week-4"
       ],
       "extract": "si_numbered",
       "prior_weight": 0.9,
-      "tier": "Analyst column. NOTE: switched from '#N Team' markup to 'N. Team' before week 3, so it now uses the numbered-table parser; FOX also renders client-side in some editions."
-    },
-    {
-      "id": "si-orr",
-      "outlet": "Sports Illustrated",
-      "analyst": "SI NFL desk",
-      "kind": "analyst",
-      "url_tpl": "",
-      "urls": [
-        "https://www.si.com/mx/americano/power-rankings-nfl-en-que-lugar-estan-campeones-seahawks"
-      ],
-      "extract": "si_numbered",
-      "prior_weight": 0.85,
-      "tier": "Weekly 1-32 ballot. Conor Orr's si.com/nfl column numbered only 31 teams in week 3 (skipped 30), so the complete SI edition is used instead."
+      "tier": "Analyst column. Uses 'N. Team' numbered headings since week 3."
     },
     {
       "id": "usatoday-davis",
@@ -60,24 +36,11 @@
       "kind": "analyst",
       "url_tpl": "",
       "urls": [
-        "https://www.usatoday.com/story/sports/nfl/columnist/nate-davis/2026/09/22/nfl-power-rankings-week-3-rams-giants-seahawks-bills/91883591007/"
+        "https://www.usatoday.com/story/sports/nfl/columnist/nate-davis/2026/09/29/nfl-power-rankings-week-4-bills-seahawks-rams-49ers/91993129007/"
       ],
       "extract": "usatoday_numbered",
       "prior_weight": 0.9,
       "tier": "National columnist. Slug week number can lag the edition; confirm from the headline."
-    },
-    {
-      "id": "sportingnews-iyer",
-      "outlet": "Sporting News",
-      "analyst": "Vinnie Iyer",
-      "kind": "analyst",
-      "url_tpl": "",
-      "urls": [
-        "https://www.sportingnews.com/us/nfl/news/nfl-power-rankings-seahawks-eagles-bengals-bears-ravens-week-3/d90bff1933f5da31944c9ae2"
-      ],
-      "extract": "sportingnews_numbered",
-      "prior_weight": 0.85,
-      "tier": "Analyst column with explicit 'N. Team (previous ranking: M)' headings."
     },
     {
       "id": "sharp-summerlin",
@@ -88,20 +51,7 @@
       "urls": [],
       "extract": "sharp_embedded_table",
       "prior_weight": 0.75,
-      "tier": "Single stable hub page updated weekly; embeds a JSON rank table. Check the 'Updated' date."
-    },
-    {
-      "id": "thescore-staff",
-      "outlet": "theScore",
-      "analyst": "theScore NFL desk",
-      "kind": "panel",
-      "url_tpl": "",
-      "urls": [
-        "https://www.thescore.com/nfl/news/3572171/nfl-power-rankings-week-3-a-reason-for-optimism-for-every-team"
-      ],
-      "extract": "thescore_numbered",
-      "prior_weight": 0.8,
-      "tier": "Editorial panel; explicit 'N. Team (record)' plus 'Previous rank' blocks."
+      "tier": "Single stable hub page updated weekly; embeds a JSON rank table. Check the page title's week."
     },
     {
       "id": "br-experts",
@@ -110,7 +60,7 @@
       "kind": "panel",
       "url_tpl": "",
       "urls": [
-        "https://bleacherreport.com/articles/25501561-br-experts-week-3-nfl-power-rankings"
+        "https://bleacherreport.com/articles/25504118-br-experts-week-4-nfl-power-rankings"
       ],
       "extract": "si_numbered",
       "prior_weight": 0.8,
