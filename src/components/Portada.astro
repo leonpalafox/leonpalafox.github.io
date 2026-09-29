@@ -4,7 +4,9 @@ import { getCollection } from 'astro:content';
 import { fullDate, monthDay } from '../lib/format';
 import { getAsset } from '../lib/assets';
 
-const allPosts = (await getCollection('blog')).sort(
+// The homepage showcases the AI columns only; data-viz pieces (NFL, World Cup)
+// stay on /blog/.
+const allPosts = (await getCollection('blog', (post) => post.data.tags.includes('ia'))).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 
