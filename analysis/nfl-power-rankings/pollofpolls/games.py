@@ -191,6 +191,49 @@ def fetch_nflcom_schedule(season: int, week: int, timeout: float = 30.0) -> str:
         return response.read().decode("utf-8", errors="replace")
 
 
+def records_through(csv_text: str, *, season: int, week: int) -> dict[str, str]:
+    """Win-loss record for every team from regular-season games BEFORE `week`.
+
+    The standing shown alongside a week-N ranking is the record the teams carry
+    *into* that week, so a Week 4 edition shows results through Week 3. Ties are
+    rendered as ``T``, matching how the NFL writes them.
+    """
+    wins: dict[str, int] = {}
+    losses: dict[str, int] = {}
+    ties: dict[str, int] = {}
+
+    for row in csv.DictReader(io.StringIO(csv_text)):
+        if row.get("season") != str(season) or row.get("game_type") != "REG":
+            continue
+        try:
+            played_week = int(row.get("week") or 0)
+        except ValueError:
+            continue
+        if played_week >= week:
+            continue
+        home_score, away_score = _to_int(row.get("home_score")), _to_int(row.get("away_score"))
+        if home_score is None or away_score is None:
+            continue
+        try:
+            home, away = _resolve(row["home_team"]), _resolve(row["away_team"])
+        except (KeyError, FetchError):
+            continue
+        if home_score == away_score:
+            for team in (home, away):
+                ties[team] = ties.get(team, 0) + 1
+            continue
+        winner, loser = (home, away) if home_score > away_score else (away, home)
+        wins[winner] = wins.get(winner, 0) + 1
+        losses[loser] = losses.get(loser, 0) + 1
+
+    teams = set(wins) | set(losses) | set(ties)
+    return {
+        team: f"{wins.get(team, 0)}-{losses.get(team, 0)}"
+        + (f"-{ties[team]}" if ties.get(team) else "")
+        for team in teams
+    }
+
+
 def remaining_bye_teams(all_teams: list[str], games: list[Game]) -> list[str]:
     """Teams with no game this week (byes, or a schedule gap)."""
     playing = {team for game in games for team in (game.home, game.away)}

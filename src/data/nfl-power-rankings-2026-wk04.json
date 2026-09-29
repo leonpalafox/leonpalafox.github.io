@@ -1,7 +1,7 @@
 {
   "week": 4,
   "season": 2026,
-  "generated": "2026-09-29T14:32:45Z",
+  "generated": "2026-09-29T19:04:10Z",
   "method": "Each source's 1-32 ballot is standardised to rank-standard-deviation units, pooled in a one-way random-effects model, and shrunk toward the panel mean (empirical Bayes), with uncertainty from both the residual disagreement and a bootstrap over sources. Full derivation in the post.",
   "movement": {
     "previousWeek": 3,
@@ -12,7 +12,8 @@
       "division": "West",
       "rank": 14,
       "previousRank": 22,
-      "delta": 8
+      "delta": 8,
+      "record": "3-0"
     },
     "biggestFaller": {
       "team": "Houston Texans",
@@ -21,10 +22,11 @@
       "division": "South",
       "rank": 23,
       "previousRank": 15,
-      "delta": -8
+      "delta": -8,
+      "record": "0-3"
     },
-    "unchanged": 1,
-    "moved": 31,
+    "unchanged": 2,
+    "moved": 30,
     "entries": [
       {
         "team": "Buffalo Bills",
@@ -33,7 +35,8 @@
         "division": "East",
         "rank": 1,
         "previousRank": 2,
-        "delta": 1
+        "delta": 1,
+        "record": "3-0"
       },
       {
         "team": "San Francisco 49ers",
@@ -42,7 +45,8 @@
         "division": "West",
         "rank": 2,
         "previousRank": 3,
-        "delta": 1
+        "delta": 1,
+        "record": "3-0"
       },
       {
         "team": "Kansas City Chiefs",
@@ -50,8 +54,9 @@
         "conference": "AFC",
         "division": "West",
         "rank": 3,
-        "previousRank": 6,
-        "delta": 3
+        "previousRank": 5,
+        "delta": 2,
+        "record": "3-0"
       },
       {
         "team": "Seattle Seahawks",
@@ -60,7 +65,8 @@
         "division": "West",
         "rank": 4,
         "previousRank": 1,
-        "delta": -3
+        "delta": -3,
+        "record": "2-1"
       },
       {
         "team": "Denver Broncos",
@@ -69,7 +75,8 @@
         "division": "West",
         "rank": 5,
         "previousRank": 7,
-        "delta": 2
+        "delta": 2,
+        "record": "2-1"
       },
       {
         "team": "Jacksonville Jaguars",
@@ -78,7 +85,8 @@
         "division": "South",
         "rank": 6,
         "previousRank": 10,
-        "delta": 4
+        "delta": 4,
+        "record": "2-1"
       },
       {
         "team": "Baltimore Ravens",
@@ -87,7 +95,8 @@
         "division": "North",
         "rank": 7,
         "previousRank": 8,
-        "delta": 1
+        "delta": 1,
+        "record": "2-1"
       },
       {
         "team": "Minnesota Vikings",
@@ -96,7 +105,8 @@
         "division": "North",
         "rank": 8,
         "previousRank": 13,
-        "delta": 5
+        "delta": 5,
+        "record": "3-0"
       },
       {
         "team": "Chicago Bears",
@@ -105,7 +115,8 @@
         "division": "North",
         "rank": 9,
         "previousRank": 12,
-        "delta": 3
+        "delta": 3,
+        "record": "2-1"
       },
       {
         "team": "Los Angeles Rams",
@@ -114,7 +125,8 @@
         "division": "West",
         "rank": 10,
         "previousRank": 4,
-        "delta": -6
+        "delta": -6,
+        "record": "1-2"
       },
       {
         "team": "Philadelphia Eagles",
@@ -123,7 +135,8 @@
         "division": "East",
         "rank": 11,
         "previousRank": 9,
-        "delta": -2
+        "delta": -2,
+        "record": "2-1"
       },
       {
         "team": "Cincinnati Bengals",
@@ -131,8 +144,9 @@
         "conference": "AFC",
         "division": "North",
         "rank": 12,
-        "previousRank": 5,
-        "delta": -7
+        "previousRank": 6,
+        "delta": -6,
+        "record": "2-1"
       },
       {
         "team": "Detroit Lions",
@@ -141,7 +155,8 @@
         "division": "North",
         "rank": 13,
         "previousRank": 14,
-        "delta": 1
+        "delta": 1,
+        "record": "2-1"
       },
       {
         "team": "Las Vegas Raiders",
@@ -150,7 +165,8 @@
         "division": "West",
         "rank": 14,
         "previousRank": 22,
-        "delta": 8
+        "delta": 8,
+        "record": "3-0"
       },
       {
         "team": "Pittsburgh Steelers",
@@ -159,7 +175,8 @@
         "division": "North",
         "rank": 15,
         "previousRank": 21,
-        "delta": 6
+        "delta": 6,
+        "record": "2-1"
       },
       {
         "team": "New England Patriots",
@@ -168,7 +185,8 @@
         "division": "East",
         "rank": 16,
         "previousRank": 11,
-        "delta": -5
+        "delta": -5,
+        "record": "1-2"
       },
       {
         "team": "Dallas Cowboys",
@@ -177,7 +195,8 @@
         "division": "East",
         "rank": 17,
         "previousRank": 16,
-        "delta": -1
+        "delta": -1,
+        "record": "1-2"
       },
       {
         "team": "New Orleans Saints",
@@ -186,7 +205,8 @@
         "division": "South",
         "rank": 18,
         "previousRank": 17,
-        "delta": -1
+        "delta": -1,
+        "record": "1-2"
       },
       {
         "team": "Indianapolis Colts",
@@ -195,7 +215,8 @@
         "division": "South",
         "rank": 19,
         "previousRank": 23,
-        "delta": 4
+        "delta": 4,
+        "record": "1-2"
       },
       {
         "team": "New York Giants",
@@ -203,8 +224,9 @@
         "conference": "NFC",
         "division": "East",
         "rank": 20,
-        "previousRank": 19,
-        "delta": -1
+        "previousRank": 20,
+        "delta": 0,
+        "record": "2-1"
       },
       {
         "team": "Cleveland Browns",
@@ -213,7 +235,8 @@
         "division": "North",
         "rank": 21,
         "previousRank": 28,
-        "delta": 7
+        "delta": 7,
+        "record": "2-1"
       },
       {
         "team": "Carolina Panthers",
@@ -221,8 +244,9 @@
         "conference": "NFC",
         "division": "South",
         "rank": 22,
-        "previousRank": 20,
-        "delta": -2
+        "previousRank": 19,
+        "delta": -3,
+        "record": "1-2"
       },
       {
         "team": "Houston Texans",
@@ -231,7 +255,8 @@
         "division": "South",
         "rank": 23,
         "previousRank": 15,
-        "delta": -8
+        "delta": -8,
+        "record": "0-3"
       },
       {
         "team": "Green Bay Packers",
@@ -240,7 +265,8 @@
         "division": "North",
         "rank": 24,
         "previousRank": 18,
-        "delta": -6
+        "delta": -6,
+        "record": "1-2"
       },
       {
         "team": "Washington Commanders",
@@ -249,7 +275,8 @@
         "division": "East",
         "rank": 25,
         "previousRank": 29,
-        "delta": 4
+        "delta": 4,
+        "record": "1-2"
       },
       {
         "team": "Atlanta Falcons",
@@ -258,7 +285,8 @@
         "division": "South",
         "rank": 26,
         "previousRank": 31,
-        "delta": 5
+        "delta": 5,
+        "record": "1-2"
       },
       {
         "team": "New York Jets",
@@ -267,7 +295,8 @@
         "division": "East",
         "rank": 27,
         "previousRank": 26,
-        "delta": -1
+        "delta": -1,
+        "record": "1-2"
       },
       {
         "team": "Arizona Cardinals",
@@ -276,7 +305,8 @@
         "division": "West",
         "rank": 28,
         "previousRank": 27,
-        "delta": -1
+        "delta": -1,
+        "record": "1-2"
       },
       {
         "team": "Los Angeles Chargers",
@@ -285,7 +315,8 @@
         "division": "West",
         "rank": 29,
         "previousRank": 25,
-        "delta": -4
+        "delta": -4,
+        "record": "0-3"
       },
       {
         "team": "Tampa Bay Buccaneers",
@@ -294,7 +325,8 @@
         "division": "South",
         "rank": 30,
         "previousRank": 24,
-        "delta": -6
+        "delta": -6,
+        "record": "0-3"
       },
       {
         "team": "Tennessee Titans",
@@ -303,7 +335,8 @@
         "division": "South",
         "rank": 31,
         "previousRank": 30,
-        "delta": -1
+        "delta": -1,
+        "record": "0-3"
       },
       {
         "team": "Miami Dolphins",
@@ -312,10 +345,12 @@
         "division": "East",
         "rank": 32,
         "previousRank": 32,
-        "delta": 0
+        "delta": 0,
+        "record": "0-3"
       }
     ]
   },
+  "recordsThroughWeek": 3,
   "headToHead": {
     "method": "Win probability comes from the consensus score alone: the projected margin is k * (score difference) + home field, treated as normal with standard deviation sigma, so P(home) = Phi(margin / sigma). The three constants are fitted by least squares on 6,719 completed regular-season games (2000-2025); see model.json and tools/calibrate.py.",
     "scheduleSource": "nflverse",
@@ -700,6 +735,7 @@
       "conference": "AFC",
       "division": "East",
       "rank": 1,
+      "record": "3-0",
       "score": 1.6639,
       "scoreRaw": 1.6787,
       "se": 0.0923,
@@ -732,6 +768,7 @@
       "conference": "NFC",
       "division": "West",
       "rank": 2,
+      "record": "3-0",
       "score": 1.4632,
       "scoreRaw": 1.4763,
       "se": 0.1071,
@@ -764,6 +801,7 @@
       "conference": "AFC",
       "division": "West",
       "rank": 3,
+      "record": "3-0",
       "score": 1.4585,
       "scoreRaw": 1.4715,
       "se": 0.1021,
@@ -796,6 +834,7 @@
       "conference": "NFC",
       "division": "West",
       "rank": 4,
+      "record": "2-1",
       "score": 1.3045,
       "scoreRaw": 1.3162,
       "se": 0.1005,
@@ -828,6 +867,7 @@
       "conference": "AFC",
       "division": "West",
       "rank": 5,
+      "record": "2-1",
       "score": 1.2057,
       "scoreRaw": 1.2165,
       "se": 0.1089,
@@ -860,6 +900,7 @@
       "conference": "AFC",
       "division": "South",
       "rank": 6,
+      "record": "2-1",
       "score": 1.019,
       "scoreRaw": 1.0281,
       "se": 0.1158,
@@ -892,6 +933,7 @@
       "conference": "AFC",
       "division": "North",
       "rank": 7,
+      "record": "2-1",
       "score": 0.9879,
       "scoreRaw": 0.9967,
       "se": 0.1278,
@@ -924,6 +966,7 @@
       "conference": "NFC",
       "division": "North",
       "rank": 8,
+      "record": "3-0",
       "score": 0.8627,
       "scoreRaw": 0.8704,
       "se": 0.1623,
@@ -956,6 +999,7 @@
       "conference": "NFC",
       "division": "North",
       "rank": 9,
+      "record": "2-1",
       "score": 0.7771,
       "scoreRaw": 0.784,
       "se": 0.1295,
@@ -988,6 +1032,7 @@
       "conference": "NFC",
       "division": "West",
       "rank": 10,
+      "record": "1-2",
       "score": 0.7125,
       "scoreRaw": 0.7189,
       "se": 0.1296,
@@ -1020,6 +1065,7 @@
       "conference": "NFC",
       "division": "East",
       "rank": 11,
+      "record": "2-1",
       "score": 0.5655,
       "scoreRaw": 0.5706,
       "se": 0.117,
@@ -1052,6 +1098,7 @@
       "conference": "AFC",
       "division": "North",
       "rank": 12,
+      "record": "2-1",
       "score": 0.5484,
       "scoreRaw": 0.5533,
       "se": 0.1479,
@@ -1084,6 +1131,7 @@
       "conference": "NFC",
       "division": "North",
       "rank": 13,
+      "record": "2-1",
       "score": 0.4667,
       "scoreRaw": 0.4709,
       "se": 0.1048,
@@ -1116,6 +1164,7 @@
       "conference": "AFC",
       "division": "West",
       "rank": 14,
+      "record": "3-0",
       "score": 0.2419,
       "scoreRaw": 0.2441,
       "se": 0.1664,
@@ -1148,6 +1197,7 @@
       "conference": "AFC",
       "division": "North",
       "rank": 15,
+      "record": "2-1",
       "score": 0.1462,
       "scoreRaw": 0.1475,
       "se": 0.1184,
@@ -1180,6 +1230,7 @@
       "conference": "AFC",
       "division": "East",
       "rank": 16,
+      "record": "1-2",
       "score": -0.0272,
       "scoreRaw": -0.0275,
       "se": 0.1383,
@@ -1212,6 +1263,7 @@
       "conference": "NFC",
       "division": "East",
       "rank": 17,
+      "record": "1-2",
       "score": -0.0801,
       "scoreRaw": -0.0808,
       "se": 0.103,
@@ -1244,6 +1296,7 @@
       "conference": "NFC",
       "division": "South",
       "rank": 18,
+      "record": "1-2",
       "score": -0.1175,
       "scoreRaw": -0.1185,
       "se": 0.1312,
@@ -1276,6 +1329,7 @@
       "conference": "AFC",
       "division": "South",
       "rank": 19,
+      "record": "1-2",
       "score": -0.4131,
       "scoreRaw": -0.4167,
       "se": 0.1509,
@@ -1308,6 +1362,7 @@
       "conference": "NFC",
       "division": "East",
       "rank": 20,
+      "record": "2-1",
       "score": -0.5297,
       "scoreRaw": -0.5345,
       "se": 0.1834,
@@ -1340,6 +1395,7 @@
       "conference": "AFC",
       "division": "North",
       "rank": 21,
+      "record": "2-1",
       "score": -0.5305,
       "scoreRaw": -0.5353,
       "se": 0.1385,
@@ -1372,6 +1428,7 @@
       "conference": "NFC",
       "division": "South",
       "rank": 22,
+      "record": "1-2",
       "score": -0.6068,
       "scoreRaw": -0.6122,
       "se": 0.1696,
@@ -1404,6 +1461,7 @@
       "conference": "AFC",
       "division": "South",
       "rank": 23,
+      "record": "0-3",
       "score": -0.6814,
       "scoreRaw": -0.6875,
       "se": 0.1952,
@@ -1436,6 +1494,7 @@
       "conference": "NFC",
       "division": "North",
       "rank": 24,
+      "record": "1-2",
       "score": -0.7258,
       "scoreRaw": -0.7322,
       "se": 0.1098,
@@ -1468,6 +1527,7 @@
       "conference": "NFC",
       "division": "East",
       "rank": 25,
+      "record": "1-2",
       "score": -0.8043,
       "scoreRaw": -0.8115,
       "se": 0.1424,
@@ -1500,6 +1560,7 @@
       "conference": "NFC",
       "division": "South",
       "rank": 26,
+      "record": "1-2",
       "score": -0.8277,
       "scoreRaw": -0.8351,
       "se": 0.1327,
@@ -1532,6 +1593,7 @@
       "conference": "AFC",
       "division": "East",
       "rank": 27,
+      "record": "1-2",
       "score": -1.1062,
       "scoreRaw": -1.116,
       "se": 0.1348,
@@ -1564,6 +1626,7 @@
       "conference": "NFC",
       "division": "West",
       "rank": 28,
+      "record": "1-2",
       "score": -1.145,
       "scoreRaw": -1.1553,
       "se": 0.124,
@@ -1596,6 +1659,7 @@
       "conference": "AFC",
       "division": "West",
       "rank": 29,
+      "record": "0-3",
       "score": -1.2026,
       "scoreRaw": -1.2133,
       "se": 0.1237,
@@ -1628,6 +1692,7 @@
       "conference": "NFC",
       "division": "South",
       "rank": 30,
+      "record": "0-3",
       "score": -1.4056,
       "scoreRaw": -1.4182,
       "se": 0.0969,
@@ -1660,6 +1725,7 @@
       "conference": "AFC",
       "division": "South",
       "rank": 31,
+      "record": "0-3",
       "score": -1.5565,
       "scoreRaw": -1.5704,
       "se": 0.0923,
@@ -1692,6 +1758,7 @@
       "conference": "AFC",
       "division": "East",
       "rank": 32,
+      "record": "0-3",
       "score": -1.6639,
       "scoreRaw": -1.6787,
       "se": 0.0923,

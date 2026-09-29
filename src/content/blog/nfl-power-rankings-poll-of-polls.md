@@ -319,6 +319,10 @@ Here is the consensus, with the spread across outlets shown for every team.
   .pop-team-text { display: flex; flex-direction: column; min-width: 0; }
   .pop-team-name { line-height: 1.2; }
   .pop-abbr { font-size: 10px; letter-spacing: 0.1em; color: var(--muted); margin-left: 6px; }
+  .pop-record {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 11px; color: var(--ink); margin-left: 7px;
+  }
   .pop-div { font-size: 10.5px; color: var(--muted); display: block; margin-top: 1px; }
   .pop-td-num { text-align: right; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px; white-space: nowrap; }
   .pop-ci { color: var(--muted); }
@@ -476,7 +480,8 @@ Here is the consensus, with the spread across outlets shown for every team.
           '<td class="pop-td-rank">' + t.rank + '</td>' +
           '<td class="pop-td-team"><div class="pop-team-cell">' + logoTag(t.abbr, 'md') +
             '<div class="pop-team-text"><span class="pop-team-name">' + t.team +
-              '<span class="pop-abbr">' + t.abbr + '</span></span>' +
+              '<span class="pop-abbr">' + t.abbr + '</span>' +
+              (t.record ? '<span class="pop-record">' + t.record + '</span>' : '') + '</span>' +
               '<span class="pop-div">' + t.conference + ' ' + t.division + '</span></div>' +
             '</div></td>' +
           '<td class="pop-td-num">' + (t.score > 0 ? '+' : '') + t.score.toFixed(3) + '</td>' +
@@ -949,6 +954,10 @@ its limits sit in the methodology further down.
   .h2h-mark img { width: 72%; height: 72%; object-fit: contain; }
   .h2h-team-text { display: flex; flex-direction: column; min-width: 0; }
   .h2h-abbr { font-size: 15px; font-weight: 600; letter-spacing: 0.01em; }
+  .h2h-record {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 11px; font-weight: 400; color: var(--muted);
+  }
   .h2h-team-name { font-size: 10.5px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .h2h-pick-tag { font-size: 9.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--signal-deep); }
   .h2h-centre { text-align: center; min-width: 118px; }
@@ -1000,11 +1009,17 @@ its limits sit in the methodology further down.
   var scores = {};
   var names = {};
   var abbrs = {};
+  var records = {};
   (window.__POP_DATA__.teams || []).forEach(function (t) {
     scores[t.team] = t.score;
     names[t.abbr] = t.team;
     abbrs[t.team] = t.abbr;
+    records[t.team] = t.record || '';
   });
+  var recordFor = function (abbr) {
+    for (var team in abbrs) { if (abbrs[team] === abbr) { return records[team]; } }
+    return '';
+  };
 
   var logoUrl = function (abbr) { return '/images/nfl/' + abbr.toLowerCase() + '.svg'; };
   var mark = function (abbr) {
@@ -1031,8 +1046,10 @@ its limits sit in the methodology further down.
     return '<div class="h2h-game">' +
       '<div class="h2h-side is-away">' +
         '<div class="h2h-team-text">' +
-          '<span class="h2h-abbr">' + g.awayAbbr + (homeFav ? '' : ' <span class="h2h-pick-tag">pick</span>') + '</span>' +
-          '<span class="h2h-team-name">' + g.away + ' · ' + g.awayScore.toFixed(2) + '</span>' +
+          '<span class="h2h-abbr">' + g.awayAbbr +
+            (recordFor(g.awayAbbr) ? ' <span class="h2h-record">' + recordFor(g.awayAbbr) + '</span>' : '') +
+            (homeFav ? '' : ' <span class="h2h-pick-tag">pick</span>') + '</span>' +
+          '<span class="h2h-team-name">' + g.away + '</span>' +
         '</div>' + mark(g.awayAbbr) +
       '</div>' +
       '<div class="h2h-centre">' +
@@ -1044,8 +1061,10 @@ its limits sit in the methodology further down.
       '</div>' +
       '<div class="h2h-side">' + mark(g.homeAbbr) +
         '<div class="h2h-team-text">' +
-          '<span class="h2h-abbr">' + g.homeAbbr + (homeFav ? ' <span class="h2h-pick-tag">pick</span>' : '') + '</span>' +
-          '<span class="h2h-team-name">' + g.home + ' · ' + g.homeScore.toFixed(2) + '</span>' +
+          '<span class="h2h-abbr">' + g.homeAbbr +
+            (recordFor(g.homeAbbr) ? ' <span class="h2h-record">' + recordFor(g.homeAbbr) + '</span>' : '') +
+            (homeFav ? ' <span class="h2h-pick-tag">pick</span>' : '') + '</span>' +
+          '<span class="h2h-team-name">' + g.home + '</span>' +
         '</div>' +
       '</div>' +
     '</div>';

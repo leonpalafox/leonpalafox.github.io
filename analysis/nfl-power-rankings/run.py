@@ -307,6 +307,21 @@ def main(argv: list[str] | None = None) -> int:
                 except Exception:  # noqa: BLE001 - schedule is optional
                     pass
 
+    # --- season-to-date records, from the same feed as the schedule --------
+    # These are the standings teams carry INTO this week, so a Week 4 edition
+    # shows results through Week 3.
+    season_records: dict[str, str] = {}
+    if csv_text:
+        season_records = games.records_through(csv_text, season=season, week=week)
+        if verbose:
+            top = ", ".join(
+                f"{teams.TEAMS[row.team][0]} {season_records.get(row.team, '?')}"
+                for row in rows[:4]
+            )
+            print(f"\nrecords through week {week - 1}: {top} ...")
+    else:
+        print("\nrecords unavailable (no schedule feed); table will omit W-L", file=sys.stderr)
+
     matchups = [
         headtohead.predict(game.home, game.away, scores, model, neutral=game.neutral)
         for game in schedule
@@ -439,6 +454,7 @@ def main(argv: list[str] | None = None) -> int:
         h2h_method_note=H2H_METHOD_NOTE,
         schedule_source=schedule_source,
         previous=previous_bundle,
+        records=season_records,
     )
     report.write_json(out_dir / "site-data.json", site_bundle)
 

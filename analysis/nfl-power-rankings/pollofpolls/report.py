@@ -221,6 +221,7 @@ def build_site_bundle(
     h2h_method_note: str = "",
     schedule_source: str = "",
     previous: dict | None = None,
+    records: dict[str, str] | None = None,
 ) -> dict:
     sources = list(panel.ballots)
     source_diag = {row["source"]: row for row in source_diagnostics(panel, rows)}
@@ -246,6 +247,8 @@ def build_site_bundle(
 
     teams_payload = []
     for row in rows:
+        # `record` is the team's standing entering this week, computed by
+        # run.py from the same schedule feed the matchups use.
         conf, div = TEAMS[row.team][1], TEAMS[row.team][2]
         teams_payload.append(
             {
@@ -254,6 +257,7 @@ def build_site_bundle(
                 "conference": conf,
                 "division": div,
                 "rank": row.rank,
+                "record": (records or {}).get(row.team, ""),
                 "score": round(row.score, 4),
                 "scoreRaw": round(row.score_raw, 4),
                 "se": round(row.se, 4),
@@ -298,6 +302,7 @@ def build_site_bundle(
                     "rank": row.rank,
                     "previousRank": was,
                     "delta": was - row.rank,
+                    "record": (records or {}).get(row.team, ""),
                 }
             )
         entries.sort(key=lambda e: (-abs(e["delta"]), e["rank"]))
@@ -343,6 +348,7 @@ def build_site_bundle(
         "generated": generated.replace(microsecond=0).isoformat().replace("+00:00", "Z"),
         "method": method_note,
         "movement": movement,
+        "recordsThroughWeek": (week - 1) if records else None,
         "headToHead": head_to_head,
         "diagnostics": {
             "sources": diagnostics.n_sources,
