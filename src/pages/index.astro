@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import Portada from '../components/Portada.astro';
-import heroSun from '../assets/hero-sun.png';
+import heroSun from '../assets/hero-sun.jpg';
 ---
 
 <Base title="León Palafox — AI Strategy and Recommender Systems for Finance">
@@ -32,6 +32,7 @@ import heroSun from '../assets/hero-sun.png';
           widths={[384, 576, 1152]}
           sizes="(min-width: 1024px) 576px, 90vw"
           loading="eager"
+          fetchpriority="high"
           class="h-auto w-full"
         />
         <div aria-hidden="true" class="absolute -right-14 top-1/2 hidden -translate-y-1/2 flex-col gap-10 2xl:flex">

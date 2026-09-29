@@ -2,8 +2,8 @@
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import SectionHeading from '../components/SectionHeading.astro';
-import heroCollage from '../assets/hero-collage.png';
-import bioPhoto from '../assets/bio-photo.png';
+import heroCollage from '../assets/hero-collage.jpg';
+import bioPhoto from '../assets/bio-photo.jpg';
 
 const logos = import.meta.glob<ImageMetadata>('../assets/logos/*.{png,jpg}', {
   eager: true,
@@ -100,7 +100,9 @@ const timeline = [
   title="León Palafox — Director, AI Innovation Lab at GBM"
   description="Director of the AI Innovation Lab at GBM, PhD from the University of Tokyo, lecturer at Universidad Panamericana, and columnist at El Financiero."
 >
-  <!-- Collage hero: recreates assets/hero_anout.png as a live composition -->
+  <!-- Collage hero: recreates assets/hero_anout.png as a live composition.
+       Both crops below are lazy on purpose: whichever one CSS hides is never
+       downloaded, and the visible one still starts as soon as layout runs. -->
   <section class="relative overflow-hidden border-b border-hairline bg-[#f4ebd7]">
     <!-- Collage panel (lg+): owns the right side, melts into the paper on its left edge -->
     <Image
@@ -109,7 +111,7 @@ const timeline = [
       aria-hidden="true"
       widths={[640, 1280]}
       sizes="(min-width: 1024px) 44vw, 100vw"
-      loading="eager"
+      loading="lazy"
       class="pointer-events-none absolute inset-y-0 right-0 hidden h-full w-[44%] object-cover object-right lg:block [mask-image:linear-gradient(to_left,#000_72%,transparent_100%)]"
     />
 
@@ -119,7 +121,7 @@ const timeline = [
       alt="Paper collage of neural networks, market charts, books, and Mexico City architecture"
       widths={[768, 1280, 1672]}
       sizes="100vw"
-      loading="eager"
+      loading="lazy"
       class="h-56 w-full object-cover object-right sm:h-72 lg:hidden"
     />
 
