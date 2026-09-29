@@ -30,17 +30,43 @@
       "tier": "Analyst column. Uses 'N. Team' numbered headings since week 3."
     },
     {
+      "id": "si-orr",
+      "outlet": "Sports Illustrated",
+      "analyst": "Conor Orr",
+      "kind": "analyst",
+      "url_tpl": "",
+      "urls": [
+        "https://www.si.com/nfl/conor-orr-week-4-nfl-power-rankings-bills-take-over-top-spot"
+      ],
+      "extract": "si_numbered",
+      "prior_weight": 0.9,
+      "tier": "Analyst column. Verify the numbering runs 1-32 with no gap; the week-3 edition skipped a number and was unusable."
+    },
+    {
       "id": "usatoday-davis",
       "outlet": "USA Today",
       "analyst": "Nate Davis",
       "kind": "analyst",
       "url_tpl": "",
       "urls": [
-        "https://www.usatoday.com/story/sports/nfl/columnist/nate-davis/2026/09/29/nfl-power-rankings-week-4-bills-seahawks-rams-49ers/91993129007/"
+        "https://www.usatoday.com/story/sports/nfl/columnist/nate-davis/2026/09/29/nfl-power-rankings-week-4-seahawks-bills-chiefs-49ers/91998593007/"
       ],
       "extract": "usatoday_numbered",
       "prior_weight": 0.9,
       "tier": "National columnist. Slug week number can lag the edition; confirm from the headline."
+    },
+    {
+      "id": "sportingnews-iyer",
+      "outlet": "Sporting News",
+      "analyst": "Vinnie Iyer",
+      "kind": "analyst",
+      "url_tpl": "",
+      "urls": [
+        "https://www.sportingnews.com/us/nfl/news/nfl-power-rankings-week-4/7341d122c9adf1408db36e5e"
+      ],
+      "extract": "sportingnews_numbered",
+      "prior_weight": 0.85,
+      "tier": "Analyst column with explicit 'N. Team (previous ranking: M)' headings."
     },
     {
       "id": "sharp-summerlin",
@@ -51,7 +77,20 @@
       "urls": [],
       "extract": "sharp_embedded_table",
       "prior_weight": 0.75,
-      "tier": "Single stable hub page updated weekly; embeds a JSON rank table. Check the page title's week."
+      "tier": "Single stable hub page updated weekly; embeds a JSON rank table. Confirm the 'Updated' date."
+    },
+    {
+      "id": "thescore-staff",
+      "outlet": "theScore",
+      "analyst": "theScore NFL desk",
+      "kind": "panel",
+      "url_tpl": "",
+      "urls": [
+        "https://www.thescore.com/nfl/news/3572173/nfl-power-rankings-week-4-check-ins-for-every-team-after-1-st-month"
+      ],
+      "extract": "thescore_numbered",
+      "prior_weight": 0.8,
+      "tier": "Editorial panel; explicit 'N. Team (record)' plus 'Previous rank' blocks."
     },
     {
       "id": "br-experts",

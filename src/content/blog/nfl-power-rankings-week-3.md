@@ -74,7 +74,7 @@ Here is where the nine outlets landed after Week 2.
   <div class="pop-header">
     <div class="pop-kicker">2026 season · Week 3 · poll of polls</div>
     <h2 class="pop-headline">Nine outlets, one consensus.</h2>
-    <p class="pop-lede">Each row is a team. The score is measured in rank standard deviations, so a value of +1.5 is roughly one and a half rank-spreads above the median team. The strip shows where each of the nine outlets placed that team, from first on the left to 32nd on the right. Click a row to see its individual ballots.</p>
+    <p class="pop-lede">Each row is a team. The score is measured in rank standard deviations, so a value of +1.5 is roughly one and a half rank-spreads above the median team. The strip shows where each outlet in the panel placed that team, from first on the left to 32nd on the right. Click a row to see its individual ballots.</p>
   </div>
 
   <div class="pop-podium">
@@ -111,7 +111,7 @@ Here is where the nine outlets landed after Week 2.
       <button type="button" class="pop-chip" data-filter="playoff">Playoff picture</button>
       <button type="button" class="pop-chip" data-filter="contested">Most contested</button>
     </div>
-    <div class="pop-readout" id="pop-readout">Select any row for that team's nine ballots.</div>
+    <div class="pop-readout" id="pop-readout">Select any row to see that team's ballots.</div>
   </div>
 
   <div class="pop-table-wrap">
@@ -123,7 +123,7 @@ Here is where the nine outlets landed after Week 2.
           <th class="pop-th-num">Score</th>
           <th class="pop-th-num pop-hide-sm">95% CI</th>
           <th class="pop-th-num pop-hide-sm">Mean</th>
-          <th class="pop-th-spread">Spread across nine outlets</th>
+          <th class="pop-th-spread">Spread across the panel</th>
           <th class="pop-th-num" title="League-wide rank from the panel">Panel</th>
           <th class="pop-th-num pop-playoff-only">Field</th>
           <th class="pop-th-num">P(No. 1)</th>        </tr>
@@ -132,7 +132,7 @@ Here is where the nine outlets landed after Week 2.
     </table>
   </div>
   <div class="pop-legend">
-    <span class="pop-legend-item"><span class="pop-swatch pop-swatch-band"></span> interquartile spread of the nine ballots</span>
+    <span class="pop-legend-item"><span class="pop-swatch pop-swatch-band"></span> interquartile spread of the panel</span>
     <span class="pop-legend-item"><span class="pop-swatch pop-swatch-dot"></span> one outlet's rank</span>
     <span class="pop-legend-item">Scale: 1 → 32, left to right</span>
   </div>
@@ -733,7 +733,7 @@ Here is where the nine outlets landed after Week 2.
   function renderReadout(team) {
     var out = document.getElementById('pop-readout');
     if (!team) {
-      out.textContent = filterSummary || 'Select any row for that team&rsquo;s nine ballots.';
+      out.textContent = filterSummary || 'Select any row to see that team&rsquo;s ballots.';
       return;
     }
     out.innerHTML = '<strong>' + team.team + '</strong> — consensus #' + team.rank +

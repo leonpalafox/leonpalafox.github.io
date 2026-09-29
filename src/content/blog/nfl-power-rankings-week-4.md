@@ -1,6 +1,6 @@
 ---
 title: "NFL Poll of Polls: Week 4"
-description: "A new No. 1, unanimously: all five outlets put Buffalo top after Seattle's first loss. Atlanta climbs eight, Houston falls nine."
+description: "A new No. 1, unanimously: all eight outlets put Buffalo top after Seattle's first loss. Las Vegas climbs eight, Houston falls eight."
 pubDate: 2026-09-29
 lang: en
 tags: ["data-viz", "nfl", "statistics"]
@@ -8,7 +8,7 @@ tags: ["data-viz", "nfl", "statistics"]
 
 Week 3 produced the season's strangest Sunday yet. Atlanta went to Green Bay and won by three touchdowns, Chicago beat Philadelphia 27–7, New England lost by 29 in Jacksonville, and Washington knocked off the previously unbeaten Seahawks 33–31. The panel has responded.
 
-For the first time this season there is a new No. 1, and it is unanimous: **all five outlets rate Buffalo first** — a thinner panel than usual, for reasons the sources section explains. Dallas plummeted and Atlanta soared.
+For the first time this season there is a new No. 1, and it is unanimous: **all eight outlets rate Buffalo first**. Cincinnati fell seven places, Las Vegas climbed eight, and the Rams dropped six.
 
 This is the same poll of polls as previous weeks — the week's rankings standardised and pooled, with every team's move charted.
 
@@ -76,7 +76,7 @@ Here is where the panel landed after Week 3.
   <div class="pop-header">
     <div class="pop-kicker">2026 season · Week 4 · poll of polls</div>
     <h2 class="pop-headline">Nine outlets, one consensus.</h2>
-    <p class="pop-lede">Each row is a team. The score is measured in rank standard deviations, so a value of +1.5 is roughly one and a half rank-spreads above the median team. The strip shows where each of the nine outlets placed that team, from first on the left to 32nd on the right. Click a row to see its individual ballots.</p>
+    <p class="pop-lede">Each row is a team. The score is measured in rank standard deviations, so a value of +1.5 is roughly one and a half rank-spreads above the median team. The strip shows where each outlet in the panel placed that team, from first on the left to 32nd on the right. Click a row to see its individual ballots.</p>
   </div>
 
   <div class="pop-podium">
@@ -113,7 +113,7 @@ Here is where the panel landed after Week 3.
       <button type="button" class="pop-chip" data-filter="playoff">Playoff picture</button>
       <button type="button" class="pop-chip" data-filter="contested">Most contested</button>
     </div>
-    <div class="pop-readout" id="pop-readout">Select any row for that team's nine ballots.</div>
+    <div class="pop-readout" id="pop-readout">Select any row to see that team's ballots.</div>
   </div>
 
   <div class="pop-table-wrap">
@@ -125,7 +125,7 @@ Here is where the panel landed after Week 3.
           <th class="pop-th-num">Score</th>
           <th class="pop-th-num pop-hide-sm">95% CI</th>
           <th class="pop-th-num pop-hide-sm">Mean</th>
-          <th class="pop-th-spread">Spread across nine outlets</th>
+          <th class="pop-th-spread">Spread across the panel</th>
           <th class="pop-th-num" title="League-wide rank from the panel">Panel</th>
           <th class="pop-th-num pop-playoff-only">Field</th>
           <th class="pop-th-num">P(No. 1)</th>        </tr>
@@ -134,7 +134,7 @@ Here is where the panel landed after Week 3.
     </table>
   </div>
   <div class="pop-legend">
-    <span class="pop-legend-item"><span class="pop-swatch pop-swatch-band"></span> interquartile spread of the nine ballots</span>
+    <span class="pop-legend-item"><span class="pop-swatch pop-swatch-band"></span> interquartile spread of the panel</span>
     <span class="pop-legend-item"><span class="pop-swatch pop-swatch-dot"></span> one outlet's rank</span>
     <span class="pop-legend-item">Scale: 1 → 32, left to right</span>
   </div>
@@ -735,7 +735,7 @@ Here is where the panel landed after Week 3.
   function renderReadout(team) {
     var out = document.getElementById('pop-readout');
     if (!team) {
-      out.textContent = filterSummary || 'Select any row for that team&rsquo;s nine ballots.';
+      out.textContent = filterSummary || 'Select any row to see that team&rsquo;s ballots.';
       return;
     }
     out.innerHTML = '<strong>' + team.team + '</strong> — consensus #' + team.rank +
@@ -1341,25 +1341,20 @@ Every team plays in Week 4. All 16 games are priced below from the consensus alo
 
 ## The panel
 
-5 outlets this week. Mean distance from the consensus order, in rank positions:
+8 outlets this week. Mean distance from the consensus order, in rank positions:
 
 | Outlet | Analyst | Mean gap | ρ vs consensus |
 |--------|---------|----------|----------------|
-| Bleacher Report | B/R NFL staff | 1.31 | 0.979 |
-| USA Today | Nate Davis | 1.38 | 0.981 |
-| FOX Sports | Ralph Vacchiano | 1.44 | 0.976 |
-| CBS Sports | Pete Prisco | 1.69 | 0.970 |
-| Sharp Football Analysis | Raymond Summerlin | 2.12 | 0.953 |
+| Bleacher Report | B/R NFL staff | 1.12 | 0.984 |
+| theScore | theScore NFL desk | 1.25 | 0.983 |
+| FOX Sports | Ralph Vacchiano | 1.56 | 0.968 |
+| CBS Sports | Pete Prisco | 1.69 | 0.967 |
+| USA Today | Nate Davis | 1.69 | 0.969 |
+| Sporting News | Vinnie Iyer | 1.81 | 0.964 |
+| Sports Illustrated | Conor Orr | 2.12 | 0.958 |
+| Sharp Football Analysis | Raymond Summerlin | 2.12 | 0.947 |
 
-The panel ranges from a mean gap of 1.31 positions (Bleacher Report) to 2.12 (Sharp Football Analysis), which is a tighter spread of opinion than last week's — no outlet sits far outside the group this time.
-
-**This is a five-source panel, not the usual nine.** Three regulars were not usable when this ran, and one of those is a change worth flagging:
-
-- **NFL.com had not published** a Week 4 column. The templated slug that worked for weeks 1–3 returned 404 and the article was absent from NFL.com's power-rankings hub and sitemap, so Nick Shook's ballot is missing.
-- **Neil Reynolds' NFL.com UK column** was also unpublished, as it was in Week 3.
-- **Conor Orr's SI column** again could not be validated — see the sources section.
-
-Five is the pipeline's minimum, and it is a smaller panel than I would like: the consensus rests on five voices rather than nine, so treat the precise ordering below the top few as softer than in previous weeks.
+There is no outlier this week. Every outlet sits within 2.12 positions of the consensus, and the agreement range (ρ 0.947–0.984) is the tightest of the season. Last week Sports Illustrated sat 4.2 positions out; this week Conor Orr's column is back inside the group, and it is a proper 1–32 ballot again after last week's list skipped a number and had to be dropped.
 
 <a id="sources"></a>
 
@@ -1380,32 +1375,32 @@ the code rather than in every post:
   method does *not* claim.
 - `analysis/nfl-power-rankings/README.md` — the pipeline and how to run it.
 
-This week's panel — five ballots, every one verified complete:
+This week's panel — eight ballots, every one verified complete:
 
 | Outlet | Analyst | This week's ballot |
 |--------|---------|--------------------|
 | CBS Sports | Pete Prisco | [cbssports.com](https://www.cbssports.com/nfl/news/2026-nfl-power-rankings-week-4-bills-vikings/) |
 | FOX Sports | Ralph Vacchiano | [foxsports.com](https://www.foxsports.com/stories/nfl/2026-nfl-power-rankings-week-4) |
-| USA Today | Nate Davis | [usatoday.com](https://www.usatoday.com/story/sports/nfl/columnist/nate-davis/2026/09/29/nfl-power-rankings-week-4-bills-seahawks-rams-49ers/91993129007/) |
+| Sports Illustrated | Conor Orr | [si.com](https://www.si.com/nfl/conor-orr-week-4-nfl-power-rankings-bills-take-over-top-spot) |
+| USA Today | Nate Davis | [usatoday.com](https://www.usatoday.com/story/sports/nfl/columnist/nate-davis/2026/09/29/nfl-power-rankings-week-4-seahawks-bills-chiefs-49ers/91998593007/) |
+| Sporting News | Vinnie Iyer | [sportingnews.com](https://www.sportingnews.com/us/nfl/news/nfl-power-rankings-week-4/7341d122c9adf1408db36e5e) |
 | Sharp Football Analysis | Raymond Summerlin | [sharpfootballanalysis.com](https://www.sharpfootballanalysis.com/analysis/nfl-power-rankings/) |
+| theScore | theScore NFL desk | [thescore.com](https://www.thescore.com/nfl/news/3572173/nfl-power-rankings-week-4-check-ins-for-every-team-after-1-st-month) |
 | Bleacher Report | B/R NFL staff | [bleacherreport.com](https://bleacherreport.com/articles/25504118-br-experts-week-4-nfl-power-rankings) |
 
-A source that cannot be validated is dropped rather than patched, and the panel
-size is reported as it is. That is why this edition is thinner than the last
-two: the pipeline refuses to invent a ballot, and it refuses to carry a partial
-one. Four outlets were unusable this week:
+Two regulars are missing, and neither is a parsing failure:
 
-- **NFL.com** — no Week 4 column published at the time of running.
-- **NFL.com UK** — no Week 4 column published.
-- **Sports Illustrated** — Conor Orr's Week 3 column numbered only 31 teams, and
-  the Week 4 edition could not be verified as a complete 1–32 ballot, so it is
-  out rather than guessed at.
-- **theScore** — the Week 4 article could not be located.
+- **NFL.com had not published** a Week 4 column when this ran. The templated slug
+  that worked for weeks 1–3 returns 404, the article is absent from NFL.com's
+  power-rankings hub, and Nick Shook's author page still lists only weeks 1–3. On
+  that evidence it is late rather than gone.
+- **Neil Reynolds' NFL.com UK column** also had not published. His column runs
+  later in the week than the US desk's, and in Week 3 it never appeared at all.
 
-ESPN remains absent permanently: every URL on the site returns an empty
-`HTTP 202` to a plain request, so it cannot be read unattended.
+ESPN remains absent permanently. Every URL on the site — including the homepage —
+returns an empty `HTTP 202` to a plain request, so it cannot be read unattended.
 
-The panel agreed more tightly than in either previous week — mean pairwise
-Spearman **ρ = 0.937** on five sources, and all five
-put Buffalo first. Fewer voices agreeing is weaker evidence than more voices
-agreeing, which is the honest reading of a smaller panel.
+The panel agreed more tightly than in any previous week: mean pairwise Spearman
+**ρ = 0.933**, and all eight outlets put Buffalo first. That is what a clear
+consensus looks like — worth contrasting with Week 3, when the same pipeline
+found ρ = 0.881 and a genuine outlier.
