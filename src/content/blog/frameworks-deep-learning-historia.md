@@ -1,17 +1,16 @@
 ---
-title: "Los frameworks de deep learning nacieron en laboratorios y murieron en empresas"
-description: "Theano, Caffe2, PyTorch, TensorFlow y MXNet: la gráfica de quién mantuvo cada framework entre 2007 y 2020, rehecha y con la explicación de cada tramo."
+title: "Quién sostuvo los frameworks de deep learning: laboratorios, empresas y comunidades"
+description: "Theano, Caffe / Caffe2, PyTorch, TensorFlow y MXNet: una cronología de sus orígenes, mantenimiento y gobernanza entre 2007 y 2020."
 pubDate: 2026-10-04
 lang: es
 tags: ["deep-learning", "codigo-abierto", "historia", "datos"]
-cover: frameworks-deep-learning-historia
 ---
 
-Entre 2007 y 2020 el deep learning pasó de ser un tema de laboratorio a ser infraestructura. La gráfica que abre esta entrada —la de los cinco frameworks y quién los mantenía año con año— se ha compartido mucho, y cuenta casi toda la historia: **Theano, Caffe2, PyTorch, TensorFlow y MXNet**, con una barra de color para cada institución que los sostuvo.
+Entre 2007 y 2020 el deep learning pasó de ser un tema de laboratorio a ser infraestructura. Los frameworks que hicieron posible ese cambio tuvieron trayectorias distintas: **Theano, Caffe / Caffe2, PyTorch, TensorFlow y MXNet** mezclan investigación académica, ingeniería corporativa y comunidades de código abierto.
 
-Contiene un patrón que se repite cinco veces. Casi todos empiezan en una universidad y casi todos terminan dentro de una empresa. El único que hace el camino inverso es el que empezó corporativo.
+No todos nacieron en una universidad ni todos terminaron dentro de una empresa. TensorFlow y PyTorch tienen origen corporativo; MXNet pasó a la incubadora de Apache; Theano perdió el desarrollo principal de su equipo académico, pero tuvo continuaciones. La pregunta interesante es quién sostiene el trabajo cuando una herramienta se vuelve infraestructura.
 
-Aquí está la gráfica otra vez, pero con los logos a color y todo explicado: haz clic en cualquier barra o en cualquier nombre y se abre el detalle de ese tramo. Mueve el año para ver el reparto de un momento concreto.
+La [gráfica interactiva al final de la entrada](#grafica) permite explorar cada periodo. Los logos identifican los proyectos y las etiquetas explican quién los mantenía o en qué estado estaban.
 
 <nav class="toc" aria-label="Contenido">
   <details>
@@ -20,16 +19,18 @@ Aquí está la gráfica otra vez, pero con los logos a color y todo explicado: h
       <span class="toc-count">5 secciones</span>
     </summary>
     <ol>
-      <li><a href="#grafica"><span class="toc-n">01</span><span class="toc-t">La gráfica, otra vez</span><span class="toc-d">Interactiva, con los logos y con el detalle de cada tramo</span></a></li>
-      <li><a href="#patron"><span class="toc-n">02</span><span class="toc-t">El patrón</span><span class="toc-d">De la universidad a la empresa, cinco veces</span></a></li>
+      <li><a href="#cronologia"><span class="toc-n">01</span><span class="toc-t">La gráfica, otra vez</span><span class="toc-d">Interactiva, con los logos y con el detalle de cada tramo</span></a></li>
+      <li><a href="#patron"><span class="toc-n">02</span><span class="toc-t">El patrón</span><span class="toc-d">Distintos orígenes, un problema de mantenimiento</span></a></li>
       <li><a href="#filas"><span class="toc-n">03</span><span class="toc-t">Las cinco filas</span><span class="toc-d">Qué fue cada framework y qué le pasó</span></a></li>
-      <li><a href="#excepcion"><span class="toc-n">04</span><span class="toc-t">La excepción que confirma la regla</span><span class="toc-d">PyTorch y el camino inverso</span></a></li>
+      <li><a href="#excepcion"><span class="toc-n">04</span><span class="toc-t">El papel de las fundaciones</span><span class="toc-d">PyTorch y MXNet: gobernanza y continuidad</span></a></li>
       <li><a href="#leer"><span class="toc-n">05</span><span class="toc-t">Qué dice esta gráfica hoy</span><span class="toc-d">Y por qué importa si estás eligiendo infraestructura</span></a></li>
     </ol>
   </details>
 </nav>
 
 <style>
+  .frameworks-sources-table { overflow-x: auto; }
+  .frameworks-sources-table:focus-visible { outline: 2px solid #c2472f; }
   .toc {
     margin: 32px 0;
     border: 1px solid #e0dcd4; border-radius: 2px;
@@ -69,92 +70,96 @@ Aquí está la gráfica otra vez, pero con los logos a color y todo explicado: h
   @media (max-width: 560px) { .toc { padding: 0 16px; } .toc-t { font-size: 14px; } }
 </style>
 
+<a id="cronologia"></a>
+
 ## 01 · La gráfica, otra vez
 
-La versión original tiene un problema de lectura: los tramos son cajas de color sin etiqueta, así que hay que adivinar qué cambió en cada frontera y por qué. La reconstruí como una línea de tiempo con logos, botones y un panel de detalle. Cada tramo de color es un periodo de mantenimiento, y cada frontera entre dos colores es una transferencia que sí ocurrió en una fecha concreta.
+Una barra de color puede ocultar diferencias importantes: el origen de un proyecto, su financiación y su gobernanza no son lo mismo. En esta cronología el color identifica al framework; la etiqueta de cada tramo indica su responsable principal o su estado. No implica que una sola institución escribiera todo el código.
 
-<a id="grafica"></a>
+Los cuadros punteados preceden al lanzamiento público. Las fechas se agrupan por año: una frontera no representa necesariamente una transferencia de propiedad. En particular, la fila **Caffe / Caffe2 reúne dos proyectos relacionados**, no dos nombres del mismo repositorio. El logo de esa fila es el de Caffe2.
 
-Los cuadros punteados son años en los que el proyecto todavía no existía. Si mueves el control de año, la gráfica te dice quién tenía cada framework ese año y en qué estado estaba. Si haces clic en una fila, ves las etapas completas de ese framework con sus fechas.
+[Explorar la gráfica y sus detalles ↓](#grafica)
 
 <a id="patron"></a>
 
 ## 02 · El patrón
 
-Puestos en orden cronológico, los cinco arranques forman una secuencia bastante limpia: **Theano en 2007, Caffe en 2013, TensorFlow y MXNet en 2015, PyTorch en 2016**. Cuatro de los cinco nacieron dentro de una universidad o de un grupo de investigación.
+Los arranques públicos se reparten así: **Theano en 2007, Caffe en 2013, TensorFlow y MXNet en 2015, PyTorch en enero de 2017**. Caffe2 se presentó en abril de 2017. Distinguir el trabajo previo del lanzamiento público evita adelantar artificialmente una barra.
 
-El segundo acto es el que casi nadie recuerda: **todos menos uno terminaron absorbidos, transferidos o abandonados por una empresa**. Theano lo dejó de mantener su propio equipo, Caffe2 se fusionó con PyTorch, MXNet pasó a una fundación con el respaldo de Amazon, y PyTorch acabó en una fundación después de nacer en Meta. Cuando la gráfica original dice "no más en desarrollo" para Theano en 2018, está describiendo el final de un ciclo completo: el proyecto universitario que se quedó sin relevo porque el relevo se fue a la industria.
+Lo que comparten no es un mismo destino institucional, sino un problema de mantenimiento. Un framework necesita kernels para hardware nuevo, empaquetado, documentación y soporte. Mi lectura es que esa carga ayuda a explicar el peso que adquirieron las empresas, aunque una cronología por sí sola no demuestra por qué ganó o perdió cada proyecto.
 
-Hay una explicación estructural y no tiene nada de misteriosa. Un framework de deep learning no se sostiene con artículos: se sostiene con kernels de GPU para hardware que cambia cada año, con empaquetado para media docena de sistemas operativos, con documentación y con soporte. Eso es trabajo de ingeniería a tiempo completo y no encaja en el presupuesto de un laboratorio, cuyo producto son publicaciones. La industria sí tiene incentivo para pagarlo, porque necesita desplegar modelos.
+Tampoco conviene confundir patrocinio con propiedad. AWS respaldó MXNet, pero Apache proporcionaba su marco de gobernanza. Y una fundación puede ampliar la participación sin garantizar que un proyecto siga teniendo mantenedores.
 
 <a id="filas"></a>
 
 ## 03 · Las cinco filas
 
-### Theano — Université de Montréal y MILA (2007–2017)
+### Theano — Université de Montréal y MILA (2007–2017; mantenimiento posterior)
 
-Theano es el abuelo de la lista y no es un framework en el sentido actual: es un compilador de expresiones matemáticas. Escribías tu modelo como un grafo simbólico, Theano lo optimizaba y generaba código en C y CUDA. Esa separación entre lo que escribes y lo que se ejecuta es hoy normal; en 2007 era novedosa.
+Theano permitía definir expresiones matemáticas como grafos simbólicos, optimizarlas y generar código eficiente para CPU y GPU. Salió del entorno de investigación de Montréal. No hay motivo para dibujar una transferencia formal de la universidad a MILA en 2013 sin una fuente que documente ese cambio.
 
-Salió del grupo de Yoshua Bengio en Montréal y creció junto con MILA. La versión 1.0 llegó en septiembre de 2017 y, poco después, el anuncio del fin del desarrollo. Cuando la gráfica marca 2018 como el año en que Theano deja de desarrollarse, el sucesor real ya tenía dos años en el mercado: PyTorch, que resolvía el mismo problema con Python corriente y sin compilar nada.
+El anuncio del fin del desarrollo principal llegó el **28 de septiembre de 2017**; la versión **1.0 se publicó el 15 de noviembre de 2017**. El equipo anunció un periodo de mantenimiento limitado, y hubo versiones posteriores. Por eso la barra desde 2018 dice «mantenimiento limitado», no «el proyecto desapareció». La historia también continuó en proyectos derivados, como PyTensor. Véanse el [anuncio de MILA](https://groups.google.com/g/theano-announce/c/PiH4p7NqZ60), el [historial de versiones](https://github.com/Theano/Theano/blob/master/HISTORY.txt) y el [repositorio de Theano](https://github.com/Theano/Theano).
 
-### Caffe2 — UC Berkeley y Meta (2013–2018)
+### Caffe / Caffe2 — Berkeley, Facebook y la integración con PyTorch
 
-Caffe apareció en diciembre de 2013, escrito por Yangqing Jia durante su doctorado en Berkeley, en el laboratorio de Trevor Darrell. Su aportación práctica fue permitir que un modelo se definiera en un archivo de configuración en vez de en código: se compartía un prototxt y cualquiera podía reproducir la red. Para una generación de investigadores, eso fue la diferencia entre leer un resultado y poder verificarlo.
+Caffe nació en Berkeley, con Yangqing Jia y la comunidad de BVLC. Sus archivos de configuración facilitaron compartir arquitecturas y modelos. Caffe2 fue un proyecto relacionado que Facebook presentó en 2017, orientado también al despliegue móvil y distribuido; no fue una simple compraventa de Caffe.
 
-Caffe2 es la segunda vida del proyecto. Facebook lo anunció en abril de 2017 con lo que al original le faltaba —redes recurrentes, despliegue en móvil, entrenamiento distribuido— y un año después lo fusionó dentro de PyTorch. Berkeley ya había cerrado el soporte del Caffe original en 2018. La frontera entre la barra de Berkeley y la de Meta en la gráfica es, literalmente, el momento en que el framework cambió de dueño.
+La integración con PyTorch se desarrolló en 2018. El **2 de mayo** se anunció públicamente la plataforma conjunta PyTorch 1.0. La fila continúa después de esa fecha como «integrado en PyTorch»: marcarla como inexistente en 2019 o 2020 confundiría integración con desaparición. Fuentes: [Caffe, BVLC](https://caffe.berkeleyvision.org/) y el [anuncio conjunto de Caffe2 y PyTorch](https://caffe2.ai/blog/2018/05/02/Caffe2_PyTorch_1_0.html).
 
-### PyTorch — Meta y la PyTorch Foundation (2016– )
+### PyTorch — Facebook AI Research y la PyTorch Foundation
 
-PyTorch llegó en 2016 y ganó por una razón poco glamorosa: se comportaba como Python normal. El grafo se construye mientras el código corre, así que un `print` o un depurador sirven de algo. El resto de la lista pedía que describieras el grafo antes de ejecutarlo, y depurar eso era incómodo.
+PyTorch se publicó en **enero de 2017**, después de su desarrollo inicial. El grafo dinámico facilitó experimentar y depurar desde Python: no era necesario declarar por adelantado un grafo estático completo. Eso no significa que PyTorch carezca de código compilado; sus operaciones se apoyan en bibliotecas y kernels nativos. Su [balance del primer año](https://pytorch.org/blog/a-year-in/) documenta aquel lanzamiento.
 
-Con la fusión de Caffe2 en 2018 quedó como el único framework de Meta, y en 2019 ya dominaba el código nuevo de investigación. La transferencia a la PyTorch Foundation es de 2022 y queda fuera del marco de esta gráfica, pero es el desenlace que importa: el único framework que nació dentro de una empresa terminó siendo el único que salió de una.
+Durante 2007–2020 la institución de referencia es Facebook AI Research. Usar «Meta» en esas barras sería emplear retrospectivamente el nombre posterior de la empresa. La [PyTorch Foundation se anunció en septiembre de 2022](https://pytorch.org/blog/PyTorchfoundation/), fuera de la ventana de la gráfica, con participación de varias empresas, incluida Meta.
 
-### TensorFlow — Google (2015– )
+### TensorFlow — Google (desde 2015)
 
-TensorFlow es el caso en el que la empresa no compró el proyecto ni lo absorbió: **lo construyó y lo mantuvo entero**. Google venía corriendo DistBelief internamente —en producción desde 2011, sin código público— y en noviembre de 2015 liberó TensorFlow como código abierto. Con Keras como fachada amable y una ruta clara hacia producción, se volvió durante años la respuesta por defecto a "qué uso".
+TensorFlow también nació dentro de una empresa. Google lo publicó como código abierto el **9 de noviembre de 2015**, después de la experiencia de DistBelief. Por tanto, PyTorch no es el único framework de origen corporativo de esta selección. El [anuncio de Google Research](https://research.google/blog/tensorflow-googles-latest-machine-learning-system-open-sourced-for-everyone/) explica ese origen.
 
-Es también la única fila de la gráfica que no cambia de dueño ni una vez. Toda la barra es del mismo color.
+Dentro de esta ventana la barra permanece bajo Google. La herramienta sí cambió: TensorFlow 2.0 adoptó la ejecución eager por defecto, de modo que la oposición entre «PyTorch dinámico» y «todos los demás estáticos» tampoco describe todo el periodo. Véase la [documentación de ejecución eager](https://www.tensorflow.org/guide/eager).
 
-### MXNet — consorcio académico, Apache y AWS (2015– )
+### MXNet — comunidad DMLC, Apache y apoyo de AWS
 
-MXNet es el experimento que más me interesa de los cinco. Lo armó un grupo de varias universidades en lugar de un solo laboratorio, Amazon lo adoptó como framework preferido en AWS, entró al Apache Incubator en enero de 2017 y se graduó como proyecto de primer nivel ese mismo diciembre. Todo el camino institucional correcto: fundación neutral, respaldo corporativo, soporte en la nube más grande.
+MXNet apareció en 2015 como una colaboración de investigadores y recibió el [respaldo de AWS en 2016](https://press.aboutamazon.com/2016/11/aws-announces-three-new-amazon-ai-services). Su entrada al Apache Incubator fue en enero de 2017. **No se graduó ese mismo año:** la graduación llegó en septiembre de 2022, como registra la [ficha de incubación de Apache](https://incubator.apache.org/projects/mxnet.html).
 
-Y aun así perdió. Es la prueba de que la gobernanza correcta no basta cuando el ecosistema ya eligió. Si algo enseña MXNet, es que en infraestructura de software el respaldo de una empresa grande no sustituye a la comunidad de desarrolladores que escribe los tutoriales, responde en los foros y publica el código de sus modelos.
+La barra de 2017–2020 indica, por tanto, «Apache Incubator». El proyecto fue retirado en 2023, fuera del periodo dibujado; su [sitio oficial lo identifica como retirado](https://mxnet.apache.org/). Una fundación y un patrocinador importante no bastan, por sí solos, para asegurar continuidad.
 
 <a id="excepcion"></a>
 
-## 04 · La excepción que confirma la regla
+## 04 · El papel de las fundaciones
 
-Hay una lectura fácil de esta gráfica: "la industria se comió al código abierto académico". Es verdad a medias. La lectura más precisa es que **el coste de mantener un framework se volvió incompatible con la estructura de un laboratorio, y compatible con la de una empresa que necesita desplegar modelos**.
+PyTorch y MXNet muestran que el recorrido no es simplemente «universidad, luego empresa». PyTorch pasó de liderazgo corporativo a una fundación; MXNet ya estaba en incubación en Apache años antes. Sus resultados distintos impiden tratar la fundación como garantía de éxito o como señal de abandono.
 
-PyTorch no niega el patrón: lo invierte. Nació corporativo y terminó en una fundación neutral, que es exactamente el camino que ninguna otra fila recorre. Hoy el patrón dominante ya no es "universidad que se queda sin relevo" sino "empresa que cede la gobernanza cuando el proyecto se vuelve infraestructura crítica". TensorFlow sigue dentro de Google; PyTorch ya no está dentro de Meta.
+Ceder la gobernanza tampoco significa que las empresas dejen de contribuir. Conviene separar tres preguntas: quién toma decisiones, quién paga a los mantenedores y quién puede continuar el proyecto si uno de sus patrocinadores se retira.
 
 <a id="leer"></a>
 
 ## 05 · Qué dice esta gráfica hoy
 
-Si estás eligiendo infraestructura hoy, la gráfica de 2007–2020 se lee como una advertencia sobre qué preguntar. No "cuál es más rápido en el benchmark", sino:
+La cronología sirve para formular preguntas sobre infraestructura, no para decidir qué framework usar solamente por su logo o por la empresa que lo respalda:
 
-- **¿Quién paga el mantenimiento dentro de tres años?** Theano no murió por un problema técnico, murió cuando el equipo que lo entendía dejó de estar financiado para mantenerlo.
-- **¿Qué pasa si la empresa se aburre?** TensorFlow sobrevivió a dos cambios de estrategia interna de Google; MXNet no sobrevivió a la indiferencia del mercado. Una fundación neutral es una respuesta, no una garantía.
-- **¿El paquete sobrevive sin la empresa?** Si la respuesta es no, no estás eligiendo una herramienta, estás eligiendo un proveedor.
+- **¿Quién mantiene el código y cómo se financia ese trabajo?** Una licencia abierta no asegura tiempo de ingeniería.
+- **¿Cómo se toman las decisiones?** Patrocinio, mantenimiento y gobernanza pueden recaer en grupos distintos.
+- **¿Qué ocurre si un equipo se retira?** Importan la comunidad, la documentación y la posibilidad de continuar el desarrollo.
 
-La conclusión práctica es incómoda: entre 2007 y 2020, "código abierto" describió la licencia, no la gobernanza. Cinco proyectos con licencias permisivas, y cuatro de ellos con una sola institución decidiendo cuándo se terminaba. La buena noticia es que la curva cambió: la fundación dejó de ser un cementerio y se volvió una salida.
+Estas cinco historias no demuestran que todos los proyectos académicos terminen absorbidos ni que las fundaciones resuelvan el mantenimiento. Sí muestran por qué una evaluación de infraestructura necesita mirar más allá de las prestaciones técnicas.
 
 ---
 
 ### Sobre la gráfica y las fuentes
 
-La versión de esta entrada se construyó desde cero a partir del registro público de cada proyecto, no copiando la imagen original. Donde la original simplificaba una transferencia, esta abre el tramo en la fecha documentada:
+La cronología resume el periodo **2007–2020** a resolución anual. Los desenlaces posteriores se explican en el texto y en los paneles, sin dibujarlos dentro de ese intervalo. Las fuentes primarias están enlazadas en cada sección.
 
-| Framework | Nace | Primera casa | Segunda casa | Estado |
-|-----------|------|--------------|--------------|--------|
-| Theano | 2007 | Université de Montréal | MILA (2013) | Fin de desarrollo anunciado en 2018 |
-| Caffe / Caffe2 | 2013 | UC Berkeley (BVLC) | Meta (2017) | Fusionado con PyTorch en marzo de 2018 |
-| PyTorch | 2016 | Meta (FAIR) | PyTorch Foundation (2022) | Activo |
-| TensorFlow | 2015 | Google Brain | — | Activo |
-| MXNet | 2015 | Consorcio académico | Apache / AWS (2017) | Proyecto Apache |
+<div class="frameworks-sources-table" role="region" aria-label="Resumen histórico de los frameworks" tabindex="0">
 
-Fuentes principales: la página de [Theano](https://github.com/Theano/Theano) y su anuncio de fin de soporte; la [historia de Caffe y Caffe2](https://en.wikipedia.org/wiki/Caffe_(software)) con el anuncio de [Facebook al liberar Caffe2](https://techcrunch.com/2017/04/18/facebook-open-sources-caffe2-its-flexible-deep-learning-framework-of-choice/); el [anuncio de TensorFlow](https://research.google/blog/tensorflow-googles-latest-machine-learning-system-open-sourced-for-everyone/) en el blog de Google Research; y la [entrada de MXNet al Apache Incubator](https://techcrunch.com/2017/01/30/mxnet-accepted-to-the-apache-incubator/).
+| Framework | Lanzamiento público | Origen | Evolución institucional |
+|-----------|---------------------|--------|------------------------|
+| Theano | 2007 | Université de Montréal / MILA | Fin del desarrollo principal anunciado en 2017; mantenimiento y derivados posteriores |
+| Caffe / Caffe2 | 2013 / 2017 | BVLC / Facebook | Caffe2 se integra con PyTorch en 2018 |
+| PyTorch | Enero de 2017 | Facebook AI Research | PyTorch Foundation desde 2022 |
+| TensorFlow | Noviembre de 2015 | Google | Liderazgo de Google durante la ventana mostrada |
+| MXNet | 2015 | Comunidad DMLC | Incubación en 2017; graduación en 2022; retiro en 2023 |
 
-Los logos son marcas de sus respectivos dueños y se usan aquí con fines ilustrativos. Están incluidos en la página —vectoriales o convertidos a PNG en el build— para que el diagrama no dependa de ninguna petición a un servidor externo.
+</div>
+
+Los logos proceden de los sitios y repositorios de los proyectos y se sirven como archivos locales, respetando sus proporciones y colores. Son marcas de sus respectivos titulares y se usan con fines ilustrativos.
