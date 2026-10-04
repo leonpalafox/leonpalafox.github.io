@@ -4,6 +4,7 @@ import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import PostCover from '../../components/PostCover.astro';
 import PollOfPollsData from '../../components/PollOfPollsData.astro';
+import FrameworksTimeline from '../../components/FrameworksTimeline.astro';
 import { getAsset } from '../../lib/assets';
 import { fullDate, kanjiYear } from '../../lib/format';
 
@@ -68,6 +69,11 @@ const pollDataWeeks: Record<string, number> = {
   'nfl-power-rankings-week-4': 4,
 };
 const pollDataWeek = pollDataWeeks[post.id];
+
+// Posts built around the framework timeline mount the interactive diagram in a
+// full-width band, so it is not squeezed into the reading column.
+const timelinePosts = new Set(['frameworks-deep-learning-historia']);
+const showTimeline = timelinePosts.has(post.id);
 ---
 
 <Base title={`${title} — León Palafox`} description={description ?? title} lang={lang} ogImage={ogImage} ogType="article" publishedTime={pubDate.toISOString()}>
@@ -103,6 +109,12 @@ const pollDataWeek = pollDataWeeks[post.id];
     <div class="prose-post mx-auto mt-12 max-w-2xl">
       <Content />
     </div>
+
+    {showTimeline && (
+      <div class="mx-auto mt-4 max-w-5xl">
+        <FrameworksTimeline />
+      </div>
+    )}
 
     <footer class="mx-auto mt-16 max-w-2xl border-t border-hairline pt-8">
       {related.length > 0 && (

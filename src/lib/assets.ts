@@ -12,7 +12,7 @@
 //   coverAlt: "…"        # optional, overrides the entry below
 //   coverCaption: "…"    # optional, overrides the entry below
 
-const files = import.meta.glob<ImageMetadata>('../assets/blog/**/*.{png,jpg,jpeg,webp,avif}', {
+const files = import.meta.glob<ImageMetadata>('../assets/blog/**/*.{png,jpg,jpeg,webp,avif,svg}', {
   eager: true,
   import: 'default',
 });
@@ -51,6 +51,10 @@ const registry: Record<string, AssetEntry> = {
   },
   riiaa: {
     alt: 'Conferencia RIIAA en el museo Universum, Ciudad de México',
+  },
+  'frameworks-deep-learning-historia': {
+    alt: 'Línea de tiempo de 2007 a 2020 con cinco frameworks de deep learning —Theano, Caffe2, PyTorch, TensorFlow y MXNet— y una barra de color por cada institución que los mantuvo.',
+    caption: 'Gráfica del artículo',
   },
 };
 

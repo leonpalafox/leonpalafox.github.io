@@ -1,0 +1,1258 @@
+---
+/**
+ * Interactive re-drawing of the "who maintained which deep learning framework"
+ * chart, 2007–2020.
+ *
+ * The original is a flat grid with logos pasted into it. This one keeps the grid
+ * but makes every row and every period a button: clicking a framework or a
+ * single span opens an explanation of what happened, to whom, and when. The year
+ * scrubber collapses the diagram onto one year and shows who held what.
+ *
+ * Figures are the documented public record — project announcements, end-of-
+ * support notices, foundation transfers. Where the original chart simplified a
+ * hand-off, this version splits the period at the documented date and says so.
+ *
+ * All marks are inlined or bundled locally, so the diagram renders without a
+ * single third-party request.
+ */
+interface Phase {
+  /** Inclusive start year. */
+  from: number;
+  /** Inclusive end year. */
+  to: number;
+  /** Who held the project during this period. */
+  who: string;
+  where?: string;
+  status?: string;
+  /** Paragraph shown in the detail panel. */
+  body: string;
+  /** Dated facts, rendered as a list. */
+  milestones?: string[];
+}
+
+interface Framework {
+  name: string;
+  type: string;
+  color: string;
+  /** Key into `marks`: the mark shown on the row label. */
+  mark: string | null;
+  /** Overrides `mark` inside the timeline bars, where the maintainer matters more. */
+  spanMark?: string;
+  /** Panel paragraph when the whole row is selected. */
+  summary: string;
+  origin: string;
+  phases: Phase[];
+}
+
+const START = 2007;
+const END = 2020;
+const years = Array.from({ length: END - START + 1 }, (_, i) => START + i);
+/** 1 label column + one column per year. */
+const COLS = years.length + 1;
+
+const frameworks: Framework[] = [
+  {
+    name: 'Theano',
+    type: 'Compilador simbólico',
+    color: '#6d4fa3',
+    mark: 'theano',
+    origin: 'Université de Montréal · MILA',
+    summary:
+      'El framework que entrenó al modelo al que se le atribuye el arranque del deep learning moderno, y que después salió de soporte sin ruido. Theano empezó como un compilador numérico para definir, optimizar y evaluar expresiones matemáticas: construías un grafo simbólico y él emitía C y CUDA rápidos.',
+    phases: [
+      {
+        from: 2007,
+        to: 2012,
+        who: 'Université de Montréal',
+        where: 'Montréal, Canadá',
+        body: 'Theano nace como un compilador académico. No está pensado para productos sino para investigación, que es justo lo que la investigación necesitaba en 2007: escribir matemáticas y obtener GPU sin escribir kernels.',
+        milestones: [
+          '2007 — arranca el proyecto en la Université de Montréal',
+          '2012 — AlexNet gana ImageNet, entrenada en parte con herramientas de esa generación',
+        ],
+      },
+      {
+        from: 2013,
+        to: 2017,
+        who: 'MILA',
+        where: 'Montréal, Canadá',
+        body: 'Yoshua Bengio funda MILA en 1993 y el instituto se convierte en la casa del proyecto mientras Montréal se vuelve uno de los polos de deep learning más densos del mundo. Theano es el dialecto local de ese polo.',
+        milestones: ['2013 — MILA da al proyecto una casa institucional', '2017 — por fin sale Theano 1.0'],
+      },
+      {
+        from: 2018,
+        to: 2020,
+        who: 'Ya no se desarrolla',
+        status: 'Terminado',
+        body: 'Después de la versión 1.0 los mantenedores anuncian que el desarrollo se detiene. La razón es la misma que termina con todos los frameworks de esta gráfica: el campo se movió a otra forma de escribir modelos y las personas que conocían el código se movieron con él.',
+        milestones: [
+          '28 de septiembre de 2017 — se publica Theano 1.0',
+          '2018 — se anuncia el fin del desarrollo',
+        ],
+      },
+    ],
+  },
+  {
+    name: 'Caffe2',
+    type: 'Runtime de producción',
+    color: '#2f6ba8',
+    mark: 'caffe2',
+    origin: 'UC Berkeley (BVLC) → Meta',
+    summary:
+      'Caffe fue el framework que hizo práctica la red convolucional para quien no iba a escribir sus propios kernels. Caffe2 es lo que pasó cuando su autor se fue a Facebook y reconstruyó la idea para desplegar a escala, incluidos los teléfonos.',
+    phases: [
+      {
+        from: 2007,
+        to: 2012,
+        who: 'Sin proyecto',
+        status: 'Sin proyecto',
+        body: 'Todavía nada. Caffe se escribe durante un doctorado en Berkeley, en el laboratorio de Trevor Darrell, y su primera versión —DeCAF— aparece en la primavera de 2013 para competir en ImageNet.',
+        milestones: ['Primavera de 2013 — DeCAF, el ancestro directo, se usa en ILSVRC'],
+      },
+      {
+        from: 2013,
+        to: 2016,
+        who: 'UC Berkeley',
+        where: 'Berkeley Vision and Learning Center',
+        body: 'El Berkeley Vision and Learning Center publica Caffe en diciembre de 2013. Los modelos se definen en archivos de configuración y no en código, y por eso una generación de investigadores pudo compartir un prototxt y reproducir una red. Es un proyecto de laboratorio, liberado para que otros laboratorios lo usen.',
+        milestones: [
+          'Diciembre de 2013 — Caffe se publica con licencia BSD',
+          '2014 — Caffe se vuelve la herramienta por defecto en visión por computadora',
+        ],
+      },
+      {
+        from: 2017,
+        to: 2018,
+        who: 'Meta',
+        where: 'Facebook',
+        status: 'Absorbido por PyTorch',
+        body: 'Facebook anuncia Caffe2 en abril de 2017 con lo que a Caffe le faltaba: redes recurrentes, despliegue en móvil y entrenamiento distribuido. Un año después se fusiona dentro de PyTorch, y el Caffe original ya había llegado a fin de soporte en 2018. La familia termina aquí.',
+        milestones: [
+          '18 de abril de 2017 — Facebook libera Caffe2',
+          'Marzo de 2018 — Caffe2 se fusiona con PyTorch',
+          '2018 — el Caffe original llega a fin de soporte',
+        ],
+      },
+    ],
+  },
+  {
+    name: 'PyTorch',
+    type: 'Define-by-run',
+    color: '#c2472f',
+    mark: 'pytorch',
+    origin: 'Meta → PyTorch Foundation',
+    summary:
+      'La única fila de esta gráfica que arranca corporativa. PyTorch es el primer framework de la lista creado dentro de una empresa desde el día uno, y también el primero que termina en una fundación: el camino inverso al de todas las demás filas.',
+    phases: [
+      {
+        from: 2007,
+        to: 2015,
+        who: 'Sin proyecto',
+        status: 'Sin proyecto',
+        body: 'Todavía nada. La idea sobre la que se construye PyTorch —definir la computación mientras corre, para que un depurador de Python sirva de algo— ya circulaba dentro de Meta como Torch, una biblioteca en Lua.',
+        milestones: [],
+      },
+      {
+        from: 2016,
+        to: 2020,
+        who: 'Meta',
+        where: 'Facebook AI Research',
+        body: 'PyTorch aparece en 2016 y gana a los investigadores por ser Python normal. Corres tu código, el grafo se construye como efecto secundario y, cuando algo se rompe, obtienes un stack trace en lugar de un volcado de grafo. En 2018 absorbe Caffe2 y queda como el único framework de Meta.',
+        milestones: [
+          '2016 — Facebook AI Research libera PyTorch',
+          'Marzo de 2018 — Caffe2 se fusiona con PyTorch',
+          '2019 — PyTorch domina el código nuevo de investigación',
+        ],
+      },
+    ],
+  },
+  {
+    name: 'TensorFlow',
+    type: 'Framework de producción',
+    color: '#b8860b',
+    mark: 'tensorflow',
+    spanMark: 'google',
+    origin: 'Google',
+    summary:
+      'El framework que convirtió una técnica de investigación en infraestructura. Google reemplazó su DistBelief interno con TensorFlow y lo liberó como código abierto, con lo que "cómo lo desplegamos" dejó de ser un problema para cualquiera que estuviera fuera de un laboratorio.',
+    phases: [
+      {
+        from: 2007,
+        to: 2014,
+        who: 'Solo investigación',
+        status: 'Solo investigación',
+        body: 'Google corre redes neuronales distribuidas grandes sobre DistBelief, usado internamente para voz e imágenes. El código no es público y está escrito para problemas a escala de Google.',
+        milestones: ['2011 — DistBelief, el predecesor interno, entra en producción'],
+      },
+      {
+        from: 2015,
+        to: 2020,
+        who: 'Google',
+        where: 'Google Brain',
+        body: 'TensorFlow se libera en noviembre de 2015 y se vuelve la respuesta por defecto a "qué uso". Llega Keras como fachada amable, después la infraestructura de serving, y durante años la pregunta de ecosistema queda resuelta. Dentro de esta ventana nunca sale de Google.',
+        milestones: [
+          '9 de noviembre de 2015 — TensorFlow se publica como código abierto',
+          '2017 — TensorFlow 1.0 y la API Estimator',
+          '2019 — TensorFlow 2.0 adopta ejecución eager, más cerca de PyTorch',
+        ],
+      },
+    ],
+  },
+  {
+    name: 'MXNet',
+    type: 'Framework distribuido',
+    color: '#2f7f8f',
+    mark: 'feather',
+    spanMark: 'mxnet',
+    origin: 'Consorcio académico → Apache',
+    summary:
+      'El framework que se saltó el camino de universidad a empresa yéndose directo a una fundación. MXNet lo construyó un grupo de varias universidades, lo respaldó Amazon, se entregó a la Apache Software Foundation y aun así perdió la guerra del ecosistema.',
+    phases: [
+      {
+        from: 2007,
+        to: 2014,
+        who: 'Sin proyecto',
+        status: 'Sin proyecto',
+        body: 'Todavía nada. MXNet lo ensambla un grupo que abarca varias instituciones en lugar de un solo laboratorio, y por eso pertenece a una fundación antes que cualquier otra fila de esta gráfica.',
+        milestones: [],
+      },
+      {
+        from: 2015,
+        to: 2020,
+        who: 'Apache / AWS',
+        where: 'Apache Software Foundation',
+        body: 'MXNet se publica en 2015 y se convierte en el framework de deep learning que AWS respalda dentro de su nube. Entra al Apache Incubator en enero de 2017 y gradúa como proyecto de primer nivel ese diciembre. Ser el framework de casa del mayor proveedor de nube no alcanzó para ganar desarrolladores.',
+        milestones: [
+          '2015 — se publica MXNet',
+          '2016 — Amazon lo nombra framework preferido en AWS',
+          'Enero de 2017 — entra al Apache Incubator',
+          'Diciembre de 2017 — proyecto de primer nivel de Apache',
+        ],
+      },
+    ],
+  },
+];
+
+/**
+ * Inline marks. Coloured brand marks are used in the row labels; inside the
+ * timeline bars the CSS repaints them in the phase ink so a bar reads as one
+ * object. Viewboxes are normalised to a consistent optical height.
+ */
+const marks: Record<string, { viewBox: string; svg: string }> = {
+  // Glyph outlines taken from the project's own wordmark, so the page does not
+  // have to fetch it.
+  theano: {
+    viewBox: '0 0 334 77',
+    svg: `<g fill="#1f5f8b" stroke="none"><path d="M22.64 5.531v14.907h19.594v6.703H22.64v28.5c0 3.875.735 6.578 2.203 8.109 1.469 1.531 4.032 2.297 7.688 2.297h9.703v6.891H31.687c-6.469 0-11.031-1.297-13.687-3.891-2.657-2.594-3.985-7.063-3.985-13.406v-28.5H0v-6.703h14.015V5.531h8.625zM100.875 40.406v32.531h-8.672V40.406c0-4.718-.828-8.187-2.484-10.406-1.657-2.219-4.578-3.328-8.766-3.328-4.718 0-8.515 1.609-11.39 4.828-2.875 3.219-4.313 7.781-4.313 13.687v27.75h-8.672V0h8.672v27.656c1.782-2.562 4.282-4.593 7.5-6.094 3.219-1.5 6.61-2.25 10.172-2.25 6.157 0 10.844 1.578 14.062 4.734 3.219 3.156 4.828 8.61 4.828 16.36zM192.938 54.625c0 6.094-2.079 11.031-6.235 14.813-4.156 3.781-9.672 5.672-16.547 5.672-3.375 0-6.61-.61-9.703-1.828-3.094-1.219-5.688-3.125-7.782-5.719v6.094h-8.671V0h8.671v28.062c1.969-2.437 4.5-4.312 7.594-5.625 3.093-1.312 6.39-1.968 9.89-1.968 6.876 0 12.392 1.875 16.548 5.625 4.156 3.75 6.235 8.594 6.235 14.531v14z"/><path d="M134.288 75.725c-6.943-1.349-11.004-3.202-14.915-8.805-2.839-4.067-3.284-6.994-3.284-10.635 0-3.55.667-6.824 1.902-9.578 1.343-2.977 3.447-5.594 6.037-7.53 4.9-3.626 10.628-4.726 16.727-4.526 2.43-5.62 6.29-10.522 10.845-13.998 3.583-2.73 7.476-4.492 11.256-5.426 5.79-1.398 11.907-1.088 17.289 1.238 3.033 1.302 5.79 3.175 8.014 5.51 2.575 2.698 4.29 5.62 5.432 9.098 1.02 3.13 1.31 6.545 1.043 9.845-.24 2.86-.98 5.66-2.2 8.16-1.16 2.37-2.72 4.54-4.66 6.35-3.28 3.07-7.6 4.85-12.06 5.32-2.1.22-4.35.14-6.42-.2-.55 2.4-1.5 4.7-2.86 6.8-2.19 3.36-5.35 5.94-8.94 7.5-2.4 1.06-4.99 1.6-7.62 1.66-2.85.07-5.54-.5-8.02-1.62-2.2-1-4.06-2.44-5.5-4.3z"/><path d="M252.156 25.344c-3.094-.625-5.75-.937-7.969-.937-5.719 0-10.484 1.64-14.297 4.921-3.812 3.282-5.719 7.75-5.719 13.407v31.202h-8.671V16.281h8.671v8.281c2.438-3.25 5.438-5.687 9-7.312 3.563-1.625 7.375-2.437 11.438-2.437.625 0 1.281.031 1.969.093.688.063 1.281.157 1.781.282v10.156h-6.625z"/><path d="M304.078 54.031c0 6.094-2.078 11.031-6.234 14.813-4.157 3.781-9.672 5.672-16.547 5.672-3.375 0-6.61-.61-9.703-1.828-3.094-1.219-5.688-3.125-7.782-5.719v6.094h-8.671V16.281h8.671v28.062c1.969-2.437 4.5-4.312 7.594-5.625 3.093-1.312 6.39-1.968 9.891-1.968 6.875 0 12.39 1.875 16.547 5.625 4.156 3.75 6.234 8.594 6.234 14.531v-2.875z"/><path d="M327.969 0c1.937 0 3.625.687 5.062 2.062 1.438 1.376 2.157 3.126 2.157 5.25 0 2.126-.719 3.876-2.157 5.25-1.437 1.376-3.125 2.063-5.062 2.063-1.938 0-3.625-.687-5.063-2.063-1.437-1.374-2.156-3.124-2.156-5.25 0-2.124.719-3.874 2.156-5.25C324.344.688 326.031 0 327.969 0z"/></g>`,
+  },
+  feather: {
+    viewBox: '0 0 64 64',
+    svg: `<g fill="none" stroke="#d22128" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 58C20 44 42 22 56 8"/><path d="M50 6c6 6 6 14 0 20-8 8-20 10-30 16"/><path d="M22 40c4-8 12-16 22-20"/><path d="M14 50c3-6 9-12 16-15"/></g>`,
+  },
+  /*
+   * Cup + saucer, with two nodes hinting at the graph the flag stood for. Drawn
+   * as a solid silhouette so it survives being repainted in a single ink inside
+   * the timeline bars.
+   */
+  caffe2: {
+    viewBox: '0 0 30 30',
+    svg: `<path fill="#7a3b1d" d="M7 10h16v7a8 8 0 0 1-8 8 8 8 0 0 1-8-8z"/><path fill="#7a3b1d" d="M23.6 11.4h1.8a3.9 3.9 0 0 1 0 7.8h-2.6v-2.6h2.4a1.3 1.3 0 0 0 0-2.6h-1.6z"/><rect x="2" y="26.4" width="26" height="2.6" rx="1.3" fill="#7a3b1d"/><g fill="#ffffff"><circle cx="11" cy="17.6" r="1.9"/><circle cx="19" cy="17.6" r="1.9"/><circle cx="15" cy="22.6" r="1.9"/></g>`,
+  },
+  pytorch: {
+    viewBox: '0 0 24 24',
+    svg: `<path fill="#ee4c2c" stroke="none" d="M12.005 0 4.952 7.053a9.865 9.865 0 0 0 0 14.022 9.866 9.866 0 0 0 14.022 0c3.984-3.9 3.986-10.205.085-14.023l-1.744 1.743c2.904 2.905 2.904 7.634 0 10.538s-7.634 2.904-10.538 0-2.904-7.634 0-10.538l4.647-4.646.582-.665zm3.568 3.899a1.327 1.327 0 0 0-1.327 1.327 1.327 1.327 0 0 0 1.327 1.328 1.327 1.327 0 0 0 1.327-1.328 1.327 1.327 0 0 0-1.327-1.327z"/>`,
+  },
+  tensorflow: {
+    viewBox: '0 0 30.4 32.6',
+    svg: `<path stroke="none" d="M2.6 5.4 14 0v32.6l-4.7-2.7V9.5L2.6 12.6z" fill="#e08b26"/><path stroke="none" d="M27.8 5.4 16.3 0v32.6l4.7-2.7V18.8l6.8 3.9V17L21 13.1V9.5l6.8-3.9z" fill="#e0552b"/><path stroke="none" d="M14 12.6 9.3 15.2v4.6l4.7 2.7z" fill="#e08b26"/><path stroke="none" d="M14 23.9 9.6 21.4v5.3z" fill="#e0552b"/>`,
+  },
+  mxnet: {
+    viewBox: '0 0 84 24',
+    svg: `<rect width="24" height="24" rx="4" fill="#2f7f8f"/><path d="M4.6 17.6V8.4h2.3l2 4.4 2-4.4h2.3v9.2h-2.1v-4.9l-1.5 3.3h-1.5l-1.4-3.3v4.9z" fill="#ffffff"/><g fill="#20333d" stroke="none"><path d="M28.4 17.6V6.4h2.2l2.7 6.3 2.7-6.3h2.2v11.2h-2.3v-6.4l-2 4.6h-1.2l-2-4.6v6.4z"/><path d="M40 17.6 44.1 6.4h2.4l4.1 11.2h-2.4l-.8-2.4h-4.3l-.8 2.4zm4.3-7.1-1.2 3.5h2.9z"/><path d="M50 17.6V6.4h2.2v7.3l4-7.3h2.3v11.2h-2.2V10l-4 7.6z"/><path d="M59.3 17.6V6.4h2.3v4.1h4.3V6.4h2.3v11.2h-2.3v-4.8h-4.3v4.8z"/><path d="M69 17.6V6.4h5.1v2.1h-3v2.1h2.8v2.1h-2.8v2.8h3.2v2.1z"/><path d="M75.4 17.6v-2.2h2.3v2.2z"/></g>`,
+  },
+  /*
+   * The Google wordmark as one solid lockup. The four brand colours only read at
+   * row-label size; the counters are punched out with a mask so the letters still
+   * parse when the whole mark is repainted in a single ink inside a bar.
+   */
+  google: {
+    viewBox: '0 0 100 36',
+    svg: `<mask id="ft-g-counters"><rect width="100" height="36" fill="#fff"/><circle cx="50" cy="18" r="3.6" fill="#000"/><circle cx="72" cy="18" r="3.6" fill="#000"/></mask><g mask="url(#ft-g-counters)" stroke="none"><path d="M8 4a14 14 0 0 0 0 28h11V21H9v-6h16v14.6A14 14 0 0 1 19 32 14 14 0 0 1 19 4z" fill="#4285f4"/><rect x="29" y="8" width="4.6" height="20" fill="#4285f4"/><circle cx="50" cy="18" r="10" fill="#ea4335"/><circle cx="72" cy="18" r="10" fill="#fbbc05"/><rect x="78" y="2" width="4.6" height="26" fill="#34a853"/><rect x="88" y="8" width="4.6" height="20" fill="#34a853"/><circle cx="97" cy="18" r="10" fill="#ea4335"/></g>`,
+  },
+};
+
+/**
+ * Wrap a registered mark in its own `<svg>` at a fixed height.
+ *
+ * `set:html` injects raw markup, so emitting the bare inner `<g>` would leave
+ * orphaned elements that render as nothing.
+ *
+ * A viewBox-only SVG has no intrinsic width or height, and Chrome will not derive
+ * one from `height: 100%` or `aspect-ratio` alone — the box collapses to zero.
+ * So the pixel size is computed here from the viewBox and written into the tag,
+ * which keeps a 3:1 wordmark and a 1:1 app icon on the same optical line.
+ */
+const svgFor = (key: string | null | undefined, height: number): string => {
+  const mark = key ? marks[key] : undefined;
+  if (!mark) return '';
+  const [, , vbWidth, vbHeight] = mark.viewBox.split(/\s+/).map(Number);
+  const width = vbWidth && vbHeight ? Math.round((vbWidth / vbHeight) * height) : height;
+  return `<svg viewBox="${mark.viewBox}" width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">${mark.svg}</svg>`;
+};
+
+const totalPhases = frameworks.reduce((sum, framework) => sum + framework.phases.length, 0);
+const isGap = (phase: Phase) => phase.who === 'Sin proyecto' || phase.who === 'Solo investigación';
+---
+
+<section class="frameworks-timeline" aria-labelledby="ft-title" data-ft>
+  <header class="ft-head">
+    <p class="micro-label text-signal-deep">Quién mantiene cada framework · 2007–2020</p>
+    <h2 id="ft-title" class="ft-headline">
+      Todos nacieron en un laboratorio. Casi todos terminaron dentro de una empresa.
+    </h2>
+    <p class="ft-lede">
+      Cada fila es un framework y cada barra de color es quién lo mantenía en ese periodo. Haz clic en una
+      barra —o en el nombre— para leer qué pasó, dónde y cuándo. Mueve el año para ver el reparto de un
+      momento concreto.
+    </p>
+  </header>
+
+  <div class="ft-controls">
+    <div class="ft-year">
+      <label for="ft-range" class="micro-label">Año</label>
+      <output id="ft-year" class="ft-year-value" for="ft-range">Todo</output>
+      <input
+        id="ft-range"
+        class="ft-range"
+        type="range"
+        min={START}
+        max={END}
+        step="1"
+        value={END}
+        aria-describedby="ft-year-hint"
+      />
+    </div>
+    <p id="ft-year-hint" class="ft-hint micro-label">
+      {totalPhases} etapas · arrastra para recorrer la línea de tiempo
+    </p>
+    <button type="button" class="ft-reset micro-label" data-ft-reset>Ver todo</button>
+  </div>
+
+  <div class="ft-scroll">
+    <div
+      class="ft-grid"
+      role="group"
+      aria-label="Cronología de frameworks de deep learning, 2007 a 2020"
+      style={`--ft-cols:${COLS}`}
+      data-ft-grid
+    >
+      <div class="ft-corner" aria-hidden="true"><span class="micro-label">Framework</span></div>
+      {
+        years.map((year) => (
+          <div class="ft-year-head" data-ft-col={year} aria-hidden="true">
+            <span>{year}</span>
+          </div>
+        ))
+      }
+
+      {
+        frameworks.map((framework, rowIndex) => {
+          const gridRow = rowIndex + 2;
+          const labelSvg = svgFor(framework.mark, 18);
+          const barSvg = svgFor(framework.spanMark ?? framework.mark, 13);
+          return (
+            <>
+              <div class="ft-rowlabel" style={`grid-row:${gridRow}`}>
+                <button
+                  type="button"
+                  class="ft-rowbtn"
+                  data-ft-row={rowIndex}
+                  aria-pressed="false"
+                  style={`--row-color:${framework.color}`}
+                >
+                  {labelSvg && <span class="ft-rowmark" aria-hidden="true" set:html={labelSvg} />}
+                  <span class="ft-rowtext">
+                    <span class="ft-rowname">{framework.name}</span>
+                    <span class="ft-rowtype">{framework.type}</span>
+                  </span>
+                </button>
+              </div>
+
+              {framework.phases.map((phase, phaseIndex) => {
+                const from = Math.max(phase.from, START);
+                const to = Math.min(phase.to, END);
+                const cols = Math.max(1, to - from + 1);
+                const empty = isGap(phase);
+                return (
+                  <button
+                    type="button"
+                    class="ft-span"
+                    data-ft-row={rowIndex}
+                    data-ft-phase={phaseIndex}
+                    data-ft-cols={cols}
+                    aria-pressed="false"
+                    aria-label={`${framework.name}, ${phase.from} a ${phase.to}: ${phase.who}`}
+                    style={{
+                      gridRow,
+                      gridColumn: `${from - START + 2} / span ${cols}`,
+                      '--phase-color': framework.color,
+                      '--phase-ink': `color-mix(in srgb, ${framework.color} 58%, var(--color-ink))`,
+                      '--phase-tint': `color-mix(in srgb, ${framework.color} 22%, var(--color-sheet))`,
+                    }}
+                    data-empty={empty ? 'true' : 'false'}
+                    data-tight={cols <= 2 ? 'true' : 'false'}
+                  >
+                    <span class="ft-span-inner">
+                      {barSvg && !empty && (
+                        <span
+                          class={framework.spanMark === 'google' ? 'ft-spanmark ft-spanmark--wide' : 'ft-spanmark'}
+                          aria-hidden="true"
+                          set:html={barSvg}
+                        />
+                      )}
+                      <span class="ft-spanwho">{phase.who}</span>
+                    </span>
+                  </button>
+                );
+              })}
+            </>
+          );
+        })
+      }
+    </div>
+  </div>
+
+  <p class="ft-note micro-label">
+    Los cuadros punteados son periodos en los que el proyecto todavía no existía. Todo es clicable.
+  </p>
+
+  <div class="ft-detail" data-ft-detail aria-live="polite"></div>
+
+  <ol class="ft-index">
+    {
+      frameworks.map((framework, rowIndex) => (
+        <li>
+          <button
+            type="button"
+            class="ft-indexbtn"
+            data-ft-row={rowIndex}
+            style={`--row-color:${framework.color}`}
+          >
+            <span class="ft-indexdot" aria-hidden="true" />
+            <span class="ft-indexname">{framework.name}</span>
+            <span class="ft-indextype">{framework.origin}</span>
+          </button>
+        </li>
+      ))
+    }
+  </ol>
+</section>
+
+<script is:inline define:vars={{ frameworks }}>
+  window.__FT_DATA__ = { frameworks };
+</script>
+
+<script>
+  interface Phase {
+    from: number;
+    to: number;
+    who: string;
+    where?: string;
+    status?: string;
+    body: string;
+    milestones?: string[];
+  }
+
+  interface Framework {
+    name: string;
+    type: string;
+    color: string;
+    mark: string | null;
+    summary: string;
+    origin: string;
+    phases: Phase[];
+  }
+
+  const START = 2007;
+  const END = 2020;
+  const YEARS = Array.from({ length: END - START + 1 }, (_, i) => START + i);
+
+  const payload = (window as unknown as { __FT_DATA__?: { frameworks: Framework[] } }).__FT_DATA__;
+  const FRAMEWORKS: Framework[] = payload?.frameworks ?? [];
+
+  /**
+   * Astro scopes this component's CSS with a `data-astro-cid-*` attribute on every
+   * element it renders at build time. Markup injected later by this script carries
+   * none of those attributes, so every rule for the detail panel would silently
+   * fail to match. The scope is read off the rendered root and stamped onto each
+   * generated node.
+   */
+  const scopeOf = (root: HTMLElement) =>
+    Array.from(root.attributes).find((attr) => attr.name.startsWith('data-astro-cid-'))?.name ?? '';
+  /** Set per instance in `mount`; empty is survivable — it only costs panel styling. */
+  let CID = '';
+
+  const inSpan = (phase: Phase, year: number) => year >= phase.from && year <= phase.to;
+  const spanLabel = (phase: Phase) =>
+    phase.from === phase.to ? String(phase.from) : `${phase.from}–${phase.to}`;
+  const isGap = (phase: Phase) => phase.who === 'Sin proyecto' || phase.who === 'Solo investigación';
+
+  const escapeHtml = (value: string) =>
+    value.replace(
+      /[&<>"']/g,
+      (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char] as string,
+    );
+
+  /**
+   * Panel markup is authored with `data-cid` placeholders and the scope is
+   * substituted in once per render. Values that go into the markup are escaped
+   * first (which neutralises any `@` in the data), so a plain substitution is
+   * safe here.
+   */
+  const html = (template: string) => template.replaceAll(' data-cid', CID);
+  const text = (value: string) => escapeHtml(value).replaceAll('@', '&#64;');
+
+  /** Inline custom properties so each card inherits its framework's colours. */
+  const palette = (framework: Framework) =>
+    `--phase-color:${framework.color};--phase-ink:color-mix(in srgb, ${framework.color} 58%, var(--color-ink));--phase-tint:color-mix(in srgb, ${framework.color} 22%, var(--color-sheet))`;
+
+  const positionBar = (from: number, to: number) => {
+    const a = ((Math.max(from, START) - START) / (END - START)) * 100;
+    const b = ((Math.min(to, END) - START + 1) / (END - START)) * 100;
+    return `left:${a.toFixed(3)}%;right:${Math.max(0, 100 - b).toFixed(3)}%`;
+  };
+
+  const panelForPhase = (framework: Framework, phase: Phase, year: number | null) => {
+    const facts = (phase.milestones ?? []).map((item) => `<li data-cid>${text(item)}</li>`).join('');
+    const now =
+      year === null
+        ? ''
+        : inSpan(phase, year)
+          ? `En ${year} esta etapa está activa`
+          : year < phase.from
+            ? `En ${year} esta etapa todavía no empieza`
+            : `En ${year} esta etapa ya había terminado`;
+    return html(`
+      <div class="ft-card" data-cid style="${palette(framework)}">
+        <p class="ft-card-kicker micro-label" data-cid>${text(framework.name)} · ${text(spanLabel(phase))}</p>
+        <h3 class="ft-card-title" data-cid>${text(phase.who)}</h3>
+        <p class="ft-card-org micro-label" data-cid>${text(phase.where ?? framework.origin)}${
+          phase.status && phase.status !== phase.who ? ` · ${text(phase.status)}` : ''
+        }</p>
+        <p class="ft-card-body" data-cid>${text(phase.body)}</p>
+        ${facts ? `<ul class="ft-card-facts" data-cid>${facts}</ul>` : ''}
+        ${now ? `<p class="ft-card-now micro-label" data-cid>${text(now)}</p>` : ''}
+      </div>`);
+  };
+
+  const panelForRow = (framework: Framework, year: number | null) => {
+    const tracks = framework.phases
+      .map((phase) => {
+        const state =
+          year === null
+            ? 'Etapa'
+            : inSpan(phase, year)
+              ? 'Activo'
+              : year < phase.from
+                ? 'Todavía no'
+                : 'Terminado';
+        const fill =
+          state === 'Terminado'
+            ? `color-mix(in srgb, ${framework.color} 30%, var(--color-sheet))`
+            : framework.color;
+        return `
+          <li class="ft-track" data-cid data-state="${state === 'Activo' ? 'on' : 'off'}">
+            <span class="ft-track-bar" data-cid style="${positionBar(phase.from, phase.to)};background:${fill}"></span>
+            <span class="ft-track-years micro-label" data-cid>${text(spanLabel(phase))}</span>
+            <span class="ft-track-state micro-label" data-cid>${state}</span>
+            <span class="ft-track-who" data-cid>${text(phase.who)}${
+              phase.where ? ` <span class="ft-track-where" data-cid>· ${text(phase.where)}</span>` : ''
+            }</span>
+          </li>`;
+      })
+      .join('');
+    return html(`
+      <div class="ft-card" data-cid style="${palette(framework)}">
+        <p class="ft-card-kicker micro-label" data-cid>${text(framework.name)} · ${text(framework.type)}</p>
+        <h3 class="ft-card-title" data-cid>${text(framework.origin)}</h3>
+        <p class="ft-card-body" data-cid>${text(framework.summary)}</p>
+        <ol class="ft-tracks" data-cid>${tracks}</ol>
+        <p class="ft-card-now micro-label" data-cid>Haz clic en una barra de la gráfica para leer cada etapa</p>
+      </div>`);
+  };
+
+  const panelForYear = (year: number) => {
+    const rows = FRAMEWORKS.map((framework) => {
+      const active = framework.phases.find((phase) => inSpan(phase, year) && !isGap(phase));
+      return `
+        <li class="ft-yearrow" data-cid>
+          <span class="ft-yeardot" data-cid style="background:${active ? framework.color : 'transparent'};border-color:${
+            active ? framework.color : 'var(--color-hairline)'
+          }"></span>
+          <span class="ft-yearname" data-cid>${text(framework.name)}</span>
+          <span class="ft-yearwho" data-cid>${text(active ? active.who : 'Sin proyecto todavía')}</span>
+        </li>`;
+    }).join('');
+    return html(`
+      <div class="ft-card ft-card--year" data-cid>
+        <p class="ft-card-kicker micro-label" data-cid>Estado del ecosistema</p>
+        <h3 class="ft-card-title" data-cid>${year}</h3>
+        <p class="ft-card-body" data-cid>Quién mantenía cada framework en ${year}. Elige una fila o una barra para leer la explicación completa.</p>
+        <ul class="ft-yearlist" data-cid>${rows}</ul>
+      </div>`);
+  };
+
+  function mount(root: HTMLElement) {
+    const grid = root.querySelector<HTMLElement>('[data-ft-grid]');
+    const detail = root.querySelector<HTMLElement>('[data-ft-detail]');
+    const range = root.querySelector<HTMLInputElement>('#ft-range');
+    const yearOut = root.querySelector<HTMLElement>('#ft-year');
+    const hint = root.querySelector<HTMLElement>('#ft-year-hint');
+    const reset = root.querySelector<HTMLButtonElement>('[data-ft-reset]');
+    if (!grid || !detail || !range || !yearOut || !reset || FRAMEWORKS.length === 0) return;
+
+    // Bound before the first render so the year panel is styled on load.
+    const scope = scopeOf(root);
+    CID = scope ? ` ${scope}` : '';
+
+    let year: number | null = null;
+    let selectedRow: number | null = null;
+    let selectedPhase: number | null = null;
+
+    const rowButtons = Array.from(root.querySelectorAll<HTMLButtonElement>('.ft-rowbtn'));
+    const indexButtons = Array.from(root.querySelectorAll<HTMLButtonElement>('.ft-indexbtn'));
+    const spans = Array.from(root.querySelectorAll<HTMLButtonElement>('.ft-span'));
+    const heads = Array.from(root.querySelectorAll<HTMLElement>('[data-ft-col]'));
+
+    const render = () => {
+      heads.forEach((head) => {
+        const column = Number(head.dataset.ftCol);
+        head.classList.toggle('is-year', year !== null && column === year);
+        head.classList.toggle('is-past', year !== null && column < year);
+      });
+
+      grid.classList.toggle('is-scrubbing', year !== null);
+      if (year !== null) grid.style.setProperty('--ft-year-index', String(year - START));
+
+      const rowSelected = selectedRow !== null && selectedPhase === null;
+      rowButtons.forEach((button) =>
+        button.classList.toggle('is-active', rowSelected && Number(button.dataset.ftRow) === selectedRow),
+      );
+      indexButtons.forEach((button) =>
+        button.classList.toggle('is-active', rowSelected && Number(button.dataset.ftRow) === selectedRow),
+      );
+
+      spans.forEach((span) => {
+        const isSelected =
+          selectedPhase !== null &&
+          Number(span.dataset.ftRow) === selectedRow &&
+          Number(span.dataset.ftPhase) === selectedPhase;
+        span.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
+      });
+
+      grid.classList.toggle('has-selection', selectedRow !== null);
+
+      if (selectedRow !== null && selectedPhase !== null) {
+        detail.innerHTML = panelForPhase(
+          FRAMEWORKS[selectedRow],
+          FRAMEWORKS[selectedRow].phases[selectedPhase],
+          year,
+        );
+      } else if (selectedRow !== null) {
+        detail.innerHTML = panelForRow(FRAMEWORKS[selectedRow], year);
+      } else {
+        detail.innerHTML = panelForYear(year ?? END);
+      }
+    };
+
+    const revealPanel = () => {
+      if (window.matchMedia('(max-width: 1023px)').matches) {
+        detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    };
+
+    const selectPhase = (row: number, phase: number) => {
+      if (selectedRow === row && selectedPhase === phase) {
+        selectedPhase = null;
+      } else {
+        selectedRow = row;
+        selectedPhase = phase;
+      }
+      render();
+      revealPanel();
+    };
+
+    const selectRow = (row: number) => {
+      if (selectedRow === row && selectedPhase === null) {
+        selectedRow = null;
+      } else {
+        selectedRow = row;
+        selectedPhase = null;
+      }
+      render();
+      revealPanel();
+    };
+
+    spans.forEach((span) =>
+      span.addEventListener('click', () =>
+        selectPhase(Number(span.dataset.ftRow), Number(span.dataset.ftPhase)),
+      ),
+    );
+    rowButtons.forEach((button) =>
+      button.addEventListener('click', () => selectRow(Number(button.dataset.ftRow))),
+    );
+    indexButtons.forEach((button) =>
+      button.addEventListener('click', () => selectRow(Number(button.dataset.ftRow))),
+    );
+
+    const syncYear = () => {
+      year = Number(range.value);
+      yearOut.textContent = String(year);
+      if (hint) hint.textContent = `Viendo ${year} · año ${year - START + 1} de ${YEARS.length}`;
+      render();
+    };
+
+    range.addEventListener('input', syncYear);
+    reset.addEventListener('click', () => {
+      year = null;
+      selectedRow = null;
+      selectedPhase = null;
+      range.value = String(END);
+      yearOut.textContent = 'Todo';
+      if (hint) hint.textContent = 'Arrastra para recorrer la línea de tiempo';
+      render();
+    });
+
+    render();
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-ft]').forEach(mount);
+</script>
+
+<style>
+  .frameworks-timeline {
+    margin: 44px 0 12px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  .ft-head {
+    max-width: 46rem;
+  }
+  .ft-headline {
+    margin: 10px 0 0;
+    font-family: var(--font-sans);
+    font-size: 1.5rem;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    font-weight: 600;
+  }
+  .ft-lede {
+    margin: 12px 0 0;
+    color: var(--color-muted);
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  /* Controls -------------------------------------------------------------- */
+  .ft-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 20px;
+    margin: 24px 0 14px;
+    padding: 12px 16px;
+    border: 1px solid var(--color-hairline);
+    background: var(--color-sheet);
+  }
+  .ft-year {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1 1 260px;
+    color: var(--color-muted);
+  }
+  .ft-year-value {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--color-ink);
+    min-width: 3.2em;
+  }
+  .ft-range {
+    appearance: none;
+    flex: 1 1 150px;
+    width: 100%;
+    height: 22px;
+    background: transparent;
+    cursor: ew-resize;
+  }
+  .ft-range::-webkit-slider-runnable-track {
+    height: 2px;
+    background: var(--color-hairline);
+  }
+  .ft-range::-moz-range-track {
+    height: 2px;
+    background: var(--color-hairline);
+  }
+  .ft-range::-webkit-slider-thumb {
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    margin-top: -6px;
+    border-radius: 50%;
+    background: var(--color-signal);
+    border: 2px solid var(--color-sheet);
+  }
+  .ft-range::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--color-signal);
+    border: 2px solid var(--color-sheet);
+  }
+  .ft-hint {
+    margin: 0;
+    color: var(--color-muted);
+  }
+  .ft-reset {
+    margin-left: auto;
+    border: 1px solid var(--color-hairline);
+    background: var(--color-paper);
+    color: var(--color-ink);
+    padding: 7px 12px;
+    cursor: pointer;
+    transition: background 140ms ease-out, color 140ms ease-out, border-color 140ms ease-out;
+  }
+  .ft-reset:hover {
+    background: var(--color-ink);
+    border-color: var(--color-ink);
+    color: var(--color-sheet);
+  }
+
+  /* Grid ------------------------------------------------------------------ */
+  .ft-scroll {
+    overflow-x: auto;
+    border: 1px solid var(--color-hairline);
+    background: var(--color-sheet);
+    -webkit-overflow-scrolling: touch;
+  }
+  .ft-grid {
+    display: grid;
+    grid-template-columns: minmax(158px, 1.6fr) repeat(14, minmax(44px, 1fr));
+    min-width: 800px;
+    position: relative;
+    isolation: isolate;
+  }
+
+  /* Column highlight while scrubbing a year. --ft-cols is 15 (label + years). */
+  .ft-grid.is-scrubbing::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 0;
+    pointer-events: none;
+    left: calc((var(--ft-year-index) + 1) / var(--ft-cols) * 100%);
+    width: calc(100% / var(--ft-cols));
+    background: color-mix(in srgb, var(--color-signal) 10%, transparent);
+    border-left: 1px solid color-mix(in srgb, var(--color-signal) 34%, transparent);
+    border-right: 1px solid color-mix(in srgb, var(--color-signal) 34%, transparent);
+    transition: left 180ms ease-out;
+  }
+
+  .ft-corner {
+    grid-column: 1;
+    position: sticky;
+    left: 0;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    padding: 6px 12px;
+    color: var(--color-muted);
+    background: var(--color-paper);
+    border-right: 1px solid var(--color-hairline);
+    border-bottom: 1px solid var(--color-hairline);
+  }
+  .ft-year-head {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 1px;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.03em;
+    color: var(--color-muted);
+    background: var(--color-paper);
+    border-bottom: 1px solid var(--color-hairline);
+    border-right: 1px solid color-mix(in srgb, var(--color-hairline) 60%, transparent);
+    transition: color 140ms ease-out, background 140ms ease-out;
+  }
+  .ft-year-head.is-past {
+    color: color-mix(in srgb, var(--color-muted) 52%, var(--color-paper));
+  }
+  .ft-year-head.is-year {
+    color: var(--color-signal-deep);
+    font-weight: 500;
+    background: color-mix(in srgb, var(--color-signal) 14%, var(--color-paper));
+  }
+
+  .ft-rowlabel {
+    grid-column: 1;
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    background: var(--color-paper);
+    border-right: 1px solid var(--color-hairline);
+    border-bottom: 1px solid var(--color-hairline);
+  }
+  .ft-rowbtn {
+    --row-color: var(--color-muted);
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    width: 100%;
+    min-height: 58px;
+    padding: 9px 12px 9px 9px;
+    border: 0;
+    border-left: 3px solid transparent;
+    background: transparent;
+    text-align: left;
+    cursor: pointer;
+    transition: background 140ms ease-out, border-color 140ms ease-out;
+  }
+  .ft-rowbtn:hover {
+    background: color-mix(in srgb, var(--row-color) 9%, var(--color-paper));
+  }
+  .ft-rowbtn.is-active {
+    border-left-color: var(--row-color);
+    background: color-mix(in srgb, var(--row-color) 14%, var(--color-paper));
+  }
+  /* Marks are emitted at a fixed pixel size (see `svgFor`); the box just centres them. */
+  .ft-rowmark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+  }
+  .ft-rowmark svg {
+    display: block;
+    max-width: 100%;
+  }
+  .ft-rowtext {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    min-width: 0;
+  }
+  .ft-rowname {
+    font-size: 0.86rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--color-ink);
+  }
+  .ft-rowtype {
+    font-family: var(--font-mono);
+    font-size: 0.5rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  .ft-span {
+    --phase-color: var(--color-muted);
+    margin: 7px 2px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    z-index: 1;
+    transition: filter 160ms ease-out, opacity 160ms ease-out, transform 160ms ease-out;
+  }
+  .ft-span-inner {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 100%;
+    min-height: 44px;
+    padding: 6px 9px;
+    overflow: hidden;
+    border-left: 3px solid var(--phase-color);
+    background: var(--phase-tint);
+  }
+  .ft-span[data-empty='true'] .ft-span-inner {
+    background: transparent;
+    border-left: 0;
+    border: 1px dashed var(--color-hairline);
+  }
+  .ft-span[data-empty='true'] .ft-spanwho {
+    color: var(--color-muted);
+    font-style: italic;
+    font-weight: 500;
+  }
+  .ft-spanmark {
+    display: flex;
+    align-items: center;
+    flex: none;
+  }
+  .ft-spanmark svg {
+    display: block;
+  }
+  /* Inside a bar every mark is repainted in the phase ink, so it reads as one object. */
+  .ft-spanmark svg * {
+    fill: var(--phase-ink) !important;
+    stroke: var(--phase-ink) !important;
+  }
+  .ft-spanwho {
+    font-size: 0.72rem;
+    line-height: 1.2;
+    font-weight: 600;
+    color: var(--phase-ink);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  /* A one- or two-year span cannot hold a label; the bar carries the meaning. */
+  .ft-span[data-tight='true'] .ft-spanwho {
+    display: none;
+  }
+  .ft-span:hover .ft-span-inner {
+    filter: saturate(1.2) brightness(0.97);
+    box-shadow: inset 0 0 0 1px var(--phase-color);
+  }
+  .ft-span[aria-pressed='true'] .ft-span-inner {
+    box-shadow: inset 0 0 0 2px var(--color-ink);
+  }
+  .ft-grid.has-selection .ft-span[aria-pressed='false'] {
+    opacity: 0.38;
+  }
+
+  .ft-note {
+    margin: 10px 0 0;
+    color: var(--color-muted);
+  }
+
+  /* Detail panel ---------------------------------------------------------- */
+  .ft-detail {
+    margin-top: 18px;
+  }
+  .ft-card {
+    --phase-color: var(--color-ink);
+    --phase-ink: var(--color-ink);
+    --phase-tint: var(--color-paper);
+    border: 1px solid var(--color-hairline);
+    border-top: 3px solid var(--phase-color);
+    background: var(--color-sheet);
+    padding: 20px 22px 22px;
+    animation: ft-fade 200ms ease-out both;
+  }
+  .ft-card-kicker {
+    margin: 0;
+    color: var(--phase-ink);
+  }
+  .ft-card-title {
+    margin: 8px 0 0;
+    font-family: var(--font-sans);
+    font-size: 1.25rem;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    font-weight: 600;
+  }
+  .ft-card-org {
+    margin: 6px 0 0;
+    color: var(--color-muted);
+  }
+  .ft-card-body {
+    margin: 12px 0 0;
+    max-width: 46rem;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--color-ink);
+  }
+  .ft-card-facts {
+    margin: 14px 0 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--color-hairline);
+  }
+  .ft-card-facts li {
+    position: relative;
+    padding: 7px 0 7px 16px;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    line-height: 1.5;
+    color: var(--color-muted);
+    border-bottom: 1px solid color-mix(in srgb, var(--color-hairline) 65%, transparent);
+  }
+  .ft-card-facts li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 13px;
+    width: 5px;
+    height: 5px;
+    background: var(--phase-color);
+  }
+  .ft-card-now {
+    margin: 14px 0 0;
+    color: var(--phase-ink);
+  }
+
+  .ft-tracks {
+    margin: 16px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .ft-track {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 3px 12px;
+    padding: 12px 0 10px;
+    border-top: 1px solid var(--color-hairline);
+  }
+  .ft-track-bar {
+    position: absolute;
+    top: 0;
+    height: 2px;
+  }
+  .ft-track-years {
+    grid-column: 1;
+    color: var(--color-muted);
+  }
+  .ft-track-state {
+    grid-column: 2;
+    color: var(--color-muted);
+  }
+  .ft-track[data-state='on'] .ft-track-state {
+    color: var(--color-signal-deep);
+  }
+  .ft-track-who {
+    grid-column: 1 / -1;
+    font-size: 0.88rem;
+    font-weight: 500;
+  }
+  .ft-track-where {
+    color: var(--color-muted);
+    font-weight: 400;
+  }
+
+  .ft-yearlist {
+    margin: 16px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .ft-yearrow {
+    display: grid;
+    grid-template-columns: 14px minmax(0, 8rem) 1fr;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-top: 1px solid var(--color-hairline);
+  }
+  .ft-yeardot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    border: 1px solid var(--color-hairline);
+  }
+  .ft-yearname {
+    font-size: 0.86rem;
+    font-weight: 600;
+  }
+  .ft-yearwho {
+    font-size: 0.86rem;
+    color: var(--color-muted);
+  }
+
+  /* Index ----------------------------------------------------------------- */
+  .ft-index {
+    margin: 22px 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 1px;
+    background: var(--color-hairline);
+    border: 1px solid var(--color-hairline);
+  }
+  .ft-index li {
+    margin: 0;
+  }
+  .ft-indexbtn {
+    --row-color: var(--color-muted);
+    display: grid;
+    grid-template-columns: 12px minmax(0, 7rem) 1fr;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 10px 12px;
+    border: 0;
+    background: var(--color-sheet);
+    text-align: left;
+    cursor: pointer;
+    transition: background 140ms ease-out;
+  }
+  .ft-indexbtn:hover {
+    background: color-mix(in srgb, var(--row-color) 10%, var(--color-sheet));
+  }
+  .ft-indexbtn.is-active {
+    background: color-mix(in srgb, var(--row-color) 16%, var(--color-sheet));
+  }
+  .ft-indexdot {
+    width: 9px;
+    height: 9px;
+    background: var(--row-color);
+  }
+  .ft-indexname {
+    font-size: 0.82rem;
+    font-weight: 600;
+  }
+  .ft-indextype {
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  @keyframes ft-fade {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .ft-grid {
+      min-width: 720px;
+      grid-template-columns: minmax(124px, 1.2fr) repeat(14, minmax(38px, 1fr));
+    }
+    .ft-rowtype {
+      display: none;
+    }
+    .ft-indexbtn {
+      grid-template-columns: 12px 1fr;
+    }
+    .ft-indextype {
+      grid-column: 2;
+    }
+    .ft-yearrow {
+      grid-template-columns: 14px 1fr;
+    }
+    .ft-yearwho {
+      grid-column: 2;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ft-card {
+      animation: none;
+    }
+    .ft-grid.is-scrubbing::after {
+      transition: none;
+    }
+  }
+</style>
