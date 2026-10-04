@@ -1,5 +1,5 @@
 ---
-/** Annual timeline of framework origins, stewardship and integration, 2007–2020.
+/** Annual timeline of framework origins, stewardship and integration, 2007–2026.
  * Logos are official assets served locally; bar labels describe maintainers or states.
  * Primary sources are linked in the accompanying article.
  */
@@ -31,19 +31,19 @@ interface Framework {
 }
 
 const START = 2007;
-const END = 2020;
+const END = 2026;
 const years = Array.from({ length: END - START + 1 }, (_, i) => START + i);
-/** 1 label column + one column per year. */
-const COLS = years.length + 1;
+/** Keep CSS tracks in sync with the timeline bounds. */
+const YEAR_COUNT = years.length;
 
 const frameworks: Framework[] = [
   {
-    "name": "Theano",
+    "name": "Theano y derivados",
     "type": "Compilador simbólico",
     "color": "#6d4fa3",
     "mark": "theano.png",
-    "origin": "Université de Montréal · MILA",
-    "summary": "Theano nació en el grupo de investigación de Montréal. Permitía definir expresiones simbólicas y compilarlas a código eficiente para CPU y GPU. MILA anunció en 2017 que dejaría el desarrollo principal; hubo mantenimiento posterior y continuaciones comunitarias.",
+    "origin": "Montréal / MILA → Aesara → PyTensor (PyMC)",
+    "summary": "El Theano original dejó el desarrollo principal en 2017. Su linaje continúa en forks: Theano-PyMC en 2020, Aesara en 2021 y PyTensor desde noviembre de 2022. En 2026 PyTensor sigue activo en el ecosistema PyMC; eso no reactiva el proyecto original.",
     "phases": [
       {
         "from": 2007,
@@ -66,6 +66,29 @@ const frameworks: Framework[] = [
           "2020 — Theano 1.0.5"
         ],
         "status": "Desarrollo principal detenido"
+      },
+      {
+        "from": 2021,
+        "to": 2021,
+        "who": "Derivado: Aesara",
+        "body": "PyMC creó un fork de Theano en 2020 y lo renombró Aesara en 2021. Esta barra sigue el linaje, no una transferencia de propiedad ni una nueva versión del Theano original.",
+        "milestones": [
+          "2020 — fork Theano-PyMC",
+          "2021 — cambio de nombre a Aesara"
+        ],
+        "status": "Fork"
+      },
+      {
+        "from": 2022,
+        "to": 2026,
+        "who": "Derivado: PyTensor · PyMC",
+        "body": "PyMC anunció el fork de Aesara llamado PyTensor el 28 de noviembre de 2022. La continuación está orientada a computación simbólica y al ecosistema probabilístico de PyMC. Aesara no desapareció por el mero hecho de ese fork.",
+        "milestones": [
+          "28 de noviembre de 2022 — anuncio de PyTensor",
+          "11 de mayo de 2026 — anuncio de PyMC 6.0 y PyTensor 3.0",
+          "2 de octubre de 2026 — PyTensor 3.3.3"
+        ],
+        "status": "Derivado activo"
       }
     ]
   },
@@ -75,7 +98,7 @@ const frameworks: Framework[] = [
     "color": "#2f6ba8",
     "mark": "caffe2.svg",
     "origin": "BVLC (Caffe) · Facebook (Caffe2)",
-    "summary": "Esta fila reúne dos proyectos relacionados, no un cambio de propietario del mismo repositorio. Caffe nació en Berkeley; Facebook presentó Caffe2 en 2017 y lo integró con PyTorch en 2018.",
+    "summary": "Caffe y Caffe2 son proyectos relacionados. Caffe 1.0 pasó a modo de mantenimiento en 2017. Caffe2 se integró con PyTorch en 2018; en mayo de 2024 se eliminó su código Python del repositorio. En 2026 no debe interpretarse la integración como soporte de la antigua API.",
     "phases": [
       {
         "from": 2007,
@@ -105,13 +128,24 @@ const frameworks: Framework[] = [
       },
       {
         "from": 2018,
-        "to": 2020,
+        "to": 2023,
         "who": "Integrado en PyTorch",
         "body": "La integración reunió las capacidades de investigación de PyTorch y las de producción de Caffe2. La fila continúa para mostrar esa integración, no la desaparición del proyecto.",
         "milestones": [
           "2 de mayo de 2018 — anuncio conjunto de PyTorch 1.0"
         ],
         "status": "Integrado"
+      },
+      {
+        "from": 2024,
+        "to": 2026,
+        "who": "Caffe2: Python retirado",
+        "body": "El 15 de mayo de 2024 PyTorch incorporó la eliminación del código Python de Caffe2. Esto no afirma que se eliminara toda su herencia en C++. Caffe original es una rama separada: su última release publicada sigue siendo 1.0, de 2017, que anunció el paso a mantenimiento.",
+        "milestones": [
+          "15 de mayo de 2024 — eliminación del código Python de Caffe2",
+          "2026 — Caffe 1.0 sigue siendo su última release publicada"
+        ],
+        "status": "Legado"
       }
     ]
   },
@@ -121,7 +155,7 @@ const frameworks: Framework[] = [
     "color": "#c2472f",
     "mark": "pytorch.svg",
     "origin": "Facebook AI Research → PyTorch Foundation (2022)",
-    "summary": "PyTorch se desarrolló en Facebook AI Research y se publicó en enero de 2017. Su ejecución dinámica facilitó experimentar y depurar con Python. La PyTorch Foundation se anunció en 2022, fuera de esta ventana.",
+    "summary": "PyTorch nació en Facebook AI Research, se publicó en 2017 y pasó a la PyTorch Foundation en 2022. Sigue activo en 2026, con aportaciones de varias empresas y de la comunidad. PyTorch 2.0 incorporó torch.compile en 2023.",
     "phases": [
       {
         "from": 2007,
@@ -133,14 +167,26 @@ const frameworks: Framework[] = [
       },
       {
         "from": 2017,
-        "to": 2020,
-        "who": "Facebook AI Research",
+        "to": 2021,
+        "who": "Facebook / Meta · FAIR",
         "body": "PyTorch construye el grafo mientras se ejecuta el programa. La integración con Caffe2 en 2018 amplió su ruta de investigación a producción.",
         "milestones": [
           "Enero de 2017 — lanzamiento público",
           "2018 — integración con Caffe2",
-          "2022 — PyTorch Foundation (fuera de la gráfica)"
+          "2021 — Facebook adopta el nombre corporativo Meta"
         ]
+      },
+      {
+        "from": 2022,
+        "to": 2026,
+        "who": "PyTorch Foundation",
+        "body": "La fundación, bajo el paraguas de Linux Foundation, amplía la gobernanza más allá de Meta. Meta sigue participando. La versión 2.0 añadió compilación opcional; el framework conserva la experiencia de ejecución eager.",
+        "milestones": [
+          "12 de septiembre de 2022 — anuncio de PyTorch Foundation",
+          "15 de marzo de 2023 — PyTorch 2.0 y torch.compile",
+          "2 de septiembre de 2026 — PyTorch 2.14.0"
+        ],
+        "status": "Activo"
       }
     ]
   },
@@ -149,8 +195,8 @@ const frameworks: Framework[] = [
     "type": "Aprendizaje automático",
     "color": "#b8860b",
     "mark": "tensorflow.png",
-    "origin": "Google Brain",
-    "summary": "TensorFlow nació dentro de Google como sucesor de DistBelief y se publicó en noviembre de 2015. Junto con PyTorch, es uno de los dos proyectos de origen corporativo de esta selección.",
+    "origin": "Google y comunidad",
+    "summary": "TensorFlow nació en Google y se publicó en 2015. Sigue activo en 2026 con contribuciones de Google y de la comunidad. La expansión de Keras a varios backends no representa una transferencia de TensorFlow ni el fin de su desarrollo.",
     "phases": [
       {
         "from": 2007,
@@ -162,14 +208,17 @@ const frameworks: Framework[] = [
       },
       {
         "from": 2015,
-        "to": 2020,
-        "who": "Google",
-        "body": "Google publicó TensorFlow como código abierto. Durante esta ventana mantuvo el liderazgo del proyecto, con contribuciones externas.",
+        "to": 2026,
+        "who": "Google y comunidad",
+        "body": "TensorFlow continúa publicando versiones en 2026. Keras 3 permite usar varios backends y no equivale al abandono de TensorFlow. Al corte de esta revisión, 2.21.0 es la versión estable verificada y 2.22.0-rc0 es una candidata, no una release estable.",
         "milestones": [
           "9 de noviembre de 2015 — publicación de TensorFlow",
           "2017 — TensorFlow 1.0",
-          "2019 — TensorFlow 2.0 y ejecución eager por defecto"
-        ]
+          "2019 — TensorFlow 2.0 y ejecución eager por defecto",
+          "6 de marzo de 2026 — TensorFlow 2.21.0 estable",
+          "24 de septiembre de 2026 — 2.22.0-rc0, versión candidata"
+        ],
+        "status": "Activo"
       }
     ]
   },
@@ -178,8 +227,8 @@ const frameworks: Framework[] = [
     "type": "Framework distribuido",
     "color": "#2f7f8f",
     "mark": "mxnet.png",
-    "origin": "Comunidad DMLC → Apache Incubator · apoyo de AWS",
-    "summary": "MXNet surgió de una colaboración entre investigadores. AWS lo respaldó en 2016 y entró al Apache Incubator en 2017. Se graduó en 2022 y fue retirado en 2023; ambos hechos quedan fuera de la gráfica.",
+    "origin": "DMLC → Apache Incubator → Apache → Attic",
+    "summary": "MXNet entró al Apache Incubator en 2017, se graduó en septiembre de 2022 y se retiró en septiembre de 2023. El traslado al Attic concluyó en febrero de 2024. En 2026 es un proyecto retirado con recursos conservados como archivo.",
     "phases": [
       {
         "from": 2007,
@@ -201,14 +250,33 @@ const frameworks: Framework[] = [
       },
       {
         "from": 2017,
-        "to": 2020,
+        "to": 2021,
         "who": "Apache Incubator",
-        "body": "MXNet permaneció en incubación durante el resto de esta ventana. Apache proporcionaba el marco de gobernanza; AWS era un patrocinador y contribuyente.",
+        "body": "Apache proporciona el marco de incubación; AWS es patrocinador y contribuyente. El proyecto permaneció en incubación hasta septiembre de 2022.",
         "milestones": [
-          "Enero de 2017 — entrada al Apache Incubator",
-          "Septiembre de 2022 — graduación (fuera de la gráfica)",
-          "2023 — retiro del proyecto (fuera de la gráfica)"
+          "Enero de 2017 — entrada al Apache Incubator"
         ]
+      },
+      {
+        "from": 2022,
+        "to": 2022,
+        "who": "Apache · TLP",
+        "body": "MXNet se graduó como proyecto de primer nivel de Apache en septiembre de 2022. La celda anual muestra el estado alcanzado ese año, no doce meses completos como TLP.",
+        "milestones": [
+          "Septiembre de 2022 — graduación como Top Level Project"
+        ],
+        "status": "Graduado"
+      },
+      {
+        "from": 2023,
+        "to": 2026,
+        "who": "Retirado · Apache Attic",
+        "body": "Apache retiró MXNet en septiembre de 2023. El proceso administrativo de traslado al Attic terminó en febrero de 2024. El código y la documentación se conservan como recursos de consulta.",
+        "milestones": [
+          "Septiembre de 2023 — retiro",
+          "Febrero de 2024 — traslado al Attic completado"
+        ],
+        "status": "Retirado"
       }
     ]
   }
@@ -220,7 +288,7 @@ const isGap = (phase: Phase) => phase.who === 'Sin proyecto' || phase.who === 'S
 
 <section id="grafica" class="frameworks-timeline" aria-labelledby="ft-title" data-ft>
   <header class="ft-head">
-    <p class="micro-label text-signal-deep">Quién mantiene cada framework · 2007–2020</p>
+    <p class="micro-label text-signal-deep">Quién mantiene cada framework · 2007–2026</p>
     <h2 id="ft-title" class="ft-headline">
       Universidades, empresas y comunidades: cinco trayectorias distintas.
     </h2>
@@ -256,8 +324,8 @@ const isGap = (phase: Phase) => phase.who === 'Sin proyecto' || phase.who === 'S
     <div
       class="ft-grid"
       role="group"
-      aria-label="Cronología de frameworks de deep learning, 2007 a 2020"
-      style={`--ft-cols:${COLS}`}
+      aria-label="Cronología de frameworks de deep learning, 2007 a 2026"
+      style={`--ft-years:${YEAR_COUNT}`}
       data-ft-grid
     >
       <div class="ft-corner" aria-hidden="true"><span class="micro-label">Framework</span></div>
@@ -327,8 +395,8 @@ const isGap = (phase: Phase) => phase.who === 'Sin proyecto' || phase.who === 'S
     </div>
   </div>
 
-  <p class="ft-note micro-label">
-    Los cuadros punteados preceden al lanzamiento público. Los colores identifican frameworks; las etiquetas indican responsables o estados. Las fechas se agrupan por año. La fila Caffe / Caffe2 reúne proyectos relacionados y usa el logo de Caffe2.
+  <p class="ft-note">
+    Los cuadros punteados preceden al lanzamiento público. Los colores identifican frameworks; las etiquetas indican responsables o estados. Cada año muestra el estado alcanzado al cierre; 2026 se corta al 4 de octubre. Los cambios dentro de un año se detallan en el panel. Theano incluye derivados, no la reactivación del original. La fila Caffe / Caffe2 reúne proyectos relacionados y usa el logo de Caffe2.
   </p>
 
   <div class="ft-detail" data-ft-detail aria-live="polite"></div>
@@ -379,7 +447,7 @@ const isGap = (phase: Phase) => phase.who === 'Sin proyecto' || phase.who === 'S
   }
 
   const START = 2007;
-  const END = 2020;
+  const END = 2026;
   const YEARS = Array.from({ length: END - START + 1 }, (_, i) => START + i);
 
   const payload = (window as unknown as { __FT_DATA__?: { frameworks: Framework[] } }).__FT_DATA__;
@@ -457,7 +525,7 @@ const isGap = (phase: Phase) => phase.who === 'Sin proyecto' || phase.who === 'S
           year === null
             ? 'Etapa'
             : inSpan(phase, year)
-              ? 'Activo'
+              ? 'En este año'
               : year < phase.from
                 ? 'Todavía no'
                 : 'Terminado';
@@ -466,7 +534,7 @@ const isGap = (phase: Phase) => phase.who === 'Sin proyecto' || phase.who === 'S
             ? `color-mix(in srgb, ${framework.color} 30%, var(--color-sheet))`
             : framework.color;
         return `
-          <li class="ft-track" data-cid data-state="${state === 'Activo' ? 'on' : 'off'}">
+          <li class="ft-track" data-cid data-state="${state === 'En este año' ? 'on' : 'off'}">
             <span class="ft-track-bar" data-cid style="${positionBar(phase.from, phase.to)};background:${fill}"></span>
             <span class="ft-track-years micro-label" data-cid>${text(spanLabel(phase))}</span>
             <span class="ft-track-state micro-label" data-cid>${state}</span>
@@ -744,8 +812,8 @@ const isGap = (phase: Phase) => phase.who === 'Sin proyecto' || phase.who === 'S
   }
   .ft-grid {
     display: grid;
-    grid-template-columns: minmax(158px, 1.6fr) repeat(14, minmax(44px, 1fr));
-    min-width: 800px;
+    grid-template-columns: minmax(158px, 1.6fr) repeat(var(--ft-years), minmax(44px, 1fr));
+    min-width: 1100px;
     position: relative;
     isolation: isolate;
   }
@@ -921,6 +989,8 @@ const isGap = (phase: Phase) => phase.who === 'Sin proyecto' || phase.who === 'S
 
   .ft-note {
     margin: 10px 0 0;
+    font-size: 0.8rem;
+    line-height: 1.6;
     color: var(--color-muted);
   }
 
@@ -1120,8 +1190,8 @@ const isGap = (phase: Phase) => phase.who === 'Sin proyecto' || phase.who === 'S
 
   @media (max-width: 640px) {
     .ft-grid {
-      min-width: 720px;
-      grid-template-columns: minmax(174px, 1.2fr) repeat(14, minmax(38px, 1fr));
+      min-width: 980px;
+      grid-template-columns: minmax(174px, 1.2fr) repeat(var(--ft-years), minmax(38px, 1fr));
     }
     .ft-rowtype {
       display: none;

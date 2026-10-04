@@ -1,6 +1,6 @@
 ---
 title: "Quién sostuvo los frameworks de deep learning: laboratorios, empresas y comunidades"
-description: "Theano, Caffe / Caffe2, PyTorch, TensorFlow y MXNet: una cronología de sus orígenes, mantenimiento y gobernanza entre 2007 y 2020."
+description: "Theano, Caffe / Caffe2, PyTorch, TensorFlow y MXNet: una cronología de sus orígenes, mantenimiento y gobernanza entre 2007 y 2026, con estado verificado al 4 de octubre de 2026."
 pubDate: 2026-10-04
 lang: es
 tags: ["deep-learning", "codigo-abierto", "historia", "datos"]
@@ -9,6 +9,8 @@ tags: ["deep-learning", "codigo-abierto", "historia", "datos"]
 Entre 2007 y 2020 el deep learning pasó de ser un tema de laboratorio a ser infraestructura. Los frameworks que hicieron posible ese cambio tuvieron trayectorias distintas: **Theano, Caffe / Caffe2, PyTorch, TensorFlow y MXNet** mezclan investigación académica, ingeniería corporativa y comunidades de código abierto.
 
 No todos nacieron en una universidad ni todos terminaron dentro de una empresa. TensorFlow y PyTorch tienen origen corporativo; MXNet pasó a la incubadora de Apache; Theano perdió el desarrollo principal de su equipo académico, pero tuvo continuaciones. La pregunta interesante es quién sostiene el trabajo cuando una herramienta se vuelve infraestructura.
+
+**Actualización: 4 de octubre de 2026.** La cronología se extiende hasta esa fecha; no anticipa el cierre de 2026. Distingue proyectos activos, derivados, integraciones y retiros.
 
 La [gráfica interactiva al final de la entrada](#grafica) permite explorar cada periodo. Los logos identifican los proyectos y las etiquetas explican quién los mantenía o en qué estado estaban.
 
@@ -76,7 +78,7 @@ La [gráfica interactiva al final de la entrada](#grafica) permite explorar cada
 
 Una barra de color puede ocultar diferencias importantes: el origen de un proyecto, su financiación y su gobernanza no son lo mismo. En esta cronología el color identifica al framework; la etiqueta de cada tramo indica su responsable principal o su estado. No implica que una sola institución escribiera todo el código.
 
-Los cuadros punteados preceden al lanzamiento público. Las fechas se agrupan por año: una frontera no representa necesariamente una transferencia de propiedad. En particular, la fila **Caffe / Caffe2 reúne dos proyectos relacionados**, no dos nombres del mismo repositorio. El logo de esa fila es el de Caffe2.
+Los cuadros punteados preceden al lanzamiento público. Cada año representa el estado alcanzado al cierre de ese año; para 2026, el corte es el 4 de octubre. Los cambios dentro de un año se fechan en los paneles. Una frontera no representa necesariamente una transferencia de propiedad. En particular, la fila **Caffe / Caffe2 reúne dos proyectos relacionados**, no dos nombres del mismo repositorio. El logo de esa fila es el de Caffe2. La fila de Theano sigue también sus derivados: que PyTensor esté activo no significa que el Theano original haya vuelto al desarrollo.
 
 [Explorar la gráfica y sus detalles ↓](#grafica)
 
@@ -94,11 +96,15 @@ Tampoco conviene confundir patrocinio con propiedad. AWS respaldó MXNet, pero A
 
 ## 03 · Las cinco filas
 
-### Theano — Université de Montréal y MILA (2007–2017; mantenimiento posterior)
+### Theano — del proyecto de MILA al linaje de PyTensor
 
 Theano permitía definir expresiones matemáticas como grafos simbólicos, optimizarlas y generar código eficiente para CPU y GPU. Salió del entorno de investigación de Montréal. No hay motivo para dibujar una transferencia formal de la universidad a MILA en 2013 sin una fuente que documente ese cambio.
 
-El anuncio del fin del desarrollo principal llegó el **28 de septiembre de 2017**; la versión **1.0 se publicó el 15 de noviembre de 2017**. El equipo anunció un periodo de mantenimiento limitado, y hubo versiones posteriores. Por eso la barra desde 2018 dice «mantenimiento limitado», no «el proyecto desapareció». La historia también continuó en proyectos derivados, como PyTensor. Véanse el [anuncio de MILA](https://groups.google.com/g/theano-announce/c/PiH4p7NqZ60), el [historial de versiones](https://github.com/Theano/Theano/blob/master/HISTORY.txt) y el [repositorio de Theano](https://github.com/Theano/Theano).
+El anuncio del fin del desarrollo principal llegó el **28 de septiembre de 2017**; la versión **1.0 se publicó el 15 de noviembre de 2017**. El equipo anunció un periodo de mantenimiento limitado, y hubo versiones posteriores. Por eso la barra de 2018–2020 dice «mantenimiento limitado», no «el proyecto desapareció». La historia también continuó en proyectos derivados, como PyTensor. Véanse el [anuncio de MILA](https://groups.google.com/g/theano-announce/c/PiH4p7NqZ60), el [historial de versiones](https://github.com/Theano/Theano/blob/master/HISTORY.txt) y el [repositorio de Theano](https://github.com/Theano/Theano).
+
+La [historia oficial de PyMC](https://www.pymc.io/about/history.html) sitúa el fork de Theano en 2020 y su cambio de nombre a **Aesara en 2021**. El **28 de noviembre de 2022**, PyMC [anunció otro fork, PyTensor](https://www.pymc.io/blog/pytensor_announcement.html), por diferencias de objetivos técnicos y gobernanza con Aesara. No fue una transferencia del proyecto original ni implica que Aesara dejara de existir.
+
+**Estado en 2026:** el Theano original permanece como legado; su linaje tiene desarrollo activo en PyTensor, dentro del ecosistema de PyMC. El [anuncio de PyMC 6.0 y PyTensor 3.0](https://www.pymc.io/blog/pymc_v6_ecosystem_updates.html) se publicó el 11 de mayo de 2026, y [PyTensor 3.3.3](https://github.com/pymc-devs/pytensor/releases/tag/rel-3.3.3) llegó el 2 de octubre. Esta continuidad se orienta a computación simbólica y probabilística, no a recuperar la posición de Theano como framework general de deep learning.
 
 ### Caffe / Caffe2 — Berkeley, Facebook y la integración con PyTorch
 
@@ -106,11 +112,17 @@ Caffe nació en Berkeley, con Yangqing Jia y la comunidad de BVLC. Sus archivos 
 
 La integración con PyTorch se desarrolló en 2018. El **2 de mayo** se anunció públicamente la plataforma conjunta PyTorch 1.0. La fila continúa después de esa fecha como «integrado en PyTorch»: marcarla como inexistente en 2019 o 2020 confundiría integración con desaparición. Fuentes: [Caffe, BVLC](https://caffe.berkeleyvision.org/) y el [anuncio conjunto de Caffe2 y PyTorch](https://caffe2.ai/blog/2018/05/02/Caffe2_PyTorch_1_0.html).
 
+**Estado en 2026:** hay que separar las dos ramas. La [release 1.0 de Caffe](https://github.com/BVLC/caffe/releases/tag/1.0), de abril de 2017, anunció el paso a modo de mantenimiento y sigue siendo la última release publicada en su repositorio. Eso permite describirlo como legado, pero no inventar una fecha formal de cierre.
+
+Caffe2 tuvo otro desenlace: el **15 de mayo de 2024**, PyTorch incorporó la [eliminación de su código Python](https://github.com/pytorch/pytorch/pull/126035). La integración histórica no garantiza que `caffe2.python` esté disponible en un PyTorch moderno. Tampoco equivale a afirmar que desapareció todo el código C++ heredado. Desde 2024 la gráfica lo marca como «Caffe2: Python retirado».
+
 ### PyTorch — Facebook AI Research y la PyTorch Foundation
 
 PyTorch se publicó en **enero de 2017**, después de su desarrollo inicial. El grafo dinámico facilitó experimentar y depurar desde Python: no era necesario declarar por adelantado un grafo estático completo. Eso no significa que PyTorch carezca de código compilado; sus operaciones se apoyan en bibliotecas y kernels nativos. Su [balance del primer año](https://pytorch.org/blog/a-year-in/) documenta aquel lanzamiento.
 
-Durante 2007–2020 la institución de referencia es Facebook AI Research. Usar «Meta» en esas barras sería emplear retrospectivamente el nombre posterior de la empresa. La [PyTorch Foundation se anunció en septiembre de 2022](https://pytorch.org/blog/PyTorchfoundation/), fuera de la ventana de la gráfica, con participación de varias empresas, incluida Meta.
+Hasta 2021 la institución de referencia es Facebook AI Research, con el cambio de nombre corporativo a Meta al final de ese periodo. La [PyTorch Foundation se anunció el 12 de septiembre de 2022](https://pytorch.org/blog/PyTorchfoundation/), bajo el paraguas de Linux Foundation y con participación de varias empresas, incluida Meta. La nueva barra refleja gobernanza compartida, no la salida de Meta del desarrollo.
+
+**Estado en 2026:** activo. [PyTorch 2.0](https://docs.pytorch.org/blog/pytorch-2.0-release/) añadió `torch.compile` en marzo de 2023, manteniendo la experiencia eager. La [release estable 2.14.0](https://github.com/pytorch/pytorch/releases/tag/v2.14.0), del 2 de septiembre de 2026, confirma que el proyecto continúa publicando versiones. La historia ya no se explica solamente como «grafos dinámicos contra grafos estáticos»: la compilación también forma parte de PyTorch.
 
 ### TensorFlow — Google (desde 2015)
 
@@ -118,11 +130,15 @@ TensorFlow también nació dentro de una empresa. Google lo publicó como códig
 
 Dentro de esta ventana la barra permanece bajo Google. La herramienta sí cambió: TensorFlow 2.0 adoptó la ejecución eager por defecto, de modo que la oposición entre «PyTorch dinámico» y «todos los demás estáticos» tampoco describe todo el periodo. Véase la [documentación de ejecución eager](https://www.tensorflow.org/guide/eager).
 
+**Estado en 2026:** activo, con [TensorFlow 2.21.0 estable](https://github.com/tensorflow/tensorflow/releases/tag/v2.21.0), publicada el 6 de marzo. El 24 de septiembre apareció [2.22.0-rc0](https://github.com/tensorflow/tensorflow/releases/tag/v2.22.0-rc0): es una candidata a lanzamiento, no una versión estable. La actividad y las contribuciones registradas no respaldan describir TensorFlow como abandonado.
+
+El ecosistema sí cambió: [Keras 3 admite múltiples backends](https://keras.io/keras_3/), incluidos TensorFlow, JAX y PyTorch. Elegir Keras ya no implica elegir exclusivamente TensorFlow; eso no constituye el fin del framework ni un cambio de propietario.
+
 ### MXNet — comunidad DMLC, Apache y apoyo de AWS
 
 MXNet apareció en 2015 como una colaboración de investigadores y recibió el [respaldo de AWS en 2016](https://press.aboutamazon.com/2016/11/aws-announces-three-new-amazon-ai-services). Su entrada al Apache Incubator fue en enero de 2017. **No se graduó ese mismo año:** la graduación llegó en septiembre de 2022, como registra la [ficha de incubación de Apache](https://incubator.apache.org/projects/mxnet.html).
 
-La barra de 2017–2020 indica, por tanto, «Apache Incubator». El proyecto fue retirado en 2023, fuera del periodo dibujado; su [sitio oficial lo identifica como retirado](https://mxnet.apache.org/). Una fundación y un patrocinador importante no bastan, por sí solos, para asegurar continuidad.
+La cronología extendida distingue incubación, graduación y retiro. **Estado en 2026: retirado.** La [ficha oficial de Apache Attic](https://attic.apache.org/projects/mxnet.html) precisa tres fechas: graduación en septiembre de 2022, retiro en septiembre de 2023 y traslado al Attic completado en febrero de 2024. El traslado administrativo no retrasa el retiro hasta 2024. Los recursos se conservan como archivo; eso no equivale a mantenimiento activo. Una fundación y un patrocinador importante no bastan, por sí solos, para asegurar continuidad.
 
 <a id="excepcion"></a>
 
@@ -148,17 +164,18 @@ Estas cinco historias no demuestran que todos los proyectos académicos terminen
 
 ### Sobre la gráfica y las fuentes
 
-La cronología resume el periodo **2007–2020** a resolución anual. Los desenlaces posteriores se explican en el texto y en los paneles, sin dibujarlos dentro de ese intervalo. Las fuentes primarias están enlazadas en cada sección.
+La cronología cubre **2007–2026**, con corte documental al **4 de octubre de 2026**. Cada celda resume el estado alcanzado durante ese año; los paneles conservan las fechas de los cambios. Los números de versión documentan actividad al corte, no prometen soporte futuro. Las fuentes primarias están enlazadas en cada sección.
 
 <div class="frameworks-sources-table" role="region" aria-label="Resumen histórico de los frameworks" tabindex="0">
 
-| Framework | Lanzamiento público | Origen | Evolución institucional |
-|-----------|---------------------|--------|------------------------|
-| Theano | 2007 | Université de Montréal / MILA | Fin del desarrollo principal anunciado en 2017; mantenimiento y derivados posteriores |
-| Caffe / Caffe2 | 2013 / 2017 | BVLC / Facebook | Caffe2 se integra con PyTorch en 2018 |
-| PyTorch | Enero de 2017 | Facebook AI Research | PyTorch Foundation desde 2022 |
-| TensorFlow | Noviembre de 2015 | Google | Liderazgo de Google durante la ventana mostrada |
-| MXNet | 2015 | Comunidad DMLC | Incubación en 2017; graduación en 2022; retiro en 2023 |
+| Proyecto o linaje | Estado al 4 de octubre de 2026 | Evidencia principal |
+|-------------------|-------------------------------|---------------------|
+| Theano → Aesara → PyTensor | Theano original como legado; PyTensor activo | Fork de PyTensor en noviembre de 2022; PyTensor 3.3.3 en octubre de 2026 |
+| Caffe | Legado; última release publicada: 1.0 | Release de abril de 2017 que anuncia modo de mantenimiento |
+| Caffe2 | Integración histórica; código Python retirado | Eliminación incorporada a PyTorch en mayo de 2024 |
+| PyTorch | Activo; PyTorch Foundation | Gobernanza desde 2022; release 2.14.0 en septiembre de 2026 |
+| TensorFlow | Activo; Google y comunidad | 2.21.0 estable; 2.22.0-rc0 candidata, ambas de 2026 |
+| MXNet | Retirado; Apache Attic | Retiro en septiembre de 2023; traslado completado en febrero de 2024 |
 
 </div>
 
