@@ -1,6 +1,5 @@
 {
-  "_comment": "Source registry for the NFL Power Rankings poll-of-polls. Add a source here, add its parser in pollofpolls/sources.py, then run: python3 run.py --validate",
-  "week": 4,
+  "week": 5,
   "season": 2026,
   "sources": [
     {
@@ -14,7 +13,7 @@
       ],
       "extract": "cbs_table",
       "prior_weight": 1.0,
-      "tier": "Long-running analyst column; hub page carries the current week's table."
+      "tier": "Analyst column; the hub page carries the current week's table."
     },
     {
       "id": "fox-vacchiano",
@@ -23,11 +22,11 @@
       "kind": "analyst",
       "url_tpl": "",
       "urls": [
-        "https://www.foxsports.com/stories/nfl/2026-nfl-power-rankings-week-4"
+        "https://www.foxsports.com/stories/nfl/2026-nfl-power-rankings-week-5"
       ],
       "extract": "si_numbered",
       "prior_weight": 0.9,
-      "tier": "Analyst column. Uses 'N. Team' numbered headings since week 3."
+      "tier": "Analyst column; 'N. Team' numbered headings."
     },
     {
       "id": "si-orr",
@@ -36,24 +35,11 @@
       "kind": "analyst",
       "url_tpl": "",
       "urls": [
-        "https://www.si.com/nfl/conor-orr-week-4-nfl-power-rankings-bills-take-over-top-spot"
+        "https://www.si.com/nfl/conor-orr-week-5-nfl-power-rankings-jaguars-seahawks-cowboys"
       ],
       "extract": "si_numbered",
       "prior_weight": 0.9,
-      "tier": "Analyst column. Verify the numbering runs 1-32 with no gap; the week-3 edition skipped a number and was unusable."
-    },
-    {
-      "id": "usatoday-davis",
-      "outlet": "USA Today",
-      "analyst": "Nate Davis",
-      "kind": "analyst",
-      "url_tpl": "",
-      "urls": [
-        "https://www.usatoday.com/story/sports/nfl/columnist/nate-davis/2026/09/29/nfl-power-rankings-week-4-seahawks-bills-chiefs-49ers/91998593007/"
-      ],
-      "extract": "usatoday_numbered",
-      "prior_weight": 0.9,
-      "tier": "National columnist. Slug week number can lag the edition; confirm from the headline."
+      "tier": "Analyst column, discovered via si.com's article sitemap. Verify numbering runs 1-32."
     },
     {
       "id": "sportingnews-iyer",
@@ -62,11 +48,11 @@
       "kind": "analyst",
       "url_tpl": "",
       "urls": [
-        "https://www.sportingnews.com/us/nfl/news/nfl-power-rankings-week-4/7341d122c9adf1408db36e5e"
+        "https://www.sportingnews.com/us/nfl/news/nfl-power-rankings-week-5/bcdbc8dfa5349061230758d7"
       ],
       "extract": "sportingnews_numbered",
       "prior_weight": 0.85,
-      "tier": "Analyst column with explicit 'N. Team (previous ranking: M)' headings."
+      "tier": "Analyst column with 'N. Team (previous ranking: M)' headings."
     },
     {
       "id": "sharp-summerlin",
@@ -77,7 +63,7 @@
       "urls": [],
       "extract": "sharp_embedded_table",
       "prior_weight": 0.75,
-      "tier": "Single stable hub page updated weekly; embeds a JSON rank table. Confirm the 'Updated' date."
+      "tier": "Fixed hub page updated in place; embeds a JSON rank table."
     },
     {
       "id": "thescore-staff",
@@ -86,24 +72,11 @@
       "kind": "panel",
       "url_tpl": "",
       "urls": [
-        "https://www.thescore.com/nfl/news/3572173/nfl-power-rankings-week-4-check-ins-for-every-team-after-1-st-month"
+        "https://www.thescore.com/nfl/news/3615691/nfl-power-rankings-week-5-every-team-s-best-offseason"
       ],
       "extract": "thescore_numbered",
       "prior_weight": 0.8,
-      "tier": "Editorial panel; explicit 'N. Team (record)' plus 'Previous rank' blocks."
-    },
-    {
-      "id": "br-experts",
-      "outlet": "Bleacher Report",
-      "analyst": "B/R NFL staff",
-      "kind": "panel",
-      "url_tpl": "",
-      "urls": [
-        "https://bleacherreport.com/articles/25504118-br-experts-week-4-nfl-power-rankings"
-      ],
-      "extract": "si_numbered",
-      "prior_weight": 0.8,
-      "tier": "Staff panel product; full 32-team ballot under numbered headings."
+      "tier": "Editorial panel; 'N. Team (record)' plus 'Previous rank' blocks."
     }
   ]
 }
