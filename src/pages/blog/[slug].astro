@@ -107,15 +107,15 @@ const showTimeline = timelinePosts.has(post.id);
 
     {asset && <PostCover asset={asset} />}
 
-    <div class="prose-post mx-auto mt-12 max-w-2xl">
-      <Content />
-    </div>
-
     {showTimeline && (
       <div class="mx-auto mt-4 max-w-5xl">
         <FrameworksTimeline />
       </div>
     )}
+
+    <div class="prose-post mx-auto mt-12 max-w-2xl">
+      <Content />
+    </div>
 
     <footer class="mx-auto mt-16 max-w-2xl border-t border-hairline pt-8">
       {related.length > 0 && (
