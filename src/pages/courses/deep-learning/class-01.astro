@@ -1,0 +1,175 @@
+---
+import Base from '../../../layouts/Base.astro';
+import SectionHeading from '../../../components/SectionHeading.astro';
+import { loadDeck } from '../../../lib/slides.mjs';
+
+const deck = '/slides/deep-learning/class-01-introduccion.html';
+const pdf = '/slides/deep-learning/class-01-introduccion.pdf';
+
+// Outline straight from the slides' Markdown, grouped by its "# Section" headings.
+// Slide numbers match the deck, so each entry deep-links with #slide=N.
+const { slides } = loadDeck('deep-learning/class-01-introduccion');
+const outline: { section: string; slides: [number, string][] }[] = [];
+slides.forEach((slide, i) => {
+  if (slide.layout === 'cover' || slide.layout === 'quiet') return;
+  let group = outline.at(-1);
+  if (group?.section !== slide.section) outline.push((group = { section: slide.section, slides: [] }));
+  group.slides.push([i + 1, slide.title]);
+});
+---
+
+<Base
+  title="Deep Learning · Clase 1: Introducción — León Palafox"
+  description="First session of the Deep Learning course at Universidad Panamericana: why representations matter, the hardware and tools behind deep learning, the perceptron, and backpropagation."
+  lang="es"
+>
+  <section class="border-b border-hairline px-6 py-14 sm:px-10 lg:px-14 lg:py-20">
+    <p class="micro-label flex flex-wrap items-center gap-3 text-signal-deep">
+      <a href="/courses/deep-learning/" class="hover:text-signal">Deep Learning</a>
+      <span aria-hidden="true" class="text-muted">/</span>
+      <span>Clase 01</span>
+      <span lang="ja" class="tracking-[0.2em] text-muted">深層学習</span>
+    </p>
+    <h1 class="mt-5 max-w-3xl text-4xl font-semibold leading-[1.02] tracking-[-0.02em] sm:text-5xl lg:text-6xl">
+      Introducción al aprendizaje profundo
+    </h1>
+    <span aria-hidden="true" class="mt-6 block h-[3px] w-14 bg-signal"></span>
+    <p class="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
+      Por qué la representación de los datos lo cambia todo, qué hizo posible el deep learning —datos, GPUs y
+      frameworks— y las piezas básicas: el perceptrón, las funciones de activación y backpropagation.
+    </p>
+    <p class="micro-label mt-6 text-muted">Universidad Panamericana · Maestría en Ciencia de Datos · {slides.length} diapositivas</p>
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a href={pdf} download class="deck-btn deck-btn--solid">
+        Descargar PDF
+        <span aria-hidden="true">↓</span>
+      </a>
+      <a href={deck} target="_blank" rel="noopener" class="deck-btn">
+        Pantalla completa
+        <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="border-b border-hairline px-4 py-8 sm:px-10 sm:py-12 lg:px-14">
+    <div class="mx-auto max-w-6xl">
+      <div class="deck-frame border border-hairline bg-ink">
+        <iframe
+          src={deck}
+          title="Diapositivas — Deep Learning, Clase 1: Introducción"
+          loading="lazy"
+          allow="fullscreen"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <div class="mt-4 flex flex-wrap items-center justify-between gap-4">
+        <p class="text-sm text-muted">
+          Usa <kbd>←</kbd> <kbd>→</kbd> o haz clic sobre la diapositiva para avanzar.
+        </p>
+        <div class="flex flex-wrap gap-x-6 gap-y-2">
+          <a href={pdf} download class="group micro-label inline-flex items-center gap-2 text-signal-deep hover:text-signal">
+            Descargar PDF
+            <span aria-hidden="true" class="transition-transform group-hover:translate-y-0.5">↓</span>
+          </a>
+          <a
+            href={deck}
+            target="_blank"
+            rel="noopener"
+            class="group micro-label inline-flex items-center gap-2 text-signal-deep hover:text-signal"
+          >
+            Abrir en pantalla completa
+            <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">↗</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-b border-hairline px-6 py-14 sm:px-10 lg:px-14">
+    <SectionHeading title="Contenido" />
+    <p class="mt-6 max-w-2xl text-[1.05rem] leading-relaxed text-muted">
+      Cada tema abre la presentación en esa diapositiva.
+    </p>
+    <div class="mt-10 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        outline.map((group) => (
+          <div>
+            <p class="micro-label text-signal-deep">{group.section}</p>
+            <ol class="mt-4 divide-y divide-hairline border-t border-hairline">
+              {group.slides.map(([n, title]) => (
+                <li>
+                  <a
+                    href={`${deck}#slide=${n}`}
+                    target="_blank"
+                    rel="noopener"
+                    class="group flex items-baseline gap-3 py-2.5 text-sm hover:text-signal-deep"
+                  >
+                    <span class="micro-label w-6 shrink-0 text-muted">{String(n).padStart(2, '0')}</span>
+                    <span class="flex-1 leading-snug">{title}</span>
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="px-6 py-14 sm:px-10 lg:px-14">
+    <a
+      href="/courses/deep-learning/"
+      class="group micro-label inline-flex items-center gap-2 text-signal-deep hover:text-signal"
+    >
+      <span aria-hidden="true" class="transition-transform group-hover:-translate-x-1">←</span>
+      Temario del curso
+    </a>
+  </section>
+</Base>
+
+<style>
+  /* The deck letterboxes a 16:9 stage above its own 74px control bar. */
+  .deck-frame {
+    position: relative;
+    box-sizing: content-box;
+    aspect-ratio: 16 / 9;
+    padding-bottom: 74px;
+  }
+  .deck-frame iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  .deck-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    border: 1px solid var(--color-ink);
+    padding: 0.7rem 1.1rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+  }
+  .deck-btn:hover {
+    border-color: var(--color-signal-deep);
+    color: var(--color-signal-deep);
+  }
+  .deck-btn--solid {
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+  .deck-btn--solid:hover {
+    background: var(--color-signal-deep);
+    color: var(--color-paper);
+  }
+  kbd {
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.8em;
+    border: 1px solid var(--color-hairline, #dcd7cc);
+    padding: 0.05em 0.35em;
+  }
+</style>
