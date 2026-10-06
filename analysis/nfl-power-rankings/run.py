@@ -121,6 +121,7 @@ def collect_ballots(
                         source_id,
                         cache_dir,
                         offline=offline,
+                        user_agent=entry.get("user_agent") or None,
                     )
                     resolved_url = candidate
                     break
@@ -133,11 +134,34 @@ def collect_ballots(
                     print(f"  {source_id:22} UNREACHABLE")
                 continue
 
+        # Freshness gate. A slug that looks current can serve an old edition --
+        # NFL.com's year-less Reynolds URLs return a 2020 page -- and no parser
+        # can tell. The article's own published date can.
+        published, modified = fetch.article_dates(raw)
+        window_start, window_end = fetch.expected_week_window(week, season)
+        newest = max([d for d in (published, modified) if d], default=None)
+        if newest:
+            from datetime import date, timedelta
+
+            start = date.fromisoformat(window_start) - timedelta(days=1)
+            end = date.fromisoformat(window_end)
+            if not (start <= date.fromisoformat(newest) <= end):
+                failures.append(
+                    f"{source_id}: stale page dated {newest} "
+                    f"(week {week} should be {window_start}..{window_end})"
+                )
+                if verbose:
+                    print(f"  {source_id:22} STALE (dated {newest}, expected {window_start}..{window_end})")
+                continue
+        elif verbose:
+            print(f"  {source_id:22} no publication date in page; freshness unverified")
+
         ballot = sources.extract(entry["extract"], raw)
         entry_meta = dict(entry)
         entry_meta["url"] = resolved_url
         entry_meta["provenance"] = provenance
         entry_meta["content_sha256"] = fetch.sha256(raw)
+        entry_meta["published"] = published
 
         issues = validate.validate_ballot(source_id, ballot)
         if issues:

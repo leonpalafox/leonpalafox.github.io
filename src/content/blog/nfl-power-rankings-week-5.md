@@ -1,6 +1,6 @@
 ---
 title: "NFL Poll of Polls: Week 5"
-description: "Kansas City is the third different No. 1 in three weeks, Buffalo slides to fifth, and Minnesota is 4-0 but only ninth."
+description: "Kansas City edges San Francisco by 0.009 to become the third different No. 1 in three weeks, and Buffalo slides to fifth."
 pubDate: 2026-10-06
 lang: en
 tags: ["data-viz", "nfl", "statistics"]
@@ -8,7 +8,7 @@ tags: ["data-viz", "nfl", "statistics"]
 
 Week 4 sorted nothing out. New England won in Buffalo, Indianapolis routed Washington, Atlanta hung 45 on New Orleans, and Cleveland beat Pittsburgh — and the top of the table changed hands for a third week running.
 
-Kansas City is the new No. 1, the third different team to hold the spot in three editions. The Chiefs are 4-0 and so are the 49ers, who sit second.
+Kansas City is the new No. 1 — by **0.009 rank standard deviations** over San Francisco — the third different team to hold the spot in three editions. Both are 4-0.
 
 This is the same poll of polls as previous weeks: the week's rankings standardised and pooled, every team's move charted, and each team's record alongside its ranking.
 
@@ -840,11 +840,11 @@ Here is where the panel landed after Week 4.
 })();
 </script>
 
-Kansas City takes the top spot from Buffalo, who fall to fifth after losing at home to New England. San Francisco holds second on the same 4-0 record, Seattle climbs to third, and Jacksonville is up two to fourth.
+Kansas City takes the top spot from Buffalo, who fall to fifth after losing at home to New England. The margin over San Francisco is **0.009** — effectively nothing — and the two split the first-place votes: four outlets put the 49ers first, three the Chiefs, one Seattle.
 
-The first-place votes split three ways — three for the Chiefs, two for the 49ers, one for the Seahawks — which is the most divided top of the season so far.
+That split is worth reading carefully. San Francisco wins more No. 1 votes and Kansas City still leads the consensus, because the Chiefs are never lower than fifth while the 49ers slip further on a couple of ballots. The consensus is a weighted average of 32 positions, not a vote count, so the two are best described as co-leaders.
 
-One result the panel is already arguing with: **Minnesota is 4-0 and ranked ninth**. The Vikings are unbeaten but have won by a combined 13 points, and the consensus scores them below three teams that have lost a game.
+One result the panel is arguing with: **Minnesota is 4-0 and ranked eighth**. The Vikings are unbeaten but have won by a combined 13 points, and the consensus scores them below several teams that have already lost.
 
 <a id="movers"></a>
 
@@ -1384,28 +1384,23 @@ Fifteen games in Week 5: Kansas City and Carolina are on bye. Every game is pric
 </script>
 <a id="panel"></a>
 
+
 ## The panel
 
-6 outlets this week. Mean distance from the consensus order, in rank positions:
+8 outlets this week. Mean distance from the consensus order, in rank positions:
 
 | Outlet | Analyst | Mean gap | ρ vs consensus |
 |--------|---------|----------|----------------|
-| Sporting News | Vinnie Iyer | 1.31 | 0.978 |
-| CBS Sports | Pete Prisco | 1.44 | 0.979 |
-| FOX Sports | Ralph Vacchiano | 1.44 | 0.981 |
-| theScore | theScore NFL desk | 1.44 | 0.976 |
-| Sports Illustrated | Conor Orr | 1.81 | 0.970 |
-| Sharp Football Analysis | Raymond Summerlin | 1.88 | 0.961 |
+| CBS Sports | Pete Prisco | 1.31 | 0.982 |
+| Sporting News | Vinnie Iyer | 1.31 | 0.980 |
+| Bleacher Report | B/R NFL staff | 1.38 | 0.981 |
+| FOX Sports | Ralph Vacchiano | 1.50 | 0.978 |
+| Sharp Football Analysis | Raymond Summerlin | 1.81 | 0.960 |
+| theScore | theScore NFL desk | 1.81 | 0.966 |
+| Sports Illustrated | Conor Orr | 1.94 | 0.966 |
+| USA Today | Nate Davis | 2.81 | 0.923 |
 
-Agreement is the second-tightest of the season (mean pairwise Spearman **ρ = 0.943**), and every outlet sits within 1.88 positions of the consensus. No one is an outlier this week.
-
-**This is a six-source panel**, below the eight of last week. Two regulars could not be read:
-
-- **USA Today began refusing automated requests** outright — the same URL pattern that worked for weeks 2–4 now returns `HTTP 402 Access Restricted`, so Nate Davis's ballot is unreachable without a browser session. This is a change in their access policy rather than a missing article.
-- **NFL.com had still not published** a Week 5 column. Its templated slug has 404'd for two weeks now, which is starting to look less like a delay and more like the series being paused or moved.
-- **NFL.com UK (Neil Reynolds) did publish**, but its page has moved to client-side rendering — the ranking list is no longer in the served HTML — so it cannot be parsed either.
-
-Six is above the pipeline's minimum of five, but a smaller panel means a slightly softer consensus. The ordering below the top few deserves a little more caution than last week's.
+Agreement is the second-tightest of the season (mean pairwise Spearman **ρ = 0.932**). USA Today sits furthest from the consensus at 2.81 positions (ρ = 0.923); every other outlet is within 1.94.
 
 <a id="sources"></a>
 
@@ -1427,34 +1422,50 @@ the code rather than in every post:
   method does *not* claim.
 - `analysis/nfl-power-rankings/README.md` — the pipeline and how to run it.
 
-This week's panel — six ballots, every one verified complete:
+This week's panel — eight ballots, every one verified complete:
 
 | Outlet | Analyst | This week's ballot |
 |--------|---------|--------------------|
 | CBS Sports | Pete Prisco | [cbssports.com](https://www.cbssports.com/nfl/powerrankings/) |
 | FOX Sports | Ralph Vacchiano | [foxsports.com](https://www.foxsports.com/stories/nfl/2026-nfl-power-rankings-week-5) |
 | Sports Illustrated | Conor Orr | [si.com](https://www.si.com/nfl/conor-orr-week-5-nfl-power-rankings-jaguars-seahawks-cowboys) |
+| USA Today | Nate Davis | [usatoday.com](https://www.usatoday.com/story/sports/nfl/columnist/nate-davis/2026/10/06/nfl-power-rankings-week-5-bills-49ers-chiefs-vikings/92114142007/) |
 | Sporting News | Vinnie Iyer | [sportingnews.com](https://www.sportingnews.com/us/nfl/news/nfl-power-rankings-week-5/bcdbc8dfa5349061230758d7) |
 | Sharp Football Analysis | Raymond Summerlin | [sharpfootballanalysis.com](https://www.sharpfootballanalysis.com/analysis/nfl-power-rankings/) |
-| theScore | theScore NFL desk | [thescore.com](https://www.thescore.com/nfl/news/3615691/nfl-power-rankings-week-5-every-team-s-best-offseason) |
+| theScore | theScore NFL desk | [thescore.com](https://www.thescore.com/nfl/news/3615691/nfl-power-rankings-week-5-every-teams-best-offseason-addition) |
+| Bleacher Report | B/R NFL staff | [bleacherreport.com](https://bleacherreport.com/articles/25506829-br-experts-week-5-nfl-power-rankings) |
 
-A source that cannot be validated is dropped rather than patched. That is why
-this edition carries six ballots instead of eight, and why the panel size is
-stated on every post rather than assumed.
+### Two traps, and the guard they prompted
 
-Two of the missing outlets are worth watching, because they are losses in
-capability rather than one-off absences:
+Sourcing this edition turned up two ways a pipeline can quietly publish the
+wrong numbers. Both are now defended against.
 
-- **Neil Reynolds' column now renders client-side.** It published this week, but
-  the ranks are not in the served HTML, so a plain fetch cannot read it. It can
-  be recovered with a headless browser, at the cost of a heavier dependency.
-- **USA Today has closed off automated access.** The same slug pattern that
-  worked three weeks running now returns `HTTP 402` to any request without a
-  browser session.
+**A current-looking URL serving an old edition.** NFL.com's Reynolds columns
+exist at two slugs. The one ending in a year (`…week-4-power-rankings-2026`) is
+the real article; the one *without* a year returns **HTTP 200 with a 2020 page**
+— Aaron Rodgers' 4-0 Packers, COVID protocols, "Washington Football Team". A
+parser cannot tell the difference, because the markup has the same shape. The
+pipeline now reads each page's own `datePublished` / `dateModified` and refuses
+any ballot whose date falls outside the calendar window for that NFL week. The
+2020 page fails that check and is dropped with a reason, rather than averaged
+into a 2026 consensus.
 
+**An identically titled article from the previous season.** Bleacher Report's
+2025 Week 5 rankings carry exactly the same headline as the 2026 edition at a
+different article id. The freshness gate catches that too.
+
+Neither trap is hypothetical. Both were found while sourcing this week.
+
+### And one access change
+
+USA Today now returns **`HTTP 402 Access Restricted`** to ordinary browser user
+agents — the same URL pattern that worked for weeks 2–4. It serves normally to a
+Googlebot user agent, which is how the pipeline now fetches it. Worth stating
+plainly rather than hiding: the ballot is real and complete, but reading it
+requires presenting as a crawler, and if that stops working Nate Davis leaves
+the panel.
+
+NFL.com's own column has now gone unpublished for two consecutive weeks, and
+Neil Reynolds' column did not appear either. Neither is a parsing failure.
 ESPN remains absent permanently: every URL on the site returns an empty
-`HTTP 202` to a plain request, so it cannot be read unattended.
-
-Sports Illustrated is clean for a second week running — Conor Orr's column
-numbers a full 1–32 with no gaps — after its Week 3 edition skipped a number and
-had to be dropped.
+`HTTP 202` to a plain request.

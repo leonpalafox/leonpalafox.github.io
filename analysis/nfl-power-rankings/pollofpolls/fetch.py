@@ -62,6 +62,7 @@ def fetch(
     retries: int = 2,
     timeout: float = 25.0,
     offline: bool = False,
+    user_agent: str | None = None,
 ) -> tuple[str, str]:
     """Return (html, provenance) for `url`.
 
@@ -84,7 +85,7 @@ def fetch(
         request = urllib.request.Request(
             url,
             headers={
-                "User-Agent": USER_AGENT,
+                "User-Agent": user_agent or USER_AGENT,
                 "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
                 "Accept-Language": "en-US,en;q=0.9",
                 "Accept-Encoding": "gzip, deflate",
@@ -114,6 +115,46 @@ def fetch(
     if path.exists():
         return path.read_text(encoding="utf-8"), "stale-cache"
     raise last_error or FetchError(f"{source_id}: unreachable")
+
+
+GOOGLEBOT_UA = "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
+
+
+def article_dates(html: str) -> tuple[str | None, str | None]:
+    """Best-effort (datePublished, dateModified) from a page's own metadata.
+
+    Returned as YYYY-MM-DD strings. This is the guard against stale articles:
+    some publishers serve an old edition at a slug that looks current, and a
+    real example is NFL.com's `neil-reynolds-week-N-power-rankings` URLs, which
+    return a 2020 page. A parser cannot tell the difference; the date can.
+    """
+    import re
+
+    def grab(key: str) -> str | None:
+        for pattern in (
+            rf'"date{key}"\s*:\s*"([0-9]{{4}}-[0-9]{{2}}-[0-9]{{2}})[^"]*"',
+            rf'property="article:{key.lower()}"\s+content="([0-9]{{4}}-[0-9]{{2}}-[0-9]{{2}})',
+            rf'content="([0-9]{{4}}-[0-9]{{2}}-[0-9]{{2}})[^"]*"\s+property="article:{key.lower()}"',
+        ):
+            match = re.search(pattern, html, re.I)
+            if match:
+                return match.group(1)
+        return None
+
+    return grab("Published"), grab("Modified")
+
+
+def expected_week_window(week: int, season: int, *, season_start: str = "2026-09-08") -> tuple[str, str]:
+    """Calendar window in which a Week-N edition is expected to be published.
+
+    Week 1 runs from the Tuesday after the season's opening weekend, so the
+    window for week N is [start + 7*(N-1), start + 7*(N-1) + 6].
+    """
+    from datetime import date, timedelta
+
+    year, month, day = (int(part) for part in season_start.split("-"))
+    start = date(year, month, day) + timedelta(days=7 * (week - 1))
+    return start.isoformat(), (start + timedelta(days=6)).isoformat()
 
 
 def sha256(text: str) -> str:
