@@ -14,7 +14,7 @@ animations live in class-01-introduccion.template.html; the site merges the two 
 
 How to edit
 - "# Section" names the section shown in each slide's header.
-- "## Title" starts a slide. Keep the 44 slides in this order: each one has its own animation.
+- "## Title" starts a slide. Keep the 45 slides in this order: each one has its own animation.
 - "key: text" is one line of text. HTML is allowed (<b>, <br>, <sup>, <span class="m"> for math).
 - "key:" followed by "- item" lines is a list. "a | b | c" splits an item into the parts
   that slide shows side by side (e.g. a heading and its description). Keep the same number of
@@ -561,6 +561,25 @@ sources:
 - https://arxiv.org/abs/2001.08361
 original:
 > 25
+
+## El impacto: la carrera por el cómputo
+layout: image
+lead: Si más cómputo da mejores modelos, toda la industria sale a comprar cómputo.
+chart_label: Ingresos de NVIDIA por centros de datos · miles de millones de USD
+year_prefix: AF
+capex_label: Inversión de los grandes de la nube
+capex_stat: 3.8×
+capex_text: Alphabet, Amazon, Meta, Microsoft y Oracle pasaron de $36.8 mil millones por trimestre (mediados de 2023) a $140.6 mil millones (finales de 2025).
+question: ¿Los ingresos de la IA van a alcanzar a lo que se está gastando?
+guide:
+- Las leyes de escalamiento convirtieron al cómputo en la gran apuesta de la industria.
+- NVIDIA vende las GPU: sus ingresos por centros de datos pasaron de $15 mil millones a $194 mil millones en cuatro años fiscales.
+- La inversión trimestral de los cinco grandes de la nube creció 3.8× desde que salió GPT-4.
+- Sigue abierta la pregunta de si los ingresos van a justificar el gasto.
+remark: El año fiscal de NVIDIA cierra a finales de enero, así que el año fiscal 2026 es casi todo 2025. La inversión (capex) trimestral viene de la serie de Epoch AI.
+sources:
+- https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2026
+- https://epoch.ai/data-insights/hyperscaler-capex-trend
 
 # Herramientas
 

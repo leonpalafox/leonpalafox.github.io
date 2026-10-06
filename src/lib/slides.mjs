@@ -9,7 +9,7 @@ export const DECKS = [
   {
     slug: 'deep-learning/class-01-introduccion',
     // The template's animations are written for exactly this many slides, in order.
-    slides: 44,
+    slides: 45,
   },
 ];
 

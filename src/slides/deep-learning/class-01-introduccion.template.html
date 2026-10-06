@@ -177,6 +177,8 @@ dialog{border:1px solid #b6975866;border-radius:15px;background:#f4f1e9;color:va
 .sp{position:absolute;width:12px;height:12px;border-radius:50%;background:var(--blue);box-shadow:0 0 0 2px var(--paper)}.sp-l{font-size:30px;color:var(--gold-d)}
 .gpu{position:absolute;left:90px;top:400px;display:flex;align-items:center;gap:16px}.gpu .chip{font-size:21px;padding:9px 18px}.gpu-a{font-size:26px;color:var(--gold-d)}.gpu-nv{display:block;height:26px;width:auto;margin-right:8px}
 .kp{margin-top:28px;display:flex;flex-direction:column;gap:8px;font-size:23px;line-height:1.35}.kp2{margin-top:24px}
+/* 26 impact */
+.imp{font-size:20px}.imp-n{font-size:64px;line-height:1;font-weight:800;color:var(--gold-d);letter-spacing:-.02em}.imp-q{margin-top:22px}
 /* 26 AlphaFold */
 .af-dm{display:flex;align-items:center;gap:12px;margin-top:16px;font-size:20px;font-weight:700}.af-ch{display:flex;flex-direction:column;align-items:flex-start;gap:10px;margin-top:14px}.af-ch .chip{font-size:17px}.af-ch .chip b{color:var(--gold-d)}
 .bd{position:absolute;left:0;top:0;width:0;height:0}.bd>i{position:absolute;left:-15px;top:-15px;width:30px;height:30px;border-radius:50%;border:2px solid var(--ink);background:var(--card);display:grid;place-items:center;font-style:normal;font-size:14px;font-weight:700;font-family:var(--mono);transition:opacity .55s ease var(--dl,0s),transform .75s cubic-bezier(.3,1.5,.5,1) var(--dl,0s),background-color .5s,color .5s,border-color .5s}
@@ -413,7 +415,7 @@ P({free: true, body: () => DIV(K[9].number, K[9].question)});
 const QS = list => list.map((q, k) => `<div class="qs" style="top:${k * 150}px"><div class="qs-b"${F(k + 1, 'growy')}></div><div class="qs-n"${F(k + 1, 'up')}>${k + 1}</div><div class="qs-t"${F(k + 1, 'left', 120)}>${q}</div></div>`).join('');
 P({body: () => QS(K[10].questions)});
 
-/* 11–12 · Cartesian → polar */
+/* 11–13 · Cartesian → polar */
 const PB = 470, PLX = 190;
 const cX = x => (x + 1.08) / 2.16 * PB, cY = y => (1.08 - y) / 2.16 * PB;
 const pXr = r => 18 + r / 1.04 * (PB - 36), pYt = t => 18 + (Math.PI - t) / (2 * Math.PI) * (PB - 36);
@@ -468,7 +470,7 @@ P({body: () => {
   A.on(A.k('sep'), 1700, 'in'); A.on(A.k('sepl'), 2000);
 }}, len: {3: 2300}});
 
-/* 14–15 · layers of representation */
+/* 14–16 · layers of representation */
 const HX = [120, 255, 390], HY = [468, 366, 264, 162, 58], HR = 32;
 const PXN = [[.15, .5, .85, .3, .65, .9, .45, .75, .95], [.9, .7, .4, .85, .55, .25, .8, .45, .15], [.35, .35, .35, .8, .8, .8, .35, .35, .35]];
 function HIER(build) {
@@ -639,19 +641,36 @@ P({body: () => {
   <div class="col-r">${s}</div>`;
 }});
 
-/* 26 · AlphaFold */
+/* 26 · impact: the spending race */
+const NVDC = [[2023, 15.0], [2024, 47.5], [2025, 115.2], [2026, 193.7]], NB = 430, NK = 1.7;
+P({body: () => {
+  let s = `<div class="tag im-t"${F(1, 'fade')}>${K[26].chart_label}</div>`;
+  [0, 50, 100, 150, 200].forEach(v => { s += L(90, NB - v * NK, 760, NB - v * NK, {b: 1, w: 1, fx: 'fade', cls: v ? 'grid' : 'ax'}) + T(78, NB - v * NK, `<span class="tk">$${v}</span>`, {b: 1, al: 'r'}); });
+  NVDC.forEach(([y, v], k) => {
+    const x = 200 + k * 160, h = v * NK, last = k === NVDC.length - 1;
+    s += `<div class="col ${last ? 'hi' : ''}" style="left:${x - 28}px;top:${NB - h}px;height:${h}px"${F(2, 'growy', k * 380)}></div>`;
+    s += T(x, NB - h - 18, `<b class="cv">$${v.toFixed(1)}</b>`, {b: 2, d: k * 380 + 600});
+    s += T(x, NB + 26, `<span class="cx-l">${K[26].year_prefix} ${y}</span>`, {b: 2, d: k * 380, v: 't'});
+  });
+  return `<div class="col-l"><div class="lead md"${F(1, 'up')}>${K[26].lead}</div>
+    <div class="card kp imp"${F(3, 'up')}><span class="tag">${K[26].capex_label}</span><b class="imp-n">${K[26].capex_stat}</b><span>${K[26].capex_text}</span></div>
+    <div class="cap imp-q"${F(4, 'up')}>${K[26].question}</div></div>
+  <div class="col-r">${s}</div>`;
+}});
+
+/* 27 · AlphaFold */
 const AF_SEQ = 'MKTAYIAKQRQISFVKSHFS'.split('');
 const AF_LIN = AF_SEQ.map((c, k) => [36 + k * 40, 56]);
 const AF_FOLD = (() => { const p = []; for (let k = 0; k < 7; k++) p.push([250 + (k % 2 ? 17 : -17), 166 + k * 46]); p.push([325, 492]); for (let k = 0; k < 6; k++) p.push([400 + (k % 2 ? -17 : 17), 442 - k * 46]); p.push([475, 158]); for (let k = 0; k < 5; k++) p.push([550 + (k % 2 ? 17 : -17), 212 + k * 46]); return p; })();
 const AF_C = ['pvl', 'plo', 'pvh', 'pvh', 'pvh', 'pvh', 'pok', 'plo', 'pok', 'pvh', 'pvh', 'pvh', 'pvh', 'pok', 'plo', 'pok', 'pvh', 'pvh', 'pok', 'pvl'];
 function bondStyle(e, a, b) { const dx = b[0] - a[0], dy = b[1] - a[1]; e.style.left = a[0] + 'px'; e.style.top = (a[1] - 1.5) + 'px'; e.style.width = Math.hypot(dx, dy) + 'px'; e.style.transform = `rotate(${Math.atan2(dy, dx) * 180 / Math.PI}deg)`; }
 P({body: () => `
-  <div class="col-l">${PTS(K[26].bullets, 1, {pc: 'sm', beats: [1, 3, 4]})}
-    <div class="af-dm"${F(3, 'up', 150)}>${IC('deepmind', 30)}<span>${K[26].lab}</span></div><div class="af-ch">${K[26].milestones.map(([a, b]) => `<span class="chip"${F(3, 'up', 300)}><b>${a}</b>${b}</span>`).join('')}</div></div>
-  <div class="col-r">${T(36, 16, `<span class="tag" data-k="af1">${K[26].sequence_label}</span>`, {b: 1, al: 'l'})}${T(206, 104, `<span class="tag">${K[26].structure_label}</span>`, {cls: 'hid', k: 'af2', al: 'l'})}
+  <div class="col-l">${PTS(K[27].bullets, 1, {pc: 'sm', beats: [1, 3, 4]})}
+    <div class="af-dm"${F(3, 'up', 150)}>${IC('deepmind', 30)}<span>${K[27].lab}</span></div><div class="af-ch">${K[27].milestones.map(([a, b]) => `<span class="chip"${F(3, 'up', 300)}><b>${a}</b>${b}</span>`).join('')}</div></div>
+  <div class="col-r">${T(36, 16, `<span class="tag" data-k="af1">${K[27].sequence_label}</span>`, {b: 1, al: 'l'})}${T(206, 104, `<span class="tag">${K[27].structure_label}</span>`, {cls: 'hid', k: 'af2', al: 'l'})}
     ${AF_LIN.slice(1).map((p, k) => L(AF_LIN[k][0], AF_LIN[k][1], p[0], p[1], {b: 1, d: 300 + k * 45, w: 3, fx: 'fade', i0: true, k: 'bond', cls: 'bond'})).join('')}
     ${AF_SEQ.map((c, k) => `<div class="bd" data-k="bd" style="transform:translate(${AF_LIN[k][0]}px,${AF_LIN[k][1]}px)"><i${F(1, 'pop', k * 45, 'data-i="0"')}>${c}</i></div>`).join('')}
-    <div class="af-lg hid" data-k="aflg"><div class="tag">${K[26].confidence_label} <span class="nt">(pLDDT)</span></div>${K[26].confidence_levels.map((t, k) => [['pvh', 'pok', 'plo', 'pvl'][k], t]).map(([c, t]) => `<div><i class="sw ${c}"></i>${t}</div>`).join('')}</div></div>`,
+    <div class="af-lg hid" data-k="aflg"><div class="tag">${K[27].confidence_label} <span class="nt">(pLDDT)</span></div>${K[27].confidence_levels.map((t, k) => [['pvh', 'pok', 'plo', 'pvl'][k], t]).map(([c, t]) => `<div><i class="sw ${c}"></i>${t}</div>`).join('')}</div></div>`,
   run: {
     2: A => { const bd = A.ks('bd'), bo = A.ks('bond'); A.k('af1').parentNode.parentNode.classList.add('gone'); A.on(A.k('af2'), 1800);
       A.tw(2600, P2 => { const pos = AF_LIN.map((a, k) => { const q = Math.min(1, Math.max(0, (P2 - k * .022) / .58)), e = eio(q), b = AF_FOLD[k]; return [a[0] + (b[0] - a[0]) * e, a[1] + (b[1] - a[1]) * e]; });
@@ -659,14 +678,14 @@ P({body: () => `
     3: A => { A.ks('bd').forEach((e, k) => A.t(k * 40, () => e.firstChild.classList.add('c-' + AF_C[k]))); A.on(A.k('aflg'), 500); }
   }, len: {2: 2600}});
 
-/* 27 · language models */
-const TOK = K[27].next_words.map(r => r.map(w => { const m = w.match(/^(.*\S)\s+(\d+)$/); return [m[1], +m[2]]; }));
+/* 28 · language models */
+const TOK = K[28].next_words.map(r => r.map(w => { const m = w.match(/^(.*\S)\s+(\d+)$/); return [m[1], +m[2]]; }));
 P({body: () => `
-  <div class="col-l">${PTS(K[27].bullets, 1, {pc: 'sm'})}</div>
-  <div class="col-r"><div class="card ctx"${F(1, 'up')}><div class="tag">${K[27].context_label}</div><div class="ctx-t" data-k="ctx">${K[27].context}<span class="caret blink" data-k="caret"></span></div></div>
-    <div class="cand"${F(2, 'up')}><div class="tag">${K[27].candidates_label}</div>
+  <div class="col-l">${PTS(K[28].bullets, 1, {pc: 'sm'})}</div>
+  <div class="col-r"><div class="card ctx"${F(1, 'up')}><div class="tag">${K[28].context_label}</div><div class="ctx-t" data-k="ctx">${K[28].context}<span class="caret blink" data-k="caret"></span></div></div>
+    <div class="cand"${F(2, 'up')}><div class="tag">${K[28].candidates_label}</div>
       ${[0, 1, 2, 3].map(k => `<div class="cr" data-k="cr"><span class="cr-w" data-k="cw"></span><span class="cr-b"><i data-k="cb"></i></span><span class="cr-p" data-k="cp"></span></div>`).join('')}</div>
-    <div class="warn hid" data-k="warn"><b>!</b><span>${K[27].warning}</span></div></div>`,
+    <div class="warn hid" data-k="warn"><b>!</b><span>${K[28].warning}</span></div></div>`,
   run: {
     2: A => { const rows = A.ks('cr'), w = A.ks('cw'), b = A.ks('cb'), p = A.ks('cp'), ctx = A.k('ctx'), caret = A.k('caret');
       TOK.forEach((cands, s) => { const t0 = s * 2300;
@@ -676,46 +695,46 @@ P({body: () => `
         A.t(t0 + 1500, () => { const sp = document.createElement('span'); sp.className = 'tok'; sp.textContent = ' ' + cands[0][0]; ctx.insertBefore(sp, caret); });
       }); },
     3: A => { A.ks('cr').forEach(r => r.classList.add('fade'));
-      A.t(200, () => { const sp = document.createElement('span'); sp.className = 'tok bad'; sp.textContent = ' ' + K[27].hallucination; A.k('ctx').insertBefore(sp, A.k('caret')); });
+      A.t(200, () => { const sp = document.createElement('span'); sp.className = 'tok bad'; sp.textContent = ' ' + K[28].hallucination; A.k('ctx').insertBefore(sp, A.k('caret')); });
       A.on(A.k('warn'), 900); }
   }, len: {2: 6900, 3: 900}});
 
-/* 28 · PyTorch */
-const CODE_PT = hlPy(K[28].code);
-P({body: () => `<div class="col-l">${PTS(K[28].bullets, 1, {pc: 'sm'})}
-    <div class="alt">${K[28].alternatives.map(t => `<span class="chip"${F(3, 'pop', 300)}>${t}</span>`).join('')}</div></div>
+/* 29 · PyTorch */
+const CODE_PT = hlPy(K[29].code);
+P({body: () => `<div class="col-l">${PTS(K[29].bullets, 1, {pc: 'sm'})}
+    <div class="alt">${K[29].alternatives.map(t => `<span class="chip"${F(3, 'pop', 300)}>${t}</span>`).join('')}</div></div>
   <div class="col-r"><div class="code pt-code"${F(1, 'fade')}>${CODE_PT.map((l, k) => `<span class="ln-c"${F(k < 8 ? 1 : 2, 'type', 0, 'data-sp="11"')}>${l}</span>`).join('')}</div></div>`});
 
-/* 29 · framework timeline */
+/* 30 · framework timeline */
 const GX = y => 210 + (y - 2007) * 59.5, GY = k => 52 + k * 62;
 P({body: () => {
-  const rows = [['Theano', [[2007, 2017.75, `${LG('mila', 26)}<span>${K[29].theano}</span>`, 'end']]], ['Caffe', [[2013.95, 2017.3, LG('berkeley', 26), 'end'], [2017.3, 2018.25, '', 'end2']]], ['PyTorch', [[2016.7, 2026.75, `${LG('facebook', 26)}<span>${K[29].pytorch}</span>`, 'act']]], ['TensorFlow', [[2015.85, 2026.75, `${LG('google', 26)}<span>${K[29].tensorflow}</span>`, 'act']]], ['Keras', [[2015.23, 2026.75, `<span>${K[29].keras}</span>`, 'act']]], ['MXNet', [[2015, 2023.7, `<span>${K[29].mxnet}</span>${LG('apache', 26)}`, 'end']]], ['JAX', [[2018.9, 2026.75, LG('google', 26), 'act']]]];
+  const rows = [['Theano', [[2007, 2017.75, `${LG('mila', 26)}<span>${K[30].theano}</span>`, 'end']]], ['Caffe', [[2013.95, 2017.3, LG('berkeley', 26), 'end'], [2017.3, 2018.25, '', 'end2']]], ['PyTorch', [[2016.7, 2026.75, `${LG('facebook', 26)}<span>${K[30].pytorch}</span>`, 'act']]], ['TensorFlow', [[2015.85, 2026.75, `${LG('google', 26)}<span>${K[30].tensorflow}</span>`, 'act']]], ['Keras', [[2015.23, 2026.75, `<span>${K[30].keras}</span>`, 'act']]], ['MXNet', [[2015, 2023.7, `<span>${K[30].mxnet}</span>${LG('apache', 26)}`, 'end']]], ['JAX', [[2018.9, 2026.75, LG('google', 26), 'act']]]];
   let s = '';
   for (let y = 2007; y <= 2025; y += 2) s += L(GX(y), 26, GX(y), 486, {b: 1, w: 1, fx: 'fade', cls: 'grid'}) + T(GX(y), 12, `<span class="tk">${y}</span>`, {b: 1});
   rows.forEach(([n, bars], k) => {
     s += T(0, GY(k) + 18, `<b class="gn">${n}</b>`, {b: 1, al: 'l', d: k * 60, fx: 'left'});
     bars.forEach(([a, b, t, c]) => { s += `<div class="gb ${c}" style="left:${GX(a)}px;top:${GY(k)}px;width:${GX(b) - GX(a) - 2}px"${F(2, 'growx', (a - 2007) * 85, 'data-i="0"')}>${t}</div>`; });
   });
-  s += T(GX(2017.75) + 8, GY(0) + 18, `<span class="gend">${K[29].theano_end}</span>`, {b: 3, al: 'l'});
-  s += T(GX(2018.25) + 8, GY(1) + 18, `<span class="gend gflex">${LG('facebook', 22)}<span>${K[29].caffe2}</span></span>`, {b: 3, al: 'l', d: 250});
+  s += T(GX(2017.75) + 8, GY(0) + 18, `<span class="gend">${K[30].theano_end}</span>`, {b: 3, al: 'l'});
+  s += T(GX(2018.25) + 8, GY(1) + 18, `<span class="gend gflex">${LG('facebook', 22)}<span>${K[30].caffe2}</span></span>`, {b: 3, al: 'l', d: 250});
   s += L(GX(2018.25) - 6, GY(1) + 38, GX(2018.25) - 6, GY(2) - 6, {b: 3, d: 400, w: 2, arrow: true, cls: 'gold'});
-  s += T(GX(2023.7) + 8, GY(5) + 18, `<span class="gend">${K[29].mxnet_end}</span>`, {b: 3, al: 'l', d: 500});
-  s += L(GX(2026.75), 26, GX(2026.75), 486, {b: 4, w: 2, cls: 'gold', fx: 'fade'}) + T(GX(2026.75), 12, `<b class="tk g">${K[29].today}</b>`, {b: 4});
-  s += `<div class="glg"${F(4, 'fade', 300)}><span><i class="gb-s act"></i>${K[29].legend_active}</span><span><i class="gb-s end"></i>${K[29].legend_ended}</span></div>`;
+  s += T(GX(2023.7) + 8, GY(5) + 18, `<span class="gend">${K[30].mxnet_end}</span>`, {b: 3, al: 'l', d: 500});
+  s += L(GX(2026.75), 26, GX(2026.75), 486, {b: 4, w: 2, cls: 'gold', fx: 'fade'}) + T(GX(2026.75), 12, `<b class="tk g">${K[30].today}</b>`, {b: 4});
+  s += `<div class="glg"${F(4, 'fade', 300)}><span><i class="gb-s act"></i>${K[30].legend_active}</span><span><i class="gb-s end"></i>${K[30].legend_ended}</span></div>`;
   return s;
 }});
 
-/* 30 · the ecosystem */
+/* 31 · the ecosystem */
 const ECO = [['end', ['mila']], ['mer', ['berkeley', 'facebook']], ['act', ['facebook']], ['act', ['google']], ['end', ['apache']], ['act', []]];
-P({body: () => `<div class="eco">${K[30].cards.map((x, k) => [x[0], x[1], x[2], ECO[k][0], x[3], ECO[k][1]]).map(([n, w, t, c, st, lg], k) => `
+P({body: () => `<div class="eco">${K[31].cards.map((x, k) => [x[0], x[1], x[2], ECO[k][0], x[3], ECO[k][1]]).map(([n, w, t, c, st, lg], k) => `
   <div class="card ec ${k === 5 ? 'now' : ''}"${F(Math.floor(k / 3) + 1, 'zoom', (k % 3) * 150, 'data-i="0"')}><div class="ec-n">${n}</div><div class="ec-w">${w}</div><div class="ec-t">${t}</div><div class="st ${c}"${F(Math.floor(k / 3) + 1, 'left', 500 + (k % 3) * 150, 'data-i="0"')}><i></i>${st}</div>${lg.length ? `<div class="ec-lg"${F(Math.floor(k / 3) + 1, 'pop', 650 + (k % 3) * 150, 'data-i="0"')}>${lg.map(x => `<img src="${LOGO[x]}" alt="${LOGO_ALT[x]}">`).join('')}</div>` : ''}</div>`).join('')}</div>`});
 
-/* 31 · Keras */
-const CODE_K = hlKeras(K[31].code);
-P({body: () => `<div class="col-l">${PTS(K[31].bullets, 1, {pc: 'sm'})}</div>
-  <div class="col-r"><div class="kb-top"${F(1, 'down')}>${K[31].api_label}</div>
+/* 32 · Keras */
+const CODE_K = hlKeras(K[32].code);
+P({body: () => `<div class="col-l">${PTS(K[32].bullets, 1, {pc: 'sm'})}</div>
+  <div class="col-r"><div class="kb-top"${F(1, 'down')}>${K[32].api_label}</div>
     ${['TensorFlow', 'JAX', 'PyTorch'].map((t, k) => L(424, 64, 140 + k * 284, 104, {b: 2, d: k * 120, w: 2, cls: 'kl'}) + `<div class="kb" data-k="kb${k}" style="left:${k * 284 + 8}px"${F(2, 'up', 150 + k * 120)}>${t}</div>`).join('')}
-    <span class="chip g kb-me hid" data-k="kbme">${K[31].this_course}</span>
+    <span class="chip g kb-me hid" data-k="kbme">${K[32].this_course}</span>
     <div class="code k-code"${F(1, 'fade', 300)}>${CODE_K.map(l => `<span class="ln-c">${l}</span>`).join('')}</div></div>`,
   run: {
     2: A => { const bk = A.k('bk'), kb = [0, 1, 2].map(k => A.k('kb' + k)), seq = [['tensorflow', 0], ['jax', 1], ['torch', 2]];
@@ -729,23 +748,23 @@ P({body: () => `<div class="col-l">${PTS(K[31].bullets, 1, {pc: 'sm'})}</div>
     3: A => A.on(A.k('kbme'), 200)
   }, len: {2: 4400}});
 
-/* 32 · divider */
-P({free: true, body: () => DIV(K[32].number, K[32].question)});
+/* 33 · divider */
+P({free: true, body: () => DIV(K[33].number, K[33].question)});
 
-/* 33 · feature engineering vs representation learning */
+/* 34 · feature engineering vs representation learning */
 const BOX = (x, y, w, t, o = {}) => `<div class="pb ${o.cls || ''}" style="left:${x}px;top:${y}px;width:${w}px"${F(o.b, o.fx || 'up', o.d || 0)}>${t}</div>`;
 P({body: () => {
-  let s = `<div class="tag fe-t" style="top:0"${F(1, 'fade')}>${K[33].manual_label}</div><div class="tag fe-t" style="top:226px"${F(2, 'fade')}>${K[33].learned_label}</div>`;
-  s += BOX(0, 36, 170, K[33].data, {b: 1}) + L(176, 76, 236, 76, {b: 1, d: 250, w: 2.5, arrow: true}) + BOX(246, 36, 470, `<span class="pb-k">${K[33].manual_tag}</span>${K[33].manual_text}`, {b: 1, d: 450, cls: 'hand'}) + L(722, 76, 782, 76, {b: 1, d: 700, w: 2.5, arrow: true}) + BOX(792, 36, 230, K[33].model, {b: 1, d: 900});
-  s += BOX(0, 262, 170, K[33].data, {b: 2}) + L(176, 302, 236, 302, {b: 2, d: 200, w: 2.5, arrow: true});
-  K[33].layers.map(([a, b]) => `${a}<small>${b}</small>`).forEach((t, k) => { s += BOX(246 + k * 196, 262, 160, t, {b: 2, d: 350 + k * 250, cls: 'lay l' + k}); s += L(246 + k * 196 + 166, 302, 246 + (k + 1) * 196 - 6, 302, {b: 2, d: 500 + k * 250, w: 2.5, arrow: true}); });
-  s += BOX(834, 262, 188, K[33].model, {b: 2, d: 1150});
-  s += `<div class="brace"${F(2, 'growx', 1300)} style="left:246px;width:552px"></div>` + T(522, 400, `<span class="note">${K[33].learned_note}</span>`, {b: 2, d: 1500});
-  s += `<div class="fe-side">${PTS(K[33].bullets, 1, {pc: 'sm', d: 300})}</div>`;
+  let s = `<div class="tag fe-t" style="top:0"${F(1, 'fade')}>${K[34].manual_label}</div><div class="tag fe-t" style="top:226px"${F(2, 'fade')}>${K[34].learned_label}</div>`;
+  s += BOX(0, 36, 170, K[34].data, {b: 1}) + L(176, 76, 236, 76, {b: 1, d: 250, w: 2.5, arrow: true}) + BOX(246, 36, 470, `<span class="pb-k">${K[34].manual_tag}</span>${K[34].manual_text}`, {b: 1, d: 450, cls: 'hand'}) + L(722, 76, 782, 76, {b: 1, d: 700, w: 2.5, arrow: true}) + BOX(792, 36, 230, K[34].model, {b: 1, d: 900});
+  s += BOX(0, 262, 170, K[34].data, {b: 2}) + L(176, 302, 236, 302, {b: 2, d: 200, w: 2.5, arrow: true});
+  K[34].layers.map(([a, b]) => `${a}<small>${b}</small>`).forEach((t, k) => { s += BOX(246 + k * 196, 262, 160, t, {b: 2, d: 350 + k * 250, cls: 'lay l' + k}); s += L(246 + k * 196 + 166, 302, 246 + (k + 1) * 196 - 6, 302, {b: 2, d: 500 + k * 250, w: 2.5, arrow: true}); });
+  s += BOX(834, 262, 188, K[34].model, {b: 2, d: 1150});
+  s += `<div class="brace"${F(2, 'growx', 1300)} style="left:246px;width:552px"></div>` + T(522, 400, `<span class="note">${K[34].learned_note}</span>`, {b: 2, d: 1500});
+  s += `<div class="fe-side">${PTS(K[34].bullets, 1, {pc: 'sm', d: 300})}</div>`;
   return s;
 }, run: {3: A => A.qa('.lay').forEach((e, k) => A.t(k * 250, () => e.classList.add('hotg2')))}});
 
-/* 34 · the perceptron */
+/* 35 · the perceptron */
 const PIN = [[90, 70], [90, 190], [90, 310], [90, 430]], PN = [460, 250], PR = 76, PT_ = [.42, .42, .42, .30], PDY = [-20, -20, -26, -40];
 const PERC = (o = {}) => {
   let s = '';
@@ -760,16 +779,16 @@ const PERC = (o = {}) => {
   s += L(PN[0] + PR + 4, PN[1], 690, PN[1], {b: o.z, d: 300, w: 2.5, arrow: true}) + T(712, PN[1], `<span class="m nl">h<sub>w,b</sub>(x)</span>`, {b: o.z, d: 500, al: 'l'});
   return s;
 };
-P({body: () => `<div class="col-l"><div class="lead md"${F(1, 'up')}>${K[34].lead}</div>
-    <div class="card pf2"${F(3, 'up')}><span class="m big-f">${K[34].formula}</span></div>
-    <div class="pex"${F(4, 'up', 200)}><div class="tag">${K[34].example_label}</div><div class="m">${K[34].example_1}</div><div class="m">${K[34].example_2}</div></div></div>
+P({body: () => `<div class="col-l"><div class="lead md"${F(1, 'up')}>${K[35].lead}</div>
+    <div class="card pf2"${F(3, 'up')}><span class="m big-f">${K[35].formula}</span></div>
+    <div class="pex"${F(4, 'up', 200)}><div class="tag">${K[35].example_label}</div><div class="m">${K[35].example_1}</div><div class="m">${K[35].example_2}</div></div></div>
   <div class="col-r">${PERC({n: 1, e: 2, z: 3})}
     ${['0.5', '−1.0', '2.0', '1'].map((v, j) => T(PIN[j][0] - 46, PIN[j][1], `<span class="val">${v}</span>`, {b: 4, d: j * 120, al: 'r', fx: 'left'})).join('')}
     ${['0.8', '0.2', '−0.4', '0.1'].map((v, j) => T(PIN[j][0] + (PN[0] - PIN[j][0]) * PT_[j] + 30, PIN[j][1] + (PN[1] - PIN[j][1]) * PT_[j] + PDY[j], `<span class="val g">${v}</span>`, {b: 4, d: 300 + j * 120, al: 'l'})).join('')}
     ${T(PN[0], PN[1] + PR + 26, '<span class="val g">z = −0.5</span>', {b: 4, d: 1100})}</div>`,
   run: {4: A => [0, 1, 2, 3].forEach(j => A.t(j * 120, () => A.k('pe' + j).classList.add('gold', 'flow')))}});
 
-/* 35 · the activation function */
+/* 36 · the activation function */
 const SIG = z => 1 / (1 + Math.exp(-z));
 const SPX = z => 170 + (z + 6) / 12 * 560, SPY = v => 500 - v * 200;
 P({body: () => {
@@ -780,17 +799,17 @@ P({body: () => {
   s += `<div class="pill"${F(1, 'pop', 500)}><span class="pl-a">Σ</span><span class="pl-b" data-k="plb">f</span></div>`;
   s += L(452, 138, 620, 138, {b: 2, w: 2.5, arrow: true}) + T(640, 138, '<span class="m nl">h = f(z)</span>', {b: 2, d: 300, al: 'l'});
   s += L(170, 500, 730, 500, {b: 2, w: 1, fx: 'fade', cls: 'ax'}) + L(SPX(0), 280, SPX(0), 500, {b: 2, w: 1, fx: 'fade', cls: 'ax'}) + L(170, SPY(1), 730, SPY(1), {b: 2, w: 1, fx: 'fade', cls: 'grid'});
-  s += T(160, SPY(1), '<span class="tk">1</span>', {b: 2, al: 'r'}) + T(160, SPY(0), '<span class="tk">0</span>', {b: 2, al: 'r'}) + T(740, 500, '<span class="m tk">z</span>', {b: 2, al: 'l'}) + T(SPX(-6) + 6, 296, `<span class="tag">${K[35].sigmoid_label}</span>`, {b: 2, al: 'l'});
+  s += T(160, SPY(1), '<span class="tk">1</span>', {b: 2, al: 'r'}) + T(160, SPY(0), '<span class="tk">0</span>', {b: 2, al: 'r'}) + T(740, 500, '<span class="m tk">z</span>', {b: 2, al: 'l'}) + T(SPX(-6) + 6, 296, `<span class="tag">${K[36].sigmoid_label}</span>`, {b: 2, al: 'l'});
   s += PL(pts, {b: 2, d: 400, w: 3, step: 14, cls: 'blue-c'});
   s += L(SPX(z0), 500, SPX(z0), SPY(h0), {b: 3, w: 1.5, cls: 'gold', d: 200}) + L(SPX(z0), SPY(h0), 170, SPY(h0), {b: 3, d: 700, w: 1.5, cls: 'gold'});
   s += `<div class="hy-m g" style="left:${SPX(z0) - 7}px;top:${SPY(h0) - 7}px"${F(3, 'pop', 600)}></div>`;
   s += T(SPX(z0) + 12, 486, '<span class="val g">z = −0.5</span>', {b: 3, al: 'l'}) + T(176, SPY(h0) - 16, `<span class="val g">h ≈ ${h0.toFixed(2)}</span>`, {b: 3, d: 900, al: 'l'});
-  return `<div class="col-l">${PTS(K[35].bullets, 1, {pc: 'sm'})}</div><div class="col-r">${s}</div>`;
+  return `<div class="col-l">${PTS(K[36].bullets, 1, {pc: 'sm'})}</div><div class="col-r">${s}</div>`;
 }, run: {2: A => A.k('plb').classList.add('on')}});
 
-/* 36 · activation functions */
+/* 37 · activation functions */
 const ACT_FN = [[x => 1 / (1 + Math.exp(-x)), [-6, 6], [-.1, 1.1]], [Math.tanh, [-4, 4], [-1.2, 1.2]], [x => Math.max(0, x), [-4, 4], [-1, 4]], [x => Math.max(.1 * x, x), [-4, 4], [-1, 4]], [x => Math.max(-.6 * x - .2, x + .3), [-4, 4], [-1, 4.5]], [x => x >= 0 ? x : Math.exp(x) - 1, [-4, 4], [-1.5, 4]]];
-const ACT = ACT_FN.map((f, k) => [...K[36].functions[k], ...f]);
+const ACT = ACT_FN.map((f, k) => [...K[37].functions[k], ...f]);
 P({body: () => {
   const W = 190, H = 118;
   return `<div class="acts">${ACT.map(([n, f, r, fn, xr, yr], k) => {
@@ -799,10 +818,10 @@ P({body: () => {
     const ox = Math.min(W, Math.max(0, px2(0))), oy = Math.min(H, Math.max(0, py2(0)));
     return `<div class="card ac"${F(b, 'up', (k % 2) * 200)}><div class="ac-n">${n}</div><div class="ac-f m">${f}</div><div class="note ac-r">${r}</div>
       <div class="ac-p">${L(0, oy, W, oy, {w: 1, cls: 'ax'})}${L(ox, 0, ox, H, {w: 1, cls: 'ax'})}${PL(pts, {b, d: 500 + (k % 2) * 200, w: 3, step: 16, cls: 'blue-c'})}</div></div>`;
-  }).join('')}</div><div class="cap acts-c"${F(4, 'up')}>${K[36].caption}</div>`;
+  }).join('')}</div><div class="cap acts-c"${F(4, 'up')}>${K[37].caption}</div>`;
 }});
 
-/* 37 · a network of neurons */
+/* 38 · a network of neurons */
 const NX = [100, 400, 660], NY = [60, 180, 300, 420], NR = 34, NOUT = 180;
 function NET(o) {
   const d = (base, extra) => o.fast ? base : extra;
@@ -813,11 +832,11 @@ function NET(o) {
   [ss('a', '(2)', 1), ss('a', '(2)', 2), ss('a', '(2)', 3), '+1'].forEach((t, j) => { s += N(NX[1], NY[j], NR, `<span class="m">${t}</span>`, {b: o.l2, d: d(300, 550 + j * 90), i0: true, k: 'q' + j, cls: j === 3 ? 'mu' : 'g'}); });
   s += N(NX[2], NOUT, NR, '<span class="m">a<sup>(3)</sup></span>', {b: o.l3, d: d(600, 450), i0: true, k: 'r0', cls: 'g'});
   s += L(NX[2] + NR + 4, NOUT, 806, NOUT, {b: o.l3, d: d(700, 700), w: 2.5, arrow: true, k: 'out', i0: true}) + T(756, NOUT - 32, '<span class="m nl">h<sub>W,b</sub>(x)</span>', {b: o.l3, d: d(800, 950), i0: true});
-  K[37].layers.forEach((t, k) => { s += T(NX[k], 492, `<span class="note">${t}</span>`, {b: [o.l1, o.l2, o.l3][k], d: 300, i0: true}); });
+  K[38].layers.forEach((t, k) => { s += T(NX[k], 492, `<span class="note">${t}</span>`, {b: [o.l1, o.l2, o.l3][k], d: 300, i0: true}); });
   return s;
 }
-P({body: () => `<div class="col-l">${PTS(K[37].bullets, 2, {pc: 'sm'})}
-    <div class="card nf"${F(4, 'up')}><div class="m">${K[37].formula_1}</div><div class="m">${K[37].formula_2}</div></div></div>
+P({body: () => `<div class="col-l">${PTS(K[38].bullets, 2, {pc: 'sm'})}
+    <div class="card nf"${F(4, 'up')}><div class="m">${K[38].formula_1}</div><div class="m">${K[38].formula_2}</div></div></div>
   <div class="col-r">${NET({l1: 1, e1: 2, l2: 2, e2: 3, l3: 3})}</div>`,
   run: {4: A => {
     A.t(0, () => [0, 1, 2, 3].forEach(j => A.k('p' + j).classList.add('hot')));
@@ -827,16 +846,16 @@ P({body: () => `<div class="col-l">${PTS(K[37].bullets, 2, {pc: 'sm'})}
     A.t(2100, () => { A.k('r0').classList.add('hot'); A.k('out').classList.add('hot'); });
   }}, len: {4: 2200}});
 
-/* 38 · divider */
-P({free: true, body: () => DIV(K[38].number, K[38].question)});
+/* 39 · divider */
+P({free: true, body: () => DIV(K[39].number, K[39].question)});
 
-/* 39 · the training loop */
+/* 40 · the training loop */
 const LOOP = [[0, 0], [520, 0], [520, 290], [0, 290]], LOSS = [2.31, 1.42, 0.88, 0.57];
 P({body: () => {
-  const cards = K[39].steps;
+  const cards = K[40].steps;
   let s = cards.map(([t, c], k) => `<div class="card lc" data-k="lc${k}" style="left:${LOOP[k][0]}px;top:${LOOP[k][1]}px"${F(k + 1, 'zoom')}><div class="lc-n">${k + 1}</div><div class="lc-t">${t}</div><code>${c}</code></div>`).join('');
   s += L(446, 100, 514, 100, {b: 2, w: 3, arrow: true, cls: 'gold'}) + L(740, 206, 740, 284, {b: 3, w: 3, arrow: true, cls: 'gold'}) + L(514, 390, 446, 390, {b: 4, w: 3, arrow: true, cls: 'gold'}) + L(220, 284, 220, 206, {b: 4, d: 300, w: 3, arrow: true, cls: 'gold'});
-  s += `<div class="lp"${F(5, 'fade')}><div class="tag">${K[39].loss_label}</div><div class="lp-it">${K[39].iteration_label} <b data-k="it">0</b></div>
+  s += `<div class="lp"${F(5, 'fade')}><div class="tag">${K[40].loss_label}</div><div class="lp-it">${K[40].iteration_label} <b data-k="it">0</b></div>
     <div class="lp-ch">${LOSS.map((v, k) => `<div class="lp-c"><i class="hid" data-k="lb${k}" style="height:${v / 2.5 * 230}px"></i><b class="hid" data-k="lv${k}">${v.toFixed(2)}</b><span>${k + 1}</span></div>`).join('')}</div></div>`;
   return s;
 }, run: {5: A => {
@@ -849,52 +868,52 @@ P({body: () => {
   A.t(t, () => { for (let m = 0; m < 4; m++) A.k('lc' + m).classList.remove('act'); });
 }}, len: {5: 5500}});
 
-/* 40 · the gradient at each layer */
-P({body: () => `<div class="col-l">${PTS(K[40].bullets, 2, {pc: 'sm'})}
-    <div class="card nf bf"${F(4, 'up', 300)}><div class="m">${K[40].formula_1}</div><div class="m">${K[40].formula_2}</div><div class="m">${K[40].formula_3}</div></div></div>
+/* 41 · the gradient at each layer */
+P({body: () => `<div class="col-l">${PTS(K[41].bullets, 2, {pc: 'sm'})}
+    <div class="card nf bf"${F(4, 'up', 300)}><div class="m">${K[41].formula_1}</div><div class="m">${K[41].formula_2}</div><div class="m">${K[41].formula_3}</div></div></div>
   <div class="col-r">${NET({l1: 1, e1: 1, l2: 1, e2: 1, l3: 1, fast: true})}
     <span class="badge hid" data-k="d3" style="left:${NX[2] + 14}px;top:${NOUT - 66}px">${ss('δ', '(3)', '')}</span>
-    ${T(704, NOUT + 52, `<span class="note">${K[40].compare_note}</span>`, {cls: 'hid', k: 'cmp', al: 'l', v: 't'})}
+    ${T(704, NOUT + 52, `<span class="note">${K[41].compare_note}</span>`, {cls: 'hid', k: 'cmp', al: 'l', v: 't'})}
     ${[0, 1, 2].map(j => `<span class="badge hid" data-k="dq${j}" style="left:${NX[1] + 12}px;top:${NY[j] - 62}px">${ss('δ', '(2)', j + 1)}</span>`).join('')}</div>`,
   run: {
     2: A => { A.k('r0').classList.add('hotr'); A.on(A.k('d3'), 200); A.on(A.k('cmp'), 400); },
     3: A => { [0, 1, 2, 3].forEach(a => A.t(a * 160, () => A.k('g' + a).classList.add('hotr', 'flowr'))); [0, 1, 2].forEach(j => A.t(600 + j * 180, () => { A.k('q' + j).classList.add('hotr'); A.k('dq' + j).classList.add('on'); })); A.t(1300, () => A.qa('[data-k^="f"]').forEach(e => e.classList.add('hotr', 'flowr'))); }
   }, len: {3: 1500}});
 
-/* 41 · an organisational analogy */
-const ORG = [['dg', 424, 20], ['r', 130, 132], ['o', 424, 132], ['s', 718, 132], ['z', 718, 248], ['g', 718, 362], ['c', 718, 476]].map(([k, x, y], j) => [k, K[41].roles[j], x, y]);
+/* 42 · an organisational analogy */
+const ORG = [['dg', 424, 20], ['r', 130, 132], ['o', 424, 132], ['s', 718, 132], ['z', 718, 248], ['g', 718, 362], ['c', 718, 476]].map(([k, x, y], j) => [k, K[42].roles[j], x, y]);
 const BLAME = {dg: '1.0', r: '0.2', o: '0.3', s: '0.5', z: '0.4', g: '0.2', c: '0.05'}, FAC = {r: '×0.2', o: '×0.3', s: '×0.5', z: '×0.8', g: '×0.5', c: '×0.25'};
 P({body: () => {
   let s = L(424, 76, 424, 104, {b: 1, d: 200, w: 2}) + L(130, 104, 718, 104, {b: 1, d: 300, w: 2}) + [130, 424, 718].map(x => L(x, 104, x, 132, {b: 1, d: 450, w: 2, k: 'v' + x})).join('');
   s += L(718, 188, 718, 248, {b: 1, d: 700, w: 2}) + L(718, 304, 718, 362, {b: 1, d: 900, w: 2}) + L(718, 418, 718, 476, {b: 1, d: 1100, w: 2});
   s += ORG.map(([k, t, x, y], j) => `<div class="org" data-k="o-${k}" style="left:${x - 116}px;top:${y}px"${F(1, 'up', [0, 300, 300, 300, 600, 800, 1000][j], 'data-i="0"')}>${t}<span class="badge hid" data-k="b-${k}">${BLAME[k]}</span></div>`).join('');
   s += [['r', 140, 118], ['o', 434, 118], ['s', 728, 118], ['z', 728, 222], ['g', 728, 336], ['c', 728, 450]].map(([k, x, y]) => T(x, y, `<span class="fac">${FAC[k]}</span>`, {al: 'l', cls: 'hid', k: 'f-' + k})).join('');
-  s += `<div class="card orgx"${F(4, 'up')}><div class="tag">${K[41].formula_label}</div><div>${K[41].formula_text}</div><div class="m">${K[41].formula_example}</div></div>`;
-  return `<div class="col-l">${PTS(K[41].bullets, 2, {pc: 'sm'})}</div><div class="col-r">${s}</div>`;
+  s += `<div class="card orgx"${F(4, 'up')}><div class="tag">${K[42].formula_label}</div><div>${K[42].formula_text}</div><div class="m">${K[42].formula_example}</div></div>`;
+  return `<div class="col-l">${PTS(K[42].bullets, 2, {pc: 'sm'})}</div><div class="col-r">${s}</div>`;
 }, run: {
   2: A => { A.k('o-dg').classList.add('err'); A.on(A.k('b-dg'), 300); },
   3: A => { [['r', 'o', 's'], ['z'], ['g'], ['c']].forEach((lvl, k) => lvl.forEach(n => { A.on(A.k('f-' + n), k * 650); A.t(k * 650 + 250, () => { A.k('o-' + n).classList.add('err'); A.k('b-' + n).classList.add('on'); }); })); }
 }, len: {3: 2300}});
 
-/* 42 · vanishing gradients */
+/* 43 · vanishing gradients */
 const VG = [0, 1, 2, 3, 4, 5, 6, 7].map(k => Math.pow(.25, 7 - k));
 const fmtG = v => v >= .01 ? String(+v.toFixed(3)) : v.toPrecision(2).replace(/e-(\d+)/, (m, e) => ` × 10⁻${[...e].map(c => '⁰¹²³⁴⁵⁶⁷⁸⁹'[c]).join('')}`);
 P({body: () => {
   const X = k => 70 + k * 96, B = 380, H = 300;
-  let s = T(0, 8, `<span class="tag">${K[42].chart_label}</span>`, {b: 1, al: 'l'}) + L(20, B, 780, B, {b: 1, w: 1, fx: 'fade', cls: 'ax'}) + T(0, B + 20, `<span class="tag">${K[42].layer_label}</span>`, {b: 1, al: 'l', d: 300});
+  let s = T(0, 8, `<span class="tag">${K[43].chart_label}</span>`, {b: 1, al: 'l'}) + L(20, B, 780, B, {b: 1, w: 1, fx: 'fade', cls: 'ax'}) + T(0, B + 20, `<span class="tag">${K[43].layer_label}</span>`, {b: 1, al: 'l', d: 300});
   VG.forEach((v, k) => {
     s += `<div class="vb hid" data-k="vb${k}" style="left:${X(k) - 17}px;top:${B - Math.max(1, v * H)}px;height:${Math.max(1, v * H)}px"></div>`;
     s += T(X(k), B - Math.max(1, v * H) - 16, `<b class="cv sm">${fmtG(v)}</b>`, {cls: 'hid', k: 'vv' + k});
     s += T(X(k), B + 20, `<span class="tk">${k + 1}</span>`, {b: 1, d: 300});
     if (k < 7) s += T(X(k) + 48, B + 20, '<span class="fac">×0.25</span>', {cls: 'hid', k: 'vm' + k});
   });
-  s += L(760, 432, 60, 432, {b: 1, d: 400, w: 2, arrow: true, cls: 'redl'}) + T(410, 452, `<span class="note">${K[42].direction_note}</span>`, {b: 1, d: 600});
-  s += `<div class="vbr"${F(2, 'growx')} style="left:${X(0) - 24}px;width:${X(2) - X(0) + 48}px"></div>` + T(X(1), 304, `<span class="val g">${K[42].slow_note}</span>`, {b: 2, d: 300});
-  s += `<div class="vch">${K[42].remedies.map(t => `<span class="chip g"${F(3, 'pop', 200)}>${t}</span>`).join('')}</div>`;
-  return `<div class="col-l">${PTS(K[42].bullets, 1, {pc: 'sm'})}</div><div class="col-r">${s}</div>`;
+  s += L(760, 432, 60, 432, {b: 1, d: 400, w: 2, arrow: true, cls: 'redl'}) + T(410, 452, `<span class="note">${K[43].direction_note}</span>`, {b: 1, d: 600});
+  s += `<div class="vbr"${F(2, 'growx')} style="left:${X(0) - 24}px;width:${X(2) - X(0) + 48}px"></div>` + T(X(1), 304, `<span class="val g">${K[43].slow_note}</span>`, {b: 2, d: 300});
+  s += `<div class="vch">${K[43].remedies.map(t => `<span class="chip g"${F(3, 'pop', 200)}>${t}</span>`).join('')}</div>`;
+  return `<div class="col-l">${PTS(K[43].bullets, 1, {pc: 'sm'})}</div><div class="col-r">${s}</div>`;
 }, run: {1: A => { for (let k = 7; k >= 0; k--) { const t = 500 + (7 - k) * 320; A.on(A.k('vb' + k), t, 'on'); A.on(A.k('vv' + k), t + 150); if (k < 7) A.on(A.k('vm' + k), t - 100); } }}, len: {1: 2900}});
 
-/* 43 · convolutional networks */
+/* 44 · convolutional networks */
 const CIN = [0, 1, 2, 3, 4, 5].map(() => [10, 10, 10, 0, 0, 0]), KER = [[1, 0, -1], [1, 0, -1], [1, 0, -1]], CS = 36;
 const COUT = [0, 1, 2, 3].map(r => [0, 1, 2, 3].map(c => { let s = 0; for (let i = 0; i < 3; i++) for (let j = 0; j < 3; j++) s += CIN[r + i][c + j] * KER[i][j]; return s; }));
 const VGG = [['c', 10, 224, 64, '224×224', '×64'], ['p', 52, 112], ['c', 84, 112, 128, '112×112', '×128'], ['p', 128, 56], ['c', 162, 56, 256, '56×56', '×256'], ['p', 214, 28], ['c', 250, 28, 512, '28×28', '×512'], ['p', 310, 14], ['c', 346, 14, 512, '14×14', '×512'], ['p', 404, 7], ['f', 470, 4096, '4096'], ['f', 540, 4096, '4096'], ['f', 610, 1000, '1000']];
@@ -906,9 +925,9 @@ P({body: () => {
   KER.forEach((row, r) => row.forEach((v, c) => { s += `<i class="cc k-${v > 0 ? 'p' : v < 0 ? 'n' : 'z'}" style="left:${284 + c * CS}px;top:${30 + (r + 1.5) * CS}px"${F(1, 'pop', 400 + (r * 3 + c) * 40, 'data-i="0"')}>${v}</i>`; }));
   s += T(420, 30 + 3 * CS, '<span class="op">=</span>', {b: 1, d: 600});
   COUT.forEach((row, r) => row.forEach((v, c) => { s += `<i class="cc o hid" data-k="co" style="left:${450 + c * CS}px;top:${30 + (r + 1) * CS}px">${v}</i>`; }));
-  s += T(107, 260, `<span class="note">${K[43].image_label}</span>`, {b: 1, d: 300}) + T(338, 260, `<span class="note">${K[43].filter_label}</span>`, {b: 1, d: 500}) + T(522, 260, `<span class="note">${K[43].map_label}</span>`, {b: 1, d: 700});
-  s += T(650, 120, `<span class="cap cnn-sh">${K[43].shared_note}</span>`, {b: 3, al: 'l', fx: 'left'});
-  s += T(0, 304, `<span class="tag">${K[43].vgg_label}</span>`, {b: 4, al: 'l'});
+  s += T(107, 260, `<span class="note">${K[44].image_label}</span>`, {b: 1, d: 300}) + T(338, 260, `<span class="note">${K[44].filter_label}</span>`, {b: 1, d: 500}) + T(522, 260, `<span class="note">${K[44].map_label}</span>`, {b: 1, d: 700});
+  s += T(650, 120, `<span class="cap cnn-sh">${K[44].shared_note}</span>`, {b: 3, al: 'l', fx: 'left'});
+  s += T(0, 304, `<span class="tag">${K[44].vgg_label}</span>`, {b: 4, al: 'l'});
   const YM = 420;
   VGG.forEach(([t, x, a, b, l1, l2], k) => {
     const h = t === 'f' ? (a === 4096 ? 110 : 60) : 150 * Math.sqrt(a / 224), w = t === 'c' ? {64: 14, 128: 20, 256: 28, 512: 36}[b] : t === 'p' ? 7 : 10;
@@ -916,8 +935,8 @@ P({body: () => {
     if (t === 'c') s += T(x + w / 2, YM + 78, `<span class="vg-l">${l1}<br><b>${l2}</b></span>`, {b: 4, d: 300 + k * 90, v: 't', i0: true});
     if (t === 'f') s += T(x + w / 2, YM - h / 2 - 14, `<span class="vg-l">${b}</span>`, {b: 4, d: 300 + k * 90, i0: true});
   });
-  return `<div class="col-l">${PTS(K[43].bullets, 1, {pc: 'sm', beats: [1, 3, 4]})}
-    <div class="vlg"${F(4, 'fade', 600)}><span><i class="vg c"></i>${K[43].legend_conv}</span><span><i class="vg p"></i>${K[43].legend_pool}</span><span><i class="vg f"></i>${K[43].legend_fc}</span></div></div><div class="col-r">${s}</div>`;
+  return `<div class="col-l">${PTS(K[44].bullets, 1, {pc: 'sm', beats: [1, 3, 4]})}
+    <div class="vlg"${F(4, 'fade', 600)}><span><i class="vg c"></i>${K[44].legend_conv}</span><span><i class="vg p"></i>${K[44].legend_pool}</span><span><i class="vg f"></i>${K[44].legend_fc}</span></div></div><div class="col-r">${s}</div>`;
 }, run: {2: A => {
   const win = A.k('win'), co = A.ks('co');
   win.classList.add('on');
@@ -925,8 +944,8 @@ P({body: () => {
   A.t(16 * 300 + 300, () => win.classList.remove('on'));
 }}, len: {2: 5100}});
 
-/* 44 · recurrent networks */
-const RX = [120, 310, 500, 690], RIN = K[44].inputs, ROUT = K[44].outputs;
+/* 45 · recurrent networks */
+const RX = [120, 310, 500, 690], RIN = K[45].inputs, ROUT = K[45].outputs;
 P({body: () => {
   let s = '';
   RX.forEach((x, t) => {
@@ -938,9 +957,9 @@ P({body: () => {
     if (t < 3) { s += L(x + 66, 240, RX[t + 1] - 66, 240, {fx: 'draw', w: 2.5, arrow: true, k: 'rr' + t, cls: 'gold'}); s += T((x + RX[t + 1]) / 2, 220, '<span class="m wl">W<sub>h</sub></span>', {cls: 'hid', k: 'rw' + t}); }
   });
   s += T(RX[0] - 12, 350, '<span class="m wl">W<sub>x</sub></span>', {cls: 'hid', k: 'rwx', al: 'r'});
-  s += T(405, 506, `<span class="m rf">${K[44].formula}</span>`, {b: 3, fx: 'up'});
-  return `<div class="col-l">${PTS(K[44].bullets, 1, {pc: 'sm', beats: [1, 2, 4]})}
-    <div class="alt">${K[44].uses.map(t => `<span class="chip"${F(2, 'pop', 300)}>${t}</span>`).join('')}</div></div><div class="col-r">${s}</div>`;
+  s += T(405, 506, `<span class="m rf">${K[45].formula}</span>`, {b: 3, fx: 'up'});
+  return `<div class="col-l">${PTS(K[45].bullets, 1, {pc: 'sm', beats: [1, 2, 4]})}
+    <div class="alt">${K[45].uses.map(t => `<span class="chip"${F(2, 'pop', 300)}>${t}</span>`).join('')}</div></div><div class="col-r">${s}</div>`;
 }, run: {
   1: A => RX.forEach((x, t) => { const t0 = 300 + t * 1050;
     A.on(A.k('ri' + t), t0); A.on(A.k('ru' + t), t0 + 150, 'in'); A.t(t0 + 450, () => { A.k('rh' + t).classList.add('on', 'act'); if (t) A.k('rh' + (t - 1)).classList.remove('act'); });
