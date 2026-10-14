@@ -31,7 +31,7 @@ import time
 HERE = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 
-from pollofpolls import fetch, games, headtohead, report, sources, stats, teams, validate  # noqa: E402
+from pollofpolls import fetch, games, headtohead, playoffs, report, sources, stats, teams, validate  # noqa: E402
 
 METHOD_NOTE = (
     "Each source's 1-32 ballot is standardised to rank-standard-deviation units, "
@@ -464,6 +464,32 @@ def main(argv: list[str] | None = None) -> int:
     )
     (out_dir / "report.md").write_text(markdown + "\n", encoding="utf-8")
 
+    # --- path to the Super Bowl: Monte Carlo over the real bracket ---------
+    # Seeding comes from records (with consensus breaking ties); the games
+    # themselves are priced from consensus strength and home field.
+    playoff_sim = None
+    if season_records:
+        playoff_rows = [
+            {
+                "team": row.team,
+                "abbr": teams.TEAMS[row.team][0],
+                "conference": teams.TEAMS[row.team][1],
+                "division": teams.TEAMS[row.team][2],
+                "record": season_records.get(row.team, "0-0"),
+                "score": row.score,
+            }
+            for row in rows
+        ]
+        playoff_sim = playoffs.simulate(playoff_rows, n_sims=50000, seed=season * 10000 + week)
+        if verbose:
+            leader = playoff_sim["teams"][0]
+            print(f"\npath to the Super Bowl ({playoff_sim['nSims']:,} brackets, seed {playoff_sim['seed']}):")
+            for entry in playoff_sim["teams"][:5]:
+                print(f"  {entry['abbr']:4} {entry['conference']} #{entry['seed']}  "
+                      f"reach {entry['pSuperBowl']*100:5.1f}%  win {entry['pChampion']*100:5.1f}%")
+    else:
+        print("playoff simulation skipped (no records)", file=sys.stderr)
+
     site_bundle = report.build_site_bundle(
         week=week,
         season=season,
@@ -479,6 +505,7 @@ def main(argv: list[str] | None = None) -> int:
         schedule_source=schedule_source,
         previous=previous_bundle,
         records=season_records,
+        playoffs=playoff_sim,
     )
     report.write_json(out_dir / "site-data.json", site_bundle)
 

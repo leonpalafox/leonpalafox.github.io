@@ -1,7 +1,7 @@
 {
   "week": 6,
   "season": 2026,
-  "generated": "2026-10-14T14:44:46Z",
+  "generated": "2026-10-14T14:55:03Z",
   "method": "Each source's 1-32 ballot is standardised to rank-standard-deviation units, pooled in a one-way random-effects model, and shrunk toward the panel mean (empirical Bayes), with uncertainty from both the residual disagreement and a bootstrap over sources. Full derivation in the post.",
   "movement": {
     "previousWeek": 5,
@@ -351,6 +351,433 @@
     ]
   },
   "recordsThroughWeek": 5,
+  "playoffs": {
+    "nSims": 50000,
+    "seed": 20260006,
+    "tiebreak": "records first, consensus score second",
+    "conferences": {
+      "AFC": [
+        {
+          "seed": 1,
+          "team": "Kansas City Chiefs",
+          "abbr": "KC",
+          "record": "4-0",
+          "score": 1.5673,
+          "divisionWinner": true
+        },
+        {
+          "seed": 2,
+          "team": "Jacksonville Jaguars",
+          "abbr": "JAX",
+          "record": "4-1",
+          "score": 1.3192,
+          "divisionWinner": true
+        },
+        {
+          "seed": 3,
+          "team": "Buffalo Bills",
+          "abbr": "BUF",
+          "record": "4-1",
+          "score": 1.2763,
+          "divisionWinner": true
+        },
+        {
+          "seed": 4,
+          "team": "Baltimore Ravens",
+          "abbr": "BAL",
+          "record": "4-1",
+          "score": 1.0438,
+          "divisionWinner": true
+        },
+        {
+          "seed": 5,
+          "team": "Denver Broncos",
+          "abbr": "DEN",
+          "record": "3-2",
+          "score": 0.9608,
+          "divisionWinner": false
+        },
+        {
+          "seed": 6,
+          "team": "New England Patriots",
+          "abbr": "NE",
+          "record": "3-2",
+          "score": 0.7527,
+          "divisionWinner": false
+        },
+        {
+          "seed": 7,
+          "team": "Cincinnati Bengals",
+          "abbr": "CIN",
+          "record": "3-2",
+          "score": 0.4427,
+          "divisionWinner": false
+        }
+      ],
+      "NFC": [
+        {
+          "seed": 1,
+          "team": "San Francisco 49ers",
+          "abbr": "SF",
+          "record": "5-0",
+          "score": 1.6435,
+          "divisionWinner": true
+        },
+        {
+          "seed": 2,
+          "team": "Minnesota Vikings",
+          "abbr": "MIN",
+          "record": "5-0",
+          "score": 1.0764,
+          "divisionWinner": true
+        },
+        {
+          "seed": 3,
+          "team": "New York Giants",
+          "abbr": "NYG",
+          "record": "3-1-1",
+          "score": -0.2346,
+          "divisionWinner": true
+        },
+        {
+          "seed": 4,
+          "team": "Carolina Panthers",
+          "abbr": "CAR",
+          "record": "2-2",
+          "score": 0.0741,
+          "divisionWinner": true
+        },
+        {
+          "seed": 5,
+          "team": "Seattle Seahawks",
+          "abbr": "SEA",
+          "record": "3-2",
+          "score": 1.228,
+          "divisionWinner": false
+        },
+        {
+          "seed": 6,
+          "team": "Chicago Bears",
+          "abbr": "CHI",
+          "record": "3-2",
+          "score": 0.5222,
+          "divisionWinner": false
+        },
+        {
+          "seed": 7,
+          "team": "Detroit Lions",
+          "abbr": "DET",
+          "record": "3-2",
+          "score": 0.3747,
+          "divisionWinner": false
+        }
+      ]
+    },
+    "wildCard": {
+      "AFC": [
+        {
+          "home": "Jacksonville Jaguars",
+          "homeAbbr": "JAX",
+          "homeSeed": 2,
+          "homeRecord": "4-1",
+          "away": "Cincinnati Bengals",
+          "awayAbbr": "CIN",
+          "awaySeed": 7,
+          "awayRecord": "3-2",
+          "pHome": 0.6915448532023658,
+          "pAway": 0.3084551467976342
+        },
+        {
+          "home": "Buffalo Bills",
+          "homeAbbr": "BUF",
+          "homeSeed": 3,
+          "homeRecord": "4-1",
+          "away": "New England Patriots",
+          "awayAbbr": "NE",
+          "awaySeed": 6,
+          "awayRecord": "3-2",
+          "pHome": 0.6469673024667728,
+          "pAway": 0.3530326975332272
+        },
+        {
+          "home": "Baltimore Ravens",
+          "homeAbbr": "BAL",
+          "homeSeed": 4,
+          "homeRecord": "4-1",
+          "away": "Denver Broncos",
+          "awayAbbr": "DEN",
+          "awaySeed": 5,
+          "awayRecord": "3-2",
+          "pHome": 0.5884123944798824,
+          "pAway": 0.41158760552011764
+        }
+      ],
+      "NFC": [
+        {
+          "home": "Minnesota Vikings",
+          "homeAbbr": "MIN",
+          "homeSeed": 2,
+          "homeRecord": "5-0",
+          "away": "Detroit Lions",
+          "awayAbbr": "DET",
+          "awaySeed": 7,
+          "awayRecord": "3-2",
+          "pHome": 0.6697716595428296,
+          "pAway": 0.3302283404571704
+        },
+        {
+          "home": "New York Giants",
+          "homeAbbr": "NYG",
+          "homeSeed": 3,
+          "homeRecord": "3-1-1",
+          "away": "Chicago Bears",
+          "awayAbbr": "CHI",
+          "awaySeed": 6,
+          "awayRecord": "3-2",
+          "pHome": 0.47232155821618216,
+          "pAway": 0.5276784417838178
+        },
+        {
+          "home": "Carolina Panthers",
+          "homeAbbr": "CAR",
+          "homeSeed": 4,
+          "homeRecord": "2-2",
+          "away": "Seattle Seahawks",
+          "awayAbbr": "SEA",
+          "awaySeed": 5,
+          "awayRecord": "3-2",
+          "pHome": 0.41763812589090366,
+          "pAway": 0.5823618741090963
+        }
+      ]
+    },
+    "teams": [
+      {
+        "team": "San Francisco 49ers",
+        "abbr": "SF",
+        "conference": "NFC",
+        "seed": 1,
+        "record": "5-0",
+        "score": 1.6435,
+        "divisionWinner": true,
+        "pDivisional": 1.0,
+        "pConference": 0.71636,
+        "pSuperBowl": 0.49492,
+        "pChampion": 0.2686
+      },
+      {
+        "team": "Kansas City Chiefs",
+        "abbr": "KC",
+        "conference": "AFC",
+        "seed": 1,
+        "record": "4-0",
+        "score": 1.5673,
+        "divisionWinner": true,
+        "pDivisional": 1.0,
+        "pConference": 0.67996,
+        "pSuperBowl": 0.4291,
+        "pChampion": 0.23658
+      },
+      {
+        "team": "Minnesota Vikings",
+        "abbr": "MIN",
+        "conference": "NFC",
+        "seed": 2,
+        "record": "5-0",
+        "score": 1.0764,
+        "divisionWinner": true,
+        "pDivisional": 0.66942,
+        "pConference": 0.45382,
+        "pSuperBowl": 0.19424,
+        "pChampion": 0.09126
+      },
+      {
+        "team": "Jacksonville Jaguars",
+        "abbr": "JAX",
+        "conference": "AFC",
+        "seed": 2,
+        "record": "4-1",
+        "score": 1.3192,
+        "divisionWinner": true,
+        "pDivisional": 0.69788,
+        "pConference": 0.4142,
+        "pSuperBowl": 0.19286,
+        "pChampion": 0.09866
+      },
+      {
+        "team": "Buffalo Bills",
+        "abbr": "BUF",
+        "conference": "AFC",
+        "seed": 3,
+        "record": "4-1",
+        "score": 1.2763,
+        "divisionWinner": true,
+        "pDivisional": 0.64714,
+        "pConference": 0.30812,
+        "pSuperBowl": 0.1439,
+        "pChampion": 0.07272
+      },
+      {
+        "team": "Seattle Seahawks",
+        "abbr": "SEA",
+        "conference": "NFC",
+        "seed": 5,
+        "record": "3-2",
+        "score": 1.228,
+        "divisionWinner": false,
+        "pDivisional": 0.58178,
+        "pConference": 0.28466,
+        "pSuperBowl": 0.1294,
+        "pChampion": 0.06354
+      },
+      {
+        "team": "Baltimore Ravens",
+        "abbr": "BAL",
+        "conference": "AFC",
+        "seed": 4,
+        "record": "4-1",
+        "score": 1.0438,
+        "divisionWinner": true,
+        "pDivisional": 0.58826,
+        "pConference": 0.233,
+        "pSuperBowl": 0.09634,
+        "pChampion": 0.04524
+      },
+      {
+        "team": "Denver Broncos",
+        "abbr": "DEN",
+        "conference": "AFC",
+        "seed": 5,
+        "record": "3-2",
+        "score": 0.9608,
+        "divisionWinner": false,
+        "pDivisional": 0.41174,
+        "pConference": 0.15944,
+        "pSuperBowl": 0.06388,
+        "pChampion": 0.03022
+      },
+      {
+        "team": "Chicago Bears",
+        "abbr": "CHI",
+        "conference": "NFC",
+        "seed": 6,
+        "record": "3-2",
+        "score": 0.5222,
+        "divisionWinner": false,
+        "pDivisional": 0.52782,
+        "pConference": 0.1668,
+        "pSuperBowl": 0.0611,
+        "pChampion": 0.0229
+      },
+      {
+        "team": "Carolina Panthers",
+        "abbr": "CAR",
+        "conference": "NFC",
+        "seed": 4,
+        "record": "2-2",
+        "score": 0.0741,
+        "divisionWinner": true,
+        "pDivisional": 0.41822,
+        "pConference": 0.1432,
+        "pSuperBowl": 0.0453,
+        "pChampion": 0.01464
+      },
+      {
+        "team": "New England Patriots",
+        "abbr": "NE",
+        "conference": "AFC",
+        "seed": 6,
+        "record": "3-2",
+        "score": 0.7527,
+        "divisionWinner": false,
+        "pDivisional": 0.35286,
+        "pConference": 0.11984,
+        "pSuperBowl": 0.04518,
+        "pChampion": 0.01988
+      },
+      {
+        "team": "New York Giants",
+        "abbr": "NYG",
+        "conference": "NFC",
+        "seed": 3,
+        "record": "3-1-1",
+        "score": -0.2346,
+        "divisionWinner": true,
+        "pDivisional": 0.47218,
+        "pConference": 0.15044,
+        "pSuperBowl": 0.0415,
+        "pChampion": 0.01184
+      },
+      {
+        "team": "Detroit Lions",
+        "abbr": "DET",
+        "conference": "NFC",
+        "seed": 7,
+        "record": "3-2",
+        "score": 0.3747,
+        "divisionWinner": false,
+        "pDivisional": 0.33058,
+        "pConference": 0.08472,
+        "pSuperBowl": 0.03354,
+        "pChampion": 0.01266
+      },
+      {
+        "team": "Cincinnati Bengals",
+        "abbr": "CIN",
+        "conference": "AFC",
+        "seed": 7,
+        "record": "3-2",
+        "score": 0.4427,
+        "divisionWinner": false,
+        "pDivisional": 0.30212,
+        "pConference": 0.08544,
+        "pSuperBowl": 0.02874,
+        "pChampion": 0.01126
+      }
+    ],
+    "superBowlMatchups": [
+      {
+        "a": "Kansas City Chiefs",
+        "b": "San Francisco 49ers",
+        "probability": 0.2135
+      },
+      {
+        "a": "Jacksonville Jaguars",
+        "b": "San Francisco 49ers",
+        "probability": 0.09558
+      },
+      {
+        "a": "Kansas City Chiefs",
+        "b": "Minnesota Vikings",
+        "probability": 0.08262
+      },
+      {
+        "a": "Buffalo Bills",
+        "b": "San Francisco 49ers",
+        "probability": 0.0706
+      },
+      {
+        "a": "Kansas City Chiefs",
+        "b": "Seattle Seahawks",
+        "probability": 0.05592
+      },
+      {
+        "a": "Baltimore Ravens",
+        "b": "San Francisco 49ers",
+        "probability": 0.04798
+      }
+    ],
+    "byConference": {
+      "AFC": {
+        "pSuperBowl": 1.0,
+        "pChampion": 0.51456
+      },
+      "NFC": {
+        "pSuperBowl": 1.0,
+        "pChampion": 0.48544
+      }
+    }
+  },
   "headToHead": {
     "method": "Win probability comes from the consensus score alone: the projected margin is k * (score difference) + home field, treated as normal with standard deviation sigma, so P(home) = Phi(margin / sigma). The three constants are fitted by least squares on 6,719 completed regular-season games (2000-2025); see model.json and tools/calibrate.py.",
     "scheduleSource": "nflverse",

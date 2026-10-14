@@ -18,14 +18,15 @@ This is the same poll of polls as previous weeks: the week's rankings standardis
   <details>
     <summary>
       <span class="toc-kicker">Contents</span>
-      <span class="toc-count">5 sections</span>
+      <span class="toc-count">6 sections</span>
     </summary>
     <ol>
       <li><a href="#consensus"><span class="toc-n">01</span><span class="toc-t">The consensus</span><span class="toc-d">All 32 teams, filterable by conference</span></a></li>
       <li><a href="#movers"><span class="toc-n">02</span><span class="toc-t">Who went up and down</span><span class="toc-d">Every week-over-week move</span></a></li>
-      <li><a href="#h2h"><span class="toc-n">03</span><span class="toc-t">This week's matchups, priced</span><span class="toc-d">All 16 games, plus any matchup you build</span></a></li>
-      <li><a href="#panel"><span class="toc-n">04</span><span class="toc-t">The panel</span><span class="toc-d">Nine outlets and how they agree</span></a></li>
-      <li><a href="#sources"><span class="toc-n">05</span><span class="toc-t">Sources and method</span><span class="toc-d">Where every number comes from</span></a></li>
+      <li><a href="#h2h"><span class="toc-n">03</span><span class="toc-t">This week's matchups, priced</span><span class="toc-d">All 14 games, plus any matchup you build</span></a></li>
+      <li><a href="#superbowl"><span class="toc-n">04</span><span class="toc-t">Path to the Super Bowl</span><span class="toc-d">50,000 simulated brackets</span></a></li>
+      <li><a href="#panel"><span class="toc-n">05</span><span class="toc-t">The panel</span><span class="toc-d">Nine outlets and how they agree</span></a></li>
+      <li><a href="#sources"><span class="toc-n">06</span><span class="toc-t">Sources and method</span><span class="toc-d">Where every number comes from</span></a></li>
     </ol>
   </details>
 </nav>
@@ -1377,6 +1378,284 @@ Fourteen games in Week 6: Cincinnati, Detroit, Miami and Minnesota are on bye. E
   renderPicker();
 })();
 </script>
+<a id="superbowl"></a>
+
+## Path to the Super Bowl
+
+<div id="sb-root" class="sb-root">
+  <div class="sb-kicker" id="sb-kicker">Simulated brackets</div>
+  <h2 class="sb-headline" id="sb-headline">Loading…</h2>
+  <p class="sb-lede" id="sb-lede"></p>
+
+  <div class="sb-conferences" id="sb-conferences"></div>
+
+  <h3 class="sb-sub">Wild card round</h3>
+  <p class="sb-note">These six games are fixed by the seeding, so their prices are computed directly rather than sampled. The higher seed hosts.</p>
+  <div class="sb-wildcard" id="sb-wildcard"></div>
+
+  <h3 class="sb-sub">Most likely to reach the Super Bowl</h3>
+  <p class="sb-note" id="sb-table-note"></p>
+  <div class="sb-table-wrap">
+    <table class="sb-table">
+      <thead>
+        <tr>
+          <th class="sb-th-rank">Seed</th>
+          <th class="sb-th-team">Team</th>
+          <th class="sb-th-num">Reach SB</th>
+          <th class="sb-th-bar"></th>
+          <th class="sb-th-num">Win SB</th>
+        </tr>
+      </thead>
+      <tbody id="sb-body"></tbody>
+    </table>
+  </div>
+
+  <h3 class="sb-sub">Most likely Super Bowl matchups</h3>
+  <ul class="sb-matchups" id="sb-matchups"></ul>
+
+  <p class="sb-foot" id="sb-foot"></p>
+</div>
+
+<style>
+  .sb-root {
+    --ink: #0a0a0a;
+    --muted: #6b6b6b;
+    --hair: #e0dcd4;
+    --paper: #fbfaf7;
+    --wash: rgba(255, 255, 255, 0.55);
+    --signal: #c2472f;
+    --up: #1f6f43;
+    background: var(--paper);
+    color: var(--ink);
+    border: 1px solid var(--hair);
+    border-radius: 2px;
+    padding: 28px 24px 22px;
+    margin: 32px 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    box-sizing: border-box;
+  }
+  .sb-root *, .sb-root *::before, .sb-root *::after { box-sizing: border-box; }
+  .sb-root img { border: 0; margin: 0; max-width: none; }
+  .sb-kicker { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+  .sb-headline { font-size: 22px; font-weight: 600; line-height: 1.25; margin: 0 0 12px; letter-spacing: -0.01em; }
+  .sb-lede { font-size: 14px; line-height: 1.6; color: var(--muted); margin: 0 0 22px; max-width: 62ch; }
+  .sb-lede strong { color: var(--ink); font-weight: 600; }
+  .sb-sub { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin: 26px 0 8px; font-weight: 600; }
+  .sb-note { font-size: 12.5px; line-height: 1.55; color: var(--muted); margin: 0 0 14px; max-width: 70ch; }
+
+  .sb-conferences { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+  @media (max-width: 720px) { .sb-conferences { grid-template-columns: 1fr; } }
+  .sb-conf-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); font-weight: 600;
+    padding-bottom: 7px; border-bottom: 1px solid var(--ink); margin-bottom: 10px;
+  }
+  .sb-conf-head b { color: var(--ink); font-weight: 600; letter-spacing: 0.04em; }
+  .sb-seed-row {
+    display: grid; grid-template-columns: 20px 26px 1fr auto;
+    align-items: center; gap: 8px; padding: 5px 0;
+    border-bottom: 1px solid var(--hair); font-size: 13px;
+  }
+  .sb-seed-row:last-child { border-bottom: 0; }
+  .sb-seed-n { font-variant-numeric: tabular-nums; font-weight: 600; color: var(--muted); font-size: 12px; }
+  .sb-mark { display: inline-flex; align-items: center; justify-content: center; flex: none; }
+  .sb-mark img { width: 22px; height: 22px; display: block; }
+  .sb-seed-team { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .sb-seed-team em { font-style: normal; font-weight: 400; color: var(--muted); font-size: 11px; margin-left: 6px; letter-spacing: 0.06em; }
+  .sb-seed-rec { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11.5px; color: var(--muted); }
+  .sb-bye {
+    font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--up); font-weight: 600; margin-left: 6px;
+  }
+  .sb-divtag {
+    font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--muted); border: 1px solid var(--hair); border-radius: 2px;
+    padding: 1px 4px; margin-left: 6px; white-space: nowrap;
+  }
+
+  .sb-wildcard { display: grid; grid-template-columns: 1fr 1fr; gap: 0 22px; align-items: start; }
+  .sb-wc-col { min-width: 0; }
+  @media (max-width: 720px) { .sb-wildcard { grid-template-columns: 1fr; } }
+  .sb-wc { border-bottom: 1px solid var(--hair); padding: 7px 0; }
+  .sb-wc:last-child { border-bottom: 0; }
+  .sb-wc-head { display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+  .sb-wc-conf { letter-spacing: 0.12em; text-transform: uppercase; font-size: 10px; font-weight: 600; }
+  .sb-wc-bar { display: flex; height: 8px; border-radius: 2px; overflow: hidden; background: var(--hair); }
+  .sb-wc-home { background: var(--up); }
+  .sb-wc-away { background: var(--signal); }
+  .sb-wc-teams { display: flex; justify-content: space-between; font-size: 12.5px; margin-top: 4px; }
+  .sb-wc-side { display: flex; align-items: center; gap: 5px; }
+  .sb-wc-side.is-away { flex-direction: row-reverse; text-align: right; }
+  .sb-wc-abbr { font-weight: 600; }
+  .sb-wc-pct { font-variant-numeric: tabular-nums; color: var(--muted); font-size: 11.5px; }
+
+  .sb-table-wrap { overflow-x: auto; }
+  .sb-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .sb-table th {
+    text-align: left; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted); font-weight: 600; padding: 0 8px 7px 0; border-bottom: 1px solid var(--ink);
+    white-space: nowrap;
+  }
+  .sb-th-num { text-align: right; }
+  .sb-table td { padding: 6px 8px 6px 0; border-bottom: 1px solid var(--hair); vertical-align: middle; }
+  .sb-table tr:last-child td { border-bottom: 0; }
+  .sb-td-seed { font-variant-numeric: tabular-nums; color: var(--muted); font-size: 11.5px; width: 46px; white-space: nowrap; }
+  .sb-td-team { white-space: nowrap; }
+  .sb-team-cell { display: flex; align-items: center; gap: 7px; }
+  .sb-team-name { font-weight: 600; }
+  .sb-abbr { font-size: 10px; letter-spacing: 0.1em; color: var(--muted); margin-left: 5px; }
+  .sb-record { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; color: var(--ink); margin-left: 6px; }
+  .sb-td-num { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; width: 76px; white-space: nowrap; }
+  .sb-td-num.is-win { font-weight: 400; color: var(--muted); }
+  .sb-td-bar { width: 34%; min-width: 90px; }
+  .sb-bar { height: 7px; background: var(--hair); border-radius: 2px; overflow: hidden; }
+  .sb-bar span { display: block; height: 100%; background: var(--ink); border-radius: 2px; }
+  .sb-bar.is-champ span { background: var(--up); }
+
+  .sb-matchups { list-style: none; margin: 0; padding: 0; }
+  .sb-matchups li {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    padding: 7px 0; border-bottom: 1px solid var(--hair); font-size: 13px;
+  }
+  .sb-matchups li:last-child { border-bottom: 0; }
+  .sb-mt { display: flex; align-items: center; gap: 8px; }
+  .sb-mt-pct { font-variant-numeric: tabular-nums; font-weight: 600; }
+  .sb-foot { font-size: 11.5px; line-height: 1.55; color: var(--muted); margin: 18px 0 0; max-width: 72ch; }
+</style>
+
+<script>
+(function () {
+  var data = (window.__POP_DATA__ && window.__POP_DATA__.playoffs) || null;
+  var root = document.getElementById('sb-root');
+  if (!root) { return; }
+  if (!data) {
+    document.getElementById('sb-headline').textContent = 'Playoff simulation unavailable.';
+    document.getElementById('sb-lede').textContent =
+      'This edition was built without season records, so the bracket could not be seeded.';
+    return;
+  }
+
+  var logoUrl = function (abbr) { return '/images/nfl/' + abbr.toLowerCase() + '.svg'; };
+  var logoTag = function (abbr) {
+    return '<span class="sb-mark"><img src="' + logoUrl(abbr) + '" alt="" aria-hidden="true"' +
+      ' loading="lazy" decoding="async" onerror="this.style.display=\'none\'"></span>';
+  };
+  var pct = function (x, digits) { return (x * 100).toFixed(digits === undefined ? 1 : digits) + '%'; };
+  var esc = function (s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  };
+
+  var teams = data.teams;
+  var leader = teams[0];
+  var runnerUp = teams[1];
+
+  // ---- headline + lede -------------------------------------------------
+  document.getElementById('sb-headline').textContent =
+    leader.abbr + ' and ' + runnerUp.abbr + ' are likeliest to reach the Super Bowl';
+  document.getElementById('sb-lede').innerHTML =
+    'Each team is seeded by its <strong>actual record</strong>, then the bracket is played out ' +
+    '<strong>' + data.nSims.toLocaleString() + ' times</strong>. Every game is priced from the consensus ' +
+    'score above plus home-field advantage, fitted on 6,719 regular-season games, and the Super Bowl is ' +
+    'treated as a neutral site. <strong>' + esc(leader.team) + '</strong> reaches it in ' +
+    pct(leader.pSuperBowl) + ' of runs and wins it in ' + pct(leader.pChampion) + '.';
+
+  // ---- conference seeding ---------------------------------------------
+  var confEl = document.getElementById('sb-conferences');
+  Object.keys(data.conferences).sort().forEach(function (conf) {
+    var seeds = data.conferences[conf];
+    var block = document.createElement('div');
+    var head = '<div class="sb-conf-head"><b>' + conf + '</b><span>' + seeds.length + ' seeds</span></div>';
+    var rows = seeds.map(function (s, i) {
+      var tag = s.divisionWinner ? '' : '<span class="sb-divtag">wild card</span>';
+      var bye = s.seed === 1 ? '<span class="sb-bye">bye</span>' : '';
+      return '<div class="sb-seed-row">' +
+        '<span class="sb-seed-n">' + s.seed + '</span>' +
+        logoTag(s.abbr) +
+        '<span class="sb-seed-team">' + s.abbr + tag + bye + '</span>' +
+        '<span class="sb-seed-rec">' + esc(s.record) + '</span>' +
+        '</div>';
+    }).join('');
+    block.innerHTML = head + rows;
+    confEl.appendChild(block);
+  });
+
+  // ---- wild card round -------------------------------------------------
+  var wcEl = document.getElementById('sb-wildcard');
+  Object.keys(data.wildCard).sort().forEach(function (conf) {
+    // One column per conference. Appending all six games to a two-column grid
+    // interleaved AFC and NFC rows, which made the bracket hard to read.
+    var col = document.createElement('div');
+    col.className = 'sb-wc-col';
+    data.wildCard[conf].forEach(function (g) {
+      var wrap = document.createElement('div');
+      wrap.className = 'sb-wc';
+      wrap.innerHTML =
+        '<div class="sb-wc-head">' +
+          '<span class="sb-wc-conf">' + conf + '</span>' +
+          '<span>(' + g.homeSeed + ') hosts (' + g.awaySeed + ')</span>' +
+        '</div>' +
+        '<div class="sb-wc-bar">' +
+          '<span class="sb-wc-home" style="width:' + (g.pHome * 100).toFixed(1) + '%"></span>' +
+          '<span class="sb-wc-away" style="width:' + (g.pAway * 100).toFixed(1) + '%"></span>' +
+        '</div>' +
+        '<div class="sb-wc-teams">' +
+          '<span class="sb-wc-side">' + logoTag(g.homeAbbr) +
+            '<span><span class="sb-wc-abbr">' + g.homeAbbr + '</span> ' +
+            '<span class="sb-wc-pct">' + esc(g.homeRecord) + ' · ' + pct(g.pHome) + '</span></span></span>' +
+          '<span class="sb-wc-side is-away">' + logoTag(g.awayAbbr) +
+            '<span><span class="sb-wc-abbr">' + g.awayAbbr + '</span> ' +
+            '<span class="sb-wc-pct">' + esc(g.awayRecord) + ' · ' + pct(g.pAway) + '</span></span></span>' +
+        '</div>';
+      col.appendChild(wrap);
+    });
+    wcEl.appendChild(col);
+  });
+
+  // ---- the ladder ------------------------------------------------------
+  document.getElementById('sb-table-note').textContent =
+    'Every team that would make the field today, ordered by how often it survives the bracket. ' +
+    '"Reach SB" is making the Super Bowl; "Win SB" is winning it.';
+
+  var maxReach = teams[0].pSuperBowl || 1;
+  document.getElementById('sb-body').innerHTML = teams.map(function (t) {
+    var w = Math.max(2, (t.pSuperBowl / maxReach) * 100);
+    var wc = Math.max(0, (t.pChampion / maxReach) * 100);
+    return '<tr>' +
+      '<td class="sb-td-seed">' + t.conference + ' ' + t.seed + '</td>' +
+      '<td class="sb-td-team"><div class="sb-team-cell">' + logoTag(t.abbr) +
+        '<span class="sb-team-name">' + esc(t.team) +
+        '<span class="sb-abbr">' + t.abbr + '</span>' +
+        '<span class="sb-record">' + esc(t.record) + '</span></span></div></td>' +
+      '<td class="sb-td-num">' + pct(t.pSuperBowl) + '</td>' +
+      '<td class="sb-td-bar"><div class="sb-bar"><span style="width:' + w.toFixed(1) + '%"></span></div></td>' +
+      '<td class="sb-td-num is-win">' + pct(t.pChampion) + '</td>' +
+      '</tr>';
+  }).join('');
+
+  // ---- most likely matchups -------------------------------------------
+  document.getElementById('sb-matchups').innerHTML = data.superBowlMatchups.slice(0, 5).map(function (m) {
+    var a = data.teams.filter(function (t) { return t.team === m.a; })[0];
+    var b = data.teams.filter(function (t) { return t.team === m.b; })[0];
+    if (!a || !b) { return ''; }
+    return '<li><span class="sb-mt">' + logoTag(a.abbr) + '<span>' + a.abbr + '</span>' +
+      '<span class="sb-wc-pct">vs</span>' + logoTag(b.abbr) + '<span>' + b.abbr + '</span></span>' +
+      '<span class="sb-mt-pct">' + pct(m.probability) + '</span></li>';
+  }).join('');
+
+  // ---- honest footer ---------------------------------------------------
+  var confs = Object.keys(data.byConference).sort();
+  document.getElementById('sb-foot').textContent =
+    'Seeding uses win-loss record with the consensus order breaking ties between identical records — ' +
+    'the real tiebreaker chain (head-to-head, division and conference record, strength of victory) needs ' +
+    'the full game log, which this pipeline does not carry. The simulation is seeded (' + data.seed + ') ' +
+    'so the numbers are reproducible, and it re-runs whenever the rankings change. Conference splits: ' +
+    confs.map(function (c) {
+      return c + ' wins the Super Bowl ' + pct(data.byConference[c].pChampion);
+    }).join(', ') + '.';
+})();
+</script>
+
 <a id="panel"></a>
 
 9 outlets this week. Mean distance from the consensus order, in rank positions:

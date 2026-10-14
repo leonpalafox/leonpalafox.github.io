@@ -15,7 +15,7 @@ import unittest
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 
-from pollofpolls import sources, stats, teams, validate  # noqa: E402
+from pollofpolls import playoffs, sources, stats, teams, validate  # noqa: E402
 
 
 class TestTeamResolution(unittest.TestCase):
@@ -476,6 +476,78 @@ class TestLogoNormalisation(unittest.TestCase):
         svg = '<svg width="500" height="500"><path d="M0 0h1v1H0z"/></svg>'
         out = self.tool.rewrite_viewbox(svg, 0.0, 0.0, 500.0)
         self.assertIn('viewBox="0 0 500 500"', out)
+
+
+class TestPlayoffSimulation(unittest.TestCase):
+    """The bracket simulation must conserve probability and respect byes."""
+
+    # 16 teams per conference, four divisions of four, with distinct records so
+    # the seeding is deterministic and each division has a clear winner.
+    RECORDS = ["5-0", "4-1", "4-1", "3-2", "3-2", "3-2", "3-2", "2-3",
+               "2-3", "2-3", "2-3", "1-4", "1-4", "0-5", "0-5", "0-5"]
+
+    def _rows(self):
+        rows = []
+        for conf in ("AFC", "NFC"):
+            for i, record in enumerate(self.RECORDS):
+                rows.append({
+                    "team": f"{conf}-{i}",
+                    "abbr": f"{conf[0]}{i}",
+                    "conference": conf,
+                    "division": f"Div{i % 4}",
+                    "record": record,
+                    "score": 2.0 - 0.1 * i,
+                })
+        return rows
+
+    def test_probabilities_sum_correctly(self):
+        sim = playoffs.simulate(self._rows(), n_sims=3000, seed=1)
+        # One team per conference reaches the Super Bowl, and exactly one wins it.
+        self.assertAlmostEqual(sum(t["pSuperBowl"] for t in sim["teams"]), 2.0, places=9)
+        self.assertAlmostEqual(sum(t["pChampion"] for t in sim["teams"]), 1.0, places=9)
+
+    def test_top_seed_gets_a_bye(self):
+        sim = playoffs.simulate(self._rows(), n_sims=3000, seed=1)
+        tops = [t for t in sim["teams"] if t["seed"] == 1]
+        self.assertEqual(len(tops), 2)
+        for team in tops:
+            self.assertEqual(team["pDivisional"], 1.0)
+
+    def test_wild_card_odds_match_the_first_round(self):
+        # A non-bye team reaches the divisional round exactly when it wins its
+        # wild card game, so the two probabilities must agree.
+        sim = playoffs.simulate(self._rows(), n_sims=6000, seed=1)
+        for conf, games in sim["wildCard"].items():
+            by_abbr = {t["abbr"]: t for t in sim["teams"]}
+            for game in games:
+                home = by_abbr[game["homeAbbr"]]
+                self.assertAlmostEqual(home["pDivisional"], game["pHome"], delta=0.02)
+
+    def test_seeding_follows_record_not_score(self):
+        # Rate the 4-1 teams far above the 5-0 teams. Seeding must ignore that.
+        rows = self._rows()
+        for row in rows:
+            if row["record"] == "4-1":
+                row["score"] = 99.0
+        sim = playoffs.simulate(rows, n_sims=500, seed=1)
+        seeded = {t["team"]: t["seed"] for t in sim["teams"]}
+        self.assertEqual(seeded["AFC-0"], 1)   # the 5-0 team still tops its conference
+        self.assertGreater(seeded["AFC-1"], seeded["AFC-0"])
+
+    def test_seven_teams_per_conference(self):
+        sim = playoffs.simulate(self._rows(), n_sims=500, seed=1)
+        for conf, seeds in sim["conferences"].items():
+            self.assertEqual([s["seed"] for s in seeds], list(range(1, 8)))
+            self.assertEqual(len(sim["wildCard"][conf]), 3)
+
+    def test_division_winners_are_seeds_one_to_four(self):
+        sim = playoffs.simulate(self._rows(), n_sims=500, seed=1)
+        for conf, seeds in sim["conferences"].items():
+            for entry in seeds:
+                if entry["seed"] <= 4:
+                    self.assertTrue(entry["divisionWinner"])
+                else:
+                    self.assertFalse(entry["divisionWinner"])
 
 
 if __name__ == "__main__":

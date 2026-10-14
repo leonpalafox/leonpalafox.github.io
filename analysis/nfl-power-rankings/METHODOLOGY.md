@@ -355,7 +355,82 @@ purpose. Once the games are played, filling them in lets the metrics in §9.2 be
 recomputed on the current season, which is how a drift in `k` or a widening gap
 to the market would be detected rather than assumed away.
 
-## 10. References
+## 10. Path to the Super Bowl: simulating the bracket
+
+§9 prices a single game. This section prices a tournament: given where each team
+is seeded today, how often does it reach the Super Bowl? It answers a different
+question from the rankings, and mixes two inputs on purpose.
+
+### 10.1 Seeding comes from records, not from the rankings
+
+The bracket is seeded by **win-loss record** -- the actual standings -- not by
+consensus score. That matters, because they disagree: Minnesota is 5-0 and ranked
+sixth, so the Vikings take the NFC's second seed while Seattle, rated higher by
+the panel, enters as a wild card.
+
+Ties between identical records are broken by consensus score. This is an
+approximation and should be labelled as one. The real NFL tiebreaker chain is
+head-to-head, then division record, then common games, then conference record,
+then strength of victory -- all of which need the full game log with opponents
+resolved. The pipeline carries results, not a resolved schedule graph, so it
+cannot compute them. Records first, consensus second, is the honest stand-in.
+
+Within a conference: the four division winners are seeded 1-4 in record order,
+then the three best remaining teams are seeded 5-7.
+
+### 10.2 Games are priced by §9
+
+A playoff game uses the same fitted model as any other:
+
+```
+margin    = k * (z_home - z_away) + home_field
+P(home)   = Phi(margin / sigma)
+```
+
+with `k = 4.59` points per consensus unit, `home_field = 2.56` points and
+`sigma = 13.16`, all from §9. The Super Bowl drops the home-field term, since it
+is played at a neutral site.
+
+One caveat worth stating: the coefficients were fitted on **regular-season**
+games. Playoff home-field advantage is often argued to be larger, and playoff
+teams are a selected, better-matched sample, so this likely understates the
+home edge slightly and overstates blowout probabilities. Re-fitting on playoff
+games alone would require more post-season history than is worth the variance.
+
+### 10.3 The bracket, and why it is a simulation
+
+The format is the current one: seven teams per conference, one bye, three wild
+card games (2v7, 3v6, 4v5), then reseeding -- the top seed always faces the
+lowest surviving seed -- with the better seed hosting throughout.
+
+That structure is a tree of conditional probabilities with no closed form, so it
+is evaluated by Monte Carlo: the bracket is played out 50,000 times and the
+round-by-round frequencies are the reported probabilities. The run is seeded
+(`season * 10000 + week`) so the output is reproducible; a different seed moves
+the numbers by less than a tenth of a point at this sample size.
+
+Two checks that the simulation is wired correctly:
+
+- The probabilities of reaching the Super Bowl sum to exactly 2.0 (one per
+  conference) and the championship probabilities sum to 1.0.
+- Top seeds have `P(reach divisional) = 1.0`, and every other seed's
+  `P(reach divisional)` equals its own wild card win probability.
+
+The wild card matchups are also reported directly from §10.2 rather than from
+the simulation, because seeding fixes them, so those six numbers are exact.
+Reporting both makes it visible which figures are prices and which are
+simulated frequencies.
+
+### 10.4 What this is not
+
+It is not a prediction of the actual playoff field, which is mostly not yet
+determined -- 14 of 32 teams would make it if the season ended today, and most
+of the other 18 still can. It is a statement about *this panel's current opinion*
+of team strength, propagated through the bracket as it stands. If the rankings
+are wrong, the bracket odds are wrong in the same direction, and they inherit
+every limitation in §7 and §9.3.
+
+## 11. References
 
 - Efron, B. & Stein, C. (1981). *The Jackknife Estimate of Variance.* Annals of
   Statistics 9(3) — the leave-one-out variance used in §4.

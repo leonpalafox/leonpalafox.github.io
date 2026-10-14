@@ -222,6 +222,7 @@ def build_site_bundle(
     schedule_source: str = "",
     previous: dict | None = None,
     records: dict[str, str] | None = None,
+    playoffs: dict | None = None,
 ) -> dict:
     sources = list(panel.ballots)
     source_diag = {row["source"]: row for row in source_diagnostics(panel, rows)}
@@ -349,6 +350,7 @@ def build_site_bundle(
         "method": method_note,
         "movement": movement,
         "recordsThroughWeek": (week - 1) if records else None,
+        "playoffs": playoffs,
         "headToHead": head_to_head,
         "diagnostics": {
             "sources": diagnostics.n_sources,
