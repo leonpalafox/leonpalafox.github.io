@@ -1,7 +1,20 @@
 {
-  "week": 5,
+  "week": 6,
   "season": 2026,
   "sources": [
+    {
+      "id": "nflcom-shook",
+      "outlet": "NFL.com",
+      "analyst": "Nick Shook",
+      "kind": "analyst",
+      "url_tpl": "https://www.nfl.com/news/nfl-power-rankings-week-{week}-{season}-nfl-season",
+      "urls": [
+        "https://www.nfl.com/news/nfl-power-rankings-week-6-2026-nfl-season"
+      ],
+      "extract": "nflcom_rank_marker",
+      "prior_weight": 1.0,
+      "tier": "League site column. Returned after a two-week absence in week 6."
+    },
     {
       "id": "cbs-prisco",
       "outlet": "CBS Sports",
@@ -13,7 +26,7 @@
       ],
       "extract": "cbs_table",
       "prior_weight": 1.0,
-      "tier": "Analyst column. The per-week slug is not derivable; the hub carries the current table."
+      "tier": "Analyst column; the per-week slug is not derivable, so the hub is used."
     },
     {
       "id": "fox-vacchiano",
@@ -22,11 +35,11 @@
       "kind": "analyst",
       "url_tpl": "",
       "urls": [
-        "https://www.foxsports.com/stories/nfl/2026-nfl-power-rankings-week-5"
+        "https://www.foxsports.com/stories/nfl/2026-nfl-power-rankings-week-6"
       ],
       "extract": "si_numbered",
       "prior_weight": 0.9,
-      "tier": "Analyst column; 'N. Team Name' inside h2 anchors. Do not use its JSON-LD keywords, which are unordered."
+      "tier": "Analyst column; 'N. Team Name' inside h2 anchors. Its JSON-LD keywords are unordered."
     },
     {
       "id": "si-orr",
@@ -35,25 +48,11 @@
       "kind": "analyst",
       "url_tpl": "",
       "urls": [
-        "https://www.si.com/nfl/conor-orr-week-5-nfl-power-rankings-jaguars-seahawks-cowboys"
+        "https://www.si.com/nfl/conor-orr-week-6-nfl-power-rankings-49ers-bills-vikings"
       ],
       "extract": "si_numbered",
       "prior_weight": 0.9,
-      "tier": "Analyst column, discovered via si.com's q4 article sitemap. Verify the numbering runs 1-32."
-    },
-    {
-      "id": "usatoday-davis",
-      "outlet": "USA Today",
-      "analyst": "Nate Davis",
-      "kind": "analyst",
-      "url_tpl": "",
-      "urls": [
-        "https://www.usatoday.com/story/sports/nfl/columnist/nate-davis/2026/10/06/nfl-power-rankings-week-5-bills-49ers-chiefs-vikings/92114142007/"
-      ],
-      "extract": "usatoday_numbered",
-      "prior_weight": 0.9,
-      "tier": "National columnist. Returns HTTP 402 to ordinary browser UAs, so it is fetched as Googlebot.",
-      "user_agent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
+      "tier": "Analyst column, found via si.com's q4 article sitemap. Verify the numbering runs 1-32."
     },
     {
       "id": "sportingnews-iyer",
@@ -62,7 +61,7 @@
       "kind": "analyst",
       "url_tpl": "",
       "urls": [
-        "https://www.sportingnews.com/us/nfl/news/nfl-power-rankings-week-5/bcdbc8dfa5349061230758d7"
+        "https://www.sportingnews.com/us/nfl/news/nfl-power-rankings-week-6/aa7e26ccbcbf70aca449ebdd"
       ],
       "extract": "sportingnews_numbered",
       "prior_weight": 0.85,
@@ -86,7 +85,7 @@
       "kind": "panel",
       "url_tpl": "",
       "urls": [
-        "https://www.thescore.com/nfl/news/3615691/nfl-power-rankings-week-5-every-teams-best-offseason-addition"
+        "https://www.thescore.com/nfl/news/3621710/nfl-power-rankings-week-6-49-ers-take-over-no-1-eagles-fall"
       ],
       "extract": "thescore_numbered",
       "prior_weight": 0.8,
@@ -99,11 +98,11 @@
       "kind": "panel",
       "url_tpl": "",
       "urls": [
-        "https://bleacherreport.com/articles/25506829-br-experts-week-5-nfl-power-rankings"
+        "https://bleacherreport.com/articles/25509520-br-experts-week-6-nfl-power-rankings"
       ],
       "extract": "si_numbered",
       "prior_weight": 0.8,
-      "tier": "Staff panel; numbered slide headings. CAUTION: the identically titled 2025 edition lives at a different id and passes a naive check."
+      "tier": "Staff panel; numbered slide headings. The 2025 edition shares the title at another id."
     }
   ]
 }
