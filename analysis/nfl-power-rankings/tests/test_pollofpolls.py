@@ -554,6 +554,18 @@ class TestPlayoffSimulation(unittest.TestCase):
 class TestWeightedBlend(unittest.TestCase):
     """The blended prediction must read records correctly and stay bounded."""
 
+    # Anchored to this file, not the process working directory: these tests
+    # failed when run from the repo root, where the relative paths below do not
+    # resolve. `unittest discover` is run from both places.
+    ANALYSIS = pathlib.Path(__file__).resolve().parents[1]
+    REPO = ANALYSIS.parents[1]
+
+    def _csv(self) -> str:
+        path = self.ANALYSIS / "cache" / "schedule" / "nflverse-games.csv"
+        if not path.exists():
+            self.skipTest("nflverse game cache not present")
+        return path.read_text(encoding="utf-8")
+
     def test_win_pct_handles_ties(self):
         self.assertAlmostEqual(weighted.win_pct("5-0"), 1.0)
         self.assertAlmostEqual(weighted.win_pct("0-5"), 0.0)
@@ -577,7 +589,7 @@ class TestWeightedBlend(unittest.TestCase):
         self.assertAlmostEqual(obs[1]["homePct"], 1.0)
 
     def test_record_model_fits_the_same_window_as_head_to_head(self):
-        csv_text = pathlib.Path("cache/schedule/nflverse-games.csv").read_text(encoding="utf-8")
+        csv_text = self._csv()
         model = weighted.fit_record_model(csv_text)
         # Same 6,719 games the head-to-head constants were fitted on, so the two
         # log-losses are comparable.
@@ -587,10 +599,10 @@ class TestWeightedBlend(unittest.TestCase):
         self.assertTrue(2.0 < model["homeField"] < 3.0)
 
     def test_blend_weight_is_bounded_and_sensitivity_is_computed(self):
-        csv_text = pathlib.Path("cache/schedule/nflverse-games.csv").read_text(encoding="utf-8")
+        csv_text = self._csv()
         bundles = {}
         for week in (3, 4, 5):
-            path = pathlib.Path(f"../../src/data/nfl-power-rankings-2026-wk{week:02d}.json")
+            path = self.REPO / "src" / "data" / f"nfl-power-rankings-2026-wk{week:02d}.json"
             if path.exists():
                 bundles[week] = json.loads(path.read_text(encoding="utf-8"))
         if len(bundles) < 3:
@@ -606,8 +618,8 @@ class TestWeightedBlend(unittest.TestCase):
         self.assertEqual(fit["curve"][-1]["weight"], 1.0)
 
     def test_predicted_probabilities_are_probabilities(self):
-        csv_text = pathlib.Path("cache/schedule/nflverse-games.csv").read_text(encoding="utf-8")
-        bundle_path = pathlib.Path("../../src/data/nfl-power-rankings-2026-wk06.json")
+        csv_text = self._csv()
+        bundle_path = self.REPO / "src" / "data" / "nfl-power-rankings-2026-wk06.json"
         if not bundle_path.exists():
             self.skipTest("week 6 bundle not present")
         bundle = json.loads(bundle_path.read_text(encoding="utf-8"))
