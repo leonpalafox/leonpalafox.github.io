@@ -103,6 +103,19 @@
       "extract": "si_numbered",
       "prior_weight": 0.8,
       "tier": "Staff panel; numbered slide headings. The 2025 edition shares the title at another id."
+    },
+    {
+      "id": "usatoday-davis",
+      "outlet": "USA Today",
+      "analyst": "Nate Davis",
+      "kind": "analyst",
+      "url_tpl": "",
+      "urls": [
+        "https://www.centraloregondaily.com/sports/nfl-power-rankings-week-6-what-does-wild-overtime-game-mean-for-bills-rams/article_3378b244-e78b-533f-842c-aceeb012563e.html"
+      ],
+      "extract": "usatoday_numbered",
+      "prior_weight": 0.9,
+      "tier": "Nate Davis's national column. usatoday.com returns HTTP 402 Access Restricted to ordinary browser agents and serves only a Googlebot UA, so the ballot is read from a syndication partner that carries the identical column under the same headline. Syndicated copies carry no publication metadata, so the freshness gate cannot date them; verify by matching the headline and the #1/#32 teams against the original."
     }
   ]
 }

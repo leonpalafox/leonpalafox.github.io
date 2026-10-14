@@ -1,14 +1,14 @@
 ---
 title: "NFL Poll of Polls: Week 6"
-description: "San Francisco takes No. 1 at 5-0 with six of eight first-place votes, Green Bay climbs ten, and all 32 teams change position."
+description: "San Francisco takes No. 1 at 5-0 with seven of nine first-place votes, and all 32 teams change position."
 pubDate: 2026-10-14
 lang: en
 tags: ["data-viz", "nfl", "statistics"]
 ---
 
-Week 5 finally produced a clean answer at the top. San Francisco went to Seattle and won 32–29, and the panel rewarded it: the 49ers are 5–0 and take the No. 1 spot with six of eight first-place votes.
+Week 5 finally produced a clean answer at the top. San Francisco went to Seattle and won 32–29, and the panel rewarded it: the 49ers are 5–0 and take the No. 1 spot with seven of nine first-place votes.
 
-Two other results mattered. Green Bay beat Chicago 31–7, which moved the Packers up **ten places** — the biggest single climb of the season — and dropped the Bears six. And the Giants and Commanders tied 27–27, the season's first.
+Two other results mattered. Green Bay beat Chicago 31–7, moving the Packers up eight places and dropping the Bears five. Dallas lost to Buffalo in overtime and fell seven, the week's biggest slide. And the Giants and Commanders tied 27–27, the season's first.
 
 Every one of the 32 teams changed position this week. That has not happened before in this poll.
 
@@ -841,13 +841,6 @@ Here is where the panel landed after Week 5.
   });
 })();
 </script>
-
-San Francisco takes the top spot from Kansas City, which was on bye at 4–0 and slips to second. The 49ers have now won the head-to-head that decided the argument: they were second to the Seahawks' third a week ago, and beating Seattle on the road settled it.
-
-Below them, Jacksonville and Buffalo each climb a place to third and fourth, Seattle drops two to fifth, and Baltimore rises three to sixth after beating Atlanta.
-
-Still the most argued-about team in the table: **Minnesota is 5–0 and ranked seventh.** The Vikings have won five straight and the panel still scores them below three teams with a loss. Whatever the voters are watching, it is not the record.
-
 <a id="movers"></a>
 
 <div id="mv-root" class="mv-root">
@@ -1386,25 +1379,22 @@ Fourteen games in Week 6: Cincinnati, Detroit, Miami and Minnesota are on bye. E
 </script>
 <a id="panel"></a>
 
-
-## The panel
-
-8 outlets this week. Mean distance from the consensus order, in rank positions:
+9 outlets this week. Mean distance from the consensus order, in rank positions:
 
 | Outlet | Analyst | Mean gap | ρ vs consensus |
 |--------|---------|----------|----------------|
-| CBS Sports | Pete Prisco | 1.25 | 0.983 |
-| Bleacher Report | B/R NFL staff | 1.31 | 0.980 |
-| Sporting News | Vinnie Iyer | 1.38 | 0.982 |
-| theScore | theScore NFL desk | 1.44 | 0.975 |
-| FOX Sports | Ralph Vacchiano | 1.50 | 0.970 |
-| Sports Illustrated | Conor Orr | 1.56 | 0.966 |
-| Sharp Football Analysis | Raymond Summerlin | 1.56 | 0.971 |
-| NFL.com | Nick Shook | 2.00 | 0.954 |
+| Bleacher Report | B/R NFL staff | 1.25 | 0.982 |
+| FOX Sports | Ralph Vacchiano | 1.38 | 0.976 |
+| Sporting News | Vinnie Iyer | 1.44 | 0.976 |
+| CBS Sports | Pete Prisco | 1.50 | 0.975 |
+| Sports Illustrated | Conor Orr | 1.56 | 0.964 |
+| theScore | theScore NFL desk | 1.56 | 0.971 |
+| Sharp Football Analysis | Raymond Summerlin | 1.69 | 0.966 |
+| NFL.com | Nick Shook | 1.88 | 0.960 |
+| USA Today | Nate Davis | 2.69 | 0.932 |
 
-Agreement is the tightest of the season (mean pairwise Spearman **ρ = 0.943**, split-half reliability 0.992). NFL.com's ballot is the furthest out at 2.00 positions, and that is a return to form rather than a problem — its column was missing for two weeks and came back this week.
+Nine ballots is the fullest panel since this poll began, but agreement loosened slightly (mean pairwise Spearman **ρ = 0.932**, split-half 0.991) — adding a ninth voice that sits furthest from the consensus will do that. USA Today is the outlier at 2.69 positions; every other outlet is inside 1.88.
 
-**NFL.com published again** after a two-week absence, which brings the panel back to full strength at eight sources.
 
 <a id="sources"></a>
 
@@ -1414,8 +1404,8 @@ Every number above comes from one pipeline. Each outlet's weekly 1–32 ballot i
 standardised, pooled in a measurement-error model, shrunk toward the panel mean,
 and published with a range reflecting how much the outlets actually disagree.
 Records are the standings each team carried into the week, computed from the
-same results feed — and they render ties, which is why the Giants and Commanders
-show `3-1-1` and `1-3-1`. The matchups are priced from the consensus score alone,
+same results feed — which is why the Giants and Commanders show `3-1-1` and
+`1-3-1` after their tie. The matchups are priced from the consensus score alone,
 using constants fitted on 6,719 completed regular-season games.
 
 The method, the calibration and the week-by-week replication checklist live with
@@ -1427,8 +1417,7 @@ the code rather than in every post:
   method does *not* claim.
 - `analysis/nfl-power-rankings/README.md` — the pipeline and how to run it.
 
-This week's panel — eight ballots, every one verified complete and dated inside
-the week:
+This week's panel — nine ballots, every one verified complete:
 
 | Outlet | Analyst | This week's ballot |
 |--------|---------|--------------------|
@@ -1436,36 +1425,51 @@ the week:
 | CBS Sports | Pete Prisco | [cbssports.com](https://www.cbssports.com/nfl/powerrankings/) |
 | FOX Sports | Ralph Vacchiano | [foxsports.com](https://www.foxsports.com/stories/nfl/2026-nfl-power-rankings-week-6) |
 | Sports Illustrated | Conor Orr | [si.com](https://www.si.com/nfl/conor-orr-week-6-nfl-power-rankings-49ers-bills-vikings) |
+| USA Today | Nate Davis | [centraloregondaily.com](https://www.centraloregondaily.com/sports/nfl-power-rankings-week-6-what-does-wild-overtime-game-mean-for-bills-rams/article_3378b244-e78b-533f-842c-aceeb012563e.html) (syndicated) |
 | Sporting News | Vinnie Iyer | [sportingnews.com](https://www.sportingnews.com/us/nfl/news/nfl-power-rankings-week-6/aa7e26ccbcbf70aca449ebdd) |
 | Sharp Football Analysis | Raymond Summerlin | [sharpfootballanalysis.com](https://www.sharpfootballanalysis.com/analysis/nfl-power-rankings/) |
 | theScore | theScore NFL desk | [thescore.com](https://www.thescore.com/nfl/news/3621710/nfl-power-rankings-week-6-49-ers-take-over-no-1-eagles-fall) |
 | Bleacher Report | B/R NFL staff | [bleacherreport.com](https://bleacherreport.com/articles/25509520-br-experts-week-6-nfl-power-rankings) |
 
-### What the freshness gate did this week
+### NFL.com came back
 
-Every ballot above was checked against the page's own `datePublished` /
-`dateModified` before use. All eight fall inside the October 13–19 window for
-Week 6. The gate exists because of two near-misses found while sourcing Week 5:
-NFL.com's year-less Reynolds slugs return a live **2020** page, and Bleacher
-Report's 2025 Week 5 rankings carry a headline identical to the 2026 edition.
-Neither would be caught by a parser, because the markup is the same shape.
+Nick Shook's column returns after two weeks of 404s and is a complete ballot,
+which puts the panel back at full strength. Its own ranking was the second
+furthest from the consensus but only slightly, so the absence looks like a
+scheduling gap rather than a change in the series.
 
-It also flagged nothing this week, which is the point — a guard that only ever
-fires is a guard you stop trusting.
+### How USA Today is read now
 
-### Still missing, and one that may not come back
+`usatoday.com` returns **`HTTP 402 Access Restricted`** to ordinary browser
+agents and serves only a Googlebot user agent. Last week the pipeline took that
+route and I said so. I am not going to keep doing it — presenting a non-Google
+crawler as Googlebot to get past a block is not something I want this pipeline
+doing quietly every Tuesday.
 
-- **Neil Reynolds' NFL.com UK column** has now been absent for four consecutive
-  weeks (weeks 3–6). Its 2026 slug pattern is known and still 404s. At this point
-  the fair description is that the column has stopped, not that it is late.
-- **USA Today** could not be located this week at its usual slug, and the site
-  returns `HTTP 402 Access Restricted` to ordinary browser agents. Last week it
-  was readable only by presenting as a Googlebot, which is how it was fetched.
-  I am not going to keep doing that, so Nate Davis's ballot sits out until the
-  column can be read the way any reader would read it.
-- **ESPN** remains absent permanently: every URL returns an empty `HTTP 202` to a
-  plain request.
+The column is nationally syndicated, and a partner site carries it verbatim
+under the same headline. That copy returns `HTTP 200` to an ordinary request,
+so Nate Davis's ballot is back in the panel, fetched the way any reader could
+fetch it. The tradeoff is real and worth stating: syndicated copies carry no
+`datePublished` metadata, so the freshness gate cannot date this one. It is
+included on the strength of an independent cross-check of the original — same
+headline, same No. 1 (49ers) and No. 32 (Titans) — not on a verified timestamp.
+The pipeline logs it as `freshness unverified` on every run, which is the honest
+label.
 
-**One candidate was found and rejected:** Pro Football Talk (NBC) publishes a
-weekly 1–32, but its rendered page is missing entries 12 through 14 entirely, so
-it cannot pass the completeness check. Worth re-checking next week.
+### One trap this week, avoided
+
+The Reynolds columns are still the cautionary tale. NFL.com's year-less slug
+`…neil-reynolds-week-6-power-rankings` returns **`HTTP 200` with a 2020 article**
+— it was updated to 2020-10-11 — while the correct 2026 slug 404s. That is now
+four consecutive weeks without the column (weeks 3–6), so the fair description
+is that it has stopped rather than that it is running late.
+
+Every other ballot passed the freshness gate against its own `datePublished` /
+`dateModified` inside the October 13–19 window for Week 6.
+
+ESPN remains absent permanently: every URL returns an empty `HTTP 202` to a
+plain request.
+
+**One candidate found and rejected:** Pro Football Talk (NBC) publishes a weekly
+1–32, but its rendered page omits entries 12 through 14 entirely, so it fails
+the completeness check. Worth re-testing next week.
