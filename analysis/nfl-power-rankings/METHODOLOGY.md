@@ -430,88 +430,106 @@ of team strength, propagated through the bracket as it stands. If the rankings
 are wrong, the bracket odds are wrong in the same direction, and they inherit
 every limitation in §7 and §9.3.
 
-## 11. A weighted second opinion: rankings blended with records
+## 11. Blending the power rankings with records
 
-§9 prices a game from the consensus score alone. This section adds each team's
-win-loss record as a second signal and asks how much weight it deserves. The
-answer is less satisfying than a single number, and that is the point.
+Section 10 seeds the bracket on a blend of the power rankings and each team's
+record rather than on either alone. This section is how that blend is built and
+what the weight is worth.
 
-### 11.1 The record signal gets its own fit
+### 11.1 Each signal is fitted, then standardised
 
-Rather than assuming a weight, the record is first fitted on its own terms, on
-the same 6,719 games and the same 2000-2025 window as the head-to-head constants:
+The two signals do not arrive on the same scale, so each is fitted on its own
+terms first, on the same 6,719 games and the same 2000-2025 window as the
+head-to-head constants:
 
 ```
-margin = k_rec * (win_pct_home - win_pct_away) + home_field_rec
+rank  points = k_rank * z            k_rank = 4.59
+record points = k_rec  * win_pct     k_rec  = 11.01
 ```
 
 with win percentage counting a tie as half a win, and a team that has not played
-yet scored 0.500 rather than 0.000. That last detail is not cosmetic: scoring an
-unplayed team 0.000 would make an opening-week win look like a full game of edge,
-and it disagreed with the percentage used everywhere else in the pipeline.
+yet scored 0.500 rather than 0.000. The record fit gives a home-field term of
+2.36 and a residual `sigma_rec` of 14.08, log-loss **0.6589**; the strength
+signal the matchup model was fitted on reaches **0.6124** on the same games.
+Record is the weaker predictor, which is what you would expect: it discards
+margin of victory, and a 3-2 team that has won by a combined 40 points is not the
+same as one that has won three one-score games.
 
-The result: `k_rec = 11.01` points per unit of win-percentage difference,
-`home_field_rec = 2.36`, `sigma_rec = 14.08`, log-loss **0.6589**. For comparison
-the strength signal the matchup model was fitted on reaches **0.6124** on the same
-games. Win-loss record is the weaker predictor, which is exactly what you would
-expect: it throws away margin of victory, and a 3-2 team that has won by a
-combined 40 points is not the same as one that has won three one-score games.
-
-### 11.2 The blend, and how the weight is chosen
-
-The two margins are mixed on the points scale:
+Each signal is then **standardised across the 32 teams before mixing**. That step
+matters more than it looks. Mixing raw margins gives the record far more say than
+the weight suggests, because `k_rec` is over twice `k_rank`: measured against the
+actual bracket, every weight below about 0.55 reproduced the *records-only*
+seeding, so "46% on the rankings" behaved like none at all. Standardising first
+makes the weight a genuine share of influence, and the blend is converted back to
+points at the matchup model's rate so the home-field and sigma constants keep
+their meaning.
 
 ```
-margin_blend = w * margin_rank + (1 - w) * margin_rec
-P(home)      = Phi(margin_blend / sigma_blend)
+strength   = k_rank * (w * z_rank_std + (1 - w) * z_rec_std)
+margin     = strength_home - strength_away + home_field_blend
+P(home)    = Phi(margin / sigma)
 ```
 
-`w` is fitted, not chosen, by minimising log-loss on genuinely out-of-sample
-games. Each weekly consensus bundle is published *before* that week's slate, and
-the record it carries is the standing entering the week, so grading a bundle
-against that week's results involves no future information. Weeks 3, 4 and 5 of
-2026 are complete and have such bundles: **47 games**. A two-dimensional sweep
-picks `w` and `sigma_blend` together, since a blended margin has its own spread.
+The same blended strength drives both the *seeding* and the *game outcomes*, so a
+division winner the panel rates highly can outrank one with a better record.
 
-Fitted on those 47 games: **`w = 0.46`** on the rankings (records get 0.54),
-`sigma_blend = 14.50`, log-loss **0.6465**, against 0.6506 for rankings-only and
-0.6496 for records-only on the same games.
+### 11.2 The weight is fitted on games that had not been played
 
-### 11.3 Why that number should not be trusted much
+`w` is fitted by minimising log-loss on genuinely ex-ante games. Each weekly
+consensus bundle is published *before* that week's slate, and the record it
+carries is the standing entering the week, so grading a bundle against that
+week's results involves no future information. Weeks 3, 4 and 5 of 2026 are
+complete and have such bundles: **47 games**.
 
-The fitted weight is nearly meaningless on its own, and the honest way to report
-it is with the interval. A 95% profile interval comes from the deviance:
-`2n(loss - loss_min) ~ chi2(1)`, so every weight whose loss is within `1.92/n` of
-the best is accepted. On 47 games that interval runs from **0.00 to 1.00** -- the
-entire range. The likelihood is almost flat, and the practical reading is that
-this season cannot yet distinguish the two signals at all.
+Fitted on those 47 games: **`w = 0.51`** on the power rankings, log-loss
+**0.6465**, against 0.6496 for rankings-only and 0.6499 for records-only.
 
-Two cross-checks, which disagree in an informative way:
+### 11.3 The weight is weakly determined, and is reported that way
 
-* **Precision weighting.** If the two models erred independently, the optimal
+A 95% profile interval comes from the deviance, `2n(loss - loss_min) ~ chi2(1)`,
+so every weight whose loss is within `1.92/n` of the best is accepted. On 47
+games that interval runs from **0.00 to 1.00** -- the entire range. The likelihood
+is nearly flat and this season cannot yet distinguish the two signals.
+
+Three views, which agree more than the interval suggests:
+
+* **The fitted weight**, 0.51, on the standardised blend.
+* **Precision weighting.** If the two models erred independently the optimal
   weight would be proportional to the inverse of each residual variance, giving
-  **0.53** on the rankings -- close to the fitted 0.46. They do *not* err
-  independently (both read the same teams), so this is a sanity check rather
-  than a second estimator.
+  **0.53** on the rankings. They do not err independently -- both read the same
+  teams -- so this is a sanity check rather than a second estimator.
 * **The longer history.** Over 6,719 games the strength signal beats win-loss
-  record by a wide margin (0.6124 against 0.6589). That argues for weighting the
-  rankings considerably more than half.
+  record by a wide margin (0.6124 against 0.6589), which argues for weighting the
+  rankings above half.
 
-So the blend is published as a second opinion, not as the headline number. The
-practically useful part is not the weight but the *shift*: on the Week 6 slate the
-record moves individual probabilities by up to 11 points while changing no pick
-at all. That is a legible statement about which games the two signals read
-differently, and it does not depend on the weight being well estimated.
+All three land near one half, so the published 51/49 is defensible; the honest
+caveat is that it is closer to "roughly half each" than to a measurement.
 
-### 11.4 What the blend is not
+### 11.4 Sigma comes from the long run, not from these 47 games
 
-It is not a better forecast than the rankings model, and the 47-game log-loss
-margin of 0.004 does not support that claim. Because the record model is the
-weaker of the two, mixing it in at half weight pulls confident predictions toward
-50% -- the blend is systematically closer to a coin flip than the model it
-blends with. Anyone reading the blended column should know that its apparent
-moderation is partly the arithmetic of averaging a strong signal with a weak one,
-not new information.
+The blend's own best-fit `sigma` on 47 games is 11.50. The simulation uses
+**13.16**, the value fitted on 6,719 games, and the reason is that the choice is
+nearly free on the evidence but not on the output. Log-loss differs by 0.0006
+across the plausible range, yet `sigma` is the term that compounds over six
+rounds: at 11.50 the favourite reaches the Super Bowl in 55% of simulated
+brackets, at 13.16 in 52%. A dispersion estimated from 47 games would overstate
+confidence throughout the bracket, so the better-estimated constant wins.
+
+### 11.5 What the blend does and does not change
+
+It is not demonstrably a better forecast than the rankings alone, and a 0.004
+log-loss margin on 47 games does not support that claim. Because the record model
+is the weaker of the two, mixing it in at half weight also pulls confident
+predictions toward 50%: the blend is systematically closer to a coin flip than
+the rankings alone would be.
+
+On the current week it moves the *strengths* and the *probabilities* but not the
+*field*: the same fourteen teams qualify in the same seeds as a records-only
+bracket would produce. That is not a bug — the panel and the standings simply
+agree on this week's seven per conference. They disagree on the NFC's third and
+fourth seeds and on the final wild card, and there the blend sides with the
+standings. A week where the two signals diverge more would move the bracket
+itself.
 
 ## 12. References
 

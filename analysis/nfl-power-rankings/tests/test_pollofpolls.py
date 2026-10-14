@@ -524,16 +524,71 @@ class TestPlayoffSimulation(unittest.TestCase):
                 home = by_abbr[game["homeAbbr"]]
                 self.assertAlmostEqual(home["pDivisional"], game["pHome"], delta=0.02)
 
-    def test_seeding_follows_record_not_score(self):
-        # Rate the 4-1 teams far above the 5-0 teams. Seeding must ignore that.
+    def test_weight_bounds_switch_which_signal_seeds(self):
+        """The endpoints must reduce to each single-signal bracket.
+
+        Rating the 4-1 teams far above the 5-0 teams makes the two signals
+        disagree, so the weight decides the seeding: at 1.0 the bracket follows
+        the rankings, at 0.0 it follows the records.
+        """
         rows = self._rows()
         for row in rows:
             if row["record"] == "4-1":
                 row["score"] = 99.0
-        sim = playoffs.simulate(rows, n_sims=500, seed=1)
-        seeded = {t["team"]: t["seed"] for t in sim["teams"]}
-        self.assertEqual(seeded["AFC-0"], 1)   # the 5-0 team still tops its conference
-        self.assertGreater(seeded["AFC-1"], seeded["AFC-0"])
+
+        by_rankings = playoffs.simulate(rows, n_sims=500, seed=1, weight=1.0)
+        seeded_rank = {t["team"]: t["seed"] for t in by_rankings["teams"]}
+        self.assertEqual(seeded_rank["AFC-1"], 1)        # the highly-rated 4-1 team
+        self.assertGreater(seeded_rank["AFC-0"], seeded_rank["AFC-1"])
+
+        by_records = playoffs.simulate(rows, n_sims=500, seed=1, weight=0.0)
+        seeded_rec = {t["team"]: t["seed"] for t in by_records["teams"]}
+        self.assertEqual(seeded_rec["AFC-0"], 1)         # the 5-0 team
+        self.assertGreater(seeded_rec["AFC-1"], seeded_rec["AFC-0"])
+
+    def test_strength_table_standardises_before_mixing(self):
+        """The blend must mix standardised signals, not raw margins.
+
+        Mixing raw margins let the record dominate -- k_rec is more than twice
+        k_rank -- so the weight barely moved the bracket. This pins the actual
+        arithmetic: each signal divided by its own spread, mixed, then rescaled
+        to points at the matchup model's rate.
+        """
+        import statistics
+
+        rows = self._rows()
+        weight = 0.5
+        got = playoffs.strength_table(rows, weight=weight)
+
+        rank_pts = [playoffs.headtohead.DEFAULT_MODEL.k * r["score"] for r in rows]
+        rec_pts = [playoffs.DEFAULT_RECORD_K * playoffs.win_pct(r["record"]) for r in rows]
+        sd_rank = statistics.pstdev(rank_pts)
+        sd_rec = statistics.pstdev(rec_pts)
+
+        for i, row in enumerate(rows):
+            expected = playoffs.headtohead.DEFAULT_MODEL.k * (
+                weight * (rank_pts[i] / sd_rank) + (1 - weight) * (rec_pts[i] / sd_rec)
+            )
+            self.assertAlmostEqual(got[row["team"]], expected, places=9)
+
+    def test_strength_table_responds_to_both_signals(self):
+        """Changing either signal must move at least one team's strength."""
+        rows = self._rows()
+        base = playoffs.strength_table(rows, weight=0.5)
+
+        by_record = [dict(r) for r in rows]
+        for row in by_record:
+            if row["record"] == "5-0":
+                row["record"] = "0-5"
+        moved_by_record = playoffs.strength_table(by_record, weight=0.5)
+        self.assertNotEqual(base["AFC-0"], moved_by_record["AFC-0"])
+
+        by_score = [dict(r) for r in rows]
+        for row in by_score:
+            if row["team"] == "AFC-0":
+                row["score"] = -5.0
+        moved_by_score = playoffs.strength_table(by_score, weight=0.5)
+        self.assertNotEqual(base["AFC-0"], moved_by_score["AFC-0"])
 
     def test_seven_teams_per_conference(self):
         sim = playoffs.simulate(self._rows(), n_sims=500, seed=1)

@@ -18,16 +18,15 @@ This is the same poll of polls as previous weeks: the week's rankings standardis
   <details>
     <summary>
       <span class="toc-kicker">Contents</span>
-      <span class="toc-count">7 sections</span>
+      <span class="toc-count">6 sections</span>
     </summary>
     <ol>
       <li><a href="#consensus"><span class="toc-n">01</span><span class="toc-t">The consensus</span><span class="toc-d">All 32 teams, filterable by conference</span></a></li>
       <li><a href="#movers"><span class="toc-n">02</span><span class="toc-t">Who went up and down</span><span class="toc-d">Every week-over-week move</span></a></li>
       <li><a href="#h2h"><span class="toc-n">03</span><span class="toc-t">This week's matchups, priced</span><span class="toc-d">All 14 games, plus any matchup you build</span></a></li>
-      <li><a href="#weighted"><span class="toc-n">04</span><span class="toc-t">Rankings plus records</span><span class="toc-d">A weighted second opinion</span></a></li>
-      <li><a href="#superbowl"><span class="toc-n">05</span><span class="toc-t">Path to the Super Bowl</span><span class="toc-d">50,000 simulated brackets</span></a></li>
-      <li><a href="#panel"><span class="toc-n">06</span><span class="toc-t">The panel</span><span class="toc-d">Nine outlets and how they agree</span></a></li>
-      <li><a href="#sources"><span class="toc-n">07</span><span class="toc-t">Sources and method</span><span class="toc-d">Where every number comes from</span></a></li>
+      <li><a href="#superbowl"><span class="toc-n">04</span><span class="toc-t">Path to the Super Bowl</span><span class="toc-d">50,000 brackets, seeded on both signals</span></a></li>
+      <li><a href="#panel"><span class="toc-n">05</span><span class="toc-t">The panel</span><span class="toc-d">Nine outlets and how they agree</span></a></li>
+      <li><a href="#sources"><span class="toc-n">06</span><span class="toc-t">Sources and method</span><span class="toc-d">Where every number comes from</span></a></li>
     </ol>
   </details>
 </nav>
@@ -1379,260 +1378,6 @@ Fourteen games in Week 6: Cincinnati, Detroit, Miami and Minnesota are on bye. E
   renderPicker();
 })();
 </script>
-<a id="weighted"></a>
-
-## A weighted second opinion: rankings plus records
-
-<div id="wg-root" class="wg-root">
-  <div class="wg-kicker" id="wg-kicker">Blended model</div>
-  <h2 class="wg-headline" id="wg-headline">Loading…</h2>
-  <p class="wg-lede" id="wg-lede"></p>
-
-  <h3 class="wg-sub">This week, under both models</h3>
-  <p class="wg-note" id="wg-games-note"></p>
-  <div class="wg-table-wrap">
-    <table class="wg-table">
-      <thead>
-        <tr>
-          <th class="wg-th-game">Game</th>
-          <th class="wg-th-rec">Records</th>
-          <th class="wg-th-num">Rankings</th>
-          <th class="wg-th-num">Blended</th>
-          <th class="wg-th-num">Shift</th>
-        </tr>
-      </thead>
-      <tbody id="wg-body"></tbody>
-    </table>
-  </div>
-
-  <h3 class="wg-sub">What the weight is worth</h3>
-  <p class="wg-note" id="wg-eval-note"></p>
-  <div class="wg-eval" id="wg-eval"></div>
-
-  <h3 class="wg-sub">Every weight gives about the same answer</h3>
-  <p class="wg-note" id="wg-curve-note"></p>
-  <div class="wg-curve" id="wg-curve"></div>
-  <div class="wg-curve-legend" id="wg-curve-legend"></div>
-  <p class="wg-curve-cap" id="wg-curve-cap"></p>
-
-  <p class="wg-foot" id="wg-foot"></p>
-</div>
-
-<style>
-  .wg-root {
-    --ink: #0a0a0a;
-    --muted: #6b6b6b;
-    --hair: #e0dcd4;
-    --paper: #fbfaf7;
-    --signal: #c2472f;
-    --up: #1f6f43;
-    background: var(--paper);
-    color: var(--ink);
-    border: 1px solid var(--hair);
-    border-radius: 2px;
-    padding: 28px 24px 22px;
-    margin: 32px 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    box-sizing: border-box;
-  }
-  .wg-root *, .wg-root *::before, .wg-root *::after { box-sizing: border-box; }
-  .wg-root img { border: 0; margin: 0; max-width: none; }
-  .wg-kicker { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
-  .wg-headline { font-size: 22px; font-weight: 600; line-height: 1.25; margin: 0 0 12px; letter-spacing: -0.01em; }
-  .wg-lede { font-size: 14px; line-height: 1.6; color: var(--muted); margin: 0 0 8px; max-width: 64ch; }
-  .wg-lede strong { color: var(--ink); font-weight: 600; }
-  .wg-sub { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin: 28px 0 8px; font-weight: 600; }
-  .wg-note { font-size: 12.5px; line-height: 1.55; color: var(--muted); margin: 0 0 14px; max-width: 72ch; }
-
-  .wg-table-wrap { overflow-x: auto; }
-  .wg-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  .wg-table th {
-    text-align: left; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--muted); font-weight: 600; padding: 0 8px 7px 0;
-    border-bottom: 1px solid var(--ink); white-space: nowrap;
-  }
-  .wg-th-num { text-align: right; }
-  .wg-table td { padding: 6px 8px 6px 0; border-bottom: 1px solid var(--hair); vertical-align: middle; }
-  .wg-table tr:last-child td { border-bottom: 0; }
-  .wg-td-game { white-space: nowrap; font-weight: 600; }
-  .wg-td-game i { font-style: normal; color: var(--muted); font-weight: 400; }
-  .wg-td-rec { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11.5px; color: var(--muted); white-space: nowrap; }
-  .wg-td-num { text-align: right; font-variant-numeric: tabular-nums; width: 78px; white-space: nowrap; }
-  .wg-td-num.is-blend { font-weight: 600; }
-  .wg-shift { font-variant-numeric: tabular-nums; font-size: 11.5px; white-space: nowrap; }
-  .wg-shift.is-toward { color: var(--up); }
-  .wg-shift.is-away { color: var(--signal); }
-  .wg-flip {
-    font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--signal); border: 1px solid var(--signal); border-radius: 2px;
-    padding: 1px 4px; margin-left: 6px;
-  }
-  .wg-mark { display: inline-flex; vertical-align: middle; margin-right: 5px; }
-  .wg-mark img { width: 18px; height: 18px; display: block; }
-
-  .wg-eval { display: grid; gap: 7px; max-width: 640px; }
-  .wg-eval-row { display: grid; grid-template-columns: 132px 1fr 62px; align-items: center; gap: 10px; font-size: 12.5px; }
-  .wg-eval-label { color: var(--muted); white-space: nowrap; }
-  .wg-eval-bar { height: 9px; background: var(--hair); border-radius: 2px; overflow: hidden; }
-  .wg-eval-bar span { display: block; height: 100%; background: var(--muted); border-radius: 2px; }
-  .wg-eval-bar.is-blend span { background: var(--up); }
-  .wg-eval-bar.is-flip span { background: #c9c4ba; }
-  .wg-eval-val { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; }
-  .wg-eval-row.is-best .wg-eval-label { color: var(--ink); font-weight: 600; }
-  .wg-axis { font-size: 10.5px; color: var(--muted); margin-top: 2px; }
-
-  .wg-curve { display: flex; align-items: flex-end; gap: 1px; height: 68px; max-width: 640px; position: relative; }
-  .wg-curve-col { flex: 1; background: var(--muted); opacity: 0.32; border-radius: 1px 1px 0 0; min-height: 2px; }
-  .wg-curve-col.is-picked { background: var(--up); opacity: 1; }
-  .wg-curve-legend { display: flex; justify-content: space-between; font-size: 10.5px; color: var(--muted); max-width: 640px; margin-top: 4px; }
-  .wg-curve-cap { font-size: 11.5px; color: var(--muted); max-width: 640px; margin-top: 8px; line-height: 1.5; }
-  .wg-curve-cap b { color: var(--ink); }
-
-  .wg-foot { font-size: 11.5px; line-height: 1.55; color: var(--muted); margin: 20px 0 0; max-width: 74ch; }
-</style>
-
-<script>
-(function () {
-  var data = (window.__POP_DATA__ && window.__POP_DATA__.weighted) || null;
-  var root = document.getElementById('wg-root');
-  if (!root) { return; }
-
-  var logoUrl = function (abbr) { return '/images/nfl/' + abbr.toLowerCase() + '.svg'; };
-  var logoTag = function (abbr) {
-    return '<span class="wg-mark"><img src="' + logoUrl(abbr) + '" alt="" aria-hidden="true"' +
-      ' loading="lazy" decoding="async" onerror="this.style.display=\'none\'"></span>';
-  };
-  var pct = function (x) { return (x * 100).toFixed(1) + '%'; };
-  var esc = function (s) {
-    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-  };
-  var abbrFor = {};
-  var recordFor = {};
-
-  if (!data || !data.games || !data.games.length) {
-    document.getElementById('wg-headline').textContent = 'Blended model unavailable.';
-    document.getElementById('wg-lede').textContent =
-      'This edition was built without prior weeks to grade the weight against.';
-    return;
-  }
-
-  // Abbreviations come from the rankings payload, which the whole page shares.
-  ((window.__POP_DATA__ && window.__POP_DATA__.teams) || []).forEach(function (t) {
-    abbrFor[t.team] = t.abbr;
-    recordFor[t.team] = t.record || '';
-  });
-  var abbr = function (team) { return abbrFor[team] || team.slice(0, 3).toUpperCase(); };
-
-  var w = data.weight;
-  var recW = 1 - w;
-
-  document.getElementById('wg-headline').textContent =
-    'Rankings and records, weighted ' + Math.round(w * 100) + '/' + Math.round(recW * 100);
-  document.getElementById('wg-lede').innerHTML =
-    'The model above prices a game from the consensus score alone. This one adds each team\u2019s ' +
-    '<strong>win\u2013loss record</strong> as a second signal: the record gets its own fit on 6,719 games ' +
-    '(worth ' + data.recordModel.k.toFixed(1) + ' points per unit of win-percentage difference), and the two ' +
-    'are mixed at a weight of <strong>' + w.toFixed(2) + '</strong> on the rankings. The weight is not a ' +
-    'round number I picked \u2014 it is fitted by out-of-sample log-loss, which is what the rest of this ' +
-    'section is about.';
-
-  // ---- this week's slate, biggest disagreement first --------------------
-  var games = data.games.slice().sort(function (a, b) { return Math.abs(b.pBlend - b.pRank) - Math.abs(a.pBlend - a.pRank); });
-  var flips = games.filter(function (g) { return !g.agrees; }).length;
-  document.getElementById('wg-games-note').textContent =
-    flips === 0
-      ? 'All ' + games.length + ' games, ordered by how much the record moves the number. The blend shifts ' +
-        'probabilities but does not change a single pick this week.'
-      : games.length + ' games, ordered by how much the record moves the number. ' +
-        flips + ' pick' + (flips === 1 ? '' : 's') + ' change between the two models.';
-
-  var maxShift = Math.max.apply(null, games.map(function (g) { return Math.abs(g.pBlend - g.pRank); }));
-  document.getElementById('wg-body').innerHTML = games.map(function (g) {
-    var shift = (g.pBlend - g.pRank) * 100;
-    var toHome = shift > 0;
-    var cls = Math.abs(shift) < 0.05 ? '' : (toHome ? 'is-toward' : 'is-away');
-    var arrow = Math.abs(shift) < 0.05 ? '' : (toHome ? '\u25b2 ' : '\u25bc ');
-    var homeRec = recordFor[g.home] || (g.homePct * 100).toFixed(0);
-    var awayRec = recordFor[g.away] || (g.awayPct * 100).toFixed(0);
-    var flipTag = g.agrees ? '' : '<span class="wg-flip">flip</span>';
-    var frac = Math.abs(shift) / (maxShift || 1);
-    var tick = Math.max(3, Math.round(frac * 34));
-    return '<tr>' +
-      '<td class="wg-td-game">' + logoTag(abbr(g.away)) + abbr(g.away) +
-        ' <i>at</i> ' + logoTag(abbr(g.home)) + abbr(g.home) + flipTag + '</td>' +
-      '<td class="wg-td-rec">' + esc(awayRec) + ' at ' + esc(homeRec) + '</td>' +
-      '<td class="wg-td-num">' + pct(g.pRank) + '</td>' +
-      '<td class="wg-td-num is-blend">' + pct(g.pBlend) + '</td>' +
-      '<td class="wg-td-num wg-shift ' + cls + '">' + arrow + Math.abs(shift).toFixed(1) + 'pp' +
-        '<span style="display:inline-block;width:' + tick + 'px"></span></td>' +
-      '</tr>';
-  }).join('');
-
-  // ---- what it was graded on -------------------------------------------
-  var base = data.atFittedSigma;
-  var lo = Math.min(base.rankingsOnly, base.recordsOnly, base.blend) - 0.004;
-  var hi = base.coinFlip;
-  var span = hi - lo;
-  var rows = [
-    { key: 'blend', label: 'Blended', value: base.blend, best: true },
-    { key: 'recordsOnly', label: 'Records only', value: base.recordsOnly },
-    { key: 'rankingsOnly', label: 'Rankings only', value: base.rankingsOnly },
-    { key: 'coinFlip', label: 'Coin flip', value: base.coinFlip, flip: true }
-  ];
-  document.getElementById('wg-eval-note').innerHTML =
-    'Log-loss on the <strong>' + data.nEval + ' games</strong> in weeks ' + data.weeks.join(', ') +
-    '. Every one was predicted before it kicked off: each weekly consensus is published ahead of that ' +
-    'week\u2019s slate, and the record is the standing entering the week. Lower is better.';
-  document.getElementById('wg-eval').innerHTML = rows.map(function (r) {
-    var frac = Math.max(0.02, (r.value - lo) / span);
-    return '<div class="wg-eval-row' + (r.best ? ' is-best' : '') + '">' +
-      '<span class="wg-eval-label">' + r.label + '</span>' +
-      '<span class="wg-eval-bar' + (r.best ? ' is-blend' : r.flip ? ' is-flip' : '') + '">' +
-        '<span style="width:' + (frac * 100).toFixed(1) + '%"></span></span>' +
-      '<span class="wg-eval-val">' + r.value.toFixed(4) + '</span></div>';
-  }).join('') +
-    '<div class="wg-axis">Bars are scaled from ' + lo.toFixed(3) + ' to ' + hi.toFixed(3) +
-    ', not from zero \u2014 the differences are genuinely small.</div>';
-
-  // ---- the curve --------------------------------------------------------
-  var curve = data.curve || [];
-  var losses = curve.map(function (p) { return p.logLoss; });
-  var cLo = Math.min.apply(null, losses), cHi = Math.max.apply(null, losses);
-  document.getElementById('wg-curve-note').textContent =
-    'Log-loss at every weight from 0 (records only) to 1 (rankings only), with the margin dispersion held fixed.';
-  document.getElementById('wg-curve').innerHTML = curve.map(function (p) {
-    var norm = (p.logLoss - cLo) / ((cHi - cLo) || 1);
-    var height = 22 + (1 - norm) * 78;
-    var picked = Math.abs(p.weight - w) < 0.005;
-    return '<div class="wg-curve-col' + (picked ? ' is-picked' : '') + '" style="height:' +
-      height.toFixed(1) + '%" title="weight ' + p.weight.toFixed(2) + ' \u2192 ' +
-      p.logLoss.toFixed(4) + '"></div>';
-  }).join('');
-  document.getElementById('wg-curve-legend').innerHTML =
-    '<span>0.0 \u2014 records only</span><span>0.5</span><span>1.0 \u2014 rankings only</span>';
-  var loW = data.weightInterval[0], hiW = data.weightInterval[1];
-  document.getElementById('wg-curve-cap').innerHTML =
-    'The curve is nearly flat, and that is the finding. A 95% profile interval for the weight runs from ' +
-    '<b>' + loW.toFixed(2) + ' to ' + hiW.toFixed(2) + '</b>' +
-    (data.weightUndetermined
-      ? ' \u2014 the entire range. On 47 games, rankings and records are statistically indistinguishable, ' +
-        'so the fitted ' + w.toFixed(2) + ' should be read as "about half each", not as a measurement.'
-      : '.') +
-    ' The green bar is the weight actually used.';
-
-  // ---- honest footer ----------------------------------------------------
-  document.getElementById('wg-foot').textContent =
-    'Two cross-checks on that weight. Precision weighting \u2014 the optimal mix if the two models erred ' +
-    'independently \u2014 gives ' + data.precisionWeight.toFixed(2) + ' on the rankings, close to the fitted ' +
-    w.toFixed(2) + '. But on the larger historical sample the signals are not equal: the strength signal the ' +
-    'matchup model was fitted on reaches 0.6124 log-loss over 6,719 games, while win-loss record alone reaches ' +
-    data.recordModel.logLoss.toFixed(4) + '. Records are the weaker predictor, and blending them in at half ' +
-    'weight dilutes confident calls toward 50%. That is why the blend is offered as a second opinion rather ' +
-    'than as the headline number: this season cannot yet tell the two apart, and the longer history prefers ' +
-    'the rankings.';
-})();
-</script>
-
 <a id="superbowl"></a>
 
 ## Path to the Super Bowl
@@ -1808,12 +1553,21 @@ Fourteen games in Week 6: Cincinnati, Detroit, Miami and Minnesota are on bye. E
   // ---- headline + lede -------------------------------------------------
   document.getElementById('sb-headline').textContent =
     leader.abbr + ' and ' + runnerUp.abbr + ' are likeliest to reach the Super Bowl';
+  var rankW = Math.round(data.weightOnRankings * 100);
+  var recW = Math.round(data.weightOnRecords * 100);
+  // The weight's uncertainty lives with the fit, not with the simulation.
+  var wFit = (window.__POP_DATA__ && window.__POP_DATA__.weighted) || null;
+  var loW = wFit ? wFit.weightInterval[0] : data.weightOnRankings;
+  var hiW = wFit ? wFit.weightInterval[1] : data.weightOnRankings;
+  var nEval = wFit ? wFit.nEval : 0;
   document.getElementById('sb-lede').innerHTML =
-    'Each team is seeded by its <strong>actual record</strong>, then the bracket is played out ' +
-    '<strong>' + data.nSims.toLocaleString() + ' times</strong>. Every game is priced from the consensus ' +
-    'score above plus home-field advantage, fitted on 6,719 regular-season games, and the Super Bowl is ' +
-    'treated as a neutral site. <strong>' + esc(leader.team) + '</strong> reaches it in ' +
-    pct(leader.pSuperBowl) + ' of runs and wins it in ' + pct(leader.pChampion) + '.';
+    'Each team is seeded on a <strong>blend of the power rankings and its record</strong> — ' +
+    rankW + '% rankings, ' + recW + '% record — and the bracket is played out <strong>' +
+    data.nSims.toLocaleString() + ' times</strong>. Every game is priced from the same blend plus ' +
+    'home-field advantage, with the Super Bowl treated as a neutral site. The weight is fitted, not ' +
+    'chosen: it is the mix that best predicted <strong>' + nEval + ' games</strong> already played ' +
+    'this season, all of them forecast before kickoff. <strong>' + esc(leader.team) + '</strong> reaches ' +
+    'it in ' + pct(leader.pSuperBowl) + ' of runs and wins it in ' + pct(leader.pChampion) + '.';
 
   // ---- conference seeding ---------------------------------------------
   var confEl = document.getElementById('sb-conferences');
@@ -1828,7 +1582,9 @@ Fourteen games in Week 6: Cincinnati, Detroit, Miami and Minnesota are on bye. E
         '<span class="sb-seed-n">' + s.seed + '</span>' +
         logoTag(s.abbr) +
         '<span class="sb-seed-team">' + s.abbr + tag + bye + '</span>' +
-        '<span class="sb-seed-rec">' + esc(s.record) + '</span>' +
+        '<span class="sb-seed-rec" title="blended strength, points">' +
+          (s.strength > 0 ? '+' : '') + s.strength.toFixed(1) + ' &middot; ' + esc(s.record) +
+        '</span>' +
         '</div>';
     }).join('');
     block.innerHTML = head + rows;
@@ -1900,12 +1656,17 @@ Fourteen games in Week 6: Cincinnati, Detroit, Miami and Minnesota are on bye. E
 
   // ---- honest footer ---------------------------------------------------
   var confs = Object.keys(data.byConference).sort();
-  document.getElementById('sb-foot').textContent =
-    'Seeding uses win-loss record with the consensus order breaking ties between identical records — ' +
-    'the real tiebreaker chain (head-to-head, division and conference record, strength of victory) needs ' +
-    'the full game log, which this pipeline does not carry. The simulation is seeded (' + data.seed + ') ' +
-    'so the numbers are reproducible, and it re-runs whenever the rankings change. Conference splits: ' +
-    confs.map(function (c) {
+  document.getElementById('sb-foot').innerHTML =
+    'Two things worth knowing. <strong>The weight is weakly determined.</strong> Its 95% profile interval ' +
+    'runs from ' + loW.toFixed(2) + ' to ' + hiW.toFixed(2) + ' on the 47 graded games, so treat ' +
+    rankW + '/' + recW + ' as "roughly half each" rather than a measurement — the longer 6,719-game ' +
+    'history does show the power rankings to be the stronger signal on its own. ' +
+    '<strong>And the two signals agree on this week\u2019s field.</strong> Blending moves the strengths and ' +
+    'the probabilities below, but the same fourteen teams make it in the same seeds as a records-only ' +
+    'bracket would produce; the panel and the standings disagree only on the NFC\u2019s third and fourth ' +
+    'seeds and on the last wild card, and there the blend sides with the standings. ' +
+    'The simulation is seeded (' + data.seed + ') so the numbers are reproducible and re-runs whenever the ' +
+    'rankings change. Conference splits: ' + confs.map(function (c) {
       return c + ' wins the Super Bowl ' + pct(data.byConference[c].pChampion);
     }).join(', ') + '.';
 })();

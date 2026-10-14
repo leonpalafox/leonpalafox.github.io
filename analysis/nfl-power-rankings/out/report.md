@@ -1,6 +1,6 @@
 # NFL Poll of Polls — 2026 season, Week 6
 
-Generated 2026-10-14 15:33 UTC from 9 source ballots.
+Generated 2026-10-14 15:39 UTC from 9 source ballots.
 
 ## Consensus table
 

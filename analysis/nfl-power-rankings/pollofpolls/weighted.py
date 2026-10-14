@@ -28,6 +28,7 @@ from __future__ import annotations
 import csv
 import io
 import math
+import statistics
 
 from . import games, headtohead
 
@@ -179,20 +180,43 @@ def _weekly_games(csv_text: str, season: int, week: int) -> list[dict]:
     return [o for o in obs if o["season"] == str(season) and o["week"] == week]
 
 
-def _model_probs(obs, ranks, rec_model, weight, rank_model, sigma):
-    """P(home) for one game under the blend, plus the two components."""
+def _margins_for(obs, ranks, rec_model, rank_model):
+    """(rank margin, record margin) or None when a team is missing."""
     h, a = ranks.get(obs["home"]), ranks.get(obs["away"])
     if h is None or a is None:
         return None
-    m_rank = rank_model.k * (h["score"] - a["score"]) + rank_model.home_field
-    m_rec = rec_model["k"] * (obs["homePct"] - obs["awayPct"]) + rec_model["homeField"]
-    m_blend = weight * m_rank + (1.0 - weight) * m_rec
-    return {
-        "pRank": _normal_cdf(m_rank / rank_model.sigma),
-        "pRec": _normal_cdf(m_rec / rec_model["sigma"]),
-        "pBlend": _normal_cdf(m_blend / sigma),
-        "marginRank": m_rank, "marginRec": m_rec, "marginBlend": m_blend,
-    }
+    return (
+        rank_model.k * (h["score"] - a["score"]) + rank_model.home_field,
+        rec_model["k"] * (obs["homePct"] - obs["awayPct"]) + rec_model["homeField"],
+    )
+
+
+def standardisers(margins_rank: list[float], margins_rec: list[float]) -> tuple[float, float]:
+    """Per-signal spreads used to put both on the same footing before mixing.
+
+    The blend mixes *standardised* margins. Mixing raw ones gives the record far
+    more influence than the weight implies, because k_rec is more than twice
+    k_rank; measured against the real bracket, every weight below about 0.55
+    reproduced the records-only seeding.
+    """
+    sd_rank = statistics.pstdev(margins_rank) or 1.0
+    sd_rec = statistics.pstdev(margins_rec) or 1.0
+    return sd_rank, sd_rec
+
+
+def blend_margin(
+    margin_rank: float,
+    margin_rec: float,
+    weight: float,
+    *,
+    scale: float,
+    sd_rank: float,
+    sd_rec: float,
+) -> float:
+    """The blended margin in points, standardising each signal first."""
+    return scale * (
+        weight * (margin_rank / sd_rank) + (1.0 - weight) * (margin_rec / sd_rec)
+    )
 
 
 def _log_loss(pairs) -> float:
@@ -224,13 +248,25 @@ def evaluate(
             continue
         ranks = _bundle_probs(bundle)
         for obs in _weekly_games(csv_text, season, week):
-            probs = _model_probs(obs, ranks, rec_model, weight, rank_model, sigma)
-            if probs is None:
+            margins = _margins_for(obs, ranks, rec_model, rank_model)
+            if margins is None:
                 continue
-            graded.append({**obs, **probs})
+            graded.append({**obs, "marginRank": margins[0], "marginRec": margins[1]})
 
     if not graded:
         return {"nEval": 0, "recordModel": rec_model}
+
+    sd_rank, sd_rec = standardisers(
+        [g["marginRank"] for g in graded], [g["marginRec"] for g in graded]
+    )
+    for g in graded:
+        g["marginBlend"] = blend_margin(
+            g["marginRank"], g["marginRec"], weight,
+            scale=rank_model.k, sd_rank=sd_rank, sd_rec=sd_rec,
+        )
+        g["pRank"] = _normal_cdf(g["marginRank"] / rank_model.sigma)
+        g["pRec"] = _normal_cdf(g["marginRec"] / rec_model["sigma"])
+        g["pBlend"] = _normal_cdf(g["marginBlend"] / sigma)
 
     pairs_rank = [(g["pRank"], g["margin"] > 0) for g in graded]
     pairs_rec = [(g["pRec"], g["margin"] > 0) for g in graded]
@@ -285,6 +321,17 @@ def fit_blend(
     if not frames:
         return {"weight": None, "nEval": 0}
 
+    # One definition of the blend, shared with evaluate() and the simulation.
+    sd_rank, sd_rec = standardisers(
+        [f["marginRank"] for f in frames], [f["marginRec"] for f in frames]
+    )
+
+    def blended_margin(f, w):
+        return blend_margin(
+            f["marginRank"], f["marginRec"], w,
+            scale=rank_model.k, sd_rank=sd_rank, sd_rec=sd_rec,
+        )
+
     curve = []
     best = None
     # A 2-D sweep: the weight on the rankings, and the margin dispersion, since a
@@ -292,7 +339,7 @@ def fit_blend(
     sigmas = [9.0 + 0.25 * i for i in range(0, 37)]          # 9.0 .. 18.0
     for w_int in range(0, 101):
         w = w_int / 100.0
-        margins = [w * f["marginRank"] + (1 - w) * f["marginRec"] for f in frames]
+        margins = [blended_margin(f, w) for f in frames]
         for s in sigmas:
             pairs = [(_normal_cdf(m / s), f["homeWon"]) for m, f in zip(margins, frames)]
             loss = _log_loss(pairs)
@@ -314,7 +361,7 @@ def fit_blend(
 
     # Baselines at the fitted sigma, for a like-for-like comparison.
     def loss_at(w, s):
-        margins = [w * f["marginRank"] + (1 - w) * f["marginRec"] for f in frames]
+        margins = [blended_margin(f, w) for f in frames]
         pairs = [(_normal_cdf(m / s), f["homeWon"]) for m, f in zip(margins, frames)]
         return _log_loss(pairs)
 

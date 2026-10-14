@@ -1,7 +1,7 @@
 {
   "week": 6,
   "season": 2026,
-  "generated": "2026-10-14T15:33:07Z",
+  "generated": "2026-10-14T15:39:55Z",
   "method": "Each source's 1-32 ballot is standardised to rank-standard-deviation units, pooled in a one-way random-effects model, and shrunk toward the panel mean (empirical Bayes), with uncertainty from both the residual disagreement and a bootstrap over sources. Full derivation in the post.",
   "movement": {
     "previousWeek": 5,
@@ -354,7 +354,14 @@
   "playoffs": {
     "nSims": 50000,
     "seed": 20260006,
-    "tiebreak": "records first, consensus score second",
+    "weight": 0.51,
+    "weightOnRankings": 0.51,
+    "weightOnRecords": 0.49,
+    "rankK": 4.59,
+    "recordK": 11.010833331498233,
+    "homeField": 2.461780760972463,
+    "sigma": 13.16,
+    "seedingRule": "blended strength (power rankings + win-loss record)",
     "conferences": {
       "AFC": [
         {
@@ -363,6 +370,7 @@
           "abbr": "KC",
           "record": "4-0",
           "score": 1.5673,
+          "strength": 11.003,
           "divisionWinner": true
         },
         {
@@ -371,6 +379,7 @@
           "abbr": "JAX",
           "record": "4-1",
           "score": 1.3192,
+          "strength": 8.948,
           "divisionWinner": true
         },
         {
@@ -379,6 +388,7 @@
           "abbr": "BUF",
           "record": "4-1",
           "score": 1.2763,
+          "strength": 8.853,
           "divisionWinner": true
         },
         {
@@ -387,6 +397,7 @@
           "abbr": "BAL",
           "record": "4-1",
           "score": 1.0438,
+          "strength": 8.332,
           "divisionWinner": true
         },
         {
@@ -395,6 +406,7 @@
           "abbr": "DEN",
           "record": "3-2",
           "score": 0.9608,
+          "strength": 6.647,
           "divisionWinner": false
         },
         {
@@ -403,6 +415,7 @@
           "abbr": "NE",
           "record": "3-2",
           "score": 0.7527,
+          "strength": 6.182,
           "divisionWinner": false
         },
         {
@@ -411,6 +424,7 @@
           "abbr": "CIN",
           "record": "3-2",
           "score": 0.4427,
+          "strength": 5.488,
           "divisionWinner": false
         }
       ],
@@ -421,6 +435,7 @@
           "abbr": "SF",
           "record": "5-0",
           "score": 1.6435,
+          "strength": 13.766,
           "divisionWinner": true
         },
         {
@@ -429,6 +444,7 @@
           "abbr": "MIN",
           "record": "5-0",
           "score": 1.0764,
+          "strength": 12.236,
           "divisionWinner": true
         },
         {
@@ -437,6 +453,7 @@
           "abbr": "NYG",
           "record": "3-1-1",
           "score": -0.2346,
+          "strength": 5.899,
           "divisionWinner": true
         },
         {
@@ -445,6 +462,7 @@
           "abbr": "CAR",
           "record": "2-2",
           "score": 0.0741,
+          "strength": 4.866,
           "divisionWinner": true
         },
         {
@@ -453,6 +471,7 @@
           "abbr": "SEA",
           "record": "3-2",
           "score": 1.228,
+          "strength": 8.912,
           "divisionWinner": false
         },
         {
@@ -461,6 +480,7 @@
           "abbr": "CHI",
           "record": "3-2",
           "score": 0.5222,
+          "strength": 7.008,
           "divisionWinner": false
         },
         {
@@ -469,6 +489,7 @@
           "abbr": "DET",
           "record": "3-2",
           "score": 0.3747,
+          "strength": 6.61,
           "divisionWinner": false
         }
       ]
@@ -484,8 +505,8 @@
           "awayAbbr": "CIN",
           "awaySeed": 7,
           "awayRecord": "3-2",
-          "pHome": 0.6915448532023658,
-          "pAway": 0.3084551467976342
+          "pHome": 0.6736386857966349,
+          "pAway": 0.3263613142033651
         },
         {
           "home": "Buffalo Bills",
@@ -496,8 +517,8 @@
           "awayAbbr": "NE",
           "awaySeed": 6,
           "awayRecord": "3-2",
-          "pHome": 0.6469673024667728,
-          "pAway": 0.3530326975332272
+          "pHome": 0.6517308097192032,
+          "pAway": 0.34826919028079684
         },
         {
           "home": "Baltimore Ravens",
@@ -508,8 +529,8 @@
           "awayAbbr": "DEN",
           "awaySeed": 5,
           "awayRecord": "3-2",
-          "pHome": 0.5884123944798824,
-          "pAway": 0.41158760552011764
+          "pHome": 0.6236579836007279,
+          "pAway": 0.3763420163992721
         }
       ],
       "NFC": [
@@ -522,8 +543,8 @@
           "awayAbbr": "DET",
           "awaySeed": 7,
           "awayRecord": "3-2",
-          "pHome": 0.6697716595428296,
-          "pAway": 0.3302283404571704
+          "pHome": 0.7305806854753452,
+          "pAway": 0.26941931452465484
         },
         {
           "home": "New York Giants",
@@ -534,8 +555,8 @@
           "awayAbbr": "CHI",
           "awaySeed": 6,
           "awayRecord": "3-2",
-          "pHome": 0.47232155821618216,
-          "pAway": 0.5276784417838178
+          "pHome": 0.5409500724043177,
+          "pAway": 0.4590499275956823
         },
         {
           "home": "Carolina Panthers",
@@ -546,8 +567,8 @@
           "awayAbbr": "SEA",
           "awaySeed": 5,
           "awayRecord": "3-2",
-          "pHome": 0.41763812589090366,
-          "pAway": 0.5823618741090963
+          "pHome": 0.4520816096377163,
+          "pAway": 0.5479183903622837
         }
       ]
     },
@@ -559,11 +580,12 @@
         "seed": 1,
         "record": "5-0",
         "score": 1.6435,
+        "strength": 13.766,
         "divisionWinner": true,
         "pDivisional": 1.0,
-        "pConference": 0.71636,
-        "pSuperBowl": 0.49492,
-        "pChampion": 0.2686
+        "pConference": 0.75976,
+        "pSuperBowl": 0.5213,
+        "pChampion": 0.32792
       },
       {
         "team": "Kansas City Chiefs",
@@ -572,11 +594,12 @@
         "seed": 1,
         "record": "4-0",
         "score": 1.5673,
+        "strength": 11.003,
         "divisionWinner": true,
         "pDivisional": 1.0,
-        "pConference": 0.67996,
-        "pSuperBowl": 0.4291,
-        "pChampion": 0.23658
+        "pConference": 0.69796,
+        "pSuperBowl": 0.4549,
+        "pChampion": 0.2163
       },
       {
         "team": "Minnesota Vikings",
@@ -585,11 +608,12 @@
         "seed": 2,
         "record": "5-0",
         "score": 1.0764,
+        "strength": 12.236,
         "divisionWinner": true,
-        "pDivisional": 0.66942,
-        "pConference": 0.45382,
-        "pSuperBowl": 0.19424,
-        "pChampion": 0.09126
+        "pDivisional": 0.7304,
+        "pConference": 0.53556,
+        "pSuperBowl": 0.24858,
+        "pChampion": 0.14596
       },
       {
         "team": "Jacksonville Jaguars",
@@ -598,11 +622,12 @@
         "seed": 2,
         "record": "4-1",
         "score": 1.3192,
+        "strength": 8.948,
         "divisionWinner": true,
-        "pDivisional": 0.69788,
-        "pConference": 0.4142,
-        "pSuperBowl": 0.19286,
-        "pChampion": 0.09866
+        "pDivisional": 0.67914,
+        "pConference": 0.39888,
+        "pSuperBowl": 0.17672,
+        "pChampion": 0.07298
       },
       {
         "team": "Buffalo Bills",
@@ -611,24 +636,12 @@
         "seed": 3,
         "record": "4-1",
         "score": 1.2763,
+        "strength": 8.853,
         "divisionWinner": true,
-        "pDivisional": 0.64714,
-        "pConference": 0.30812,
-        "pSuperBowl": 0.1439,
-        "pChampion": 0.07272
-      },
-      {
-        "team": "Seattle Seahawks",
-        "abbr": "SEA",
-        "conference": "NFC",
-        "seed": 5,
-        "record": "3-2",
-        "score": 1.228,
-        "divisionWinner": false,
-        "pDivisional": 0.58178,
-        "pConference": 0.28466,
-        "pSuperBowl": 0.1294,
-        "pChampion": 0.06354
+        "pDivisional": 0.65198,
+        "pConference": 0.31436,
+        "pSuperBowl": 0.13942,
+        "pChampion": 0.05686
       },
       {
         "team": "Baltimore Ravens",
@@ -637,63 +650,26 @@
         "seed": 4,
         "record": "4-1",
         "score": 1.0438,
+        "strength": 8.332,
         "divisionWinner": true,
-        "pDivisional": 0.58826,
-        "pConference": 0.233,
-        "pSuperBowl": 0.09634,
-        "pChampion": 0.04524
+        "pDivisional": 0.62422,
+        "pConference": 0.2525,
+        "pSuperBowl": 0.10582,
+        "pChampion": 0.04162
       },
       {
-        "team": "Denver Broncos",
-        "abbr": "DEN",
-        "conference": "AFC",
+        "team": "Seattle Seahawks",
+        "abbr": "SEA",
+        "conference": "NFC",
         "seed": 5,
         "record": "3-2",
-        "score": 0.9608,
+        "score": 1.228,
+        "strength": 8.912,
         "divisionWinner": false,
-        "pDivisional": 0.41174,
-        "pConference": 0.15944,
-        "pSuperBowl": 0.06388,
-        "pChampion": 0.03022
-      },
-      {
-        "team": "Chicago Bears",
-        "abbr": "CHI",
-        "conference": "NFC",
-        "seed": 6,
-        "record": "3-2",
-        "score": 0.5222,
-        "divisionWinner": false,
-        "pDivisional": 0.52782,
-        "pConference": 0.1668,
-        "pSuperBowl": 0.0611,
-        "pChampion": 0.0229
-      },
-      {
-        "team": "Carolina Panthers",
-        "abbr": "CAR",
-        "conference": "NFC",
-        "seed": 4,
-        "record": "2-2",
-        "score": 0.0741,
-        "divisionWinner": true,
-        "pDivisional": 0.41822,
-        "pConference": 0.1432,
-        "pSuperBowl": 0.0453,
-        "pChampion": 0.01464
-      },
-      {
-        "team": "New England Patriots",
-        "abbr": "NE",
-        "conference": "AFC",
-        "seed": 6,
-        "record": "3-2",
-        "score": 0.7527,
-        "divisionWinner": false,
-        "pDivisional": 0.35286,
-        "pConference": 0.11984,
-        "pSuperBowl": 0.04518,
-        "pChampion": 0.01988
+        "pDivisional": 0.54688,
+        "pConference": 0.20716,
+        "pSuperBowl": 0.07534,
+        "pChampion": 0.0363
       },
       {
         "team": "New York Giants",
@@ -702,24 +678,68 @@
         "seed": 3,
         "record": "3-1-1",
         "score": -0.2346,
+        "strength": 5.899,
         "divisionWinner": true,
-        "pDivisional": 0.47218,
-        "pConference": 0.15044,
-        "pSuperBowl": 0.0415,
-        "pChampion": 0.01184
+        "pDivisional": 0.54104,
+        "pConference": 0.17966,
+        "pSuperBowl": 0.05312,
+        "pChampion": 0.02082
       },
       {
-        "team": "Detroit Lions",
-        "abbr": "DET",
-        "conference": "NFC",
-        "seed": 7,
+        "team": "Denver Broncos",
+        "abbr": "DEN",
+        "conference": "AFC",
+        "seed": 5,
         "record": "3-2",
-        "score": 0.3747,
+        "score": 0.9608,
+        "strength": 6.647,
         "divisionWinner": false,
-        "pDivisional": 0.33058,
-        "pConference": 0.08472,
-        "pSuperBowl": 0.03354,
-        "pChampion": 0.01266
+        "pDivisional": 0.37578,
+        "pConference": 0.13522,
+        "pSuperBowl": 0.05126,
+        "pChampion": 0.01832
+      },
+      {
+        "team": "Chicago Bears",
+        "abbr": "CHI",
+        "conference": "NFC",
+        "seed": 6,
+        "record": "3-2",
+        "score": 0.5222,
+        "strength": 7.008,
+        "divisionWinner": false,
+        "pDivisional": 0.45896,
+        "pConference": 0.13386,
+        "pSuperBowl": 0.04242,
+        "pChampion": 0.01656
+      },
+      {
+        "team": "New England Patriots",
+        "abbr": "NE",
+        "conference": "AFC",
+        "seed": 6,
+        "record": "3-2",
+        "score": 0.7527,
+        "strength": 6.182,
+        "divisionWinner": false,
+        "pDivisional": 0.34802,
+        "pConference": 0.11192,
+        "pSuperBowl": 0.0408,
+        "pChampion": 0.01384
+      },
+      {
+        "team": "Carolina Panthers",
+        "abbr": "CAR",
+        "conference": "NFC",
+        "seed": 4,
+        "record": "2-2",
+        "score": 0.0741,
+        "strength": 4.866,
+        "divisionWinner": true,
+        "pDivisional": 0.45312,
+        "pConference": 0.1227,
+        "pSuperBowl": 0.03346,
+        "pChampion": 0.01212
       },
       {
         "team": "Cincinnati Bengals",
@@ -728,61 +748,76 @@
         "seed": 7,
         "record": "3-2",
         "score": 0.4427,
+        "strength": 5.488,
         "divisionWinner": false,
-        "pDivisional": 0.30212,
-        "pConference": 0.08544,
-        "pSuperBowl": 0.02874,
-        "pChampion": 0.01126
+        "pDivisional": 0.32086,
+        "pConference": 0.08916,
+        "pSuperBowl": 0.03108,
+        "pChampion": 0.0096
+      },
+      {
+        "team": "Detroit Lions",
+        "abbr": "DET",
+        "conference": "NFC",
+        "seed": 7,
+        "record": "3-2",
+        "score": 0.3747,
+        "strength": 6.61,
+        "divisionWinner": false,
+        "pDivisional": 0.2696,
+        "pConference": 0.0613,
+        "pSuperBowl": 0.02578,
+        "pChampion": 0.0108
       }
     ],
     "superBowlMatchups": [
       {
         "a": "Kansas City Chiefs",
         "b": "San Francisco 49ers",
-        "probability": 0.2135
-      },
-      {
-        "a": "Jacksonville Jaguars",
-        "b": "San Francisco 49ers",
-        "probability": 0.09558
+        "probability": 0.23796
       },
       {
         "a": "Kansas City Chiefs",
         "b": "Minnesota Vikings",
-        "probability": 0.08262
+        "probability": 0.11216
+      },
+      {
+        "a": "Jacksonville Jaguars",
+        "b": "San Francisco 49ers",
+        "probability": 0.09232
       },
       {
         "a": "Buffalo Bills",
         "b": "San Francisco 49ers",
-        "probability": 0.0706
-      },
-      {
-        "a": "Kansas City Chiefs",
-        "b": "Seattle Seahawks",
-        "probability": 0.05592
+        "probability": 0.07214
       },
       {
         "a": "Baltimore Ravens",
         "b": "San Francisco 49ers",
-        "probability": 0.04798
+        "probability": 0.05472
+      },
+      {
+        "a": "Jacksonville Jaguars",
+        "b": "Minnesota Vikings",
+        "probability": 0.04442
       }
     ],
     "byConference": {
       "AFC": {
         "pSuperBowl": 1.0,
-        "pChampion": 0.51456
+        "pChampion": 0.42952
       },
       "NFC": {
         "pSuperBowl": 1.0,
-        "pChampion": 0.48544
+        "pChampion": 0.57048
       }
     }
   },
   "weighted": {
-    "weight": 0.46,
+    "weight": 0.51,
     "precisionWeight": 0.5336161548294748,
-    "sigma": 14.5,
-    "logLoss": 0.6464805654955068,
+    "sigma": 11.5,
+    "logLoss": 0.6464836545755566,
     "nEval": 47,
     "weeks": [
       3,
@@ -806,407 +841,407 @@
     "curve": [
       {
         "weight": 0.0,
-        "logLoss": 0.6498796509383219
+        "logLoss": 0.6496533361285294
       },
       {
         "weight": 0.01,
-        "logLoss": 0.6497383852795863
+        "logLoss": 0.6495534517073593
       },
       {
         "weight": 0.02,
-        "logLoss": 0.649600567842737
+        "logLoss": 0.6494555423848217
       },
       {
         "weight": 0.03,
-        "logLoss": 0.6494661985377054
+        "logLoss": 0.649359608855299
       },
       {
         "weight": 0.04,
-        "logLoss": 0.6493352772651418
+        "logLoss": 0.6492656518098403
       },
       {
         "weight": 0.05,
-        "logLoss": 0.6492078039164104
+        "logLoss": 0.649173671936158
       },
       {
         "weight": 0.06,
-        "logLoss": 0.6490837783735839
+        "logLoss": 0.6490836699186187
       },
       {
         "weight": 0.07,
-        "logLoss": 0.6489632005094361
+        "logLoss": 0.6489956464382396
       },
       {
         "weight": 0.08,
-        "logLoss": 0.6488460701874389
+        "logLoss": 0.648909602172681
       },
       {
         "weight": 0.09,
-        "logLoss": 0.6487323872617577
+        "logLoss": 0.6488255377962429
       },
       {
         "weight": 0.1,
-        "logLoss": 0.6486221515772461
+        "logLoss": 0.6487434539798579
       },
       {
         "weight": 0.11,
-        "logLoss": 0.6485153629694446
+        "logLoss": 0.6486633513910853
       },
       {
         "weight": 0.12,
-        "logLoss": 0.6484120212645745
+        "logLoss": 0.6485852306941086
       },
       {
         "weight": 0.13,
-        "logLoss": 0.6483121262795394
+        "logLoss": 0.6485090925497269
       },
       {
         "weight": 0.14,
-        "logLoss": 0.6482156778219186
+        "logLoss": 0.6484349376153529
       },
       {
         "weight": 0.15,
-        "logLoss": 0.6481226756899688
+        "logLoss": 0.6483627665450044
       },
       {
         "weight": 0.16,
-        "logLoss": 0.6480331196726218
+        "logLoss": 0.6482925799893036
       },
       {
         "weight": 0.17,
-        "logLoss": 0.6479470095494833
+        "logLoss": 0.6482243785954696
       },
       {
         "weight": 0.18,
-        "logLoss": 0.6478643450908319
+        "logLoss": 0.6481581630073134
       },
       {
         "weight": 0.19,
-        "logLoss": 0.6477851260576222
+        "logLoss": 0.6480939338652352
       },
       {
         "weight": 0.2,
-        "logLoss": 0.6477093522014808
+        "logLoss": 0.6480316918062196
       },
       {
         "weight": 0.21,
-        "logLoss": 0.6476370232647124
+        "logLoss": 0.6479714374638292
       },
       {
         "weight": 0.22,
-        "logLoss": 0.6475681389802966
+        "logLoss": 0.6479131714682032
       },
       {
         "weight": 0.23,
-        "logLoss": 0.6475026990718927
+        "logLoss": 0.6478568944460517
       },
       {
         "weight": 0.24,
-        "logLoss": 0.6474407032538404
+        "logLoss": 0.647802607020651
       },
       {
         "weight": 0.25,
-        "logLoss": 0.6473821512311642
+        "logLoss": 0.6477503098118409
       },
       {
         "weight": 0.26,
-        "logLoss": 0.6473270426995745
+        "logLoss": 0.6477000034360213
       },
       {
         "weight": 0.27,
-        "logLoss": 0.647275377345473
+        "logLoss": 0.6476516885061461
       },
       {
         "weight": 0.28,
-        "logLoss": 0.6472271548459554
+        "logLoss": 0.6476053656317219
       },
       {
         "weight": 0.29,
-        "logLoss": 0.6471823748688164
+        "logLoss": 0.6475610354188037
       },
       {
         "weight": 0.3,
-        "logLoss": 0.647141037072555
+        "logLoss": 0.6475186984699902
       },
       {
         "weight": 0.31,
-        "logLoss": 0.6471031411063788
+        "logLoss": 0.6474783553844233
       },
       {
         "weight": 0.32,
-        "logLoss": 0.6470686866102097
+        "logLoss": 0.6474400067577812
       },
       {
         "weight": 0.33,
-        "logLoss": 0.6470376732146916
+        "logLoss": 0.6474036531822779
       },
       {
         "weight": 0.34,
-        "logLoss": 0.647010100541195
+        "logLoss": 0.6473692952466595
       },
       {
         "weight": 0.35,
-        "logLoss": 0.646985968201825
+        "logLoss": 0.6473369335362004
       },
       {
         "weight": 0.36,
-        "logLoss": 0.6469652757994281
+        "logLoss": 0.6473065686327012
       },
       {
         "weight": 0.37,
-        "logLoss": 0.6469480229276008
+        "logLoss": 0.6472782011144854
       },
       {
         "weight": 0.38,
-        "logLoss": 0.6469342091706954
+        "logLoss": 0.6472518315563979
       },
       {
         "weight": 0.39,
-        "logLoss": 0.646923834103833
+        "logLoss": 0.6472274605298005
       },
       {
         "weight": 0.4,
-        "logLoss": 0.6469168972929072
+        "logLoss": 0.6472050886025705
       },
       {
         "weight": 0.41,
-        "logLoss": 0.6469133982945976
+        "logLoss": 0.6471847163390987
       },
       {
         "weight": 0.42,
-        "logLoss": 0.6469133366563772
+        "logLoss": 0.6471663443002855
       },
       {
         "weight": 0.43,
-        "logLoss": 0.6469167119165233
+        "logLoss": 0.6471499730435408
       },
       {
         "weight": 0.44,
-        "logLoss": 0.6469235236041281
+        "logLoss": 0.6471356031227794
       },
       {
         "weight": 0.45,
-        "logLoss": 0.6469337712391093
+        "logLoss": 0.6471232350884211
       },
       {
         "weight": 0.46,
-        "logLoss": 0.6469474543322218
+        "logLoss": 0.6471128694873878
       },
       {
         "weight": 0.47,
-        "logLoss": 0.6469645723850691
+        "logLoss": 0.647104506863101
       },
       {
         "weight": 0.48,
-        "logLoss": 0.646985124890116
+        "logLoss": 0.6470981477554814
       },
       {
         "weight": 0.49,
-        "logLoss": 0.6470091113306994
+        "logLoss": 0.6470937927009457
       },
       {
         "weight": 0.5,
-        "logLoss": 0.6470365311810435
+        "logLoss": 0.6470914422324063
       },
       {
         "weight": 0.51,
-        "logLoss": 0.6470673839062708
+        "logLoss": 0.6470910968792695
       },
       {
         "weight": 0.52,
-        "logLoss": 0.647101668962417
+        "logLoss": 0.6470927571674323
       },
       {
         "weight": 0.53,
-        "logLoss": 0.6471393857964447
+        "logLoss": 0.6470964236192843
       },
       {
         "weight": 0.54,
-        "logLoss": 0.6471805338462572
+        "logLoss": 0.6471020967537033
       },
       {
         "weight": 0.55,
-        "logLoss": 0.6472251125407148
+        "logLoss": 0.6471097770860563
       },
       {
         "weight": 0.56,
-        "logLoss": 0.6472731212996471
+        "logLoss": 0.6471194651281971
       },
       {
         "weight": 0.57,
-        "logLoss": 0.6473245595338707
+        "logLoss": 0.6471311613884656
       },
       {
         "weight": 0.58,
-        "logLoss": 0.6473794266452046
+        "logLoss": 0.6471448663716872
       },
       {
         "weight": 0.59,
-        "logLoss": 0.6474377220264861
+        "logLoss": 0.6471605805791721
       },
       {
         "weight": 0.6,
-        "logLoss": 0.6474994450615859
+        "logLoss": 0.6471783045087133
       },
       {
         "weight": 0.61,
-        "logLoss": 0.6475645951254282
+        "logLoss": 0.6471980386545878
       },
       {
         "weight": 0.62,
-        "logLoss": 0.647633171584004
+        "logLoss": 0.6472197835075545
       },
       {
         "weight": 0.63,
-        "logLoss": 0.6477051737943927
+        "logLoss": 0.6472435395548543
       },
       {
         "weight": 0.64,
-        "logLoss": 0.6477806011047768
+        "logLoss": 0.6472693072802091
       },
       {
         "weight": 0.65,
-        "logLoss": 0.6478594528544602
+        "logLoss": 0.6472970871638233
       },
       {
         "weight": 0.66,
-        "logLoss": 0.6479417283738899
+        "logLoss": 0.6473268796823809
       },
       {
         "weight": 0.67,
-        "logLoss": 0.6480274269846719
+        "logLoss": 0.6473586853090468
       },
       {
         "weight": 0.68,
-        "logLoss": 0.6481165479995915
+        "logLoss": 0.647392504513467
       },
       {
         "weight": 0.69,
-        "logLoss": 0.6482090907226331
+        "logLoss": 0.6474283377617672
       },
       {
         "weight": 0.7,
-        "logLoss": 0.648305054449
+        "logLoss": 0.6474661855165547
       },
       {
         "weight": 0.71,
-        "logLoss": 0.6484044384651341
+        "logLoss": 0.6475060482369167
       },
       {
         "weight": 0.72,
-        "logLoss": 0.6485072420487371
+        "logLoss": 0.647547926378422
       },
       {
         "weight": 0.73,
-        "logLoss": 0.6486134644687921
+        "logLoss": 0.64759182039312
       },
       {
         "weight": 0.74,
-        "logLoss": 0.6487231049855827
+        "logLoss": 0.6476377307295421
       },
       {
         "weight": 0.75,
-        "logLoss": 0.6488361628507177
+        "logLoss": 0.6476856578327018
       },
       {
         "weight": 0.76,
-        "logLoss": 0.6489526373071498
+        "logLoss": 0.6477356021440946
       },
       {
         "weight": 0.77,
-        "logLoss": 0.6490725275892003
+        "logLoss": 0.6477875641017004
       },
       {
         "weight": 0.78,
-        "logLoss": 0.6491958329225797
+        "logLoss": 0.6478415441399813
       },
       {
         "weight": 0.79,
-        "logLoss": 0.6493225525244124
+        "logLoss": 0.6478975426898853
       },
       {
         "weight": 0.8,
-        "logLoss": 0.6494526856032583
+        "logLoss": 0.6479555601788447
       },
       {
         "weight": 0.81,
-        "logLoss": 0.6495862313591371
+        "logLoss": 0.6480155970307793
       },
       {
         "weight": 0.82,
-        "logLoss": 0.6497231889835524
+        "logLoss": 0.648077653666095
       },
       {
         "weight": 0.83,
-        "logLoss": 0.6498635576595148
+        "logLoss": 0.6481417305016868
       },
       {
         "weight": 0.84,
-        "logLoss": 0.6500073365615664
+        "logLoss": 0.6482078279509389
       },
       {
         "weight": 0.85,
-        "logLoss": 0.6501545248558068
+        "logLoss": 0.6482759464237259
       },
       {
         "weight": 0.86,
-        "logLoss": 0.650305121699917
+        "logLoss": 0.6483460863264147
       },
       {
         "weight": 0.87,
-        "logLoss": 0.6504591262431844
+        "logLoss": 0.648418248061865
       },
       {
         "weight": 0.88,
-        "logLoss": 0.6506165376265285
+        "logLoss": 0.6484924320294313
       },
       {
         "weight": 0.89,
-        "logLoss": 0.6507773549825286
+        "logLoss": 0.6485686386249638
       },
       {
         "weight": 0.9,
-        "logLoss": 0.6509415774354473
+        "logLoss": 0.6486468682408115
       },
       {
         "weight": 0.91,
-        "logLoss": 0.6511092041012586
+        "logLoss": 0.6487271212658213
       },
       {
         "weight": 0.92,
-        "logLoss": 0.6512802340876742
+        "logLoss": 0.6488093980853419
       },
       {
         "weight": 0.93,
-        "logLoss": 0.65145466649417
+        "logLoss": 0.6488936990812241
       },
       {
         "weight": 0.94,
-        "logLoss": 0.651632500412015
+        "logLoss": 0.6489800246318236
       },
       {
         "weight": 0.95,
-        "logLoss": 0.6518137349242971
+        "logLoss": 0.6490683751120028
       },
       {
         "weight": 0.96,
-        "logLoss": 0.6519983691059515
+        "logLoss": 0.6491587508931319
       },
       {
         "weight": 0.97,
-        "logLoss": 0.6521864020237899
+        "logLoss": 0.6492511523430912
       },
       {
         "weight": 0.98,
-        "logLoss": 0.6523778327365267
+        "logLoss": 0.6493455798262747
       },
       {
         "weight": 0.99,
-        "logLoss": 0.6525726602948108
+        "logLoss": 0.6494420337035901
       },
       {
         "weight": 1.0,
-        "logLoss": 0.6527708837412511
+        "logLoss": 0.6495405143324625
       }
     ],
     "weightInterval": [
@@ -1215,237 +1250,11 @@
     ],
     "weightUndetermined": true,
     "atFittedSigma": {
-      "rankingsOnly": 0.6505798919917488,
-      "recordsOnly": 0.649554157886917,
-      "blend": 0.6464805654955068,
+      "rankingsOnly": 0.6496191974898479,
+      "recordsOnly": 0.6498557353470082,
+      "blend": 0.6464836545755566,
       "coinFlip": 0.6931471805599453
-    },
-    "games": [
-      {
-        "week": 6,
-        "home": "Denver Broncos",
-        "away": "Seattle Seahawks",
-        "homePct": 0.6,
-        "awayPct": 0.6,
-        "marginRank": 1.333552,
-        "marginRec": 2.3595525734131897,
-        "marginBlend": 1.8875923096431226,
-        "pRank": 0.5403572327511891,
-        "pBlend": 0.5517875085841442,
-        "pickRank": "Denver Broncos",
-        "pickBlend": "Denver Broncos",
-        "agrees": true,
-        "flip": 0.011430275832955084
-      },
-      {
-        "week": 6,
-        "home": "Jacksonville Jaguars",
-        "away": "Houston Texans",
-        "homePct": 0.8,
-        "awayPct": 0.2,
-        "marginRank": 11.779933000000002,
-        "marginRec": 8.96605257231213,
-        "marginBlend": 10.260437569048552,
-        "pRank": 0.814641651482213,
-        "pBlend": 0.7604082422399226,
-        "pickRank": "Jacksonville Jaguars",
-        "pickBlend": "Jacksonville Jaguars",
-        "agrees": true,
-        "flip": 0.054233409242290365
-      },
-      {
-        "week": 6,
-        "home": "Cleveland Browns",
-        "away": "Baltimore Ravens",
-        "homePct": 0.6,
-        "awayPct": 0.8,
-        "marginRank": -4.112942,
-        "marginRec": 0.15738590711354217,
-        "marginBlend": -1.8069649301586874,
-        "pRank": 0.37731752100958205,
-        "pBlend": 0.45041288147771014,
-        "pickRank": "Baltimore Ravens",
-        "pickBlend": "Baltimore Ravens",
-        "agrees": true,
-        "flip": 0.07309536046812809
-      },
-      {
-        "week": 6,
-        "home": "Philadelphia Eagles",
-        "away": "Carolina Panthers",
-        "homePct": 0.4,
-        "awayPct": 0.5,
-        "marginRank": 0.690493,
-        "marginRec": 1.2584692402633666,
-        "marginBlend": 0.997200169742218,
-        "pRank": 0.5209225312050496,
-        "pBlend": 0.5274146163153978,
-        "pickRank": "Philadelphia Eagles",
-        "pickBlend": "Philadelphia Eagles",
-        "agrees": true,
-        "flip": 0.006492085110348156
-      },
-      {
-        "week": 6,
-        "home": "Atlanta Falcons",
-        "away": "Chicago Bears",
-        "homePct": 0.4,
-        "awayPct": 0.6,
-        "marginRank": -1.1666210000000001,
-        "marginRec": 0.1573859071135435,
-        "marginBlend": -0.4516572701586866,
-        "pRank": 0.4646804276582716,
-        "pBlend": 0.48757544495020116,
-        "pickRank": "Chicago Bears",
-        "pickBlend": "Chicago Bears",
-        "agrees": true,
-        "flip": 0.022895017291929554
-      },
-      {
-        "week": 6,
-        "home": "New York Giants",
-        "away": "New Orleans Saints",
-        "homePct": 0.7,
-        "awayPct": 0.2,
-        "marginRank": 5.999287,
-        "marginRec": 7.864969239162305,
-        "marginBlend": 7.006755409147646,
-        "pRank": 0.6757593010233675,
-        "pBlend": 0.6855318333039742,
-        "pickRank": "New York Giants",
-        "pickBlend": "New York Giants",
-        "agrees": true,
-        "flip": 0.009772532280606705
-      },
-      {
-        "week": 6,
-        "home": "New England Patriots",
-        "away": "New York Jets",
-        "homePct": 0.6,
-        "awayPct": 0.4,
-        "marginRank": 9.625846000000001,
-        "marginRec": 4.561719239712836,
-        "marginBlend": 6.8912175494449315,
-        "pRank": 0.7677469976506397,
-        "pBlend": 0.682697878077521,
-        "pickRank": "New England Patriots",
-        "pickBlend": "New England Patriots",
-        "agrees": true,
-        "flip": 0.08504911957311867
-      },
-      {
-        "week": 6,
-        "home": "Tampa Bay Buccaneers",
-        "away": "Pittsburgh Steelers",
-        "homePct": 0.2,
-        "awayPct": 0.6,
-        "marginRank": -2.614766000000001,
-        "marginRec": -2.0447807591861036,
-        "marginBlend": -2.306973969960496,
-        "pRank": 0.4212524570115579,
-        "pBlend": 0.43679439291252364,
-        "pickRank": "Pittsburgh Steelers",
-        "pickBlend": "Pittsburgh Steelers",
-        "agrees": true,
-        "flip": 0.015541935900965753
-      },
-      {
-        "week": 6,
-        "home": "Indianapolis Colts",
-        "away": "Tennessee Titans",
-        "homePct": 0.4,
-        "awayPct": 0.0,
-        "marginRank": 6.655197999999999,
-        "marginRec": 6.763885906012483,
-        "marginBlend": 6.713889469246741,
-        "pRank": 0.6934713275968224,
-        "pBlend": 0.6783274428258156,
-        "pickRank": "Indianapolis Colts",
-        "pickBlend": "Indianapolis Colts",
-        "agrees": true,
-        "flip": 0.01514388477100681
-      },
-      {
-        "week": 6,
-        "home": "Los Angeles Rams",
-        "away": "Arizona Cardinals",
-        "homePct": 0.4,
-        "awayPct": 0.2,
-        "marginRank": 12.291718000000001,
-        "marginRec": 4.561719239712836,
-        "marginBlend": 8.117518669444932,
-        "pRank": 0.8248535018526992,
-        "pBlend": 0.7122019164694966,
-        "pickRank": "Los Angeles Rams",
-        "pickBlend": "Los Angeles Rams",
-        "agrees": true,
-        "flip": 0.11265158538320263
-      },
-      {
-        "week": 6,
-        "home": "Las Vegas Raiders",
-        "away": "Buffalo Bills",
-        "homePct": 0.6,
-        "awayPct": 0.8,
-        "marginRank": -3.594731,
-        "marginRec": 0.15738590711354217,
-        "marginBlend": -1.5685878701586873,
-        "pRank": 0.3923667077859924,
-        "pBlend": 0.45692706007574463,
-        "pickRank": "Buffalo Bills",
-        "pickBlend": "Buffalo Bills",
-        "agrees": true,
-        "flip": 0.06456035228975221
-      },
-      {
-        "week": 6,
-        "home": "Kansas City Chiefs",
-        "away": "Los Angeles Chargers",
-        "homePct": 1.0,
-        "awayPct": 0.0,
-        "marginRank": 16.361212,
-        "marginRec": 13.370385904911423,
-        "marginBlend": 14.74616590865217,
-        "pRank": 0.8931127263981842,
-        "pBlend": 0.8454178048041875,
-        "pickRank": "Kansas City Chiefs",
-        "pickBlend": "Kansas City Chiefs",
-        "agrees": true,
-        "flip": 0.047694921593996686
-      },
-      {
-        "week": 6,
-        "home": "Green Bay Packers",
-        "away": "Dallas Cowboys",
-        "homePct": 0.6,
-        "awayPct": 0.4,
-        "marginRank": 4.429507,
-        "marginRec": 4.561719239712836,
-        "marginBlend": 4.500901609444932,
-        "pRank": 0.6317865037591462,
-        "pBlend": 0.6218742670515619,
-        "pickRank": "Green Bay Packers",
-        "pickBlend": "Green Bay Packers",
-        "agrees": true,
-        "flip": 0.009912236707584343
-      },
-      {
-        "week": 6,
-        "home": "San Francisco 49ers",
-        "away": "Washington Commanders",
-        "homePct": 1.0,
-        "awayPct": 0.3,
-        "marginRank": 15.29725,
-        "marginRec": 10.067135905461953,
-        "marginBlend": 12.472988388949455,
-        "pRank": 0.8774645064583542,
-        "pBlend": 0.8051622774743502,
-        "pickRank": "San Francisco 49ers",
-        "pickBlend": "San Francisco 49ers",
-        "agrees": true,
-        "flip": 0.07230222898400396
-      }
-    ]
+    }
   },
   "headToHead": {
     "method": "Win probability comes from the consensus score alone: the projected margin is k * (score difference) + home field, treated as normal with standard deviation sigma, so P(home) = Phi(margin / sigma). The three constants are fitted by least squares on 6,719 completed regular-season games (2000-2025); see model.json and tools/calibrate.py.",

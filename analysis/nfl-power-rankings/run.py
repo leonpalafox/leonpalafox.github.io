@@ -465,37 +465,10 @@ def main(argv: list[str] | None = None) -> int:
     )
     (out_dir / "report.md").write_text(markdown + "\n", encoding="utf-8")
 
-    # --- path to the Super Bowl: Monte Carlo over the real bracket ---------
-    # Seeding comes from records (with consensus breaking ties); the games
-    # themselves are priced from consensus strength and home field.
-    playoff_sim = None
-    if season_records:
-        playoff_rows = [
-            {
-                "team": row.team,
-                "abbr": teams.TEAMS[row.team][0],
-                "conference": teams.TEAMS[row.team][1],
-                "division": teams.TEAMS[row.team][2],
-                "record": season_records.get(row.team, "0-0"),
-                "score": row.score,
-            }
-            for row in rows
-        ]
-        playoff_sim = playoffs.simulate(playoff_rows, n_sims=50000, seed=season * 10000 + week)
-        if verbose:
-            leader = playoff_sim["teams"][0]
-            print(f"\npath to the Super Bowl ({playoff_sim['nSims']:,} brackets, seed {playoff_sim['seed']}):")
-            for entry in playoff_sim["teams"][:5]:
-                print(f"  {entry['abbr']:4} {entry['conference']} #{entry['seed']}  "
-                      f"reach {entry['pSuperBowl']*100:5.1f}%  win {entry['pChampion']*100:5.1f}%")
-    else:
-        print("playoff simulation skipped (no records)", file=sys.stderr)
-
-    # --- a weighted second opinion: rankings blended with records ----------
-    # The weight is fitted by out-of-sample log-loss on the most recent weeks
-    # whose games are complete and whose consensus bundle was published before
-    # them, so every graded prediction was made with pre-game information only.
-    # Pricing this week's slate needs this week's bundle, so that happens below.
+    # --- the blend that the bracket is seeded and priced on ----------------
+    # Fit the weight on ex-ante games first: each weekly bundle is published
+    # before its week's slate, so grading it against those results uses no
+    # future information. The playoff simulation consumes the fitted weight.
     blended = None
     if slate_csv:
         data_dir = HERE.parent.parent / "src" / "data"
@@ -512,13 +485,48 @@ def main(argv: list[str] | None = None) -> int:
             if blended.get("weight") is None:
                 blended = None
             elif verbose:
-                print(f"\nweighted blend graded on weeks {list(eval_weeks)} ({blended['nEval']} games):")
-                print(f"  weight on rankings {blended['weight']:.2f} "
-                      f"(precision cross-check {blended['precisionWeight']:.2f}), "
-                      f"log-loss {blended['logLoss']:.4f}, 95% interval "
-                      f"[{blended['weightInterval'][0]:.2f}, {blended['weightInterval'][1]:.2f}]")
-        else:
-            print("weighted blend skipped (no prior bundles to grade against)", file=sys.stderr)
+                print(f"\nblend fitted on weeks {list(eval_weeks)} ({blended['nEval']} ex-ante games): "
+                      f"{blended['weight']:.2f} on the rankings, {1 - blended['weight']:.2f} on records; "
+                      f"95% interval [{blended['weightInterval'][0]:.2f}, {blended['weightInterval'][1]:.2f}]")
+
+    # --- path to the Super Bowl: Monte Carlo over the real bracket ---------
+    # Seeding comes from records (with consensus breaking ties); the games
+    # themselves are priced from consensus strength and home field.
+    playoff_sim = None
+    if season_records:
+        playoff_rows = [
+            {
+                "team": row.team,
+                "abbr": teams.TEAMS[row.team][0],
+                "conference": teams.TEAMS[row.team][1],
+                "division": teams.TEAMS[row.team][2],
+                "record": season_records.get(row.team, "0-0"),
+                "score": row.score,
+            }
+            for row in rows
+        ]
+        # Use the long-run margin dispersion, not the blend's own 47-game fit.
+        # The fitted value (11.50) buys 0.0006 log-loss over the 6,719-game 13.16
+        # but would overstate favourites through a bracket that compounds six
+        # rounds, and sigma is no better determined than the weight is.
+        playoff_sim = playoffs.simulate(
+            playoff_rows,
+            n_sims=50000,
+            seed=season * 10000 + week,
+            weight=blended["weight"] if blended else 1.0,
+            sigma=headtohead.DEFAULT_MODEL.sigma,
+            record_model=blended["recordModel"] if blended else None,
+        )
+        if verbose:
+            leader = playoff_sim["teams"][0]
+            print(f"\npath to the Super Bowl ({playoff_sim['nSims']:,} brackets, seed {playoff_sim['seed']}, "
+                  f"seeded on {playoff_sim['weight']:.2f} rankings / "
+                  f"{1 - playoff_sim['weight']:.2f} record):")
+            for entry in playoff_sim["teams"][:5]:
+                print(f"  {entry['abbr']:4} {entry['conference']} #{entry['seed']}  "
+                      f"reach {entry['pSuperBowl']*100:5.1f}%  win {entry['pChampion']*100:5.1f}%")
+    else:
+        print("playoff simulation skipped (no records)", file=sys.stderr)
 
     site_bundle = report.build_site_bundle(
         week=week,
@@ -538,18 +546,6 @@ def main(argv: list[str] | None = None) -> int:
         playoffs=playoff_sim,
         weighted=blended,
     )
-    # Price this week's slate under both models now that the bundle exists.
-    if blended is not None and slate_csv:
-        blended["games"] = weighted.predict_games(
-            csv_text=slate_csv, season=season, week=week, bundle=site_bundle,
-            weight=blended["weight"], sigma=blended["sigma"],
-            record_model=blended["recordModel"],
-        )
-        if verbose:
-            flips = sum(1 for g in blended["games"] if not g["agrees"])
-            print(f"  {len(blended['games'])} games priced under both models; "
-                  f"{flips} pick(s) flip")
-
     report.write_json(out_dir / "site-data.json", site_bundle)
 
     if not args.no_site:
