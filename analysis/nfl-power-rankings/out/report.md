@@ -1,6 +1,6 @@
 # NFL Poll of Polls — 2026 season, Week 6
 
-Generated 2026-10-14 14:55 UTC from 9 source ballots.
+Generated 2026-10-14 15:33 UTC from 9 source ballots.
 
 ## Consensus table
 
@@ -132,9 +132,9 @@ Schedule: nflverse
 | Away | Home | Projected margin | P(home) | Pick | Market | Model − market |
 |------|------|------------------|---------|------|--------|----------------|
 | SEA | DEN | +1.3 | 54.0% | DEN by 1.3 | -2.5 | +3.8 |
-| HOU | JAX | +9.2 | 75.8% | JAX by 9.2 | +3.0 | +6.2 |
+| HOU | JAX | +9.2 | 75.8% | JAX by 9.2 | +2.5 | +6.7 |
 | BAL | CLE | -4.1 | 37.7% | BAL by 4.1 | -5.5 | +1.4 |
-| CAR | PHI | +0.7 | 52.1% | PHI by 0.7 | +1.5 | -0.8 |
+| CAR | PHI | +0.7 | 52.1% | PHI by 0.7 | -1.5 | +2.2 |
 | CHI | ATL | -1.2 | 46.5% | CHI by 1.2 | -3.0 | +1.8 |
 | NO | NYG | +6.0 | 67.6% | NYG by 6.0 | -1.5 | +7.5 |
 | NYJ | NE | +9.6 | 76.8% | NE by 9.6 | +7.5 | +2.1 |

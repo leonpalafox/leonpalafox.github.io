@@ -223,6 +223,7 @@ def build_site_bundle(
     previous: dict | None = None,
     records: dict[str, str] | None = None,
     playoffs: dict | None = None,
+    weighted: dict | None = None,
 ) -> dict:
     sources = list(panel.ballots)
     source_diag = {row["source"]: row for row in source_diagnostics(panel, rows)}
@@ -351,6 +352,7 @@ def build_site_bundle(
         "movement": movement,
         "recordsThroughWeek": (week - 1) if records else None,
         "playoffs": playoffs,
+        "weighted": weighted,
         "headToHead": head_to_head,
         "diagnostics": {
             "sources": diagnostics.n_sources,

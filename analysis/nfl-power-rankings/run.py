@@ -31,7 +31,7 @@ import time
 HERE = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 
-from pollofpolls import fetch, games, headtohead, playoffs, report, sources, stats, teams, validate  # noqa: E402
+from pollofpolls import fetch, games, headtohead, playoffs, report, sources, stats, teams, validate, weighted  # noqa: E402
 
 METHOD_NOTE = (
     "Each source's 1-32 ballot is standardised to rank-standard-deviation units, "
@@ -335,8 +335,9 @@ def main(argv: list[str] | None = None) -> int:
     # These are the standings teams carry INTO this week, so a Week 4 edition
     # shows results through Week 3.
     season_records: dict[str, str] = {}
-    if csv_text:
-        season_records = games.records_through(csv_text, season=season, week=week)
+    slate_csv = locals().get("csv_text")
+    if slate_csv:
+        season_records = games.records_through(slate_csv, season=season, week=week)
         if verbose:
             top = ", ".join(
                 f"{teams.TEAMS[row.team][0]} {season_records.get(row.team, '?')}"
@@ -490,6 +491,35 @@ def main(argv: list[str] | None = None) -> int:
     else:
         print("playoff simulation skipped (no records)", file=sys.stderr)
 
+    # --- a weighted second opinion: rankings blended with records ----------
+    # The weight is fitted by out-of-sample log-loss on the most recent weeks
+    # whose games are complete and whose consensus bundle was published before
+    # them, so every graded prediction was made with pre-game information only.
+    # Pricing this week's slate needs this week's bundle, so that happens below.
+    blended = None
+    if slate_csv:
+        data_dir = HERE.parent.parent / "src" / "data"
+        prior = {}
+        for prior_week in range(1, week):
+            path = data_dir / f"nfl-power-rankings-{season}-wk{prior_week:02d}.json"
+            if path.exists():
+                prior[prior_week] = json.loads(path.read_text(encoding="utf-8"))
+        eval_weeks = tuple(sorted(prior))[-3:]
+        if eval_weeks:
+            blended = weighted.fit_blend(
+                csv_text=slate_csv, season=season, bundles=prior, weeks=eval_weeks
+            )
+            if blended.get("weight") is None:
+                blended = None
+            elif verbose:
+                print(f"\nweighted blend graded on weeks {list(eval_weeks)} ({blended['nEval']} games):")
+                print(f"  weight on rankings {blended['weight']:.2f} "
+                      f"(precision cross-check {blended['precisionWeight']:.2f}), "
+                      f"log-loss {blended['logLoss']:.4f}, 95% interval "
+                      f"[{blended['weightInterval'][0]:.2f}, {blended['weightInterval'][1]:.2f}]")
+        else:
+            print("weighted blend skipped (no prior bundles to grade against)", file=sys.stderr)
+
     site_bundle = report.build_site_bundle(
         week=week,
         season=season,
@@ -506,7 +536,20 @@ def main(argv: list[str] | None = None) -> int:
         previous=previous_bundle,
         records=season_records,
         playoffs=playoff_sim,
+        weighted=blended,
     )
+    # Price this week's slate under both models now that the bundle exists.
+    if blended is not None and slate_csv:
+        blended["games"] = weighted.predict_games(
+            csv_text=slate_csv, season=season, week=week, bundle=site_bundle,
+            weight=blended["weight"], sigma=blended["sigma"],
+            record_model=blended["recordModel"],
+        )
+        if verbose:
+            flips = sum(1 for g in blended["games"] if not g["agrees"])
+            print(f"  {len(blended['games'])} games priced under both models; "
+                  f"{flips} pick(s) flip")
+
     report.write_json(out_dir / "site-data.json", site_bundle)
 
     if not args.no_site:

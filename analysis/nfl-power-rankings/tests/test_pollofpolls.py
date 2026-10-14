@@ -8,6 +8,7 @@ inlined so a broken parser fails here rather than in a published chart.
 
 from __future__ import annotations
 
+import json
 import math
 import pathlib
 import sys
@@ -15,7 +16,7 @@ import unittest
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 
-from pollofpolls import playoffs, sources, stats, teams, validate  # noqa: E402
+from pollofpolls import playoffs, sources, stats, teams, validate, weighted  # noqa: E402
 
 
 class TestTeamResolution(unittest.TestCase):
@@ -548,6 +549,80 @@ class TestPlayoffSimulation(unittest.TestCase):
                     self.assertTrue(entry["divisionWinner"])
                 else:
                     self.assertFalse(entry["divisionWinner"])
+
+
+class TestWeightedBlend(unittest.TestCase):
+    """The blended prediction must read records correctly and stay bounded."""
+
+    def test_win_pct_handles_ties(self):
+        self.assertAlmostEqual(weighted.win_pct("5-0"), 1.0)
+        self.assertAlmostEqual(weighted.win_pct("0-5"), 0.0)
+        self.assertAlmostEqual(weighted.win_pct("3-1-1"), 0.7)   # (3 + 0.5) / 5
+        self.assertAlmostEqual(weighted.win_pct("0-0"), 0.5)     # no games yet
+
+    def test_running_records_do_not_leak_across_seasons(self):
+        csv_text = (
+            "season,week,game_type,gameday,home_team,away_team,home_score,away_score\n"
+            "2020,1,REG,2020-09-10,KC,HOU,34,20\n"
+            "2020,2,REG,2020-09-17,KC,LV,10,20\n"
+            "2021,1,REG,2021-09-09,KC,HOU,30,10\n"
+        )
+        obs = weighted._running_records(csv_text)
+        self.assertEqual(len(obs), 3)
+        # The 2021 game must not see KC's 1-1 record from 2020.
+        last = obs[-1]
+        self.assertAlmostEqual(last["homePct"], 0.5)   # fresh season, 0-0 entering
+        self.assertAlmostEqual(last["awayPct"], 0.5)
+        # And the second 2020 game must see the 1-0 from the first.
+        self.assertAlmostEqual(obs[1]["homePct"], 1.0)
+
+    def test_record_model_fits_the_same_window_as_head_to_head(self):
+        csv_text = pathlib.Path("cache/schedule/nflverse-games.csv").read_text(encoding="utf-8")
+        model = weighted.fit_record_model(csv_text)
+        # Same 6,719 games the head-to-head constants were fitted on, so the two
+        # log-losses are comparable.
+        self.assertEqual(model["nGames"], 6719)
+        self.assertGreater(model["k"], 5.0)
+        self.assertLess(model["k"], 20.0)
+        self.assertTrue(2.0 < model["homeField"] < 3.0)
+
+    def test_blend_weight_is_bounded_and_sensitivity_is_computed(self):
+        csv_text = pathlib.Path("cache/schedule/nflverse-games.csv").read_text(encoding="utf-8")
+        bundles = {}
+        for week in (3, 4, 5):
+            path = pathlib.Path(f"../../src/data/nfl-power-rankings-2026-wk{week:02d}.json")
+            if path.exists():
+                bundles[week] = json.loads(path.read_text(encoding="utf-8"))
+        if len(bundles) < 3:
+            self.skipTest("weekly bundles not present")
+        fit = weighted.fit_blend(csv_text=csv_text, season=2026, bundles=bundles)
+        self.assertGreaterEqual(fit["weight"], 0.0)
+        self.assertLessEqual(fit["weight"], 1.0)
+        self.assertEqual(len(fit["curve"]), 101)          # weight 0.00 .. 1.00
+        # The interval must be a real range, and the endpoints of the curve must
+        # reproduce the two single-signal baselines.
+        self.assertLessEqual(fit["weightInterval"][0], fit["weightInterval"][1])
+        self.assertEqual(fit["curve"][0]["weight"], 0.0)
+        self.assertEqual(fit["curve"][-1]["weight"], 1.0)
+
+    def test_predicted_probabilities_are_probabilities(self):
+        csv_text = pathlib.Path("cache/schedule/nflverse-games.csv").read_text(encoding="utf-8")
+        bundle_path = pathlib.Path("../../src/data/nfl-power-rankings-2026-wk06.json")
+        if not bundle_path.exists():
+            self.skipTest("week 6 bundle not present")
+        bundle = json.loads(bundle_path.read_text(encoding="utf-8"))
+        model = weighted.fit_record_model(csv_text)
+        games = weighted.predict_games(
+            csv_text=csv_text, season=2026, week=6, bundle=bundle,
+            weight=0.5, sigma=14.0, record_model=model,
+        )
+        self.assertGreater(len(games), 0)
+        for game in games:
+            for key in ("pRank", "pBlend"):
+                self.assertGreaterEqual(game[key], 0.0)
+                self.assertLessEqual(game[key], 1.0)
+            self.assertEqual(game["pickBlend"], game["home"] if game["pBlend"] >= 0.5 else game["away"])
+            self.assertEqual(game["agrees"], (game["pRank"] >= 0.5) == (game["pBlend"] >= 0.5))
 
 
 if __name__ == "__main__":

@@ -1,7 +1,7 @@
 {
   "week": 6,
   "season": 2026,
-  "generated": "2026-10-14T14:55:03Z",
+  "generated": "2026-10-14T15:33:07Z",
   "method": "Each source's 1-32 ballot is standardised to rank-standard-deviation units, pooled in a one-way random-effects model, and shrunk toward the panel mean (empirical Bayes), with uncertainty from both the residual disagreement and a bootstrap over sources. Full derivation in the post.",
   "movement": {
     "previousWeek": 5,
@@ -778,6 +778,675 @@
       }
     }
   },
+  "weighted": {
+    "weight": 0.46,
+    "precisionWeight": 0.5336161548294748,
+    "sigma": 14.5,
+    "logLoss": 0.6464805654955068,
+    "nEval": 47,
+    "weeks": [
+      3,
+      4,
+      5
+    ],
+    "recordModel": {
+      "k": 11.010833331498233,
+      "homeField": 2.3595525734131897,
+      "sigma": 14.076627698268341,
+      "nGames": 6719,
+      "logLoss": 0.6588992404023424,
+      "source": "least squares on the same game log as the head-to-head fit"
+    },
+    "rankModel": {
+      "k": 4.59,
+      "homeField": 2.56,
+      "sigma": 13.16,
+      "nGames": 6719
+    },
+    "curve": [
+      {
+        "weight": 0.0,
+        "logLoss": 0.6498796509383219
+      },
+      {
+        "weight": 0.01,
+        "logLoss": 0.6497383852795863
+      },
+      {
+        "weight": 0.02,
+        "logLoss": 0.649600567842737
+      },
+      {
+        "weight": 0.03,
+        "logLoss": 0.6494661985377054
+      },
+      {
+        "weight": 0.04,
+        "logLoss": 0.6493352772651418
+      },
+      {
+        "weight": 0.05,
+        "logLoss": 0.6492078039164104
+      },
+      {
+        "weight": 0.06,
+        "logLoss": 0.6490837783735839
+      },
+      {
+        "weight": 0.07,
+        "logLoss": 0.6489632005094361
+      },
+      {
+        "weight": 0.08,
+        "logLoss": 0.6488460701874389
+      },
+      {
+        "weight": 0.09,
+        "logLoss": 0.6487323872617577
+      },
+      {
+        "weight": 0.1,
+        "logLoss": 0.6486221515772461
+      },
+      {
+        "weight": 0.11,
+        "logLoss": 0.6485153629694446
+      },
+      {
+        "weight": 0.12,
+        "logLoss": 0.6484120212645745
+      },
+      {
+        "weight": 0.13,
+        "logLoss": 0.6483121262795394
+      },
+      {
+        "weight": 0.14,
+        "logLoss": 0.6482156778219186
+      },
+      {
+        "weight": 0.15,
+        "logLoss": 0.6481226756899688
+      },
+      {
+        "weight": 0.16,
+        "logLoss": 0.6480331196726218
+      },
+      {
+        "weight": 0.17,
+        "logLoss": 0.6479470095494833
+      },
+      {
+        "weight": 0.18,
+        "logLoss": 0.6478643450908319
+      },
+      {
+        "weight": 0.19,
+        "logLoss": 0.6477851260576222
+      },
+      {
+        "weight": 0.2,
+        "logLoss": 0.6477093522014808
+      },
+      {
+        "weight": 0.21,
+        "logLoss": 0.6476370232647124
+      },
+      {
+        "weight": 0.22,
+        "logLoss": 0.6475681389802966
+      },
+      {
+        "weight": 0.23,
+        "logLoss": 0.6475026990718927
+      },
+      {
+        "weight": 0.24,
+        "logLoss": 0.6474407032538404
+      },
+      {
+        "weight": 0.25,
+        "logLoss": 0.6473821512311642
+      },
+      {
+        "weight": 0.26,
+        "logLoss": 0.6473270426995745
+      },
+      {
+        "weight": 0.27,
+        "logLoss": 0.647275377345473
+      },
+      {
+        "weight": 0.28,
+        "logLoss": 0.6472271548459554
+      },
+      {
+        "weight": 0.29,
+        "logLoss": 0.6471823748688164
+      },
+      {
+        "weight": 0.3,
+        "logLoss": 0.647141037072555
+      },
+      {
+        "weight": 0.31,
+        "logLoss": 0.6471031411063788
+      },
+      {
+        "weight": 0.32,
+        "logLoss": 0.6470686866102097
+      },
+      {
+        "weight": 0.33,
+        "logLoss": 0.6470376732146916
+      },
+      {
+        "weight": 0.34,
+        "logLoss": 0.647010100541195
+      },
+      {
+        "weight": 0.35,
+        "logLoss": 0.646985968201825
+      },
+      {
+        "weight": 0.36,
+        "logLoss": 0.6469652757994281
+      },
+      {
+        "weight": 0.37,
+        "logLoss": 0.6469480229276008
+      },
+      {
+        "weight": 0.38,
+        "logLoss": 0.6469342091706954
+      },
+      {
+        "weight": 0.39,
+        "logLoss": 0.646923834103833
+      },
+      {
+        "weight": 0.4,
+        "logLoss": 0.6469168972929072
+      },
+      {
+        "weight": 0.41,
+        "logLoss": 0.6469133982945976
+      },
+      {
+        "weight": 0.42,
+        "logLoss": 0.6469133366563772
+      },
+      {
+        "weight": 0.43,
+        "logLoss": 0.6469167119165233
+      },
+      {
+        "weight": 0.44,
+        "logLoss": 0.6469235236041281
+      },
+      {
+        "weight": 0.45,
+        "logLoss": 0.6469337712391093
+      },
+      {
+        "weight": 0.46,
+        "logLoss": 0.6469474543322218
+      },
+      {
+        "weight": 0.47,
+        "logLoss": 0.6469645723850691
+      },
+      {
+        "weight": 0.48,
+        "logLoss": 0.646985124890116
+      },
+      {
+        "weight": 0.49,
+        "logLoss": 0.6470091113306994
+      },
+      {
+        "weight": 0.5,
+        "logLoss": 0.6470365311810435
+      },
+      {
+        "weight": 0.51,
+        "logLoss": 0.6470673839062708
+      },
+      {
+        "weight": 0.52,
+        "logLoss": 0.647101668962417
+      },
+      {
+        "weight": 0.53,
+        "logLoss": 0.6471393857964447
+      },
+      {
+        "weight": 0.54,
+        "logLoss": 0.6471805338462572
+      },
+      {
+        "weight": 0.55,
+        "logLoss": 0.6472251125407148
+      },
+      {
+        "weight": 0.56,
+        "logLoss": 0.6472731212996471
+      },
+      {
+        "weight": 0.57,
+        "logLoss": 0.6473245595338707
+      },
+      {
+        "weight": 0.58,
+        "logLoss": 0.6473794266452046
+      },
+      {
+        "weight": 0.59,
+        "logLoss": 0.6474377220264861
+      },
+      {
+        "weight": 0.6,
+        "logLoss": 0.6474994450615859
+      },
+      {
+        "weight": 0.61,
+        "logLoss": 0.6475645951254282
+      },
+      {
+        "weight": 0.62,
+        "logLoss": 0.647633171584004
+      },
+      {
+        "weight": 0.63,
+        "logLoss": 0.6477051737943927
+      },
+      {
+        "weight": 0.64,
+        "logLoss": 0.6477806011047768
+      },
+      {
+        "weight": 0.65,
+        "logLoss": 0.6478594528544602
+      },
+      {
+        "weight": 0.66,
+        "logLoss": 0.6479417283738899
+      },
+      {
+        "weight": 0.67,
+        "logLoss": 0.6480274269846719
+      },
+      {
+        "weight": 0.68,
+        "logLoss": 0.6481165479995915
+      },
+      {
+        "weight": 0.69,
+        "logLoss": 0.6482090907226331
+      },
+      {
+        "weight": 0.7,
+        "logLoss": 0.648305054449
+      },
+      {
+        "weight": 0.71,
+        "logLoss": 0.6484044384651341
+      },
+      {
+        "weight": 0.72,
+        "logLoss": 0.6485072420487371
+      },
+      {
+        "weight": 0.73,
+        "logLoss": 0.6486134644687921
+      },
+      {
+        "weight": 0.74,
+        "logLoss": 0.6487231049855827
+      },
+      {
+        "weight": 0.75,
+        "logLoss": 0.6488361628507177
+      },
+      {
+        "weight": 0.76,
+        "logLoss": 0.6489526373071498
+      },
+      {
+        "weight": 0.77,
+        "logLoss": 0.6490725275892003
+      },
+      {
+        "weight": 0.78,
+        "logLoss": 0.6491958329225797
+      },
+      {
+        "weight": 0.79,
+        "logLoss": 0.6493225525244124
+      },
+      {
+        "weight": 0.8,
+        "logLoss": 0.6494526856032583
+      },
+      {
+        "weight": 0.81,
+        "logLoss": 0.6495862313591371
+      },
+      {
+        "weight": 0.82,
+        "logLoss": 0.6497231889835524
+      },
+      {
+        "weight": 0.83,
+        "logLoss": 0.6498635576595148
+      },
+      {
+        "weight": 0.84,
+        "logLoss": 0.6500073365615664
+      },
+      {
+        "weight": 0.85,
+        "logLoss": 0.6501545248558068
+      },
+      {
+        "weight": 0.86,
+        "logLoss": 0.650305121699917
+      },
+      {
+        "weight": 0.87,
+        "logLoss": 0.6504591262431844
+      },
+      {
+        "weight": 0.88,
+        "logLoss": 0.6506165376265285
+      },
+      {
+        "weight": 0.89,
+        "logLoss": 0.6507773549825286
+      },
+      {
+        "weight": 0.9,
+        "logLoss": 0.6509415774354473
+      },
+      {
+        "weight": 0.91,
+        "logLoss": 0.6511092041012586
+      },
+      {
+        "weight": 0.92,
+        "logLoss": 0.6512802340876742
+      },
+      {
+        "weight": 0.93,
+        "logLoss": 0.65145466649417
+      },
+      {
+        "weight": 0.94,
+        "logLoss": 0.651632500412015
+      },
+      {
+        "weight": 0.95,
+        "logLoss": 0.6518137349242971
+      },
+      {
+        "weight": 0.96,
+        "logLoss": 0.6519983691059515
+      },
+      {
+        "weight": 0.97,
+        "logLoss": 0.6521864020237899
+      },
+      {
+        "weight": 0.98,
+        "logLoss": 0.6523778327365267
+      },
+      {
+        "weight": 0.99,
+        "logLoss": 0.6525726602948108
+      },
+      {
+        "weight": 1.0,
+        "logLoss": 0.6527708837412511
+      }
+    ],
+    "weightInterval": [
+      0.0,
+      1.0
+    ],
+    "weightUndetermined": true,
+    "atFittedSigma": {
+      "rankingsOnly": 0.6505798919917488,
+      "recordsOnly": 0.649554157886917,
+      "blend": 0.6464805654955068,
+      "coinFlip": 0.6931471805599453
+    },
+    "games": [
+      {
+        "week": 6,
+        "home": "Denver Broncos",
+        "away": "Seattle Seahawks",
+        "homePct": 0.6,
+        "awayPct": 0.6,
+        "marginRank": 1.333552,
+        "marginRec": 2.3595525734131897,
+        "marginBlend": 1.8875923096431226,
+        "pRank": 0.5403572327511891,
+        "pBlend": 0.5517875085841442,
+        "pickRank": "Denver Broncos",
+        "pickBlend": "Denver Broncos",
+        "agrees": true,
+        "flip": 0.011430275832955084
+      },
+      {
+        "week": 6,
+        "home": "Jacksonville Jaguars",
+        "away": "Houston Texans",
+        "homePct": 0.8,
+        "awayPct": 0.2,
+        "marginRank": 11.779933000000002,
+        "marginRec": 8.96605257231213,
+        "marginBlend": 10.260437569048552,
+        "pRank": 0.814641651482213,
+        "pBlend": 0.7604082422399226,
+        "pickRank": "Jacksonville Jaguars",
+        "pickBlend": "Jacksonville Jaguars",
+        "agrees": true,
+        "flip": 0.054233409242290365
+      },
+      {
+        "week": 6,
+        "home": "Cleveland Browns",
+        "away": "Baltimore Ravens",
+        "homePct": 0.6,
+        "awayPct": 0.8,
+        "marginRank": -4.112942,
+        "marginRec": 0.15738590711354217,
+        "marginBlend": -1.8069649301586874,
+        "pRank": 0.37731752100958205,
+        "pBlend": 0.45041288147771014,
+        "pickRank": "Baltimore Ravens",
+        "pickBlend": "Baltimore Ravens",
+        "agrees": true,
+        "flip": 0.07309536046812809
+      },
+      {
+        "week": 6,
+        "home": "Philadelphia Eagles",
+        "away": "Carolina Panthers",
+        "homePct": 0.4,
+        "awayPct": 0.5,
+        "marginRank": 0.690493,
+        "marginRec": 1.2584692402633666,
+        "marginBlend": 0.997200169742218,
+        "pRank": 0.5209225312050496,
+        "pBlend": 0.5274146163153978,
+        "pickRank": "Philadelphia Eagles",
+        "pickBlend": "Philadelphia Eagles",
+        "agrees": true,
+        "flip": 0.006492085110348156
+      },
+      {
+        "week": 6,
+        "home": "Atlanta Falcons",
+        "away": "Chicago Bears",
+        "homePct": 0.4,
+        "awayPct": 0.6,
+        "marginRank": -1.1666210000000001,
+        "marginRec": 0.1573859071135435,
+        "marginBlend": -0.4516572701586866,
+        "pRank": 0.4646804276582716,
+        "pBlend": 0.48757544495020116,
+        "pickRank": "Chicago Bears",
+        "pickBlend": "Chicago Bears",
+        "agrees": true,
+        "flip": 0.022895017291929554
+      },
+      {
+        "week": 6,
+        "home": "New York Giants",
+        "away": "New Orleans Saints",
+        "homePct": 0.7,
+        "awayPct": 0.2,
+        "marginRank": 5.999287,
+        "marginRec": 7.864969239162305,
+        "marginBlend": 7.006755409147646,
+        "pRank": 0.6757593010233675,
+        "pBlend": 0.6855318333039742,
+        "pickRank": "New York Giants",
+        "pickBlend": "New York Giants",
+        "agrees": true,
+        "flip": 0.009772532280606705
+      },
+      {
+        "week": 6,
+        "home": "New England Patriots",
+        "away": "New York Jets",
+        "homePct": 0.6,
+        "awayPct": 0.4,
+        "marginRank": 9.625846000000001,
+        "marginRec": 4.561719239712836,
+        "marginBlend": 6.8912175494449315,
+        "pRank": 0.7677469976506397,
+        "pBlend": 0.682697878077521,
+        "pickRank": "New England Patriots",
+        "pickBlend": "New England Patriots",
+        "agrees": true,
+        "flip": 0.08504911957311867
+      },
+      {
+        "week": 6,
+        "home": "Tampa Bay Buccaneers",
+        "away": "Pittsburgh Steelers",
+        "homePct": 0.2,
+        "awayPct": 0.6,
+        "marginRank": -2.614766000000001,
+        "marginRec": -2.0447807591861036,
+        "marginBlend": -2.306973969960496,
+        "pRank": 0.4212524570115579,
+        "pBlend": 0.43679439291252364,
+        "pickRank": "Pittsburgh Steelers",
+        "pickBlend": "Pittsburgh Steelers",
+        "agrees": true,
+        "flip": 0.015541935900965753
+      },
+      {
+        "week": 6,
+        "home": "Indianapolis Colts",
+        "away": "Tennessee Titans",
+        "homePct": 0.4,
+        "awayPct": 0.0,
+        "marginRank": 6.655197999999999,
+        "marginRec": 6.763885906012483,
+        "marginBlend": 6.713889469246741,
+        "pRank": 0.6934713275968224,
+        "pBlend": 0.6783274428258156,
+        "pickRank": "Indianapolis Colts",
+        "pickBlend": "Indianapolis Colts",
+        "agrees": true,
+        "flip": 0.01514388477100681
+      },
+      {
+        "week": 6,
+        "home": "Los Angeles Rams",
+        "away": "Arizona Cardinals",
+        "homePct": 0.4,
+        "awayPct": 0.2,
+        "marginRank": 12.291718000000001,
+        "marginRec": 4.561719239712836,
+        "marginBlend": 8.117518669444932,
+        "pRank": 0.8248535018526992,
+        "pBlend": 0.7122019164694966,
+        "pickRank": "Los Angeles Rams",
+        "pickBlend": "Los Angeles Rams",
+        "agrees": true,
+        "flip": 0.11265158538320263
+      },
+      {
+        "week": 6,
+        "home": "Las Vegas Raiders",
+        "away": "Buffalo Bills",
+        "homePct": 0.6,
+        "awayPct": 0.8,
+        "marginRank": -3.594731,
+        "marginRec": 0.15738590711354217,
+        "marginBlend": -1.5685878701586873,
+        "pRank": 0.3923667077859924,
+        "pBlend": 0.45692706007574463,
+        "pickRank": "Buffalo Bills",
+        "pickBlend": "Buffalo Bills",
+        "agrees": true,
+        "flip": 0.06456035228975221
+      },
+      {
+        "week": 6,
+        "home": "Kansas City Chiefs",
+        "away": "Los Angeles Chargers",
+        "homePct": 1.0,
+        "awayPct": 0.0,
+        "marginRank": 16.361212,
+        "marginRec": 13.370385904911423,
+        "marginBlend": 14.74616590865217,
+        "pRank": 0.8931127263981842,
+        "pBlend": 0.8454178048041875,
+        "pickRank": "Kansas City Chiefs",
+        "pickBlend": "Kansas City Chiefs",
+        "agrees": true,
+        "flip": 0.047694921593996686
+      },
+      {
+        "week": 6,
+        "home": "Green Bay Packers",
+        "away": "Dallas Cowboys",
+        "homePct": 0.6,
+        "awayPct": 0.4,
+        "marginRank": 4.429507,
+        "marginRec": 4.561719239712836,
+        "marginBlend": 4.500901609444932,
+        "pRank": 0.6317865037591462,
+        "pBlend": 0.6218742670515619,
+        "pickRank": "Green Bay Packers",
+        "pickBlend": "Green Bay Packers",
+        "agrees": true,
+        "flip": 0.009912236707584343
+      },
+      {
+        "week": 6,
+        "home": "San Francisco 49ers",
+        "away": "Washington Commanders",
+        "homePct": 1.0,
+        "awayPct": 0.3,
+        "marginRank": 15.29725,
+        "marginRec": 10.067135905461953,
+        "marginBlend": 12.472988388949455,
+        "pRank": 0.8774645064583542,
+        "pBlend": 0.8051622774743502,
+        "pickRank": "San Francisco 49ers",
+        "pickBlend": "San Francisco 49ers",
+        "agrees": true,
+        "flip": 0.07230222898400396
+      }
+    ]
+  },
   "headToHead": {
     "method": "Win probability comes from the consensus score alone: the projected margin is k * (score difference) + home field, treated as normal with standard deviation sigma, so P(home) = Phi(margin / sigma). The three constants are fitted by least squares on 6,719 completed regular-season games (2000-2025); see model.json and tools/calibrate.py.",
     "scheduleSource": "nflverse",
@@ -819,7 +1488,7 @@
         "gameday": "2026-10-18",
         "kickoff": "09:30",
         "neutral": true,
-        "marketSpread": 3.0
+        "marketSpread": 2.5
       },
       {
         "away": "Baltimore Ravens",
@@ -851,7 +1520,7 @@
         "gameday": "2026-10-18",
         "kickoff": "13:00",
         "neutral": false,
-        "marketSpread": 1.5
+        "marketSpread": -1.5
       },
       {
         "away": "Chicago Bears",
