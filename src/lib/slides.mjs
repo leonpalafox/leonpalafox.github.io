@@ -1,6 +1,8 @@
 // Slide decks whose words live in Markdown (src/slides/**.md) and whose design and
 // animation live in an HTML template next to it. The build merges the two; see
 // src/pages/slides/ for the routes and scripts/build-slides-pdf.mjs for the PDFs.
+// A "standalone" deck is a single self-contained HTML file (src/slides/**.html),
+// served as is: its words live in its own script.
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -11,12 +13,17 @@ export const DECKS = [
     // The template's animations are written for exactly this many slides, in order.
     slides: 45,
   },
+  {
+    slug: 'deep-learning/class-02-redes-convolucionales',
+    standalone: true,
+  },
 ];
 
 const root = process.cwd();
 export const deckPaths = (slug) => ({
   md: join(root, 'src/slides', `${slug}.md`),
   template: join(root, 'src/slides', `${slug}.template.html`),
+  html: join(root, 'src/slides', `${slug}.html`),
   pdf: join(root, 'public/slides', `${slug}.pdf`),
   pdfHash: join(root, 'src/slides', `${slug}.pdf-hash`),
 });
@@ -115,6 +122,10 @@ export function renderDeck(slug) {
   const spec = DECKS.find((d) => d.slug === slug);
   if (!spec) throw new Error(`Unknown slide deck: ${slug}`);
   const paths = deckPaths(slug);
+  if (spec.standalone) {
+    const html = readFileSync(paths.html, 'utf8');
+    return { html, deck: loadDeck(slug), hash: createHash('sha256').update(html).digest('hex').slice(0, 16) };
+  }
   const md = readFileSync(paths.md, 'utf8');
   const template = readFileSync(paths.template, 'utf8');
   const deck = parseDeck(md);
@@ -135,7 +146,25 @@ export function renderDeck(slug) {
 }
 
 export function loadDeck(slug) {
+  if (DECKS.find((d) => d.slug === slug)?.standalone) return outlineStandalone(slug);
   return parseDeck(readFileSync(deckPaths(slug).md, 'utf8'));
+}
+
+// A standalone deck lists its slides in `const SEC = [...]` and `const META = [...]`
+// ({title, layout, sec, ...}); evaluate just those two literals to get the outline.
+function outlineStandalone(slug) {
+  const html = readFileSync(deckPaths(slug).html, 'utf8');
+  const literal = (name) => {
+    const m = html.match(new RegExp(`\\nconst ${name} = (\\[[\\s\\S]*?\\n?\\]);\\n`));
+    if (!m) throw new Error(`${slug}.html: could not find "const ${name} = [...]"`);
+    return m[1];
+  };
+  const meta = new Function('SEC', `return ${literal('META')};`)(new Function(`return ${literal('SEC')};`)());
+  const title = html.match(/<title>([^<]*)<\/title>/)?.[1] ?? '';
+  return {
+    meta: { title },
+    slides: meta.map((m) => ({ title: m.title, layout: m.layout, section: m.sec })),
+  };
 }
 
 export function pdfIsCurrent(slug, hash) {

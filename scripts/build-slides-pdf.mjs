@@ -1,4 +1,4 @@
-// Prints every Markdown-driven slide deck to public/slides/**.pdf with headless Chrome,
+// Prints every slide deck to public/slides/**.pdf with headless Chrome,
 // driven over the DevTools protocol so the deck's own 1600×900 @page size is used.
 // Usage: npm run slides:pdf   (set CHROME_PATH if Chrome is not in the default place)
 import { spawn } from 'node:child_process';
@@ -57,7 +57,8 @@ try {
   await send('Page.enable');
   for (const { slug } of DECKS) {
     const { html, hash } = renderDeck(slug);
-    const page = join(work, 'deck.html');
+    // A distinct file per deck: navigating to the same URL with only the hash changed doesn't reload.
+    const page = join(work, `${slug.replaceAll('/', '_')}.html`);
     writeFileSync(page, html);
     events.length = 0;
     await send('Page.navigate', { url: `${pathToFileURL(page).href}#print` });

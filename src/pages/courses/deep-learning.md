@@ -17,13 +17,12 @@ A comprehensive journey through the foundations and state-of-the-art of Deep Neu
 | # | Session | Slides |
 | -- | ------- | ------ |
 | 1 | [Introducción: representaciones, herramientas, perceptrón y backpropagation](/courses/deep-learning/class-01/) | [Deck](/slides/deep-learning/class-01-introduccion.html) · [PDF](/slides/deep-learning/class-01-introduccion.pdf) |
-| 2 | Backpropagation and gradient descent | *Próximamente* |
+| 2 | [Redes neuronales convolucionales: invarianza, convolución y pooling](/courses/deep-learning/class-02/) | [Deck](/slides/deep-learning/class-02-redes-convolucionales.html) · [PDF](/slides/deep-learning/class-02-redes-convolucionales.pdf) |
 | 3 | Optimizers: SGD, Momentum, Adam | *Próximamente* |
-| 4 | Convolutional Neural Networks | *Próximamente* |
-| 5 | Recurrent networks: RNN, LSTM, GRU | *Próximamente* |
-| 6 | Attention and the Transformer architecture | *Próximamente* |
-| 7 | Pretrained language models: BERT, GPT | *Próximamente* |
-| 8 | Generative models: VAEs and GANs | *Próximamente* |
+| 4 | Recurrent networks: RNN, LSTM, GRU | *Próximamente* |
+| 5 | Attention and the Transformer architecture | *Próximamente* |
+| 6 | Pretrained language models: BERT, GPT | *Próximamente* |
+| 7 | Generative models: VAEs and GANs | *Próximamente* |
 
 *Provisional syllabus. The session schedule will be posted once finalized.*
 
@@ -39,6 +38,14 @@ A comprehensive journey through the foundations and state-of-the-art of Deep Neu
 2. **Representaciones y aplicaciones** — el problema de clasificación, cómo un cambio de coordenadas vuelve separable un problema, capas de representación, IA vs. ML vs. DL, y el papel de las GPUs, CUDA y la escala de datos. Casos: AlphaFold y modelos de lenguaje.
 3. **Herramientas** — PyTorch, Keras y la historia de los frameworks de deep learning.
 4. **Redes y entrenamiento** — el perceptrón, funciones de activación, redes de neuronas, el ciclo de entrenamiento, backpropagation y gradientes que se desvanecen; un primer vistazo a redes convolucionales y recurrentes.
+
+### Clase 2 — Redes neuronales convolucionales
+
+*Un mismo filtro recorre toda la imagen.* · [Slides & outline →](/courses/deep-learning/class-02/) · [PDF ↓](/slides/deep-learning/class-02-redes-convolucionales.pdf)
+
+1. **Invarianza y características locales** — por qué un dígito girado, desplazado o escalado es otra imagen píxel por píxel; aumentar los datos artificialmente frente a modelar las transformaciones; características locales y estacionaridad.
+2. **Convolución y pooling** — el filtro que recorre la imagen, la convolución como ecuación, max y average pooling, y por qué compartir pesos equivale a entrenar con un conjunto de datos mucho más grande.
+3. **Datos** — CIFAR-10, ImageNet y el reto ILSVRC, donde AlexNet (2012) mostró lo que podían hacer las CNN entrenadas en GPUs.
 
 ## Assessment
 
