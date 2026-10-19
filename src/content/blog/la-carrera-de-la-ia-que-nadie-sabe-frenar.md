@@ -4,7 +4,6 @@ description: "La inteligencia artificial avanza a gran velocidad mientras crecen
 pubDate: 2026-09-15
 lang: es
 tags: ["ia", "financiero", "riesgos"]
-featured: true
 cover: carrera-ia-sin-frenar
 source: "https://www.elfinanciero.com.mx/opinion/leon-palafox1/2026/09/15/la-carrera-de-la-ia-que-nadie-sabe-frenar/"
 sourceName: "El Financiero"

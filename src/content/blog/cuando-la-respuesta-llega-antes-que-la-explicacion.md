@@ -4,6 +4,7 @@ description: "La inteligencia artificial puede resolver problemas matemáticos q
 pubDate: 2026-10-13
 lang: es
 tags: ["ia", "financiero", "matematicas"]
+featured: true
 cover: cuando-la-respuesta-llega-antes-que-la-explicacion
 source: "https://www.elfinanciero.com.mx/opinion/leon-palafox1/2026/10/13/cuando-la-respuesta-llega-antes-que-la-explicacion/"
 sourceName: "El Financiero"
