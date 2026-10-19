@@ -35,6 +35,10 @@ export interface AssetEntry {
 
 /** Metadata for the images in src/assets/blog/. Keys must match an id from that folder. */
 const registry: Record<string, AssetEntry> = {
+  'cuando-la-respuesta-llega-antes-que-la-explicacion': {
+    alt: 'Un hombre de abrigo, de espaldas sobre un risco, sostiene un marco vacío frente a una gigantesca escultura de arcos y esferas translúcidas que flota sobre un valle desértico; un hilo rojo desciende desde la estructura hasta una máquina que dibuja sobre un rollo de papel.',
+    caption: 'El Financiero · 13 de octubre de 2026',
+  },
   'el-banco-de-jensen': {
     alt: 'Una mano gigante coloca un chip de Nvidia sobre un banco de columnas clásicas, rodeado de torres góticas llenas de servidores con luces verdes; una figura diminuta espera al pie de la escalinata.',
   },
