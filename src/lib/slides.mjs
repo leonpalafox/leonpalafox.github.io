@@ -145,6 +145,14 @@ export function renderDeck(slug) {
   return { html, deck, hash: createHash('sha256').update(html).digest('hex').slice(0, 16) };
 }
 
+// The deck is served bare for full-screen viewing, but its class page (which
+// embeds it in an iframe) is the page meant for search. Keep the bare URL out
+// of the index while its slides still count toward the page that embeds them.
+// Applied after renderDeck so the PDF freshness hash stays the same.
+export function servedDeck(html) {
+  return html.replace('</title>', '</title><meta name="robots" content="noindex, indexifembedded">');
+}
+
 export function loadDeck(slug) {
   if (DECKS.find((d) => d.slug === slug)?.standalone) return outlineStandalone(slug);
   return parseDeck(readFileSync(deckPaths(slug).md, 'utf8'));

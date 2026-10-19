@@ -31,6 +31,7 @@ const line = [caption, credit].filter(Boolean).join(' · ');
       widths={[400, 800, 1120]}
       sizes={`(min-width: 640px) ${resolvedMaxWidth}, 100vw`}
       loading="eager"
+      fetchpriority="high"
       class="w-full border border-hairline bg-paper shadow-[0_1px_0_0_rgba(0,0,0,0.04),0_18px_40px_-28px_rgba(0,0,0,0.45)]"
     />
   </div>

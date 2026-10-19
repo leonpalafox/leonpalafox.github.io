@@ -7,6 +7,9 @@ const blog = defineCollection({
     title: z.string(),
     description: z.string().optional(),
     pubDate: z.coerce.date(),
+    // Set when a post is substantively revised after publication. It is shown next
+    // to the date and reported to search engines (dateModified, sitemap lastmod).
+    updatedDate: z.coerce.date().optional(),
     lang: z.enum(['es', 'en']).default('es'),
     tags: z.array(z.string()).default([]),
     // Pin this post to the lead slot of the homepage Portada, ahead of newer posts.

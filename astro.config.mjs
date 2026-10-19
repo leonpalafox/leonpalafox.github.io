@@ -5,6 +5,9 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
 // Old Jekyll permalinks were /:categories/:title/ — keep inbound links alive.
+// :title kept the filename's case, so the old URLs are /articulos/BigData/ and
+// /articulos/datosCafe/ (confirmed in the Wayback Machine); the posts now live
+// at the lower-cased id.
 const oldPostSlugs = [
   '2026-cuando-la-ia-dejo-de-hablar-y-se-puso-a-trabajar-manual',
   'es-hora-de-mirar-hacia-adentro-y-garantizar-el-futuro-de-mex',
@@ -17,8 +20,8 @@ const oldPostSlugs = [
   'mexico-tiene-la-costumbre-de-regular-el-futuro-como-si-fuera',
   'world-cup-managers-rank-vs-tenure',
   'mitos',
-  'bigdata',
-  'datoscafe',
+  'BigData',
+  'datosCafe',
   'etica',
   'theranos',
   'banamex',
@@ -31,7 +34,7 @@ const redirects = {
   '/conferences/riiaaesp': '/blog/riiaaesp/',
 };
 for (const slug of oldPostSlugs) {
-  redirects[`/articulos/${slug}`] = `/blog/${slug}/`;
+  redirects[`/articulos/${slug}`] = `/blog/${slug.toLowerCase()}/`;
 }
 
 // Stale routes from the Jekyll-era site that still appear in search results.
@@ -57,29 +60,38 @@ const legacyEventSlugs = [
 for (const slug of legacyEventSlugs) {
   redirects[`/_events/${slug}`] = '/media/';
 }
+// Each URL appears in one case only. On a case-insensitive disk (macOS)
+// BigData/ and bigdata/ are the same directory, so a second variant overwrites
+// the first (a /blog/BigData redirect replaced the post itself) and Astro
+// reports a route collision, which later versions turn into a build error.
 Object.assign(redirects, {
   '/_events': '/media/',
   '/articulos': '/blog/',
   '/year-archive': '/blog/',
-  '/articulos/BigData': '/blog/bigdata/',
-  '/articulos/datosCafe': '/blog/datoscafe/',
-  '/blog/BigData': '/blog/bigdata/',
-  '/blog/datosCafe': '/blog/datoscafe/',
 });
 // Note: /mlclase/ is a separate GitHub Pages project site
 // (github.com/leonpalafox/mlclase), so it cannot be redirected from this repo.
 
 // Publication dates from the content frontmatter, used as <lastmod> so crawlers
-// can tell new columns from old ones without a full recrawl.
+// can tell new columns from old ones without a full recrawl. A post revised
+// after publication reports its `updatedDate` instead.
 const blogDir = new URL('./src/content/blog/', import.meta.url);
 const postDates = new Map();
+const postModified = new Map();
+const frontmatterDate = (frontmatter, key) => {
+  const match = frontmatter.match(new RegExp(`^${key}:\\s*['"]?(\\d{4}-\\d{2}-\\d{2})`, 'm'));
+  return match ? new Date(`${match[1]}T00:00:00Z`) : undefined;
+};
 for (const file of fs.readdirSync(blogDir)) {
   if (!file.endsWith('.md')) continue;
   const source = fs.readFileSync(new URL(file, blogDir), 'utf8');
-  const frontmatter = source.match(/^---\r?\n([\s\S]*?)\r?\n---/);
-  const published = frontmatter?.[1].match(/^pubDate:\s*['"]?(\d{4}-\d{2}-\d{2})/m);
+  const frontmatter = source.match(/^---\r?\n([\s\S]*?)\r?\n---/)?.[1] ?? '';
+  const published = frontmatterDate(frontmatter, 'pubDate');
   if (published) {
-    postDates.set(file.replace(/\.md$/, '').toLowerCase(), new Date(`${published[1]}T00:00:00Z`));
+    const slug = file.replace(/\.md$/, '').toLowerCase();
+    const updated = frontmatterDate(frontmatter, 'updatedDate');
+    postDates.set(slug, published);
+    postModified.set(slug, updated && updated > published ? updated : published);
   }
 }
 const latestPostDate = postDates.size
@@ -95,8 +107,8 @@ export default defineConfig({
       serialize(item) {
         const post = item.url.match(/\/blog\/([^/]+)\/$/);
         const slug = post?.[1].toLowerCase();
-        if (slug && postDates.has(slug)) {
-          item.lastmod = postDates.get(slug).toISOString();
+        if (slug && postModified.has(slug)) {
+          item.lastmod = postModified.get(slug).toISOString();
         } else if (latestPostDate && (item.url === 'https://www.leonpalafox.com/' || /\/blog\/$/.test(item.url))) {
           item.lastmod = latestPostDate.toISOString();
         }

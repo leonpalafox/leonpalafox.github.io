@@ -7,7 +7,7 @@ import PollOfPollsData from '../../components/PollOfPollsData.astro';
 import FrameworksTimeline from '../../components/FrameworksTimeline.astro';
 import { getAsset } from '../../lib/assets';
 import { seoTitle } from '../../lib/seo';
-import { fullDate, kanjiYear } from '../../lib/format';
+import { fullDate, isoDate, kanjiYear } from '../../lib/format';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -16,12 +16,14 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
-const { title, description, pubDate, lang, tags, cover, coverAlt, coverCaption, source, sourceName, translation } =
+const { title, description, pubDate, updatedDate, lang, tags, cover, coverAlt, coverCaption, source, sourceName, translation } =
   post.data;
+const updated = updatedDate && updatedDate > pubDate ? updatedDate : undefined;
 
 const asset = cover ? getAsset(cover, { alt: coverAlt, caption: coverCaption }) : null;
 // A post with cover art gets its own social preview instead of the site-wide one.
-const ogImageData = asset ? await getImage({ src: asset.src, width: 1200 }) : undefined;
+// JPEG rather than WebP: LinkedIn and some chat apps drop WebP link previews.
+const ogImageData = asset ? await getImage({ src: asset.src, width: 1200, format: 'jpg' }) : undefined;
 const ogImage = ogImageData?.src;
 const ogImageHeight = asset ? Math.round((1200 * asset.src.height) / asset.src.width) : undefined;
 const pageTitle = seoTitle(title);
@@ -35,6 +37,7 @@ const blogPostingJsonLd = {
   headline: title,
   description: description ?? title,
   datePublished: pubDate.toISOString(),
+  dateModified: (updated ?? pubDate).toISOString(),
   inLanguage: lang === 'es' ? 'es-MX' : 'en-US',
   author: {
     '@type': 'Person',
@@ -49,17 +52,45 @@ const blogPostingJsonLd = {
 };
 
 const t = {
-  es: { back: 'Todas las entradas', original: 'Publicado originalmente en' },
-  en: { back: 'All posts', original: 'Originally published in' },
+  es: {
+    back: 'Todas las entradas',
+    original: 'Publicado originalmente en',
+    updated: 'Actualizado el',
+    sequence: 'Entradas anterior y siguiente',
+    previous: 'Anterior',
+    next: 'Siguiente',
+  },
+  en: {
+    back: 'All posts',
+    original: 'Originally published in',
+    updated: 'Updated',
+    sequence: 'Previous and next posts',
+    previous: 'Previous',
+    next: 'Next',
+  },
 }[lang];
 const translationLabel = translation?.label ?? (translation?.lang === 'en' ? 'Read in English' : 'Leer en español');
-const related = (await getCollection('blog'))
-  .filter((candidate) => candidate.id !== post.id && candidate.data.lang === lang)
+
+// Posts in the same language, oldest first: the neighbours become the
+// previous/next links, so every post is linked from the ones on either side.
+const sameLang = (await getCollection('blog'))
+  .filter((candidate) => candidate.data.lang === lang)
+  .sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf());
+const position = sameLang.findIndex((candidate) => candidate.id === post.id);
+const previous = sameLang[position - 1];
+const next = sameLang[position + 1];
+
+// Related reading: most shared tags first, then the closest in time. Breaking
+// ties by recency instead sent every post to the same three newest columns and
+// left most of the archive with no links from other posts.
+const related = sameLang
+  .filter((candidate) => ![post.id, previous?.id, next?.id].includes(candidate.id))
   .map((candidate) => ({
     post: candidate,
     overlap: candidate.data.tags.filter((tag) => tags.includes(tag)).length,
+    distance: Math.abs(candidate.data.pubDate.valueOf() - pubDate.valueOf()),
   }))
-  .sort((a, b) => b.overlap - a.overlap || b.post.data.pubDate.valueOf() - a.post.data.pubDate.valueOf())
+  .sort((a, b) => b.overlap - a.overlap || a.distance - b.distance)
   .slice(0, 3)
   .map(({ post }) => post);
 
@@ -82,7 +113,7 @@ const timelinePosts = new Set(['frameworks-deep-learning-historia']);
 const showTimeline = timelinePosts.has(post.id);
 ---
 
-<Base title={pageTitle} description={description ?? title} lang={lang} ogImage={ogImage} ogImageAlt={asset?.alt} ogImageHeight={ogImageHeight} ogType="article" publishedTime={pubDate.toISOString()}>
+<Base title={pageTitle} description={description ?? title} lang={lang} ogImage={ogImage} ogImageAlt={asset?.alt} ogImageHeight={ogImageHeight} ogType="article" publishedTime={pubDate.toISOString()} modifiedTime={updated?.toISOString()}>
   {pollDataWeek !== undefined && <PollOfPollsData week={pollDataWeek} />}
   <script type="application/ld+json" set:html={JSON.stringify(blogPostingJsonLd).replace(/</g, '\\u003c')} />
   <article class="px-6 py-14 sm:px-10 lg:px-14 lg:py-20">
@@ -91,6 +122,13 @@ const showTimeline = timelinePosts.has(post.id);
         <time datetime={pubDate.toISOString().slice(0, 10)}>{fullDate(pubDate, lang)}</time>
         <span lang="ja" class="text-muted tracking-[0.2em]">{kanjiYear(pubDate)}</span>
       </p>
+      {
+        updated && (
+          <p class="micro-label mt-2 text-muted">
+            {t.updated} <time datetime={isoDate(updated)}>{fullDate(updated, lang)}</time>
+          </p>
+        )
+      }
       <h1 class="mt-5 text-3xl font-semibold leading-[1.08] tracking-[-0.02em] sm:text-4xl lg:text-[2.75rem]">
         {title}
       </h1>
@@ -161,6 +199,35 @@ const showTimeline = timelinePosts.has(post.id);
               </li>
             )}
           </ul>
+        )
+      }
+
+      {
+        (previous || next) && (
+          <nav aria-label={t.sequence} class="mb-8 grid gap-6 border-y border-hairline py-6 sm:grid-cols-2 sm:gap-10">
+            {previous && (
+              <a href={`/blog/${previous.id}/`} class="group block">
+                <span class="micro-label inline-flex items-center gap-2 text-muted">
+                  <span aria-hidden="true" class="transition-transform group-hover:-translate-x-1">←</span>
+                  {t.previous}
+                </span>
+                <span class="mt-2 block leading-snug text-signal-deep underline-offset-4 group-hover:underline">
+                  {previous.data.title}
+                </span>
+              </a>
+            )}
+            {next && (
+              <a href={`/blog/${next.id}/`} class="group block sm:col-start-2 sm:text-right">
+                <span class="micro-label inline-flex items-center gap-2 text-muted">
+                  {t.next}
+                  <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
+                </span>
+                <span class="mt-2 block leading-snug text-signal-deep underline-offset-4 group-hover:underline">
+                  {next.data.title}
+                </span>
+              </a>
+            )}
+          </nav>
         )
       }
 

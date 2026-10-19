@@ -17,6 +17,7 @@ interface Props {
   ogImageHeight?: number;
   ogType?: 'website' | 'article';
   publishedTime?: string;
+  modifiedTime?: string;
   noindex?: boolean;
 }
 
@@ -30,6 +31,7 @@ const {
   ogImageHeight = 630,
   ogType = 'website',
   publishedTime,
+  modifiedTime,
   noindex = false,
 } = Astro.props;
 
@@ -100,12 +102,17 @@ const pageNames: Record<string, string> = {
   '/portfolio/': 'Portfolio',
   '/publications/': 'Publications',
   '/media/': 'Media',
+  '/courses/deep-learning/': 'Deep Learning',
+  '/courses/machine-learning-2/': 'Machine Learning 2',
 };
 const breadcrumbs = [{ name: lang === 'es' ? 'Inicio' : 'Home', href: '/' }];
 if (path.startsWith('/blog/') && path !== '/blog/') {
   breadcrumbs.push({ name: 'Blog', href: '/blog/' });
 } else if (path.startsWith('/courses/') || (path.startsWith('/teaching/') && path !== '/teaching/')) {
   breadcrumbs.push({ name: lang === 'es' ? 'Cursos' : 'Teaching', href: '/teaching/' });
+  // A class session sits under its course page.
+  const course = path.match(/^\/courses\/[^/]+\/(?=[^/]+\/$)/)?.[0];
+  if (course && pageNames[course]) breadcrumbs.push({ name: pageNames[course], href: course });
 }
 breadcrumbs.push({ name: pageNames[path] ?? title.replace(/ — León Palafox$/, ''), href: path });
 ---
@@ -118,7 +125,8 @@ breadcrumbs.push({ name: pageNames[path] ?? title.replace(/ — León Palafox$/,
     <title>{title}</title>
     <meta name="description" content={metaDescription} />
     <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large'} />
-    <link rel="canonical" href={canonical} />
+    {/* A noindex page (the 404) has no URL of its own to point search engines at. */}
+    {!noindex && <link rel="canonical" href={canonical} />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="alternate" type="application/rss+xml" title="León Palafox" href={new URL('rss.xml', Astro.site)} />
     <link rel="sitemap" href="/sitemap-index.xml" />
@@ -128,6 +136,7 @@ breadcrumbs.push({ name: pageNames[path] ?? title.replace(/ — León Palafox$/,
     <meta property="og:type" content={ogType} />
     <meta property="og:locale" content={lang === 'es' ? 'es_MX' : 'en_US'} />
     {publishedTime && <meta property="article:published_time" content={publishedTime} />}
+    {modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
     {ogType === 'article' && <meta name="author" content="León Palafox" />}
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={new URL(ogImage, Astro.site)} />

@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { pdfIsCurrent, renderDeck } from '../../../lib/slides.mjs';
+import { pdfIsCurrent, renderDeck, servedDeck } from '../../../lib/slides.mjs';
 
 const SLUG = 'deep-learning/class-02-redes-convolucionales';
 
@@ -9,5 +9,5 @@ export const GET: APIRoute = () => {
   if (import.meta.env.PROD && !pdfIsCurrent(SLUG, hash)) {
     console.warn(`[slides] ${SLUG}.pdf is older than the slides. Run \`npm run slides:pdf\` and commit the PDF.`);
   }
-  return new Response(html, { headers: { 'Content-Type': 'text/html; charset=utf-8' } });
+  return new Response(servedDeck(html), { headers: { 'Content-Type': 'text/html; charset=utf-8' } });
 };
