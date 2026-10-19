@@ -1,6 +1,6 @@
 ---
 title: "The NFL Power Rankings Poll of Polls"
-description: "Nine outlets, one consensus: a statistically explicit poll of polls for the 2026 season, with the full Python pipeline and every source documented for weekly replication."
+description: "Nine outlets, one consensus: a statistically explicit poll of polls for the 2026 season, with the full Python pipeline documented."
 pubDate: 2026-09-17
 lang: en
 tags: ["data-viz", "nfl", "statistics", "python"]

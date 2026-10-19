@@ -1,4 +1,5 @@
 // @ts-check
+import fs from 'node:fs';
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
@@ -33,12 +34,73 @@ for (const slug of oldPostSlugs) {
   redirects[`/articulos/${slug}`] = `/blog/${slug}/`;
 }
 
+// Stale routes from the Jekyll-era site that still appear in search results.
+// The lower-case permalinks redirect above; these keep the case-preserved and
+// collection URLs from turning into 404s and losing their inbound links.
+const legacyEventSlugs = [
+  'algorithia',
+  'arizonapst',
+  'arizonastaff',
+  'banorte',
+  'gbm',
+  'nii',
+  'novartis',
+  'panamericana',
+  'phd',
+  'rassini',
+  'richit',
+  'todai_monbusho',
+  'todaim',
+  'ucla',
+  'unam',
+];
+for (const slug of legacyEventSlugs) {
+  redirects[`/_events/${slug}`] = '/media/';
+}
+Object.assign(redirects, {
+  '/_events': '/media/',
+  '/articulos': '/blog/',
+  '/year-archive': '/blog/',
+  '/mlclase': '/teaching/',
+  '/articulos/BigData': '/blog/bigdata/',
+  '/articulos/datosCafe': '/blog/datoscafe/',
+  '/blog/BigData': '/blog/bigdata/',
+  '/blog/datosCafe': '/blog/datoscafe/',
+});
+
+// Publication dates from the content frontmatter, used as <lastmod> so crawlers
+// can tell new columns from old ones without a full recrawl.
+const blogDir = new URL('./src/content/blog/', import.meta.url);
+const postDates = new Map();
+for (const file of fs.readdirSync(blogDir)) {
+  if (!file.endsWith('.md')) continue;
+  const source = fs.readFileSync(new URL(file, blogDir), 'utf8');
+  const frontmatter = source.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+  const published = frontmatter?.[1].match(/^pubDate:\s*['"]?(\d{4}-\d{2}-\d{2})/m);
+  if (published) {
+    postDates.set(file.replace(/\.md$/, '').toLowerCase(), new Date(`${published[1]}T00:00:00Z`));
+  }
+}
+const latestPostDate = postDates.size
+  ? new Date(Math.max(...[...postDates.values()].map((date) => date.getTime())))
+  : undefined;
+
 export default defineConfig({
   site: 'https://www.leonpalafox.com',
   redirects,
   integrations: [
     sitemap({
       customPages: ['https://www.leonpalafox.com/pisa_results/'],
+      serialize(item) {
+        const post = item.url.match(/\/blog\/([^/]+)\/$/);
+        const slug = post?.[1].toLowerCase();
+        if (slug && postDates.has(slug)) {
+          item.lastmod = postDates.get(slug).toISOString();
+        } else if (latestPostDate && (item.url === 'https://www.leonpalafox.com/' || /\/blog\/$/.test(item.url))) {
+          item.lastmod = latestPostDate.toISOString();
+        }
+        return item;
+      },
     }),
   ],
   vite: {

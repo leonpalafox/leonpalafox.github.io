@@ -6,6 +6,7 @@ import PostCover from '../../components/PostCover.astro';
 import PollOfPollsData from '../../components/PollOfPollsData.astro';
 import FrameworksTimeline from '../../components/FrameworksTimeline.astro';
 import { getAsset } from '../../lib/assets';
+import { seoTitle } from '../../lib/seo';
 import { fullDate, kanjiYear } from '../../lib/format';
 
 export async function getStaticPaths() {
@@ -20,7 +21,10 @@ const { title, description, pubDate, lang, tags, cover, coverAlt, coverCaption, 
 
 const asset = cover ? getAsset(cover, { alt: coverAlt, caption: coverCaption }) : null;
 // A post with cover art gets its own social preview instead of the site-wide one.
-const ogImage = asset ? (await getImage({ src: asset.src, width: 1200 })).src : undefined;
+const ogImageData = asset ? await getImage({ src: asset.src, width: 1200 }) : undefined;
+const ogImage = ogImageData?.src;
+const ogImageHeight = asset ? Math.round((1200 * asset.src.height) / asset.src.width) : undefined;
+const pageTitle = seoTitle(title);
 
 // BlogPosting structured data, linked to the site-wide Person via its @id.
 const personId = new URL('#person', Astro.site).toString();
@@ -78,7 +82,7 @@ const timelinePosts = new Set(['frameworks-deep-learning-historia']);
 const showTimeline = timelinePosts.has(post.id);
 ---
 
-<Base title={`${title} — León Palafox`} description={description ?? title} lang={lang} ogImage={ogImage} ogType="article" publishedTime={pubDate.toISOString()}>
+<Base title={pageTitle} description={description ?? title} lang={lang} ogImage={ogImage} ogImageAlt={asset?.alt} ogImageHeight={ogImageHeight} ogType="article" publishedTime={pubDate.toISOString()}>
   {pollDataWeek !== undefined && <PollOfPollsData week={pollDataWeek} />}
   <script type="application/ld+json" set:html={JSON.stringify(blogPostingJsonLd).replace(/</g, '\\u003c')} />
   <article class="px-6 py-14 sm:px-10 lg:px-14 lg:py-20">

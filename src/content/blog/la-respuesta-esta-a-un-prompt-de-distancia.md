@@ -1,6 +1,6 @@
 ---
 title: "La respuesta está a un prompt de distancia"
-description: "Los resultados atípicos del examen de admisión de la UNAM mostraron lo que la vigilancia automatizada no alcanzó a ver: la inteligencia artificial ya está en todas las aulas."
+description: "Los resultados atípicos del examen de admisión de la UNAM mostraron lo que la vigilancia automatizada no alcanzó a ver."
 pubDate: 2026-08-07
 lang: es
 tags: ["mexico", "ia", "educacion"]

@@ -22,12 +22,37 @@ for (const post of posts) {
   if (!byYear.has(year)) byYear.set(year, []);
   byYear.get(year)!.push(post);
 }
+
+// The blog index is a collection, not an article: describe the list itself so
+// search engines can see all columns from the hub page.
+const blogJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  '@id': new URL('/blog/#collection', Astro.site).toString(),
+  url: new URL('/blog/', Astro.site).toString(),
+  name: 'León Palafox — Blog on AI & Data Strategy',
+  description: 'Columns and notes on AI, data strategy, and innovation — most published in El Financiero.',
+  inLanguage: ['en', 'es'],
+  isPartOf: { '@type': 'WebSite', name: 'León Palafox', url: Astro.site.toString() },
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListOrder: 'https://schema.org/ItemListOrderDescending',
+    numberOfItems: posts.length,
+    itemListElement: posts.map((post, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      url: new URL(`/blog/${post.id}/`, Astro.site).toString(),
+      name: post.data.title,
+    })),
+  },
+};
 ---
 
 <Base
   title="León Palafox — Blog on AI & Data Strategy"
   description="Columns and notes on AI, data strategy, and innovation — most published in El Financiero."
 >
+  <script type="application/ld+json" set:html={JSON.stringify(blogJsonLd).replace(/</g, '\\u003c')} />
   <PageHero
     eyebrow="Blog"
     jp="記事"

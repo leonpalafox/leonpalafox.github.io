@@ -5,12 +5,16 @@ import Footer from '../components/Footer.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import { getImage } from 'astro:assets';
 import bioPhoto from '../assets/bio-photo.jpg';
+import { clampDescription } from '../lib/seo';
 
 interface Props {
   title: string;
   description?: string;
   lang?: string;
   ogImage?: string;
+  ogImageAlt?: string;
+  ogImageWidth?: number;
+  ogImageHeight?: number;
   ogType?: 'website' | 'article';
   publishedTime?: string;
   noindex?: boolean;
@@ -21,11 +25,15 @@ const {
   description = 'León Palafox — AI strategy and recommender systems for finance. Director of the AI Innovation Lab at GBM, professor, and columnist at El Financiero.',
   lang = 'en',
   ogImage = '/images/og-default.jpg',
+  ogImageAlt = 'León Palafox — AI strategy and recommender systems for finance',
+  ogImageWidth = 1200,
+  ogImageHeight = 630,
   ogType = 'website',
   publishedTime,
   noindex = false,
 } = Astro.props;
 
+const metaDescription = clampDescription(description);
 const canonical = new URL(Astro.url.pathname, Astro.site);
 
 // Site-wide Person entity (structured data) so name searches resolve to this site.
@@ -37,7 +45,17 @@ const personJsonLd = {
   '@id': personId,
   name: 'León Palafox',
   alternateName: 'Leon Palafox',
+  description:
+    'León Palafox is an AI leader in Mexico focused on financial AI, recommender systems, personalization engines, MLOps, experimentation, and AI strategy.',
   jobTitle: 'Director, AI Innovation Lab',
+  knowsAbout: [
+    'Artificial intelligence',
+    'Recommender systems',
+    'Machine learning',
+    'Financial technology',
+    'Data science',
+    'MLOps',
+  ],
   worksFor: { '@type': 'Organization', name: 'GBM', url: 'https://www.gbm.com/' },
   alumniOf: [
     { '@type': 'CollegeOrUniversity', name: 'University of Tokyo' },
@@ -50,6 +68,7 @@ const personJsonLd = {
     'https://github.com/leonpalafox',
     'https://twitter.com/leonpalafox',
     'https://medium.com/@leonpalafox',
+    'https://www.elfinanciero.com.mx/opinion/leon-palafox1/',
   ],
 };
 
@@ -97,24 +116,30 @@ breadcrumbs.push({ name: pageNames[path] ?? title.replace(/ — León Palafox$/,
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
-    <meta name="description" content={description} />
-    <meta name="robots" content={noindex ? 'noindex, follow' : 'max-image-preview:large'} />
+    <meta name="description" content={metaDescription} />
+    <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large'} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="alternate" type="application/rss+xml" title="León Palafox" href={new URL('rss.xml', Astro.site)} />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <meta property="og:title" content={title} />
     <meta property="og:site_name" content="León Palafox" />
-    <meta property="og:description" content={description} />
+    <meta property="og:description" content={metaDescription} />
     <meta property="og:type" content={ogType} />
     <meta property="og:locale" content={lang === 'es' ? 'es_MX' : 'en_US'} />
     {publishedTime && <meta property="article:published_time" content={publishedTime} />}
     {ogType === 'article' && <meta name="author" content="León Palafox" />}
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={new URL(ogImage, Astro.site)} />
+    <meta property="og:image:width" content={String(ogImageWidth)} />
+    <meta property="og:image:height" content={String(ogImageHeight)} />
+    <meta property="og:image:alt" content={ogImageAlt} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@leonpalafox" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={metaDescription} />
     <meta name="twitter:image" content={new URL(ogImage, Astro.site)} />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
     <meta name="generator" content={Astro.generator} />
     <script type="application/ld+json" set:html={JSON.stringify(personJsonLd).replace(/</g, '\\u003c')} />
     {path === '/' && <script type="application/ld+json" set:html={JSON.stringify(websiteJsonLd)} />}

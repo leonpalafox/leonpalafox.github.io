@@ -1,6 +1,6 @@
 ---
 title: "Cuando la respuesta llega antes que la explicación"
-description: "La inteligencia artificial puede resolver problemas matemáticos que los humanos no comprenden por completo, lo que plantea nuevos retos de verificación y confianza."
+description: "La inteligencia artificial ya resuelve problemas matemáticos que los humanos no comprenden del todo, lo que plantea nuevos retos de verificación y confianza."
 pubDate: 2026-10-13
 lang: es
 tags: ["ia", "financiero", "matematicas"]
