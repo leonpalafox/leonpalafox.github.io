@@ -61,12 +61,13 @@ Object.assign(redirects, {
   '/_events': '/media/',
   '/articulos': '/blog/',
   '/year-archive': '/blog/',
-  '/mlclase': '/teaching/',
   '/articulos/BigData': '/blog/bigdata/',
   '/articulos/datosCafe': '/blog/datoscafe/',
   '/blog/BigData': '/blog/bigdata/',
   '/blog/datosCafe': '/blog/datoscafe/',
 });
+// Note: /mlclase/ is a separate GitHub Pages project site
+// (github.com/leonpalafox/mlclase), so it cannot be redirected from this repo.
 
 // Publication dates from the content frontmatter, used as <lastmod> so crawlers
 // can tell new columns from old ones without a full recrawl.
