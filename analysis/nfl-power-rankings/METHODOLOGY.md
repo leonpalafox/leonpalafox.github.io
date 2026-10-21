@@ -491,6 +491,23 @@ so every weight whose loss is within `1.92/n` of the best is accepted. On 47
 games that interval runs from **0.00 to 1.00** -- the entire range. The likelihood
 is nearly flat and this season cannot yet distinguish the two signals.
 
+**The weight is therefore fitted with a weak prior, and that is not cosmetic.**
+An unregularised minimisation of a flat likelihood lands on whichever boundary is
+luckier, and the boundary moves from week to week: on weeks 3-5 it gave 0.51, and
+on weeks 4-6 it gave **exactly 1.00** -- which silently discards the record, the
+opposite of what the blend exists to do. The published weight is the maximum a
+posteriori under a `Beta(2, 2)` prior centred on an even split, worth one
+pseudo-observation per side:
+
+```
+maximise   -n * log_loss(w)  +  log(w)  +  log(1 - w)
+```
+
+That regularises the estimate to **0.50** and **0.55** on the same two windows --
+stable, and still driven by the data wherever the data discriminates. The
+unregularised argmin is reported alongside it rather than hidden, because the gap
+between the two *is* the evidence that the weight is not identified.
+
 Three views, which agree more than the interval suggests:
 
 * **The fitted weight**, 0.51, on the standardised blend.
@@ -523,13 +540,18 @@ is the weaker of the two, mixing it in at half weight also pulls confident
 predictions toward 50%: the blend is systematically closer to a coin flip than
 the rankings alone would be.
 
-On the current week it moves the *strengths* and the *probabilities* but not the
-*field*: the same fourteen teams qualify in the same seeds as a records-only
-bracket would produce. That is not a bug — the panel and the standings simply
-agree on this week's seven per conference. They disagree on the NFC's third and
-fourth seeds and on the final wild card, and there the blend sides with the
-standings. A week where the two signals diverge more would move the bracket
-itself.
+In Week 6 it moved the *strengths* and the *probabilities* but not the *field*:
+the same fourteen teams qualified in the same seeds as a records-only bracket
+would have produced, because the panel and the standings agreed on that week's
+seven per conference.
+
+In Week 7 it changed the field. The fourteen teams were the same, but the last
+wild card in each conference was not: Seattle and Cincinnati took the seventh
+seed, displacing Detroit and Pittsburgh, who a standings-only bracket would have
+included. The panel rated the Seahawks and Bengals above their records, and the
+blend followed them about halfway. That is the blend doing what it is for, and it
+depends on a weight the data cannot pin down -- which is why the weight is stated
+on the page rather than buried here.
 
 ## 12. References
 

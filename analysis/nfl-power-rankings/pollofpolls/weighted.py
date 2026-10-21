@@ -333,18 +333,30 @@ def fit_blend(
         )
 
     curve = []
-    best = None
+    best = None          # unregularised argmin, kept only for reporting
+    best_map = None      # what the pipeline actually uses
     # A 2-D sweep: the weight on the rankings, and the margin dispersion, since a
     # blended margin has its own spread and the rank model's sigma need not suit it.
     sigmas = [9.0 + 0.25 * i for i in range(0, 37)]          # 9.0 .. 18.0
     for w_int in range(0, 101):
         w = w_int / 100.0
         margins = [blended_margin(f, w) for f in frames]
+        # A weak Beta(2,2) prior on the weight, centred at an even split. With ~45
+        # games the likelihood is flat enough that the unregularised argmin jumps
+        # between the two boundaries from week to week -- it gave 0.51 on weeks
+        # 3-5 and 1.00 on weeks 4-6 -- and a boundary value silently discards one
+        # of the two signals the model exists to combine. The prior is worth one
+        # pseudo-observation per side, so it regularises without overruling data
+        # that actually discriminates.
+        prior = math.log(w) + math.log(1.0 - w) if 0.0 < w < 1.0 else -math.inf
         for s in sigmas:
             pairs = [(_normal_cdf(m / s), f["homeWon"]) for m, f in zip(margins, frames)]
             loss = _log_loss(pairs)
             if best is None or loss < best["logLoss"]:
                 best = {"weight": w, "sigma": s, "logLoss": loss}
+            penalised = loss - prior / len(frames)
+            if best_map is None or penalised < best_map["penalised"]:
+                best_map = {"weight": w, "sigma": s, "logLoss": loss, "penalised": penalised}
         # record the curve at the rank model's own sigma so the x-axis is honest
         pairs = [(_normal_cdf(m / sigma), f["homeWon"]) for m, f in zip(margins, frames)]
         curve.append({"weight": w, "logLoss": _log_loss(pairs)})
@@ -374,10 +386,13 @@ def fit_blend(
     precision_weight = (1.0 / rank_var) / ((1.0 / rank_var) + (1.0 / rec_var))
 
     return {
-        "weight": best["weight"],
+        "weight": best_map["weight"],
+        "weightUnregularised": best["weight"],
         "precisionWeight": precision_weight,
-        "sigma": best["sigma"],
-        "logLoss": best["logLoss"],
+        "sigma": best_map["sigma"],
+        "logLoss": best_map["logLoss"],
+        "logLossUnregularised": best["logLoss"],
+        "prior": "Beta(2,2) on the weight, centred at an even split",
         "nEval": len(frames),
         "weeks": list(weeks),
         "recordModel": rec_model,

@@ -673,24 +673,36 @@ class TestWeightedBlend(unittest.TestCase):
         self.assertEqual(fit["curve"][-1]["weight"], 1.0)
 
     def test_predicted_probabilities_are_probabilities(self):
+        """Price whatever week the newest bundle is for, if it is still upcoming.
+
+        The target week is derived from the bundle (`recordsThroughWeek + 1`)
+        rather than hardcoded, because a hardcoded week silently became a
+        no-op once those games were played. If that week has already been
+        played the test skips rather than failing, since `predict_games`
+        correctly returns nothing for a slate that is in the books.
+        """
         csv_text = self._csv()
-        bundle_path = self.REPO / "src" / "data" / "nfl-power-rankings-2026-wk06.json"
-        if not bundle_path.exists():
-            self.skipTest("week 6 bundle not present")
-        bundle = json.loads(bundle_path.read_text(encoding="utf-8"))
+        bundles = sorted(self.REPO.glob("src/data/nfl-power-rankings-2026-wk*.json"))
+        if not bundles:
+            self.skipTest("no weekly bundles present")
+        bundle = json.loads(bundles[-1].read_text(encoding="utf-8"))
+        season = bundle.get("season", 2026)
+        week = (bundle.get("recordsThroughWeek") or 0) + 1
+
         model = weighted.fit_record_model(csv_text)
         games = weighted.predict_games(
-            csv_text=csv_text, season=2026, week=6, bundle=bundle,
+            csv_text=csv_text, season=season, week=week, bundle=bundle,
             weight=0.5, sigma=14.0, record_model=model,
         )
-        self.assertGreater(len(games), 0)
+        if not games:
+            self.skipTest(f"week {week} of {season} is already played")
+
         for game in games:
             for key in ("pRank", "pBlend"):
                 self.assertGreaterEqual(game[key], 0.0)
                 self.assertLessEqual(game[key], 1.0)
             self.assertEqual(game["pickBlend"], game["home"] if game["pBlend"] >= 0.5 else game["away"])
             self.assertEqual(game["agrees"], (game["pRank"] >= 0.5) == (game["pBlend"] >= 0.5))
-
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
