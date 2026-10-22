@@ -71,6 +71,94 @@ const talks = [
     href: 'https://www.youtube.com/watch?v=i3oR-HcV86U',
   },
 ];
+
+const press = [
+  {
+    year: '2026',
+    items: [
+      {
+        date: 'Jul 27',
+        title: 'La IA agéntica llegó a México sin reglas ni garantías',
+        outlet: 'WIRED en Español',
+        href: 'https://es.wired.com/articulos/la-ia-agentica-llego-a-mexico-sin-reglas-ni-garantias',
+        note: 'Sobre la privacidad de datos y la gobernanza de los agentes de IA que ya operan en México.',
+      },
+      {
+        date: 'Sep 14',
+        title: 'El negocio de la IA que ‘acabará con la humanidad’ ya genera empresas de más de 4,600 mdd',
+        outlet: 'Expansión',
+        href: 'https://expansion.mx/tecnologia/2026/09/14/ia-que-acabara-con-la-humanidad-genera-empresas-millonarias',
+        note: 'Sobre la automejora recursiva como la vertical de negocio que hay detrás del debate existencial.',
+      },
+      {
+        date: 'Sep 28',
+        title: 'León Palafox: “El valor de la IA empieza por conectar con quienes conocen el negocio”',
+        outlet: 'MIT Technology Review en español',
+        href: 'https://www.technologyreview.es/article/leon-palafox-el-valor-de-la-ia-empieza-por-conectar-con-quienes-conocen-el-negocio',
+        note: 'Entrevista sobre por qué la IA solo genera valor cuando se conecta con quienes conocen el negocio.',
+      },
+      {
+        date: 'Oct',
+        title: 'La burbuja de la IA',
+        outlet: 'Expansión (revista) · pp. 40–41',
+        href: 'https://embed-rech-01.dialog.cm/expansionpublishing/docs/expansi_n_octubre_2026_la_compra_de_la_d_cada',
+        note: 'Reportaje en la edición de octubre de 2026.',
+      },
+    ],
+  },
+  {
+    year: '2023',
+    items: [
+      {
+        date: 'Jun 26',
+        title: 'Imposible que la inteligencia artificial domine y destruya a los humanos',
+        outlet: 'Diario Digital México',
+        href: 'https://diariodigitalmexico.com/imposible-que-la-inteligencia-artificial-domine-y-destruya-a-los-humanos-leon-palafox/',
+        note: 'Sobre por qué la IA no puede dominar ni destruir a la humanidad, y su impacto en el empleo.',
+      },
+      {
+        date: 'Jun 26',
+        title: 'Imposible que la inteligencia artificial destruya a los humanos: León Palafox',
+        outlet: 'Emprefinanzas',
+        href: 'https://emprefinanzas.com.mx/2023/06/26/imposible-que-la-inteligencia-artificial-destruya-a-los-humanos-leon-palafox/',
+        note: 'Otra versión de la misma entrevista publicada por Diario Digital México.',
+      },
+      {
+        date: 'Jun 29',
+        title: '¿Es posible el cobro con tarjeta sin mi autorización?',
+        outlet: 'TV Azteca',
+        href: 'https://www.tvazteca.com/aztecanoticias/cobro-tarjeta-terminal-cartera-autorizacion',
+        note: 'Sobre cobros con tarjeta sin autorización y la tecnología NFC.',
+      },
+      {
+        date: 'Sep 14',
+        title: 'Academia y gobierno, los eslabones débiles de la inteligencia artificial en México',
+        outlet: 'Forbes México',
+        href: 'https://forbes.com.mx/academia-y-gobierno-los-eslabones-debiles-de-la-inteligencia-artificial-en-mexico/',
+        note: 'Sobre los pendientes de México en talento, política pública y adopción de IA.',
+      },
+      {
+        date: 'Oct 24',
+        title: '¿Puede México “subirse a la ola de IA”? 5 cosas que debe hacer',
+        outlet: 'Arena Pública',
+        href: 'https://www.arenapublica.com/tecnologias/puede-mexico-subirse-la-ola-de-ia-5-cosas-que-debe-hacer',
+        note: 'Sobre talento, inversión y cultura de datos para subirse a la ola de la IA.',
+      },
+    ],
+  },
+  {
+    year: '2022',
+    items: [
+      {
+        date: 'Sep 08',
+        title: 'IA plantea oportunidades y retos para las instituciones financieras',
+        outlet: 'El Economista',
+        href: 'https://www.eleconomista.com.mx/sectorfinanciero/IA-plantea-oportunidades-y-retos-para-las-instituciones-financieras-20220908-0092.html',
+        note: 'Sobre oportunidades, retos y resultados tangibles de la IA en el sector financiero.',
+      },
+    ],
+  },
+];
 ---
 
 <Base
@@ -143,6 +231,13 @@ const talks = [
           <strong>MarsNet</strong>, a convolutional neural network that identifies land features on the surface of
           Mars from HiRISE imagery.
         </p>
+        <a
+          href="https://developer.nvidia.com/blog/deep-learning-image-understanding-planetary-science/"
+          class="inline-flex items-center gap-2 text-sm font-medium text-signal-deep"
+        >
+          Read the NVIDIA Developer Blog post
+          <span aria-hidden="true">→</span>
+        </a>
       </div>
       <Image
         src={nvidiaPhoto}
@@ -157,6 +252,10 @@ const talks = [
 
   <section class="px-6 py-14 sm:px-10 lg:px-14">
     <SectionHeading title="Press mentions" id="press" />
+    <p class="mt-6 max-w-2xl leading-relaxed text-muted">
+      Interviews, profiles, and commentary in Mexican and international media on AI, data strategy, and the
+      technology industry.
+    </p>
 
     <a
       href="https://mexicobusiness.news/cloudanddata/news/ai-hype-business-impact-why-corporate-ai-breaks"
@@ -171,11 +270,11 @@ const talks = [
         class="w-full border border-hairline object-cover"
       />
       <div>
-        <p class="micro-label text-signal-deep">Mexico Business News · AI, Cloud &amp; Data</p>
+        <p class="micro-label text-signal-deep">Mexico Business News</p>
         <h3 class="mt-2 text-xl font-semibold leading-snug">
           From AI Hype to Business Impact: Why Corporate AI Breaks
         </h3>
-        <p class="mt-2 text-sm text-muted">October 20, 2026</p>
+        <p class="mt-2 text-sm text-muted">AI, Cloud &amp; Data · October 20, 2026</p>
         <p class="mt-4 leading-relaxed text-muted">
           On why corporate AI projects stall when they automate broken processes, how the gap between IT and the
           business erodes value, and why the business — not IT — has to decide what gets built.
@@ -191,40 +290,42 @@ const talks = [
       </div>
     </a>
 
-    <ul class="mt-10 max-w-3xl divide-y divide-hairline">
-      <li>
-        <a
-          href="https://expansion.mx/tecnologia/2026/09/14/ia-que-acabara-con-la-humanidad-genera-empresas-millonarias"
-          class="group flex items-baseline gap-5 py-4"
-        >
-          <span class="flex-1 leading-snug">
-            <span class="font-medium" lang="es"
-              >El negocio de la IA que ‘acabará con la humanidad’ ya genera empresas de más de 4,600 mdd</span
-            >
-            <span class="mt-1 block text-sm text-muted">Expansión · 14 de septiembre de 2026</span>
-            <span class="mt-2 block max-w-2xl text-sm leading-relaxed text-muted" lang="es">
-              Sobre la automejora recursiva como la vertical de negocio que hay detrás del debate existencial:
-              "La oportunidad económica es enorme. Automatizar parte del trabajo de investigación necesario para
-              producir la siguiente generación de tecnología podría acortar los tiempos de desarrollo".
-            </span>
-          </span>
-          <span aria-hidden="true" class="shrink-0 text-signal-deep transition-transform group-hover:translate-x-1"
-            >→</span
-          >
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://diariodigitalmexico.com/imposible-que-la-inteligencia-artificial-domine-y-destruya-a-los-humanos-leon-palafox/"
-          class="group flex items-baseline gap-5 py-4"
-        >
-          <span class="flex-1 leading-snug">
-            <span class="font-medium" lang="es">"Imposible que la Inteligencia Artificial domine y destruya a los humanos"</span>
-            <span class="mt-1 block text-sm text-muted">Diario Digital / TV Azteca</span>
-          </span>
-          <span aria-hidden="true" class="shrink-0 text-signal-deep transition-transform group-hover:translate-x-1">→</span>
-        </a>
-      </li>
-    </ul>
+    <div class="mt-10 max-w-3xl space-y-8">
+      {
+        press.map((group) => (
+          <div>
+            <h3 class="micro-label text-signal-deep">{group.year}</h3>
+            <ul class="mt-3 divide-y divide-hairline">
+              {group.items.map((item) => (
+                <li>
+                  <a href={item.href} class="group flex items-baseline gap-5 py-4">
+                    <span class="micro-label w-14 shrink-0 text-muted">{item.date}</span>
+                    <span class="flex-1 leading-snug">
+                      <span class="font-medium" lang="es">
+                        {item.title}
+                      </span>
+                      <span class="mt-1 block text-sm text-muted" lang="es">
+                        {item.outlet}
+                      </span>
+                      {item.note && (
+                        <span class="mt-2 block max-w-2xl text-sm leading-relaxed text-muted" lang="es">
+                          {item.note}
+                        </span>
+                      )}
+                    </span>
+                    <span
+                      aria-hidden="true"
+                      class="shrink-0 text-signal-deep transition-transform group-hover:translate-x-1"
+                    >
+                      →
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
   </section>
 </Base>
