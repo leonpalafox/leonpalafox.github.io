@@ -18,11 +18,12 @@ A comprehensive journey through the foundations and state-of-the-art of Deep Neu
 | -- | ------- | ------ |
 | 1 | [Introducción: representaciones, herramientas, perceptrón y backpropagation](/courses/deep-learning/class-01/) | [Deck](/slides/deep-learning/class-01-introduccion.html) · [PDF](/slides/deep-learning/class-01-introduccion.pdf) |
 | 2 | [Redes neuronales convolucionales: invarianza, convolución y pooling](/courses/deep-learning/class-02/) | [Deck](/slides/deep-learning/class-02-redes-convolucionales.html) · [PDF](/slides/deep-learning/class-02-redes-convolucionales.pdf) |
-| 3 | Optimizers: SGD, Momentum, Adam | *Próximamente* |
-| 4 | Recurrent networks: RNN, LSTM, GRU | *Próximamente* |
-| 5 | Attention and the Transformer architecture | *Próximamente* |
-| 6 | Pretrained language models: BERT, GPT | *Próximamente* |
-| 7 | Generative models: VAEs and GANs | *Próximamente* |
+| 3 | [Embeddings en CNN: de píxeles a vectores y aplicaciones](/courses/deep-learning/class-03/) | [Deck](/slides/deep-learning/class-03-embeddings-cnn.html) · [PDF](/slides/deep-learning/class-03-embeddings-cnn.pdf) |
+| 4 | Optimizers: SGD, Momentum, Adam | *Próximamente* |
+| 5 | Recurrent networks: RNN, LSTM, GRU | *Próximamente* |
+| 6 | Attention and the Transformer architecture | *Próximamente* |
+| 7 | Pretrained language models: BERT, GPT | *Próximamente* |
+| 8 | Generative models: VAEs and GANs | *Próximamente* |
 
 *Provisional syllabus. The session schedule will be posted once finalized.*
 
@@ -46,6 +47,16 @@ A comprehensive journey through the foundations and state-of-the-art of Deep Neu
 1. **Invarianza y características locales** — por qué un dígito girado, desplazado o escalado es otra imagen píxel por píxel; aumentar los datos artificialmente frente a modelar las transformaciones; características locales y estacionaridad.
 2. **Convolución y pooling** — el filtro que recorre la imagen, la convolución como ecuación, max y average pooling, y por qué compartir pesos equivale a entrenar con un conjunto de datos mucho más grande.
 3. **Datos** — CIFAR-10, ImageNet y el reto ILSVRC, donde AlexNet (2012) mostró lo que podían hacer las CNN entrenadas en GPUs.
+
+### Clase 3 — Embeddings en CNN
+
+*De una imagen a un vector reutilizable.* · [Slides & outline →](/courses/deep-learning/class-03/) · [PDF ↓](/slides/deep-learning/class-03-embeddings-cnn.pdf)
+
+1. **Embeddings** — representaciones visuales, similitud más allá de los píxeles y un experimento con transformaciones de una misma imagen.
+2. **De píxeles a vectores** — backbone y head de clasificación, jerarquía de características, feature maps y Global Average Pooling.
+3. **Del clasificador al encoder** — quitar la última capa, reutilizar la representación y extraer un embedding de 2048 dimensiones con ResNet-50.
+4. **Aplicaciones** — búsqueda visual por similitud, clustering sin etiquetas, transferencia de aprendizaje y detección de anomalías.
+5. **Buenas prácticas** — elegir modelo y capa de extracción, congelar o ajustar el backbone, normalizar los vectores y escoger una métrica de similitud.
 
 ## Assessment
 

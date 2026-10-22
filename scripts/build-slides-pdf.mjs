@@ -1,6 +1,6 @@
 // Prints every slide deck to public/slides/**.pdf with headless Chrome,
 // driven over the DevTools protocol so the deck's own 1600×900 @page size is used.
-// Usage: npm run slides:pdf   (set CHROME_PATH if Chrome is not in the default place)
+// Usage: npm run slides:pdf [-- slug ...]   (set CHROME_PATH if Chrome is not in the default place)
 import { spawn } from 'node:child_process';
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -8,6 +8,13 @@ import { dirname, join } from 'node:path';
 import { setTimeout as sleep } from 'node:timers/promises';
 import { pathToFileURL } from 'node:url';
 import { DECKS, deckPaths, renderDeck } from '../src/lib/slides.mjs';
+
+// Optional slugs let a new class be exported without rewriting existing PDFs.
+const requested = process.argv.slice(2);
+for (const slug of requested) {
+  if (!DECKS.some((deck) => deck.slug === slug)) throw new Error(`Unknown slide deck: ${slug}`);
+}
+const decks = requested.length ? DECKS.filter((deck) => requested.includes(deck.slug)) : DECKS;
 
 const chromePath = [
   process.env.CHROME_PATH,
@@ -55,7 +62,7 @@ try {
   });
 
   await send('Page.enable');
-  for (const { slug } of DECKS) {
+  for (const { slug } of decks) {
     const { html, hash } = renderDeck(slug);
     // A distinct file per deck: navigating to the same URL with only the hash changed doesn't reload.
     const page = join(work, `${slug.replaceAll('/', '_')}.html`);

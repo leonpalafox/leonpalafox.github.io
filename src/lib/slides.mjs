@@ -17,6 +17,10 @@ export const DECKS = [
     slug: 'deep-learning/class-02-redes-convolucionales',
     standalone: true,
   },
+  {
+    slug: 'deep-learning/class-03-embeddings-cnn',
+    standalone: true,
+  },
 ];
 
 const root = process.cwd();
@@ -159,7 +163,8 @@ export function loadDeck(slug) {
 }
 
 // A standalone deck lists its slides in `const SEC = [...]` and `const META = [...]`
-// ({title, layout, sec, ...}); evaluate just those two literals to get the outline.
+// ({title, layout, sec, ...}). Read only the outline fields: speaker notes and
+// other unused metadata may reference helper constants defined elsewhere.
 function outlineStandalone(slug) {
   const html = readFileSync(deckPaths(slug).html, 'utf8');
   const literal = (name) => {
@@ -167,11 +172,21 @@ function outlineStandalone(slug) {
     if (!m) throw new Error(`${slug}.html: could not find "const ${name} = [...]"`);
     return m[1];
   };
-  const meta = new Function('SEC', `return ${literal('META')};`)(new Function(`return ${literal('SEC')};`)());
+  const sections = new Function(`return ${literal('SEC')};`)();
+  const metadata = literal('META');
+  const entries = [...metadata.matchAll(/\{\s*title:\s*('(?:\\.|[^'\\])*'|"(?:\\.|[^"\\])*")\s*,\s*layout:\s*('(?:\\.|[^'\\])*'|"(?:\\.|[^"\\])*")\s*,\s*sec:\s*SEC\[(\d+)\]/g)];
+  if (!entries.length || entries.length !== [...metadata.matchAll(/\{\s*title:/g)].length) {
+    throw new Error(`${slug}.html: expected each META entry to start with title, layout, and sec: SEC[n]`);
+  }
+  const slides = entries.map(([, title, layout, section]) => {
+    const [slideTitle, slideLayout] = new Function(`return [${title}, ${layout}];`)();
+    if (sections[Number(section)] === undefined) throw new Error(`${slug}.html: unknown section SEC[${section}]`);
+    return { title: slideTitle, layout: slideLayout, section: sections[Number(section)] };
+  });
   const title = html.match(/<title>([^<]*)<\/title>/)?.[1] ?? '';
   return {
     meta: { title },
-    slides: meta.map((m) => ({ title: m.title, layout: m.layout, section: m.sec })),
+    slides,
   };
 }
 
