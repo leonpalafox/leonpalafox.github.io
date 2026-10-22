@@ -4,6 +4,7 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import nvidiaPhoto from '../assets/nvidia-photo.jpg';
+import mbnHero from '../assets/mbn-ai-hype-2026.jpg';
 
 const columns = [
   {
@@ -156,7 +157,41 @@ const talks = [
 
   <section class="px-6 py-14 sm:px-10 lg:px-14">
     <SectionHeading title="Press mentions" id="press" />
-    <ul class="mt-8 max-w-3xl divide-y divide-hairline">
+
+    <a
+      href="https://mexicobusiness.news/cloudanddata/news/ai-hype-business-impact-why-corporate-ai-breaks"
+      class="group mt-8 grid max-w-4xl gap-6 border border-hairline bg-paper p-5 transition-colors hover:border-signal lg:grid-cols-[minmax(0,340px)_1fr] lg:items-start lg:gap-8 lg:p-6"
+    >
+      <Image
+        src={mbnHero}
+        alt="León Palafox, Director of AI Innovation Laboratory at GBM, pictured for the Mexico AI, Cloud & Data Summit 2026. Photo: Mexico Business News."
+        widths={[340, 680, 1020]}
+        sizes="(min-width: 1024px) 340px, 100vw"
+        loading="lazy"
+        class="w-full border border-hairline object-cover"
+      />
+      <div>
+        <p class="micro-label text-signal-deep">Mexico Business News · AI, Cloud &amp; Data</p>
+        <h3 class="mt-2 text-xl font-semibold leading-snug">
+          From AI Hype to Business Impact: Why Corporate AI Breaks
+        </h3>
+        <p class="mt-2 text-sm text-muted">October 20, 2026</p>
+        <p class="mt-4 leading-relaxed text-muted">
+          On why corporate AI projects stall when they automate broken processes, how the gap between IT and the
+          business erodes value, and why the business — not IT — has to decide what gets built.
+        </p>
+        <blockquote class="mt-4 border-l-2 border-signal pl-4 leading-relaxed">
+          “If the process was broken, you are only going to break it much faster. If the process was ugly, you are
+          going to make that ugly process much faster, until you reach a bottleneck.”
+        </blockquote>
+        <span class="mt-5 inline-flex items-center gap-2 text-sm font-medium text-signal-deep">
+          Read the article
+          <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
+        </span>
+      </div>
+    </a>
+
+    <ul class="mt-10 max-w-3xl divide-y divide-hairline">
       <li>
         <a
           href="https://expansion.mx/tecnologia/2026/09/14/ia-que-acabara-con-la-humanidad-genera-empresas-millonarias"
