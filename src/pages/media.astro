@@ -5,6 +5,7 @@ import PageHero from '../components/PageHero.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import nvidiaHero from '../assets/nvidia-hero.jpg';
 import mbnHero from '../assets/mbn-ai-hype-2026.jpg';
+import mitPhoto from '../assets/mit-top-business-leaders-2026.jpg';
 
 const columns = [
   {
@@ -89,13 +90,6 @@ const press = [
         outlet: 'Expansión',
         href: 'https://expansion.mx/tecnologia/2026/09/14/ia-que-acabara-con-la-humanidad-genera-empresas-millonarias',
         note: 'Sobre la automejora recursiva como la vertical de negocio que hay detrás del debate existencial.',
-      },
-      {
-        date: 'Sep 28',
-        title: 'León Palafox: “El valor de la IA empieza por conectar con quienes conocen el negocio”',
-        outlet: 'MIT Technology Review en español',
-        href: 'https://www.technologyreview.es/article/leon-palafox-el-valor-de-la-ia-empieza-por-conectar-con-quienes-conocen-el-negocio',
-        note: 'Entrevista sobre por qué la IA solo genera valor cuando se conecta con quienes conocen el negocio.',
       },
       {
         date: 'Oct',
@@ -296,6 +290,35 @@ const press = [
         </blockquote>
         <span class="mt-5 inline-flex items-center gap-2 text-sm font-medium text-signal-deep">
           Read the article
+          <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
+        </span>
+      </div>
+    </a>
+
+    <a
+      href="https://www.technologyreview.es/article/leon-palafox-el-valor-de-la-ia-empieza-por-conectar-con-quienes-conocen-el-negocio"
+      class="group mt-6 grid max-w-4xl gap-6 border border-hairline bg-paper p-5 transition-colors hover:border-signal lg:grid-cols-[minmax(0,340px)_1fr] lg:items-start lg:gap-8 lg:p-6"
+    >
+      <Image
+        src={mitPhoto}
+        alt="León Palafox on stage at the AI Top Business Leaders México panel, seated with three other panelists in front of a screen reading “La ventaja no está en usar IA, sino en saber dónde aplicarla”."
+        widths={[340, 680, 1020, 1200]}
+        sizes="(min-width: 1024px) 340px, 100vw"
+        loading="lazy"
+        class="w-full border border-hairline object-cover"
+      />
+      <div>
+        <p class="micro-label text-signal-deep">MIT Technology Review</p>
+        <h3 class="mt-2 text-xl font-semibold leading-snug">
+          León Palafox: “El valor de la IA empieza por conectar con quienes conocen el negocio”
+        </h3>
+        <p class="mt-2 text-sm text-muted">September 28, 2026</p>
+        <p class="mt-4 leading-relaxed text-muted">
+          Interview for the AI Top Business Leaders México series on why AI creates value only when it connects with
+          the people who know the business.
+        </p>
+        <span class="mt-5 inline-flex items-center gap-2 text-sm font-medium text-signal-deep">
+          Read the interview
           <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
         </span>
       </div>
