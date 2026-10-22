@@ -11,3 +11,5 @@ The Mexico Business News SVG viewBox is cropped to remove empty margins; its art
 - `expansion.svg`: https://cdn-3.expansion.mx/4d/74/ff21633645fd835ffef7f00b46c7/logo-exp-1.svg
 - `nvidia.svg`: https://www.nvidia.com/content/dam/en-zz/Solutions/about-nvidia/nvidia-brochure/images/nvidia-logo-black.svg
 - `mexico-business-news.svg`: https://mexicobusiness.news/sites/default/files/2022-11/MexicoBusinessNews-Logo.svg
+- `el-economista.png`: https://www.eleconomista.com.mx/images/logo-el-economista-mx.png
+- `tv-azteca.png`: https://tvazteca.brightspotcdn.com/1f/8e/ba02d27c4ed184614d0589695a96/1.%20LogoTVASitioOK.png

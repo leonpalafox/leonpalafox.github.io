@@ -16,6 +16,8 @@ import forbesLogo from '../assets/logos/publications/forbes-mexico.svg';
 import expansionLogo from '../assets/logos/publications/expansion.svg';
 import nvidiaLogo from '../assets/logos/publications/nvidia.svg';
 import mbnLogo from '../assets/logos/publications/mexico-business-news.svg';
+import economistaLogo from '../assets/logos/publications/el-economista.png';
+import tvAztecaLogo from '../assets/logos/publications/tv-azteca.png';
 
 const publications = [
   { name: 'MIT Technology Review', logo: mitLogo, href: '#press', width: 250 },
@@ -23,6 +25,14 @@ const publications = [
   { name: 'El Financiero', logo: financieroLogo, href: '#columns', width: 190 },
   { name: 'Forbes México', logo: forbesLogo, href: '#press', width: 125 },
   { name: 'Expansión', logo: expansionLogo, href: '#press', width: 155 },
+  {
+    name: 'El Economista', logo: economistaLogo, width: 210,
+    href: 'https://www.eleconomista.com.mx/sectorfinanciero/IA-plantea-oportunidades-y-retos-para-las-instituciones-financieras-20220908-0092.html',
+  },
+  {
+    name: 'TV Azteca', logo: tvAztecaLogo, width: 170,
+    href: 'https://www.tvazteca.com/aztecanoticias/cobro-tarjeta-terminal-cartera-autorizacion',
+  },
 ];
 
 const columns = [
@@ -513,11 +523,15 @@ const postDate = new Intl.DateTimeFormat('en', { month: 'short', day: 'numeric',
   }
   @media (min-width: 768px) {
     .publication-logos {
-      grid-template-columns: 1.6fr 0.9fr 1.25fr 0.85fr 1.1fr;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
       gap: 1.75rem;
     }
+    .publication-logos li,
     .publication-logos li:first-child {
-      grid-column: auto;
+      grid-column: span 3;
+    }
+    .publication-logos li:nth-child(n + 5) {
+      grid-column: span 4;
     }
   }
 
