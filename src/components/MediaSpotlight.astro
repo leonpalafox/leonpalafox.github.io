@@ -1,0 +1,269 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  slides: {
+    label: string;
+    logo: ImageMetadata;
+    logoWidth: number;
+    outlet: string;
+    title: string;
+    image: ImageMetadata;
+    alt: string;
+    href: string;
+    lang?: string;
+  }[];
+}
+const { slides } = Astro.props;
+---
+
+<section class="spotlight min-w-0" aria-label="Media and featured stories">
+  <div class="spotlight-stage">
+    {slides.map((slide, index) => (
+      <>
+        <input
+          class="spotlight-choice sr-only"
+          type="radio"
+          name="media-spotlight"
+          id={`spotlight-choice-${index}`}
+          checked={index === 0}
+          aria-controls={`spotlight-slide-${index}`}
+          aria-label={slide.label}
+        />
+        <article class="spotlight-slide" id={`spotlight-slide-${index}`} aria-label={`${index + 1} of ${slides.length}: ${slide.outlet}`}>
+          <div class="spotlight-story">
+            <div class="spotlight-image">
+              <Image
+                src={slide.image}
+                alt={slide.alt}
+                widths={[640, 960, 1440, 1920]}
+                sizes="(min-width: 1480px) 1288px, (min-width: 1280px) calc(100vw - 192px), 100vw"
+                loading={index === 0 ? 'eager' : 'lazy'}
+                fetchpriority={index === 0 ? 'high' : 'auto'}
+                class="h-full w-full object-cover"
+              />
+            </div>
+            <div class="spotlight-shade" aria-hidden="true"></div>
+            <a href={slide.href} class="spotlight-caption">
+              <p class="micro-label spotlight-outlet">{slide.outlet}</p>
+              <h2 lang={slide.lang ?? 'en'}>{slide.title}</h2>
+              <span class="spotlight-read">Read the feature <span aria-hidden="true">↗</span></span>
+            </a>
+          </div>
+        </article>
+      </>
+    ))}
+  </div>
+  <div class="spotlight-intro">
+    <p class="micro-label spotlight-eyebrow">Media <span lang="ja">メディア</span></p>
+    <h1>Ideas in<br />the <span>conversation.</span></h1>
+    <span aria-hidden="true" class="spotlight-rule"></span>
+    <p class="spotlight-description">Interviews, columns, and conversations on AI, business, and the technology shaping Mexico’s future.</p>
+    <a href="#media-inquiries" class="spotlight-contact">Media &amp; speaking inquiries <span aria-hidden="true">↗</span></a>
+  </div>
+  <div class="spotlight-selectors">
+    {slides.map((slide, index) => (
+      <label for={`spotlight-choice-${index}`} class="spotlight-selector" data-choice={index}>
+        <Image
+          src={slide.logo}
+          alt={slide.label}
+          width={slide.logoWidth}
+          loading="eager"
+          class="spotlight-logo"
+        />
+      </label>
+    ))}
+  </div>
+</section>
+
+<style>
+  .spotlight {
+    --hero-inset: 1.5rem;
+    position: relative;
+    width: 100%;
+    min-height: 46rem;
+    overflow: hidden;
+    background: var(--color-ink);
+    color: var(--color-sheet);
+    isolation: isolate;
+  }
+  .spotlight-stage {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    min-width: 0;
+  }
+  .spotlight-slide {
+    grid-area: 1 / 1;
+    position: relative;
+    min-width: 0;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 450ms ease, visibility 450ms;
+  }
+  .spotlight-choice:checked + .spotlight-slide {
+    visibility: visible;
+    opacity: 1;
+    z-index: 1;
+  }
+  .spotlight-story,
+  .spotlight-image,
+  .spotlight-shade {
+    position: absolute;
+    inset: 0;
+  }
+  .spotlight-image :global(img) {
+    object-position: 62% center;
+  }
+  .spotlight-shade {
+    background:
+      linear-gradient(0deg, rgb(20 20 18 / 98%) 0%, rgb(20 20 18 / 75%) 20%, transparent 65%),
+      linear-gradient(90deg, rgb(20 20 18 / 98%) 0%, rgb(20 20 18 / 92%) 35%, rgb(20 20 18 / 35%) 75%, rgb(20 20 18 / 20%) 100%);
+  }
+  .spotlight-intro {
+    position: relative;
+    z-index: 2;
+    padding: 3.5rem var(--hero-inset) 21rem;
+    pointer-events: none;
+  }
+  .spotlight-eyebrow {
+    display: flex;
+    gap: 1rem;
+    color: #f9a28e;
+  }
+  .spotlight-eyebrow span { color: rgb(245 243 238 / 65%); }
+  .spotlight-intro h1 {
+    margin-top: 1.5rem;
+    font-size: clamp(2.75rem, 5.5vw, 5rem);
+    font-weight: 600;
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+  }
+  .spotlight-intro h1 span {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-style: italic;
+  }
+  .spotlight-rule {
+    display: block;
+    width: 3.5rem;
+    height: 3px;
+    margin-top: 1.75rem;
+    background: var(--color-signal);
+  }
+  .spotlight-description {
+    max-width: 31rem;
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: rgb(245 243 238 / 85%);
+  }
+  .spotlight-contact {
+    display: inline-flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 1.75rem;
+    padding: 1rem 1.5rem;
+    background: var(--color-signal-deep);
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 500;
+    pointer-events: auto;
+    transition: background-color 150ms;
+  }
+  .spotlight-contact:hover { background: var(--color-signal); }
+  .spotlight-caption {
+    position: absolute;
+    inset: auto var(--hero-inset) 12.5rem;
+    display: block;
+    max-width: 44rem;
+  }
+  .spotlight-outlet {
+    color: #f9a28e;
+    line-height: 1.6;
+    letter-spacing: 0.18em;
+  }
+  .spotlight-caption h2 {
+    margin-top: 0.5rem;
+    font-family: var(--font-serif);
+    font-size: clamp(1.125rem, 1.8vw, 1.5rem);
+    font-weight: 450;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    text-wrap: pretty;
+  }
+  .spotlight-read {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+    font-size: 0.75rem;
+    color: rgb(245 243 238 / 80%);
+  }
+  .spotlight-read > span { transition: transform 200ms; }
+  .spotlight-caption:hover .spotlight-read > span { transform: translate(2px, -2px); }
+  .spotlight-selectors {
+    position: absolute;
+    z-index: 3;
+    inset: auto var(--hero-inset) 1.75rem;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+  .spotlight-selector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 4rem;
+    padding: 0.875rem 0.25rem 0;
+    border-top: 2px solid rgb(245 243 238 / 30%);
+    color: rgb(245 243 238 / 65%);
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1.35;
+    transition: border-color 200ms, color 200ms;
+  }
+  .spotlight-selector :global(.spotlight-logo) {
+    max-width: 100%;
+    max-height: 2.5rem;
+    height: auto;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    opacity: 0.55;
+    transition: opacity 200ms;
+  }
+  .spotlight-selector:hover :global(.spotlight-logo) { opacity: 1; }
+  .spotlight-selector:hover { border-color: var(--color-sheet); color: white; }
+  .spotlight:has(#spotlight-choice-0:checked) [data-choice="0"],
+  .spotlight:has(#spotlight-choice-1:checked) [data-choice="1"],
+  .spotlight:has(#spotlight-choice-2:checked) [data-choice="2"],
+  .spotlight:has(#spotlight-choice-3:checked) [data-choice="3"] {
+    border-color: var(--color-signal);
+    color: white;
+  }
+  .spotlight:has(#spotlight-choice-0:checked) [data-choice="0"] :global(.spotlight-logo),
+  .spotlight:has(#spotlight-choice-1:checked) [data-choice="1"] :global(.spotlight-logo),
+  .spotlight:has(#spotlight-choice-2:checked) [data-choice="2"] :global(.spotlight-logo),
+  .spotlight:has(#spotlight-choice-3:checked) [data-choice="3"] :global(.spotlight-logo) { opacity: 1; }
+  .spotlight:has(#spotlight-choice-0:focus-visible) [data-choice="0"],
+  .spotlight:has(#spotlight-choice-1:focus-visible) [data-choice="1"],
+  .spotlight:has(#spotlight-choice-2:focus-visible) [data-choice="2"],
+  .spotlight:has(#spotlight-choice-3:focus-visible) [data-choice="3"] {
+    outline: 2px solid var(--color-signal);
+    outline-offset: 4px;
+  }
+  @media (min-width: 640px) {
+    .spotlight { --hero-inset: 2.5rem; min-height: 44rem; }
+    .spotlight-intro { padding-top: 4rem; padding-bottom: 17.5rem; }
+    .spotlight-description { font-size: 1.125rem; }
+    .spotlight-caption { bottom: 8rem; }
+    .spotlight-selectors { bottom: 2.5rem; gap: 1.5rem; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .spotlight-selector { font-size: 0.875rem; }
+  }
+  @media (min-width: 1024px) {
+    .spotlight { --hero-inset: 3.5rem; }
+    .spotlight-intro { padding-top: 4.5rem; }
+  }
+</style>

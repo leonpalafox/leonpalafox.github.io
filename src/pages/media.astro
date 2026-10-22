@@ -1,12 +1,29 @@
 ---
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
-import PageHero from '../components/PageHero.astro';
+import MediaSpotlight from '../components/MediaSpotlight.astro';
+import { getCollection } from 'astro:content';
 import SectionHeading from '../components/SectionHeading.astro';
+import { getAsset } from '../lib/assets';
 import nvidiaHero from '../assets/nvidia-hero.jpg';
 import mbnHero from '../assets/mbn-ai-hype-stage-2026.jpg';
 import mitPhoto from '../assets/mit-top-business-leaders-2026.jpg';
 import wiredHero from '../assets/wired-agentic-ai-2026.jpg';
+import mitLogo from '../assets/logos/publications/mit-technology-review.png';
+import wiredLogo from '../assets/logos/publications/wired.svg';
+import financieroLogo from '../assets/logos/publications/el-financiero.png';
+import forbesLogo from '../assets/logos/publications/forbes-mexico.svg';
+import expansionLogo from '../assets/logos/publications/expansion.svg';
+import nvidiaLogo from '../assets/logos/publications/nvidia.svg';
+import mbnLogo from '../assets/logos/publications/mexico-business-news.svg';
+
+const publications = [
+  { name: 'MIT Technology Review', logo: mitLogo, href: '#press', width: 250 },
+  { name: 'WIRED', logo: wiredLogo, href: '#press', width: 135 },
+  { name: 'El Financiero', logo: financieroLogo, href: '#columns', width: 190 },
+  { name: 'Forbes México', logo: forbesLogo, href: '#press', width: 125 },
+  { name: 'Expansión', logo: expansionLogo, href: '#press', width: 155 },
+];
 
 const columns = [
   {
@@ -147,246 +164,417 @@ const press = [
     ],
   },
 ];
+
+const featured = [
+  {
+    outlet: 'MIT Technology Review',
+    date: 'September 28, 2026',
+    datetime: '2026-09-28',
+    title: 'León Palafox: “El valor de la IA empieza por conectar con quienes conocen el negocio”',
+    description: 'An interview for AI Top Business Leaders México on connecting AI with the people who know the business.',
+    image: mitPhoto,
+    alt: 'León Palafox with fellow panelists at AI Top Business Leaders México.',
+    href: 'https://www.technologyreview.es/article/leon-palafox-el-valor-de-la-ia-empieza-por-conectar-con-quienes-conocen-el-negocio',
+  },
+  {
+    outlet: 'WIRED en Español',
+    date: 'July 28, 2026',
+    datetime: '2026-07-28',
+    title: 'La IA agéntica llegó a México sin reglas ni garantías',
+    description: 'On data privacy, regulatory gaps, and the safeguards still missing as autonomous AI agents begin operating in Mexico.',
+    image: wiredHero,
+    alt: 'WIRED illustration of AI agents working at screens above the Mexico City skyline.',
+    href: 'https://es.wired.com/articulos/la-ia-agentica-llego-a-mexico-sin-reglas-ni-garantias',
+  },
+];
+
+const spotlights = [
+  {
+    label: 'NVIDIA',
+    logo: nvidiaLogo,
+    logoWidth: 150,
+    outlet: 'NVIDIA Developer Blog',
+    title: 'From deep learning to the surface of Mars.',
+    image: nvidiaHero,
+    alt: 'Mars terrain and neural network diagrams from NVIDIA’s feature on deep learning for planetary science.',
+    href: 'https://developer.nvidia.com/blog/deep-learning-image-understanding-planetary-science/',
+  },
+  { ...featured[0], label: 'MIT Technology Review', logo: mitLogo, logoWidth: 240, lang: 'es' },
+  { ...featured[1], label: 'WIRED', logo: wiredLogo, logoWidth: 130, lang: 'es' },
+  {
+    label: 'Mexico Business News',
+    logo: mbnLogo,
+    logoWidth: 105,
+    outlet: 'Mexico Business News',
+    title: 'From AI Hype to Business Impact: Why Corporate AI Breaks',
+    image: mbnHero,
+    alt: 'León Palafox speaking at the Mexico AI, Cloud & Data Summit 2026. Photo: Mexico Business News.',
+    href: 'https://mexicobusiness.news/cloudanddata/news/ai-hype-business-impact-why-corporate-ai-breaks',
+  },
+];
+
+const recentPosts = (await getCollection('blog'))
+  .filter((post) => post.data.tags.includes('financiero'))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+const postDate = new Intl.DateTimeFormat('en', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
 ---
 
 <Base
   title="León Palafox — Media, Talks & Interviews"
   description="Media appearances, interviews, talks, and public writing by León Palafox on AI, machine learning, data science, and financial technology."
 >
-  <PageHero
-    eyebrow="Media"
-    jp="メディア"
-    title="Columns, podcasts & interviews"
-    description="Public conversations about artificial intelligence, data strategy, and the future of technology in Mexico and the world."
-  />
+  <MediaSpotlight slides={spotlights} />
 
-  <section class="border-b border-hairline px-6 py-14 sm:px-10 lg:px-14">
-    <SectionHeading title="Columns — El Financiero" id="columns" />
-    <p class="mt-6 max-w-2xl leading-relaxed text-muted">
-      I write a regular column for <em>El Financiero</em> on the business impact of AI, sovereignty, and technical
-      strategy. Recent columns also appear on the <a href="/blog/" class="text-signal-deep underline underline-offset-3 hover:text-signal">blog</a>.
-    </p>
-    {
-      columns.map((group) => (
-        <div class="mt-8 max-w-3xl">
-          <h3 class="micro-label text-signal-deep">{group.year}</h3>
-          <ul class="mt-3 divide-y divide-hairline">
-            {group.items.map((item) => (
-              <li>
-                <a href={item.href} class="group flex items-baseline gap-5 py-3.5">
-                  <span class="micro-label w-14 shrink-0 text-muted">{item.date}</span>
-                  <span class="flex-1 leading-snug" lang="es">
-                    {item.title}
-                  </span>
-                  <span aria-hidden="true" class="shrink-0 text-signal-deep transition-transform group-hover:translate-x-1">
-                    →
-                  </span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))
-    }
-  </section>
+  <nav aria-label="Media sections" class="media-navigation border-b border-hairline bg-paper px-6 py-7 sm:px-10 lg:px-14">
+    {[
+      ['Press', '#press'], ['Podcasts & talks', '#talks'], ['Columns', '#columns'],
+      ['Research', '#research-highlights'], ['Latest writing', '#latest-writing'],
+    ].map(([label, href], index) => (
+      <a href={href} class="media-navigation-link">
+        <span class="micro-label media-navigation-number" aria-hidden="true">0{index + 1}</span>
+        <span class="media-navigation-label">{label}</span>
+        <span class="media-navigation-arrow" aria-hidden="true">↓</span>
+      </a>
+    ))}
+  </nav>
 
-  <section class="border-b border-hairline px-6 py-14 sm:px-10 lg:px-14">
-    <SectionHeading title="Podcasts & talks" id="talks" />
-    <ul class="mt-8 max-w-3xl divide-y divide-hairline">
-      {
-        talks.map((talk) => (
-          <li>
-            <a href={talk.href} class="group flex items-baseline gap-5 py-4">
-              <span class="flex-1 leading-snug">
-                <span class="font-medium" lang="es">{talk.title}</span>
-                <span class="mt-1 block text-sm text-muted">{talk.outlet}</span>
-              </span>
-              <span aria-hidden="true" class="shrink-0 text-signal-deep transition-transform group-hover:translate-x-1">→</span>
-            </a>
-          </li>
-        ))
-      }
+  <section aria-label="Selected media outlets" class="border-b border-hairline bg-paper px-6 py-8 sm:px-10 lg:px-14">
+    <p class="micro-label text-muted">Featured in &amp; writing for</p>
+    <ul class="publication-logos mt-6">
+      {publications.map((publication) => (
+        <li>
+          <a href={publication.href} class="publication-logo" aria-label={`${publication.name} — see coverage`}>
+            <Image
+              src={publication.logo}
+              alt={publication.name}
+              width={publication.width}
+              loading="lazy"
+              class:list={['publication-logo-image', { 'publication-logo-boxed': publication.name === 'Expansión' }]}
+            />
+          </a>
+        </li>
+      ))}
     </ul>
   </section>
 
-  <section class="border-b border-hairline px-6 py-14 sm:px-10 lg:px-14">
-    <SectionHeading title="Research highlights" id="research-highlights" />
-
-    <figure class="mt-8 max-w-4xl">
-      <a
-        href="https://developer.nvidia.com/blog/deep-learning-image-understanding-planetary-science/"
-        class="group block"
-      >
-        <Image
-          src={nvidiaHero}
-          alt="Hero art for NVIDIA's Technical Blog on deep learning for planetary science: a Mars landscape annotated with impact craters, rootless cones and lava flows, alongside a convolutional neural network diagram and sample landform detections."
-          widths={[640, 960, 1280]}
-          sizes="(min-width: 896px) 896px, 100vw"
-          quality={70}
-          loading="lazy"
-          class="w-full border border-hairline object-cover"
-        />
-      </a>
-      <figcaption class="mt-3 flex items-start gap-3">
-        <span aria-hidden="true" class="mt-[0.55em] h-px w-6 shrink-0 bg-hairline"></span>
-        <span class="micro-label text-muted">NVIDIA · May 12, 2015</span>
-      </figcaption>
-    </figure>
-
-    <div class="mt-8 max-w-2xl space-y-4 text-[1.05rem] leading-relaxed">
-      <h3 class="text-lg font-semibold">NVIDIA</h3>
-      <p>
-        NVIDIA interviewed me about our work with the Lunar and Planetary Laboratory at the University of Arizona:
-        <strong>MarsNet</strong>, a convolutional neural network that identifies land features on the surface of Mars
-        from HiRISE imagery.
-      </p>
-      <a
-        href="https://developer.nvidia.com/blog/deep-learning-image-understanding-planetary-science/"
-        class="inline-flex items-center gap-2 text-sm font-medium text-signal-deep"
-      >
-        Read the NVIDIA Developer Blog post
-        <span aria-hidden="true">→</span>
-      </a>
+  <section aria-labelledby="press" class="media-section border-b border-hairline">
+    <div class="flex flex-wrap items-end justify-between gap-4">
+      <SectionHeading title="In the press" id="press" />
+      <p class="micro-label text-muted">Interviews / profiles / commentary</p>
     </div>
-  </section>
 
-  <section class="px-6 py-14 sm:px-10 lg:px-14">
-    <SectionHeading title="Press mentions" id="press" />
-    <p class="mt-6 max-w-2xl leading-relaxed text-muted">
-      Interviews, profiles, and commentary in Mexican and international media on AI, data strategy, and the
-      technology industry.
-    </p>
-
-    <a
-      href="https://mexicobusiness.news/cloudanddata/news/ai-hype-business-impact-why-corporate-ai-breaks"
-      class="group mt-8 grid max-w-4xl gap-6 border border-hairline bg-paper p-5 transition-colors hover:border-signal lg:grid-cols-[minmax(0,340px)_1fr] lg:items-center lg:gap-8 lg:p-6"
-    >
+    <a href="https://mexicobusiness.news/cloudanddata/news/ai-hype-business-impact-why-corporate-ai-breaks" class="group mt-8 grid items-center gap-6 border border-hairline bg-paper p-5 transition-colors hover:border-signal md:grid-cols-2 md:gap-8 lg:p-7">
       <Image
         src={mbnHero}
-        alt="León Palafox speaking at the Mexico AI, Cloud & Data Summit 2026, standing at a podium with the summit logo on the screen behind him. Photo: Mexico Business News."
-        widths={[340, 680, 1020]}
-        sizes="(min-width: 1024px) 340px, 100vw"
-        quality={70}
+        alt="León Palafox speaking at the Mexico AI, Cloud & Data Summit 2026. Photo: Mexico Business News."
+        widths={[480, 720, 1072]}
+        sizes="(min-width: 1024px) 44vw, (min-width: 768px) 46vw, 90vw"
+        quality={80}
         loading="lazy"
-        class="w-full border border-hairline object-cover"
+        class="aspect-[4/3] w-full border border-hairline object-cover"
       />
       <div>
-        <p class="micro-label text-signal-deep">Mexico Business News</p>
-        <h3 class="mt-2 text-xl font-semibold leading-snug">
-          From AI Hype to Business Impact: Why Corporate AI Breaks
-        </h3>
-        <p class="mt-2 text-sm text-muted">AI, Cloud &amp; Data · October 20, 2026</p>
-        <p class="mt-4 leading-relaxed text-muted">
-          On why corporate AI projects stall when they automate broken processes, how the gap between IT and the
-          business erodes value, and why the business — not IT — has to decide what gets built.
-        </p>
-        <blockquote class="mt-4 border-l-2 border-signal pl-4 leading-relaxed">
-          “If the process was broken, you are only going to break it much faster. If the process was ugly, you are
-          going to make that ugly process much faster, until you reach a bottleneck.”
-        </blockquote>
-        <span class="mt-5 inline-flex items-center gap-2 text-sm font-medium text-signal-deep">
-          Read the article
-          <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
-        </span>
+        <p class="micro-label text-signal-deep">Latest appearance</p>
+        <p class="mt-3 text-lg font-semibold">Mexico Business News</p>
+        <time datetime="2026-10-20" class="mt-2 block text-sm text-muted">October 20, 2026</time>
+        <h3 class="mt-4 text-2xl font-semibold leading-tight tracking-tight transition-colors group-hover:text-signal-deep">From AI Hype to Business Impact: Why Corporate AI Breaks</h3>
+        <p class="mt-4 leading-relaxed text-muted">Why corporate AI projects stall, how the gap between IT and the business erodes value, and what it takes to turn AI into business impact.</p>
+        <span class="media-link mt-5">Read the article <span aria-hidden="true">↗</span></span>
       </div>
     </a>
 
-    <a
-      href="https://www.technologyreview.es/article/leon-palafox-el-valor-de-la-ia-empieza-por-conectar-con-quienes-conocen-el-negocio"
-      class="group mt-6 grid max-w-4xl gap-6 border border-hairline bg-paper p-5 transition-colors hover:border-signal lg:grid-cols-[minmax(0,340px)_1fr] lg:items-start lg:gap-8 lg:p-6"
-    >
-      <Image
-        src={mitPhoto}
-        alt="León Palafox on stage at the AI Top Business Leaders México panel, seated with three other panelists in front of a screen reading “La ventaja no está en usar IA, sino en saber dónde aplicarla”."
-        widths={[340, 680, 1020]}
-        sizes="(min-width: 1024px) 340px, 100vw"
-        quality={70}
-        loading="lazy"
-        class="w-full border border-hairline object-cover"
-      />
-      <div>
-        <p class="micro-label text-signal-deep">MIT Technology Review</p>
-        <h3 class="mt-2 text-xl font-semibold leading-snug">
-          León Palafox: “El valor de la IA empieza por conectar con quienes conocen el negocio”
-        </h3>
-        <p class="mt-2 text-sm text-muted">September 28, 2026</p>
-        <p class="mt-4 leading-relaxed text-muted">
-          Interview for the AI Top Business Leaders México series on why AI creates value only when it connects with
-          the people who know the business.
-        </p>
-        <span class="mt-5 inline-flex items-center gap-2 text-sm font-medium text-signal-deep">
-          Read the interview
-          <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
-        </span>
-      </div>
-    </a>
+    <div class="mt-8 grid gap-8 md:grid-cols-2">
+      {featured.map((item) => (
+        <a href={item.href} class="group flex flex-col border border-hairline bg-paper transition-colors hover:border-signal">
+          <div class="overflow-hidden border-b border-hairline">
+            <Image src={item.image} alt={item.alt} widths={[480, 720, 1080]} sizes="(min-width: 1024px) 44vw, (min-width: 768px) 46vw, 90vw" quality={75} loading="lazy" class="aspect-[16/10] w-full object-cover transition-transform duration-300 group-hover:scale-[1.025]" />
+          </div>
+          <div class="flex flex-1 flex-col p-6 sm:p-7">
+            <p class="micro-label leading-relaxed text-signal-deep">{item.outlet}</p>
+            <time datetime={item.datetime} class="mt-3 text-sm text-muted">{item.date}</time>
+            <h3 lang="es" class="mt-4 text-2xl font-semibold leading-snug tracking-tight">{item.title}</h3>
+            <p class="mt-4 text-sm leading-relaxed text-muted">{item.description}</p>
+            <span class="media-link mt-auto pt-6">Read the story <span aria-hidden="true">↗</span></span>
+          </div>
+        </a>
+      ))}
+    </div>
 
-    <a
-      href="https://es.wired.com/articulos/la-ia-agentica-llego-a-mexico-sin-reglas-ni-garantias"
-      class="group mt-6 block max-w-4xl border border-hairline bg-paper p-5 transition-colors hover:border-signal lg:p-6"
-    >
-      <Image
-        src={wiredHero}
-        alt="WIRED en Español hero art for “La IA agéntica llegó a México sin reglas ni garantías”: humanoid AI agents working at screens over the Mexico City skyline, with a León Palafox quote on not knowing where data is stored."
-        widths={[640, 960, 1280]}
-        sizes="(min-width: 1024px) 848px, 100vw"
-        quality={70}
-        loading="lazy"
-        class="w-full border border-hairline object-cover"
-      />
-      <div class="mt-6 lg:mt-7">
-        <p class="micro-label text-signal-deep">WIRED en Español</p>
-        <h3 class="mt-2 text-xl font-semibold leading-snug">
-          La IA agéntica llegó a México sin reglas ni garantías
-        </h3>
-        <p class="mt-2 text-sm text-muted">July 28, 2026</p>
-        <p class="mt-4 max-w-2xl leading-relaxed text-muted">
-          On data privacy, regulatory gaps, and the safeguards still missing as autonomous AI agents begin operating
-          in Mexico.
-        </p>
-        <span class="mt-5 inline-flex items-center gap-2 text-sm font-medium text-signal-deep">
-          Read the article
-          <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
-        </span>
-      </div>
-    </a>
-
-    <div class="mt-10 max-w-3xl space-y-8">
-      {
-        press.map((group) => (
-          <div>
-            <h3 class="micro-label text-signal-deep">{group.year}</h3>
-            <ul class="mt-3 divide-y divide-hairline">
+    <details class="press-archive mt-8 border-y border-hairline">
+      <summary class="flex cursor-pointer items-center justify-between gap-4 py-5 font-medium">
+        More press coverage <span class="micro-label text-signal-deep">Archive <span aria-hidden="true" class="archive-toggle ml-2 inline-block">+</span></span>
+      </summary>
+      <div class="pb-6">
+        {press.map((group) => (
+          <div class="mt-6 grid gap-3 sm:grid-cols-[5rem_1fr] sm:gap-6">
+            <h3 class="micro-label pt-4 text-signal-deep">{group.year}</h3>
+            <ul class="divide-y divide-hairline">
               {group.items.map((item) => (
                 <li>
-                  <a href={item.href} class="group flex items-baseline gap-5 py-4">
-                    <span class="micro-label w-14 shrink-0 text-muted">{item.date}</span>
-                    <span class="flex-1 leading-snug">
-                      <span class="font-medium" lang="es">
-                        {item.title}
-                      </span>
-                      <span class="mt-1 block text-sm text-muted" lang="es">
-                        {item.outlet}
-                      </span>
-                      {item.note && (
-                        <span class="mt-2 block max-w-2xl text-sm leading-relaxed text-muted" lang="es">
-                          {item.note}
-                        </span>
-                      )}
+                  <a href={item.href} class="group flex items-start gap-4 py-4">
+                    <span class="micro-label w-14 shrink-0 pt-1 text-muted">{item.date}</span>
+                    <span class="min-w-0 flex-1">
+                      <span lang="es" class="font-medium leading-snug group-hover:text-signal-deep">{item.title}</span>
+                      <span class="mt-2 block text-sm text-muted">{item.outlet}</span>
+                      <span lang="es" class="mt-2 block text-sm leading-relaxed text-muted">{item.note}</span>
                     </span>
-                    <span
-                      aria-hidden="true"
-                      class="shrink-0 text-signal-deep transition-transform group-hover:translate-x-1"
-                    >
-                      →
-                    </span>
+                    <span aria-hidden="true" class="text-signal-deep">↗</span>
                   </a>
                 </li>
               ))}
             </ul>
           </div>
-        ))
-      }
+        ))}
+      </div>
+    </details>
+  </section>
+
+  <section aria-labelledby="talks" class="media-section border-b border-hairline">
+    <SectionHeading title="Behind the microphone" id="talks" />
+    <p class="mt-6 max-w-2xl leading-relaxed text-muted">Longer conversations on data, the possibilities of AI, and the people putting it to work.</p>
+    <div class="mt-8 grid border-l border-t border-hairline md:grid-cols-2">
+      {talks.map((talk, index) => (
+        <a href={talk.href} class="group flex gap-5 border-b border-r border-hairline p-6 transition-colors hover:bg-paper sm:p-8">
+          <span aria-hidden="true" class="flex size-10 shrink-0 items-center justify-center rounded-full border border-hairline text-signal-deep">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="m6 3 7 5-7 5V3Z" fill="currentColor" /></svg>
+          </span>
+          <div class="flex min-w-0 flex-1 flex-col">
+            <p class="micro-label leading-relaxed text-muted">{talk.outlet}</p>
+            <h3 lang="es" class="mt-3 text-xl font-semibold leading-snug tracking-tight group-hover:text-signal-deep">{talk.title}</h3>
+            <span class="media-link mt-auto pt-6">{index === 0 ? 'Explore the session' : index === 3 ? 'Watch the talk' : 'Listen to the conversation'} <span aria-hidden="true">↗</span></span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section aria-labelledby="columns" class="media-section border-b border-hairline">
+    <div class="grid gap-8 lg:grid-cols-[0.7fr_1.3fr] lg:gap-12">
+      <div>
+        <SectionHeading title="A regular point of view" id="columns" />
+        <p class="mt-6 font-serif text-3xl italic">El Financiero</p>
+        <p class="mt-4 leading-relaxed text-muted">My column on the business impact of AI, digital sovereignty, and technical strategy. Written from Mexico, with a global perspective.</p>
+        <a href="/blog/" class="media-link mt-6">Explore all writing <span aria-hidden="true">→</span></a>
+      </div>
+      <div>
+        {columns.map((group) => (
+          <div class="mb-8 last:mb-0">
+            <h3 class="micro-label text-signal-deep">{group.year}</h3>
+            <ul class="mt-3 divide-y divide-hairline border-t border-hairline">
+              {group.items.map((item) => (
+                <li>
+                  <a href={item.href} class="group flex items-baseline gap-4 py-4">
+                    <span class="micro-label w-14 shrink-0 text-muted">{item.date}</span>
+                    <span lang="es" class="min-w-0 flex-1 leading-snug group-hover:text-signal-deep">{item.title}</span>
+                    <span aria-hidden="true" class="shrink-0 text-signal-deep">↗</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="research-highlights" class="media-section border-b border-hairline">
+    <SectionHeading title="Research in the spotlight" id="research-highlights" />
+    <a href="https://developer.nvidia.com/blog/deep-learning-image-understanding-planetary-science/" class="group mt-8 grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
+      <Image src={nvidiaHero} alt="Mars terrain and neural network diagrams from NVIDIA’s feature on deep learning for planetary science." widths={[480, 720, 1080]} sizes="(min-width: 1024px) 44vw, 90vw" quality={75} loading="lazy" class="w-full border border-hairline" />
+      <div>
+        <p class="micro-label text-signal-deep">NVIDIA Developer Blog</p>
+        <h3 class="mt-4 text-2xl font-semibold leading-tight tracking-tight sm:text-3xl">From deep learning to the surface of Mars.</h3>
+        <p class="mt-4 leading-relaxed text-muted">NVIDIA interviewed me about MarsNet, our work at the University of Arizona’s Lunar and Planetary Laboratory using convolutional neural networks to identify land features in HiRISE imagery.</p>
+        <time datetime="2015-05-12" class="mt-4 block text-sm text-muted">May 12, 2015</time>
+        <span class="media-link mt-6">Read the research feature <span aria-hidden="true">↗</span></span>
+      </div>
+    </a>
+  </section>
+
+  <section aria-labelledby="latest-writing" class="media-section border-b border-hairline">
+    <div class="flex flex-wrap items-end justify-between gap-5">
+      <SectionHeading title="Latest writing" id="latest-writing" />
+      <a href="/blog/" class="media-link">All articles <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="mt-8 grid gap-8 md:grid-cols-3">
+      {recentPosts.map((post) => (
+        <a href={`/blog/${post.id}/`} class="group flex flex-col border-t border-hairline pt-5">
+          {post.data.cover && <Image src={getAsset(post.data.cover, { alt: '' }).src} alt="" widths={[360, 720]} sizes="(min-width: 768px) 30vw, 90vw" loading="lazy" class="mb-5 aspect-[4/3] w-full border border-hairline object-cover" />}
+          <time datetime={post.data.pubDate.toISOString()} class="micro-label leading-relaxed text-muted">{postDate.format(post.data.pubDate)}</time>
+          <h3 lang={post.data.lang} class="mt-3 text-xl font-semibold leading-snug tracking-tight group-hover:text-signal-deep">{post.data.title}</h3>
+          <span class="media-link mt-auto pt-5">Read the column <span aria-hidden="true">→</span></span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section aria-labelledby="media-inquiries" class="media-section bg-paper">
+    <div class="grid items-center gap-8 md:grid-cols-[1fr_auto]">
+      <div>
+        <p class="micro-label text-signal-deep">Let’s talk / お問い合わせ</p>
+        <h2 id="media-inquiries" class="mt-4 text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">Have a conversation in mind?</h2>
+        <p class="mt-4 max-w-xl leading-relaxed text-muted">For interviews, podcast appearances, and speaking engagements on AI, data strategy, and financial technology, get in touch.</p>
+      </div>
+      <a href="mailto:leon.palafox@gmail.com?subject=Media%20%26%20speaking%20inquiry" class="media-button justify-self-start">Start a conversation <span aria-hidden="true">↗</span></a>
     </div>
   </section>
 </Base>
+
+<style>
+  .media-navigation {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+  .media-navigation-link {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-content: space-between;
+    gap: 1rem 0.5rem;
+    min-height: 7rem;
+    padding: 1rem;
+    border: 1px solid var(--color-hairline);
+    border-top: 3px solid var(--color-signal-deep);
+    background: var(--color-sheet);
+    color: var(--color-ink);
+    transition: background-color 150ms, border-color 150ms, color 150ms;
+  }
+  .media-navigation-link:last-child {
+    grid-column: 1 / -1;
+  }
+  .media-navigation-number {
+    grid-column: 1 / -1;
+    color: var(--color-signal-deep);
+  }
+  .media-navigation-label {
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+  .media-navigation-arrow {
+    align-self: end;
+    color: var(--color-signal-deep);
+    font-size: 1.25rem;
+    line-height: 1;
+  }
+  .media-navigation-link:hover,
+  .media-navigation-link:focus-visible {
+    border-color: var(--color-signal-deep);
+    background: var(--color-signal-deep);
+    color: white;
+  }
+  .media-navigation-link:hover .media-navigation-number,
+  .media-navigation-link:hover .media-navigation-arrow,
+  .media-navigation-link:focus-visible .media-navigation-number,
+  .media-navigation-link:focus-visible .media-navigation-arrow {
+    color: white;
+  }
+  @media (min-width: 768px) {
+    .media-navigation {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+    .media-navigation-link:last-child {
+      grid-column: auto;
+    }
+  }
+
+  .publication-logos {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: center;
+    gap: 1.25rem 2rem;
+  }
+  .publication-logos li:first-child {
+    grid-column: 1 / -1;
+  }
+  .publication-logo {
+    display: flex;
+    min-height: 4rem;
+    align-items: center;
+    justify-content: center;
+  }
+  .publication-logo :global(.publication-logo-image) {
+    max-width: 100%;
+    max-height: 3.5rem;
+    height: auto;
+    object-fit: contain;
+    filter: brightness(0);
+    opacity: 0.7;
+    transition: opacity 150ms;
+  }
+  .publication-logo :global(.publication-logo-boxed) {
+    filter: grayscale(1);
+  }
+  .publication-logo:hover :global(.publication-logo-image),
+  .publication-logo:focus-visible :global(.publication-logo-image) {
+    opacity: 1;
+  }
+  @media (min-width: 768px) {
+    .publication-logos {
+      grid-template-columns: 1.6fr 0.9fr 1.25fr 0.85fr 1.1fr;
+      gap: 1.75rem;
+    }
+    .publication-logos li:first-child {
+      grid-column: auto;
+    }
+  }
+
+  .media-section {
+    padding: 3.5rem 1.5rem;
+  }
+  .media-section :global(h2[id]) {
+    scroll-margin-top: 2rem;
+    font-size: clamp(2rem, 3.2vw, 3rem);
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+  }
+  .media-section :global(h2[id] > span[aria-hidden]) {
+    width: 4rem;
+    margin-top: 1rem;
+    height: 4px;
+  }
+  .media-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 1.25rem;
+    background: var(--color-signal-deep);
+    padding: 1rem 1.5rem;
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: background-color 150ms;
+  }
+  .media-button:hover {
+    background: var(--color-ink);
+  }
+  .media-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--color-signal-deep);
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+  .media-link > span {
+    transition: transform 150ms;
+  }
+  a:hover .media-link > span,
+  a.media-link:hover > span {
+    transform: translate(2px, -2px);
+  }
+  .press-archive summary::-webkit-details-marker {
+    display: none;
+  }
+  .press-archive[open] .archive-toggle {
+    transform: rotate(45deg);
+  }
+  @media (min-width: 640px) {
+    .media-section { padding-inline: 2.5rem; }
+  }
+  @media (min-width: 1024px) {
+    .media-section { padding: 4.5rem 3.5rem; }
+  }
+</style>

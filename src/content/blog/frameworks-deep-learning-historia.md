@@ -6,7 +6,7 @@ lang: es
 tags: ["deep-learning", "codigo-abierto", "historia", "datos"]
 ---
 
-Cuando elegimos un framework para entrenar un modelo, normalmente nos fijamos en qué tan fácil es usarlo, si funciona con nuestras GPU y cuántos ejemplos hay disponibles. Es comprensible: queremos que el modelo corra. El problema aparece unos años después, cuando necesitamos actualizarlo y descubrimos que el equipo que mantenía la herramienta ya está trabajando en otra cosa.
+Durante muchos años, escribir herramientas de Deep Learning er una tarea muy ardua por dos razones principales:
 
 La historia de Theano, Caffe, Caffe2, PyTorch, TensorFlow y MXNet tiene bastante de eso. En menos de veinte años hubo proyectos que salieron de universidades, otros que nacieron dentro de empresas y algunos que acabaron en fundaciones. Unos siguen publicando versiones; de otros quedan el código, la documentación y las aplicaciones que todavía dependen de ellos.
 
