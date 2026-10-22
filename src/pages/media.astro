@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import SectionHeading from '../components/SectionHeading.astro';
-import nvidiaPhoto from '../assets/nvidia-photo.jpg';
+import nvidiaHero from '../assets/nvidia-hero.jpg';
 import mbnHero from '../assets/mbn-ai-hype-2026.jpg';
 
 const columns = [
@@ -223,30 +223,41 @@ const press = [
 
   <section class="border-b border-hairline px-6 py-14 sm:px-10 lg:px-14">
     <SectionHeading title="Research highlights" id="research-highlights" />
-    <div class="mt-8 grid max-w-4xl gap-8 md:grid-cols-[1fr_320px]">
-      <div class="space-y-4 text-[1.05rem] leading-relaxed">
-        <h3 class="text-lg font-semibold">NVIDIA</h3>
-        <p>
-          NVIDIA interviewed me about our work with the Lunar and Planetary Laboratory at the University of Arizona:
-          <strong>MarsNet</strong>, a convolutional neural network that identifies land features on the surface of
-          Mars from HiRISE imagery.
-        </p>
-        <a
-          href="https://developer.nvidia.com/blog/deep-learning-image-understanding-planetary-science/"
-          class="inline-flex items-center gap-2 text-sm font-medium text-signal-deep"
-        >
-          Read the NVIDIA Developer Blog post
-          <span aria-hidden="true">→</span>
-        </a>
-      </div>
-      <Image
-        src={nvidiaPhoto}
-        alt="León Palafox interviewed by NVIDIA about MarsNet and machine learning for planetary sciences"
-        widths={[320, 640]}
-        sizes="(min-width: 768px) 320px, 100vw"
-        loading="lazy"
-        class="w-full border border-hairline object-cover"
-      />
+
+    <figure class="mt-8 max-w-4xl">
+      <a
+        href="https://developer.nvidia.com/blog/deep-learning-image-understanding-planetary-science/"
+        class="group block"
+      >
+        <Image
+          src={nvidiaHero}
+          alt="Hero art for NVIDIA's Technical Blog on deep learning for planetary science: a Mars landscape annotated with impact craters, rootless cones and lava flows, alongside a convolutional neural network diagram and sample landform detections."
+          widths={[640, 960, 1280, 1672]}
+          sizes="(min-width: 896px) 896px, 100vw"
+          loading="lazy"
+          class="w-full border border-hairline object-cover"
+        />
+      </a>
+      <figcaption class="mt-3 flex items-start gap-3">
+        <span aria-hidden="true" class="mt-[0.55em] h-px w-6 shrink-0 bg-hairline"></span>
+        <span class="micro-label text-muted">NVIDIA · May 12, 2015</span>
+      </figcaption>
+    </figure>
+
+    <div class="mt-8 max-w-2xl space-y-4 text-[1.05rem] leading-relaxed">
+      <h3 class="text-lg font-semibold">NVIDIA</h3>
+      <p>
+        NVIDIA interviewed me about our work with the Lunar and Planetary Laboratory at the University of Arizona:
+        <strong>MarsNet</strong>, a convolutional neural network that identifies land features on the surface of Mars
+        from HiRISE imagery.
+      </p>
+      <a
+        href="https://developer.nvidia.com/blog/deep-learning-image-understanding-planetary-science/"
+        class="inline-flex items-center gap-2 text-sm font-medium text-signal-deep"
+      >
+        Read the NVIDIA Developer Blog post
+        <span aria-hidden="true">→</span>
+      </a>
     </div>
   </section>
 
