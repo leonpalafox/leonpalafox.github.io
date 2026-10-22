@@ -6,6 +6,7 @@ import SectionHeading from '../components/SectionHeading.astro';
 import nvidiaHero from '../assets/nvidia-hero.jpg';
 import mbnHero from '../assets/mbn-ai-hype-2026.jpg';
 import mitPhoto from '../assets/mit-top-business-leaders-2026.jpg';
+import wiredHero from '../assets/wired-agentic-ai-2026.jpg';
 
 const columns = [
   {
@@ -77,13 +78,6 @@ const press = [
   {
     year: '2026',
     items: [
-      {
-        date: 'Jul 27',
-        title: 'La IA agéntica llegó a México sin reglas ni garantías',
-        outlet: 'WIRED en Español',
-        href: 'https://es.wired.com/articulos/la-ia-agentica-llego-a-mexico-sin-reglas-ni-garantias',
-        note: 'Sobre la privacidad de datos y la gobernanza de los agentes de IA que ya operan en México.',
-      },
       {
         date: 'Sep 14',
         title: 'El negocio de la IA que ‘acabará con la humanidad’ ya genera empresas de más de 4,600 mdd',
@@ -319,6 +313,35 @@ const press = [
         </p>
         <span class="mt-5 inline-flex items-center gap-2 text-sm font-medium text-signal-deep">
           Read the interview
+          <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
+        </span>
+      </div>
+    </a>
+
+    <a
+      href="https://es.wired.com/articulos/la-ia-agentica-llego-a-mexico-sin-reglas-ni-garantias"
+      class="group mt-6 block max-w-4xl border border-hairline bg-paper p-5 transition-colors hover:border-signal lg:p-6"
+    >
+      <Image
+        src={wiredHero}
+        alt="WIRED en Español hero art for “La IA agéntica llegó a México sin reglas ni garantías”: humanoid AI agents working at screens over the Mexico City skyline, with a León Palafox quote on not knowing where data is stored."
+        widths={[640, 960, 1280, 1672]}
+        sizes="(min-width: 1024px) 848px, 100vw"
+        loading="lazy"
+        class="w-full border border-hairline object-cover"
+      />
+      <div class="mt-6 lg:mt-7">
+        <p class="micro-label text-signal-deep">WIRED en Español</p>
+        <h3 class="mt-2 text-xl font-semibold leading-snug">
+          La IA agéntica llegó a México sin reglas ni garantías
+        </h3>
+        <p class="mt-2 text-sm text-muted">July 28, 2026</p>
+        <p class="mt-4 max-w-2xl leading-relaxed text-muted">
+          On data privacy, regulatory gaps, and the safeguards still missing as autonomous AI agents begin operating
+          in Mexico.
+        </p>
+        <span class="mt-5 inline-flex items-center gap-2 text-sm font-medium text-signal-deep">
+          Read the article
           <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
         </span>
       </div>
