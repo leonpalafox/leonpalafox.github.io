@@ -5,6 +5,7 @@ import { loadDeck } from '../../../lib/slides.mjs';
 
 const deck = '/slides/deep-learning/class-02-redes-convolucionales.html';
 const pdf = '/slides/deep-learning/class-02-redes-convolucionales.pdf';
+const notebook = 'https://colab.research.google.com/drive/1HlMWpdtCkxoUpzOVyqYZ8HufpbYFEp_8?usp=sharing';
 
 // Outline straight from the deck's own slide list, grouped by section.
 // Slide numbers match the deck, so each entry deep-links with #slide=N.
@@ -47,6 +48,10 @@ slides.forEach((slide, i) => {
       </a>
       <a href={deck} target="_blank" rel="noopener" class="deck-btn">
         Pantalla completa
+        <span aria-hidden="true">↗</span>
+      </a>
+      <a href={notebook} target="_blank" rel="noopener" class="deck-btn">
+        Notebook en Colab
         <span aria-hidden="true">↗</span>
       </a>
     </div>
