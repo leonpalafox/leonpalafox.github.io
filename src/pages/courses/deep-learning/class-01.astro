@@ -5,6 +5,7 @@ import { loadDeck } from '../../../lib/slides.mjs';
 
 const deck = '/slides/deep-learning/class-01-introduccion.html';
 const pdf = '/slides/deep-learning/class-01-introduccion.pdf';
+const notebook = 'https://colab.research.google.com/drive/1eLdTmDQjlvF7qRlw2CBwDpHPO7j_mIrC?usp=sharing';
 
 // Outline straight from the slides' Markdown, grouped by its "# Section" headings.
 // Slide numbers match the deck, so each entry deep-links with #slide=N.
@@ -46,6 +47,10 @@ slides.forEach((slide, i) => {
       </a>
       <a href={deck} target="_blank" rel="noopener" class="deck-btn">
         Pantalla completa
+        <span aria-hidden="true">↗</span>
+      </a>
+      <a href={notebook} target="_blank" rel="noopener" class="deck-btn">
+        Notebook en Colab
         <span aria-hidden="true">↗</span>
       </a>
     </div>

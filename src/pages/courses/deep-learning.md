@@ -16,7 +16,7 @@ A comprehensive journey through the foundations and state-of-the-art of Deep Neu
 
 | # | Session | Resources |
 | -- | ------- | ------ |
-| 1 | [Introducción: representaciones, herramientas, perceptrón y backpropagation](/courses/deep-learning/class-01/) | [Deck](/slides/deep-learning/class-01-introduccion.html) · [PDF](/slides/deep-learning/class-01-introduccion.pdf) |
+| 1 | [Introducción: representaciones, herramientas, perceptrón y backpropagation](/courses/deep-learning/class-01/) | [Deck](/slides/deep-learning/class-01-introduccion.html) · [PDF](/slides/deep-learning/class-01-introduccion.pdf) · [Colab](https://colab.research.google.com/drive/1eLdTmDQjlvF7qRlw2CBwDpHPO7j_mIrC?usp=sharing) |
 | 2 | [Redes neuronales convolucionales: invarianza, convolución y pooling](/courses/deep-learning/class-02/) | [Deck](/slides/deep-learning/class-02-redes-convolucionales.html) · [PDF](/slides/deep-learning/class-02-redes-convolucionales.pdf) · [Colab](https://colab.research.google.com/drive/1HlMWpdtCkxoUpzOVyqYZ8HufpbYFEp_8?usp=sharing) |
 | 3 | [Embeddings en CNN: de píxeles a vectores y aplicaciones](/courses/deep-learning/class-03/) | [Deck](/slides/deep-learning/class-03-embeddings-cnn.html) · [PDF](/slides/deep-learning/class-03-embeddings-cnn.pdf) |
 | 4 | Optimizers: SGD, Momentum, Adam | *Próximamente* |
@@ -33,7 +33,7 @@ A comprehensive journey through the foundations and state-of-the-art of Deep Neu
 
 ### Clase 1 — Introducción al aprendizaje profundo
 
-*Por qué la representación de los datos lo cambia todo.* · [Slides & outline →](/courses/deep-learning/class-01/) · [PDF ↓](/slides/deep-learning/class-01-introduccion.pdf)
+*Por qué la representación de los datos lo cambia todo.* · [Slides & outline →](/courses/deep-learning/class-01/) · [PDF ↓](/slides/deep-learning/class-01-introduccion.pdf) · [Notebook en Colab ↗](https://colab.research.google.com/drive/1eLdTmDQjlvF7qRlw2CBwDpHPO7j_mIrC?usp=sharing)
 
 1. **El curso** — objetivos, metodología, mapa del curso y evaluación (60% proyecto final en equipos de hasta 3; 40% tareas y participación).
 2. **Representaciones y aplicaciones** — el problema de clasificación, cómo un cambio de coordenadas vuelve separable un problema, capas de representación, IA vs. ML vs. DL, y el papel de las GPUs, CUDA y la escala de datos. Casos: AlphaFold y modelos de lenguaje.
