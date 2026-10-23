@@ -25,13 +25,20 @@
 </script>
 <link rel="preconnect" href="https://www.googletagmanager.com">
 <link rel="preconnect" href="https://www.google-analytics.com">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-M9BV46V3PD"></script>
-<script>
+<!-- Same snippet as src/lib/analytics.mjs GA_SCRIPT; scripts/check-ga.mjs fails the build if they differ -->
+<script>if (location.hostname === 'www.leonpalafox.com') {
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  window.gtag = function () { dataLayer.push(arguments); };
+  let referrer = null;
+  try { referrer = sessionStorage.getItem('lp_referrer'); sessionStorage.removeItem('lp_referrer'); } catch (e) {}
   gtag('js', new Date());
-  gtag('config', 'G-M9BV46V3PD');
-</script>
+  gtag('config', 'G-M9BV46V3PD', referrer ? { page_referrer: referrer } : {});
+  const tag = document.createElement('script');
+  tag.async = true;
+  tag.src = 'https://www.googletagmanager.com/gtag/js?id=G-M9BV46V3PD';
+  document.head.appendChild(tag);
+}</script>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&display=swap">
 <style>

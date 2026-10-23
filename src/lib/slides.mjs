@@ -6,6 +6,7 @@
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { GA_HEAD } from './analytics.mjs';
 
 export const DECKS = [
   {
@@ -154,7 +155,9 @@ export function renderDeck(slug) {
 // of the index while its slides still count toward the page that embeds them.
 // Applied after renderDeck so the PDF freshness hash stays the same.
 export function servedDeck(html) {
-  return html.replace('</title>', '</title><meta name="robots" content="noindex, indexifembedded">');
+  return html
+    .replace('</title>', '</title><meta name="robots" content="noindex, indexifembedded">')
+    .replace('</head>', `${GA_HEAD}</head>`);
 }
 
 export function loadDeck(slug) {

@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
+import { LEGACY_REFERRER_SCRIPT } from './src/lib/analytics.mjs';
 
 // Old Jekyll permalinks were /:categories/:title/ — keep inbound links alive.
 // :title kept the filename's case, so the old URLs are /articulos/BigData/ and
@@ -72,6 +73,26 @@ Object.assign(redirects, {
 // Note: /mlclase/ is a separate GitHub Pages project site
 // (github.com/leonpalafox/mlclase), so it cannot be redirected from this repo.
 
+// The redirects above are meta-refresh pages (GitHub Pages has no server 301s),
+// so the destination sees the redirect page as its referrer and GA4 records a
+// visitor from Google as direct. Hand the original referrer on; Base.astro's
+// GA snippet reports it (src/lib/analytics.mjs).
+const legacyReferrer = {
+  name: 'legacy-referrer',
+  hooks: {
+    'astro:build:done': ({ dir }) => {
+      const tag = `<script>${LEGACY_REFERRER_SCRIPT}</script>`;
+      for (const file of fs.readdirSync(dir, { recursive: true })) {
+        if (!file.endsWith('.html')) continue;
+        const path = new URL(file, dir);
+        const html = fs.readFileSync(path, 'utf8');
+        if (!html.includes('http-equiv="refresh"') || html.includes(tag)) continue;
+        fs.writeFileSync(path, html.replace('</title>', `</title>${tag}`));
+      }
+    },
+  },
+};
+
 // Publication dates from the content frontmatter, used as <lastmod> so crawlers
 // can tell new columns from old ones without a full recrawl. A post revised
 // after publication reports its `updatedDate` instead.
@@ -115,6 +136,7 @@ export default defineConfig({
         return item;
       },
     }),
+    legacyReferrer,
   ],
   vite: {
     plugins: [tailwindcss()],
