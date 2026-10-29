@@ -22,6 +22,10 @@ export const DECKS = [
     slug: 'deep-learning/class-03-embeddings-cnn',
     standalone: true,
   },
+  {
+    slug: 'deep-learning/class-04-regularizacion-transfer-learning',
+    standalone: true,
+  },
 ];
 
 const root = process.cwd();

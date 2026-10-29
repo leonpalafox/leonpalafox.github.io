@@ -19,7 +19,7 @@ A comprehensive journey through the foundations and state-of-the-art of Deep Neu
 | 1 | [Introducción: representaciones, herramientas, perceptrón y backpropagation](/courses/deep-learning/class-01/) | [Deck](/slides/deep-learning/class-01-introduccion.html) · [PDF](/slides/deep-learning/class-01-introduccion.pdf) · [Colab](https://colab.research.google.com/drive/1eLdTmDQjlvF7qRlw2CBwDpHPO7j_mIrC?usp=sharing) |
 | 2 | [Redes neuronales convolucionales: invarianza, convolución y pooling](/courses/deep-learning/class-02/) | [Deck](/slides/deep-learning/class-02-redes-convolucionales.html) · [PDF](/slides/deep-learning/class-02-redes-convolucionales.pdf) · [Colab](https://colab.research.google.com/drive/1HlMWpdtCkxoUpzOVyqYZ8HufpbYFEp_8?usp=sharing) |
 | 3 | [Embeddings en CNN: de píxeles a vectores y aplicaciones](/courses/deep-learning/class-03/) | [Deck](/slides/deep-learning/class-03-embeddings-cnn.html) · [PDF](/slides/deep-learning/class-03-embeddings-cnn.pdf) |
-| 4 | Optimizers: SGD, Momentum, Adam | *Próximamente* |
+| 4 | [Regularización y transfer learning: generalización y CNN en la práctica](/courses/deep-learning/class-04/) | [Deck](/slides/deep-learning/class-04-regularizacion-transfer-learning.html) · [PDF](/slides/deep-learning/class-04-regularizacion-transfer-learning.pdf) |
 | 5 | Recurrent networks: RNN, LSTM, GRU | *Próximamente* |
 | 6 | Attention and the Transformer architecture | *Próximamente* |
 | 7 | Pretrained language models: BERT, GPT | *Próximamente* |
@@ -57,6 +57,15 @@ A comprehensive journey through the foundations and state-of-the-art of Deep Neu
 3. **Del clasificador al encoder** — quitar la última capa, reutilizar la representación y extraer un embedding de 2048 dimensiones con ResNet-50.
 4. **Aplicaciones** — búsqueda visual por similitud, clustering sin etiquetas, transferencia de aprendizaje y detección de anomalías.
 5. **Buenas prácticas** — elegir modelo y capa de extracción, congelar o ajustar el backbone, normalizar los vectores y escoger una métrica de similitud.
+
+### Clase 4 — Regularización y transfer learning
+
+*Cómo hacer que una CNN funcione en el mundo real.* · [Slides & outline →](/courses/deep-learning/class-04/) · [PDF ↓](/slides/deep-learning/class-04-regularizacion-transfer-learning.pdf)
+
+1. **Repaso y aplicaciones** — convolución, pooling y aprendizaje jerárquico; visión en medicina, búsqueda visual, segmentación y video.
+2. **Generalización y regularización** — overfitting, Dropout, BatchNorm y data augmentation para entrenar con pocos datos y mejorar la generalización.
+3. **Transfer learning** — modelos preentrenados, extracción de características frente a fine-tuning y adaptación de la cabeza de clasificación.
+4. **Práctica y evaluación** — anatomía de una solución de visión, entrenamiento y comparación de modelos, accuracy, precision, recall y matriz de confusión.
 
 ## Assessment
 
