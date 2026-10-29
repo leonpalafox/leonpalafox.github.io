@@ -1,5 +1,5 @@
 {
-  "week": 7,
+  "week": 8,
   "season": 2026,
   "sources": [
     {
@@ -9,11 +9,11 @@
       "kind": "analyst",
       "url_tpl": "https://www.nfl.com/news/nfl-power-rankings-week-{week}-{season}-nfl-season",
       "urls": [
-        "https://www.nfl.com/news/nfl-power-rankings-week-7-2026-nfl-season"
+        "https://www.nfl.com/news/nfl-power-rankings-week-8-2026-nfl-season"
       ],
       "extract": "nflcom_rank_marker",
       "prior_weight": 1.0,
-      "tier": "League site column. Missing for weeks 4-5, back from week 6."
+      "tier": "League site column."
     },
     {
       "id": "cbs-prisco",
@@ -35,11 +35,11 @@
       "kind": "analyst",
       "url_tpl": "",
       "urls": [
-        "https://www.foxsports.com/stories/nfl/2026-nfl-power-rankings-week-7"
+        "https://www.foxsports.com/stories/nfl/2026-nfl-power-rankings-week-8"
       ],
       "extract": "si_numbered",
       "prior_weight": 0.9,
-      "tier": "Analyst column; 'N. Team Name' inside h2 anchors. Its JSON-LD keywords are unordered."
+      "tier": "Analyst column; 'N. Team Name' inside h2 anchors."
     },
     {
       "id": "si-orr",
@@ -48,7 +48,7 @@
       "kind": "analyst",
       "url_tpl": "",
       "urls": [
-        "https://www.si.com/nfl/conor-orr-week-7-nfl-power-rankings-rams-packers-cowboys"
+        "https://www.si.com/nfl/conor-orr-week-8-nfl-power-rankings-vikings-seahawks-bears"
       ],
       "extract": "si_numbered",
       "prior_weight": 0.9,
@@ -61,11 +61,11 @@
       "kind": "analyst",
       "url_tpl": "",
       "urls": [
-        "https://www.sportingnews.com/us/nfl/news/nfl-power-rankings-bears-steelers-packers-bump-week-7/0393017998c62642cfc8cd0a"
+        "https://www.sportingnews.com/us/nfl/news/nfl-power-rankings-week-8-bills-vikings-49ers-patriots-packers/eb6f24cce36fc22dac8c8aa6"
       ],
       "extract": "sportingnews_numbered",
       "prior_weight": 0.85,
-      "tier": "Analyst column with 'N. Team W-L (previous rank)' headings; the slug hash is not derivable."
+      "tier": "Analyst column; the slug hash is not derivable and the word order changes weekly."
     },
     {
       "id": "sharp-summerlin",
@@ -85,7 +85,7 @@
       "kind": "panel",
       "url_tpl": "",
       "urls": [
-        "https://www.thescore.com/nfl/news/3628524/nfl-power-rankings-week-7-whos-on-the-hot-seat-from-every-team"
+        "https://www.thescore.com/nfl/news/3635053/nfl-power-rankings-week-8-every-teams-scariest-trend"
       ],
       "extract": "thescore_numbered",
       "prior_weight": 0.8,
@@ -98,24 +98,11 @@
       "kind": "panel",
       "url_tpl": "",
       "urls": [
-        "https://bleacherreport.com/articles/25513225-br-experts-week-7-nfl-power-rankings"
+        "https://bleacherreport.com/articles/25520633-br-experts-week-8-nfl-power-rankings"
       ],
       "extract": "si_numbered",
       "prior_weight": 0.8,
       "tier": "Staff panel; numbered slide headings. The 2025 edition shares the title at another id."
-    },
-    {
-      "id": "usatoday-davis",
-      "outlet": "USA Today",
-      "analyst": "Nate Davis",
-      "kind": "analyst",
-      "url_tpl": "",
-      "urls": [
-        "https://www.centraloregondaily.com/sports/nfl-power-rankings-week-7-do-struggling-rams-seahawks-drop-out-of-top-10/article_2e2606a6-0a87-53e5-8072-013d551461df.html"
-      ],
-      "extract": "usatoday_numbered",
-      "prior_weight": 0.9,
-      "tier": "Nate Davis's national column. usatoday.com now returns HTTP 402 Access Restricted to EVERY user agent, including Googlebot and Bingbot -- the crawler workaround that worked in week 5 is dead -- and the Gannett syndication network blocks too. The ballot is read from an independent syndication partner that carries the column verbatim under the same headline. Syndicated copies carry no publication metadata, so the freshness gate cannot date them; verify by matching the headline and the #1/#32 teams against the original."
     }
   ]
 }
