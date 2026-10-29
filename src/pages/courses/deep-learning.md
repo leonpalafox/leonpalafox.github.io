@@ -18,7 +18,7 @@ A comprehensive journey through the foundations and state-of-the-art of Deep Neu
 | -- | ------- | ------ |
 | 1 | [Introducción: representaciones, herramientas, perceptrón y backpropagation](/courses/deep-learning/class-01/) | [Deck](/slides/deep-learning/class-01-introduccion.html) · [PDF](/slides/deep-learning/class-01-introduccion.pdf) · [Colab](https://colab.research.google.com/drive/1eLdTmDQjlvF7qRlw2CBwDpHPO7j_mIrC?usp=sharing) |
 | 2 | [Redes neuronales convolucionales: invarianza, convolución y pooling](/courses/deep-learning/class-02/) | [Deck](/slides/deep-learning/class-02-redes-convolucionales.html) · [PDF](/slides/deep-learning/class-02-redes-convolucionales.pdf) · [Colab](https://colab.research.google.com/drive/1HlMWpdtCkxoUpzOVyqYZ8HufpbYFEp_8?usp=sharing) |
-| 3 | [Embeddings en CNN: de píxeles a vectores y aplicaciones](/courses/deep-learning/class-03/) | [Deck](/slides/deep-learning/class-03-embeddings-cnn.html) · [PDF](/slides/deep-learning/class-03-embeddings-cnn.pdf) |
+| 3 | [Embeddings en CNN: de píxeles a vectores y aplicaciones](/courses/deep-learning/class-03/) | [Deck](/slides/deep-learning/class-03-embeddings-cnn.html) · [PDF](/slides/deep-learning/class-03-embeddings-cnn.pdf) · [Colab](https://colab.research.google.com/drive/1_LK6V7Rpdd2jtQMPKaLZiGtT8QGeMnxj) |
 | 4 | [Regularización y transfer learning: generalización y CNN en la práctica](/courses/deep-learning/class-04/) | [Deck](/slides/deep-learning/class-04-regularizacion-transfer-learning.html) · [PDF](/slides/deep-learning/class-04-regularizacion-transfer-learning.pdf) |
 | 5 | Recurrent networks: RNN, LSTM, GRU | *Próximamente* |
 | 6 | Attention and the Transformer architecture | *Próximamente* |
@@ -50,7 +50,7 @@ A comprehensive journey through the foundations and state-of-the-art of Deep Neu
 
 ### Clase 3 — Embeddings en CNN
 
-*De una imagen a un vector reutilizable.* · [Slides & outline →](/courses/deep-learning/class-03/) · [PDF ↓](/slides/deep-learning/class-03-embeddings-cnn.pdf)
+*De una imagen a un vector reutilizable.* · [Slides & outline →](/courses/deep-learning/class-03/) · [PDF ↓](/slides/deep-learning/class-03-embeddings-cnn.pdf) · [Notebook en Colab ↗](https://colab.research.google.com/drive/1_LK6V7Rpdd2jtQMPKaLZiGtT8QGeMnxj)
 
 1. **Embeddings** — representaciones visuales, similitud más allá de los píxeles y un experimento con transformaciones de una misma imagen.
 2. **De píxeles a vectores** — backbone y head de clasificación, jerarquía de características, feature maps y Global Average Pooling.
