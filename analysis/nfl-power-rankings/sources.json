@@ -103,6 +103,19 @@
       "extract": "si_numbered",
       "prior_weight": 0.8,
       "tier": "Staff panel; numbered slide headings. The 2025 edition shares the title at another id."
+    },
+    {
+      "id": "usatoday-davis",
+      "outlet": "USA Today",
+      "analyst": "Nate Davis",
+      "kind": "analyst",
+      "url_tpl": "",
+      "urls": [
+        "https://www.centraloregondaily.com/sports/nfl-power-rankings-week-8-whos-no-1-after-49ers-chiefs-lose-first-games/article_84aa44e0-484d-59f0-9ff5-4ee2b0efa71e.html"
+      ],
+      "extract": "usatoday_numbered",
+      "prior_weight": 0.9,
+      "tier": "Nate Davis's national column. usatoday.com returns HTTP 402 to every user agent (Chrome, Googlebot, Bingbot) and the ENTIRE Gannett newspaper network does the same, so tennessean.com and detroitnews.com copies are dead ends. Only an independent TownNews/BLOX partner reprint is readable. Syndicated copies carry no publication metadata, so the freshness gate cannot date them; verify by matching the headline and the #1/#32 teams."
     }
   ]
 }

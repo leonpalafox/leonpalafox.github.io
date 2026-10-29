@@ -841,15 +841,15 @@ Here is where the panel landed after Week 7.
 })();
 </script>
 
-Buffalo climbs two places to first on six of eight first-place votes without playing, which is what happens when the two teams above you both lose. Minnesota is second on the other two votes and is the only unbeaten left — but the panel scores the Bills higher on quality, and 5–1 against a tougher slate reads better than 6–0 against a softer one.
+Buffalo climbs two places to first on six of nine first-place votes without playing, which is what happens when the two teams above you both lose. Minnesota is second on two votes and is the only unbeaten left — but the panel scores the Bills higher on quality, and 5–1 against a tougher slate reads better than 6–0 against a softer one.
 
-The two losers drop in step: San Francisco falls to third and Kansas City to fourth, both down two.
+The ninth vote is worth naming, because it is the odd one: **USA Today puts San Francisco first**, the only outlet in the panel to do so. Everyone else has the 49ers third or lower after their first loss.
+
+San Francisco falls to third and Kansas City to fourth, both down two.
 
 **Seattle is the week's statement, up four to fifth** after beating the Chiefs 20–3 — the biggest result of their season. Chicago climbs two to sixth.
 
 The bottom of the top ten is where the movement is: Baltimore falls six to 16th after losing 35–13 to Cincinnati, Carolina drops five to 19th after being routed 43–13 by Tampa Bay, and Tampa Bay itself climbs six.
-
-## The panel
 
 <a id="movers"></a>
 
@@ -1669,9 +1669,9 @@ Fourteen games in Week 8: Houston, New Orleans, the Giants and San Francisco are
     'Two things worth knowing. <strong>The weight is weakly determined.</strong> Its 95% profile interval ' +
     'runs from ' + loW.toFixed(2) + ' to ' + hiW.toFixed(2) + ' on the ' + nEval + ' graded games, so treat ' +
     rankW + '/' + recW + ' as "roughly half each" rather than a measurement; the unregularised best fit ' +
-    'this week wanted <strong>' + Math.round((wFit ? wFit.weightUnregularised : rankW / 100) * 100) +
-    '% on the rankings</strong>, and the published weight is held off that boundary by a weak prior ' +
-    'centred on an even split. ' +
+    'wanted <strong>' + Math.round((wFit ? wFit.weightUnregularised : rankW / 100) * 100) +
+    '% on the rankings</strong> this week, and the published weight is held off that boundary by a weak ' +
+    'prior centred on an even split. ' +
     '<strong>And this week the blend reshuffles a conference.</strong> The field is the same fourteen ' +
     'teams either way, but not the seeds: <strong>Cincinnati rises from the seventh seed to the fourth</strong> ' +
     'and Jacksonville from fourth to third, while Pittsburgh falls from third to sixth. The panel rates the ' +
@@ -1685,23 +1685,25 @@ Fourteen games in Week 8: Houston, New Orleans, the Giants and San Francisco are
 </script>
 <a id="panel"></a>
 
-8 outlets this week. Mean distance from the consensus order, in rank positions:
+## The panel
+
+9 outlets this week. Mean distance from the consensus order, in rank positions:
 
 | Outlet | Analyst | Mean gap | ρ vs consensus |
 |--------|---------|----------|----------------|
-| Bleacher Report | B/R NFL staff | 0.75 | 0.993 |
-| theScore | theScore NFL desk | 0.94 | 0.988 |
-| CBS Sports | Pete Prisco | 1.06 | 0.984 |
-| Sporting News | Vinnie Iyer | 1.06 | 0.988 |
-| FOX Sports | Ralph Vacchiano | 1.25 | 0.982 |
-| Sports Illustrated | Conor Orr | 1.25 | 0.981 |
-| Sharp Football Analysis | Raymond Summerlin | 1.94 | 0.962 |
-| NFL.com | Nick Shook | 2.12 | 0.959 |
+| Bleacher Report | B/R NFL staff | 0.69 | 0.994 |
+| Sporting News | Vinnie Iyer | 1.00 | 0.989 |
+| theScore | theScore NFL desk | 1.00 | 0.987 |
+| CBS Sports | Pete Prisco | 1.38 | 0.981 |
+| FOX Sports | Ralph Vacchiano | 1.38 | 0.981 |
+| Sports Illustrated | Conor Orr | 1.50 | 0.977 |
+| NFL.com | Nick Shook | 2.06 | 0.959 |
+| Sharp Football Analysis | Raymond Summerlin | 2.06 | 0.959 |
+| USA Today | Nate Davis | 2.94 | 0.922 |
 
-This is the most agreed panel of the season by a clear margin: mean pairwise Spearman **ρ = 0.958**, split-half reliability 0.993. Every outlet is inside 2.12 positions of the consensus, and Bleacher Report is within 0.75 — the tightest single ballot of the year.
+Generally strong agreement — mean pairwise Spearman **ρ = 0.943** — with one clear exception. Seven of the nine outlets sit within 2.06 positions of the consensus, and Bleacher Report is within 0.69.
 
-A chaotic Sunday produced a *more* agreed panel, which is not what you would expect. The likely reason is that the week resolved arguments rather than creating them: when the two leaders both lose, the ordering below them stops being hypothetical.
-
+**USA Today is the outlier at 2.94 positions (ρ = 0.922)**, and the distance is almost entirely one decision: it is the only ballot that keeps San Francisco at No. 1 after the 49ers' first loss. That single call reorders everything beneath it, because every other team shifts down a slot in response.
 
 <a id="sources"></a>
 
@@ -1724,8 +1726,7 @@ than in every post:
   method does *not* claim.
 - `analysis/nfl-power-rankings/README.md` — the pipeline and how to run it.
 
-This week's panel — eight ballots, every one verified complete and dated inside
-the week:
+This week's panel — nine ballots, every one verified complete:
 
 | Outlet | Analyst | This week's ballot |
 |--------|---------|--------------------|
@@ -1737,26 +1738,36 @@ the week:
 | Sharp Football Analysis | Raymond Summerlin | [sharpfootballanalysis.com](https://www.sharpfootballanalysis.com/analysis/nfl-power-rankings/) |
 | theScore | theScore NFL desk | [thescore.com](https://www.thescore.com/nfl/news/3635053/nfl-power-rankings-week-8-every-teams-scariest-trend) |
 | Bleacher Report | B/R NFL staff | [bleacherreport.com](https://bleacherreport.com/articles/25520633-br-experts-week-8-nfl-power-rankings) |
+| USA Today | Nate Davis | [centraloregondaily.com](https://www.centraloregondaily.com/sports/nfl-power-rankings-week-8-whos-no-1-after-49ers-chiefs-lose-first-games/article_84aa44e0-484d-59f0-9ff5-4ee2b0efa71e.html) (syndicated) |
 
-Eight ballots this week, nine last week. The one that dropped out is USA Today,
-and the reason has changed again:
+### USA Today hangs on by one door
 
-- **USA Today is out of reach entirely this week.** The canonical site returns
-  `HTTP 402 Access Restricted` to every user agent — Chrome, Googlebot, Bingbot —
-  which has been true since Week 6. What is new is that the syndication route has
-  closed as well: both the Gannett network copy and the independent partner used
-  in Weeks 6–7 returned either `402` or nothing for Week 8. There is no reading
-  of Nate Davis's column that does not involve guessing, so it is out.
+`usatoday.com` has returned **`HTTP 402 Access Restricted`** to every user agent
+since Week 6 — Chrome, Googlebot, Bingbot, all of them. What is new this week is
+that the **entire Gannett newspaper network** refuses the same way:
+`tennessean.com` and `detroitnews.com` both carried the column in earlier weeks
+and now return 402 across the whole host, not just the article.
 
-Two are still missing:
+One door is still open. An independent TownNews/BLOX partner reprints the column
+verbatim under the same headline, with Nate Davis's byline, and serves it
+normally. The ballot is read from there.
 
-- **Neil Reynolds' NFL.com UK column** is absent for a sixth straight week. Its
-  year-less slug now returns a plain 404 rather than the stale 2020 article it
-  once served, so there is nothing to catch and nothing to include.
-- **Pro Football Talk** publishes a weekly 1–32 but has failed the completeness
-  check three weeks running, with entries missing from its rendered page.
+The caveat is permanent for this source now: reprints carry no `datePublished`, so
+the freshness gate logs USA Today as **`freshness unverified`** on every run. It
+is included on the strength of an independent cross-check — same headline, same
+No. 1 (49ers), same No. 32 (Chargers) — not on a verified timestamp. If that
+partner stops reprinting, this ballot leaves the panel.
+
+### Three still missing
+
+- **Neil Reynolds' NFL.com UK column** is gone rather than late. Both its
+  year-less and year-suffixed slugs return plain 404s, six weeks running, with no
+  stale article to catch and nothing to include.
+- **Pro Football Talk** changed failure mode this week: its old slug now
+  redirects to a 404, so there is no article body to test for completeness at all.
 - **ESPN** remains absent permanently: every URL returns an empty `HTTP 202` to a
   plain request.
 
-All eight ballots passed the freshness gate against their own `datePublished`
-inside the October 27 – November 2 window for Week 8.
+Eight ballots passed the freshness gate against their own `datePublished` inside
+the October 27 – November 2 window for Week 8; the ninth is dated by cross-check
+as above.
