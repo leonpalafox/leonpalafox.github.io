@@ -1087,7 +1087,7 @@ Fourteen games in Week 6: Cincinnati, Detroit, Miami and Minnesota are on bye. E
   <div class="h2h-head">
     <div class="h2h-kicker" id="h2h-kicker">2026 season · Week 2 · head to head</div>
     <h3 class="h2h-title">What the consensus says about this week.</h3>
-    <p class="h2h-lede" id="h2h-lede"></p>
+    <p class="h2h-lede" id="h2h-lede">Every game, priced from the poll of polls alone. Win probability is the shaded side. The market column is shown for comparison and was <em>not</em> an input.</p>
   </div>
 
   <div class="h2h-filter">
@@ -1249,9 +1249,8 @@ Fourteen games in Week 6: Cincinnati, Detroit, Miami and Minnesota are on bye. E
     var agree = withLine.filter(function (g) {
       return (g.expectedMargin > 0) === (g.marketSpread > 0);
     }).length;
-    lede.innerHTML = 'Every game, priced from the poll of polls alone. Win probability ' +
-      'is the shaded side. The market column is shown for comparison and was <em>not</em> ' +
-      'an input \u2014 on this slate the two agree on the favourite in <strong>' + agree +
+    lede.innerHTML = lede.innerHTML +
+      ' On this slate the two agree on the favourite in <strong>' + agree +
       ' of ' + withLine.length + ' games</strong>.';
   })();
   var scores = {};
