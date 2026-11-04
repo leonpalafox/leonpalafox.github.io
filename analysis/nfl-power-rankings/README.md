@@ -223,12 +223,53 @@ Every random draw is seeded from the registry week (`seed=20260917` in
 SHA-256 prefix is recorded in `consensus.json` so a reader can confirm which
 bytes produced the published numbers.
 
+## Hazard: never regenerate a past week
+
+**Archived bundles must be restored from git, never re-run.** Two of the nine
+sources are *rolling hubs* that always serve the current week in place:
+
+- CBS Sports — `https://www.cbssports.com/nfl/powerrankings/`
+- Sharp Football — `https://www.sharpfootballanalysis.com/analysis/nfl-power-rankings/`
+
+They have no per-week URL, which is exactly why they are convenient, and exactly
+why they cannot be reused later. Point `sources.json` at an old `week`, run the
+pipeline, and those two fetch *today's* ballot while the other seven (which do
+have per-week URLs) fetch the historical one. The archived edition is then a
+mixture that never existed.
+
+The freshness gate does not rescue you. It rejects a page whose own date falls
+outside the requested week's window, so the rolling hub is refused — but refusing
+it silently *shrinks the panel* and re-weights everything else. Either outcome
+corrupts the archive: mixed weeks in one case, a smaller panel in the other.
+
+This happened on 2026-11-04. Re-running the Week 8 registry while preparing Week 9
+changed its consensus from ρ = 0.9428 to ρ = 0.9363 and reshuffled its playoff
+seeds. It was caught in `git status` and restored with:
+
+```bash
+git checkout -- src/data/nfl-power-rankings-2026-wk08.json
+```
+
+Practical guard, after any run:
+
+```bash
+git status --porcelain src/data/
+```
+
+Only the bundle for the week you intended should appear. If an older one has
+changed, restore it before committing. The per-week page cache under
+`cache/<season>-wk<NN>/` preserves the original HTML, but only until it expires —
+it is not a substitute for the committed bundle.
+
 ## Week-to-week use
 
 1. Update `week` and the discovery-source URLs in `sources.json` (see the
    checklist in `SOURCES.md`).
 2. `python3 run.py`
-3. Point the blog post at the new week's bundle and rebuild the site.
+3. Check `git status --porcelain src/data/` — only the new week's bundle should
+   have changed. If a past week moved, restore it (see the hazard above).
+4. Point the blog post at the new week's bundle and rebuild the site.
 
-The post imports `src/data/nfl-power-rankings-latest.json`, so step 3 is a
-one-line edit at most.
+The post reads its payload from the week-stamped bundle via
+`src/components/PollOfPollsData.astro`, which takes the week as a prop, so each
+published edition keeps rendering its own numbers.

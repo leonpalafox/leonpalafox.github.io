@@ -558,6 +558,38 @@ def main(argv: list[str] | None = None) -> int:
     if not args.no_site:
         target = HERE.parent.parent / "src" / "data" / f"nfl-power-rankings-{season}-wk{week:02d}.json"
         target.parent.mkdir(parents=True, exist_ok=True)
+
+        # Overwriting an existing week rewrites a published edition in place, and
+        # two of the nine sources (CBS, Sharp) are rolling hubs that only ever
+        # hold the current week. Reconstructing a past week therefore mixes
+        # today's ballots into a historical bundle -- this happened to Week 8 on
+        # 2026-11-04. Nothing can detect intent, so the least it can do is show
+        # what is about to change and say so loudly.
+        if target.exists():
+            try:
+                prior = json.loads(target.read_text(encoding="utf-8"))
+            except (OSError, ValueError):
+                prior = None
+            if prior:
+                before = prior.get("diagnostics", {})
+                after = site_bundle.get("diagnostics", {})
+                prior_ranks = {t["abbr"]: t["rank"] for t in prior.get("teams", [])}
+                now_ranks = {t["abbr"]: t["rank"] for t in site_bundle.get("teams", [])}
+                moved = sum(1 for k in prior_ranks if prior_ranks.get(k) != now_ranks.get(k))
+                rho_before = before.get("meanPairwiseSpearman") or 0.0
+                rho_after = after.get("meanPairwiseSpearman") or 0.0
+                src_before = before.get("sources") or 0
+                src_after = after.get("sources") or 0
+                if src_before != src_after or moved or abs(rho_after - rho_before) > 1e-9:
+                    print(f"\n  WARNING: rewriting an existing {season} week {week} bundle.", file=sys.stderr)
+                    print(f"    sources {src_before} -> {src_after}, "
+                          f"rho {rho_before:.4f} -> {rho_after:.4f}, {moved} team(s) reseeded",
+                          file=sys.stderr)
+                    print("    If this is a past week, STOP: CBS and Sharp are rolling hubs "
+                          "and will inject the current week.", file=sys.stderr)
+                    print(f"    Restore with: git checkout -- {target.relative_to(HERE.parent.parent)}",
+                          file=sys.stderr)
+
         report.write_json(target, site_bundle)
         latest = HERE.parent.parent / "src" / "data" / "nfl-power-rankings-latest.json"
         report.write_json(latest, site_bundle)

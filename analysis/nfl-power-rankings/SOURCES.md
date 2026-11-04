@@ -108,6 +108,10 @@ is a one-line edit in `sources.json`, and the report prints the weights used.
 - **Parser:** `cbs_table` parses the table rows; prose changes cannot corrupt it.
 - **Watch for:** the hub page also embeds the same club names in navigation
   menus. Parsing the table rather than the text is what keeps those out.
+- **Rolling page — do not reuse for a past week.** The hub overwrites itself
+  every Tuesday, so it can only ever reproduce the *current* week. Re-running an
+  archived week with this URL fetches today's table; see the hazard in
+  `README.md`.
 
 ### 3.4 Sports Illustrated — Conor Orr · `si-orr`
 
@@ -167,6 +171,9 @@ is a one-line edit in `sources.json`, and the report prints the weights used.
 - **Watch for:** the hub must genuinely have been refreshed for the week you
   think it has. The consensus pipeline trusts the page, so verify the date.
   This is the one source whose freshness is not visible in its URL.
+- **Rolling page — do not reuse for a past week.** Like the CBS hub, this URL
+  always holds the current week, so it cannot reconstruct an archived one. See
+  the hazard in `README.md`.
 
 ### 3.8 theScore — theScore NFL desk · `thescore-staff`
 
@@ -212,6 +219,11 @@ Run these steps in order every week. Steps 1–3 should take a few minutes; step
    ```bash
    python3 run.py --validate
    ```
+
+   If you are regenerating anything other than the current week, stop: the two
+   rolling hubs (CBS, Sharp) will serve today's ballot into a historical bundle.
+   Archived bundles are restored from git, never re-run — see the hazard in
+   `README.md`.
 
    Every source must report `ok 32/32`. Anything less is a hard failure: fix
    the URL, or fix the parser, or drop the source and say so.
