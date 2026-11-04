@@ -704,5 +704,57 @@ class TestWeightedBlend(unittest.TestCase):
             self.assertEqual(game["pickBlend"], game["home"] if game["pBlend"] >= 0.5 else game["away"])
             self.assertEqual(game["agrees"], (game["pRank"] >= 0.5) == (game["pBlend"] >= 0.5))
 
+class TestPostMarkup(unittest.TestCase):
+    """Guards against two artefacts that reached production on 2026-11-04.
+
+    Both were introduced by splicing widget markup between editions, and both
+    were invisible to an anchor check: a duplicated IIFE closer that leaked into
+    the body as visible ``})();`` text, and a hardcoded "agree on the favourite in
+    15 of 16 games" sentence copied forward from the first post while the data
+    underneath it said something else.
+    """
+
+    ANALYSIS = pathlib.Path(__file__).resolve().parents[1]
+    REPO = ANALYSIS.parents[1]
+
+    def _posts(self):
+        posts = sorted((self.REPO / "src" / "content" / "blog").glob("nfl-power-rankings*.md"))
+        if not posts:
+            self.skipTest("no poll-of-polls posts found")
+        return posts
+
+    def test_script_tags_are_balanced(self):
+        for post in self._posts():
+            text = post.read_text(encoding="utf-8")
+            self.assertEqual(
+                text.count("<script>"), text.count("</script>"),
+                f"{post.name} has unbalanced <script>/</script> tags",
+            )
+
+    def test_no_code_leaks_into_the_body(self):
+        """A closer outside a script element renders as literal text on the page."""
+        for post in self._posts():
+            lines = post.read_text(encoding="utf-8").split("\n")
+            open_at = None
+            for number, line in enumerate(lines, start=1):
+                if line.strip() == "<script>":
+                    open_at = number
+                elif line.strip() == "</script>":
+                    open_at = None
+                elif line.strip() == "})();" and open_at is None:
+                    self.fail(f"{post.name}:{number} has a stray '}})();' outside any script")
+
+    def test_market_agreement_is_not_hardcoded(self):
+        """The count must come from the data, not from a sentence copied forward."""
+        pattern = "agree on the favourite in"
+        for post in self._posts():
+            text = post.read_text(encoding="utf-8")
+            if pattern in text:
+                self.assertNotRegex(
+                    text, r"favourite in \d+ of \d+ games",
+                    f"{post.name} hardcodes the market-agreement count instead of computing it",
+                )
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

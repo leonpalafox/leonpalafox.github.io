@@ -398,6 +398,7 @@ Here is where the panel landed after Week 3.
   // Club marks are served from the site's own /images/nfl/, fetched once by
   // analysis/nfl-power-rankings/tools/fetch_logos.py. `onerror` hides the image
   // so a missing file degrades to a text-only row instead of a broken icon.
+
   var logoUrl = function (abbr) { return '/images/nfl/' + abbr.toLowerCase() + '.svg'; };
   var logoTag = function (abbr, size) {
     return '<span class="pop-mark pop-mark--' + size + '">' +
@@ -1088,13 +1089,13 @@ Every team plays in Week 4. All 16 games are priced below from the consensus alo
   <div class="h2h-head">
     <div class="h2h-kicker" id="h2h-kicker">2026 season · Week 2 · head to head</div>
     <h3 class="h2h-title">What the consensus says about this week.</h3>
-    <p class="h2h-lede">Every game, priced from the poll of polls alone. Win probability is the shaded side. The market column is shown for comparison and was <em>not</em> an input — on this slate the two agree on the favourite in 15 of 16 games.</p>
+    <p class="h2h-lede" id="h2h-lede"></p>
   </div>
 
   <div class="h2h-filter">
     <label class="h2h-label" for="h2h-view">Show</label>
     <select id="h2h-view" class="h2h-select">
-      <option value="all">All 16 games</option>
+      <option value="all">All games</option>
       <option value="close">Closest 5</option>
       <option value="lopsided">Most lopsided 5</option>
     </select>
@@ -1233,6 +1234,28 @@ Every team plays in Week 4. All 16 games are priced below from the consensus alo
 
   var games = DATA.games || [];
   var model = DATA.model || {};
+
+  // Derived, not written. This sentence used to be hardcoded and was copied
+  // forward from the Week 2 post unchanged, so five published editions claimed
+  // the market and the model agreed on "15 of 16 games" while their own data
+  // said otherwise. Computing it means it cannot drift again.
+  (function describeSlate() {
+    var slate = (DATA.games || []);
+    var allOption = document.querySelector('#h2h-view option[value="all"]');
+    if (allOption) { allOption.textContent = 'All ' + slate.length + ' games'; }
+    var lede = document.getElementById('h2h-lede');
+    if (!lede) { return; }
+    var withLine = slate.filter(function (g) {
+      return g.marketSpread !== null && g.marketSpread !== undefined;
+    });
+    var agree = withLine.filter(function (g) {
+      return (g.expectedMargin > 0) === (g.marketSpread > 0);
+    }).length;
+    lede.innerHTML = 'Every game, priced from the poll of polls alone. Win probability ' +
+      'is the shaded side. The market column is shown for comparison and was <em>not</em> ' +
+      'an input \u2014 on this slate the two agree on the favourite in <strong>' + agree +
+      ' of ' + withLine.length + ' games</strong>.';
+  })();
   var scores = {};
   var names = {};
   var abbrs = {};

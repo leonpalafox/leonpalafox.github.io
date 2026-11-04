@@ -21,7 +21,7 @@ This is the same poll of polls as previous weeks: the week's rankings standardis
     <ol>
       <li><a href="#consensus"><span class="toc-n">01</span><span class="toc-t">The consensus</span><span class="toc-d">All 32 teams, filterable by conference</span></a></li>
       <li><a href="#movers"><span class="toc-n">02</span><span class="toc-t">Who went up and down</span><span class="toc-d">Every week-over-week move</span></a></li>
-      <li><a href="#h2h"><span class="toc-n">03</span><span class="toc-t">This week's matchups, priced</span><span class="toc-d">All 14 games, plus any matchup you build</span></a></li>
+      <li><a href="#h2h"><span class="toc-n">03</span><span class="toc-t">This week's matchups, priced</span><span class="toc-d">All 15 games, plus any matchup you build</span></a></li>
       <li><a href="#superbowl"><span class="toc-n">04</span><span class="toc-t">Path to the Super Bowl</span><span class="toc-d">50,000 brackets, seeded on both signals</span></a></li>
       <li><a href="#panel"><span class="toc-n">05</span><span class="toc-t">The panel</span><span class="toc-d">Nine outlets and how they agree</span></a></li>
       <li><a href="#sources"><span class="toc-n">06</span><span class="toc-t">Sources and method</span><span class="toc-d">Where every number comes from</span></a></li>
@@ -399,6 +399,7 @@ Here is where the panel landed after Week 8.
   // Club marks are served from the site's own /images/nfl/, fetched once by
   // analysis/nfl-power-rankings/tools/fetch_logos.py. `onerror` hides the image
   // so a missing file degrades to a text-only row instead of a broken icon.
+
   var logoUrl = function (abbr) { return '/images/nfl/' + abbr.toLowerCase() + '.svg'; };
   var logoTag = function (abbr, size) {
     return '<span class="pop-mark pop-mark--' + size + '">' +
@@ -1093,13 +1094,13 @@ Fifteen games in Week 9: Pittsburgh and Tennessee are the only teams on bye. Eve
   <div class="h2h-head">
     <div class="h2h-kicker" id="h2h-kicker">2026 season · Week 2 · head to head</div>
     <h3 class="h2h-title">What the consensus says about this week.</h3>
-    <p class="h2h-lede">Every game, priced from the poll of polls alone. Win probability is the shaded side. The market column is shown for comparison and was <em>not</em> an input — on this slate the two agree on the favourite in 15 of 16 games.</p>
+    <p class="h2h-lede" id="h2h-lede"></p>
   </div>
 
   <div class="h2h-filter">
     <label class="h2h-label" for="h2h-view">Show</label>
     <select id="h2h-view" class="h2h-select">
-      <option value="all">All 16 games</option>
+      <option value="all">All games</option>
       <option value="close">Closest 5</option>
       <option value="lopsided">Most lopsided 5</option>
     </select>
@@ -1238,6 +1239,28 @@ Fifteen games in Week 9: Pittsburgh and Tennessee are the only teams on bye. Eve
 
   var games = DATA.games || [];
   var model = DATA.model || {};
+
+  // Derived, not written. This sentence used to be hardcoded and was copied
+  // forward from the Week 2 post unchanged, so five published editions claimed
+  // the market and the model agreed on "15 of 16 games" while their own data
+  // said otherwise. Computing it means it cannot drift again.
+  (function describeSlate() {
+    var slate = (DATA.games || []);
+    var allOption = document.querySelector('#h2h-view option[value="all"]');
+    if (allOption) { allOption.textContent = 'All ' + slate.length + ' games'; }
+    var lede = document.getElementById('h2h-lede');
+    if (!lede) { return; }
+    var withLine = slate.filter(function (g) {
+      return g.marketSpread !== null && g.marketSpread !== undefined;
+    });
+    var agree = withLine.filter(function (g) {
+      return (g.expectedMargin > 0) === (g.marketSpread > 0);
+    }).length;
+    lede.innerHTML = 'Every game, priced from the poll of polls alone. Win probability ' +
+      'is the shaded side. The market column is shown for comparison and was <em>not</em> ' +
+      'an input \u2014 on this slate the two agree on the favourite in <strong>' + agree +
+      ' of ' + withLine.length + ' games</strong>.';
+  })();
   var scores = {};
   var names = {};
   var abbrs = {};
@@ -1709,8 +1732,6 @@ Fifteen games in Week 9: Pittsburgh and Tennessee are the only teams on bye. Eve
     'the rankings change. Conference splits: ' + confs.map(function (c) {
       return c + ' wins the Super Bowl ' + pct(data.byConference[c].pChampion);
     }).join(', ') + '.';
-})();
-</script>
 })();
 </script>
 <a id="panel"></a>
