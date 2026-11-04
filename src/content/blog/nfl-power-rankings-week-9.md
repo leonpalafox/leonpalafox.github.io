@@ -1733,7 +1733,7 @@ Fifteen games in Week 9: Pittsburgh and Tennessee are the only teams on bye. Eve
 
 Agreement is strong — mean pairwise Spearman **ρ = 0.949**, split-half 0.993 — and unanimous at the very top: **every outlet has Buffalo first except USA Today**, which alone keeps San Francisco there.
 
-That single ballot is again the outlier at 2.06 positions (ρ = 0.954). Everything else sits inside 1.81.
+That ballot is the outlier on both measures — the largest mean gap at 2.06 positions and the lowest agreement at ρ = 0.954, where every other outlet sits inside 1.81. The reason is blunt: **USA Today ranks Buffalo sixth**, and all eight other ballots rank it first.
 
 <a id="sources"></a>
 
