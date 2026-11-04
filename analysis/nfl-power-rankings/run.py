@@ -517,6 +517,13 @@ def main(argv: list[str] | None = None) -> int:
             sigma=headtohead.DEFAULT_MODEL.sigma,
             record_model=blended["recordModel"] if blended else None,
         )
+        # Deterministic seeding comparison, so the post can state what the blend
+        # actually changed instead of having it written by hand each week.
+        playoff_sim["bracketShift"] = playoffs.bracket_shift(
+            playoff_rows,
+            weight=playoff_sim["weight"],
+            record_model=blended["recordModel"] if blended else None,
+        )
         if verbose:
             leader = playoff_sim["teams"][0]
             print(f"\npath to the Super Bowl ({playoff_sim['nSims']:,} brackets, seed {playoff_sim['seed']}, "

@@ -1,5 +1,5 @@
 {
-  "week": 8,
+  "week": 9,
   "season": 2026,
   "sources": [
     {
@@ -9,7 +9,7 @@
       "kind": "analyst",
       "url_tpl": "https://www.nfl.com/news/nfl-power-rankings-week-{week}-{season}-nfl-season",
       "urls": [
-        "https://www.nfl.com/news/nfl-power-rankings-week-8-2026-nfl-season"
+        "https://www.nfl.com/news/nfl-power-rankings-week-9-2026-nfl-season"
       ],
       "extract": "nflcom_rank_marker",
       "prior_weight": 1.0,
@@ -35,7 +35,7 @@
       "kind": "analyst",
       "url_tpl": "",
       "urls": [
-        "https://www.foxsports.com/stories/nfl/2026-nfl-power-rankings-week-8"
+        "https://www.foxsports.com/stories/nfl/2026-nfl-power-rankings-week-9"
       ],
       "extract": "si_numbered",
       "prior_weight": 0.9,
@@ -48,7 +48,7 @@
       "kind": "analyst",
       "url_tpl": "",
       "urls": [
-        "https://www.si.com/nfl/conor-orr-week-8-nfl-power-rankings-vikings-seahawks-bears"
+        "https://www.si.com/nfl/conor-orr-week-9-nfl-power-rankings-broncos-cowboys-chiefs"
       ],
       "extract": "si_numbered",
       "prior_weight": 0.9,
@@ -61,7 +61,7 @@
       "kind": "analyst",
       "url_tpl": "",
       "urls": [
-        "https://www.sportingnews.com/us/nfl/news/nfl-power-rankings-week-8-bills-vikings-49ers-patriots-packers/eb6f24cce36fc22dac8c8aa6"
+        "https://www.sportingnews.com/us/nfl/news/nfl-power-rankings-week-9-broncos-steelers-vikings-cowboys-eagles/2beb6e091cbe88e9ab220e8c"
       ],
       "extract": "sportingnews_numbered",
       "prior_weight": 0.85,
@@ -85,7 +85,7 @@
       "kind": "panel",
       "url_tpl": "",
       "urls": [
-        "https://www.thescore.com/nfl/news/3635053/nfl-power-rankings-week-8-every-teams-scariest-trend"
+        "https://www.thescore.com/nfl/news/3641968/nfl-power-rankings-week-9-trade-deadline-priorities-for-each-team"
       ],
       "extract": "thescore_numbered",
       "prior_weight": 0.8,
@@ -98,7 +98,7 @@
       "kind": "panel",
       "url_tpl": "",
       "urls": [
-        "https://bleacherreport.com/articles/25520633-br-experts-week-8-nfl-power-rankings"
+        "https://bleacherreport.com/articles/25528539-br-experts-week-9-nfl-power-rankings"
       ],
       "extract": "si_numbered",
       "prior_weight": 0.8,
@@ -111,11 +111,11 @@
       "kind": "analyst",
       "url_tpl": "",
       "urls": [
-        "https://www.centraloregondaily.com/sports/nfl-power-rankings-week-8-whos-no-1-after-49ers-chiefs-lose-first-games/article_84aa44e0-484d-59f0-9ff5-4ee2b0efa71e.html"
+        "https://www.centraloregondaily.com/sports/nfl-power-rankings-week-9-where-do-bears-seahawks-settle-after-monday-night-clash/article_2554181b-4971-5c69-ad09-f5e2aa4b1f7b.html"
       ],
       "extract": "usatoday_numbered",
       "prior_weight": 0.9,
-      "tier": "Nate Davis's national column. usatoday.com returns HTTP 402 to every user agent (Chrome, Googlebot, Bingbot) and the ENTIRE Gannett newspaper network does the same, so tennessean.com and detroitnews.com copies are dead ends. Only an independent TownNews/BLOX partner reprint is readable. Syndicated copies carry no publication metadata, so the freshness gate cannot date them; verify by matching the headline and the #1/#32 teams."
+      "tier": "Nate Davis's national column. usatoday.com and the whole Gannett network return HTTP 402 to every user agent, so the ballot is read from an independent TownNews partner reprint. Those carry no publication metadata, so the freshness gate logs this source as unverified; verify by matching the headline and the #1/#32 teams."
     }
   ]
 }

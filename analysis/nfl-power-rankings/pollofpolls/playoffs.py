@@ -211,6 +211,76 @@ def _play(
     return home if rng.random() < p_home else away
 
 
+def bracket_shift(
+    rows: list[dict],
+    *,
+    weight: float = DEFAULT_WEIGHT,
+    rank_model=headtohead.DEFAULT_MODEL,
+    record_model: dict | None = None,
+) -> dict:
+    """How the blended seeding differs from each single-signal bracket.
+
+    Seeding is deterministic given a weight, so this needs no simulation. It is
+    computed rather than described because the difference changes every week and
+    hand-written text about it has been wrong before: the section used to claim
+    the blend "reshuffles a conference" in a week where it changed nothing.
+    """
+    if record_model is None:
+        record_model = {"k": DEFAULT_RECORD_K}
+
+    def seeds_at(w: float) -> dict[str, int]:
+        out = {}
+        for conf in sorted({row["conference"] for row in rows}):
+            for team in seed_conference(
+                [r for r in rows if r["conference"] == conf],
+                weight=w, rank_model=rank_model, record_model=record_model,
+            ):
+                out[team.team] = team.seed
+        return out
+
+    blended = seeds_at(weight)
+    abbr = {row["team"]: row["abbr"] for row in rows}
+
+    def compare(other: dict[str, int]) -> list[dict]:
+        """Every team whose seed differs, in either direction.
+
+        Iterating the union matters: a team the blend *excludes* but the other
+        bracket includes would otherwise be invisible, which is exactly the
+        interesting case (a division winner changing hands can knock someone out
+        of the field entirely).
+        """
+        changed = []
+        for team in set(blended) | set(other):
+            seed = blended.get(team)
+            was = other.get(team)
+            if seed == was:
+                continue
+            changed.append({
+                "team": team,
+                "abbr": abbr.get(team) or team[:3].upper(),
+                "blendSeed": seed,       # None when the blend leaves them out
+                "otherSeed": was,        # None when the other bracket leaves them out
+                "delta": (was - seed) if (was is not None and seed is not None) else None,
+            })
+        return sorted(
+            changed,
+            key=lambda entry: (entry["blendSeed"] is None, entry["blendSeed"] or 99),
+        )
+
+    vs_records = compare(seeds_at(0.0))
+    vs_rankings = compare(seeds_at(1.0))
+    return {
+        "vsRecords": vs_records,
+        "vsRankings": vs_rankings,
+        # "Field changed" means the set of qualifying teams differs, not just the
+        # order: a team present in one bracket and absent from the other.
+        "fieldChangedVsRecords": any(e["otherSeed"] is None for e in vs_records),
+        "fieldChangedVsRankings": any(e["otherSeed"] is None for e in vs_rankings),
+        "nChangedVsRecords": len(vs_records),
+        "nChangedVsRankings": len(vs_rankings),
+    }
+
+
 def simulate(
     rows: list[dict],
     *,

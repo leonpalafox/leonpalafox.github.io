@@ -244,6 +244,11 @@ def build_site_bundle(
                 "mean_abs_dev": round(diag.get("mean_abs_dev", float("nan")), 2),
                 "rho_consensus": round(diag.get("rho_consensus", float("nan")), 3),
                 "mean_rho_peers": round(diag.get("mean_rho_peers", float("nan")), 3),
+                # The page's own publication date, so a claim like "every ballot
+                # is dated inside the week" can be checked against the artifact
+                # rather than taken on trust. None means the page carried no
+                # metadata -- true of syndicated reprints.
+                "published": meta.get("published"),
             }
         )
 
