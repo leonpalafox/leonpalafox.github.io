@@ -60,6 +60,74 @@ const registry: Record<string, AssetEntry> = {
     alt: 'Línea de tiempo de 2007 a 2020 con cinco frameworks de deep learning —Theano, Caffe2, PyTorch, TensorFlow y MXNet— y una barra de color por cada institución que los mantuvo.',
     caption: 'Gráfica del artículo',
   },
+  'the-cost-of-thinking-in-spanish': {
+    alt: "Ilustración de una calle con un cartel gigante que dice ENGLISH, entre edificios y pantallas de datos, con personas caminando.",
+    caption: "Medium · November 9, 2026",
+  },
+  'la-ia-esta-ampliando-el-espacio-de-soluciones': {
+    alt: "Diagrama de flujo sobre la viabilidad de un recomendador de café, con pasos de necesidad, tiempo de entrega y relevancia.",
+    caption: "GBM Tech · 5 de noviembre de 2026",
+  },
+  'corporations-without-new-hires': {
+    alt: "Un brazo robótico sube una escalera hacia una puerta en un paisaje rojo, bajo la luna.",
+    caption: "Medium · October 26, 2026",
+  },
+  'muse-and-the-internet-that-works-for-us': {
+    alt: "Ilustración de una joven y un robot esponjoso en un prado, con una ciudad y nubes al fondo.",
+    caption: "Medium · September 28, 2026",
+  },
+  'la-ultima-frontera-quizas-no-sea-humana': {
+    alt: "Un libro abierto se convierte en un paisaje montañoso con figuras diminutas caminando por sus páginas.",
+    caption: "Medium · 13 de septiembre de 2026",
+  },
+  'they-are-coming-to-deploy-us': {
+    alt: "Un grupo de personas con traje entra a un edificio corporativo moderno.",
+    caption: "Medium · July 6, 2026",
+  },
+  'silicon-valley-built-a-religion': {
+    alt: "Un templo púrpura con arcos y una esfera luminosa, frente a una congregación de siluetas.",
+    caption: "Medium · June 22, 2026",
+  },
+  'the-ai-world-just-changed-overnight': {
+    alt: "Mapa mundial oscuro con líneas de red luminosas y una cúpula de cristal sobre una región.",
+    caption: "Medium · June 13, 2026",
+  },
+  'the-cost-of-ai-written-code-is-not-the-same-everywhere': {
+    alt: "Ilustración de un rostro humano y edificios atravesados por líneas de circuito.",
+    caption: "Medium · June 8, 2026",
+  },
+  'the-three-forces-threatening-the-junior-data-scientist': {
+    alt: "Ilustración de personas trabajando en cubículos y pantallas de código, en tonos naranja y azul.",
+    caption: "Medium · June 6, 2026",
+  },
+  'the-spacex-ipo-is-not-just-a-space-story': {
+    alt: "Un monolito negro de servidores se alza en un paisaje desértico con figuras diminutas.",
+    caption: "Medium · May 25, 2026",
+  },
+  'de-listas-estaticas-a-recomendaciones-dinamicas-gbm': {
+    alt: "Diagrama de una interfaz que pasa de recomendaciones genéricas a perfiles personalizados.",
+    caption: "GBM Tech · 13 de abril de 2026",
+  },
+  'the-technology-that-keeps-almost-working': {
+    alt: "Niños y adultos reunidos alrededor de máquinas recreativas en una tienda.",
+    caption: "Medium · March 23, 2026",
+  },
+  'the-four-papers-every-ai-practitioner-should-have-a-fight-about': {
+    alt: "Composición abstracta de cuadrículas y bloques de color sobre fondo oscuro.",
+    caption: "Medium · March 18, 2026",
+  },
+  'the-algorithms-brutal-honesty': {
+    alt: "Ilustración de una fábrica con máquinas, pantallas y personas trabajando.",
+    caption: "Medium · February 2, 2026",
+  },
+  'netflixs-ai-pivot': {
+    alt: "Ilustración en tres paneles sobre el consumo de contenido: una persona frente a una pantalla, un teléfono y una pared de imágenes.",
+    caption: "Medium · January 26, 2026",
+  },
+  'the-ouroboros-in-the-server-room': {
+    alt: "Ilustración de una serpiente mecánica en blanco y negro formando un arco.",
+    caption: "Medium · January 5, 2026",
+  },
 };
 
 export interface BlogAsset extends AssetEntry {

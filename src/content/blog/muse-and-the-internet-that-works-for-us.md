@@ -1,0 +1,28 @@
+---
+title: "Muse and the Internet That Works for Us"
+description: "Meta's Muse wants to turn the browser into a personal agent that does the tedious tasks for you. The interface is the real story."
+pubDate: 2026-09-28
+lang: en
+tags: ["ia", "tecnologia", "agentes"]
+cover: muse-and-the-internet-that-works-for-us
+source: "https://medium.com/@leonpalafox/muse-and-the-internet-that-works-for-us-4e4bcd4404d1"
+sourceName: "Medium"
+---
+
+One task I find myself repeating all the time is generating tax invoices from the different places where I shop. What makes it truly frustrating is that every time I need to do it, the process or website is different. Recently, I have been asking ChatGPT Work to do it for me. The agent visits the website, enters my personal information, and generates the invoice in the vast majority of cases, saving me 20 to 30 minutes per invoice. Now imagine having a personal agent for every task you need to automate. That is exactly what Meta offered on September 8, 2026, with the launch of its personal agent, Muse.
+
+I do not think I am exaggerating when I say this is the most important AI release since ChatGPT, because it brings AI agents to a much broader audience. So what has changed? Agents already existed, and as I mentioned, I have used them myself. But I am an experienced user, accustomed to testing these tools and understanding what I can delegate to them. Using agents this way still requires me to interact with them and know exactly what to ask. In many cases, the outcome also depends on the types of files I provide, which could be a barrier for many users. Many people do not have that familiarity, nor should they have to. The leap is allowing them to ask for a task to be completed without first learning how to configure an agent. And there is always the question of how personal data is handled. I should mention that I am rather promiscuous with my personal data, but I understand why most people are uneasy about sharing their financial or health information with a chatbot.
+
+Muse can be used through the web or WhatsApp without installing an additional application, and it runs on a machine dedicated to the user in the cloud. It is an agent devoted exclusively to that user, offering an experience similar to what an advanced user would get by installing an agent on their own computer. This ease of use matters because it allows users to stop worrying about much of the technical setup and, ultimately, aims to deliver a product that simply works.
+
+Amazon has already blocked the agent from accessing its website. In other words, you cannot ask the agent to use your Amazon account to make a purchase. The company has justified this on security grounds, stating that Muse accessed the site without authorization, failed to identify itself as an agent, and posed risks related to users’ credentials. In my view, one of Amazon’s greatest strengths is also at stake: getting to know its customers through their interactions with its website.
+
+If someone tells Muse what they need, compares options with the agent, and arrives at Amazon only to complete a purchase, much of that decision-making process could take place outside Amazon’s view. The company would still know what it sold, but it could lose information about how the customer chose it and which alternatives they considered. It could also lose opportunities to show them ads along the way. And I predict that, similarly, websites whose entire value proposition rests on advertising will increasingly block this agent.
+
+But given Meta’s reputation for handling personal data, do we really want to entrust it with our entire lives? To ease those concerns, Meta has promised that Muse conversations and the data stored on each user’s dedicated machine will not be shared with its advertising systems. And while that is its current policy, it is quite likely that Meta will eventually seek to generate ads within Muse itself, personalized to the context of whatever each person is trying to accomplish. Apple also does something similar on privacy with Siri, combining on-device processing with a protected cloud system for more complex requests. In Muse’s case, the proposition is that each person has a dedicated space for their own agent.
+
+My hypothesis is that the cost of running this infrastructure could be one reason Meta is not pursuing a much broader release at the moment. But once this becomes very popular, it will be easy to imagine more platforms that do not depend on advertising seeking integrations with this agent, much as many websites already seek integrations with ChatGPT. In fact, Meta has already announced integration with Stripe’s Link and the forthcoming addition of Shop Pay.
+
+This may mark the beginning of real competition among agents for consumers, and we may see Google expand the reach of its own agent, Gemini Agent. This is where much of the advantage of having all its platforms integrated will surely come into play. That is why the question will likely no longer revolve around which model is the most advanced. For many of these everyday tasks, the models are already good enough. The question will now be who puts them to the best use, allowing users to interact with them to complete their most basic tasks.
+
+And then, perhaps, generating my tax invoices will require nothing more than uploading a photo. Better yet, restaurants will have a QR code that does it automatically for you. What will matter is that anyone can do it just as easily, without having to devote their professional life to artificial intelligence. We are on the threshold of a new era of the internet, and I could not be more excited.
