@@ -1,5 +1,5 @@
 {
-  "week": 9,
+  "week": 10,
   "season": 2026,
   "sources": [
     {
@@ -9,7 +9,7 @@
       "kind": "analyst",
       "url_tpl": "https://www.nfl.com/news/nfl-power-rankings-week-{week}-{season}-nfl-season",
       "urls": [
-        "https://www.nfl.com/news/nfl-power-rankings-week-9-2026-nfl-season"
+        "https://www.nfl.com/news/nfl-power-rankings-week-10-2026-nfl-season"
       ],
       "extract": "nflcom_rank_marker",
       "prior_weight": 1.0,
@@ -26,7 +26,7 @@
       ],
       "extract": "cbs_table",
       "prior_weight": 1.0,
-      "tier": "Analyst column; the per-week slug is not derivable, so the hub is used."
+      "tier": "Analyst column; the per-week slug is not derivable, so the hub is used. Rolling page."
     },
     {
       "id": "fox-vacchiano",
@@ -35,7 +35,7 @@
       "kind": "analyst",
       "url_tpl": "",
       "urls": [
-        "https://www.foxsports.com/stories/nfl/2026-nfl-power-rankings-week-9"
+        "https://www.foxsports.com/stories/nfl/2026-nfl-power-rankings-week-10"
       ],
       "extract": "si_numbered",
       "prior_weight": 0.9,
@@ -48,11 +48,11 @@
       "kind": "analyst",
       "url_tpl": "",
       "urls": [
-        "https://www.si.com/nfl/conor-orr-week-9-nfl-power-rankings-broncos-cowboys-chiefs"
+        "https://www.si.com/mx/americano/power-rankings-nfl-semana-10-bears-demuestran-son-mejor-equipo-nfc"
       ],
       "extract": "si_numbered",
       "prior_weight": 0.9,
-      "tier": "Analyst column, found via si.com's q4 article sitemap. Verify the numbering runs 1-32."
+      "tier": "Conor Orr's column, read from SI's Spanish-language edition. The English page again dropped the number on one entry -- Tampa Bay's '21.' was missing, leaving 31 -- so it fails the completeness check. The Spanish edition carries the identical 1-32 order (same top five) and parses fully."
     },
     {
       "id": "sportingnews-iyer",
@@ -61,7 +61,7 @@
       "kind": "analyst",
       "url_tpl": "",
       "urls": [
-        "https://www.sportingnews.com/us/nfl/news/nfl-power-rankings-week-9-broncos-steelers-vikings-cowboys-eagles/2beb6e091cbe88e9ab220e8c"
+        "https://www.sportingnews.com/us/nfl/news/nfl-power-rankings-week-10-bears-lions-packers-patriots-ravens/9c3fccaffd529825789bb963"
       ],
       "extract": "sportingnews_numbered",
       "prior_weight": 0.85,
@@ -76,7 +76,7 @@
       "urls": [],
       "extract": "sharp_embedded_table",
       "prior_weight": 0.75,
-      "tier": "Fixed hub page updated in place; embeds a JSON rank table."
+      "tier": "Fixed hub page updated in place; embeds a JSON rank table. Rolling page."
     },
     {
       "id": "thescore-staff",
@@ -85,7 +85,7 @@
       "kind": "panel",
       "url_tpl": "",
       "urls": [
-        "https://www.thescore.com/nfl/news/3641968/nfl-power-rankings-week-9-trade-deadline-priorities-for-each-team"
+        "https://www.thescore.com/nfl/news/3649968/nfl-power-rankings-week-10-how-teams-stack-up-at-the-midway-point"
       ],
       "extract": "thescore_numbered",
       "prior_weight": 0.8,
@@ -98,11 +98,11 @@
       "kind": "panel",
       "url_tpl": "",
       "urls": [
-        "https://bleacherreport.com/articles/25528539-br-experts-week-9-nfl-power-rankings"
+        "https://bleacherreport.com/articles/25531196-br-experts-week-10-nfl-power-rankings"
       ],
       "extract": "si_numbered",
       "prior_weight": 0.8,
-      "tier": "Staff panel; numbered slide headings. The 2025 edition shares the title at another id."
+      "tier": "Staff panel; numbered slide headings."
     },
     {
       "id": "usatoday-davis",
@@ -111,11 +111,11 @@
       "kind": "analyst",
       "url_tpl": "",
       "urls": [
-        "https://www.centraloregondaily.com/sports/nfl-power-rankings-week-9-where-do-bears-seahawks-settle-after-monday-night-clash/article_2554181b-4971-5c69-ad09-f5e2aa4b1f7b.html"
+        "https://lufkindailynews.com/news_reuters/national/nfl-power-rankings-week-10-how-will-trade-deadline-affect-pecking-order/article_0a761057-5b78-56a7-8456-ad22ec5eb460.html"
       ],
       "extract": "usatoday_numbered",
       "prior_weight": 0.9,
-      "tier": "Nate Davis's national column. usatoday.com and the whole Gannett network return HTTP 402 to every user agent, so the ballot is read from an independent TownNews partner reprint. Those carry no publication metadata, so the freshness gate logs this source as unverified; verify by matching the headline and the #1/#32 teams."
+      "tier": "Nate Davis's national column. usatoday.com and every Gannett domain return HTTP 402 to all user agents, so it is read from an independent TownNews reprint. The Central Oregon copy of this week's column was truncated (25 of 32 entries); the Lufkin reprint is complete. Reprints carry no publication metadata, so the freshness gate logs this as unverified."
     }
   ]
 }
