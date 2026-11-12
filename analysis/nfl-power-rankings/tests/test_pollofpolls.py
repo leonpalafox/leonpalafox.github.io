@@ -756,5 +756,33 @@ class TestPostMarkup(unittest.TestCase):
                 )
 
 
+class TestBareRankFallback(unittest.TestCase):
+    """A rank printed without punctuation must still parse.
+
+    Sports Illustrated wrote "21 Tampa Bay Buccaneers (3-6)" with no period on
+    the number, which a strict pattern reads as 31 entries. That was reported as
+    the outlet skipping a number, when in fact the list was complete.
+    """
+
+    def test_unpunctuated_rank_is_recovered(self):
+        clubs = list(teams.TEAMS)
+        lines = []
+        for i, club in enumerate(clubs, start=1):
+            # SI's real defect: rank 21 written as "21 Tampa Bay Buccaneers (3-6)"
+            lines.append(f"{i} {club} (5-4)" if i == 21 else f"{i}. {club} (5-4)")
+        found = sources.extract("si_numbered", "<br>".join(lines))
+        self.assertEqual(len(found), 32, "all 32 clubs should parse")
+        self.assertEqual(found[clubs[20]], 21, "the unpunctuated entry is rank 21")
+
+    def test_fallback_does_not_invent_ranks(self):
+        # A prose line beginning with a number must not create a rank when the
+        # strict pass already populated the field.
+        lines = [f"{i}. {list(teams.TEAMS)[i - 1]}" for i in range(1, 33)]
+        lines.append("4 Buffalo Bills players were named to the Pro Bowl")
+        found = sources.extract("si_numbered", "<br>".join(lines))
+        self.assertEqual(len(found), 32)
+        self.assertEqual(found[list(teams.TEAMS)[3]], 4)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

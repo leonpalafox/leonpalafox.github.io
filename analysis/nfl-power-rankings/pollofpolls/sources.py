@@ -73,6 +73,10 @@ def _clean(line: str) -> str:
 # --- generic numbered table ------------------------------------------------
 
 _NUMBERED = re.compile(r"^\s*(\d{1,2})[.\u2013\u2014)-]\s*\|?\s*([A-Za-z][^|(]{2,40})")
+# Some outlets occasionally omit the separator entirely: SI printed
+# "21 Tampa Bay Buccaneers (3-6)" with no period. Used only to fill ranks the
+# strict pattern left missing, so it can never overwrite a confident match.
+_NUMBERED_BARE = re.compile(r"^\s*(\d{1,2})\s+([A-Za-z][^|(]{2,40})")
 
 
 def _strip_tags(fragment: str) -> str:
@@ -103,6 +107,28 @@ def numbered_table(raw: str, *, max_rank: int = 32) -> dict[str, int]:
         canonical = teams.normalize(name)
         if canonical and canonical not in found:
             found[canonical] = rank
+
+    # Second pass: accept an unpunctuated "N Team" only for a rank that is still
+    # missing, and only if the club resolves and is not already placed. This is
+    # how SI's "21 Tampa Bay Buccaneers" is recovered without letting prose like
+    # "4 Buffalo Bills players" invent a rank that the strict pass already had.
+    missing = set(range(1, max_rank + 1)) - set(found.values())
+    if missing:
+        for line in text.splitlines():
+            probe = _clean(line)
+            match = _NUMBERED_BARE.match(probe)
+            if not match:
+                continue
+            rank = int(match.group(1))
+            if rank not in missing:
+                continue
+            name = re.split(r"\s+[(\u2013\u2014-]", match.group(2), maxsplit=1)[0]
+            canonical = teams.normalize(name)
+            if canonical and canonical not in found:
+                found[canonical] = rank
+                missing.discard(rank)
+                if not missing:
+                    break
     return found
 
 

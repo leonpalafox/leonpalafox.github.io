@@ -261,6 +261,28 @@ changed, restore it before committing. The per-week page cache under
 `cache/<season>-wk<NN>/` preserves the original HTML, but only until it expires —
 it is not a substitute for the committed bundle.
 
+## Hazard: the page cache is keyed by source id, not by URL
+
+Changing a source's `urls` entry in `sources.json` does **not** invalidate its
+cached page. The cache path is `cache/<season>-wk<NN>/<source-id>.html`, so a
+re-run happily parses yesterday's copy of a different URL and reports it as
+current.
+
+This bit on 2026-11-11: Sports Illustrated was re-pointed from its Spanish edition
+back to the English column, the re-run logged `(cache, 576 KB)`, and the bundle
+still carried the Spanish page's `datePublished`. The ballot happened to be
+identical, so the numbers were unaffected, but the provenance was wrong and only
+the publication date exposed it.
+
+When you change a URL for a source, delete that source's cache entry first:
+
+```bash
+rm cache/<season>-wk<NN>/<source-id>.html
+```
+
+The run log says `(network, …)` when a page was actually fetched and `(cache, …)`
+when it was not, so it is visible either way.
+
 ## Week-to-week use
 
 1. Update `week` and the discovery-source URLs in `sources.json` (see the

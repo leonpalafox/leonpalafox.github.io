@@ -1785,23 +1785,25 @@ This week's panel — nine ballots, every one verified complete:
 | NFL.com | Nick Shook | [nfl.com](https://www.nfl.com/news/nfl-power-rankings-week-10-2026-nfl-season) |
 | CBS Sports | Pete Prisco | [cbssports.com](https://www.cbssports.com/nfl/powerrankings/) |
 | FOX Sports | Ralph Vacchiano | [foxsports.com](https://www.foxsports.com/stories/nfl/2026-nfl-power-rankings-week-10) |
-| Sports Illustrated | Conor Orr | [si.com/mx](https://www.si.com/mx/americano/power-rankings-nfl-semana-10-bears-demuestran-son-mejor-equipo-nfc) (Spanish edition) |
+| Sports Illustrated | Conor Orr | [si.com](https://www.si.com/nfl/conor-orr-week-10-nfl-power-rankings-bears-jaguars-seahawks) |
 | Sporting News | Vinnie Iyer | [sportingnews.com](https://www.sportingnews.com/us/nfl/news/nfl-power-rankings-week-10-bears-lions-packers-patriots-ravens/9c3fccaffd529825789bb963) |
 | Sharp Football Analysis | Raymond Summerlin | [sharpfootballanalysis.com](https://www.sharpfootballanalysis.com/analysis/nfl-power-rankings/) |
 | theScore | theScore NFL desk | [thescore.com](https://www.thescore.com/nfl/news/3649968/nfl-power-rankings-week-10-how-teams-stack-up-at-the-midway-point) |
 | Bleacher Report | B/R NFL staff | [bleacherreport.com](https://bleacherreport.com/articles/25531196-br-experts-week-10-nfl-power-rankings) |
 | USA Today | Nate Davis | [lufkindailynews.com](https://lufkindailynews.com/news_reuters/national/nfl-power-rankings-week-10-how-will-trade-deadline-affect-pecking-order/article_0a761057-5b78-56a7-8456-ad22ec5eb460.html) (syndicated) |
 
-### Two sources needed a second copy this week
+### A parser bug, and a truncated reprint
 
-Neither is a new failure, and both are worth recording because they will recur.
-
-**Sports Illustrated again skipped a number.** Conor Orr's English column lost the
-numeral on the Tampa Bay entry — the text reads "Last week's result: beat
-Buccaneers" with no "21." — leaving 31 numbered entries. That is the same defect
-that dropped his Week 3 column, so the validation gate refused it. SI publishes the
-same ballot in Spanish, and that edition carries the identical order (the top five
-match exactly) with all 32 numbers intact. The ballot is included from there.
+**Sports Illustrated looked like it skipped a number, and it was my parser.** Conor
+Orr's column prints rank 21 as "21 Tampa Bay Buccaneers" with no period after the
+number, where every other entry reads "22. ...". The extractor required that
+punctuation, so it found 31 entries and the validation gate refused the ballot —
+the same symptom that dropped his Week 3 column. On inspection the English page is
+complete: all 32 clubs are there, in order. The parser now runs a second pass over
+numbered lines without punctuation, accepting one only for a rank the strict pass
+left missing, so prose like "4 Buffalo Bills players" cannot invent a rank. This is
+recorded here rather than quietly fixed because the earlier diagnosis was wrong in
+a way that blamed the source.
 
 **USA Today's reprint was truncated.** The column is only readable through
 independent reprints, since `usatoday.com` and every Gannett paper return `HTTP

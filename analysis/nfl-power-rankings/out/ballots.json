@@ -122,7 +122,6 @@
     "Baltimore Ravens": 18,
     "Cleveland Browns": 19,
     "Las Vegas Raiders": 20,
-    "Tampa Bay Buccaneers": 21,
     "Atlanta Falcons": 22,
     "New Orleans Saints": 23,
     "Carolina Panthers": 24,
@@ -133,7 +132,8 @@
     "Tennessee Titans": 29,
     "New York Jets": 30,
     "Philadelphia Eagles": 31,
-    "Los Angeles Chargers": 32
+    "Los Angeles Chargers": 32,
+    "Tampa Bay Buccaneers": 21
   },
   "sportingnews-iyer": {
     "Buffalo Bills": 1,

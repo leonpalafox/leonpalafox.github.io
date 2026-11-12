@@ -48,11 +48,11 @@
       "kind": "analyst",
       "url_tpl": "",
       "urls": [
-        "https://www.si.com/mx/americano/power-rankings-nfl-semana-10-bears-demuestran-son-mejor-equipo-nfc"
+        "https://www.si.com/nfl/conor-orr-week-10-nfl-power-rankings-bears-jaguars-seahawks"
       ],
       "extract": "si_numbered",
       "prior_weight": 0.9,
-      "tier": "Conor Orr's column, read from SI's Spanish-language edition. The English page again dropped the number on one entry -- Tampa Bay's '21.' was missing, leaving 31 -- so it fails the completeness check. The Spanish edition carries the identical 1-32 order (same top five) and parses fully."
+      "tier": "Analyst column, found via si.com's q4 article sitemap. Its rank 21 is printed as '21 Tampa Bay Buccaneers' with no period; sources.numbered_table recovers that with a gap-filling second pass rather than reporting 31 entries."
     },
     {
       "id": "sportingnews-iyer",

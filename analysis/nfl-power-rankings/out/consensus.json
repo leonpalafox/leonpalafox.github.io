@@ -1,7 +1,7 @@
 {
   "week": 10,
   "season": 2026,
-  "generated": "2026-11-12T04:16:36+00:00",
+  "generated": "2026-11-12T04:21:15+00:00",
   "sources": [
     {
       "id": "nflcom-shook",
@@ -12,7 +12,7 @@
       "extract": "nflcom_rank_marker",
       "prior_weight": 1.0,
       "tier": "League site column.",
-      "provenance": "network",
+      "provenance": "cache",
       "content_sha256": "cb50ae2fbac8c9d4"
     },
     {
@@ -20,12 +20,12 @@
       "outlet": "CBS Sports",
       "analyst": "Pete Prisco",
       "kind": "analyst",
-      "url": "https://www.cbssports.com/nfl/powerrankings/",
+      "url": "https://www.cbssports.com/nfl/news/priscos-nfl-week-10-power-rankings/",
       "extract": "cbs_table",
       "prior_weight": 1.0,
       "tier": "Analyst column; the per-week slug is not derivable, so the hub is used. Rolling page.",
-      "provenance": "network",
-      "content_sha256": "dcf0b54bc093207a"
+      "provenance": "cache",
+      "content_sha256": "fb04df282c778b5a"
     },
     {
       "id": "fox-vacchiano",
@@ -36,7 +36,7 @@
       "extract": "si_numbered",
       "prior_weight": 0.9,
       "tier": "Analyst column; 'N. Team Name' inside h2 anchors.",
-      "provenance": "network",
+      "provenance": "cache",
       "content_sha256": "44efe513e60f499c"
     },
     {
@@ -44,12 +44,12 @@
       "outlet": "Sports Illustrated",
       "analyst": "Conor Orr",
       "kind": "analyst",
-      "url": "https://www.si.com/mx/americano/power-rankings-nfl-semana-10-bears-demuestran-son-mejor-equipo-nfc",
+      "url": "https://www.si.com/nfl/conor-orr-week-10-nfl-power-rankings-bears-jaguars-seahawks",
       "extract": "si_numbered",
       "prior_weight": 0.9,
-      "tier": "Conor Orr's column, read from SI's Spanish-language edition. The English page again dropped the number on one entry -- Tampa Bay's '21.' was missing, leaving 31 -- so it fails the completeness check. The Spanish edition carries the identical 1-32 order (same top five) and parses fully.",
+      "tier": "Analyst column, found via si.com's q4 article sitemap. Its rank 21 is printed as '21 Tampa Bay Buccaneers' with no period; sources.numbered_table recovers that with a gap-filling second pass rather than reporting 31 entries.",
       "provenance": "network",
-      "content_sha256": "27d7876c0a19c50e"
+      "content_sha256": "42c2060894c168d8"
     },
     {
       "id": "sportingnews-iyer",
@@ -60,8 +60,8 @@
       "extract": "sportingnews_numbered",
       "prior_weight": 0.85,
       "tier": "Analyst column; the slug hash is not derivable and the word order changes weekly.",
-      "provenance": "network",
-      "content_sha256": "4deeede0ca180d92"
+      "provenance": "cache",
+      "content_sha256": "3c51f54c2f827702"
     },
     {
       "id": "sharp-summerlin",
@@ -72,7 +72,7 @@
       "extract": "sharp_embedded_table",
       "prior_weight": 0.75,
       "tier": "Fixed hub page updated in place; embeds a JSON rank table. Rolling page.",
-      "provenance": "network",
+      "provenance": "cache",
       "content_sha256": "7d831f33ccbbc840"
     },
     {
@@ -84,7 +84,7 @@
       "extract": "thescore_numbered",
       "prior_weight": 0.8,
       "tier": "Editorial panel; 'N. Team (record)' plus 'Previous rank' blocks.",
-      "provenance": "network",
+      "provenance": "cache",
       "content_sha256": "0e6928cb7487bfb9"
     },
     {
@@ -96,7 +96,7 @@
       "extract": "si_numbered",
       "prior_weight": 0.8,
       "tier": "Staff panel; numbered slide headings.",
-      "provenance": "network",
+      "provenance": "cache",
       "content_sha256": "3888c3d7fb402436"
     },
     {
@@ -108,8 +108,8 @@
       "extract": "usatoday_numbered",
       "prior_weight": 0.9,
       "tier": "Nate Davis's national column. usatoday.com and every Gannett domain return HTTP 402 to all user agents, so it is read from an independent TownNews reprint. The Central Oregon copy of this week's column was truncated (25 of 32 entries); the Lufkin reprint is complete. Reprints carry no publication metadata, so the freshness gate logs this as unverified.",
-      "provenance": "network",
-      "content_sha256": "d39c83f3715ff2f1"
+      "provenance": "cache",
+      "content_sha256": "4f4c141f1667f6e7"
     }
   ],
   "diagnostics": {

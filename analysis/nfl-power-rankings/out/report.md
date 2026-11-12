@@ -1,6 +1,6 @@
 # NFL Poll of Polls — 2026 season, Week 10
 
-Generated 2026-11-12 04:16 UTC from 9 source ballots.
+Generated 2026-11-12 04:21 UTC from 9 source ballots.
 
 ## Consensus table
 
@@ -152,13 +152,13 @@ Schedule: nflverse
   - URL: https://www.nfl.com/news/nfl-power-rankings-week-10-2026-nfl-season
   - Parser: `nflcom_rank_marker`
 - **CBS Sports** (Pete Prisco) — Analyst column; the per-week slug is not derivable, so the hub is used. Rolling page.
-  - URL: https://www.cbssports.com/nfl/powerrankings/
+  - URL: https://www.cbssports.com/nfl/news/priscos-nfl-week-10-power-rankings/
   - Parser: `cbs_table`
 - **FOX Sports** (Ralph Vacchiano) — Analyst column; 'N. Team Name' inside h2 anchors.
   - URL: https://www.foxsports.com/stories/nfl/2026-nfl-power-rankings-week-10
   - Parser: `si_numbered`
-- **Sports Illustrated** (Conor Orr) — Conor Orr's column, read from SI's Spanish-language edition. The English page again dropped the number on one entry -- Tampa Bay's '21.' was missing, leaving 31 -- so it fails the completeness check. The Spanish edition carries the identical 1-32 order (same top five) and parses fully.
-  - URL: https://www.si.com/mx/americano/power-rankings-nfl-semana-10-bears-demuestran-son-mejor-equipo-nfc
+- **Sports Illustrated** (Conor Orr) — Analyst column, found via si.com's q4 article sitemap. Its rank 21 is printed as '21 Tampa Bay Buccaneers' with no period; sources.numbered_table recovers that with a gap-filling second pass rather than reporting 31 entries.
+  - URL: https://www.si.com/nfl/conor-orr-week-10-nfl-power-rankings-bears-jaguars-seahawks
   - Parser: `si_numbered`
 - **Sporting News** (Vinnie Iyer) — Analyst column; the slug hash is not derivable and the word order changes weekly.
   - URL: https://www.sportingnews.com/us/nfl/news/nfl-power-rankings-week-10-bears-lions-packers-patriots-ravens/9c3fccaffd529825789bb963

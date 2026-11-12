@@ -1,7 +1,7 @@
 {
   "week": 10,
   "season": 2026,
-  "generated": "2026-11-12T04:16:36Z",
+  "generated": "2026-11-12T04:21:15Z",
   "method": "Each source's 1-32 ballot is standardised to rank-standard-deviation units, pooled in a one-way random-effects model, and shrunk toward the panel mean (empirical Bayes), with uncertainty from both the residual disagreement and a bootstrap over sources. Full derivation in the post.",
   "movement": {
     "previousWeek": 9,
@@ -1585,7 +1585,7 @@
       "analyst": "Pete Prisco",
       "kind": "analyst",
       "tier": "Analyst column; the per-week slug is not derivable, so the hub is used. Rolling page.",
-      "url": "https://www.cbssports.com/nfl/powerrankings/",
+      "url": "https://www.cbssports.com/nfl/news/priscos-nfl-week-10-power-rankings/",
       "prior_weight": 1.0,
       "mean_abs_dev": 1.31,
       "rho_consensus": 0.979,
@@ -1610,13 +1610,13 @@
       "outlet": "Sports Illustrated",
       "analyst": "Conor Orr",
       "kind": "analyst",
-      "tier": "Conor Orr's column, read from SI's Spanish-language edition. The English page again dropped the number on one entry -- Tampa Bay's '21.' was missing, leaving 31 -- so it fails the completeness check. The Spanish edition carries the identical 1-32 order (same top five) and parses fully.",
-      "url": "https://www.si.com/mx/americano/power-rankings-nfl-semana-10-bears-demuestran-son-mejor-equipo-nfc",
+      "tier": "Analyst column, found via si.com's q4 article sitemap. Its rank 21 is printed as '21 Tampa Bay Buccaneers' with no period; sources.numbered_table recovers that with a gap-filling second pass rather than reporting 31 entries.",
+      "url": "https://www.si.com/nfl/conor-orr-week-10-nfl-power-rankings-bears-jaguars-seahawks",
       "prior_weight": 0.9,
       "mean_abs_dev": 2.38,
       "rho_consensus": 0.941,
       "mean_rho_peers": 0.908,
-      "published": "2026-11-12"
+      "published": "2026-11-10"
     },
     {
       "id": "sportingnews-iyer",
