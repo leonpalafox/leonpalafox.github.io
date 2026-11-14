@@ -44,6 +44,29 @@ const courses = [
   },
 ];
 
+const vibeCoding = [
+  {
+    label: 'The guide',
+    name: 'The eight rules',
+    href: '/teaching/vibe-coding/',
+    blurb:
+      'Environment, data contract, model setup, split, tuning, success, output and pace. Each rule shows the vague prompt, the version that works and an example to try.',
+  },
+  {
+    label: 'Before the code',
+    name: 'Prompt builder',
+    href: '/teaching/vibe-coding/prompt-builder/',
+    blurb:
+      'Fill in your environment, data, model and metric. It assembles the setup prompt with the rules in it, ready to copy or save as a file.',
+  },
+  {
+    label: 'After every answer',
+    name: 'Review checklist',
+    href: '/teaching/vibe-coding/review/',
+    blurb: 'Thirteen checks to run before you type “next”. Mark what broke and it writes the correction prompt.',
+  },
+];
+
 const archive = [
   {
     code: 'DS01',
@@ -121,6 +144,32 @@ const archive = [
               </a>
             )}
           </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="border-b border-hairline px-6 py-14 sm:px-10 lg:px-14">
+    <SectionHeading title="Vibe coding for data science" />
+    <p class="mt-6 max-w-2xl text-[1.05rem] leading-relaxed text-muted">
+      How to get an assistant to write the analysis you meant, and how to check that it did. Eight rules, with the
+      tools to apply them.
+    </p>
+    <div class="mt-8 grid gap-6 lg:grid-cols-3">
+      {
+        vibeCoding.map((page) => (
+          <a
+            href={page.href}
+            class="group flex flex-col border border-hairline bg-paper p-7 transition-colors hover:border-signal"
+          >
+            <p class="micro-label text-signal-deep">{page.label}</p>
+            <h3 class="mt-3 text-xl font-semibold tracking-tight">{page.name}</h3>
+            <p class="mt-4 text-sm leading-relaxed">{page.blurb}</p>
+            <span class="micro-label mt-auto inline-flex items-center gap-2 pt-6 text-signal-deep">
+              Open
+              <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
+            </span>
+          </a>
         ))
       }
     </div>

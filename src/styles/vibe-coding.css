@@ -1,0 +1,670 @@
+/* Shared styles for /teaching/vibe-coding/ (rules, prompt builder, review). */
+
+/* ---------- Prompt blocks ---------- */
+
+.vc-prompt {
+  min-width: 0;
+  border: 1px solid var(--color-hairline);
+}
+
+.vc-prompt__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 2.5rem;
+  padding: 0.4rem 0.9rem;
+  border-bottom: 1px solid var(--color-hairline);
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.vc-prompt pre {
+  margin: 0;
+  padding: 1rem 0.9rem 1.1rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.vc-prompt--vague {
+  background: var(--color-paper);
+}
+
+.vc-prompt--vague .vc-prompt__head {
+  color: var(--color-signal-deep);
+}
+
+.vc-prompt--vague pre {
+  color: var(--color-muted);
+}
+
+.vc-prompt--spec {
+  border-color: var(--color-ink);
+  background: var(--color-ink);
+  color: #f1eee6;
+}
+
+.vc-prompt--spec .vc-prompt__head {
+  border-bottom-color: #34332f;
+  color: #b3ad9f;
+}
+
+.vc-h {
+  color: #ff9a82;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+}
+
+.vc-ph {
+  color: #e9c98a;
+}
+
+.vc-copy {
+  flex: none;
+  border: 1px solid #5a584f;
+  padding: 0.3rem 0.6rem;
+  background: transparent;
+  color: #f1eee6;
+  font: inherit;
+  letter-spacing: 0.16em;
+  cursor: pointer;
+  transition:
+    border-color 160ms ease,
+    background 160ms ease;
+}
+
+.vc-copy:hover {
+  border-color: #f1eee6;
+}
+
+.vc-copy[data-done='true'] {
+  border-color: #ff9a82;
+  color: #ff9a82;
+}
+
+/* ---------- Widgets ---------- */
+
+.vc-widget {
+  min-width: 0;
+  border: 1px solid var(--color-hairline);
+  background: var(--color-paper);
+}
+
+.vc-widget__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.4rem 1rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--color-hairline);
+}
+
+.vc-widget__body {
+  padding: 1rem;
+}
+
+.vc-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.vc-chip {
+  border: 1px solid #bdb7aa;
+  padding: 0.45rem 0.7rem;
+  background: transparent;
+  color: var(--color-ink);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.2;
+  cursor: pointer;
+  transition:
+    border-color 160ms ease,
+    background 160ms ease,
+    color 160ms ease;
+}
+
+.vc-chip:hover {
+  border-color: var(--color-ink);
+}
+
+.vc-chip[aria-pressed='true'],
+.vc-chip[aria-selected='true'] {
+  border-color: var(--color-ink);
+  background: var(--color-ink);
+  color: #f1eee6;
+}
+
+.vc-chip--text {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+}
+
+.vc-facts {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.5rem 1rem;
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+
+.vc-facts dt {
+  padding-top: 0.2em;
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.vc-range {
+  display: block;
+}
+
+.vc-range__label {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.vc-range__label strong {
+  color: var(--color-signal-deep);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.vc-range input[type='range'] {
+  width: 100%;
+  margin-top: 0.7rem;
+  accent-color: var(--color-signal);
+}
+
+.vc-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border: 1px solid #d2ccc0;
+  background: var(--color-sheet);
+}
+
+.vc-stat {
+  min-width: 0;
+  padding: 0.75rem 0.8rem;
+  border-left: 1px solid #d2ccc0;
+}
+
+.vc-stat:first-child {
+  border-left: 0;
+}
+
+.vc-stat dt {
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.vc-stat dd {
+  margin-top: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: clamp(1.05rem, 3.2vw, 1.45rem);
+  line-height: 1;
+}
+
+.vc-stat--key dd {
+  color: var(--color-signal-deep);
+}
+
+@media (max-width: 420px) {
+  .vc-stats {
+    grid-template-columns: 1fr;
+  }
+  .vc-stat {
+    border-top: 1px solid #d2ccc0;
+    border-left: 0;
+  }
+  .vc-stat:first-child {
+    border-top: 0;
+  }
+}
+
+/* ---------- Rule 4: where each step learns from ---------- */
+
+.vc-flow {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.vc-flow__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.35rem;
+}
+
+@media (min-width: 640px) {
+  .vc-flow__row {
+    grid-template-columns: minmax(0, 11rem) minmax(0, 1fr);
+    align-items: center;
+    gap: 1rem;
+  }
+}
+
+.vc-flow__step {
+  font-size: 0.85rem;
+  line-height: 1.3;
+}
+
+.vc-flow__bar {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  gap: 2px;
+}
+
+.vc-flow__seg {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  min-height: 2rem;
+  padding: 0.3rem 0.55rem;
+  border: 1px solid #d2ccc0;
+  background: var(--color-sheet);
+  color: var(--color-muted);
+  font-size: 0.72rem;
+  line-height: 1.25;
+  transition:
+    background 200ms ease,
+    color 200ms ease,
+    border-color 200ms ease;
+}
+
+.vc-flow__seg[data-on='true'] {
+  border-color: #243130;
+  background: #243130;
+  color: #f1eee6;
+}
+
+.vc-flow__seg--test {
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.vc-flow__seg--test[data-on='leak'] {
+  border-color: var(--color-signal-deep);
+  background: var(--color-signal-deep);
+  color: #fff;
+}
+
+.vc-flow__seg--test[data-on='once'] {
+  border-color: #243130;
+  background: #243130;
+  color: #f1eee6;
+}
+
+.vc-flow__legend {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  gap: 2px;
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* ---------- Rule 5: selection simulation ---------- */
+
+.vc-strip {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.vc-strip text {
+  fill: var(--color-muted);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+}
+
+.vc-strip .vc-strip__value {
+  fill: var(--color-ink);
+  font-size: 11.5px;
+  font-weight: 500;
+}
+
+.vc-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.2rem;
+  color: var(--color-muted);
+  font-size: 0.75rem;
+}
+
+.vc-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.vc-legend i {
+  display: inline-block;
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 999px;
+  background: #8c877c;
+}
+
+.vc-legend i[data-k='best'] {
+  background: var(--color-signal);
+}
+
+.vc-legend i[data-k='truth'] {
+  width: 1px;
+  height: 0.9rem;
+  border-radius: 0;
+  background: var(--color-ink);
+}
+
+/* ---------- Rule 6: the do-nothing model ---------- */
+
+.vc-matrix {
+  display: grid;
+  grid-template-columns: auto repeat(2, minmax(0, 1fr));
+  gap: 2px;
+  font-size: 0.78rem;
+}
+
+.vc-matrix__axis {
+  display: flex;
+  align-items: center;
+  padding: 0.3rem 0.5rem 0.3rem 0;
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.vc-matrix__axis--top {
+  justify-content: center;
+  padding: 0 0 0.3rem;
+}
+
+.vc-matrix__cell {
+  padding: 0.6rem 0.7rem;
+  border: 1px solid #d2ccc0;
+  background: var(--color-sheet);
+}
+
+.vc-matrix__cell b {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+.vc-matrix__cell span {
+  color: var(--color-muted);
+  font-size: 0.72rem;
+}
+
+.vc-matrix__cell[data-miss='true'] {
+  border-color: var(--color-signal-deep);
+}
+
+.vc-matrix__cell[data-miss='true'] b {
+  color: var(--color-signal-deep);
+}
+
+/* ---------- Forms (prompt builder, review) ---------- */
+
+.vc-fieldset {
+  min-width: 0;
+  border: 0;
+  border-top: 1px solid var(--color-hairline);
+  padding: 1.6rem 0 0.4rem;
+  margin: 0;
+}
+
+.vc-fieldset legend {
+  float: left;
+  width: 100%;
+  margin-bottom: 1.1rem;
+  padding: 0;
+}
+
+.vc-fieldset legend + * {
+  clear: both;
+}
+
+.vc-field {
+  display: block;
+  min-width: 0;
+  margin-bottom: 1.1rem;
+}
+
+.vc-field__label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.vc-field__help {
+  display: block;
+  margin-top: 0.3rem;
+  color: var(--color-muted);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.vc-input {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  margin-top: 0.45rem;
+  border: 1px solid #c9c3b6;
+  border-radius: 0;
+  padding: 0.55rem 0.7rem;
+  background: #fbfaf6;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  line-height: 1.4;
+}
+
+.vc-input::placeholder {
+  color: #9a958a;
+}
+
+.vc-input:focus {
+  border-color: var(--color-ink);
+}
+
+textarea.vc-input {
+  min-height: 5.2rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  line-height: 1.6;
+  resize: vertical;
+}
+
+.vc-input--mono {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+}
+
+.vc-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.3rem 0;
+  font-size: 0.88rem;
+  line-height: 1.4;
+  cursor: pointer;
+}
+
+.vc-check input {
+  flex: none;
+  width: 1rem;
+  height: 1rem;
+  margin-top: 0.15rem;
+  accent-color: var(--color-signal-deep);
+}
+
+.vc-button {
+  border: 1px solid #bdb7aa;
+  padding: 0.6rem 0.9rem;
+  background: transparent;
+  color: var(--color-ink);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    border-color 160ms ease,
+    background 160ms ease,
+    color 160ms ease;
+}
+
+.vc-button:hover {
+  border-color: var(--color-ink);
+}
+
+/* ---------- Review checklist ---------- */
+
+.vc-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.7rem;
+  padding: 1rem 0;
+  border-top: 1px solid var(--color-hairline);
+}
+
+@media (min-width: 640px) {
+  .vc-item {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+    gap: 1.25rem;
+  }
+}
+
+.vc-item__evidence {
+  grid-column: 1 / -1;
+}
+
+.vc-verdict {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.vc-verdict button {
+  min-width: 4.6rem;
+  border: 1px solid #bdb7aa;
+  padding: 0.5rem 0.6rem;
+  background: transparent;
+  color: var(--color-ink);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    border-color 160ms ease,
+    background 160ms ease,
+    color 160ms ease;
+}
+
+.vc-verdict button:hover {
+  border-color: var(--color-ink);
+}
+
+.vc-verdict button[data-verdict='ok'][aria-pressed='true'] {
+  border-color: #243130;
+  background: #243130;
+  color: #f1eee6;
+}
+
+.vc-verdict button[data-verdict='broken'][aria-pressed='true'] {
+  border-color: var(--color-signal-deep);
+  background: var(--color-signal-deep);
+  color: #fff;
+}
+
+/* ---------- File tree ---------- */
+
+.vc-tree {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+
+.vc-tree button {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  width: 100%;
+  border: 0;
+  border-left: 2px solid transparent;
+  padding: 0.38rem 0.6rem 0.38rem calc(0.6rem + var(--depth, 0) * 1.1rem);
+  background: transparent;
+  color: var(--color-ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.vc-tree button:hover {
+  background: rgb(20 20 18 / 4%);
+}
+
+.vc-tree button[aria-pressed='true'] {
+  border-left-color: var(--color-signal);
+  background: var(--color-sheet);
+}
+
+.vc-tree button[data-dir='true'] {
+  font-weight: 500;
+}
+
+.vc-tree__note {
+  margin-left: auto;
+  color: var(--color-muted);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+.vc-tree__panel pre {
+  margin: 0.9rem 0 0;
+  padding: 0.9rem;
+  overflow-x: auto;
+  background: var(--color-ink);
+  color: #f1eee6;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  line-height: 1.65;
+}
+
+/* Rule sections are jump targets from the index strip. */
+.vc-rule {
+  scroll-margin-top: 1rem;
+}

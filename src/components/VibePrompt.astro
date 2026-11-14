@@ -1,0 +1,27 @@
+---
+// A prompt shown as text: the vague version (paper) or the spec version (ink,
+// with a copy button). `name` lets a widget rewrite the text in place.
+import { highlightPrompt } from '../data/vibe-coding';
+
+interface Props {
+  tone: 'vague' | 'spec';
+  label: string;
+  text: string;
+  name?: string;
+}
+const { tone, label, text, name } = Astro.props;
+---
+
+<div class:list={['vc-prompt', `vc-prompt--${tone}`]}>
+  <div class="vc-prompt__head">
+    <span>{label}</span>
+    {
+      tone === 'spec' && (
+        <button type="button" class="vc-copy" data-vc-copy hidden>
+          Copy
+        </button>
+      )
+    }
+  </div>
+  <pre data-vc-text={name} set:html={highlightPrompt(text)} />
+</div>

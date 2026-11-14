@@ -1,0 +1,150 @@
+---
+import Base from '../../../layouts/Base.astro';
+import PageHero from '../../../components/PageHero.astro';
+import SectionHeading from '../../../components/SectionHeading.astro';
+import VibeNav from '../../../components/VibeNav.astro';
+import VibePrompt from '../../../components/VibePrompt.astro';
+import '../../../styles/vibe-coding.css';
+import { CHECKLIST, RULES, buildCorrection } from '../../../data/vibe-coding';
+
+const sample = buildCorrection([{ rule: 3, what: CHECKLIST.find((c) => c.id === 'extras')!.what }]);
+---
+
+<Base
+  title="Review Checklist for AI-Written ML Code — León Palafox"
+  description="Thirteen checks to run on every answer from an AI assistant before you type “next”. Mark what broke and get the correction prompt to send back."
+>
+  <PageHero
+    eyebrow="Vibe coding · review"
+    jp="点検"
+    title="Review before you type “next”"
+    description="Rules in the prompt lower the odds of a mistake. They do not remove it. Run these checks on every answer, and when one fails, send a correction that names the rule and asks for the smallest fix."
+  />
+  <VibeNav />
+
+  <section class="border-b border-hairline px-6 py-12 sm:px-10 lg:px-14" data-vc-review>
+    <div class="grid gap-x-12 gap-y-10 lg:grid-cols-[minmax(0,6fr)_minmax(0,5fr)]">
+      <div class="min-w-0">
+        <p class="text-sm leading-relaxed text-muted">
+          Mark each line as it holds or breaks in the answer in front of you. For a broken one, edit the note so it says
+          what you actually saw.
+        </p>
+        <ul class="mt-6 border-b border-hairline">
+          {
+            CHECKLIST.map((item) => (
+              <li class="vc-item" data-item={item.id}>
+                <div class="min-w-0">
+                  <p class="leading-snug">{item.label}</p>
+                  <p class="micro-label mt-1.5 text-muted">
+                    <a href={`/teaching/vibe-coding/#${RULES[item.rule - 1].id}`} class="hover:text-signal-deep">
+                      Rule {String(item.rule).padStart(2, '0')} · {RULES[item.rule - 1].short}
+                    </a>
+                  </p>
+                </div>
+                <div class="vc-verdict" role="group" aria-label={item.label}>
+                  <button type="button" data-verdict="ok" aria-pressed="false">
+                    {item.own ? 'Done' : 'Holds'}
+                  </button>
+                  {!item.own && (
+                    <button type="button" data-verdict="broken" aria-pressed="false">
+                      Broken
+                    </button>
+                  )}
+                </div>
+                {!item.own && (
+                  <label class="vc-item__evidence vc-field !mb-0" data-evidence hidden>
+                    <span class="vc-field__label">What you saw</span>
+                    <input class="vc-input" type="text" value={item.what} autocomplete="off" />
+                  </label>
+                )}
+              </li>
+            ))
+          }
+        </ul>
+        <noscript>
+          <p class="mt-6 border border-hairline bg-paper p-4 text-sm text-muted">
+            The buttons need JavaScript. The list still works on paper: go through it line by line, and use the
+            correction template on this page for anything that fails.
+          </p>
+        </noscript>
+      </div>
+
+      <div class="min-w-0 lg:sticky lg:top-6 lg:self-start">
+        <dl class="vc-stats" aria-live="polite">
+          <div class="vc-stat">
+            <dt>Hold</dt>
+            <dd data-review-ok>0</dd>
+          </div>
+          <div class="vc-stat vc-stat--key">
+            <dt>Broken</dt>
+            <dd data-review-broken>0</dd>
+          </div>
+          <div class="vc-stat">
+            <dt>Open</dt>
+            <dd data-review-open>{CHECKLIST.length}</dd>
+          </div>
+        </dl>
+
+        <div class="mt-5" data-review-waiting>
+          <p class="text-sm leading-relaxed" data-review-waiting-line>
+            {CHECKLIST.length} checks still open. Go through all of them before you type “next”.
+          </p>
+          <p class="micro-label mt-6 text-muted">The correction looks like this</p>
+          <div class="mt-3 opacity-70">
+            <VibePrompt tone="vague" label="Example" text={sample} />
+          </div>
+        </div>
+
+        <div class="mt-5" data-review-fix hidden>
+          <p class="mb-3 text-sm leading-relaxed">Do not type “next”. Send this instead.</p>
+          <VibePrompt tone="spec" label="Correction prompt" name="review" text={sample} />
+        </div>
+
+        <div class="mt-5 border-l-2 border-signal pl-4" data-review-clear hidden>
+          <p class="font-serif text-xl leading-snug">Everything holds. Type “next”.</p>
+          <p class="mt-2 text-sm text-muted">Reset the list for the next answer.</p>
+        </div>
+
+        <button type="button" class="vc-button mt-6" data-review-reset>Reset the list</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-6 py-14 sm:px-10 lg:px-14">
+    <SectionHeading title="How to correct" />
+    <div class="mt-8 grid gap-10 lg:grid-cols-3">
+      <div>
+        <p class="micro-label text-signal-deep">Name the rule and the evidence</p>
+        <p class="mt-3 text-sm leading-relaxed">
+          “This is wrong” gets you a rewrite of everything. “You fitted the encoder before the split” gets you a fix.
+          Quote the line or the cell if you can.
+        </p>
+      </div>
+      <div>
+        <p class="micro-label text-signal-deep">Ask for the smallest change</p>
+        <p class="mt-3 text-sm leading-relaxed">
+          Keep what already passed review. An assistant asked to start over will also change the parts that were
+          right, and you will have to check them again.
+        </p>
+      </div>
+      <div>
+        <p class="micro-label text-signal-deep">Recheck what depends on it</p>
+        <p class="mt-3 text-sm leading-relaxed">
+          A fix to the split changes every number after it. Rerun the downstream cells and read the new outputs before
+          moving on. Then log the correction with the run.
+        </p>
+      </div>
+    </div>
+
+    <a href="/teaching/vibe-coding/" class="group micro-label mt-12 inline-flex items-center gap-2 text-signal-deep hover:text-signal">
+      <span aria-hidden="true" class="transition-transform group-hover:-translate-x-1">←</span>
+      The eight rules
+    </a>
+  </section>
+</Base>
+
+<script>
+  import { mountVibeCoding } from '../../../scripts/vibe-coding';
+
+  mountVibeCoding();
+</script>

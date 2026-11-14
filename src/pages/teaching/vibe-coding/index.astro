@@ -1,0 +1,505 @@
+---
+import Base from '../../../layouts/Base.astro';
+import PageHero from '../../../components/PageHero.astro';
+import SectionHeading from '../../../components/SectionHeading.astro';
+import VibeNav from '../../../components/VibeNav.astro';
+import VibePrompt from '../../../components/VibePrompt.astro';
+import '../../../styles/vibe-coding.css';
+import {
+  COLUMN_PITFALLS,
+  ENGINES,
+  FOLD_OPTIONS,
+  GRID_PARAMS,
+  PIPELINE_STEPS,
+  RULES,
+  buildContract,
+  buildCorrection,
+  countCombinations,
+} from '../../../data/vibe-coding';
+
+const description =
+  'Eight rules for prompting an AI assistant to do data science, each with a vague prompt, the version that works and an example you can try.';
+
+const answers = [
+  {
+    name: '“Best model wins”',
+    points: ['Gradient boosting, with scaling', 'SMOTE oversampling', 'Accuracy as the only metric', 'No way to explain a prediction'],
+  },
+  {
+    name: '“Quick and simple”',
+    points: ['Logistic regression', 'Categories label-encoded as 0, 1, 2…', 'Codes treated as numbers', 'One split, one number'],
+  },
+  {
+    name: '“Looks rigorous”',
+    points: ['Random forest with a long parameter list', 'Tuned by looking at the test score', 'Threshold picked on test', 'A score that will not hold up'],
+  },
+];
+
+const firstPitfall = COLUMN_PITFALLS[0];
+const defaultCombos = countCombinations({});
+const personId = new URL('#person', Astro.site).toString();
+const pageUrl = new URL('/teaching/vibe-coding/', Astro.site).toString();
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'TechArticle',
+  '@id': `${pageUrl}#guide`,
+  headline: 'Eight rules for vibe coding in data science',
+  description,
+  inLanguage: 'en-US',
+  datePublished: '2026-11-13',
+  author: { '@type': 'Person', '@id': personId, name: 'León Palafox', url: new URL('/about/', Astro.site).toString() },
+  publisher: { '@id': personId },
+  mainEntityOfPage: pageUrl,
+};
+---
+
+<Base title="Vibe Coding for Data Science: Eight Rules — León Palafox" description={description}>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd).replace(/</g, '\\u003c')} />
+
+  <PageHero
+    eyebrow="Vibe coding · data science"
+    jp="規則"
+    title="Eight rules for vibe coding in data science"
+    description="An assistant will write a whole notebook from one sentence. Whether the number at the bottom means anything depends on what that sentence left out. These are the rules I teach for closing those gaps before any code exists."
+  />
+  <VibeNav />
+
+  <section class="border-b border-hairline px-6 py-14 sm:px-10 lg:px-14">
+    <SectionHeading title="One vague prompt, many notebooks" />
+    <div class="mt-8 grid gap-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
+      <div>
+        <p class="text-[1.05rem] leading-relaxed">
+          Send the prompt below to three assistants, or to the same one three times. You get three notebooks back, and
+          all of them run.
+        </p>
+        <div class="mt-6">
+          <VibePrompt tone="vague" label="The prompt" text={'Build a classifier for this CSV:\nhttps://…/data.csv'} />
+        </div>
+        <p class="mt-6 text-[1.05rem] leading-relaxed">
+          None of it is wrong code. Each notebook answers a different question, and none of them is the question you
+          had in mind. The assistant filled every gap in the prompt with a guess. The rules below take the guesses away,
+          one gap at a time.
+        </p>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-3">
+        {
+          answers.map((answer, index) => (
+            <article class="border border-hairline bg-paper p-5">
+              <p class="micro-label text-muted">Answer {'ABC'[index]}</p>
+              <h3 class="mt-2 text-base font-semibold tracking-tight">{answer.name}</h3>
+              <ul class="mt-3 space-y-1.5 text-sm leading-snug text-muted">
+                {answer.points.map((point) => (
+                  <li class="flex gap-2.5">
+                    <span aria-hidden="true" class="mt-[0.5em] size-1 shrink-0 rounded-full bg-signal" />
+                    {point}
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+
+    <nav aria-label="Rules" class="mt-12">
+      <ol class="grid gap-x-8 border-t border-hairline sm:grid-cols-2 lg:grid-cols-4">
+        {
+          RULES.map((rule) => (
+            <li class="border-b border-hairline">
+              <a href={`#${rule.id}`} class="group flex items-baseline gap-3 py-3 text-sm hover:text-signal-deep">
+                <span class="micro-label text-signal-deep">{String(rule.n).padStart(2, '0')}</span>
+                <span>{rule.title}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+    </nav>
+  </section>
+
+  {
+    RULES.map((rule) => (
+      <section id={rule.id} class="vc-rule border-b border-hairline px-6 py-14 sm:px-10 lg:px-14">
+        <div class="grid gap-x-12 gap-y-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
+          <div>
+            <p class="micro-label text-signal-deep">Rule {String(rule.n).padStart(2, '0')}</p>
+            <h2 class="mt-3 text-3xl font-semibold leading-tight tracking-tight">{rule.title}</h2>
+            <span aria-hidden="true" class="mt-4 block h-[3px] w-10 bg-signal" />
+            <p class="mt-6 text-[1.05rem] leading-relaxed">{rule.why}</p>
+            <div class="mt-6">
+              <VibePrompt tone="vague" label="Vague" text={rule.vague} />
+            </div>
+            {rule.takeaway && (
+              <p class="mt-6 border-l-2 border-signal pl-4 font-serif text-lg leading-snug">{rule.takeaway}</p>
+            )}
+          </div>
+
+          <div class="min-w-0 space-y-5">
+            <VibePrompt
+              tone="spec"
+              label="In the prompt"
+              name={`rule-${rule.n}`}
+              text={rule.n === 2 ? buildContract([firstPitfall.id]) : rule.spec}
+            />
+
+            {rule.n === 1 && (
+              <div class="vc-widget" data-vc-engines>
+                <div class="vc-widget__head">
+                  <p class="micro-label text-signal-deep">Try it</p>
+                  <p class="text-sm text-muted">Change where the code runs. Only this block of the prompt changes.</p>
+                </div>
+                <div class="vc-widget__body">
+                  <div class="vc-chips" role="group" aria-label="Environment">
+                    {ENGINES.map((engine, index) => (
+                      <button type="button" class="vc-chip" data-engine={engine.id} aria-pressed={index === 0 ? 'true' : 'false'}>
+                        {engine.label}
+                      </button>
+                    ))}
+                  </div>
+                  <p class="mt-4 text-sm" data-engine-what aria-live="polite">{ENGINES[0].what}</p>
+                  <dl class="vc-facts mt-4">
+                    <dt>Output</dt>
+                    <dd data-fact="output">{ENGINES[0].facts.output}</dd>
+                    <dt>Installs</dt>
+                    <dd data-fact="installs">{ENGINES[0].facts.installs}</dd>
+                    <dt>Files</dt>
+                    <dd data-fact="files">{ENGINES[0].facts.files}</dd>
+                    <dt>Watch for</dt>
+                    <dd data-fact="watch">{ENGINES[0].facts.watch}</dd>
+                  </dl>
+                </div>
+              </div>
+            )}
+
+            {rule.n === 2 && (
+              <div class="vc-widget" data-vc-contract>
+                <div class="vc-widget__head">
+                  <p class="micro-label text-signal-deep">Try it</p>
+                  <p class="text-sm text-muted">Switch on what your table contains. Each one adds a line to the contract.</p>
+                </div>
+                <div class="vc-widget__body">
+                  <div class="vc-chips" role="group" aria-label="Columns that get misread">
+                    {COLUMN_PITFALLS.map((pitfall, index) => (
+                      <button
+                        type="button"
+                        class="vc-chip vc-chip--text"
+                        data-pitfall={pitfall.id}
+                        aria-pressed={index === 0 ? 'true' : 'false'}
+                      >
+                        {pitfall.label}
+                      </button>
+                    ))}
+                  </div>
+                  <div class="mt-4 border-l-2 border-signal pl-3" aria-live="polite">
+                    <p class="micro-label text-muted">
+                      Left to a guess · <span data-pitfall-label>{firstPitfall.label}</span>
+                    </p>
+                    <p class="mt-1.5 text-sm leading-relaxed" data-pitfall-guess>{firstPitfall.guess}</p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {rule.n === 3 && (
+              <div class="vc-widget" data-vc-grid>
+                <div class="vc-widget__head">
+                  <p class="micro-label text-signal-deep">Try it</p>
+                  <p class="text-sm text-muted">Switch values on and off. The grid in the prompt follows, and so does the bill.</p>
+                </div>
+                <div class="vc-widget__body space-y-4">
+                  {GRID_PARAMS.map((param) => (
+                    <div>
+                      <p class="font-mono text-xs text-muted">{param.name}</p>
+                      <div class="vc-chips mt-1.5" role="group" aria-label={param.name}>
+                        {param.values.map((value) => (
+                          <button type="button" class="vc-chip" data-param={param.name} data-value={value} aria-pressed="true">
+                            {value}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                  <div>
+                    <p class="font-mono text-xs text-muted">cross-validation folds</p>
+                    <div class="vc-chips mt-1.5" role="group" aria-label="Cross-validation folds">
+                      {FOLD_OPTIONS.map((folds) => (
+                        <button type="button" class="vc-chip" data-folds={folds} aria-pressed={folds === 5 ? 'true' : 'false'}>
+                          {folds}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  <p class="border-t border-hairline pt-4 text-sm leading-relaxed" aria-live="polite">
+                    <span class="font-mono" data-grid-math>{GRID_PARAMS.map((p) => p.values.length).join(' × ')} = {defaultCombos} combinations</span>, each fitted on <span data-grid-folds>5</span> folds: <strong class="font-mono text-signal-deep" data-grid-fits>{(defaultCombos * 5).toLocaleString('en-US')}</strong> model fits.
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {rule.n === 4 && (
+              <div class="vc-widget" data-vc-flow>
+                <div class="vc-widget__head">
+                  <p class="micro-label text-signal-deep">Try it</p>
+                  <p class="text-sm text-muted">Which rows each step gets to see.</p>
+                </div>
+                <div class="vc-widget__body">
+                  <div class="vc-chips" role="group" aria-label="Prompt">
+                    <button type="button" class="vc-chip vc-chip--text" data-mode="vague" aria-pressed="true">
+                      What often comes back
+                    </button>
+                    <button type="button" class="vc-chip vc-chip--text" data-mode="rule" aria-pressed="false">
+                      With the rule
+                    </button>
+                  </div>
+                  <div class="vc-flow mt-5">
+                    <div class="vc-flow__row" aria-hidden="true">
+                      <span />
+                      <div class="vc-flow__legend">
+                        <span>Train · 80%</span>
+                        <span class="text-center">Test</span>
+                      </div>
+                    </div>
+                    {PIPELINE_STEPS.map((step) => {
+                      const usesTrain = step.vague.rows === 'all';
+                      return (
+                        <div class="vc-flow__row" data-flow-row>
+                          <div class="vc-flow__step">
+                            {step.step}
+                            <span class="mt-0.5 block text-xs text-muted" data-flow-note>
+                              {step.vague.note}
+                            </span>
+                          </div>
+                          <div class="vc-flow__bar">
+                            <span class="vc-flow__seg" data-seg="train" data-on={String(usesTrain)}>
+                              {usesTrain ? 'used' : ''}
+                            </span>
+                            <span class="vc-flow__seg vc-flow__seg--test" data-seg="test" data-on="leak">
+                              used
+                            </span>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                  <p class="mt-5 border-t border-hairline pt-4 text-sm leading-relaxed" data-flow-verdict aria-live="polite">
+                    The test rows took part in four decisions and then graded the result.
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {rule.n === 5 && (
+              <div class="vc-widget" data-vc-selection>
+                <div class="vc-widget__head">
+                  <p class="micro-label text-signal-deep">Try it</p>
+                  <p class="text-sm text-muted">What choosing by test score does to a model with no skill at all.</p>
+                </div>
+                <div class="vc-widget__body">
+                  <p class="text-sm leading-relaxed">
+                    Every configuration here guesses at random on balanced classes, so its true accuracy is 50%. Score
+                    them all on the same test set and report the best one.
+                  </p>
+                  <div class="mt-5 grid gap-5 sm:grid-cols-2">
+                    <label class="vc-range">
+                      <span class="vc-range__label">
+                        <span>Configurations tried</span>
+                        <strong data-sel-k-val>30</strong>
+                      </span>
+                      <input data-sel-k type="range" min="1" max="200" step="1" value="30" />
+                    </label>
+                    <label class="vc-range">
+                      <span class="vc-range__label">
+                        <span>Rows in the test set</span>
+                        <strong data-sel-n-val>500</strong>
+                      </span>
+                      <input data-sel-n type="range" min="200" max="5000" step="100" value="500" />
+                    </label>
+                  </div>
+                  <div class="mt-5" data-sel-strip />
+                  <noscript>
+                    <p class="text-sm text-muted">
+                      This simulation needs JavaScript. With 30 random configurations and 500 test rows, the best of
+                      them typically scores about 54.6% while its true accuracy is 50%.
+                    </p>
+                  </noscript>
+                  <div class="vc-legend mt-2">
+                    <span><i data-k="other" />One configuration</span>
+                    <span><i data-k="best" />The one you would report</span>
+                    <span><i data-k="truth" />True accuracy, 50%</span>
+                  </div>
+                  <dl class="vc-stats mt-5" aria-live="polite">
+                    <div class="vc-stat vc-stat--key">
+                      <dt>Reported</dt>
+                      <dd data-sel-best>–</dd>
+                    </div>
+                    <div class="vc-stat">
+                      <dt>True accuracy</dt>
+                      <dd>50.0%</dd>
+                    </div>
+                    <div class="vc-stat">
+                      <dt>Typical best</dt>
+                      <dd data-sel-typical>–</dd>
+                    </div>
+                  </dl>
+                  <p class="mt-4 text-sm leading-relaxed" data-sel-line />
+                  <div class="mt-4 flex flex-wrap items-center justify-between gap-3">
+                    <button type="button" class="vc-button" data-sel-redraw>
+                      Draw again
+                    </button>
+                    <p class="text-xs text-muted">
+                      Typical best: mean over 1,500 simulated runs, normal approximation to the binomial.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {rule.n === 6 && (
+              <div class="vc-widget" data-vc-baseline>
+                <div class="vc-widget__head">
+                  <p class="micro-label text-signal-deep">Try it</p>
+                  <p class="text-sm text-muted">A model that predicts “negative” for every row, on 1,000 rows.</p>
+                </div>
+                <div class="vc-widget__body">
+                  <label class="vc-range">
+                    <span class="vc-range__label">
+                      <span>Share of positive cases</span>
+                      <strong data-base-share-val>5%</strong>
+                    </span>
+                    <input data-base-share type="range" min="1" max="50" step="1" value="5" />
+                  </label>
+                  <div class="mt-5 grid gap-5 sm:grid-cols-2">
+                    <div class="vc-matrix" role="img" aria-label="Confusion matrix of the do-nothing model">
+                      <span />
+                      <span class="vc-matrix__axis vc-matrix__axis--top">Says negative</span>
+                      <span class="vc-matrix__axis vc-matrix__axis--top">Says positive</span>
+                      <span class="vc-matrix__axis">Is negative</span>
+                      <div class="vc-matrix__cell">
+                        <b data-cell="tn">950</b>
+                        <span>correct</span>
+                      </div>
+                      <div class="vc-matrix__cell">
+                        <b>0</b>
+                        <span>false alarms</span>
+                      </div>
+                      <span class="vc-matrix__axis">Is positive</span>
+                      <div class="vc-matrix__cell" data-miss="true">
+                        <b data-cell="fn">50</b>
+                        <span>missed</span>
+                      </div>
+                      <div class="vc-matrix__cell">
+                        <b>0</b>
+                        <span>caught</span>
+                      </div>
+                    </div>
+                    <dl class="vc-stats self-start" style="grid-template-columns: 1fr 1fr" aria-live="polite">
+                      <div class="vc-stat vc-stat--key">
+                        <dt>Accuracy</dt>
+                        <dd data-base-acc>95%</dd>
+                      </div>
+                      <div class="vc-stat">
+                        <dt>Positives caught</dt>
+                        <dd data-base-caught>0 of 50</dd>
+                      </div>
+                    </dl>
+                  </div>
+                  <p class="mt-5 border-t border-hairline pt-4 text-sm leading-relaxed" data-base-line>
+                    On this data, any model below 95% accuracy is worse than doing nothing, and one at 95% may have
+                    caught no positives at all.
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {rule.n === 8 && (
+              <div class="vc-widget" data-vc-correction>
+                <div class="vc-widget__head">
+                  <p class="micro-label text-signal-deep">Try it</p>
+                  <p class="text-sm text-muted">Say which rule broke and what you saw. Send back the result.</p>
+                </div>
+                <div class="vc-widget__body">
+                  <div class="grid gap-4 sm:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
+                    <label class="vc-field !mb-0">
+                      <span class="vc-field__label">Rule that broke</span>
+                      <select class="vc-input" data-fix-rule>
+                        {RULES.map((r) => (
+                          <option value={r.n} selected={r.n === 3}>
+                            {r.n}. {r.short}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+                    <label class="vc-field !mb-0">
+                      <span class="vc-field__label">What happened</span>
+                      <input class="vc-input" type="text" data-fix-what value={RULES[2].breach} autocomplete="off" />
+                    </label>
+                  </div>
+                  <div class="mt-4">
+                    <VibePrompt
+                      tone="spec"
+                      label="Correction prompt"
+                      name="correction"
+                      text={buildCorrection([{ rule: 3, what: RULES[2].breach }])}
+                    />
+                  </div>
+                  <p class="mt-4 text-sm text-muted">
+                    The <a href="/teaching/vibe-coding/review/" class="underline underline-offset-4 hover:text-signal-deep">review checklist</a> writes
+                    this for you from the boxes you mark as broken.
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+    ))
+  }
+
+  <section class="px-6 py-16 sm:px-10 lg:px-14 lg:py-20">
+    <p class="micro-label text-signal-deep">Takeaway</p>
+    <p class="mt-5 max-w-3xl font-serif text-3xl leading-tight sm:text-4xl">
+      Constrain the what. Let the model write the how. Check everything in between.
+    </p>
+    <p class="mt-6 max-w-2xl text-[1.05rem] leading-relaxed text-muted">
+      Review catches errors after the code is written. Rules keep them from being written. You need both, so the guide
+      has a tool for each.
+    </p>
+    <div class="mt-10 grid gap-6 lg:grid-cols-2">
+      <a
+        href="/teaching/vibe-coding/prompt-builder/"
+        class="group flex flex-col border border-hairline bg-paper p-7 transition-colors hover:border-signal"
+      >
+        <p class="micro-label text-signal-deep">Before the code</p>
+        <h3 class="mt-3 text-xl font-semibold tracking-tight">Prompt builder</h3>
+        <p class="mt-4 text-sm leading-relaxed">
+          Fill in your environment, data, model and metric. It assembles the setup prompt with all eight rules in it,
+          ready to copy or save as a file.
+        </p>
+        <span class="micro-label mt-auto inline-flex items-center gap-2 pt-6 text-signal-deep">
+          Open
+          <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
+        </span>
+      </a>
+      <a
+        href="/teaching/vibe-coding/review/"
+        class="group flex flex-col border border-hairline bg-paper p-7 transition-colors hover:border-signal"
+      >
+        <p class="micro-label text-signal-deep">After every answer</p>
+        <h3 class="mt-3 text-xl font-semibold tracking-tight">Review checklist</h3>
+        <p class="mt-4 text-sm leading-relaxed">
+          Thirteen checks to run before you type “next”. Mark what broke and it writes the correction prompt.
+        </p>
+        <span class="micro-label mt-auto inline-flex items-center gap-2 pt-6 text-signal-deep">
+          Open
+          <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
+        </span>
+      </a>
+    </div>
+  </section>
+</Base>
+
+<script>
+  import { mountVibeCoding } from '../../../scripts/vibe-coding';
+
+  mountVibeCoding();
+</script>

@@ -1,0 +1,30 @@
+---
+// Section navigation shared by the three vibe coding pages.
+const pages = [
+  { label: 'The eight rules', href: '/teaching/vibe-coding/' },
+  { label: 'Prompt builder', href: '/teaching/vibe-coding/prompt-builder/' },
+  { label: 'Review checklist', href: '/teaching/vibe-coding/review/' },
+];
+const path = `${Astro.url.pathname.replace(/\/$/, '')}/`;
+---
+
+<nav aria-label="Vibe coding" class="border-b border-hairline px-6 sm:px-10 lg:px-14">
+  <ul class="flex flex-wrap gap-x-8">
+    {
+      pages.map((page) => (
+        <li>
+          <a
+            href={page.href}
+            aria-current={path === page.href ? 'page' : undefined}
+            class:list={[
+              'micro-label -mb-px block border-b-2 py-4 transition-colors hover:text-signal',
+              path === page.href ? 'border-signal text-signal-deep' : 'border-transparent text-ink',
+            ]}
+          >
+            {page.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>

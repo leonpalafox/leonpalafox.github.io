@@ -58,6 +58,8 @@ const personJsonLd = {
     'Financial technology',
     'Data science',
     'MLOps',
+    'Vibe coding',
+    'AI-assisted data science',
   ],
   worksFor: { '@type': 'Organization', name: 'GBM', url: 'https://www.gbm.com/' },
   alumniOf: [
@@ -105,14 +107,17 @@ const pageNames: Record<string, string> = {
   '/media/': 'Media',
   '/courses/deep-learning/': 'Deep Learning',
   '/courses/machine-learning-2/': 'Machine Learning 2',
+  '/teaching/vibe-coding/': 'Vibe coding',
+  '/teaching/vibe-coding/prompt-builder/': 'Prompt builder',
+  '/teaching/vibe-coding/review/': 'Review checklist',
 };
 const breadcrumbs = [{ name: lang === 'es' ? 'Inicio' : 'Home', href: '/' }];
 if (path.startsWith('/blog/') && path !== '/blog/') {
   breadcrumbs.push({ name: 'Blog', href: '/blog/' });
 } else if (path.startsWith('/courses/') || (path.startsWith('/teaching/') && path !== '/teaching/')) {
   breadcrumbs.push({ name: lang === 'es' ? 'Cursos' : 'Teaching', href: '/teaching/' });
-  // A class session sits under its course page.
-  const course = path.match(/^\/courses\/[^/]+\/(?=[^/]+\/$)/)?.[0];
+  // A class session sits under its course page, a guide's tool under the guide.
+  const course = path.match(/^\/(?:courses|teaching)\/[^/]+\/(?=[^/]+\/$)/)?.[0];
   if (course && pageNames[course]) breadcrumbs.push({ name: pageNames[course], href: course });
 }
 breadcrumbs.push({ name: pageNames[path] ?? title.replace(/ — León Palafox$/, ''), href: path });
