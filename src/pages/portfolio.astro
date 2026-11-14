@@ -2,6 +2,35 @@
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import SectionHeading from '../components/SectionHeading.astro';
+import { getCollection } from 'astro:content';
+
+// The poll is re-run every week of the season; say how far it has got.
+const nflEditions = (await getCollection('blog', (post) => post.data.tags.includes('nfl'))).length;
+
+const projects = [
+  {
+    year: '2026',
+    title: 'NFL Power Rankings Poll of Polls',
+    description:
+      'Nine outlets publish a power ranking every week and disagree. This pools them into one statistically explicit consensus, charts every team\u2019s movement, and simulates a path to the Super Bowl, with the Python pipeline documented.',
+    note: `Updated weekly \u00b7 ${nflEditions} editions so far`,
+    href: '/blog/nfl-power-rankings-poll-of-polls/',
+  },
+  {
+    year: '2026',
+    title: 'PISA 2025 score shifts',
+    description:
+      'An interactive map of PISA score changes, OECD decennial trends, and uncertainty across participating education systems.',
+    href: '/pisa_results/',
+  },
+  {
+    year: '2026',
+    title: 'World Cup managers: rank vs tenure',
+    description:
+      'An interactive bubble chart of the 48 teams headed to the 2026 World Cup, comparing FIFA ranking, how long each manager has been in charge, and titles won.',
+    href: '/blog/world-cup-managers-rank-vs-tenure/',
+  },
+];
 ---
 
 <Base
@@ -18,18 +47,21 @@ import SectionHeading from '../components/SectionHeading.astro';
   <section class="px-6 py-14 sm:px-10 lg:px-14">
     <SectionHeading title="Data visualization" id="data-visualization" />
     <ul class="mt-8 max-w-3xl divide-y divide-hairline">
-      <li>
-        <a href="/pisa_results/" class="group flex items-start gap-5 py-5">
-          <span class="micro-label mt-1 w-16 shrink-0 text-muted">2026</span>
-          <span class="flex-1">
-            <span class="block text-lg font-medium leading-snug">PISA 2025 score shifts</span>
-            <span class="mt-2 block leading-relaxed text-muted">
-              An interactive map of PISA score changes, OECD decennial trends, and uncertainty across participating education systems.
-            </span>
-          </span>
-          <span aria-hidden="true" class="mt-1 shrink-0 text-signal-deep transition-transform group-hover:translate-x-1">→</span>
-        </a>
-      </li>
+      {
+        projects.map((project) => (
+          <li>
+            <a href={project.href} class="group flex items-start gap-5 py-5">
+              <span class="micro-label mt-1 w-16 shrink-0 text-muted">{project.year}</span>
+              <span class="flex-1">
+                <span class="block text-lg font-medium leading-snug">{project.title}</span>
+                <span class="mt-2 block leading-relaxed text-muted">{project.description}</span>
+                {project.note && <span class="micro-label mt-3 block text-signal-deep">{project.note}</span>}
+              </span>
+              <span aria-hidden="true" class="mt-1 shrink-0 text-signal-deep transition-transform group-hover:translate-x-1">→</span>
+            </a>
+          </li>
+        ))
+      }
     </ul>
   </section>
 </Base>

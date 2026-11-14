@@ -16,6 +16,20 @@ const thumbs = new Map(
   posts.filter((p) => p.data.cover).map((p) => [p.id, getAsset(p.data.cover!, { alt: '' }).src]),
 );
 
+// Topic filter. Tags in the front matter are fine-grained and mixed-language, so they are
+// folded into a few reader-facing topics; a post can sit in more than one.
+const topics = [
+  { id: 'ai', label: 'Artificial intelligence', tags: ['ia', 'machine learning', 'deep-learning'] },
+  { id: 'mexico', label: 'Mexico', tags: ['mexico'] },
+  { id: 'data', label: 'Data & visualization', tags: ['data-viz', 'datos', 'bigdata', 'statistics'] },
+  { id: 'nfl', label: 'NFL Poll of Polls', tags: ['nfl'] },
+];
+const topicsFor = (tags: string[]) =>
+  topics.filter((topic) => topic.tags.some((tag) => tags.includes(tag))).map((topic) => topic.id);
+const topicCounts = new Map(
+  topics.map((topic) => [topic.id, posts.filter((post) => topicsFor(post.data.tags).includes(topic.id)).length]),
+);
+
 const byYear = new Map<number, typeof posts>();
 for (const post of posts) {
   const year = post.data.pubDate.getUTCFullYear();
@@ -60,9 +74,34 @@ const blogJsonLd = {
     description="Columns and notes on AI, data strategy, and innovation. Most of these ran in El Financiero, so the majority are in Spanish."
   />
 
+  {/* Revealed by the script below; without JavaScript the full list simply shows. */}
+  <div class="topic-filter border-b border-hairline px-6 py-5 sm:px-10 lg:px-14" data-topic-filter hidden>
+    <p id="topic-filter-label" class="micro-label mb-3 flex items-center gap-3 text-muted">
+      <span>Filter by topic</span>
+      <span lang="ja" class="tracking-[0.2em]">分類</span>
+    </p>
+    <ul class="flex flex-wrap gap-2" aria-labelledby="topic-filter-label">
+      <li>
+        <button type="button" class="topic-chip" data-topic="all" aria-pressed="true">
+          All <span class="topic-count">{posts.length}</span>
+        </button>
+      </li>
+      {
+        topics.map((topic) => (
+          <li>
+            <button type="button" class="topic-chip" data-topic={topic.id} aria-pressed="false">
+              {topic.label} <span class="topic-count">{topicCounts.get(topic.id)}</span>
+            </button>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="sr-only" aria-live="polite" data-topic-status></p>
+  </div>
+
   {
     [...byYear.entries()].map(([year, yearPosts]) => (
-      <section class="border-b border-hairline px-6 py-10 last:border-b-0 sm:px-10 lg:px-14">
+      <section data-year-section class="border-b border-hairline px-6 py-10 last:border-b-0 sm:px-10 lg:px-14">
         <h2 class="flex items-baseline gap-4">
           <span class="text-3xl font-semibold tracking-tight">{year}</span>
           <span lang="ja" class="text-sm text-muted">
@@ -72,14 +111,14 @@ const blogJsonLd = {
         </h2>
         <ul class="mt-6 divide-y divide-hairline">
           {yearPosts.map((post) => (
-            <li>
+            <li data-topics={topicsFor(post.data.tags).join(' ')}>
               <a href={`/blog/${post.id}/`} class="group flex items-baseline gap-5 py-4">
                 <span class="micro-label w-12 shrink-0 text-muted">{monthDay(post.data.pubDate)}</span>
                 <span class="flex-1 leading-snug" lang={post.data.lang}>
                   {post.data.title}
                 </span>
                 <span class="micro-label hidden shrink-0 text-muted sm:inline">{post.data.lang}</span>
-                {thumbs.has(post.id) && (
+                {thumbs.has(post.id) ? (
                   <Image
                     src={thumbs.get(post.id)!}
                     alt=""
@@ -89,6 +128,8 @@ const blogJsonLd = {
                     loading="lazy"
                     class="-my-1 h-8 w-[26px] shrink-0 self-center border border-hairline object-cover grayscale-[0.35] transition duration-300 group-hover:grayscale-0"
                   />
+                ) : (
+                  <span aria-hidden="true" class="hidden w-[26px] shrink-0 sm:block" />
                 )}
                 <span aria-hidden="true" class="shrink-0 text-signal-deep transition-transform group-hover:translate-x-1">
                   →
@@ -101,3 +142,82 @@ const blogJsonLd = {
     ))
   }
 </Base>
+
+<style>
+  .topic-chip {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    min-height: 2.5rem;
+    padding: 0.45rem 0.9rem;
+    border: 1px solid var(--color-hairline);
+    background: var(--color-sheet);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 150ms, border-color 150ms, color 150ms;
+  }
+
+  .topic-chip:hover {
+    border-color: var(--color-ink);
+  }
+
+  .topic-chip[aria-pressed='true'] {
+    border-color: var(--color-signal-deep);
+    background: var(--color-signal-deep);
+    color: #fff;
+  }
+
+  .topic-count {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    opacity: 0.7;
+  }
+</style>
+
+<script>
+  const filter = document.querySelector<HTMLElement>('[data-topic-filter]');
+  if (filter) {
+    const chips = [...filter.querySelectorAll<HTMLButtonElement>('[data-topic]')];
+    const status = filter.querySelector<HTMLElement>('[data-topic-status]');
+    const sections = [...document.querySelectorAll<HTMLElement>('[data-year-section]')];
+    const known = new Set(chips.map((chip) => chip.dataset.topic));
+
+    const apply = (topic: string) => {
+      let shown = 0;
+      for (const section of sections) {
+        let any = false;
+        for (const row of section.querySelectorAll<HTMLElement>('[data-topics]')) {
+          const match = topic === 'all' || (row.dataset.topics ?? '').split(' ').includes(topic);
+          row.hidden = !match;
+          if (match) {
+            any = true;
+            shown += 1;
+          }
+        }
+        section.hidden = !any;
+      }
+      for (const chip of chips) chip.setAttribute('aria-pressed', String(chip.dataset.topic === topic));
+      if (status) status.textContent = `${shown} posts shown`;
+    };
+
+    // The choice lives in the URL (?topic=ai) so a filtered list can be linked and survives Back.
+    const fromUrl = () => {
+      const topic = new URLSearchParams(location.search).get('topic') ?? 'all';
+      return known.has(topic) ? topic : 'all';
+    };
+
+    for (const chip of chips) {
+      chip.addEventListener('click', () => {
+        const topic = chip.dataset.topic ?? 'all';
+        const url = new URL(location.href);
+        if (topic === 'all') url.searchParams.delete('topic');
+        else url.searchParams.set('topic', topic);
+        history.replaceState(null, '', url);
+        apply(topic);
+      });
+    }
+
+    filter.hidden = false;
+    apply(fromUrl());
+  }
+</script>

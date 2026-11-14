@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import SectionHeading from '../components/SectionHeading.astro';
+import SocialLinks from '../components/SocialLinks.astro';
 import heroCollage from '../assets/hero-collage.jpg';
 import bioPhoto from '../assets/bio-photo.jpg';
 
@@ -128,7 +129,7 @@ const timeline = [
     <!-- Drafting-sketch decorations -->
     <div aria-hidden="true" class="pointer-events-none absolute inset-0 hidden lg:block">
       <div
-        class="absolute left-10 top-[46%] h-16 w-20 opacity-45"
+        class="absolute left-10 top-[52%] h-16 w-20 opacity-45"
         style="background-image: radial-gradient(var(--color-ink) 1px, transparent 1px); background-size: 9px 9px;"
       >
       </div>
@@ -179,6 +180,7 @@ const timeline = [
             de Matemáticas Bourbaki. I write a regular column in <em>El Financiero</em> on AI, data strategy, and
             innovation.
           </p>
+          <SocialLinks profilesOnly class="mt-7" />
         </div>
       </div>
     </div>

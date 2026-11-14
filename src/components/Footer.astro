@@ -1,4 +1,6 @@
 ---
+import SocialLinks from './SocialLinks.astro';
+
 const year = new Date().getFullYear();
 ---
 
@@ -22,22 +24,20 @@ const year = new Date().getFullYear();
       </ul>
     </nav>
     <div>
-      <p class="micro-label mb-4 text-muted">Elsewhere</p>
-      <ul class="space-y-2 text-sm">
-        <li>
-          <a class="hover:text-signal" href="https://www.linkedin.com/in/leonpalafox/" rel="me">LinkedIn</a>
-        </li>
-        <li><a class="hover:text-signal" href="https://twitter.com/leonpalafox" rel="me">X / Twitter</a></li>
-        <li><a class="hover:text-signal" href="https://github.com/leonpalafox" rel="me">GitHub</a></li>
-        <li><a class="hover:text-signal" href="mailto:leon.palafox@gmail.com">Email</a></li>
-        <li><a class="hover:text-signal" href="/rss.xml">RSS</a></li>
-      </ul>
+      <p class="micro-label mb-4 flex items-center gap-3 text-muted">
+        <span>Elsewhere</span>
+        <span lang="ja" class="tracking-[0.2em]">接続</span>
+      </p>
+      <SocialLinks />
+      <p class="mt-5 text-sm text-muted">
+        <a class="underline decoration-hairline underline-offset-4 hover:text-signal-deep" href="mailto:leon.palafox@gmail.com">leon.palafox@gmail.com</a>
+      </p>
     </div>
   </div>
-  <div class="flex items-center justify-between border-t border-hairline px-6 py-4 sm:px-10 lg:px-14">
-    <p class="micro-label text-muted">© {year} León Palafox — Mexico City</p>
-    <p class="flex items-center gap-3">
-      <span class="border border-signal px-1.5 py-0.5 text-[0.65rem] text-signal-deep" lang="ja" title="kaizen — continuous improvement">改善</span>
+  <div class="flex items-center justify-between gap-4 border-t border-hairline px-6 py-4 sm:px-10 lg:px-14">
+    <p class="micro-label text-muted">© {year} León Palafox<span class="hidden sm:inline"> — Mexico City</span></p>
+    <p class="flex shrink-0 items-center gap-3">
+      <span class="whitespace-nowrap border border-signal px-1.5 py-0.5 text-[0.65rem] text-signal-deep" lang="ja" title="kaizen — continuous improvement">改善</span>
       <span aria-hidden="true" class="block size-2 rounded-full bg-signal"></span>
     </p>
   </div>

@@ -11,10 +11,15 @@ const path = `${Astro.url.pathname.replace(/\/$/, '')}/`;
 const isActive = (href: string) => path.startsWith(href) || (href === '/teaching/' && path.startsWith('/courses/'));
 ---
 
-<header class="border-b border-hairline">
+<header class="site-header border-b border-hairline" data-site-header>
   <div class="flex flex-wrap items-center justify-between gap-x-8 gap-y-3 px-6 py-5 sm:px-10 lg:px-14">
     <a href="/" class="text-lg font-semibold tracking-tight">León Palafox</a>
-    <nav aria-label="Main" lang="en">
+    {/* Phone only, and only once the script below runs: without JavaScript the links simply wrap. */}
+    <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav" lang="en" data-nav-toggle>
+      <span class="micro-label" data-nav-toggle-label>Menu</span>
+      <span class="nav-toggle-bars" aria-hidden="true"><span></span><span></span></span>
+    </button>
+    <nav id="site-nav" class="site-nav" aria-label="Main" lang="en">
       <ul class="flex flex-wrap items-center gap-x-7 gap-y-2 text-[0.9rem]">
         {
           nav.map((item) => (
@@ -32,10 +37,111 @@ const isActive = (href: string) => path.startsWith(href) || (href === '/teaching
             </li>
           ))
         }
-        <li aria-hidden="true">
+        <li aria-hidden="true" class="hidden sm:block">
           <span class="block size-3.5 rounded-full bg-signal"></span>
         </li>
       </ul>
     </nav>
   </div>
 </header>
+
+<style>
+  .nav-toggle {
+    display: none;
+    align-items: center;
+    gap: 0.75rem;
+    min-height: 2.75rem;
+    margin-block: -0.5rem;
+    cursor: pointer;
+  }
+
+  .nav-toggle-bars {
+    position: relative;
+    display: block;
+    width: 1.25rem;
+    height: 0.6rem;
+  }
+
+  .nav-toggle-bars span {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 1.5px;
+    background: var(--color-ink);
+    transition: transform 200ms ease, top 200ms ease, background-color 200ms ease;
+  }
+
+  .nav-toggle-bars span:first-child {
+    top: 0;
+  }
+
+  .nav-toggle-bars span:last-child {
+    top: 100%;
+  }
+
+  .is-open .nav-toggle-bars span {
+    top: 50%;
+    background: var(--color-signal);
+  }
+
+  .is-open .nav-toggle-bars span:first-child {
+    transform: rotate(45deg);
+  }
+
+  .is-open .nav-toggle-bars span:last-child {
+    transform: rotate(-45deg);
+  }
+
+  @media (max-width: 639px) {
+    .has-toggle .nav-toggle {
+      display: inline-flex;
+    }
+
+    .has-toggle .site-nav {
+      display: none;
+      width: 100%;
+    }
+
+    .has-toggle.is-open .site-nav {
+      display: block;
+    }
+
+    .has-toggle .site-nav ul {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      border-top: 1px solid var(--color-hairline);
+      font-size: 1.05rem;
+    }
+
+    .has-toggle .site-nav li + li {
+      border-top: 1px solid var(--color-hairline);
+    }
+
+    .has-toggle .site-nav a {
+      display: block;
+      padding-block: 0.9rem;
+    }
+  }
+</style>
+
+<script>
+  const header = document.querySelector<HTMLElement>('[data-site-header]');
+  const toggle = header?.querySelector<HTMLButtonElement>('[data-nav-toggle]');
+  const label = header?.querySelector<HTMLElement>('[data-nav-toggle-label]');
+  if (header && toggle && label) {
+    header.classList.add('has-toggle');
+    const setOpen = (open: boolean) => {
+      header.classList.toggle('is-open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      label.textContent = open ? 'Close' : 'Menu';
+    };
+    toggle.addEventListener('click', () => setOpen(!header.classList.contains('is-open')));
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && header.classList.contains('is-open')) {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+  }
+</script>
