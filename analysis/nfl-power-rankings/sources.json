@@ -1,20 +1,7 @@
 {
-  "week": 10,
+  "week": 11,
   "season": 2026,
   "sources": [
-    {
-      "id": "nflcom-shook",
-      "outlet": "NFL.com",
-      "analyst": "Nick Shook",
-      "kind": "analyst",
-      "url_tpl": "https://www.nfl.com/news/nfl-power-rankings-week-{week}-{season}-nfl-season",
-      "urls": [
-        "https://www.nfl.com/news/nfl-power-rankings-week-10-2026-nfl-season"
-      ],
-      "extract": "nflcom_rank_marker",
-      "prior_weight": 1.0,
-      "tier": "League site column."
-    },
     {
       "id": "cbs-prisco",
       "outlet": "CBS Sports",
@@ -35,7 +22,7 @@
       "kind": "analyst",
       "url_tpl": "",
       "urls": [
-        "https://www.foxsports.com/stories/nfl/2026-nfl-power-rankings-week-10"
+        "https://www.foxsports.com/stories/nfl/2026-nfl-power-rankings-week-11"
       ],
       "extract": "si_numbered",
       "prior_weight": 0.9,
@@ -48,11 +35,11 @@
       "kind": "analyst",
       "url_tpl": "",
       "urls": [
-        "https://www.si.com/nfl/conor-orr-week-10-nfl-power-rankings-bears-jaguars-seahawks"
+        "https://www.si.com/nfl/conor-orr-week-11-nfl-power-rankings-vikings-kirk-cousins"
       ],
       "extract": "si_numbered",
       "prior_weight": 0.9,
-      "tier": "Analyst column, found via si.com's q4 article sitemap. Its rank 21 is printed as '21 Tampa Bay Buccaneers' with no period; sources.numbered_table recovers that with a gap-filling second pass rather than reporting 31 entries."
+      "tier": "Analyst column, found via si.com's q4 article sitemap."
     },
     {
       "id": "sportingnews-iyer",
@@ -61,7 +48,7 @@
       "kind": "analyst",
       "url_tpl": "",
       "urls": [
-        "https://www.sportingnews.com/us/nfl/news/nfl-power-rankings-week-10-bears-lions-packers-patriots-ravens/9c3fccaffd529825789bb963"
+        "https://www.sportingnews.com/us/nfl/news/nfl-power-rankings-week-11-chiefs-lions-bengals-steelers-patriots/e403f5c91ad099549cf10404"
       ],
       "extract": "sportingnews_numbered",
       "prior_weight": 0.85,
@@ -85,7 +72,7 @@
       "kind": "panel",
       "url_tpl": "",
       "urls": [
-        "https://www.thescore.com/nfl/news/3649968/nfl-power-rankings-week-10-how-teams-stack-up-at-the-midway-point"
+        "https://www.thescore.com/nfl/news/3656431/nfl-power-rankings-week-11-every-teams-most-important-remaining-game"
       ],
       "extract": "thescore_numbered",
       "prior_weight": 0.8,
@@ -98,7 +85,7 @@
       "kind": "panel",
       "url_tpl": "",
       "urls": [
-        "https://bleacherreport.com/articles/25531196-br-experts-week-10-nfl-power-rankings"
+        "https://bleacherreport.com/articles/25534198-br-experts-week-11-nfl-power-rankings"
       ],
       "extract": "si_numbered",
       "prior_weight": 0.8,
@@ -111,11 +98,11 @@
       "kind": "analyst",
       "url_tpl": "",
       "urls": [
-        "https://lufkindailynews.com/news_reuters/national/nfl-power-rankings-week-10-how-will-trade-deadline-affect-pecking-order/article_0a761057-5b78-56a7-8456-ad22ec5eb460.html"
+        "https://www.centraloregondaily.com/sports/nfl-power-rankings-week-11-49ers-remain-no-1-but-who-is-afcs-best-team/article_b5e31ecd-ab34-5f14-8c02-146b4876a68b.html"
       ],
       "extract": "usatoday_numbered",
       "prior_weight": 0.9,
-      "tier": "Nate Davis's national column. usatoday.com and every Gannett domain return HTTP 402 to all user agents, so it is read from an independent TownNews reprint. The Central Oregon copy of this week's column was truncated (25 of 32 entries); the Lufkin reprint is complete. Reprints carry no publication metadata, so the freshness gate logs this as unverified."
+      "tier": "Nate Davis's national column, read from an independent TownNews reprint because usatoday.com and every Gannett domain return HTTP 402 to all user agents. Reprints carry no publication metadata, so the freshness gate logs this as unverified."
     }
   ]
 }
