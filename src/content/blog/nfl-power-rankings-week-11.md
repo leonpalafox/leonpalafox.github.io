@@ -8,7 +8,7 @@ tags: ["data-viz", "nfl", "statistics"]
 
 Week 10 changed almost nothing at the top and a great deal underneath it. Buffalo went to New Jersey and won 31–12, San Francisco survived a 46–40 shootout in Dallas, and both are 8–1. Jacksonville, Minnesota and Denver all sit at 7–2.
 
-**Nine teams are now 7–2 or better**, which is why the middle of this table is so compressed: the five teams between fourth and eighth sit within 0.30 rank standard deviations of one another.
+**Nine teams are now 7–2 or better**, which is why the middle of this table is so compressed: the five teams between fourth and eighth sit within 0.28 rank standard deviations of one another.
 
 This is the same poll of polls as previous weeks: the week's rankings standardised and pooled, every team's move charted, each team's record alongside its ranking, and a simulated path to the Super Bowl.
 
@@ -842,13 +842,13 @@ Here is where the panel landed after Week 10.
 })();
 </script>
 
-Buffalo and San Francisco hold the top two, and the gap between them is 0.094 rank standard deviations — still close, but wider than last week's 0.055.
+Buffalo and San Francisco hold the top two, and the gap between them is 0.051 rank standard deviations — the closest the pair has been all season.
 
 **Jacksonville moves to third, up one**, on the strength of a 40–23 win in Tennessee, and Chicago slips one to fourth.
 
-The story is the cluster behind them: **Minnesota climbs five to sixth** after beating Green Bay 30–10, and Kansas City and Cincinnati are 0.056 apart in seventh and eighth, with Detroit 0.22 further back. Green Bay falls three to twelfth after that loss.
+The story is the cluster behind them: **Minnesota climbs five to sixth** after beating Green Bay 30–10, and Cincinnati and Kansas City are 0.070 apart in seventh and eighth, with Detroit 0.13 further back. Green Bay falls three to twelfth after that loss.
 
-Carolina is the week's biggest climber at six; New England and Miami share the biggest fall at four.
+Carolina is the week's biggest climber at six, with Minnesota and Washington up five. New England and Miami share the biggest fall at five.
 
 <a id="movers"></a>
 
@@ -1737,24 +1737,24 @@ Thirteen games in Week 11: Atlanta, Cleveland, Green Bay, the Rams, New England 
 
 ## The panel
 
-8 outlets this week. Mean distance from the consensus order, in rank positions:
+10 outlets this week. Mean distance from the consensus order, in rank positions:
 
 | Outlet | Analyst | Mean gap | ρ vs consensus |
 |--------|---------|----------|----------------|
-| Bleacher Report | B/R NFL staff | 1.00 | 0.982 |
-| CBS Sports | Pete Prisco | 1.06 | 0.986 |
-| FOX Sports | Ralph Vacchiano | 1.19 | 0.987 |
-| Sharp Football Analysis | Raymond Summerlin | 1.25 | 0.979 |
-| theScore | theScore NFL desk | 1.25 | 0.982 |
-| Sporting News | Vinnie Iyer | 1.31 | 0.977 |
-| Sports Illustrated | Conor Orr | 1.75 | 0.963 |
-| USA Today | Nate Davis | 2.00 | 0.958 |
+| CBS Sports | Pete Prisco | 1.19 | 0.983 |
+| FOX Sports | Ralph Vacchiano | 1.19 | 0.986 |
+| Bleacher Report | B/R NFL staff | 1.25 | 0.974 |
+| theScore | theScore NFL desk | 1.31 | 0.982 |
+| Sharp Football Analysis | Raymond Summerlin | 1.38 | 0.980 |
+| NFL.com UK | Neil Reynolds | 1.38 | 0.981 |
+| Sports Illustrated | Conor Orr | 1.69 | 0.968 |
+| Sporting News | Vinnie Iyer | 1.69 | 0.968 |
+| NFL.com | Nick Shook | 2.00 | 0.967 |
+| USA Today | Nate Davis | 2.00 | 0.957 |
 
-This is the most agreed panel of the season: mean pairwise Spearman **ρ = 0.955**, split-half 0.992, and every outlet is within 2.00 positions of the consensus.
+Mean pairwise Spearman is **ρ = 0.953** with split-half 0.991, and the panel is tightly bunched: eight of the ten outlets sit within 1.69 positions of the consensus, and the two furthest out — NFL.com and USA Today — are level at 2.00.
 
-Six of the eight ballots put Buffalo and San Francisco first and second in some order. The two that do not are FOX, which has Denver second, and Sports Illustrated, which puts Jacksonville first.
-
-USA Today sits furthest out at 2.00, but even that is a mild dissent by this panel's standards.
+**Eight of the ten ballots put Buffalo and San Francisco first and second** in some order. The two that do not are FOX, which has Denver second, and Sports Illustrated, which puts Jacksonville first.
 
 <a id="sources"></a>
 
@@ -1777,10 +1777,12 @@ than in every post:
   method does *not* claim.
 - `analysis/nfl-power-rankings/README.md` — the pipeline and how to run it.
 
-This week's panel — eight ballots, every one verified complete:
+This week's panel — ten ballots, every one verified complete:
 
 | Outlet | Analyst | This week's ballot |
 |--------|---------|--------------------|
+| NFL.com | Nick Shook | [nfl.com](https://www.nfl.com/news/nfl-power-rankings-week-11-2026-nfl-season) |
+| NFL.com UK | Neil Reynolds | [nfl.com](https://www.nfl.com/news/neil-reynolds-week-11-power-rankings-2026) |
 | CBS Sports | Pete Prisco | [cbssports.com](https://www.cbssports.com/nfl/powerrankings/) |
 | FOX Sports | Ralph Vacchiano | [foxsports.com](https://www.foxsports.com/stories/nfl/2026-nfl-power-rankings-week-11) |
 | Sports Illustrated | Conor Orr | [si.com](https://www.si.com/nfl/conor-orr-week-11-nfl-power-rankings-vikings-kirk-cousins) |
@@ -1790,25 +1792,35 @@ This week's panel — eight ballots, every one verified complete:
 | Bleacher Report | B/R NFL staff | [bleacherreport.com](https://bleacherreport.com/articles/25534198-br-experts-week-11-nfl-power-rankings) |
 | USA Today | Nate Davis | [centraloregondaily.com](https://www.centraloregondaily.com/sports/nfl-power-rankings-week-11-49ers-remain-no-1-but-who-is-afcs-best-team/article_b5e31ecd-ab34-5f14-8c02-146b4876a68b.html) (syndicated) |
 
-### NFL.com had not published
+### Two columns that had gone quiet both came back
 
-This is a scheduling gap, not a failure. Nick Shook's column normally lands on
-Tuesday afternoon; it was still returning `404` when this edition was built, from
-both the templated slug and a search of NFL.com's own index. It returned the same
-way for two weeks in October and came back without ceremony, so the panel carries
-eight ballots this time rather than nine.
+This edition was first built on eight ballots. Checking again the next day found
+both missing columns published, so the panel was rebuilt on ten and every number
+above is from the wider one.
 
-That is worth stating because it changes the numbers: an eight-baller panel
-weights each remaining voice slightly more heavily than a nine-baller one.
+**NFL.com was a day late, not gone.** Nick Shook's column returned `404` for two
+hours on Tuesday and appeared the following day. It has done this before, in
+October, which is why it was described as a scheduling gap rather than a failure.
 
-### Still missing
+**Neil Reynolds' UK column returned after eight weeks.** It had not published since
+Week 2; both of its slug forms were 404 for two months. This week the year-suffixed
+URL works and carries a complete 1–32 ballot, dated 16 November. Nothing changed on
+this side — the column simply resumed. It is the most dissenting voice in the panel
+that is still close to the consensus: 1.38 positions out, ρ = 0.981.
 
-- **Neil Reynolds' NFL.com UK column** has not published since Week 2. Both slug
-  forms are plain 404s, so there is nothing to catch and nothing to include.
-- **Pro Football Talk** redirects to a 404 and has failed the completeness check
-  repeatedly.
-- **ESPN** returns an empty `HTTP 202` to any plain request.
+### One correction: Pro Football Talk
 
-Seven ballots passed the freshness gate against their own `datePublished` inside
-the November 17–23 window; USA Today's reprint carries no metadata and is logged
-as unverified in the payload, as always.
+Earlier editions said PFT "has failed the completeness check repeatedly". That was
+my measurement, not its content. Its list runs a full 1–32, but the entries do not
+fit the numbered pattern the other outlets share: a club name can begin with a
+digit ("49ers"), and the rank parenthetical is worded differently, so the generic
+extractor both misses entries and double-counts others. It stays out of the panel
+because it cannot be validated automatically without a dedicated parser, not
+because it is incomplete.
+
+**ESPN** remains absent permanently: every URL returns an empty `HTTP 202` to a
+plain request.
+
+Nine ballots passed the freshness gate against their own `datePublished` inside
+the November 17–23 window; USA Today's reprint carries no metadata and is logged as
+unverified in the payload, as always.

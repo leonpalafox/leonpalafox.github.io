@@ -3,6 +3,19 @@
   "season": 2026,
   "sources": [
     {
+      "id": "nflcom-shook",
+      "outlet": "NFL.com",
+      "analyst": "Nick Shook",
+      "kind": "analyst",
+      "url_tpl": "https://www.nfl.com/news/nfl-power-rankings-week-{week}-{season}-nfl-season",
+      "urls": [
+        "https://www.nfl.com/news/nfl-power-rankings-week-11-2026-nfl-season"
+      ],
+      "extract": "nflcom_rank_marker",
+      "prior_weight": 1.0,
+      "tier": "League site column. Publishes Tuesday afternoon; was a day late for the first build of week 11."
+    },
+    {
       "id": "cbs-prisco",
       "outlet": "CBS Sports",
       "analyst": "Pete Prisco",
@@ -103,6 +116,19 @@
       "extract": "usatoday_numbered",
       "prior_weight": 0.9,
       "tier": "Nate Davis's national column, read from an independent TownNews reprint because usatoday.com and every Gannett domain return HTTP 402 to all user agents. Reprints carry no publication metadata, so the freshness gate logs this as unverified."
+    },
+    {
+      "id": "nflcom-reynolds",
+      "outlet": "NFL.com UK",
+      "analyst": "Neil Reynolds",
+      "kind": "analyst",
+      "url_tpl": "https://www.nfl.com/news/neil-reynolds-week-{week}-power-rankings-{season}",
+      "urls": [
+        "https://www.nfl.com/news/neil-reynolds-week-11-power-rankings-2026"
+      ],
+      "extract": "nflcom_reynolds",
+      "prior_weight": 0.85,
+      "tier": "UK desk column. Absent for eight weeks (weeks 3-10) and returned in week 11. Only the year-suffixed slug works; the year-less form is a 404, not the live article."
     }
   ]
 }

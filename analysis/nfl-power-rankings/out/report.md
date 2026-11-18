@@ -1,125 +1,129 @@
 # NFL Poll of Polls — 2026 season, Week 11
 
-Generated 2026-11-17 15:58 UTC from 8 source ballots.
+Generated 2026-11-18 23:03 UTC from 10 source ballots.
 
 ## Consensus table
 
 | # | Team | Score (z) | 95% CI | Mean rank | Rank range | 95% rank CI | P(#1) |
 |---|------|-----------|--------|-----------|------------|-------------|-------|
-| 1 | Buffalo Bills | +1.641 | [+1.458, +1.824] | 1.25 | 1–2 | 1–1 | 100% |
-| 2 | San Francisco 49ers | +1.547 | [+1.360, +1.735] | 2.12 | 1–3 | 2–2 | 0% |
-| 3 | Jacksonville Jaguars | +1.362 | [+1.124, +1.599] | 3.88 | 1–6 | 3–5 | 0% |
-| 4 | Chicago Bears | +1.305 | [+1.092, +1.517] | 4.38 | 3–7 | 3–5 | 0% |
-| 5 | Denver Broncos | +1.195 | [+0.895, +1.496] | 5.38 | 2–11 | 3–8 | 0% |
-| 6 | Minnesota Vikings | +1.074 | [+0.824, +1.324] | 6.50 | 4–9 | 5–8 | 0% |
-| 7 | Kansas City Chiefs | +1.056 | [+0.779, +1.332] | 6.75 | 3–10 | 5–9 | 0% |
-| 8 | Cincinnati Bengals | +1.000 | [+0.787, +1.214] | 7.25 | 5–9 | 6–8 | 0% |
-| 9 | Detroit Lions | +0.836 | [+0.636, +1.035] | 8.75 | 7–10 | 9–10 | 0% |
-| 10 | Seattle Seahawks | +0.784 | [+0.541, +1.027] | 9.12 | 6–12 | 9–10 | 0% |
-| 11 | Los Angeles Rams | +0.592 | [+0.407, +0.777] | 11.00 | 10–12 | 11–11 | 0% |
-| 12 | Green Bay Packers | +0.470 | [+0.281, +0.658] | 12.12 | 11–13 | 12–13 | 0% |
-| 13 | Pittsburgh Steelers | +0.395 | [+0.164, +0.626] | 12.88 | 10–15 | 12–14 | 0% |
-| 14 | Cleveland Browns | +0.297 | [+0.114, +0.480] | 13.75 | 13–14 | 13–14 | 0% |
-| 15 | New York Giants | +0.044 | [-0.243, +0.332] | 16.12 | 14–21 | 15–17 | 0% |
-| 16 | Carolina Panthers | -0.015 | [-0.220, +0.191] | 16.62 | 15–19 | 15–17 | 0% |
-| 17 | Tampa Bay Buccaneers | -0.204 | [-0.524, +0.115] | 18.50 | 15–23 | 16–20 | 0% |
-| 18 | New England Patriots | -0.274 | [-0.615, +0.067] | 18.88 | 16–24 | 16–21 | 0% |
-| 19 | Dallas Cowboys | -0.396 | [-0.730, -0.061] | 20.12 | 17–26 | 18–24 | 0% |
-| 20 | Houston Texans | -0.414 | [-0.656, -0.172] | 20.38 | 18–23 | 18–23 | 0% |
-| 21 | Las Vegas Raiders | -0.458 | [-0.802, -0.114] | 20.75 | 17–25 | 18–24 | 0% |
-| 22 | Washington Commanders | -0.469 | [-0.749, -0.189] | 20.88 | 16–23 | 18–23 | 0% |
-| 23 | Atlanta Falcons | -0.624 | [-0.916, -0.333] | 22.38 | 18–25 | 20–25 | 0% |
-| 24 | New Orleans Saints | -0.658 | [-0.922, -0.394] | 22.62 | 19–25 | 22–25 | 0% |
-| 25 | Baltimore Ravens | -0.706 | [-0.974, -0.438] | 23.00 | 20–26 | 22–25 | 0% |
-| 26 | Arizona Cardinals | -1.088 | [-1.290, -0.885] | 26.62 | 25–28 | 26–27 | 0% |
-| 27 | Indianapolis Colts | -1.226 | [-1.488, -0.964] | 27.88 | 24–31 | 26–29 | 0% |
-| 28 | Philadelphia Eagles | -1.262 | [-1.489, -1.035] | 28.25 | 26–31 | 27–29 | 0% |
-| 29 | New York Jets | -1.341 | [-1.603, -1.079] | 29.00 | 26–31 | 27–31 | 0% |
-| 30 | Tennessee Titans | -1.433 | [-1.685, -1.182] | 29.75 | 26–32 | 28–32 | 0% |
-| 31 | Miami Dolphins | -1.497 | [-1.706, -1.289] | 30.38 | 29–32 | 30–32 | 0% |
-| 32 | Los Angeles Chargers | -1.533 | [-1.758, -1.309] | 30.75 | 28–32 | 30–32 | 0% |
+| 1 | Buffalo Bills | +1.626 | [+1.463, +1.788] | 1.40 | 1–2 | 1–2 | 96% |
+| 2 | San Francisco 49ers | +1.574 | [+1.406, +1.742] | 1.90 | 1–3 | 1–2 | 4% |
+| 3 | Jacksonville Jaguars | +1.382 | [+1.184, +1.580] | 3.70 | 1–6 | 3–4 | 0% |
+| 4 | Chicago Bears | +1.279 | [+1.094, +1.464] | 4.60 | 3–7 | 3–5 | 0% |
+| 5 | Denver Broncos | +1.149 | [+0.901, +1.398] | 5.80 | 2–11 | 4–7 | 0% |
+| 6 | Minnesota Vikings | +1.089 | [+0.879, +1.298] | 6.40 | 4–9 | 5–8 | 0% |
+| 7 | Cincinnati Bengals | +1.074 | [+0.864, +1.284] | 6.60 | 4–9 | 5–8 | 0% |
+| 8 | Kansas City Chiefs | +1.004 | [+0.767, +1.241] | 7.20 | 3–10 | 6–9 | 0% |
+| 9 | Detroit Lions | +0.874 | [+0.691, +1.057] | 8.40 | 6–10 | 8–10 | 0% |
+| 10 | Seattle Seahawks | +0.755 | [+0.550, +0.960] | 9.40 | 6–12 | 9–10 | 0% |
+| 11 | Los Angeles Rams | +0.543 | [+0.347, +0.740] | 11.40 | 10–15 | 11–12 | 0% |
+| 12 | Green Bay Packers | +0.498 | [+0.324, +0.672] | 11.90 | 10–13 | 11–13 | 0% |
+| 13 | Pittsburgh Steelers | +0.381 | [+0.187, +0.575] | 13.00 | 10–15 | 12–14 | 0% |
+| 14 | Cleveland Browns | +0.327 | [+0.159, +0.494] | 13.50 | 12–14 | 13–14 | 0% |
+| 15 | New York Giants | +0.057 | [-0.174, +0.288] | 16.00 | 14–21 | 15–17 | 0% |
+| 16 | Carolina Panthers | -0.069 | [-0.261, +0.124] | 17.10 | 15–19 | 15–17 | 0% |
+| 17 | Tampa Bay Buccaneers | -0.125 | [-0.407, +0.156] | 17.80 | 14–23 | 15–19 | 0% |
+| 18 | Houston Texans | -0.349 | [-0.572, -0.126] | 19.80 | 17–23 | 18–22 | 0% |
+| 19 | New England Patriots | -0.354 | [-0.645, -0.062] | 19.60 | 16–24 | 17–22 | 0% |
+| 20 | Dallas Cowboys | -0.378 | [-0.649, -0.107] | 20.00 | 17–26 | 18–23 | 0% |
+| 21 | Washington Commanders | -0.409 | [-0.650, -0.169] | 20.30 | 16–23 | 18–22 | 0% |
+| 22 | Las Vegas Raiders | -0.454 | [-0.724, -0.183] | 20.70 | 17–25 | 18–23 | 0% |
+| 23 | Atlanta Falcons | -0.628 | [-0.862, -0.395] | 22.40 | 18–25 | 21–25 | 0% |
+| 24 | New Orleans Saints | -0.693 | [-0.919, -0.467] | 22.90 | 19–25 | 23–25 | 0% |
+| 25 | Baltimore Ravens | -0.817 | [-1.069, -0.564] | 24.00 | 20–28 | 23–25 | 0% |
+| 26 | Arizona Cardinals | -1.158 | [-1.370, -0.945] | 27.20 | 25–31 | 26–28 | 0% |
+| 27 | Indianapolis Colts | -1.231 | [-1.447, -1.016] | 27.90 | 24–31 | 26–29 | 0% |
+| 28 | Tennessee Titans | -1.313 | [-1.591, -1.034] | 28.70 | 24–32 | 26–31 | 0% |
+| 29 | New York Jets | -1.336 | [-1.574, -1.098] | 29.00 | 26–31 | 26–31 | 0% |
+| 30 | Philadelphia Eagles | -1.358 | [-1.593, -1.124] | 29.10 | 26–32 | 27–32 | 0% |
+| 31 | Los Angeles Chargers | -1.462 | [-1.672, -1.253] | 30.10 | 27–32 | 29–32 | 0% |
+| 32 | Miami Dolphins | -1.479 | [-1.659, -1.299] | 30.20 | 29–32 | 29–32 | 0% |
 
 ## Ballots
 
-| Team | cbs-prisco | fox-vacchiano | si-orr | sportingnews-iyer | sharp-summerlin | thescore-staff | br-experts | usatoday-davis |
-|---|---|---|---|---|---|---|---|---|
-| Buffalo Bills | 1 | 1 | 2 | 1 | 1 | 1 | 1 | 2 |
-| San Francisco 49ers | 2 | 3 | 3 | 2 | 2 | 2 | 2 | 1 |
-| Jacksonville Jaguars | 3 | 6 | 1 | 5 | 3 | 6 | 3 | 4 |
-| Chicago Bears | 4 | 5 | 5 | 7 | 4 | 3 | 4 | 3 |
-| Denver Broncos | 5 | 2 | 11 | 4 | 5 | 5 | 5 | 6 |
-| Minnesota Vikings | 9 | 7 | 4 | 6 | 9 | 4 | 6 | 7 |
-| Kansas City Chiefs | 6 | 4 | 7 | 3 | 7 | 10 | 8 | 9 |
-| Cincinnati Bengals | 7 | 8 | 6 | 9 | 8 | 8 | 7 | 5 |
-| Detroit Lions | 8 | 9 | 9 | 8 | 10 | 7 | 9 | 10 |
-| Seattle Seahawks | 12 | 10 | 8 | 10 | 6 | 9 | 10 | 8 |
-| Los Angeles Rams | 11 | 12 | 10 | 11 | 11 | 11 | 11 | 11 |
-| Green Bay Packers | 13 | 11 | 12 | 13 | 12 | 12 | 12 | 12 |
-| Pittsburgh Steelers | 10 | 15 | 14 | 12 | 13 | 13 | 13 | 13 |
-| Cleveland Browns | 14 | 13 | 13 | 14 | 14 | 14 | 14 | 14 |
-| New York Giants | 15 | 14 | 15 | 15 | 19 | 15 | 15 | 21 |
-| Carolina Panthers | 16 | 17 | 17 | 19 | 15 | 17 | 16 | 16 |
-| Tampa Bay Buccaneers | 17 | 16 | 18 | 23 | 18 | 18 | 23 | 15 |
-| New England Patriots | 20 | 19 | 23 | 16 | 16 | 16 | 17 | 24 |
-| Dallas Cowboys | 18 | 20 | 26 | 17 | 17 | 22 | 19 | 22 |
-| Houston Texans | 19 | 18 | 20 | 22 | 20 | 19 | 22 | 23 |
-| Las Vegas Raiders | 25 | 21 | 19 | 18 | 24 | 24 | 18 | 17 |
-| Washington Commanders | 23 | 22 | 16 | 20 | 22 | 23 | 21 | 20 |
-| Atlanta Falcons | 21 | 25 | 22 | 24 | 25 | 20 | 24 | 18 |
-| New Orleans Saints | 24 | 23 | 21 | 25 | 23 | 21 | 25 | 19 |
-| Baltimore Ravens | 22 | 26 | 24 | 21 | 21 | 25 | 20 | 25 |
-| Arizona Cardinals | 26 | 27 | 25 | 26 | 27 | 26 | 28 | 28 |
-| Indianapolis Colts | 29 | 24 | 27 | 28 | 28 | 27 | 29 | 31 |
-| Philadelphia Eagles | 28 | 28 | 30 | 27 | 31 | 29 | 26 | 27 |
-| New York Jets | 27 | 31 | 31 | 29 | 30 | 31 | 27 | 26 |
-| Tennessee Titans | 32 | 29 | 28 | 30 | 26 | 32 | 31 | 30 |
-| Miami Dolphins | 30 | 32 | 29 | 31 | 29 | 30 | 30 | 32 |
-| Los Angeles Chargers | 31 | 30 | 32 | 32 | 32 | 28 | 32 | 29 |
+| Team | nflcom-shook | cbs-prisco | fox-vacchiano | si-orr | sportingnews-iyer | sharp-summerlin | thescore-staff | br-experts | usatoday-davis | nflcom-reynolds |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Buffalo Bills | 2 | 1 | 1 | 2 | 1 | 1 | 1 | 1 | 2 | 2 |
+| San Francisco 49ers | 1 | 2 | 3 | 3 | 2 | 2 | 2 | 2 | 1 | 1 |
+| Jacksonville Jaguars | 3 | 3 | 6 | 1 | 5 | 3 | 6 | 3 | 4 | 3 |
+| Chicago Bears | 6 | 4 | 5 | 5 | 7 | 4 | 3 | 4 | 3 | 5 |
+| Denver Broncos | 7 | 5 | 2 | 11 | 4 | 5 | 5 | 5 | 6 | 8 |
+| Minnesota Vikings | 5 | 9 | 7 | 4 | 6 | 9 | 4 | 6 | 7 | 7 |
+| Cincinnati Bengals | 4 | 7 | 8 | 6 | 9 | 8 | 8 | 7 | 5 | 4 |
+| Kansas City Chiefs | 9 | 6 | 4 | 7 | 3 | 7 | 10 | 8 | 9 | 9 |
+| Detroit Lions | 8 | 8 | 9 | 9 | 8 | 10 | 7 | 9 | 10 | 6 |
+| Seattle Seahawks | 11 | 12 | 10 | 8 | 10 | 6 | 9 | 10 | 8 | 10 |
+| Los Angeles Rams | 15 | 11 | 12 | 10 | 11 | 11 | 11 | 11 | 11 | 11 |
+| Green Bay Packers | 10 | 13 | 11 | 12 | 13 | 12 | 12 | 12 | 12 | 12 |
+| Pittsburgh Steelers | 13 | 10 | 15 | 14 | 12 | 13 | 13 | 13 | 13 | 14 |
+| Cleveland Browns | 12 | 14 | 13 | 13 | 14 | 14 | 14 | 14 | 14 | 13 |
+| New York Giants | 16 | 15 | 14 | 15 | 15 | 19 | 15 | 15 | 21 | 15 |
+| Carolina Panthers | 19 | 16 | 17 | 17 | 19 | 15 | 17 | 16 | 16 | 19 |
+| Tampa Bay Buccaneers | 14 | 17 | 16 | 18 | 23 | 18 | 18 | 23 | 15 | 16 |
+| Houston Texans | 17 | 19 | 18 | 20 | 22 | 20 | 19 | 22 | 23 | 18 |
+| New England Patriots | 23 | 20 | 19 | 23 | 16 | 16 | 16 | 17 | 24 | 22 |
+| Dallas Cowboys | 18 | 18 | 20 | 26 | 17 | 17 | 22 | 19 | 22 | 21 |
+| Washington Commanders | 20 | 23 | 22 | 16 | 20 | 21 | 23 | 21 | 20 | 17 |
+| Las Vegas Raiders | 21 | 25 | 21 | 19 | 18 | 24 | 24 | 18 | 17 | 20 |
+| Atlanta Falcons | 22 | 21 | 25 | 22 | 24 | 25 | 20 | 24 | 18 | 23 |
+| New Orleans Saints | 25 | 24 | 23 | 21 | 25 | 22 | 21 | 25 | 19 | 24 |
+| Baltimore Ravens | 28 | 22 | 26 | 24 | 21 | 23 | 25 | 20 | 25 | 26 |
+| Arizona Cardinals | 31 | 26 | 27 | 25 | 26 | 27 | 26 | 28 | 28 | 28 |
+| Indianapolis Colts | 29 | 29 | 24 | 27 | 28 | 28 | 27 | 29 | 31 | 27 |
+| Tennessee Titans | 24 | 32 | 29 | 28 | 30 | 26 | 32 | 31 | 30 | 25 |
+| New York Jets | 26 | 27 | 31 | 31 | 29 | 31 | 31 | 27 | 26 | 31 |
+| Philadelphia Eagles | 32 | 28 | 28 | 30 | 27 | 32 | 29 | 26 | 27 | 32 |
+| Los Angeles Chargers | 27 | 31 | 30 | 32 | 32 | 30 | 28 | 32 | 29 | 30 |
+| Miami Dolphins | 30 | 30 | 32 | 29 | 31 | 29 | 30 | 30 | 32 | 29 |
 
 ## Pairwise Spearman agreement
 
-| | cbs-prisco | fox-vacchiano | si-orr | sportingnews-iyer | sharp-summerlin | thescore-staff | br-experts | usatoday-davis |
-|---|---|---|---|---|---|---|---|---|
-| cbs-prisco | 1.00 | 0.97 | 0.94 | 0.96 | 0.97 | 0.97 | 0.97 | 0.95 |
-| fox-vacchiano | 0.97 | 1.00 | 0.95 | 0.97 | 0.96 | 0.97 | 0.96 | 0.94 |
-| si-orr | 0.94 | 0.95 | 1.00 | 0.94 | 0.94 | 0.95 | 0.95 | 0.95 |
-| sportingnews-iyer | 0.96 | 0.97 | 0.94 | 1.00 | 0.96 | 0.95 | 0.99 | 0.93 |
-| sharp-summerlin | 0.97 | 0.96 | 0.94 | 0.96 | 1.00 | 0.96 | 0.97 | 0.94 |
-| thescore-staff | 0.97 | 0.97 | 0.95 | 0.95 | 0.96 | 1.00 | 0.96 | 0.95 |
-| br-experts | 0.97 | 0.96 | 0.95 | 0.99 | 0.97 | 0.96 | 1.00 | 0.95 |
-| usatoday-davis | 0.95 | 0.94 | 0.95 | 0.93 | 0.94 | 0.95 | 0.95 | 1.00 |
+| | nflcom-shook | cbs-prisco | fox-vacchiano | si-orr | sportingnews-iyer | sharp-summerlin | thescore-staff | br-experts | usatoday-davis | nflcom-reynolds |
+|---|---|---|---|---|---|---|---|---|---|---|
+| nflcom-shook | 1.00 | 0.95 | 0.95 | 0.94 | 0.92 | 0.94 | 0.94 | 0.93 | 0.95 | 0.98 |
+| cbs-prisco | 0.95 | 1.00 | 0.97 | 0.94 | 0.96 | 0.97 | 0.97 | 0.97 | 0.95 | 0.95 |
+| fox-vacchiano | 0.95 | 0.97 | 1.00 | 0.95 | 0.97 | 0.97 | 0.97 | 0.96 | 0.94 | 0.96 |
+| si-orr | 0.94 | 0.94 | 0.95 | 1.00 | 0.94 | 0.94 | 0.95 | 0.95 | 0.95 | 0.98 |
+| sportingnews-iyer | 0.92 | 0.96 | 0.97 | 0.94 | 1.00 | 0.96 | 0.95 | 0.99 | 0.93 | 0.94 |
+| sharp-summerlin | 0.94 | 0.97 | 0.97 | 0.94 | 0.96 | 1.00 | 0.96 | 0.96 | 0.94 | 0.96 |
+| thescore-staff | 0.94 | 0.97 | 0.97 | 0.95 | 0.95 | 0.96 | 1.00 | 0.96 | 0.95 | 0.96 |
+| br-experts | 0.93 | 0.97 | 0.96 | 0.95 | 0.99 | 0.96 | 0.96 | 1.00 | 0.95 | 0.95 |
+| usatoday-davis | 0.95 | 0.95 | 0.94 | 0.95 | 0.93 | 0.94 | 0.95 | 0.95 | 1.00 | 0.95 |
+| nflcom-reynolds | 0.98 | 0.95 | 0.96 | 0.98 | 0.94 | 0.96 | 0.96 | 0.95 | 0.95 | 1.00 |
 
 ## Source diagnostics
 
 | Source | Analyst | Mean deviation (positions) | Max deviation | ρ vs peers |
 |--------|---------|----------------------------|---------------|------------|
-| Bleacher Report | B/R NFL staff | 1.00 | 6 | 0.96 |
-| CBS Sports | Pete Prisco | 1.06 | 4 | 0.96 |
-| FOX Sports | Ralph Vacchiano | 1.19 | 3 | 0.96 |
-| Sharp Football Analysis | Raymond Summerlin | 1.25 | 4 | 0.96 |
-| theScore | theScore NFL desk | 1.25 | 4 | 0.96 |
-| Sporting News | Vinnie Iyer | 1.31 | 6 | 0.96 |
-| Sports Illustrated | Conor Orr | 1.75 | 7 | 0.95 |
+| CBS Sports | Pete Prisco | 1.19 | 4 | 0.96 |
+| FOX Sports | Ralph Vacchiano | 1.19 | 4 | 0.96 |
+| Bleacher Report | B/R NFL staff | 1.25 | 6 | 0.96 |
+| theScore | theScore NFL desk | 1.31 | 4 | 0.96 |
+| Sharp Football Analysis | Raymond Summerlin | 1.38 | 4 | 0.96 |
+| NFL.com UK | Neil Reynolds | 1.38 | 4 | 0.96 |
+| Sports Illustrated | Conor Orr | 1.69 | 6 | 0.95 |
+| Sporting News | Vinnie Iyer | 1.69 | 6 | 0.95 |
+| NFL.com | Nick Shook | 2.00 | 5 | 0.94 |
 | USA Today | Nate Davis | 2.00 | 6 | 0.94 |
 
 ## Variance components
 
-- Sources in panel: **8**
+- Sources in panel: **10**
 - Teams: **32**
-- Within-team variance (σ_w²): **0.0057**
-- Between-team variance (σ_b²): **0.9860**
-- Shrinkage reliability λ: **0.994**
-- Effective independent sources (from split-half ρ): **8.00**
-- Mean pairwise Spearman: **0.955**
-- Split-half ρ → Spearman-Brown reliability: **0.992**
+- Within-team variance (σ_w²): **0.0048**
+- Between-team variance (σ_b²): **0.9833**
+- Shrinkage reliability λ: **0.995**
+- Effective independent sources (from split-half ρ): **10.00**
+- Mean pairwise Spearman: **0.953**
+- Split-half ρ → Spearman-Brown reliability: **0.991**
 
 ## Most contested teams (rank range across sources)
 
 - Dallas Cowboys: 9 positions
 - Denver Broncos: 9 positions
+- Tampa Bay Buccaneers: 9 positions
+- Baltimore Ravens: 8 positions
 - Las Vegas Raiders: 8 positions
-- New England Patriots: 8 positions
-- Tampa Bay Buccaneers: 8 positions
 
 ## Head to head
 
@@ -129,24 +133,27 @@ Schedule: nflverse
 
 | Away | Home | Projected margin | P(home) | Pick | Market | Model − market |
 |------|------|------------------|---------|------|--------|----------------|
-| IND | HOU | +6.3 | 68.4% | HOU by 6.3 | +12.5 | -6.2 |
-| ARI | KC | +12.4 | 82.7% | KC by 12.4 | +16.5 | -4.1 |
-| BAL | CAR | +5.7 | 66.8% | CAR by 5.7 | +2.5 | +3.2 |
-| JAX | NYG | -3.5 | 39.6% | JAX by 3.5 | -6.0 | +2.5 |
-| MIA | BUF | +17.0 | 90.1% | BUF by 17.0 | +16.5 | +0.5 |
-| NO | CHI | +11.6 | 81.0% | CHI by 11.6 | +11.5 | +0.1 |
-| TB | DET | +7.3 | 71.1% | DET by 7.3 | +6.5 | +0.8 |
-| TEN | DAL | +7.3 | 71.1% | DAL by 7.3 | +8.5 | -1.2 |
-| NYJ | LAC | +1.7 | 55.1% | LAC by 1.7 | +3.5 | -1.8 |
-| LV | DEN | +10.1 | 78.0% | DEN by 10.1 | +10.0 | +0.1 |
-| PIT | PHI | -5.0 | 35.1% | PIT by 5.0 | -4.5 | -0.5 |
-| MIN | SF | +2.2 | 56.6% | SF by 2.2 | +3.0 | -0.8 |
-| CIN | WAS | -4.2 | 37.5% | CIN by 4.2 | -6.5 | +2.3 |
+| IND | HOU | +6.6 | 69.2% | HOU by 6.6 | +12.5 | -5.9 |
+| ARI | KC | +12.5 | 82.9% | KC by 12.5 | +15.5 | -3.0 |
+| BAL | CAR | +6.0 | 67.6% | CAR by 6.0 | +2.5 | +3.5 |
+| JAX | NYG | -3.5 | 39.4% | JAX by 3.5 | -6.0 | +2.5 |
+| MIA | BUF | +16.8 | 89.9% | BUF by 16.8 | +16.5 | +0.3 |
+| NO | CHI | +11.6 | 81.1% | CHI by 11.6 | +11.5 | +0.1 |
+| TB | DET | +7.1 | 70.6% | DET by 7.1 | +7.0 | +0.1 |
+| TEN | DAL | +6.9 | 69.9% | DAL by 6.9 | +8.5 | -1.6 |
+| NYJ | LAC | +2.0 | 56.0% | LAC by 2.0 | +3.0 | -1.0 |
+| LV | DEN | +9.9 | 77.4% | DEN by 9.9 | +10.0 | -0.1 |
+| PIT | PHI | -5.4 | 34.0% | PIT by 5.4 | -4.5 | -0.9 |
+| MIN | SF | +2.2 | 56.7% | SF by 2.2 | +3.0 | -0.8 |
+| CIN | WAS | -4.2 | 37.3% | CIN by 4.2 | -6.5 | +2.3 |
 
 ## Source notes
 
+- **NFL.com** (Nick Shook) — League site column. Publishes Tuesday afternoon; was a day late for the first build of week 11.
+  - URL: https://www.nfl.com/news/nfl-power-rankings-week-11-2026-nfl-season
+  - Parser: `nflcom_rank_marker`
 - **CBS Sports** (Pete Prisco) — Analyst column; the per-week slug is not derivable, so the hub is used. Rolling page.
-  - URL: https://www.cbssports.com/nfl/powerrankings/
+  - URL: https://www.cbssports.com/nfl/news/priscos-nfl-week-11-power-rankings/
   - Parser: `cbs_table`
 - **FOX Sports** (Ralph Vacchiano) — Analyst column; 'N. Team Name' inside h2 anchors.
   - URL: https://www.foxsports.com/stories/nfl/2026-nfl-power-rankings-week-11
@@ -169,4 +176,7 @@ Schedule: nflverse
 - **USA Today** (Nate Davis) — Nate Davis's national column, read from an independent TownNews reprint because usatoday.com and every Gannett domain return HTTP 402 to all user agents. Reprints carry no publication metadata, so the freshness gate logs this as unverified.
   - URL: https://www.centraloregondaily.com/sports/nfl-power-rankings-week-11-49ers-remain-no-1-but-who-is-afcs-best-team/article_b5e31ecd-ab34-5f14-8c02-146b4876a68b.html
   - Parser: `usatoday_numbered`
+- **NFL.com UK** (Neil Reynolds) — UK desk column. Absent for eight weeks (weeks 3-10) and returned in week 11. Only the year-suffixed slug works; the year-less form is a 404, not the live article.
+  - URL: https://www.nfl.com/news/neil-reynolds-week-11-power-rankings-2026
+  - Parser: `nflcom_reynolds`
 
