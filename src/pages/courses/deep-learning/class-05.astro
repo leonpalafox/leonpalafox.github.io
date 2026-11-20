@@ -5,7 +5,7 @@ import { loadDeck } from '../../../lib/slides.mjs';
 
 const deck = '/slides/deep-learning/class-05-redes-recurrentes.html';
 const pdf = '/slides/deep-learning/class-05-redes-recurrentes.pdf';
-const notebook = '/notebooks/deep-learning/class-05-rnn-lstm-laboratorio.ipynb';
+const notebook = 'https://colab.research.google.com/drive/1SG6lPbf8fP4F_ClpeyO1zoPhHC523OoZ?usp=sharing';
 
 // Outline straight from the deck's own slide list, grouped by section.
 // Slide numbers match the deck, so each entry deep-links with #slide=N.
@@ -39,7 +39,7 @@ slides.forEach((slide, i) => {
       De la estructura espacial a la temporal: una celda que se reutiliza en cada paso, por qué el gradiente
       se desvanece a lo largo del tiempo y cómo la LSTM y la GRU lo resuelven con compuertas y una memoria aditiva.
     </p>
-    <p class="micro-label mt-6 text-muted">Universidad Panamericana · Maestría en Ciencia de Datos · {slides.length} diapositivas · en inglés · laboratorio en español</p>
+    <p class="micro-label mt-6 text-muted">Universidad Panamericana · Maestría en Ciencia de Datos · {slides.length} diapositivas · en inglés</p>
     <div class="mt-8 flex flex-wrap gap-3">
       <a href={pdf} download class="deck-btn deck-btn--solid">
         Descargar PDF
@@ -49,9 +49,9 @@ slides.forEach((slide, i) => {
         Pantalla completa
         <span aria-hidden="true">↗</span>
       </a>
-      <a href={notebook} download class="deck-btn">
-        Descargar notebook
-        <span aria-hidden="true">↓</span>
+      <a href={notebook} target="_blank" rel="noopener" class="deck-btn">
+        Notebook en Colab
+        <span aria-hidden="true">↗</span>
       </a>
     </div>
   </section>
