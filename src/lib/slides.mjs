@@ -30,6 +30,10 @@ export const DECKS = [
     slug: 'deep-learning/class-05-redes-recurrentes',
     standalone: true,
   },
+  {
+    slug: 'deep-learning/class-06-transformers',
+    standalone: true,
+  },
 ];
 
 const root = process.cwd();

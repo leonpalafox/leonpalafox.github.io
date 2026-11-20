@@ -21,7 +21,7 @@ A comprehensive journey through the foundations and state-of-the-art of Deep Neu
 | 3 | [Embeddings en CNN: de píxeles a vectores y aplicaciones](/courses/deep-learning/class-03/) | [Deck](/slides/deep-learning/class-03-embeddings-cnn.html) · [PDF](/slides/deep-learning/class-03-embeddings-cnn.pdf) · [Colab](https://colab.research.google.com/drive/1_LK6V7Rpdd2jtQMPKaLZiGtT8QGeMnxj) |
 | 4 | [Regularización y transfer learning: generalización y CNN en la práctica](/courses/deep-learning/class-04/) | [Deck](/slides/deep-learning/class-04-regularizacion-transfer-learning.html) · [PDF](/slides/deep-learning/class-04-regularizacion-transfer-learning.pdf) · [Colab](https://colab.research.google.com/drive/13xNIhWsqNU3l9KoDVNDA6vkCZ75jfqwX?usp=sharing) |
 | 5 | [Redes recurrentes: RNN, LSTM y GRU, de la recurrencia a las compuertas](/courses/deep-learning/class-05/) | [Deck](/slides/deep-learning/class-05-redes-recurrentes.html) · [PDF](/slides/deep-learning/class-05-redes-recurrentes.pdf) |
-| 6 | Attention and the Transformer architecture | *Próximamente* |
+| 6 | [Transformers: atención, arquitectura y sus tres variantes](/courses/deep-learning/class-06/) | [Deck](/slides/deep-learning/class-06-transformers.html) · [PDF](/slides/deep-learning/class-06-transformers.pdf) |
 | 7 | Pretrained language models: BERT, GPT | *Próximamente* |
 | 8 | Generative models: VAEs and GANs | *Próximamente* |
 
@@ -78,6 +78,17 @@ A comprehensive journey through the foundations and state-of-the-art of Deep Neu
 5. **GRU** — dos compuertas (reset y update) y un solo estado; comparación lado a lado de RNN, LSTM y GRU con ejemplos, y cuándo usar cada una.
 6. **En la práctica** — redes bidireccionales y apiladas, padding, masking y empaquetado de secuencias en PyTorch.
 7. **Panorama** — por qué los Transformers las reemplazaron, dónde siguen vivas (streaming, dispositivos embebidos, series de tiempo) y su regreso con Mamba, RWKV y xLSTM; cierra con un ejemplo resuelto paso a paso de una LSTM sobre “the movie was not good”.
+
+### Clase 6 — Transformers: atención, arquitectura y sus tres variantes
+
+*La recurrencia se va; la atención se queda.* · [Slides & outline →](/courses/deep-learning/class-06/) · [PDF ↓](/slides/deep-learning/class-06-transformers.pdf) · *Diapositivas en inglés*
+
+1. **De la LSTM a la atención** — seq2seq, el cuello de botella de un solo vector, el problema de predecir con todo el contexto y por qué «Attention is all you need» elimina la recurrencia.
+2. **Atención** — self-attention, queries, keys y values, producto punto escalado resuelto a mano y multi-head attention.
+3. **Arquitectura** — tokenizer, embeddings, codificación posicional, bloques de encoder y decoder, y la proyección lineal + softmax que convierte un vector en un token.
+4. **Flujo de tokens** — codificar la oración fuente, decodificar token a token, las formas de los tensores de extremo a extremo y teacher forcing.
+5. **Tres variantes** — solo encoder (BERT), solo decoder (GPT) y encoder–decoder (T5, BART); quién puede ver a quién y cómo elegir.
+6. **Panorama** — BERT en números, de 2017 a hoy y el precio de la escala: de 65M a ~10T parámetros.
 
 ## Assessment
 
