@@ -10,7 +10,7 @@ heading: "Deep Learning"
 
 ## Course Description
 
-A comprehensive journey through the foundations and state-of-the-art of Deep Neural Networks, from the mathematical basics of the Perceptron through Transformers and generative models.
+A comprehensive journey through the foundations and state-of-the-art of Deep Neural Networks, from the mathematical basics of the Perceptron through Transformers and training on multiple GPUs.
 
 ## Course at a glance
 
@@ -22,8 +22,7 @@ A comprehensive journey through the foundations and state-of-the-art of Deep Neu
 | 4 | [Regularización y transfer learning: generalización y CNN en la práctica](/courses/deep-learning/class-04/) | [Deck](/slides/deep-learning/class-04-regularizacion-transfer-learning.html) · [PDF](/slides/deep-learning/class-04-regularizacion-transfer-learning.pdf) · [Colab](https://colab.research.google.com/drive/13xNIhWsqNU3l9KoDVNDA6vkCZ75jfqwX?usp=sharing) |
 | 5 | [Redes recurrentes: RNN, LSTM y GRU, de la recurrencia a las compuertas](/courses/deep-learning/class-05/) | [Deck](/slides/deep-learning/class-05-redes-recurrentes.html) · [PDF](/slides/deep-learning/class-05-redes-recurrentes.pdf) · [Colab](https://colab.research.google.com/drive/1SG6lPbf8fP4F_ClpeyO1zoPhHC523OoZ?usp=sharing) |
 | 6 | [Transformers: atención, arquitectura y sus tres variantes](/courses/deep-learning/class-06/) | [Deck](/slides/deep-learning/class-06-transformers.html) · [PDF](/slides/deep-learning/class-06-transformers.pdf) |
-| 7 | Pretrained language models: BERT, GPT | *Próximamente* |
-| 8 | Generative models: VAEs and GANs | *Próximamente* |
+| 7 | [Entrenamiento en paralelo: de los LLM a AlexNet en dos GPUs](/courses/deep-learning/class-07/) | [Deck](/slides/deep-learning/class-07-entrenamiento-paralelo.html) · [PDF](/slides/deep-learning/class-07-entrenamiento-paralelo.pdf) |
 
 *Provisional syllabus. The session schedule will be posted once finalized.*
 
@@ -89,6 +88,17 @@ A comprehensive journey through the foundations and state-of-the-art of Deep Neu
 4. **Flujo de tokens** — codificar la oración fuente, decodificar token a token, las formas de los tensores de extremo a extremo y teacher forcing.
 5. **Tres variantes** — solo encoder (BERT), solo decoder (GPT) y encoder–decoder (T5, BART); quién puede ver a quién y cómo elegir.
 6. **Panorama** — BERT en números, de 2017 a hoy y el precio de la escala: de 65M a ~10T parámetros.
+
+### Clase 7 — Entrenamiento en paralelo
+
+*De entrenar un LLM a medir dos GPUs.* · [Slides & outline →](/courses/deep-learning/class-07/) · [PDF ↓](/slides/deep-learning/class-07-entrenamiento-paralelo.pdf) · [mini_llm.py ↓](/code/deep-learning/mini_llm.py) · [mide.py ↓](/code/deep-learning/mide.py)
+
+1. **¿Por qué GPUs?** — cómo se entrena un LLM, un mini LLM medido en CPU y GPU, cuánto tardaría un modelo grande y cuánta memoria pide.
+2. **Pensar en paralelo** — dependencias paso a paso, speedup y eficiencia, la parte que no se divide, el costo de comunicar y los colectivos.
+3. **Repartir el entrenamiento** — datos en paralelo y DDP en PyTorch; partir un modelo que no cabe (pipeline, tensorial, ZeRO y FSDP).
+4. **AlexNet en dos GPUs** — por qué DDP con FP32 salió más lento que una GPU y tres formas de mover menos datos.
+5. **Decidir** — resultados, una demo en Runpod y un ejercicio con un LLM.
+6. **Cierre del curso** — todo es datos + modelo + optimización: un repaso de las siete clases y cómo la paralelización reparte las tres.
 
 ## Evaluación
 

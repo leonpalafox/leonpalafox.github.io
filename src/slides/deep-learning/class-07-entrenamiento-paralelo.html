@@ -1,0 +1,1295 @@
+<!doctype html><html lang="es-MX"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Entrenamiento en paralelo · Deep Learning · UP</title><style>
+:root{--navy:#101e30;--navy2:#18304a;--paper:#f4f1e9;--paper2:#e9e4d8;--card:#fbf9f4;--gold:#b69758;--gold-d:#8a6c34;--gold-l:#efe3c7;--ink:#142438;--muted:#5d6975;--hair:rgba(20,36,56,.13);--hair2:rgba(20,36,56,.3);--blue:#2f63a8;--blue-l:#dde6f2;--ochre:#b07a26;--red:#b9472f;--red-l:#f6ddd5;--green:#2e9466;--orange:#d0603a;--sans:"Inter","Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;--serif:Georgia,"Times New Roman",Times,serif;--math:"Cambria Math",Cambria,"STIX Two Math","Latin Modern Math","Times New Roman",serif;--mono:ui-monospace,"SFMono-Regular","Cascadia Mono","Segoe UI Mono",Menlo,Consolas,"Liberation Mono",monospace}
+*{box-sizing:border-box}html,body{height:100%}body{margin:0;background:#080f19;color:var(--ink);font-family:var(--sans);overflow:hidden;-webkit-font-smoothing:antialiased}button,select{font:inherit}button{cursor:pointer}
+#viewport{position:absolute;inset:0 0 74px;overflow:hidden;cursor:pointer}#stage{width:1600px;height:900px;position:absolute;transform-origin:0 0;background:var(--paper);overflow:hidden}
+/* ---------- slide frame ---------- */
+.slide{position:absolute;inset:0;background:var(--paper);color:var(--ink);overflow:hidden}.slide.dark{background:var(--navy);color:var(--paper)}
+.hd{position:absolute;left:86px;right:86px;top:40px;height:46px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--hair)}.dark .hd{border-color:rgba(244,241,233,.14)}
+.wm{display:flex;align-items:center}.wm img{display:block;height:44px;width:auto}.cover .hd{top:22px;height:100px}.cover .wm img{height:84px}
+.lchip{display:inline-flex;align-items:center;flex:none;background:#fff;border-radius:5px;padding:2px 6px}.lchip img{display:block;width:auto}.gflex{display:inline-flex;align-items:center;gap:8px}
+.sec{font-size:15px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}.dark .sec{color:#aab4c0}
+.eb{position:absolute;left:86px;top:120px;font-size:17px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold-d);font-weight:700}.dark .eb{color:var(--gold)}
+h1.tt{position:absolute;left:86px;right:86px;top:150px;margin:0;font-size:60px;line-height:1.08;letter-spacing:-.02em;font-weight:700}
+.ct{position:absolute;left:86px;right:86px;top:274px;bottom:90px}.free{position:absolute;inset:0}
+.ft{position:absolute;left:86px;right:86px;bottom:30px;display:flex;justify-content:space-between;font-size:15px;color:var(--muted);letter-spacing:.04em}.dark .ft{color:#9aa6b3}
+.prog{position:absolute;left:0;bottom:0;height:4px;background:var(--gold);transition:width .8s cubic-bezier(.6,0,.2,1)}
+/* ---------- entrance effects ---------- */
+[data-fx]{transition:opacity .55s ease var(--dl,0s),transform .75s cubic-bezier(.2,.75,.25,1) var(--dl,0s),filter .6s ease var(--dl,0s),background-color .45s,border-color .45s,color .45s,box-shadow .45s}
+[data-fx]:not(.in){opacity:0}
+[data-fx=up]:not(.in){transform:translateY(32px)}[data-fx=down]:not(.in){transform:translateY(-34px)}[data-fx=left]:not(.in){transform:translateX(-50px)}[data-fx=right]:not(.in){transform:translateX(50px)}
+[data-fx=pop]:not(.in){transform:scale(.3)}[data-fx=pop]{transition-timing-function:ease,cubic-bezier(.3,1.5,.5,1)}[data-fx=zoom]:not(.in){transform:scale(.86)}
+[data-fx=blur]:not(.in){filter:blur(12px);transform:translateY(14px)}
+[data-fx=growx]{transform-origin:0 50%}[data-fx=growx]:not(.in){opacity:1;transform:scaleX(0)}[data-fx=growy]{transform-origin:50% 100%}[data-fx=growy]:not(.in){opacity:1;transform:scaleY(0)}[data-fx=growyd]{transform-origin:50% 0}[data-fx=growyd]:not(.in){opacity:1;transform:scaleY(0)}
+[data-fx=draw]:not(.in){opacity:1}[data-fx=draw]>i{transform:scaleX(0);transition:transform .6s cubic-bezier(.6,.05,.25,1) var(--dl,0s)}[data-fx=draw].in>i{transform:none}
+.seg>i{transition-duration:.13s!important;transition-timing-function:linear!important}
+[data-fx=mark]:not(.in){opacity:1}[data-fx=mark]{background:linear-gradient(transparent 60%,rgba(182,151,88,.42) 60%) no-repeat 0 0/0% 100%;transition:background-size .7s cubic-bezier(.6,0,.2,1) var(--dl,0s)}[data-fx=mark].in{background-size:100% 100%}
+[data-fx=words]:not(.in),[data-fx=letters]:not(.in),[data-fx=type]:not(.in){opacity:1}
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding:0 .02em .1em;margin-bottom:-.1em}.w>span{display:inline-block;transform:translateY(108%);transition:transform .8s cubic-bezier(.2,.8,.2,1) calc(var(--dl,0s) + var(--wi)*70ms)}.in .w>span{transform:none}
+.lt{display:inline-block;opacity:0;transform:translateY(.35em) rotate(4deg);filter:blur(8px);transition:opacity .5s ease calc(var(--dl,0s) + var(--wi)*55ms),transform .7s cubic-bezier(.2,.8,.2,1) calc(var(--dl,0s) + var(--wi)*55ms),filter .6s ease calc(var(--dl,0s) + var(--wi)*55ms)}.in .lt{opacity:1;transform:none;filter:none}
+.ch{opacity:0;transition:opacity .01s linear calc(var(--dl,0s) + var(--c)*var(--sp,18ms))}.in .ch{opacity:1}
+.hid{opacity:0;transition:opacity .45s ease,transform .6s cubic-bezier(.2,.8,.25,1),background-color .4s,color .4s,border-color .4s,box-shadow .4s}.hid.on{opacity:1}
+.no-anim,.no-anim *{transition:none!important;animation:none!important}
+/* ---------- shared components ---------- */
+.col-l{position:absolute;left:0;top:0;width:520px;bottom:0}.col-r{position:absolute;left:580px;right:0;top:0;bottom:0}
+.pts{display:flex;flex-direction:column}.pt{font-size:29px;line-height:1.3;padding:17px 0;border-bottom:1px solid var(--hair)}.pt:last-child{border-bottom:0}.dark .pt{border-color:rgba(244,241,233,.14)}
+.pt.sm{font-size:25px;padding:14px 0}.lead{font-size:38px;line-height:1.18;font-weight:700;letter-spacing:-.01em}.lead.md{font-size:33px}
+.note{font-size:16px;color:var(--muted);line-height:1.4}.cap{font-size:21px;color:var(--muted);line-height:1.35}.dark .cap,.dark .note{color:#aab4c0}
+.card{background:var(--card);border:1px solid var(--hair);border-radius:16px;padding:22px 26px}.dark .card{background:var(--navy2);border-color:rgba(244,241,233,.12)}
+.chip{display:inline-flex;align-items:center;gap:9px;padding:7px 16px;border-radius:999px;border:1px solid var(--hair2);font-size:19px;line-height:1.2;background:var(--card);white-space:nowrap}.chip.g{background:var(--gold-l);border-color:var(--gold)}.chip.b{background:var(--blue-l);border-color:#a9bcd8}
+.dark .chip{background:transparent;border-color:rgba(244,241,233,.3);color:var(--paper)}
+.tag{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-d);font-weight:700}.dark .tag{color:var(--gold)}
+.m{font-family:var(--math);font-style:italic;letter-spacing:.01em}.m .u,.m b{font-style:normal;font-weight:400}.m sub,.m sup{font-size:.62em}
+.ss{display:inline-flex;flex-direction:column;vertical-align:.34em;font-size:.6em;line-height:1.05;margin-left:.04em;font-style:normal}
+.frac{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font-size:.84em;line-height:1.15;margin:0 .1em}.frac>span:last-child{border-top:1.5px solid currentColor;padding-top:1px}
+.code{background:var(--navy);color:#e6e2d8;border-radius:16px;padding:22px 26px;font-family:var(--mono);font-size:18px;line-height:1.56;white-space:pre}.code .k{color:#e5bd6c}.code .s{color:#a9d6a0}.code .c{color:#8394aa}.code .n{color:#f0a682}.code .f{color:#9fc5ff}
+.code .ln-c{display:block;min-height:1.56em;border-radius:5px;transition:background-color .4s}.code .ln-c.lit{background:rgba(182,151,88,.2)}
+.abs{position:absolute}.lbl{position:absolute;white-space:nowrap}.lbl>span{flex:none}.nt{text-transform:none;letter-spacing:.02em}.cx{width:0;display:flex;justify-content:center}.cy{height:0;display:flex;align-items:center}.cxy{width:0;height:0;display:flex;align-items:center;justify-content:center}
+.ln{position:absolute;transform-origin:0 50%;pointer-events:none;color:rgba(20,36,56,.32)}.ln>i{display:block;width:100%;height:100%;background:currentColor;border-radius:4px;transform-origin:0 50%}
+.ln .ah{position:absolute;right:-4px;top:50%;margin-top:-6px;width:0;height:0;border-left:12px solid currentColor;border-top:6px solid transparent;border-bottom:6px solid transparent}
+[data-fx=draw] .ah{opacity:0;transition:opacity .2s calc(var(--dl,0s) + .45s)}[data-fx=draw].in .ah{opacity:1}
+.dark .ln{color:rgba(244,241,233,.4)}
+.ln.hot{color:var(--blue)}.ln.hotr{color:var(--red)}.ln.gold{color:var(--gold)}
+.ln.flow>i{background:linear-gradient(90deg,currentColor 0 38%,#fff 50%,currentColor 62% 100%);background-size:300% 100%;animation:flow 1s linear 2}.ln.flowr>i{background:linear-gradient(90deg,currentColor 0 38%,#fff 50%,currentColor 62% 100%);background-size:300% 100%;animation:flow 1s linear 2 reverse}
+@keyframes flow{from{background-position:100% 0}to{background-position:0 0}}
+.nd{position:absolute;border-radius:50%;display:flex;align-items:center;justify-content:center;border:3px solid var(--blue);background:var(--paper);font-size:23px;color:var(--ink);transition:opacity .55s ease var(--dl,0s),transform .75s cubic-bezier(.3,1.5,.5,1) var(--dl,0s),box-shadow .4s,background-color .4s,border-color .4s,color .4s}
+.nd.g{border-color:var(--gold)}.nd.mu{border-color:#9aa5b1;color:var(--muted)}.nd.hot{background:var(--blue-l);box-shadow:0 0 0 7px rgba(47,99,168,.16)}.nd.hotr{border-color:var(--red);box-shadow:0 0 0 7px rgba(185,71,47,.15)}.nd.hotg{background:var(--gold-l);border-color:var(--gold);box-shadow:0 0 0 8px rgba(182,151,88,.22)}
+.dim{opacity:.28!important}.fade{opacity:.35!important}
+.badge{position:absolute;padding:3px 10px;border-radius:999px;background:var(--red);color:#fff;font-size:16px;font-weight:700;white-space:nowrap;font-family:var(--sans)}
+.pulse{animation:pulse 1.4s ease-in-out 3}@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(185,71,47,.0)}50%{box-shadow:0 0 0 12px rgba(185,71,47,.18)}}
+.blink{animation:blink 1.1s steps(1) infinite}@keyframes blink{50%{opacity:0}}
+/* ---------- controls / dialogs ---------- */
+#controls{position:absolute;bottom:0;left:0;right:0;min-height:74px;padding:14px 22px;background:#0c1522;display:flex;align-items:center;justify-content:center;gap:9px;color:#e9e5dc;flex-wrap:wrap;transition:transform .35s ease,opacity .35s}
+#controls button,#controls select{border:1px solid #ffffff26;background:transparent;color:inherit;border-radius:7px;padding:9px 13px;font-size:14px}#controls button:hover{background:#ffffff15}
+#controls select{background:#152234}button:focus-visible,select:focus-visible{outline:2px solid var(--gold);outline-offset:3px}#play.active{background:var(--gold);color:#101e30}
+#position{font-size:14px;min-width:70px;text-align:center;font-variant-numeric:tabular-nums}#event{color:#aab6c6;font-size:12px;min-width:110px}.sep{width:1px;height:26px;background:#ffffff1c;margin:0 4px}
+#hint{position:absolute;top:12px;left:50%;transform:translateX(-50%);background:#0c1522ee;color:#e9e5dc;padding:9px 15px;border-radius:6px;font-size:13px;z-index:5;transition:opacity 1s;pointer-events:none;white-space:nowrap}
+body.fs #viewport{bottom:0}body.fs #controls{position:fixed;transform:translateY(100%);opacity:0}body.fs.show-ui #controls{transform:none;opacity:1}
+dialog{border:1px solid #b6975866;border-radius:15px;background:#f4f1e9;color:var(--ink);width:min(1000px,92vw);max-height:85vh;padding:28px;box-shadow:0 20px 90px #0008}dialog::backdrop{background:#0009}
+.dialog-head{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:20px}.dialog-head h2{margin:0;font-size:27px}.dialog-head button{color:var(--ink);border:1px solid #14243833;background:transparent;border-radius:7px;padding:9px 13px}
+#index-list{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}#index-list button{color:var(--ink);text-align:left;line-height:1.4;border:1px solid #14243822;background:transparent;border-radius:8px;padding:14px;font-size:15px}#index-list button:hover{background:#e9e4d8}#index-list button.current{background:#e3dbc8;border-color:var(--gold)}#index-list b{color:#947443;display:block;margin-bottom:5px}
+#notes-content{font-size:18px;line-height:1.6;white-space:pre-wrap}#notes-content a{color:#405d8c;overflow-wrap:anywhere}
+#print-deck{display:none}
+@media(prefers-reduced-motion:reduce){[data-fx]{transition:opacity .25s ease var(--dl,0s)!important}[data-fx]:not(.in){transform:none!important;filter:none!important}.w>span,.lt{transform:none!important;filter:none!important}.lt{transition:opacity .25s ease calc(var(--dl,0s) + var(--wi)*30ms)!important}.ln.flow>i,.ln.flowr>i,.pulse{animation:none!important}}
+@media(max-width:760px){#controls{padding:8px;gap:5px}#controls button,#controls select{font-size:12px;padding:7px 8px}#event,.sep{display:none}#index-list{grid-template-columns:1fr 1fr}#hint{white-space:normal;width:90%;text-align:center}}
+@media print{@page{size:1600px 900px;margin:0}html,body{height:auto;overflow:visible;background:#fff}#viewport,#controls,dialog,#hint{display:none!important}#print-deck{display:block}.print-page{width:1600px;height:900px;position:relative;overflow:hidden;break-after:page;page-break-after:always}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style>
+<style>
+/* utilities */
+.gone{opacity:0!important;transition-delay:0s!important}.dim,.fade{transition-delay:0s!important}
+/* footer logo */
+.ft-l{display:flex;align-items:center;gap:16px}
+.ft-l .ing{display:block;height:26px;width:auto}
+.dark .ft-l .ing{display:none}
+/* cover */
+.cv-k{position:absolute;left:86px;top:178px;font-size:18px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.cv-t{position:absolute;left:78px;top:214px;margin:0;font-size:150px;line-height:.98;letter-spacing:-.045em;font-weight:700}
+.cv-r{position:absolute;left:86px;top:540px;width:430px;height:3px;background:var(--gold)}
+.cv-s{position:absolute;left:86px;top:566px;font-size:36px;color:var(--gold)}.cv-n{position:absolute;left:86px;top:652px;font-size:28px}.cv-m{position:absolute;left:86px;top:696px;font-size:21px;color:#aab4c0;letter-spacing:.02em}
+.cv-l{position:absolute;left:1110px;right:86px;top:226px;margin:0;padding:0;list-style:none}.cv-l li{display:flex;gap:18px;align-items:baseline;font-size:24px;padding:15px 0;border-bottom:1px solid rgba(244,241,233,.14);color:#dfe4ea}.cv-l li span{font-size:14px;color:var(--gold);letter-spacing:.14em;font-variant-numeric:tabular-nums}
+.divider h1.tt{top:296px;font-size:104px;letter-spacing:-.035em;max-width:1150px}
+.question h1.tt{font-size:64px}.qs{position:absolute;left:0;right:0;height:130px;display:flex;align-items:center;gap:30px}
+/* interactive chips */
+.x-chips{display:flex;flex-wrap:wrap;gap:10px}
+.x-chip{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;background:var(--card);border:1px solid var(--hair2);font-size:17px;color:var(--ink);white-space:nowrap}
+.x-chip svg{width:18px;height:18px;stroke:var(--gold-d);fill:none;stroke-width:1.8}
+button.x-chip{cursor:pointer;font-family:var(--sans);transition:background-color .2s,border-color .2s,color .2s,box-shadow .2s}
+button.x-chip:hover{border-color:var(--gold);background:var(--gold-l)}
+button.x-chip.on{background:var(--ink);border-color:var(--ink);color:#fff;box-shadow:0 4px 12px rgba(20,36,56,.22)}
+button.x-chip.on svg{stroke:var(--gold)}
+button.x-chip:focus-visible{outline:3px solid rgba(47,99,168,.45);outline-offset:2px}
+.x-hlab{position:absolute;font-size:16px;font-weight:700;white-space:nowrap;transform:translate(-50%,-100%);transition:left 1s cubic-bezier(.6,0,.2,1),top 1s cubic-bezier(.6,0,.2,1),opacity .5s ease var(--dl,0s)}
+.x-hlab{z-index:40;background:rgba(244,241,233,.92);padding:1px 9px;border-radius:999px}
+/* shared building blocks (r- prefix) */
+.r-pic{position:absolute;border-radius:12px;overflow:hidden;background:var(--paper2);box-shadow:0 8px 22px rgba(20,36,56,.16)}
+.r-pic>img{display:block;width:100%;height:100%;object-fit:cover}
+.r-pic.px>img,.r-px{image-rendering:pixelated}
+.r-pic .r-ov{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.r-lab{position:absolute;text-align:center;font-size:15px;line-height:1.3;color:var(--muted);white-space:nowrap;transform:translateX(-50%)}
+.r-lab b{display:block;color:var(--ink);font-size:16px}
+.r-lab code{font:500 13px var(--mono);color:var(--gold-d)}
+.r-mono{font-family:var(--mono)}
+.r-card{position:absolute;background:var(--card);border:1px solid var(--hair);border-radius:16px;box-shadow:0 4px 14px rgba(20,36,56,.05)}
+.r-ttl{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-d);font-weight:700}
+.r-note{position:absolute;font-size:14px;line-height:1.4;color:var(--muted)}
+.r-note b{color:var(--ink)}
+.r-call{position:absolute;display:flex;align-items:center;gap:14px;padding:14px 20px;border-radius:14px;background:#fbf3e2;border:1px solid #e3cda4;font-size:19px;line-height:1.35}
+.r-call svg{width:30px;height:30px;flex:none;stroke:var(--gold-d);fill:none;stroke-width:1.6}
+.r-call b{color:var(--gold-d)}
+.r-num{font-variant-numeric:tabular-nums}
+.r-big{font-size:34px;font-weight:700;letter-spacing:-.01em;line-height:1.05;font-variant-numeric:tabular-nums}
+.r-big small{display:block;font-size:14px;font-weight:400;color:var(--muted);letter-spacing:0;line-height:1.35;margin-top:4px}
+.r-big.red{color:var(--red)}.r-big.gold{color:var(--gold-d)}.r-big.green{color:var(--green)}
+.r-chart{position:absolute;overflow:visible}
+.r-chart text{font:13px var(--sans);fill:var(--muted)}
+.r-chart .ax{stroke:var(--hair2);stroke-width:1.2;fill:none}
+.r-chart .gr{stroke:var(--hair);stroke-width:1;fill:none}
+.r-ln{fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:var(--len);stroke-dashoffset:var(--len);transition:stroke-dashoffset 1.6s cubic-bezier(.45,0,.2,1) var(--dl,0s),opacity .5s ease var(--dl,0s)}
+.r-ln.in{stroke-dashoffset:0}
+.r-ln.tr{stroke:var(--navy)}.r-ln.va{stroke:var(--gold)}.r-ln.alt{stroke:var(--green)}.r-ln.alt2{stroke:var(--blue)}.r-ln.red{stroke:var(--red)}.r-ln.mu{stroke:#a8b2bd}
+.r-ln.dash{stroke-dasharray:none}
+.r-ln.thin{stroke-width:2}
+.r-key{position:absolute;display:flex;gap:16px;font-size:14px;color:var(--muted);white-space:nowrap}
+.r-key span{display:flex;align-items:center;gap:6px}
+.r-key i{display:block;width:18px;height:3px;border-radius:2px}
+[data-fx=wipe]{transition:clip-path 1.2s cubic-bezier(.6,0,.2,1) var(--dl,0s)}[data-fx=wipe]:not(.in){opacity:1;clip-path:inset(0 100% 0 0)}[data-fx=wipe].in{clip-path:inset(0 0 0 0)}
+.r-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.r-chips.r-vert{flex-direction:column;align-items:stretch}
+.r-chips .x-chip{font-size:14px;padding:6px 12px}
+</style>
+<style>
+/* ===== transformers deck (tf- prefix keeps clear of the base, x- and r- styles) ===== */
+:root{--att:#2f63a8;--ffn:#b07a26;--emb:#6b4fa0;--pe:#1f8a8a;--nrm:#7d8894;--out:#b9472f;--enc:#2f63a8;--dec:#d0603a;--ed:#2e9466;--qc:#2f63a8;--kc:#b07a26;--vc:#2e9466;--wire:#97a1ad}
+h1.tt.l1{font-size:52px;top:156px}h1.tt.l2{font-size:46px;top:148px;line-height:1.06}
+.s1 .cv-t{font-size:118px;top:226px;line-height:1}.s1 .cv-r{top:478px}.s1 .cv-s{top:500px;font-size:31px}.s1 .cv-p{position:absolute;left:86px;top:556px;font-size:20px;color:#aab4c0;letter-spacing:.02em}.s1 .cv-n{top:640px}.s1 .cv-m{top:684px}
+.s1 .cv-l{top:150px;left:1120px}.s1 .cv-l li{padding:10px 0;font-size:22px}
+.tf-cover-art{position:absolute;left:86px;top:742px;width:900px;height:96px;overflow:visible}
+.tf-cv-a{fill:none;stroke:var(--gold);stroke-width:1.6;opacity:.55;animation:tfcva .8s ease both}
+.tf-cv-n{fill:var(--gold);stroke:var(--gold);stroke-width:2.5;animation:tfcvn .6s ease both}
+@keyframes tfcva{from{opacity:0}}@keyframes tfcvn{from{fill:var(--navy)}}
+/* small text pieces */
+.tf-tt{position:absolute;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-d);font-weight:700;white-space:nowrap}
+.tf-bt{position:absolute;font-size:19px;line-height:1.4;color:var(--ink)}
+.tf-bt p{margin:0 0 12px}.tf-bt b{color:var(--gold-d)}.tf-bt .mu{color:var(--muted);font-size:15.5px}
+.tf-ill{position:absolute;padding:2px 9px;border-radius:999px;background:#ece6d8;color:var(--muted);font-size:12px;letter-spacing:.06em;text-transform:uppercase;font-weight:700;white-space:nowrap}
+.tf-ban{position:absolute;display:flex;align-items:center;justify-content:center;gap:16px;padding:14px 26px;border-radius:14px;background:var(--gold-d);color:#fff;font-size:23px;font-weight:700;letter-spacing:-.005em;white-space:nowrap}
+.tf-ban.navy{background:var(--navy)}.tf-ban b{color:var(--gold-l)}
+.tf-eq{font-family:var(--math);font-style:italic;font-size:26px;line-height:1.5;white-space:nowrap}
+.tf-eq .u{font-style:normal;font-family:var(--sans)}.tf-eq sub,.tf-eq sup{font-size:.62em}
+.tf-x{color:var(--red);font-weight:700}.tf-ok{color:var(--green);font-weight:700}
+.tf-dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:8px;vertical-align:-1px}
+/* tokens */
+.tf-toks{position:absolute;display:flex;align-items:center;gap:7px;white-space:nowrap}
+.tf-tk{display:inline-block;padding:6px 13px;border-radius:9px;border:1.5px solid var(--hair2);background:var(--card);font-size:19px;color:var(--ink);white-space:nowrap;transition:background-color .4s,border-color .4s,color .4s,box-shadow .4s,opacity .4s,transform .75s cubic-bezier(.2,.75,.25,1) var(--dl,0s)}
+.tf-tk.src{background:var(--blue-l);border-color:#a9bcd8}
+.tf-tk.tgt{background:#f8e3d9;border-color:#e7b9a3}
+.tf-tk.id{font-family:var(--mono);font-size:17px}
+.tf-tk.sp{font-family:var(--mono);font-size:15px;color:var(--muted);background:#ece9e2}
+.tf-tk.q{border-style:dashed;color:var(--muted);background:transparent}
+.tf-tk.on{background:var(--gold);border-color:var(--gold);color:#fff;box-shadow:0 4px 12px rgba(138,108,52,.3)}
+.tf-tk.cur{box-shadow:0 0 0 4px rgba(182,151,88,.35);border-color:var(--gold)}
+.tf-tk.fut{opacity:.32}.tf-tk.hit{background:var(--gold-l);border-color:var(--gold)}
+.tf-tk.abs{position:absolute}
+/* vectors: a strip of cells */
+.tf-vec{display:inline-flex;gap:2px;padding:3px;border-radius:6px;background:#fff;border:1px solid var(--hair);vertical-align:middle}
+.tf-vec i{display:block;width:9px;height:20px;border-radius:2px}
+.tf-vec.sm i{width:6px;height:14px}
+.tf-vec.v i{width:20px;height:9px}.tf-vec.v{flex-direction:column}
+/* blocks, frames, operators (architecture diagram) */
+.tf-blk{position:absolute;display:flex;flex-direction:column;align-items:center;justify-content:center;border:2px solid var(--c);border-radius:10px;background:color-mix(in srgb,var(--c) 11%,var(--card));font-size:16px;font-weight:600;color:var(--ink);text-align:center;line-height:1.15;transition:opacity .5s ease var(--dl,0s),transform .7s cubic-bezier(.3,1.5,.5,1) var(--dl,0s),box-shadow .4s,background-color .4s}
+.tf-blk.sm{font-size:12.5px;font-weight:600;border-width:1.5px;border-radius:7px}
+.tf-blk.lit{box-shadow:0 0 0 6px color-mix(in srgb,var(--c) 24%,transparent);background:color-mix(in srgb,var(--c) 28%,var(--card))}
+.tf-frame{position:absolute;border:2px solid color-mix(in srgb,var(--c) 45%,transparent);border-radius:16px;background:color-mix(in srgb,var(--c) 5%,transparent);transition:opacity .5s ease var(--dl,0s),box-shadow .4s}
+.tf-frame.lit{box-shadow:0 0 0 6px color-mix(in srgb,var(--c) 18%,transparent);border-color:var(--c)}
+.tf-op{position:absolute;width:26px;height:26px;margin:-13px 0 0 -13px;border-radius:50%;border:2px solid var(--pe);background:var(--paper);display:flex;align-items:center;justify-content:center;font:700 17px var(--sans);color:var(--pe);line-height:1;transition:opacity .5s ease var(--dl,0s),box-shadow .4s}
+.tf-op.lit{box-shadow:0 0 0 6px rgba(31,138,138,.22);background:#d9efee}
+.tf-al{position:absolute;transform:translate(-50%,-50%);white-space:nowrap;font-size:15px;color:var(--muted);text-align:center;line-height:1.2;transition:opacity .5s ease var(--dl,0s),color .4s}
+.tf-al.l{transform:translate(0,-50%);text-align:left}.tf-al.r{transform:translate(-100%,-50%);text-align:right}
+.tf-al.big{font-size:20px;font-weight:700;color:var(--ink)}.tf-al.lit{color:var(--gold-d);font-weight:700}
+.tf-arch{position:absolute;transform-origin:0 0;width:600px;height:640px}
+.tf-arch>svg{position:absolute;left:0;top:0;overflow:visible}
+.tf-w{fill:none;stroke:var(--wire);stroke-width:2.2;stroke-linejoin:round;transition:stroke .4s,stroke-width .4s,opacity .5s ease var(--dl,0s)}
+.tf-w.lit{stroke:var(--gold-d);stroke-width:3.4}
+.tf-arch.dimx .tf-e:not(.lit):not([data-fx]:not(.in)){opacity:.22}
+.tf-arch[data-arch=mini].dimx .tf-e:not(.lit):not([data-fx]:not(.in)){opacity:.45}
+.tf-here{position:absolute;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.tf-mini{position:absolute;border-radius:14px;border:1px solid var(--hair);background:rgba(251,249,244,.7)}
+/* matrices */
+.tf-mat{position:absolute;display:grid;gap:3px;font-variant-numeric:tabular-nums}
+.tf-mat .c{display:flex;align-items:center;justify-content:center;border-radius:6px;background:var(--card);border:1px solid var(--hair);font:600 15px var(--mono);color:var(--ink);transition:background-color .5s,color .5s,opacity .5s,box-shadow .4s}
+.tf-mat .c.cur{box-shadow:inset 0 0 0 2px var(--gold)}
+.tf-mat .h{display:flex;align-items:center;justify-content:center;font-size:13.5px;color:var(--muted);white-space:nowrap;overflow:visible}
+.tf-mat .h.r{justify-content:flex-end;padding-right:6px}
+.tf-mat .c.x{background:repeating-linear-gradient(45deg,#ece9e2 0 6px,#e2ded5 6px 12px);border-color:transparent;color:transparent}
+.tf-mat .c.e{background:transparent;border-style:dashed;color:transparent}
+.tf-mat .c.tiny{font-size:12px}
+.tf-mlab{position:absolute;font:italic 22px var(--math);color:var(--ink)}.tf-mlab small{font:13px var(--sans);color:var(--muted);font-style:normal;margin-left:6px}
+/* bars */
+.tf-bars{position:absolute;display:flex;flex-direction:column;gap:7px}
+.tf-bar{display:flex;align-items:center;gap:10px;font-size:17px;white-space:nowrap}
+.tf-bar span{width:var(--lw,110px);text-align:right;color:var(--ink)}
+.tf-bar i{display:block;height:18px;border-radius:5px;background:var(--c,var(--gold));transition:width .6s cubic-bezier(.4,0,.2,1)}
+.tf-bar b{font:600 15px var(--mono);color:var(--ink)}
+.tf-bar.top span{font-weight:700}.tf-bar.top b{color:var(--gold-d)}
+/* cards */
+.tf-cardh{display:flex;align-items:center;gap:10px;margin:18px 22px 0;font-size:22px}.tf-cardh svg{width:26px;height:26px;stroke:var(--gold-d);fill:none;stroke-width:1.7;flex:none}
+.tf-cardt{margin:8px 22px 0;font-size:19px;line-height:1.38}.tf-cardt b{color:var(--gold-d)}
+.tf-cardm{margin:8px 22px 0;font-size:15px;line-height:1.4;color:var(--muted)}
+.tf-pill{display:inline-block;padding:2px 10px;border-radius:999px;font-size:13px;font-weight:700;letter-spacing:.04em;color:#fff;background:var(--c)}
+.tf-two{position:absolute;display:flex;gap:14px;font-size:19px;line-height:1.35}.tf-two>span{flex:none;display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:var(--gold);color:#fff;font-weight:700}.tf-two b{color:var(--gold-d)}
+/* tables */
+.tf-tb{position:absolute;display:grid;border:1px solid var(--hair);border-radius:14px;overflow:hidden;background:var(--card)}
+.tf-tb>span{padding:9px 16px;font-size:17px;line-height:1.3;border-top:1px solid var(--hair)}
+.tf-tb>span.h{border-top:0;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-d);font-weight:700;background:rgba(182,151,88,.1)}
+.tf-tb>span.l{font-weight:700}.tf-tb .mo{font-family:var(--mono);font-size:16px}.tf-tb b{color:var(--gold-d)}
+.tf-tb .hc{font-size:15px;letter-spacing:.06em;text-transform:none}
+/* stage rows (token flow) */
+.tf-sr{position:absolute;left:0;right:0;height:66px;display:flex;align-items:center;border-radius:12px;transition:opacity .45s,background-color .4s,box-shadow .4s}
+.tf-sr.past{opacity:.5}.tf-sr.cur{background:rgba(182,151,88,.12);box-shadow:inset 3px 0 0 var(--gold)}
+.tf-sr>b{position:absolute;left:16px;width:170px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-d)}
+.tf-sr>em{position:absolute;right:16px;font:600 14px var(--mono);font-style:normal;color:var(--muted)}
+.tf-sc{position:absolute;transform:translateX(-50%);display:flex;align-items:center;gap:6px}
+.tf-lay{display:inline-flex;gap:4px;margin-left:10px}.tf-lay i{display:block;width:12px;height:12px;border-radius:3px;background:rgba(20,36,56,.1);transition:background-color .3s}.tf-lay i.on{background:var(--enc)}
+/* attention arcs */
+.tf-arcs{position:absolute;overflow:visible}
+.tf-arcs path{fill:none;stroke:var(--att);stroke-linecap:round;transition:stroke-width .5s,opacity .5s}
+.tf-arcs text{font:600 13px var(--mono);fill:var(--ink)}
+.tf-arcs .gw{fill:var(--gold);transition:height .5s,y .5s}
+/* variant columns */
+.tf-vcard{position:absolute;top:0;height:536px;border-radius:16px;border:1px solid var(--hair);border-top:6px solid var(--c);background:var(--card)}
+.tf-vcard>h3{margin:16px 22px 0;font-size:25px;color:var(--c)}
+.tf-vrow{margin:0 22px;padding:8px 0;border-top:1px solid var(--hair);font-size:16.5px;line-height:1.35}.tf-vrow>i{display:block;font-style:normal;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:2px}
+.tf-vdia{position:relative;height:150px;margin:10px 22px 6px}
+.tf-mt{position:absolute;font-size:19px;font-weight:700;white-space:nowrap}
+/* timeline */
+.tf-tl{position:absolute;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-d))}
+.tf-ev{position:absolute;display:flex;flex-direction:column;align-items:flex-start;gap:3px;width:180px}
+.tf-ev i{display:block;width:28px;height:28px;border-radius:50%;background:var(--paper);border:4px solid var(--c,var(--gold));margin-bottom:8px}
+.tf-ev b{font-size:20px}.tf-ev span{font-size:16.5px;font-weight:700;color:var(--c,var(--gold-d));line-height:1.25}.tf-ev em{font-style:normal;font-size:13.5px;color:var(--muted);line-height:1.3}
+.tf-5l{position:absolute;display:flex;align-items:center;gap:24px;width:1428px;font-size:24px;padding-bottom:13px;border-bottom:1px solid var(--hair)}
+.tf-5l>span{width:190px;flex:none;font-size:14px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-d);font-weight:700}.tf-5l b{color:var(--gold-d)}
+.tf-cell{position:absolute;display:flex;align-items:center;justify-content:center;border:2px solid var(--c);border-radius:12px;background:color-mix(in srgb,var(--c) 9%,var(--card));font:italic 21px var(--math);color:var(--ink)}
+.tf-badge{position:absolute;padding:2px 10px;border-radius:999px;background:var(--navy);color:var(--gold);font-size:13px;font-weight:700;letter-spacing:.06em;white-space:nowrap}
+.tf-loop{position:absolute;font-size:15px;color:var(--gold-d);font-weight:700;white-space:nowrap}
+.tf-quote{position:absolute;font-family:var(--serif);font-size:34px;font-style:italic;color:var(--ink);white-space:nowrap}
+.tf-quote b{font-style:normal;font-family:var(--sans);background:var(--gold-l);padding:0 8px;border-radius:6px}
+.tf-tb.big>span{font-size:19px;padding:13px 18px}
+.tf-bub{transform-box:fill-box;transform-origin:center}
+</style>
+<style>
+/* ===== paralelismo (prefijo ap-) ===== */
+:root{--s1:#5b6b7c;--s32:#b4510d;--s16:#2f63a8;--smap:#1f6b45}
+.s1 .cv-t{font-size:112px;top:226px}.s1 .cv-l li{font-size:21px}
+.ap-blk{box-sizing:border-box;text-align:center;font-size:18px;font-weight:700;line-height:1.25;padding:2px 6px;z-index:2}
+.ap-blk em{display:block;font-style:normal;font-weight:400;font-size:14px;color:var(--muted);margin-top:3px}
+.ap-gpu{position:absolute;box-sizing:border-box;border:2px dashed color-mix(in srgb,var(--c) 55%,transparent);border-radius:16px;background:color-mix(in srgb,var(--c) 5%,transparent)}
+.ap-gpu>span{position:absolute;left:14px;top:7px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.ln.img{color:var(--ink)}.ln.act{color:var(--smap)}.ln.grad{color:var(--s32)}
+.ln.grad>i{background:repeating-linear-gradient(90deg,currentColor 0 9px,transparent 9px 14px)}
+.ap-card{box-sizing:border-box;border-top:5px solid var(--c);overflow:hidden}.ap-card h3{margin:16px 24px 8px;font-size:22px;line-height:1.25}
+.ap-card>div{margin:0 24px;font-size:18px;line-height:1.45}.ap-card p{margin:0 0 16px}.ap-card code{font:600 15px var(--mono);color:var(--gold-d)}
+.ap-ans{font-size:20px;line-height:1.4;color:var(--smap);font-weight:700}
+.ap-ask{font-size:46px;line-height:1.2;font-weight:700;letter-spacing:-.01em}
+.ap-hl{position:absolute;display:flex;align-items:center;justify-content:flex-end;text-align:right;font-size:18px;white-space:nowrap}
+.ap-hv{position:absolute;display:flex;align-items:center;font-size:19px;white-space:nowrap;font-variant-numeric:tabular-nums}.ap-hv u{text-decoration:none;background:var(--paper);padding:1px 4px;border-radius:4px}.ap-hv span{color:var(--muted);font-size:15px;margin-left:6px}
+.ap-hid{position:absolute;font-size:24px;color:var(--muted);line-height:58px;transition:opacity .3s}
+.ap-sum{position:absolute;width:124px;height:62px;border-radius:12px;border:2px solid var(--c);background:color-mix(in srgb,var(--c) 11%,var(--card));display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:3}
+.ap-sum b{font-size:24px;line-height:1.1}.ap-sum span{font-size:13px;color:var(--muted)}
+.ap-coh{position:absolute;top:0;width:360px;text-align:center;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-d);font-weight:700}
+.ap-rank{position:absolute;left:0;width:90px;height:56px;display:flex;align-items:center;font-size:17px;font-weight:700}
+.ap-cell{position:absolute;width:360px;height:56px;box-sizing:border-box;border-radius:10px;border:1.5px solid var(--hair2);background:var(--card);display:flex;align-items:center;justify-content:center;font:600 21px var(--mono)}
+.ap-cell.hi{border-color:var(--s16);background:var(--blue-l)}.ap-cell.off{opacity:.35;border-style:dashed;background:transparent}
+.ap-arrow{position:absolute;left:530px;height:56px;display:flex;align-items:center;font-size:26px;color:var(--muted)}
+.ap-codesc{position:absolute;left:1010px;top:30px;width:418px}.ap-codesc h3{margin:0 0 10px;font-size:32px}.ap-codesc p{margin:0 0 14px;font-size:21px;line-height:1.4}.ap-codesc .mu{color:var(--muted);font-size:17px}
+.ap-ring{position:absolute;width:136px;height:62px;box-sizing:border-box;border-radius:10px;border:2px solid var(--hair2);display:flex;align-items:center;justify-content:center;font:600 18px var(--mono);transition:background-color .4s}
+.ap-ring.v1{background:var(--card)}.ap-ring.v2{background:#dde6f2}.ap-ring.v3{background:#b3c8e4}.ap-ring.v4{background:var(--smap);border-color:var(--smap);color:#fff}
+.ap-ring.hit{border-color:var(--gold);box-shadow:0 0 0 5px rgba(182,151,88,.45)}
+.ap-rtxt{position:absolute;left:0;top:342px;width:710px;font-size:20px;line-height:1.4;font-weight:700}
+.ap-level{position:absolute;left:0;width:1428px;height:82px;box-sizing:border-box;display:flex;align-items:center;gap:30px;padding:0 28px;border-radius:14px;border:1px solid var(--hair);border-left:8px solid var(--c);background:var(--card)}
+.ap-level b{width:340px;font-size:24px}.ap-level span{width:600px;font-size:20px;line-height:1.35}.ap-level em{font-style:normal;font-size:17px;color:var(--c);font-weight:700;margin-left:auto;text-align:right}
+.ap-bar{position:absolute;height:48px;box-sizing:border-box;border-radius:7px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px;font-weight:700}
+.ap-bar.wait{background:repeating-linear-gradient(45deg,#e8e4da 0 6px,#d9d4c8 6px 12px);color:var(--muted)}
+.ap-bar.mb{height:34px;font-size:15px}.ap-bar.m1{background:var(--s16)}.ap-bar.m2{background:var(--smap)}.ap-bar.m3{background:var(--s32)}.ap-bar.m4{background:var(--s1)}
+.ap-slot{position:absolute;width:58px;height:34px;box-sizing:border-box;border:1px dashed var(--hair2);border-radius:7px}
+.ap-def{position:absolute;width:448px;box-sizing:border-box;border-left:4px solid var(--gold);padding:2px 0 2px 14px}.ap-def b{display:block;font:600 16px var(--mono);color:var(--gold-d)}.ap-def span{display:block;font-size:17px;line-height:1.35;margin-top:3px}
+.r-chart text{font-size:16px}.ap-level em{white-space:nowrap}.ap-dv{font:600 12px var(--mono)!important;color:var(--ink)!important}
+.s20 .code{line-height:1.46;padding-top:16px;padding-bottom:16px}.ap-dmo{position:absolute;box-sizing:border-box;height:34px;border-radius:8px;background:var(--c);color:#fff;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;letter-spacing:.18em;text-transform:uppercase}
+.ap-round{position:absolute;width:170px;display:flex;align-items:center;font-size:20px;font-weight:700}
+.ap-why{position:absolute;box-sizing:border-box;display:flex;align-items:center;padding:0 0 0 16px;border-left:5px solid var(--c);font-size:18px;line-height:1.3}
+.ap-job{position:absolute;width:104px;height:34px;box-sizing:border-box;border-radius:7px;display:flex;align-items:center;justify-content:center;color:#fff;font:700 16px var(--mono)}
+.ap-job.idle{background:repeating-linear-gradient(45deg,#e8e4da 0 6px,#d9d4c8 6px 12px);color:var(--muted);font:600 13px var(--sans)}
+.ap-pillar{box-sizing:border-box;border-top:8px solid var(--c)}.ap-pillar h3{margin:16px 26px 4px;font-size:34px;color:var(--c)}.ap-pillar h4{margin:0 26px 14px;font-size:19px;font-weight:700}
+.ap-pillar p{margin:0 26px;font-size:19px;line-height:1.42}.ap-pillar p.saw{margin-top:16px;padding-top:12px;border-top:1px solid var(--hair);font-size:17px;color:var(--muted)}.ap-pillar p.saw b{color:var(--c)}
+.ap-plus{position:absolute;width:30px;text-align:center;font-size:34px;font-weight:700;color:var(--muted)}
+.ap-st{transition:opacity .45s}.ap-st.off{opacity:.16}
+.ap-refs h3{margin:0 0 10px;font-size:20px}.ap-refs p{margin:0 0 9px;font-size:17px}.ap-refs a{color:#2f63a8}
+</style>
+</head><body><main id="viewport" aria-label="Presentación interactiva"><div id="stage"></div></main><div id="hint">Clic o →: avanzar · ←: volver · R: repetir animación · C: entradas por clic · A: avance automático · G: índice · N: notas · F: pantalla completa</div><nav id="controls" aria-label="Controles de presentación"><button id="prev" aria-label="Anterior" title="Anterior (←)">←</button><span id="position" aria-live="polite"></span><button id="next" aria-label="Siguiente" title="Siguiente (→)">→</button><span class="sep"></span><select id="mode" aria-label="Cómo entran los elementos" title="Cómo entran los elementos (C)"><option value="auto:0.7">Entradas automáticas · rápidas</option><option value="auto:1" selected>Entradas automáticas · normales</option><option value="auto:1.5">Entradas automáticas · pausadas</option><option value="click">Entradas por clic</option></select><button id="replay" title="Repetir la animación (R)">↻ Repetir</button><span class="sep"></span><button id="play" title="Avance automático (A)">▶ Auto</button><select id="hold" aria-label="Pausa antes de avanzar"><option value="4000">pausa 4 s</option><option value="8000" selected>pausa 8 s</option><option value="15000">pausa 15 s</option><option value="30000">pausa 30 s</option></select><span class="sep"></span><button id="index" title="Índice (G)">Índice</button><button id="notes" title="Notas (N)">Notas</button><button id="full" title="Pantalla completa (F)">Pantalla completa</button><span id="event"></span></nav><dialog id="index-dialog"><div class="dialog-head"><h2>Contenido del curso</h2><button data-close="index-dialog">Cerrar ✕</button></div><div id="index-list"></div></dialog><dialog id="notes-dialog"><div class="dialog-head"><h2 id="notes-title">Notas</h2><button data-close="notes-dialog">Cerrar ✕</button></div><div id="notes-content"></div></dialog><div id="print-deck"></div><script>
+/* logos: official UP logo and the Ingenierías UP · Posgrados logo, from the professor's course material */
+const LOGO = {"up": "data:image/webp;base64,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", "ing": "data:image/webp;base64,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"};
+const LOGO_ALT = {"up": "Universidad Panamericana, logotipo oficial", "ing": "Ingenierías UP · Posgrados"};
+const LG = (k, h = 20, cls = '') => `<span class="lchip ${cls}"><img src="${LOGO[k]}" alt="${LOGO_ALT[k]}" style="height:${h}px"></span>`;
+const IC = (k, h = 22, alt = '') => `<img class="ic" src="${LOGO[k]}" alt="${alt}" style="height:${h}px">`;
+
+const IMG = {};
+/* ================= datos de las diapositivas (guía del profesor y fuentes) ================= */
+const SEC = ['¿Por qué GPUs?', 'Pensar en paralelo', 'Repartir el entrenamiento', 'El experimento', 'Mover menos datos', 'Decidir', 'Cierre del curso', 'Apéndice'];
+const PSRC = {
+  gpt2: 'https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf', gpt3: 'https://arxiv.org/abs/2005.14165',
+  llama2: 'https://arxiv.org/abs/2307.09288', kaplan: 'https://arxiv.org/abs/2001.08361',
+  amdahl: 'https://doi.org/10.1145/1465482.1465560',
+  nccl: 'https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/index.html',
+  g4090: 'https://www.nvidia.com/en-us/geforce/graphics-cards/40-series/rtx-4090/',
+  alexnet: 'https://proceedings.neurips.cc/paper_files/paper/2012/hash/c399862d3b9d6b76c8436e924a68c45b-Abstract.html',
+  zero: 'https://arxiv.org/abs/1910.02054', fsdp: 'https://arxiv.org/abs/2304.11277',
+  gpipe: 'https://arxiv.org/abs/1811.06965', megatron: 'https://arxiv.org/abs/1909.08053', hogwild: 'https://arxiv.org/abs/1106.5730',
+  ps: 'https://www.usenix.org/conference/osdi14/technical-sessions/presentation/li_mu', ddpp: 'https://arxiv.org/abs/2006.15704',
+  ddp: 'https://docs.pytorch.org/docs/stable/notes/ddp.html', hooks: 'https://docs.pytorch.org/docs/2.8/ddp_comm_hooks.html',
+  dist: 'https://docs.pytorch.org/docs/stable/distributed.html', torchrun: 'https://docs.pytorch.org/docs/stable/elastic/run.html',
+  ce: 'https://docs.pytorch.org/docs/2.8/generated/torch.nn.CrossEntropyLoss.html', sgd: 'https://docs.pytorch.org/docs/2.8/generated/torch.optim.SGD.html',
+  tv: 'https://docs.pytorch.org/vision/0.23/models/alexnet.html', imagenette: 'https://github.com/fastai/imagenette'
+};
+const BENCH = 'Fuente: benchmark del curso, «AlexNet on Imagenette · One GPU vs. Two», 26 de noviembre de 2026, 04:39 UTC (un host, 3 semillas, 20 épocas).';
+const META = [
+  {title: 'Entrenamiento en paralelo: AlexNet en dos GPUs', layout: 'cover', sec: SEC[0], min: 1,
+    points: ['Seis preguntas y un cierre de curso; la portada sirve de mapa.', 'Se asume que ya vieron CNN, clasificación supervisada, backpropagation, SGD y dropout.', 'Pregunta de fondo: ¿cómo mover menos datos entre las GPUs sin cambiar la arquitectura ni el objetivo de entrenamiento?']},
+  {title: 'Entrenar un LLM: adivinar la siguiente palabra.', sec: SEC[0], min: 4,
+    points: ['Parta de lo que ya saben de los LLM: durante el pre-entrenamiento el modelo adivina el siguiente token.', 'Recorra las seis cajas con una sola oración. Los porcentajes son inventados.', 'Dato para la discusión: sin entrenar, con 50,257 tokens posibles, cada uno recibe cerca de 0.002% y la pérdida ronda 10.8.', 'Token: palabra o pedazo de palabra.', 'El código es un esquema: es el mismo update para un LLM y para el AlexNet que usaremos. Cambian las entradas y el objetivo.', 'Pregunte: si cada paso son seis líneas, ¿por qué es tan caro? Porque se repite con miles de millones de tokens.', 'Al final revele las tres etiquetas y diga la idea del curso: todo es datos + modelo + optimización. Regresaremos a ella al cerrar.'], src: [PSRC.ce, PSRC.gpt3]},
+  {title: 'Lo medimos: un mini LLM en CPU y en GPU.', sec: SEC[0], min: 4,
+    points: ['Pida predecir cuántas veces más rápida será la GPU antes de revelar.', 'Medición del 26 de noviembre de 2026: laptop Apple M5 (10 núcleos de CPU, GPU integrada de 10 núcleos, 24 GB), PyTorch 2.15.0, en batería. Mediana de 3 corridas: 6,025 y 10,140 tokens/s.', 'La CPU usa sus 10 núcleos: es la línea base justa. Los tokens son aleatorios, así que solo se mide velocidad.', 'Una GPU integrada en una laptop está lejos de una GPU de centro de datos. Pida que corran mini_llm.py en su equipo y comparen.']},
+  {title: 'Ahora un LLM de verdad: ¿cuántos años?', sec: SEC[0], min: 4,
+    points: ['Antes de revelar cada fila, pida una estimación: ¿días, años o siglos?', 'La columna de la laptop escala la medición anterior: un modelo con N veces más parámetros procesa N veces menos tokens por segundo.', 'Las columnas de GPU usan el pico teórico de una RTX 4090 (82.6 billones de operaciones por segundo) y unas 6 operaciones por parámetro y por token. Son cotas optimistas: sin comunicación, sin límites de memoria.', 'Tokens: GPT-3, 300 mil millones; Llama 2 7B, 2 billones; para GPT-2 se supone 10 mil millones.', 'Además, el modelo de 7B ni siquiera cabe en una tarjeta: se ve dos diapositivas más adelante.'], src: [PSRC.gpt2, PSRC.llama2, PSRC.gpt3, PSRC.kaplan, PSRC.g4090]},
+  {title: '¿Por qué una GPU? Muchas cuentas independientes.', sec: SEC[0], min: 4,
+    points: ['Cada casilla del resultado de una multiplicación de matrices se puede calcular sin esperar a las demás.', 'La animación es un esquema: 96 cuentas, 8 a la vez contra todas a la vez. Una CPU real también usa instrucciones vectoriales.', 'Una CPU tiene pocos núcleos muy capaces; una GPU, miles de unidades sencillas y una memoria mucho más ancha.', 'Cifras de catálogo para comparar órdenes de magnitud. La CPU de escritorio es una referencia genérica de 8 núcleos, no la laptop medida.'], src: [PSRC.g4090]},
+  {title: 'Y además tiene que caber en la memoria.', sec: SEC[0], min: 3,
+    points: ['Entrenar no guarda solo los pesos: también un gradiente por peso y el estado del optimizador (AdamW guarda dos valores por peso).', 'En FP32: 4 + 4 + 8 = 16 bytes por parámetro. Para 7,000 millones: 112 GB, sin contar activaciones.', 'Precisión mixta y optimizadores fragmentados reducen la cifra por tarjeta.', 'Pregunta puente: si no cabe en una, ¿cómo se reparte?'], src: [PSRC.zero, PSRC.g4090]},
+  {title: 'Sumar ocho números: ¿qué puede ir a la vez?', sec: SEC[1], min: 4,
+    points: ['Antes de revelar cada ronda pregunte: ¿qué cuentas puedo hacer ya, sin esperar a nadie?', 'Una dependencia es una cuenta que necesita el resultado de otra.', 'Ronda 1: cuatro sumas independientes. Ronda 2: cada una espera dos resultados. Ronda 3: la última espera a las dos anteriores.', 'Son 7 sumas, pero solo 3 rondas obligatorias.']},
+  {title: 'Más manos ayudan, hasta que toca esperar.', sec: SEC[1], min: 4,
+    points: ['Mismas sumas y mismos colores que la diapositiva anterior. Cada columna es un turno.', 'Pida predecir cuántos turnos toman 2 personas y después 4.', 'Con 1 persona: 7 turnos. Con 2: 4. Con 4: 3. Con 8 siguen siendo 3.', 'Con 4 personas se va 2.33 veces más rápido, no 4: varias casillas son espera.', 'Conexión: en el entrenamiento backward necesita el forward y el update necesita los gradientes de todas las GPUs.', 'Actividad: sumen 8 tarjetas con 1, 2 y 4 personas y cronometren.']},
+  {title: 'Speedup y eficiencia: se miden con cronómetro.', sec: SEC[1], min: 3,
+    points: ['Pida a la clase hacer la división antes de revelar: 0.273 entre 0.164.', 'Speedup: cuántas veces más rápido. Eficiencia: qué parte del ideal se aprovechó.', 'Los segundos son medianas por época; el reporte da 1.67× porque compara semilla por semilla.', 'Un speedup menor que 1 es posible: agregar hardware puede empeorar el tiempo.', 'La línea base importa: el mejor programa de una GPU, con el mismo problema.', BENCH]},
+  {title: 'La parte que no se divide manda.', sec: SEC[1], min: 4,
+    points: ['Empiece con 10 segundos fijos y pida predecir el tiempo con 2, 8 y 64 GPUs antes de mostrarlo.', 'Cambie con los botones: con 10 s fijos nunca se pasa de 10×; con 50 s, nunca de 2×.', 'Ejemplos de trabajo que no se divide: arranque, carga de datos en un solo proceso, guardar checkpoints, evaluación sin repartir.', 'Se conoce como ley de Amdahl. No incluye comunicación: en la práctica el resultado suele ser peor.', 'Los 100 segundos son un ejemplo, no una medición.'], src: [PSRC.amdahl]},
+  {title: 'Comunicar y esperar también cuestan.', sec: SEC[1], min: 4,
+    points: ['Revele las cuatro barras una por una y pregunte si la siguiente será más corta o más larga.', 'La última barra es más larga que la de una GPU: ese caso aparece en el experimento.', 'Vocabulario: aquí el problema total no cambia (escalado fuerte).', 'Las unidades de las barras son inventadas.', 'La tabla usa velocidades nominales de catálogo; los tiempos son tamaño entre velocidad. No se midieron en el host del experimento.', 'Si parte de la comunicación ocurre mientras la GPU calcula, el costo visible es menor.'], src: [PSRC.g4090]},
+  {title: 'Colectivos: cómo conversan varias GPUs.', sec: SEC[1], min: 5,
+    points: ['Rank: el proceso asignado a una GPU, numerado desde 0.', 'Colectivo: una operación en la que participan todos los ranks del grupo.', 'All-reduce: una reducción cuyo resultado queda disponible en todos los ranks. All-gather: cada rank termina con las piezas de todos.', 'En GPUs NVIDIA, PyTorch delega estos colectivos a NCCL.', 'Si un rank no llama al colectivo, los demás se quedan esperando.'], src: [PSRC.nccl, PSRC.dist]},
+  {title: 'Paralelismo de datos: réplicas y lotes repartidos.', sec: SEC[2], kicker: '13 · se reparten los datos', min: 3,
+    points: ['Cada GPU tiene una copia completa del modelo y procesa una parte distinta del lote.', 'Después del backward se sincronizan los gradientes; así las réplicas aplican el mismo update y siguen siendo iguales.', 'Se repiten parámetros y estado del optimizador en cada GPU: no resuelve un modelo que no cabe.', 'DDP es síncrono: todos esperan al más lento antes de actualizar.', 'Use los botones o → para recorrer un update: repartir, forward, backward, all-reduce y update.'], src: [PSRC.ddp]},
+  {title: 'Por qué promediar gradientes funciona.', sec: SEC[2], kicker: '14 · datos + optimización', min: 4,
+    points: ['Escriba 2, 4, 6 y 8 en el pizarrón y pida el promedio. Después repártalos entre dos estudiantes.', 'Con grupos del mismo tamaño, el promedio de los dos promedios es el correcto.', 'Con grupos de 3 y 1, el promedio simple falla.', 'La igualdad vale para las mismas operaciones y máscaras. BatchNorm calcula estadísticas por réplica; AlexNet no usa BatchNorm. Dropout y el orden de las sumas en punto flotante pueden cambiar la trayectoria.'], src: [PSRC.ddp]},
+  {title: 'Si el modelo no cabe, se parte.', sec: SEC[2], kicker: '15 · se reparte el modelo', min: 5,
+    points: ['Tres formas de repartir un solo modelo. En cada una pregunte: ¿qué cruza entre tarjetas?', 'Modelo y pipeline: capas repartidas; los microlotes mantienen ocupadas las etapas.', 'Tensorial: una misma multiplicación dividida; pide comunicación dentro de cada capa.', 'ZeRO y FSDP: paralelismo de datos con parámetros, gradientes o estado fragmentados.', 'Los entrenamientos grandes de LLM combinan varias.'], src: [PSRC.gpipe, PSRC.megatron, PSRC.zero, PSRC.fsdp]},
+  {title: 'DDP en PyTorch: el esqueleto.', sec: SEC[2], min: 4,
+    points: ['torchrun lanza un proceso por GPU y define variables como LOCAL_RANK.', 'DDP copia los parámetros del rank 0 al construirse y promedia gradientes durante backward.', 'DistributedSampler entrega a cada rank una parte distinta; set_epoch cambia el barajado entre épocas.', 'Solo el rank 0 guarda el checkpoint.', 'Es un ejemplo genérico de enseñanza; no es el train.py del laboratorio, que usa un caché residente en GPU.', 'Errores clásicos: un colectivo que solo llama un rank cuelga el programa; olvidar set_epoch repite el orden; reportar métricas de un solo rank; guardar desde todos los ranks.'], src: [PSRC.dist, PSRC.torchrun, PSRC.ddp]},
+  {title: 'El experimento: el mismo lote, en una o dos GPUs.', sec: SEC[3], min: 3,
+    points: ['Pasamos del LLM a un modelo pequeño para poder medir todas las variantes en clase.', 'En 2012 AlexNet se repartió por capas entre dos GTX 580 de 3 GB porque no cabía. Hoy cabe: repartimos los datos.', 'AlexNet estilo Torchvision, adaptado a 10 clases e imágenes de 160 px.', 'Imagenette: 9,469 ejemplos de entrenamiento, 9,216 usados por época (18 updates) y 3,925 de validación.', 'Cada semilla empareja inicialización (dentro de cada arquitectura), orden, flips, SGD (LR 0.01, momentum 0.9, weight decay 0.0005, decaimiento coseno) y calendario.', 'El bucle medido usa un caché residente en GPU: no mide decodificación JPEG ni copias host→GPU.', BENCH], src: [PSRC.alexnet, PSRC.imagenette, PSRC.tv]},
+  {title: '¿Dos GPUs entrenan el doble de rápido?', sec: SEC[3], min: 4,
+    points: ['Voto a mano alzada: ¿más rápido, igual o más lento? Después revele la segunda barra (→ o los botones).', 'Reducir el lote local puede ahorrar cómputo; la forma del tensor de gradientes no cambia.', 'El host no tenía acceso CUDA directo entre GPUs (peer access).', 'El reporte no incluye un perfil CUDA/NCCL ni mide cuánto de la regresión se debe a sincronización, topología o poco solapamiento.', BENCH]},
+  {title: '¿Por qué? Casi todo está en la cabeza.', sec: SEC[3], min: 4,
+    points: ['Cabeza: 54,575,114 parámetros. Convoluciones: 2,469,696. Total: 57,044,810.', 'Cuatro bytes por parámetro dan 228.2 MB por réplica: tamaño lógico de lo que entra a la reducción, no tráfico físico medido.', 'Con la mitad de las imágenes por GPU, el tensor de gradientes tiene la misma forma.', 'Los 18 y 41 ms se calculan como 512 entre imágenes por segundo.', 'El host no tenía acceso CUDA directo entre GPUs. El reporte no mide cuánto se debe a sincronización, topología o poco solapamiento.', BENCH], src: [PSRC.tv, PSRC.ddp]},
+  {title: 'Dos primeras ideas: menos bytes o menos parámetros.', sec: SEC[4], kicker: '20 · optimización o modelo', min: 5,
+    points: ['Antes de revelar las barras, pregunte cuál de las dos ideas pasará de 1.00×.', 'Todas las corridas ya calculan con autocast BF16; pesos, estado de SGD y cross-entropy quedan en FP32. Aquí cambia solo lo que se comunica.', 'PyTorch ofrece default_hooks.bf16_compress_hook en register_comm_hook; el redondeo adicional es posible.', 'La compacta usa pool 2 × 2 y capas de 1024 y 512. Cada arquitectura se compara contra su propia GPU: compacta 33,750 imágenes/s; estándar 28,046.', 'La compacta cambia cómputo y capacidad: no cumple el objetivo de conservar AlexNet estándar.', BENCH], src: [PSRC.hooks]},
+  {title: 'La tercera idea: compartir mapas y repetir la cabeza.', sec: SEC[4], kicker: '21 · datos y modelo', min: 4,
+    points: ['El intercambio ocurre antes del pooling adaptativo: cada imagen deja 256 mapas de 4 × 4 en BF16 (8 KiB); 256 imágenes son 2 MiB.', 'Ambas cabezas ven los mismos ejemplos y etiquetas, en el mismo orden, con máscaras de dropout idénticas.', 'El modelo tiene los mismos parámetros que el estándar de 1 GPU.', 'Se cambia cómputo duplicado por menos comunicación. Los gradientes de conv se siguen reduciendo: 2 MiB describe el bloque local de features, no todo el tráfico del update.']},
+  {title: 'Backward: tres detalles sostienen el promedio.', sec: SEC[4], kicker: '22 · optimización', min: 5,
+    points: ['Cada rank obtiene desde su cabeza la señal de error de todas las features y toma solo su tramo.', 'La tabla es un ejemplo didáctico: 0.3 y 0.5 no vienen del experimento. Revele fila por fila y pida predecir.', 'El 2 compensa el promedio posterior de DDP. Con p GPUs el factor es p.', 'Cada cabeza obtiene su propio gradiente de lote completo, sin all-reduce de la cabeza.', 'El código es pseudocódigo conceptual; la implementación real está en train.py.'], src: [PSRC.ddp]},
+  {title: 'El mismo AlexNet estándar llega a 1.42×.', sec: SEC[5], min: 5,
+    points: ['Con mapas compartidos, el estándar pasa de 28,046 a 39,734 imágenes/s con los mismos 57,044,810 parámetros.', 'Parte del ideal con 2 GPUs: mapas 71%, DDP BF16 35%, DDP FP32 menos de 25%.', 'De punta a punta (lanzamiento, carga, épocas, validaciones y cierre): 11.77 a 10.10 s, 1.17×. Excluye la preparación única de datos.', 'Compacta BF16: 1.67× entrenando y 1.24× total.', 'Barras de tiempo: entrenar es la suma de las medianas por época; el resto es el total menos eso. Es aproximado porque combina medianas.', 'Vuelva a la parte que no se divide: en trabajos cortos pesa más.', 'La prueba compara configuraciones completas y no aísla el costo de cada operación.', BENCH], src: [PSRC.amdahl]},
+  {title: '¿Qué aprendió cada variante?', sec: SEC[5], min: 4,
+    points: ['Cada punto es la mediana de tres semillas en esa época. Los dos paneles comparten el eje.', 'La cercanía de los valores finales no establece equivalencia estadística ni trayectorias idénticas.', 'La compacta obtiene más exactitud en esta receta y calendario; no se buscó la mejor curva posible del estándar.', 'Para elegir por calidad, compare el tiempo para llegar a una meta de validación.', BENCH]},
+  {title: 'Tu turno: mídelo en Runpod.', sec: SEC[5], min: 8,
+    points: ['Proyecto remoto en el pod: /workspace/alexnet-demo (editor Zed).', 'Antes de clase: preparar el caché, verificar las GPUs y confirmar los argumentos de cada variante en el README.', 'mide.py cronometra all-reduce para cuatro tamaños. La fila de 2.1 MB es referencia de tamaño: los mapas se mueven con all-gather.', 'mini_llm.py da los tokens por segundo en la RTX 4090 para comparar con la laptop. Ni mide.py ni mini_llm.py se han ejecutado en el pod al preparar este material.', 'Si el benchmark tarda o falla la red, use el reporte de referencia y la tabla guardada.', BENCH], src: [PSRC.torchrun, PSRC.dist]},
+  {title: 'Ejercicio: un LLM en dos GPUs.', sec: SEC[5], min: 5,
+    points: ['Dé dos minutos en parejas antes de revelar.', '7,000 millones de parámetros × 16 bytes = 112 GB (FP32 y AdamW, sin activaciones).', 'DDP repite todo en cada tarjeta. Fragmentar en dos deja 56 GB por tarjeta: tampoco cabe. Se necesitan al menos 5 tarjetas para el estado, o cambiar precisión y optimizador.', 'Acepte propuestas de reducir precisión o entrenar menos parámetros, y pida medir.'], src: [PSRC.zero, PSRC.fsdp]},
+  {title: 'Todo el curso en tres palabras.', sec: SEC[6], min: 4,
+    points: ['La idea que une el curso: todo en machine learning y deep learning es datos + modelo + optimización.', 'Recorra la tabla de arriba abajo y pida a un estudiante por fila que dé un ejemplo propio.', 'Antes de revelar la fila de hoy, pregunte qué se reparte en cada columna.']},
+  {title: 'Paralelizar es repartir esas tres cosas.', sec: SEC[6], min: 6,
+    points: ['Cierre del curso. Lea cada columna como una pregunta: qué parto, qué cruza y qué medí.', 'Datos: DDP reparte el lote; hoy salió 0.45× con FP32, así que repartir no basta.', 'Modelo: los mapas compartidos llegaron a 1.42×; la cabeza compacta a 1.67×, pero es otro modelo. Un LLM de 7,000 millones pide al menos 5 tarjetas solo para entrenar.', 'Optimización: all-reduce mantiene iguales las réplicas; BF16 pasó de 0.45× a 0.70×; ZeRO y FSDP fragmentan el estado del optimizador.', 'En los casos reales las tres se mezclan: los mapas compartidos reparten datos y cambian qué parte del modelo se repite.', 'Ticket de salida: una frase por columna sobre su proyecto final y cómo medirían si la decisión funcionó (línea base, tiempo total y calidad).', 'Proyecto final: entrega el jueves 3 de diciembre de 2026.', BENCH]},
+  {title: 'A1 · Resultados completos.', sec: SEC[7], min: 0,
+    points: ['Permite consultar la época 1 y el tiempo total.', 'Cada columna es una mediana sobre tres corridas. Los speedups son medianas de cocientes por semilla, así que pueden diferir en la última cifra de dividir dos medianas.', BENCH]},
+  {title: 'A2 · Cómo se midió y dónde leer más.', sec: SEC[7], min: 0,
+    points: ['El reporte documenta train.py --cudnn-autotune para una prueba aparte; el benchmark usa las heurísticas por defecto de cuDNN.', 'Los argumentos de cada modo individual están en el README del proyecto.', BENCH], src: Object.values(PSRC)}
+];
+
+'use strict';
+/* ================= helpers: everything on the slides is built from plain HTML elements ================= */
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const px = v => (+v).toFixed(1) + 'px';
+/* entrance attributes: beat, effect, extra delay (ms), extra attributes */
+const F = (b, fx = 'up', d = 0, x = '') => ` data-b="${b}" data-fx="${fx}"${d ? ` data-d="${Math.round(d)}"` : ''}${x ? ' ' + x : ''}`;
+const fxa = o => (o.b != null ? F(o.b, o.fx, o.d || 0) : (o.fx ? ` data-fx="${o.fx}"` : '')) + (o.i0 ? ' data-i="0"' : '') + (o.k ? ` data-k="${o.k}"` : '');
+/* a straight line (a rotated div) from (x1,y1) to (x2,y2) */
+function L(x1, y1, x2, y2, o = {}) {
+  const dx = x2 - x1, dy = y2 - y1, len = Math.hypot(dx, dy), ang = Math.atan2(dy, dx) * 180 / Math.PI, w = o.w || 2;
+  return `<div class="ln ${o.cls || ''}"${fxa({...o, fx: o.fx || (o.b != null ? 'draw' : null)})} style="left:${px(x1)};top:${px(y1 - w / 2)};width:${px(len)};height:${w}px;transform:rotate(${ang.toFixed(2)}deg)${o.style ? ';' + o.style : ''}"><i></i>${o.arrow ? '<b class="ah"></b>' : ''}</div>`;
+}
+/* a line between the borders of two circles */
+function LC(x1, y1, r1, x2, y2, r2, o = {}) {
+  const dx = x2 - x1, dy = y2 - y1, d = Math.hypot(dx, dy), ux = dx / d, uy = dy / d, e = r2 + (o.arrow ? 9 : 0);
+  return L(x1 + ux * r1, y1 + uy * r1, x2 - ux * e, y2 - uy * e, o);
+}
+/* a polyline whose segments draw one after another */
+function PL(pts, o = {}) {
+  let s = ''; const st = o.step || 14;
+  for (let k = 1; k < pts.length; k++) {
+    const [a, b] = [pts[k - 1], pts[k]], dx = b[0] - a[0], dy = b[1] - a[1], m = Math.hypot(dx, dy) || 1, e = 1.2 / m;
+    s += L(a[0] - dx * e, a[1] - dy * e, b[0] + dx * e, b[1] + dy * e, {...o, cls: (o.cls || '') + ' seg', d: (o.d || 0) + (k - 1) * st, i0: true});
+  }
+  return s;
+}
+/* a round node centred on (x,y) */
+function N(x, y, r, html, o = {}) {
+  return `<div class="nd ${o.cls || ''}"${fxa({...o, fx: o.fx || (o.b != null ? 'pop' : null)})} style="left:${px(x - r)};top:${px(y - r)};width:${2 * r}px;height:${2 * r}px${o.style ? ';' + o.style : ''}">${html}</div>`;
+}
+/* a label anchored at (x,y): al = l | c | r (horizontal), v = t | c | b (vertical) */
+function T(x, y, html, o = {}) {
+  const jc = {l: 'flex-start', c: 'center', r: 'flex-end'}[o.al || 'c'], ai = {t: 'flex-start', c: 'center', b: 'flex-end'}[o.v || 'c'];
+  return `<div class="lbl ${o.cls || ''}"${fxa({...o, fx: o.fx || (o.b != null ? 'fade' : null)})} style="left:${px(x)};top:${px(y)};width:0;height:0;display:flex;align-items:${ai};justify-content:${jc}"><span style="${o.inner || ''}">${html}</span></div>`;
+}
+/* a positioned box */
+const BX = (x, y, w, h, html, o = {}) => `<div class="abs ${o.cls || ''}"${fxa(o)} style="left:${px(x)};top:${px(y)};width:${w}px;${h ? `height:${h}px;` : ''}${o.style || ''}">${html}</div>`;
+/* math bits */
+const sb = (b, s) => `${b}<sub>${s}</sub>`;
+const ss = (b, sup, s) => `${b}<span class="ss"><span>${sup}</span><span>${s}</span></span>`;
+/* point list: one point per beat (or all in one beat) */
+function PTS(list, b0 = 1, o = {}) {
+  return `<div class="pts ${o.cls || ''}">${list.map((t, k) => `<div class="pt ${o.pc || ''}"${F(o.same ? b0 : b0 + (o.beats ? o.beats[k] - b0 : k), o.fx || 'up', o.d || 0)}>${t}</div>`).join('')}</div>`;
+}
+/* deterministic pseudo-random numbers */
+function rng(seed) { return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+/* ================= Recurrent networks · slide building blocks ================= */
+const DEF = [];
+const P = o => DEF.push(o);
+const fmtN = v => Math.round(v).toLocaleString('en-US');
+const pct = (v, d = 0) => (v * 100).toFixed(d) + '%';
+const f2 = v => (+v).toFixed(2), f3 = v => (+v).toFixed(3);
+/* small building blocks */
+const PIC = (key, x, y, w, h, o = {}) => `<div class="r-pic${o.cls ? ' ' + o.cls : ''}"${o.k ? ` data-k="${o.k}"` : ''} style="left:${x}px;top:${y}px;width:${w}px;height:${h}px${o.style ? ';' + o.style : ''}"${o.b != null ? F(o.b, o.fx || 'zoom', o.d || 0, o.i0 === false ? '' : 'data-i="0"') : ''}><img src="${IMG[key]}" alt="${o.alt || ''}">${o.inner || ''}</div>`;
+const LAB = (x, y, t, sub, o = {}) => `<div class="r-lab${o.cls ? ' ' + o.cls : ''}" style="left:${x}px;top:${y}px${o.style ? ';' + o.style : ''}"${o.b != null ? F(o.b, o.fx || 'fade', o.d || 0, 'data-i="0"') : ''}><b>${t}</b>${sub ? `<code>${sub}</code>` : ''}</div>`;
+const AR = (x1, y1, x2, y2, o = {}) => L(x1, y1, x2, y2, {arrow: true, w: o.w || 2.5, cls: o.cls || 'gold', b: o.b, d: o.d, i0: true});
+const BOX = (x, y, w, h, html, o = {}) => `<div class="${o.cls || 'r-card'}"${o.k ? ` data-k="${o.k}"` : ''} style="left:${x}px;top:${y}px;width:${w}px${h ? `;height:${h}px` : ''}${o.style ? ';' + o.style : ''}"${o.b != null ? F(o.b, o.fx || 'up', o.d || 0, o.i0 === false ? '' : 'data-i="0"') : ''}>${html}</div>`;
+const NOTE = (x, y, w, html, o = {}) => `<div class="r-note" style="left:${x}px;top:${y}px;width:${w}px${o.style ? ';' + o.style : ''}"${o.b != null ? F(o.b, o.fx || 'fade', o.d || 0, 'data-i="0"') : ''}>${html}</div>`;
+const CALL = (x, y, w, icon, html, o = {}) => `<div class="r-call${o.cls ? ' ' + o.cls : ''}" style="left:${x}px;top:${y}px;width:${w}px${o.style ? ';' + o.style : ''}"${o.b != null ? F(o.b, o.fx || 'up', o.d || 0, 'data-i="0"') : ''}>${ICON[icon] || ''}<span>${html}</span></div>`;
+const ICON = {
+  bulb: '<svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.8.8 1.3 1.7 1.4 2.5h5.2c.1-.8.6-1.7 1.4-2.5A6 6 0 0 0 12 3z"/></svg>',
+  warn: '<svg viewBox="0 0 24 24"><path d="M12 3 2 20h20z"/><path d="M12 10v5M12 17.6v.4"/></svg>',
+  db: '<svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg>',
+  wave: '<svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M6 15l3-6 3 8 3-10 3 6"/></svg>',
+  clock: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+  net: '<svg viewBox="0 0 24 24"><circle cx="4" cy="6" r="2"/><circle cx="4" cy="18" r="2"/><circle cx="12" cy="4" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="20" r="2"/><circle cx="20" cy="12" r="2"/><path d="M6 6l4-2M6 6l4 6M6 18l4-6M6 18l4 2M14 4l4 7M14 12h4M14 20l4-7"/></svg>',
+  scatter: '<svg viewBox="0 0 24 24"><path d="M3 18c3-1 3-10 6-10s3 9 6 9 3-7 6-8"/><circle cx="5" cy="10" r="1.2"/><circle cx="9" cy="16" r="1.2"/><circle cx="15" cy="6" r="1.2"/><circle cx="20" cy="17" r="1.2"/></svg>',
+  gauge: '<svg viewBox="0 0 24 24"><path d="M4 17a8 8 0 1 1 16 0"/><path d="M12 17l4-6"/><path d="M7 17h10"/></svg>',
+  target: '<svg viewBox="0 0 24 24"><circle cx="11" cy="13" r="8"/><circle cx="11" cy="13" r="4"/><path d="M11 13l8-8M16 4h4v4"/></svg>',
+  check: '<svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>',
+  search: '<svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg>',
+  rocket: '<svg viewBox="0 0 24 24"><path d="M5 19c1-3 2-4 4-5M14 4c3 0 6 3 6 6l-7 7-6-6z"/><circle cx="15" cy="9" r="1.6"/><path d="M7 11l-3 1 2 2M13 17l-1 3-2-2"/></svg>',
+  code: '<svg viewBox="0 0 24 24"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg>',
+  layers: '<svg viewBox="0 0 24 24"><path d="M12 3 2 8l10 5 10-5z"/><path d="M2 13l10 5 10-5M2 17.5l10 5 10-5"/></svg>',
+  eye: '<svg viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>',
+  lock: '<svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>',
+  quote: '<svg viewBox="0 0 24 24"><path d="M5 18c3-1 4-4 4-7H5V6h5v5c0 4-1 7-5 8zM14 18c3-1 4-4 4-7h-4V6h5v5c0 4-1 7-5 8z"/></svg>'
+};
+/* a presenter-driven state machine: → / ← step through states, chips jump to one; at the ends the deck moves on */
+function STEP(A, o) {
+  const chips = o.chips || [], n = o.n; let k = -1;
+  const set = (j, how) => {
+    j = Math.max(0, Math.min(n - 1, j)); if (j === k) return;
+    const pk = k; k = j; o.set(k, pk, how);
+    chips.forEach((c, i) => { c.classList.toggle('on', i === k); c.setAttribute('aria-pressed', String(i === k)); });
+  };
+  const ctl = {next() { if (k < n - 1) { set(k + 1, 'step'); return true; } return false; }, prev() { if (k > 0) { set(k - 1, 'back'); return true; } return false; }, stop() {}};
+  A.ctl(ctl);
+  chips.forEach((c, i) => c.addEventListener('click', ev => { ev.stopPropagation(); stopAdv(); set(i, 'jump'); if (ev.detail > 0) c.blur(); }));
+  set(A.final() ? (o.fin != null ? o.fin : n - 1) : 0, A.final() ? 'final' : 'first');
+  return ctl;
+}
+const CHIPB = (label, icon, k = 'chip') => `<button type="button" class="x-chip" data-k="${k}" aria-pressed="false">${icon ? ICON[icon] : ''}<span>${label}</span></button>`;
+/* line chart as inline svg; returns {html, X, Y} so callers can place markers */
+function CHART(o) {
+  const X = v => (v - o.x0) / (o.x1 - o.x0) * o.w, Y = v => o.h - (v - o.y0) / (o.y1 - o.y0) * o.h;
+  let s = `<svg class="r-chart" style="left:${o.left || 0}px;top:${o.top || 0}px" width="${o.w}" height="${o.h}" viewBox="0 0 ${o.w} ${o.h}"${o.b != null ? F(o.b, 'fade', o.d || 0, 'data-i="0"') : ''}>`;
+  (o.yt || []).forEach(v => { s += `<path class="gr" d="M0 ${Y(v).toFixed(1)}H${o.w}"/><text x="-8" y="${(Y(v) + 4).toFixed(1)}" text-anchor="end">${o.fy ? o.fy(v) : v}</text>`; });
+  (o.xt || []).forEach(v => { s += `<text x="${X(v).toFixed(1)}" y="${o.h + 18}" text-anchor="middle">${o.fx ? o.fx(v) : v}</text>`; });
+  s += `<path class="ax" d="M0 0V${o.h}H${o.w}"/>`;
+  if (o.xl) s += `<text x="${o.w / 2}" y="${o.h + 38}" text-anchor="middle" style="fill:var(--ink)">${o.xl}</text>`;
+  if (o.yl) s += `<text x="${-o.h / 2}" y="-44" transform="rotate(-90)" text-anchor="middle" style="fill:var(--ink)">${o.yl}</text>`;
+  s += '</svg>';
+  (o.series || []).forEach(sr => {
+    const pts = sr.pts.map(([x, y]) => [X(x), Y(Math.max(o.y0, Math.min(o.y1, y)))]);
+    let len = 0; for (let k = 1; k < pts.length; k++) len += Math.hypot(pts[k][0] - pts[k - 1][0], pts[k][1] - pts[k - 1][1]);
+    const d = pts.map((p, k) => (k ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join('');
+    s += `<svg class="r-chart" style="left:${o.left || 0}px;top:${o.top || 0}px;pointer-events:none" width="${o.w}" height="${o.h}" viewBox="0 0 ${o.w} ${o.h}"><path class="r-ln ${sr.cls || ''}"${sr.k ? ` data-k="${sr.k}"` : ''} style="--len:${Math.ceil(len + 2)}${sr.style ? ';' + sr.style : ''}" d="${d}"${sr.b != null ? F(sr.b, 'arc', sr.d || 0, 'data-i="0"') : ''}/></svg>`;
+  });
+  return {html: s, X: v => (o.left || 0) + X(v), Y: v => (o.top || 0) + Y(v)};
+}
+const KEY = (x, y, items, o = {}) => `<div class="r-key" style="left:${x}px;top:${y}px"${o.b != null ? F(o.b, 'fade', o.d || 0, 'data-i="0"') : ''}>${items.map(([c, t]) => `<span><i style="background:${c}"></i>${t}</span>`).join('')}</div>`;
+
+
+
+/* ================= Transformers · building blocks (tf- prefix) ================= */
+const FX = (b, fx = 'up', d = 0) => F(b, fx, d, 'data-i="0"');
+const AT = (b, fx, d) => (b != null ? FX(b, fx, d || 0) : '');
+const TT = (x, y, t, o = {}) => `<div class="tf-tt" style="left:${x}px;top:${y}px${o.style ? ';' + o.style : ''}"${o.k ? ` data-k="${o.k}"` : ''}${AT(o.b, o.fx || 'fade', o.d)}>${t}</div>`;
+const BT = (x, y, w, html, o = {}) => `<div class="tf-bt" style="left:${x}px;top:${y}px;width:${w}px${o.style ? ';' + o.style : ''}"${o.k ? ` data-k="${o.k}"` : ''}${AT(o.b, o.fx || 'up', o.d)}>${html}</div>`;
+const ILL = (x, y, t = 'mock values · illustrative', o = {}) => `<span class="tf-ill" style="left:${x}px;top:${y}px"${AT(o.b, 'fade', o.d)}>${t}</span>`;
+const BOS = '&lt;s&gt;', EOS = '&lt;/s&gt;';
+const mi = (v, s) => `<i class="m">${v}</i>${s != null ? `<sub>${s}</sub>` : ''}`;
+/* tokens */
+const TK = (t, cls = '', o = {}) => `<span class="tf-tk ${cls}"${o.k ? ` data-k="${o.k}"` : ''}${o.style ? ` style="${o.style}"` : ''}${AT(o.b, o.fx || 'up', o.d)}>${t}</span>`;
+const TOKS = (x, y, list, o = {}) => `<div class="tf-toks" style="left:${x}px;top:${y}px${o.style ? ';' + o.style : ''}"${o.k ? ` data-k="${o.k}"` : ''}>${list.map((t, j) => { const [tx, c] = Array.isArray(t) ? t : [t, '']; return TK(tx, `${o.cls || ''} ${c}`, {b: o.b, fx: o.fx, d: (o.d || 0) + j * (o.st ?? 70), k: o.tk}); }).join('')}</div>`;
+/* a token chip at a fixed slot (left edge x, width w) */
+const TKA = (x, y, w, t, cls = '', o = {}) => TK(t, 'abs ' + cls, {...o, style: `left:${x}px;top:${y}px;width:${w}px;text-align:center${o.style ? ';' + o.style : ''}`});
+/* vectors: mock numbers in [-1, 1] drawn as a strip of coloured cells */
+const MV = (seed, n = 12) => { const r = rng(seed); return Array.from({length: n}, () => 2 * r() - 1); };
+const vcol = (v, pos = 'var(--gold)', neg = 'var(--blue)') => (v >= 0 ? `color-mix(in srgb,${pos} ${Math.round(10 + v * 80)}%,#fff)` : `color-mix(in srgb,${neg} ${Math.round(10 - v * 80)}%,#fff)`);
+const VEC = (vals, o = {}) => `<span class="tf-vec${o.cls ? ' ' + o.cls : ''}"${o.k ? ` data-k="${o.k}"` : ''}${o.style ? ` style="${o.style}"` : ''}>${vals.map(v => `<i style="background:${vcol(v, o.pos, o.neg)}"></i>`).join('')}</span>`;
+/* bars */
+const barsInner = (items, o = {}) => { const w = o.w || 260, mx = o.max || Math.max(...items.map(i => i[1])); return items.map(([l, v], j) => `<div class="tf-bar${j === 0 && o.top ? ' top' : ''}"><span>${l}</span><i style="width:${(v / mx * w).toFixed(1)}px"></i><b>${(+v).toFixed(o.dec ?? 2)}</b></div>`).join(''); };
+const BARS = (x, y, items, o = {}) => `<div class="tf-bars" style="left:${x}px;top:${y}px;--lw:${o.lw || 110}px${o.c ? ';--c:' + o.c : ''}"${o.k ? ` data-k="${o.k}"` : ''}${AT(o.b, o.fx || 'fade', o.d)}>${barsInner(items, o)}</div>`;
+/* matrices: v = number | string | null (blocked by the mask) | 'e' (empty) | {c: colour} (filled, no number) */
+function cellStyle(v, o) {
+  if (v && typeof v === 'object') return {cls: '', bg: `color-mix(in srgb,${v.c} 62%,var(--card))`, col: '', txt: v.t || ''};
+  if (v === null) return {cls: ' x', bg: '', col: '', txt: ''};
+  if (v === 'e' || v === undefined) return {cls: ' e', bg: '', col: '', txt: ''};
+  if (typeof v === 'string') return {cls: '', bg: '', col: '', txt: v};
+  const a = o.heat ? Math.max(0, Math.min(1, Math.abs(v) / (o.max || 1))) : 0;
+  return {cls: '', bg: o.heat ? `color-mix(in srgb,${o.c || 'var(--att)'} ${Math.round(5 + a * 62)}%,var(--card))` : '', col: o.heat && a > .72 ? '#fff' : '', txt: o.nonum ? '' : (+v).toFixed(o.dec ?? 2)};
+}
+const cellStr = (v, o) => { const s = cellStyle(v, o); return `<span class="c${s.cls}${o.tiny ? ' tiny' : ''}" style="${s.bg ? 'background:' + s.bg + ';' : ''}${s.col ? 'color:' + s.col : ''}">${s.txt}</span>`; };
+function paintMat(el, vals, o = {}, cur = -1) {
+  const cs = el.querySelectorAll('.c'); let k = 0;
+  vals.forEach((row, r) => row.forEach(v => { const e = cs[k++], s = cellStyle(v, o); e.className = 'c' + s.cls + (o.tiny ? ' tiny' : '') + (r === cur ? ' cur' : ''); e.style.background = s.bg; e.style.color = s.col; e.textContent = s.txt; }));
+}
+function MAT(x, y, vals, o = {}) {
+  const C = vals[0].length, cw = o.cw || 58, ch = o.ch || 38, lw = o.lw || 90;
+  const cols = (o.rl ? `${lw}px ` : '') + `repeat(${C},${cw}px)`, rows = (o.cl ? '26px ' : '') + `repeat(${vals.length},${ch}px)`;
+  let s = '';
+  if (o.cl) { if (o.rl) s += '<span></span>'; o.cl.forEach(t => { s += `<span class="h">${t}</span>`; }); }
+  vals.forEach((row, r) => { if (o.rl) s += `<span class="h r">${o.rl[r]}</span>`; row.forEach(v => { s += cellStr(v, o); }); });
+  return `<div class="tf-mat" style="left:${x}px;top:${y}px;grid-template-columns:${cols};grid-template-rows:${rows}${o.style ? ';' + o.style : ''}"${o.k ? ` data-k="${o.k}"` : ''}${AT(o.b, o.fx || 'fade', o.d)}>${s}</div>`;
+}
+const grid = (R, C, f) => Array.from({length: R}, (_, r) => Array.from({length: C}, (_, c) => f(r, c)));
+const FULL = (n, c) => grid(n, n, () => ({c}));
+const CAUSAL = (n, c) => grid(n, n, (r, q) => (q <= r ? {c} : null));
+const softmax = a => { const m = Math.max(...a), e = a.map(v => Math.exp(v - m)), s = e.reduce((p, q) => p + q, 0); return e.map(v => v / s); };
+const f1 = v => (+v).toFixed(1);
+const CHIPS = (x, y, labels, o = {}) => `<div class="x-chips" style="position:absolute;left:${x}px;top:${y}px${o.style ? ';' + o.style : ''}">${labels.map(l => CHIPB(l, o.icon || null)).join('')}</div>`;
+const CARD = (x, y, w, h, icon, head, txt, meta, o = {}) => BOX(x, y, w, h, `<div class="tf-cardh">${icon ? ICON[icon] : ''}<b>${head}</b>${o.mark || ''}</div><div class="tf-cardt">${txt}</div>${meta ? `<div class="tf-cardm">${meta}</div>` : ''}`, o);
+
+/* ================= paralelismo · piezas propias (prefijo ap-) ================= */
+const C1 = 'var(--s1)', C32 = 'var(--s32)', C16 = 'var(--s16)', CM = 'var(--smap)';
+/* bloque de diagrama */
+const B = (x, y, w, h, html, c = C1, o = {}) => `<div class="tf-blk ap-blk" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px;--c:${c}${o.style ? ';' + o.style : ''}"${o.k ? ` data-k="${o.k}"` : ''}${AT(o.b, o.fx || 'up', o.d)}><div>${html}</div></div>`;
+/* marco que agrupa (una GPU) */
+const GPU = (x, y, w, h, label, o = {}) => `<div class="ap-gpu" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px;--c:${o.c || C1}"${AT(o.b, 'fade', o.d)}><span>${label}</span></div>`;
+/* tarjeta con título */
+const KARD = (x, y, w, h, head, body, o = {}) => `<div class="r-card ap-card" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px;--c:${o.c || 'var(--gold)'}${o.style ? ';' + o.style : ''}"${AT(o.b, o.fx || 'up', o.d)}><h3>${head}</h3><div>${body}</div></div>`;
+/* tabla */
+function TBL(x, y, w, cols, head, rows, o = {}) {
+  const st = o.fs ? `font-size:${o.fs}px;padding:${o.pad || '9px 16px'}` : '';
+  let t = head.map(h => `<span class="h" style="${o.hs || ''}">${h}</span>`).join('');
+  rows.forEach((r, i) => r.forEach((c, j) => { t += `<span class="${j ? '' : 'l'}" style="${st}${o.mark && o.mark[i] ? `;${j ? '' : `box-shadow:inset 5px 0 0 ${o.mark[i]}`}` : ''}"${o.b != null ? FX(o.beats ? o.beats[i] : o.b, 'fade', (o.beats ? 0 : i * 90)) : ''}>${c}</span>`; }));
+  return `<div class="tf-tb" style="left:${x}px;top:${y}px;width:${w}px;grid-template-columns:${cols}">${t}</div>`;
+}
+/* código con resaltado sencillo */
+function CODE(x, y, w, lines, o = {}) {
+  const hl = l => { const i = l.indexOf('#'), code = i < 0 ? l : l.slice(0, i), com = i < 0 ? '' : l.slice(i);
+    return esc(code).replace(/\b(for|if|with|import|from|in|as)\b/g, '<span class="k">$1</span>') + (com ? `<span class="c">${esc(com)}</span>` : ''); };
+  return `<div class="code abs" style="left:${x}px;top:${y}px;width:${w}px;font-size:${o.fs || 18}px"${AT(o.b ?? 1, 'up', o.d)}>${lines.map((l, i) => `<span class="ln-c${o.lit && o.lit.includes(i) ? ' lit' : ''}">${hl(l)}</span>`).join('')}</div>`;
+}
+const SRCN = (y = 514, b = 1) => NOTE(0, y, 1000, 'Benchmark del curso · Runpod · RTX 4090 · 3 semillas', {b, d: 600});
+const ILLU = (x, y, t = 'ejemplo ilustrativo · no medido', o = {}) => ILL(x, y, t, o);
+const BIG = (x, y, w, big, small, o = {}) => `<div class="r-big abs" style="left:${x}px;top:${y}px;width:${w}px;font-size:${o.fs || 54}px;color:${o.c || 'var(--gold-d)'}"${AT(o.b, 'up', o.d)}>${big}<small style="font-size:${o.sfs || 17}px">${small}</small></div>`;
+/* barras horizontales desde cero */
+function HB(x, y, items, o) {
+  const lw = o.lw || 300, w = o.w || 800, rh = o.rh || 70, bh = o.bh || 36; let s = '';
+  if (o.ref) { const rx = x + lw + o.ref / o.max * w; s += `<div class="abs" style="left:${rx.toFixed(1)}px;top:${y - 8}px;height:${(items.length - 1) * rh + bh + 16}px;border-left:2px dashed var(--ink);opacity:.6"${AT(o.b ?? 1, 'fade', 300)}></div><div class="tf-al" style="left:${rx.toFixed(1)}px;top:${y - 18}px"${AT(o.b ?? 1, 'fade', 300)}>${o.refl}</div>`; }
+  items.forEach((it, i) => {
+    const yy = y + i * rh, b = it.b ?? o.b ?? 1, len = it.v / o.max * w;
+    s += `<div class="ap-hl" style="left:${x}px;top:${yy}px;width:${lw - 16}px;height:${bh}px"${AT(b, 'fade', i * 90)}>${it.l}</div>`;
+    s += `<div class="abs" data-fx="growx" data-b="${b}" data-i="0" data-d="${200 + i * 90}" style="left:${x + lw}px;top:${yy}px;width:${len.toFixed(1)}px;height:${bh}px;background:${it.c};border-radius:0 6px 6px 0"></div>`;
+    s += `<div class="ap-hv" style="left:${(x + lw + len + 12).toFixed(1)}px;top:${yy}px;height:${bh}px"${AT(b, 'fade', 500 + i * 90)}><u>${it.t}</u></div>`;
+  });
+  s += `<div class="abs" style="left:${x + lw - 1}px;top:${y - 8}px;height:${(items.length - 1) * rh + bh + 16}px;border-left:2px solid var(--ink)"${AT(o.b ?? 1, 'fade')}></div>`;
+  return s;
+}
+const LEG = (x, y, b = 1) => `<div class="r-key" style="left:${x}px;top:${y}px;font-size:16px"${AT(b, 'fade')}><span><i style="background:var(--ink)"></i>imágenes</span><span><i style="background:var(--smap);height:6px"></i>activaciones</span><span><i style="background:repeating-linear-gradient(90deg,var(--s32) 0 5px,transparent 5px 8px)"></i>gradientes</span></div>`;
+const IA = (x1, y1, x2, y2, o = {}) => AR(x1, y1, x2, y2, {...o, cls: 'img', w: 2.5});
+const AA = (x1, y1, x2, y2, o = {}) => AR(x1, y1, x2, y2, {...o, cls: 'act', w: 5});
+const GA = (x1, y1, x2, y2, o = {}) => AR(x1, y1, x2, y2, {...o, cls: 'grad', w: 4});
+
+/* ================= 01–04 · punto de partida ================= */
+/* ================= 05–12 · principios ================= */
+const AMD_F = [5, 10, 25, 50], AMD_P = [1, 2, 4, 8, 64];
+function amdInner(F) {
+  let s = '';
+  AMD_P.forEach((p, i) => { const part = (100 - F) / p, total = F + part, y = i * 64, k = 6.4;
+    s += `<div class="ap-hl" style="left:0;top:${y}px;width:104px;height:42px">${p} GPU${p > 1 ? 's' : ''}</div>`;
+    s += `<div class="abs" style="left:120px;top:${y}px;width:${(F * k).toFixed(1)}px;height:42px;background:var(--s1);transition:width .5s"></div>`;
+    s += `<div class="abs" style="left:${(120 + F * k).toFixed(1)}px;top:${y}px;width:${(part * k).toFixed(1)}px;height:42px;background:var(--s16);border-radius:0 6px 6px 0;transition:left .5s,width .5s"></div>`;
+    s += `<div class="ap-hv" style="left:${(134 + total * k).toFixed(1)}px;top:${y}px;height:42px"><b>${total.toFixed(1)} s</b><span>${(100 / total).toFixed(1)}× más rápido</span></div>`; });
+  return s;
+}
+const amdCard = F => `Ni con miles de GPUs se baja de <b>${F} segundos</b>: lo máximo posible es <b>${100 / F}× más rápido</b>.`;
+const CO = [
+  ['Broadcast', 'Un rank copia su dato a todos.', ['A', '—', '—', '—'], ['A', 'A', 'A', 'A'], 'Ejemplo: DDP copia los pesos iniciales del rank 0.'],
+  ['Reduce', 'Combina (p. ej. suma) y deja el resultado en un solo rank.', ['a', 'b', 'c', 'd'], ['a+b+c+d', '—', '—', '—'], 'Ejemplo: reunir una métrica en el rank 0.'],
+  ['All-reduce', 'Combina y deja el resultado en todos los ranks.', ['a', 'b', 'c', 'd'], ['a+b+c+d', 'a+b+c+d', 'a+b+c+d', 'a+b+c+d'], 'Ejemplo: sumar gradientes y dividir entre p.'],
+  ['All-gather', 'Cada rank recibe las piezas de todos, en orden de rank.', ['a', 'b', 'c', 'd'], ['a b c d', 'a b c d', 'a b c d', 'a b c d'], 'Ejemplo: juntar los mapas de características.'],
+  ['Reduce-scatter', 'Combina y entrega a cada rank solo un trozo del resultado.', ['a₀ a₁ a₂ a₃', 'b₀ b₁ b₂ b₃', 'c₀ c₁ c₂ c₃', 'd₀ d₁ d₂ d₃'], ['Σ₀', 'Σ₁', 'Σ₂', 'Σ₃'], 'Ejemplo: primera mitad de un all-reduce en anillo.']];
+function coInner(k) {
+  const [n, d, a, z, ex] = CO[k]; let s = '<div class="ap-coh" style="left:130px">antes</div><div class="ap-coh" style="left:610px">después</div>';
+  for (let r = 0; r < 4; r++) { const y = 34 + r * 70;
+    s += `<div class="ap-rank" style="top:${y}px">rank ${r}</div><div class="ap-cell${a[r] === '—' ? ' off' : ''}" style="left:130px;top:${y}px">${a[r]}</div><div class="ap-arrow" style="top:${y}px">→</div><div class="ap-cell hi${z[r] === '—' ? ' off' : ''}" style="left:610px;top:${y}px">${z[r]}</div>`; }
+  s += `<div class="ap-codesc"><h3>${n}</h3><p>${d}</p><p class="mu">${ex}</p></div>`;
+  return s;
+}
+/* estado exacto del anillo con p = 4: m[rank][trozo] = cuántas contribuciones contiene */
+/* ================= 13–22 · paralelismo al entrenar ================= */
+/* ================= 23–29 · el experimento ================= */
+/* ================= 30–34 · mover menos ================= */
+/* ================= 35–42 · resultados y decisión ================= */
+/* segundos de entrenamiento por época: mediana de las tres semillas (estándar: 1 GPU, DDP FP32, DDP BF16, mapas) */
+/* medianas por época de las tres semillas */
+const CURVE = [[11.3,11.2,13.8,18.2],[16.3,16.7,23.7,24.2],[16.9,16.5,27.4,30.4],[15.8,17.1,36.2,36.4],[19.0,16.9,36.2,36.4],[19.1,18.4,42.3,41.6],[19.7,19.5,47.4,47.7],[20.2,21.6,49.7,49.0],[22.7,23.0,52.8,52.1],[23.0,22.8,52.9,52.6],[24.0,23.9,57.2,53.8],[24.0,25.5,59.1,58.1],[25.5,26.1,60.3,59.2],[25.9,26.0,60.9,60.4],[26.0,26.8,60.9,60.6],[26.3,26.9,62.2,62.0],[24.6,24.1,63.1,63.0],[26.2,26.2,62.9,62.5],[26.4,26.2,63.5,63.5],[26.0,26.2,63.4,63.5]];
+const curve = j => CURVE.map((r, i) => [i + 1, r[j]]);
+/* ================= apéndice ================= */
+/* imágenes/s de cada corrida (épocas 2–20), semillas 42, 43 y 44 */
+
+P({free: true, body: () => {
+  let art = '<svg class="tf-cover-art" viewBox="0 0 900 96" width="900" height="96">';
+  [0, 1].forEach(r => { const y = 22 + r * 50; art += `<path class="tf-cv-a" d="M24 ${y}H700" style="animation-delay:${1.6 + r * .2}s"/>`; for (let k = 0; k < 9; k++) art += `<rect x="${14 + k * 84}" y="${y - 11}" width="46" height="22" rx="5" class="tf-cv-n" style="animation-delay:${(1.3 + k * .09 + r * .05).toFixed(2)}s"/>`; });
+  art += '<path class="tf-cv-a" d="M710 22C790 22,790 72,710 72" style="animation-delay:2.4s"/></svg>';
+  return `
+  <div class="cv-k"${F(0, 'left', 150)}>Deep Learning · Clase 7</div>
+  <h1 class="cv-t"${F(0, 'letters', 250)}>Entrenamiento<br>en paralelo</h1>
+  <div class="cv-r"${F(1, 'growx')}></div>
+  <div class="cv-s"${F(1, 'up', 250)}>De entrenar un LLM a AlexNet en dos GPUs</div>
+  <div class="cv-p"${F(1, 'up', 420)}>Antes de empezar: CNN · clasificación · backpropagation · SGD · Transformers</div>
+  <div class="cv-n"${F(2, 'up')}>Dr. León Felipe Palafox Novack</div>
+  <div class="cv-m"${F(2, 'up')}>lfpalafox@up.edu.mx</div>
+  <div${FX(2, 'fade', 300)}>${art}</div>
+  <ol class="cv-l">${['¿Por qué necesitamos GPUs?', '¿Cuánto se gana en paralelo?', '¿Cómo se reparte un entrenamiento?', '¿Qué pasa con dos GPUs?', '¿Cómo mover menos datos?', '¿Qué conviene elegir?', 'Cierre del curso'].map((t, k) => `<li${F(3, 'right')}><span>${String(k + 1).padStart(2, '0')}</span>${t}</li>`).join('')}</ol>`;
+}});
+
+P({body: () => {
+  let s = '';
+  [['Datos', C16], ['Modelo', CM], ['Optimización', C32]].forEach(([t, c], k) => { s += `<div class="ap-dmo" style="left:${k * 484}px;top:0;width:448px;--c:${c}"${FX(6, 'down', k * 250)}>${t}</div>`; });
+  [['Texto', '«mi té sabe …»', C16], ['Tokens', 'palabras → números', C16], ['Modelo', 'el LLM', CM], ['Predicción', '¿qué sigue?', CM], ['Comparar', 'con la palabra real', C32], ['Ajustar', 'los pesos', C32]].forEach(([a, c, col], k) => {
+    s += B(k * 242, 48, 206, 82, `<span style="font-size:22px">${a}</span><em>${c}</em>`, col, {b: 1, d: k * 160});
+    if (k < 5) s += IA(k * 242 + 210, 89, k * 242 + 238, 89, {b: 1, d: k * 160 + 100}); });
+  s += TT(0, 152, 'Mi té sabe …  (la palabra real era «agrio»)', {b: 2});
+  s += HB(0, 190, [{l: 'con poco entrenamiento', v: 10, c: C32, t: '«agrio»: <b>10%</b> · pérdida 2.30'}, {l: 'ya entrenado', v: 80, c: CM, t: '«agrio»: <b>80%</b> · pérdida 0.22', b: 3}], {b: 2, max: 100, w: 280, lw: 230, rh: 62, bh: 40});
+  s += ILL(0, 318, 'porcentajes inventados', {b: 2});
+  s += CODE(750, 156, 678, ['optimizer.zero_grad(set_to_none=True)', 'with torch.autocast("cuda", dtype=torch.bfloat16):', '    logits = model(entrada)           # tokens o imágenes', '    loss = loss_fn(logits, objetivo)  # lo que debía salir', 'loss.backward()                       # derivadas', 'optimizer.step()                      # cambia pesos'], {fs: 18, b: 4});
+  s += CALL(0, 384, 1428, 'bulb', 'Son <b>las mismas seis líneas</b> que para clasificar imágenes. Lo caro es repetirlas con <b>miles de millones de tokens</b>.', {b: 5});
+  return s;
+}});
+
+P({body: () => {
+  let s = TT(0, 0, 'Tokens de entrenamiento por segundo · en una laptop', {b: 1});
+  s += HB(0, 44, [{l: 'CPU · 10 núcleos', v: 6025, c: C1, t: '<b>6,025</b> tokens/s'}, {l: 'GPU integrada', v: 10140, c: C16, t: '<b>10,140</b> tokens/s', b: 2}], {b: 1, max: 11000, w: 640, lw: 220, rh: 90, bh: 60});
+  s += BIG(1100, 40, 328, '1.7×', 'más rápida la GPU, con el mismo código en la misma máquina', {b: 3, fs: 96, c: 'var(--s16)'});
+  s += KARD(0, 250, 690, 190, 'Qué se midió', 'Un mini LLM de <b>30 millones de parámetros</b>. Cada paso lee 16 secuencias de 256 tokens (aleatorios: solo se mide velocidad), calcula el error y ajusta los pesos. Mediana de 3 corridas.', {b: 4});
+  s += KARD(738, 250, 690, 190, 'Hazlo en tu equipo', 'Descarga <code>mini_llm.py</code> de la página de la clase y corre:<br><code style="font-size:19px">python mini_llm.py</code><br>Anota tus tokens por segundo.', {b: 5, c: CM});
+  s += NOTE(0, 470, 1428, 'Laptop Apple M5, GPU integrada, PyTorch 2.15.0, 26 de noviembre de 2026. Una GPU de centro de datos es mucho más rápida que esta.', {b: 1});
+  return s;
+}});
+
+P({body: () => {
+  let s = TBL(0, 0, 1428, '300px 230px 1fr 1fr 1fr', ['modelo', 'tokens para entrenar', 'esta laptop, solo CPU', '1 RTX 4090, ideal', '1,000 RTX 4090, ideal'], [
+    ['GPT-2 chico · 124 M', '10 mil millones*', '<b>≈ 80 días</b>', '≈ 1 día', '≈ 90 segundos'],
+    ['Llama 2 · 7,000 M', '2 billones', '<b>≈ 2,500 años</b>', '≈ 32 años', '≈ 12 días'],
+    ['GPT-3 · 175,000 M', '300 mil millones', '<b>≈ 9,000 años</b>', '≈ 120 años', '≈ 44 días']], {b: 1, fs: 25, pad: '21px 18px', beats: [1, 2, 3]});
+  s += NOTE(0, 308, 1428, '* Supuesto de esta clase. Laptop: escalada desde 6,025 tokens/s con 30 M de parámetros. RTX 4090: pico teórico, sin comunicación ni límites de memoria; en la práctica tarda bastante más.', {b: 1, style: 'font-size:17px'});
+  s += CALL(0, 394, 1428, 'clock', 'La CPU no alcanza y <b>una sola GPU tampoco</b>. Hacen falta muchas trabajando <b>a la vez</b>.', {b: 4});
+  return s;
+}});
+
+P({body: () => {
+  const grid96 = (x0, b, group) => { let h = ''; for (let i = 0; i < 96; i++) { const c = i % 12, r = Math.floor(i / 12);
+      h += `<div class="abs" style="left:${x0 + c * 30}px;top:${34 + r * 30}px;width:26px;height:26px;border-radius:5px;border:1px solid var(--hair2);box-sizing:border-box"${FX(1, 'fade')}></div><div class="abs" style="left:${x0 + c * 30}px;top:${34 + r * 30}px;width:26px;height:26px;border-radius:5px;background:${group ? C1 : C16}"${FX(b, 'pop', group ? Math.floor(i / group) * 260 : 0)}></div>`; } return h; };
+  let s = TT(0, 0, 'CPU · 8 cuentas a la vez', {b: 1}) + grid96(0, 2, 8) + BIG(0, 290, 356, '12 turnos', '', {b: 2, fs: 34, c: 'var(--s1)'});
+  s += TT(440, 0, 'GPU · todas a la vez', {b: 1}) + grid96(440, 3, 0) + BIG(440, 290, 356, '1 turno', '', {b: 3, fs: 34, c: 'var(--s16)'});
+  s += TBL(860, 20, 568, '1fr 150px 150px', ['de catálogo', 'CPU de escritorio', 'RTX 4090'], [
+    ['Núcleos', '8', '<b>16,384</b>'], ['Operaciones por segundo (pico)', '≈ 1 billón', '<b>≈ 83 billones</b>'], ['Datos desde su memoria', '≈ 90 GB/s', '<b>≈ 1,000 GB/s</b>']], {b: 4, fs: 19, pad: '17px 16px'});
+  s += NOTE(860, 280, 568, '1 billón = un millón de millones. Los núcleos de CPU y GPU no son equivalentes: los de la CPU son mucho más capaces.', {b: 4, d: 300});
+  s += CALL(0, 384, 1428, 'bulb', 'Entrenar una red es, casi todo, <b>multiplicar matrices</b>: justo el trabajo que se puede repartir en miles de cuentas.', {b: 5});
+  return s;
+}});
+
+P({body: () => {
+  let s = TT(0, 0, 'Lo que ocupa entrenar un modelo de 7,000 millones de parámetros', {b: 1});
+  [['pesos · 28 GB', 0, 28, C16], ['gradientes · 28 GB', 28, 28, C32], ['optimizador AdamW · 56 GB', 56, 56, CM]].forEach(([t, a, w, c], k) => {
+    s += `<div class="ap-bar" style="left:${a * 10}px;top:32px;width:${w * 10 - 3}px;height:72px;background:${c};font-size:20px"${AT(1, 'growx', k * 350)}>${t}</div>`; });
+  s += BIG(1160, 34, 268, '112 GB', 'en total', {b: 2, fs: 52, c: 'var(--ink)'});
+  s += TT(0, 136, 'Tarjetas RTX 4090 de 24 GB, a la misma escala', {b: 3});
+  for (let k = 0; k < 5; k++) s += GPU(k * 240, 164, 234, 74, `24 GB · tarjeta ${k + 1}`, {b: 3, d: k * 150});
+  for (let k = 0; k < 5; k++) { const gb = Math.min(24, 112 - 24 * k); s += `<div class="ap-bar" style="left:${k * 240 + 6}px;top:194px;width:${gb * 9.25}px;height:36px;background:var(--gold);font-size:15px"${AT(3, 'growx', 800 + k * 350)}>${gb} GB${gb < 24 ? '' : ' · llena'}</div>`; }
+  s += TBL(0, 270, 880, '1fr 220px 260px', ['modelo', 'memoria para entrenar', 'tarjetas de 24 GB'], [
+    ['GPT-2 chico · 124 M', '2 GB', 'cabe en 1'], ['7,000 M', '112 GB', '<b>al menos 5</b>'], ['GPT-3 · 175,000 M', '2,800 GB', '<b>al menos 117</b>']], {b: 4, fs: 19, pad: '10px 16px'});
+  s += CALL(930, 280, 498, 'layers', 'Muchas GPUs por <b>dos razones</b>: terminar antes y que el entrenamiento <b>quepa</b>.', {b: 5});
+  s += NOTE(930, 390, 498, 'FP32 y AdamW, sin contar activaciones. 16 bytes por parámetro.', {b: 4});
+  return s;
+}});
+
+P({body: () => {
+  let s = '';
+  const row = (y, h, label, b) => `<div class="ap-round" style="left:0;top:${y}px;height:${h}px"${FX(b, 'fade')}>${label}</div>`;
+  s += row(8, 56, 'Los datos', 1);
+  for (let k = 0; k < 8; k++) s += B(190 + k * 96, 8, 76, 56, `<span style="font-size:24px">${k + 1}</span>`, C1, {b: 1, d: k * 60});
+  s += row(126, 66, 'Ronda 1', 2);
+  [['1 + 2', 3], ['3 + 4', 7], ['5 + 6', 11], ['7 + 8', 15]].forEach(([op, v], i) => { const cx = 276 + i * 192;
+    s += IA(228 + i * 192, 68, cx - 26, 122, {b: 2, d: i * 90}) + IA(324 + i * 192, 68, cx + 26, 122, {b: 2, d: i * 90});
+    s += B(cx - 76, 126, 152, 66, `<span style="font-size:24px">${op} = ${v}</span>`, C16, {b: 2, d: 200 + i * 90}); });
+  s += row(260, 66, 'Ronda 2', 3);
+  [['3 + 7', 10], ['11 + 15', 26]].forEach(([op, v], i) => { const cx = 372 + i * 384;
+    s += IA(276 + i * 384, 196, cx - 40, 256, {b: 3}) + IA(468 + i * 384, 196, cx + 40, 256, {b: 3});
+    s += B(cx - 86, 260, 172, 66, `<span style="font-size:24px">${op} = ${v}</span>`, C32, {b: 3, d: 200 + i * 90}); });
+  s += row(394, 66, 'Ronda 3', 4);
+  s += IA(372, 330, 520, 390, {b: 4}) + IA(756, 330, 608, 390, {b: 4});
+  s += B(464, 394, 200, 66, '<span style="font-size:26px">10 + 26 = 36</span>', CM, {b: 4, d: 200});
+  [[126, C16, '<b>4 sumas</b> que no necesitan nada entre sí: pueden hacerse <b>a la vez</b>.', 2], [260, C32, '<b>2 sumas</b>. Tienen que <b>esperar</b> los resultados de la ronda 1.', 3], [394, CM, '<b>1 suma</b>. Espera a las dos anteriores: <b>nadie puede adelantarla</b>.', 4]].forEach(([y, c, txt, b]) => {
+    s += `<div class="ap-why" style="left:1010px;top:${y}px;width:418px;height:66px;--c:${c}"${FX(b, 'left', 300)}><span>${txt}</span></div>`; });
+  s += `<div class="ap-why" style="left:1010px;top:8px;width:418px;height:56px;--c:var(--gold)"${FX(1, 'left', 300)}><span><b>Dependencia:</b> una cuenta necesita el resultado de otra.</span></div>`;
+  s += CALL(0, 478, 1428, 'bulb', 'Son <b>7 sumas</b>, pero como mínimo <b>3 rondas</b>: dentro de una ronda se trabaja en paralelo; entre rondas se espera.', {b: 5});
+  return s;
+}});
+
+P({body: () => {
+  let s = '';
+  const col = {1: C16, 2: C32, 3: CM}, X = t => 190 + t * 112;
+  for (let k = 0; k < 7; k++) s += `<div class="ap-coh" style="left:${X(k)}px;top:0;width:104px"${FX(1, 'fade')}>turno ${k + 1}</div>`;
+  const block = (y, n, rows, turns, result, b) => { let h = `<div class="ap-round" style="left:0;top:${y}px;height:${n * 38 - 4}px"${FX(b, 'fade')}>${n} persona${n > 1 ? 's' : ''}</div>`;
+    rows.forEach((r, i) => { for (let k = 0; k < turns; k++) { const c = r[k];
+      h += c ? `<div class="ap-job" style="left:${X(k)}px;top:${y + i * 38}px;background:${col[c[1]]}"${FX(b, 'pop', k * 140)}>${c[0]}</div>` : `<div class="ap-job idle" style="left:${X(k)}px;top:${y + i * 38}px"${FX(b, 'fade', k * 140)}>espera</div>`; } });
+    h += `<div class="ap-why" style="left:${X(7) + 14}px;top:${y}px;width:${1428 - X(7) - 14}px;height:${Math.min(n * 38 - 4, 72)}px;--c:var(--gold)"${FX(b, 'left', 900)}><span>${result}</span></div>`; return h; };
+  const a = ['1+2', 1], c = ['3+4', 1], d = ['5+6', 1], e = ['7+8', 1], f = ['3+7', 2], g = ['11+15', 2], z = ['10+26', 3];
+  s += block(30, 1, [[a, c, d, e, f, g, z]], 7, '<b>7 turnos</b>', 1);
+  s += block(92, 2, [[a, d, f, z], [c, e, g]], 4, '<span><b>4 turnos</b><br>1.75× más rápido</span>', 2);
+  s += block(196, 4, [[a, f, z], [c, g], [d], [e]], 3, '<span><b>3 turnos</b><br>2.33× más rápido, no 4×</span>', 3);
+  s += CALL(0, 372, 1428, 'clock', '¿Y con <b>8 personas</b>? Siguen siendo <b>3 turnos</b>: nunca hay más de 4 sumas disponibles a la vez.', {b: 4});
+  s += CALL(0, 450, 1428, 'bulb', 'Al entrenar pasa igual: backward <b>espera</b> al forward, y el update <b>espera</b> los gradientes de todas las GPUs.', {b: 5});
+  return s;
+}});
+
+P({body: () => {
+  let s = TT(0, 0, 'Medido · segundos por época de entrenamiento', {b: 1});
+  s += HB(0, 40, [{l: '1 GPU', v: 0.273, c: C1, t: '<b>0.273 s</b>'}, {l: '2 GPUs, lo ideal', v: 0.137, c: '#aab4c0', t: '0.137 s · la mitad'}, {l: '2 GPUs, lo medido', v: 0.164, c: C16, t: '<b>0.164 s</b>', b: 2}], {b: 1, max: 0.3, w: 600, lw: 220, rh: 70, bh: 44});
+  s += BIG(980, 0, 448, '0.273 ÷ 0.164 = 1.66×', '<b>Speedup</b>: ¿cuántas veces más rápido?', {b: 3, fs: 40, c: 'var(--s16)'});
+  s += BIG(980, 110, 448, '1.66 de 2 = 83%', '<b>Eficiencia</b>: ¿cuánto del ideal aprovechamos?', {b: 4, fs: 40, c: 'var(--smap)'});
+  s += KARD(0, 278, 690, 110, 'Menos de 1×', '<b>Agregar hardware empeoró el tiempo.</b> Sí puede pasar.', {b: 5, c: C32});
+  s += KARD(738, 278, 690, 110, 'La línea base importa', 'El mismo problema, en la mejor versión de <b>una GPU</b>.', {b: 6, c: CM});
+  s += NOTE(0, 414, 1428, 'AlexNet con cabeza compacta (la presentamos más adelante), BF16. Tiempos: mediana de tres corridas, épocas 2–20. El reporte da 1.67× porque compara semilla por semilla antes de tomar la mediana.', {b: 2});
+  s += SRCN(514, 1);
+  return s;
+}});
+
+P({body: () => {
+  let s = TT(0, 0, 'Un trabajo de 100 segundos en una GPU', {b: 1}) + ILLU(380, -6, 'trabajo ilustrativo', {b: 1});
+  s += `<div data-k="amd" style="position:absolute;left:0;top:40px;width:960px;height:310px"${FX(2, 'fade')}>${amdInner(10)}</div>`;
+  s += `<div class="r-key" style="left:120px;top:370px;font-size:17px"${FX(2, 'fade')}><span><i style="background:var(--s1);height:10px"></i>no se puede dividir</span><span><i style="background:var(--s16);height:10px"></i>se reparte entre las GPUs</span></div>`;
+  s += TT(0, 414, '¿Cuántos segundos no se pueden dividir?', {b: 3}) + CHIPS(0, 440, AMD_F.map(v => `${v} s`));
+  s += KARD(1040, 0, 388, 180, 'El techo', `<span data-k="amdc">${amdCard(10)}</span>`, {b: 4, c: C32});
+  s += KARD(1040, 198, 388, 170, 'En un entrenamiento', 'Arrancar el programa, cargar datos en un solo proceso, guardar el modelo.', {b: 5});
+  s += CALL(1040, 388, 388, 'warn', 'Se llama <b>ley de Amdahl</b>. No cuenta la comunicación: la realidad suele ser peor.', {b: 6});
+  return s;
+}, run: {3: A => { const el = A.k('amd'), card = A.k('amdc'); STEP(A, {n: 4, chips: A.ks('chip'), fin: 1, set: k => { el.innerHTML = amdInner(AMD_F[k]); card.innerHTML = amdCard(AMD_F[k]); }}); }}});
+
+P({body: () => {
+  let s = TT(0, 0, 'Un mismo paso, en cuatro situaciones', {b: 1}) + ILLU(1130, -6, 'unidades de tiempo inventadas', {b: 1});
+  const seg = {c: [C16, 'calcular'], m: [C32, 'comunicar'], e: ['', 'esperar']};
+  [['1 GPU', [['c', 100]], 1], ['2 GPUs, lo ideal', [['c', 50]], 2], ['2 GPUs, poco que mandar', [['c', 50], ['m', 15], ['e', 6]], 3], ['2 GPUs, mucho que mandar', [['c', 50], ['m', 70], ['e', 6]], 4]].forEach(([l, parts, b], i) => {
+    const y = 34 + i * 56; let x = 270, tot = 0;
+    s += `<div class="ap-hl" style="left:0;top:${y}px;width:254px;height:42px"${FX(b, 'fade')}>${l}</div>`;
+    parts.forEach(([k, v], j) => { const w = v * 7; s += `<div class="ap-bar${k === 'e' ? ' wait' : ''}" style="left:${x}px;top:${y}px;width:${w}px;height:42px${seg[k][0] ? ';background:' + seg[k][0] : ''}"${AT(b, 'growx', j * 200)}>${w > 80 ? seg[k][1] : ''}</div>`; x += w; tot += v; });
+    s += `<div class="ap-hv" style="left:${x + 14}px;top:${y}px;height:42px"${FX(b, 'fade', 500)}><b>${tot}</b></div>`; });
+  s += `<div class="abs" style="left:970px;top:24px;height:232px;border-left:2px dashed var(--ink);opacity:.5"${FX(4, 'fade')}></div>`;
+  s += TT(0, 280, '¿Cuánto tarda en cruzar un tensor de 100 MB?', {b: 5});
+  s += TBL(0, 308, 800, '1fr 180px 180px', ['camino de los datos', 'velocidad nominal', '100 MB tardan'], [
+    ['Memoria dentro de una RTX 4090', '≈ 1,000 GB/s', '<b>0.1 ms</b>'], ['PCIe 4.0 x16, por dirección', '≈ 32 GB/s', '<b>3 ms</b>'], ['Red Ethernet de 10 Gb/s', '≈ 1.25 GB/s', '<b>80 ms</b>']], {b: 5});
+  s += CALL(850, 320, 578, 'bulb', 'Tres preguntas para cualquier diseño: <b>qué cruza</b>, <b>cuánto pesa</b> y <b>cada cuánto</b>.', {b: 6});
+  s += NOTE(850, 420, 578, 'Velocidades de catálogo, para comparar escalas. El ancho de banda real del host del experimento no se midió.', {b: 5, d: 400});
+  return s;
+}});
+
+P({body: () => {
+  let s = CHIPS(0, 0, CO.map(c => c[0]), {style: 'width:900px'});
+  s += `<div data-k="co" style="position:absolute;left:0;top:62px;width:1428px;height:320px"${FX(2, 'fade')}>${coInner(2)}</div>`;
+  s += CARD(0, 398, 450, 120, null, 'Rank', 'El proceso asignado a una GPU: 0, 1, …, p − 1.', '', {b: 3});
+  s += CARD(470, 398, 450, 120, null, 'Colectivo', 'Operación en la que <b>todos</b> los ranks participan.', '', {b: 4});
+  s += CARD(940, 398, 488, 120, null, 'NCCL', 'Biblioteca de NVIDIA que ejecuta colectivos entre GPUs.', '', {b: 5});
+  return s;
+}, run: {2: A => { const el = A.k('co'); STEP(A, {n: 5, chips: A.ks('chip'), fin: 2, set: k => { el.innerHTML = coInner(k); }}); }}});
+
+const DP_ON = [['lote'], ['mod'], ['grad'], ['ar'], ['mod'], ['lote', 'mod', 'grad', 'ar']];
+const DP_CAP = ['<b>1 · Repartir.</b> El lote se parte: cada GPU recibe imágenes distintas.', '<b>2 · Forward.</b> Cada réplica, con los mismos pesos, calcula su pérdida.', '<b>3 · Backward.</b> Cada GPU obtiene el gradiente de su parte del lote.', '<b>4 · All-reduce.</b> Los gradientes se suman y se dividen entre 2: las dos GPUs reciben el mismo g.', '<b>5 · Update.</b> Cada réplica aplica el mismo cambio: siguen idénticas.', 'Las réplicas empiezan y terminan <b>iguales</b>. Pesos y optimizador se <b>repiten</b> en cada GPU.'];
+P({body: () => {
+  const G = (k, html) => `<div class="ap-st" data-k="st" data-s="${k}">${html}</div>`;
+  let lote = B(0, 190, 170, 90, 'Lote<br>global', C1, {b: 1}), mod = '', grad = '';
+  [0, 1].forEach(r => { const y = 10 + r * 250;
+    lote += IA(176, 235, 306, y + 105, {b: 1, d: 200}) + B(310, y + 60, 150, 90, `parte ${r + 1}<br>del lote`, C1, {b: 1, d: 300});
+    mod += IA(466, y + 105, 506, y + 105, {b: 1, d: 400}) + B(510, y + 60, 190, 90, 'modelo completo<em>réplica</em>', C16, {b: 1, d: 500});
+    grad += GA(706, y + 105, 746, y + 105, {b: 1, d: 600}) + B(750, y + 60, 130, 90, `gradiente<br>g<sub>${r}</sub>`, C32, {b: 1, d: 700}); });
+  let s = GPU(280, 10, 620, 200, 'GPU 0 · rank 0', {b: 1}) + GPU(280, 260, 620, 200, 'GPU 1 · rank 1', {b: 1});
+  s += G('lote', lote) + G('mod', mod) + G('grad', grad);
+  s += G('ar', B(960, 180, 190, 110, 'all-reduce<em>suma y divide entre 2</em>', C32, {b: 1, d: 800}) + GA(884, 115, 962, 200, {b: 1, d: 800}) + GA(884, 365, 962, 270, {b: 1, d: 800}));
+  s += KARD(1180, 40, 248, 390, 'Un update, paso a paso', '<span data-k="cap"></span>', {b: 1});
+  s += CHIPS(400, 476, ['1 Repartir', '2 Forward', '3 Backward', '4 All-reduce', '5 Update', 'Todo']);
+  s += LEG(0, 496, 1);
+  return s;
+}, run: {1: A => { const st = A.ks('st'), cap = A.k('cap');
+  STEP(A, {n: 6, chips: A.ks('chip'), fin: 5, set: k => { st.forEach(e => e.classList.toggle('off', !DP_ON[k].includes(e.dataset.s))); cap.innerHTML = DP_CAP[k]; }}); }}});
+
+P({body: () => {
+  const T_ = (x, y, v, b, d, c = C1, w = 64) => B(x, y, w, 56, `<span style="font-size:24px">${v}</span>`, c, {b, d, fx: 'pop'});
+  let s = TT(0, 0, '1 GPU · los cuatro ejemplos juntos', {b: 1});
+  [2, 4, 6, 8].forEach((v, k) => { s += T_(14 + k * 76, 30, v, 1, k * 90); });
+  s += IA(326, 58, 560, 58, {b: 1, d: 400}) + B(570, 30, 280, 56, '<span style="font-size:22px">promedio = 5</span>', CM, {b: 1, d: 500});
+  s += TT(0, 118, '2 GPUs · dos ejemplos cada una', {b: 2});
+  s += GPU(0, 146, 262, 108, 'GPU 0', {b: 2}) + GPU(276, 146, 262, 108, 'GPU 1', {b: 2});
+  [[14, 2], [88, 4], [290, 6], [364, 8]].forEach(([x, v], k) => { s += T_(x, 182, v, 2, k * 90); });
+  s += T_(184, 182, 3, 3, 0, C32) + T_(460, 182, 7, 3, 100, C32) + IA(162, 210, 182, 210, {b: 3}) + IA(438, 210, 458, 210, {b: 3});
+  s += IA(542, 210, 566, 210, {b: 3, d: 200}) + B(570, 182, 280, 56, '<span style="font-size:22px">(3 + 7) ÷ 2 = 5 ✓</span>', CM, {b: 3, d: 300});
+  s += TT(0, 286, '2 GPUs · tres ejemplos y uno', {b: 4});
+  s += GPU(0, 314, 352, 108, 'GPU 0', {b: 4}) + GPU(366, 314, 172, 108, 'GPU 1', {b: 4});
+  [[14, 2], [86, 4], [158, 6], [378, 8]].forEach(([x, v], k) => { s += T_(x, 350, v, 4, k * 90, C1, 62); });
+  s += T_(266, 350, 4, 4, 400, C32, 72) + T_(466, 350, 8, 4, 500, C32, 62) + IA(228, 378, 262, 378, {b: 4, d: 300}) + IA(444, 378, 462, 378, {b: 4, d: 400});
+  s += IA(542, 378, 566, 378, {b: 4, d: 600}) + B(570, 338, 280, 80, '<span style="font-size:22px">(4 + 8) ÷ 2 = 6 ✗</span><em>lo correcto es 5: el 4 debe pesar triple</em>', 'var(--red)', {b: 4, d: 700});
+  s += CALL(0, 450, 850, 'check', 'El promedio de los promedios acierta <b>cuando los grupos tienen el mismo tamaño</b>.', {b: 5});
+  s += KARD(900, 0, 528, 150, 'Capas que miran todo el lote', 'BatchNorm calcula estadísticas <b>en cada réplica</b> (existe SyncBatchNorm). AlexNet no la usa.', {b: 6, c: C32});
+  s += KARD(900, 168, 528, 150, 'No son corridas idénticas', 'Dropout usa números aleatorios distintos y las sumas se hacen en otro orden: la trayectoria puede separarse.', {b: 6, d: 200, c: C32});
+  s += KARD(900, 336, 528, 170, 'Compruébalo', 'Con dropout apagado, calcula el gradiente con 512 en una GPU y con 256 + 256. Deben ser <b>casi iguales</b>.', {b: 7, c: CM});
+  s += NOTE(0, 514, 1000, 'Números de ejemplo: cada uno es el cambio que un ejemplo pide para un mismo peso (su gradiente).', {b: 1});
+  return s;
+}});
+
+P({body: () => {
+  let s = '';
+  s += KARD(0, 0, 464, 370, 'Por capas (modelo y pipeline)', 'Cada GPU guarda un tramo de la red. Cruzan <b>activaciones</b> y sus derivadas.', {b: 1, c: C16});
+  [0, 1, 2].forEach(k => { const x = 30 + k * 142; s += B(x, 190, 108, 90, `GPU ${k}<em>capas ${k * 8 + 1}–${k * 8 + 8}</em>`, C16, {b: 1, d: 200 + k * 150}); if (k < 2) s += AA(x + 111, 235, x + 139, 235, {b: 1, d: 300 + k * 150}); });
+  s += NOTE(30, 300, 400, 'Con <b>microlotes</b>, cada GPU empieza el siguiente sin esperar a que el lote cruce toda la red.', {b: 1, d: 600});
+  s += KARD(482, 0, 464, 370, 'Dentro de una capa (tensorial)', 'Cada GPU calcula una parte de la misma capa. Cruzan resultados <b>en cada capa</b>.', {b: 2, c: CM});
+  s += B(512, 205, 100, 62, 'entrada', C1, {b: 2, d: 200}) + B(662, 164, 106, 62, 'GPU 0<em>mitad</em>', CM, {b: 2, d: 300}) + B(662, 248, 106, 62, 'GPU 1<em>mitad</em>', CM, {b: 2, d: 300}) + B(818, 205, 100, 62, 'juntar', C32, {b: 2, d: 450});
+  s += AA(615, 225, 659, 196, {b: 2, d: 250}) + AA(615, 247, 659, 278, {b: 2, d: 250}) + AA(771, 196, 815, 225, {b: 2, d: 400}) + AA(771, 278, 815, 247, {b: 2, d: 400});
+  s += KARD(964, 0, 464, 370, 'El estado fragmentado (ZeRO, FSDP)', 'Cada GPU guarda una parte de pesos y optimizador. Cruzan <b>parámetros</b> justo cuando se usan.', {b: 3, c: C32});
+  [0, 1].forEach(g => { const y = 164 + g * 86; s += GPU(994, y, 404, 74, `GPU ${g}`, {b: 3, d: 200}); ['pesos', 'gradientes', 'optimizador'].forEach((t, k) => { s += B(1004 + k * 130, y + 28, 122, 38, `${t} ${g + 1}/2`, g ? CM : C16, {b: 3, d: 300 + k * 100, style: 'font-size:13px'}); }); });
+  s += CALL(0, 396, 1428, 'layers', 'Todas <b>cambian memoria por comunicación</b>. En los LLM grandes se combinan con el paralelismo de datos.', {b: 4});
+  return s;
+}});
+
+P({body: () => {
+  let s = CODE(0, 0, 940, [
+    'import os, torch, torch.distributed as dist',
+    'from torch.nn.parallel import DistributedDataParallel as DDP',
+    'from torch.utils.data import DataLoader, DistributedSampler',
+    '',
+    'dist.init_process_group("nccl")        # un proceso por GPU',
+    'gpu = int(os.environ["LOCAL_RANK"])',
+    'torch.cuda.set_device(gpu)',
+    'model = DDP(AlexNet().to(gpu), device_ids=[gpu])',
+    '',
+    'sampler = DistributedSampler(train_set, drop_last=True)',
+    'loader = DataLoader(train_set, sampler=sampler, drop_last=True,',
+    '                    batch_size=512 // dist.get_world_size())',
+    'for epoch in range(20):',
+    '    sampler.set_epoch(epoch)           # otro barajado por época',
+    '    for images, labels in loader:',
+    '        train_step(images.to(gpu), labels.to(gpu))',
+    'if dist.get_rank() == 0:',
+    '    torch.save(model.module.state_dict(), "alexnet.pt")',
+    'dist.destroy_process_group()'], {fs: 15.5, b: 1});
+  [['init_process_group', 'Une los procesos en un grupo que puede hacer colectivos.'], ['DDP(...)', 'Copia los pesos del rank 0 y promedia gradientes en backward.'], ['DistributedSampler', 'Cada rank lee una parte distinta de los datos.'], ['batch_size', 'Es el lote local: 512 ÷ 2 = 256.'], ['rank 0', 'Un solo proceso escribe archivos.']].forEach(([h, t], k) => {
+    s += `<div class="ap-def" style="left:980px;top:${k * 78}px"${FX(2 + k, 'right')}><b>${h}</b><span>${t}</span></div>`; });
+  s += `<div class="code abs" style="left:980px;top:404px;width:448px;font-size:15px;padding:14px 18px;box-sizing:border-box"${FX(7, 'up')}><span class="c"># lanzar 2 procesos en una máquina</span>\ntorchrun --standalone \\\n  --nproc-per-node=2 train.py</div>`;
+  s += NOTE(0, 514, 940, 'Ejemplo genérico de enseñanza: model, train_set y train_step se definen aparte. El laboratorio usa su propio train.py.', {b: 2});
+  return s;
+}});
+
+P({body: () => {
+  let s = TT(0, 0, '1 GPU', {b: 1}) + TT(440, 0, '2 GPUs', {b: 2});
+  s += GPU(0, 32, 360, 170, 'GPU 0', {b: 1}) + B(40, 76, 280, 90, '<span style="font-size:30px">512 × 1</span>', C1, {b: 1, d: 150});
+  [0, 1].forEach(g => { s += GPU(440 + g * 220, 32, 200, 170, `GPU ${g}`, {b: 2}) + B(462 + g * 220, 76, 156, 90, '<span style="font-size:30px">256</span>', C16, {b: 2, d: 100 + g * 100}); });
+  s += `<div class="tf-al l" style="left:0;top:228px;font-size:19px"${FX(2, 'fade', 300)}>imágenes por GPU antes de la convolución</div>`;
+  [['160 × 160', 'píxeles RGB, recorte central'], ['20', 'épocas por corrida'], ['42 · 43 · 44', 'tres semillas']].forEach(([a, c], k) => { s += `<div class="r-card" style="left:${k * 300}px;top:280px;width:280px;height:120px"${FX(3, 'up', k * 120)}><div class="r-big gold" style="margin:18px 22px;font-size:34px">${a}<small>${c}</small></div></div>`; });
+  s += TBL(940, 0, 488, '1fr 150px', ['Imagenette', ''], [['Ejemplos de entrenamiento', '9,469'], ['Usados por época', '<b>9,216</b>'], ['Updates por época', '<b>18</b>'], ['Ejemplos de validación', '3,925'], ['Clases', '10']], {b: 4, fs: 19, pad: '12px 16px'});
+  s += NOTE(940, 340, 488, 'El lote incompleto se descarta tras barajar. Cada semilla comparte pesos iniciales (por arquitectura), orden, flips, SGD y calendario de LR entre 1 y 2 GPUs.', {b: 5});
+  s += CALL(0, 430, 1428, 'target', '<b>AlexNet</b> (5 convoluciones y 3 capas densas): lo bastante chico para medirlo en clase. Solo cambia <b>la forma de repartirlo</b>.', {b: 6});
+  return s;
+}});
+
+P({body: () => {
+  let s = TT(0, 0, 'Entrenamiento · épocas 2–20 · imágenes por segundo', {b: 1});
+  s += HB(0, 64, [{l: '1 GPU', v: 28046, c: C1, t: '<b>28,046</b>'}], {b: 1, max: 30000, w: 940, lw: 290, bh: 66});
+  s += `<div class="ap-hl" style="left:0;top:166px;width:274px;height:66px"${FX(1, 'fade')}>2 GPUs · DDP FP32</div><div class="abs" style="left:289px;top:156px;height:86px;border-left:2px solid var(--ink)"${FX(1, 'fade')}></div>`;
+  s += `<div class="ap-hid" data-k="q" style="left:304px;top:170px">¿Dónde termina esta barra?</div>`;
+  s += `<div class="abs hid" data-k="r" style="left:290px;top:166px;width:${(12480 / 30000 * 940).toFixed(1)}px;height:66px;background:var(--s32);border-radius:0 6px 6px 0"></div><div class="ap-hv hid" data-k="r" style="left:${(302 + 12480 / 30000 * 940).toFixed(1)}px;top:166px;height:66px"><b>12,480</b></div>`;
+  s += `<div class="abs hid" data-k="r" style="left:900px;top:176px;width:520px"><div class="r-big" style="font-size:76px;color:var(--s32)">0.45×<small style="font-size:18px">de la velocidad de una GPU · menos de la cuarta parte del ideal</small></div></div>`;
+  s += CHIPS(290, 290, ['Predicción', 'Revelar medición']);
+  s += BT(0, 356, 1428, '<p>Cada GPU procesa menos imágenes, pero <b>la forma del tensor de gradientes es la misma</b>. El reporte registra que este host <b>no tenía acceso CUDA directo entre GPUs</b>.</p><p class="mu">No hay perfil CUDA/NCCL: no se midió cuánto se debe a sincronización, topología o poco solapamiento.</p>', {b: 3, k: 'why'});
+  s += SRCN(514, 1);
+  return s;
+}, run: {2: A => { const r = A.ks('r'), q = A.k('q'); STEP(A, {n: 2, chips: A.ks('chip'), fin: 1, set: k => { r.forEach(e => e.classList.toggle('on', k === 1)); q.style.opacity = k ? 0 : 1; }}); }}});
+
+P({body: () => {
+  let s = TT(0, 0, 'AlexNet estándar · 10 clases', {b: 1});
+  for (let k = 0; k < 5; k++) { s += B(k * 124, 34, 108, 92, `conv ${k + 1}`, C16, {b: 1, d: k * 90}); }
+  s += AA(622, 80, 662, 80, {b: 1, d: 500});
+  [['256 × 6 × 6', 'entrada'], ['4096', 'densa'], ['4096', 'densa'], ['10', 'logits']].forEach(([a, c], k) => { const x = 666 + k * 192; s += B(x, 34, 164, 92, `<span style="font-size:22px">${a}</span><em>${c}</em>`, C32, {b: 2, d: k * 120}); if (k < 3) s += IA(x + 168, 80, x + 190, 80, {b: 2, d: k * 120 + 80}); });
+  s += HB(0, 184, [{l: 'convoluciones', v: 2469696, c: C16, t: '2,469,696 parámetros · ~4%'}, {l: 'cabeza', v: 54575114, c: C32, t: '54,575,114 · ~96%'}], {b: 3, max: 54575114, w: 800, lw: 190, rh: 58});
+  s += BIG(0, 330, 420, '57.0 M', 'parámetros entrenables (57,044,810)', {b: 4, fs: 62});
+  s += BIG(480, 330, 420, '228.2 MB', 'valores de gradiente FP32 por réplica y por update', {b: 5, fs: 62, c: 'var(--s32)'});
+  s += BIG(960, 330, 468, '18 → 41 ms', 'por update, de 1 GPU a 2 GPUs con DDP FP32', {b: 6, fs: 54, c: 'var(--ink)'});
+  s += CALL(0, 440, 1428, 'search', '<b>Hipótesis:</b> sincronizar 228 MB en cada update cuesta más de lo que ahorra repartir las imágenes. No se perfiló: lo medirás en la demo.', {b: 7});
+  return s;
+}});
+
+P({body: () => {
+  let s = KARD(0, 0, 690, 112, 'Menos bytes: gradientes en BF16', '2 bytes por valor al comunicar: <b>228.2 → 114.1 MB</b>. Mismo modelo.', {b: 1, c: C16});
+  s += KARD(738, 0, 690, 112, 'Menos parámetros: cabeza compacta', 'De 57.0 a 4.0 millones: <b>16.2 MB</b> de gradientes. <b>Otro modelo.</b>', {b: 2, c: C1});
+  s += TT(0, 136, 'Speedup de entrenamiento con 2 GPUs · cada modelo contra su propia 1 GPU', {b: 3});
+  s += HB(0, 196, [{l: 'Estándar · FP32', v: 0.45, c: C32, t: '0.45×', b: 3}, {l: 'Estándar · BF16', v: 0.70, c: C16, t: '0.70×', b: 4}, {l: 'Compacta · FP32', v: 1.55, c: C32, t: '1.55×', b: 5}, {l: 'Compacta · BF16', v: 1.67, c: C16, t: '<b>1.67×</b>', b: 6}], {b: 3, max: 2, w: 960, lw: 220, rh: 54, bh: 36, ref: 1, refl: '1 GPU = 1.00×'});
+  s += CALL(0, 424, 1428, 'search', 'La mitad de bytes todavía pierde contra una GPU. <b>¿Se puede ganar sin cambiar el modelo?</b>', {b: 7});
+  s += SRCN(514, 1);
+  return s;
+}});
+
+P({body: () => {
+  let s = '';
+  [0, 1].forEach(g => { const y = g * 262;
+    s += GPU(0, y, 1428, 190, `GPU ${g} · rank ${g}`, {b: 1});
+    s += B(24, y + 62, 150, 90, '256<br>imágenes', C1, {b: 1, d: 100}) + IA(178, y + 107, 214, y + 107, {b: 1, d: 150});
+    s += B(218, y + 62, 160, 90, '5 conv', C16, {b: 1, d: 200}) + AA(382, y + 107, 418, y + 107, {b: 2});
+    s += B(422, y + 62, 220, 90, `[256, 256, 4, 4]<em>BF16 · 2 MiB</em>`, CM, {b: 2, d: 100});
+    s += B(790, y + 62, 220, 90, '[512, 256, 4, 4]<em>en orden de rank</em>', CM, {b: 3, d: 200});
+    s += AA(1014, y + 107, 1050, y + 107, {b: 4});
+    s += B(1054, y + 62, 120, 90, 'pool<br>6 × 6', C16, {b: 4, d: 100}) + AA(1178, y + 107, 1214, y + 107, {b: 4, d: 200});
+    s += B(1218, y + 62, 186, 90, 'cabeza completa<em>512 ejemplos</em>', C16, {b: 4, d: 300});
+    s += AA(646, y + 107, 786, y + 107, {b: 3}); });
+  s += AA(660, 118, 786, 362, {b: 3, d: 200}) + AA(660, 358, 786, 114, {b: 3, d: 200});
+  s += `<div class="tf-ban navy" style="left:560px;top:204px;font-size:20px;background:var(--smap)"${FX(3, 'pop')}>all-gather BF16</div>`;
+  s += BT(0, 462, 960, '<p style="font-size:21px">Ahora cruzan <b>2 MiB</b> de mapas por GPU (8 KiB por imagen) y los gradientes de las convoluciones (≈ 9.9 MB si van en FP32). Antes cruzaban <b>228.2 MB</b>.</p>', {b: 5});
+  s += NOTE(990, 466, 438, 'Mismas etiquetas en el mismo orden y mismas máscaras de dropout en ambas cabezas.', {b: 6});
+  return s;
+}});
+
+P({body: () => {
+  let s = '';
+  [['1', 'Cada cabeza califica las <b>512 imágenes</b>.', 'Obtiene sus propios gradientes completos: la cabeza no se sincroniza.'], ['2', 'Cada GPU regresa la señal de <b>sus 256 imágenes</b>, <b>multiplicada por 2</b>.', 'Esa señal pasa hacia atrás por sus convoluciones.'], ['3', '<b>DDP promedia</b> las convoluciones.', 'El promedio deshace el 2 y queda la suma correcta.']].forEach(([n, h, t], k) => {
+    s += `<div class="tf-two" style="left:0;top:${k * 96}px;width:640px;font-size:21px"${FX(1 + k, 'left')}><span>${n}</span><div>${h}<div style="color:var(--muted);font-size:16px;margin-top:4px">${t}</div></div></div>`; });
+  s += TT(0, 304, 'Con números · queremos que las conv reciban 0.3 + 0.5', {b: 4});
+  s += TBL(0, 330, 650, '1fr 95px 95px 130px', ['', 'GPU 0', 'GPU 1', 'DDP promedia'], [['lo que queremos (sumar)', '0.3', '0.5', '<b>0.8</b>'], ['si se envía tal cual', '0.3', '0.5', '<b style="color:var(--red)">0.4 ✗</b>'], ['si se envía el doble', '0.6', '1.0', '<b style="color:var(--smap)">0.8 ✓</b>']], {b: 4, fs: 17, pad: '9px 14px', beats: [4, 5, 6]});
+  s += CODE(690, 0, 738, ['f = conv(x_local)               # [256, 256, 4, 4]', 'F = all_gather(f.detach())      # [512, 256, 4, 4]', 'F.requires_grad_()', 'logits = head(pool(F))          # mismo dropout', 'loss = loss_fn(logits, y_all)   # media sobre 512', 'loss.backward()                 # cabeza y F.grad', 'g_local = F.grad[mi_tramo]      # mis 256', 'f.backward(2 * g_local)         # DDP promedia conv', 'optimizer.step()                # en cada rank'], {fs: 18, lit: [7], b: 5});
+  s += `<span class="tf-ill" style="left:690px;top:330px"${FX(5, 'fade')}>pseudocódigo conceptual</span>`;
+  s += CALL(690, 380, 738, 'search', 'Compruébalo: con dropout apagado, compara el gradiente de conv con el de 1 GPU, <b>con y sin el 2</b>.', {b: 7});
+  return s;
+}});
+
+P({body: () => {
+  let s = TT(0, 0, 'AlexNet estándar · speedup de entrenamiento contra 1 GPU', {b: 1});
+  s += HB(0, 60, [{l: '1 GPU', v: 1, c: C1, t: '1.00× · 28,046 img/s'}, {l: 'DDP FP32', v: 0.45, c: C32, t: '0.45×'}, {l: 'DDP BF16', v: 0.70, c: C16, t: '0.70×'}, {l: 'Mapas compartidos', v: 1.42, c: CM, t: '<b>1.42× · 39,734 img/s</b>', b: 2}], {b: 1, max: 1.8, w: 640, lw: 210, rh: 78, bh: 48, ref: 1, refl: '1.00×'});
+  const seg = (x, y, w, t, c, d) => `<div class="ap-bar${c ? '' : ' wait'}" style="left:${x}px;top:${y}px;width:${w - 3}px;height:40px${c ? ';background:' + c : ''}"${AT(3, 'growx', d)}>${t}</div>`;
+  s += TT(1040, 0, 'De punta a punta · segundos (aprox.)', {b: 3});
+  s += `<div class="tf-al l" style="left:1040px;top:42px;font-size:16px"${FX(3, 'fade')}>1 GPU · 11.77 s</div>` + seg(1040, 56, 224, 'entrenar 7.0', C1, 100) + seg(1264, 56, 153, 'resto 4.8', '', 500);
+  s += `<div class="tf-al l" style="left:1040px;top:120px;font-size:16px"${FX(3, 'fade')}>2 GPUs · mapas · 10.10 s</div>` + seg(1040, 134, 163, 'entrenar 5.1', CM, 900) + seg(1203, 134, 161, 'resto 5.0', '', 1300);
+  s += BIG(1040, 196, 388, '1.17×', 'de punta a punta. Entrenar bajó de 7.0 a 5.1 s; el resto (arrancar, cargar, validar, cerrar) siguió en ≈ 5 s.', {b: 3, fs: 54, d: 1500});
+  s += CALL(0, 400, 1428, 'bulb', 'Cruzan <b>activaciones pequeñas</b> en lugar de todos los gradientes de la cabeza, a cambio de <b>repetir cómputo</b>.', {b: 4});
+  s += SRCN(514, 1);
+  return s;
+}});
+
+P({body: () => {
+  let s = '';
+  [[60, 'AlexNet estándar', 0, C1, CM, '1 GPU', 'mapas compartidos', 'final 26.0 / 26.2%', 1], [790, 'AlexNet compacta', 2, C1, C16, '1 GPU', 'DDP BF16', 'final 63.4 / 63.5%', 2]].forEach(([x, t, j, c1, c2, l1, l2, fin, b]) => {
+    s += TT(x - 20, 0, t, {b});
+    const ch = CHART({left: x, top: 76, w: 580, h: 360, x0: 1, x1: 20, y0: 0, y1: 70, xt: [1, 5, 10, 15, 20], yt: [0, 10, 20, 30, 40, 50, 60, 70], fy: v => v + '%', xl: 'época', b,
+      series: [{pts: curve(j), b, d: 200, style: `stroke:${c1};stroke-width:8;opacity:.6`}, {pts: curve(j + 1), b, d: 600, style: `stroke:${c2};stroke-width:3`}]});
+    s += ch.html + KEY(x, 38, [[c1, l1], [c2, l2]], {b});
+    s += `<div class="tf-al r" style="left:${x + 580}px;top:${(ch.Y(CURVE[19][j]) + (j ? 34 : -34)).toFixed(0)}px;font-size:18px;font-weight:700;color:var(--ink)"${FX(b, 'fade', 1500)}>${fin}</div>`; });
+  s += NOTE(0, 490, 1428, 'Top-1 de validación · mediana de 3 semillas por época · mismo eje 0–70% · valores parecidos no demuestran equivalencia.', {b: 3});
+  s += SRCN(514, 1);
+  return s;
+}});
+
+P({body: () => {
+  let s = CODE(0, 0, 860, ['nvidia-smi -L                  # ¿hay dos GPUs?', '', '# 1. el experimento completo', 'python prepare_data.py --archive data/imagenette2-160.tgz', 'python benchmark.py --epochs 20 --repeats 3 --batch-size 512', '', '# 2. ¿cuánto tarda en cruzar cada tamaño?', 'torchrun --standalone --nproc-per-node=2 mide.py', '', '# 3. ¿cuántos tokens por segundo da una RTX 4090?', 'python mini_llm.py'], {fs: 19, b: 1});
+  s += TT(900, 0, 'Anota tus resultados', {b: 2});
+  s += TBL(900, 28, 528, '1fr 215px', ['medición', 'tu resultado'], [['Cruzar 2.1 MB', '______ ms'], ['Cruzar 16.2 MB', '______ ms'], ['Cruzar 114.1 MB', '______ ms'], ['Cruzar 228.2 MB', '______ ms'], [`Laptop CPU: <b>${fmtN(6025)}</b> tokens/s`, '4090: _______']], {b: 2, fs: 19, pad: '12px 16px'});
+  s += CALL(0, 420, 1428, 'search', 'Antes de correr, apuesta: ¿explican los milisegundos de 228.2 MB la diferencia entre <b>18 y 41 ms</b> por update?', {b: 3});
+  return s;
+}});
+
+P({body: () => {
+  let s = `<div class="abs ap-ask" style="left:0;top:0;width:1428px;font-size:34px"${FX(1, 'up')}>Quieren entrenar un modelo de <b>7,000 millones</b> de parámetros en <b>dos RTX 4090</b> de 24 GB.</div>`;
+  [['¿Cuánta memoria pide el entrenamiento?', '112 GB', 'Pesos, gradientes y AdamW en FP32.'], ['¿Alcanza con DDP?', 'No', 'DDP repite todo: cada tarjeta necesitaría los 112 GB.'], ['¿Y fragmentando con FSDP?', 'Tampoco', 'Son 56 GB por tarjeta. Hacen falta al menos 5, o cambiar precisión y optimizador.']].forEach(([q, a, why], k) => { const x = k * 486;
+    s += KARD(x, 90, 456, 290, q, '', {b: 2});
+    s += `<div class="abs hid" data-k="ans" style="left:${x + 26}px;top:206px;width:404px"><div class="r-big gold" style="font-size:54px">${a}<small style="font-size:18px">${why}</small></div></div>`; });
+  s += CHIPS(0, 404, ['Pensar (2 min)', 'Ver respuestas']);
+  s += CALL(0, 458, 1428, 'search', 'Antes de pagar más GPUs: ¿qué se <b>repite</b>, qué se <b>reparte</b> y qué <b>cruza</b>?', {b: 3});
+  return s;
+}, run: {2: A => { const a = A.ks('ans'); STEP(A, {n: 2, chips: A.ks('chip'), fin: 1, set: k => a.forEach(e => e.classList.toggle('on', k === 1))}); }}});
+
+P({body: () => {
+  const h = (t, c) => `<span style="color:${c};font-size:17px">${t}</span>`;
+  let s = TBL(0, 0, 1428, '270px 1fr 1fr 1fr', ['clase', h('DATOS', C16), h('MODELO', CM), h('OPTIMIZACIÓN', C32)], [
+    ['1 · Introducción', 'representaciones', 'perceptrón y redes', 'ciclo de entrenamiento y backpropagation'],
+    ['2 · CNN', 'imágenes, invarianzas', 'convolución y pooling', 'pesos compartidos: menos que ajustar'],
+    ['3 · Embeddings', 'de píxeles a vectores', 'encoder (ResNet-50)', 'reutilizar pesos: congelar o ajustar'],
+    ['4 · Regularización y transfer', 'data augmentation', 'Dropout, BatchNorm, nueva cabeza', 'fine-tuning sin sobreajustar'],
+    ['5 · Recurrentes', 'secuencias', 'RNN, LSTM, GRU', 'a través del tiempo; gradient clipping'],
+    ['6 · Transformers', 'texto convertido en tokens', 'atención, encoder y decoder', 'teacher forcing'],
+    ['<span style="color:var(--gold-d)">7 · Hoy</span>', '<b>repartir el lote</b>', '<b>repartir capas y cómputo</b>', '<b>coordinar los updates</b>']], {b: 1, fs: 19, pad: '11px 18px', beats: [1, 1, 2, 2, 3, 3, 4], mark: [null, null, null, null, null, null, 'var(--gold)']});
+  s += `<div class="tf-ban navy" style="left:0;top:442px;width:1428px;box-sizing:border-box;font-size:30px"${FX(5, 'up')}><span>Aprendizaje profundo = <b>datos + modelo + optimización</b></span></div>`;
+  return s;
+}});
+
+P({body: () => {
+  let s = '';
+  [['Datos', C16, '¿Qué ejemplos ve cada GPU?', 'El <b>lote se reparte</b>: paralelismo de datos con DDP.', 'DDP con FP32: <b>0.45×</b>. Repartir no basta.'],
+    ['Modelo', CM, '¿Qué parte calcula cada GPU?', '<b>Capas, matrices o activaciones</b>: pipeline, tensorial, mapas compartidos.', 'Mapas compartidos: <b>1.42×</b>. Un LLM de 7,000 M: 5 tarjetas o más.'],
+    ['Optimización', C32, '¿Cómo quedan de acuerdo?', '<b>Gradientes y estado</b>: all-reduce, BF16, ZeRO y FSDP.', 'BF16 al comunicar: de 0.45× a <b>0.70×</b>.']].forEach(([n, c, q, how, saw], k) => { const x = k * 486;
+    s += `<div class="r-card ap-pillar" style="left:${x}px;top:0;width:456px;height:296px;--c:${c}"${FX(1 + k, 'up')}><h3>${n}</h3><h4>${q}</h4><p>${how}</p><p class="saw">${saw}</p></div>`;
+    if (k < 2) s += `<div class="ap-plus" style="left:${x + 456}px;top:20px"${FX(2 + k, 'pop')}>+</div>`; });
+  s += CALL(0, 316, 1428, 'target', '<b>Ticket de salida:</b> para su proyecto final (3 de diciembre), una frase por columna. ¿Qué datos, qué modelo, qué optimización, y cómo medirán que funcionó?', {b: 4});
+  s += `<div class="tf-ban navy" style="left:0;top:416px;width:1428px;box-sizing:border-box;font-size:30px;padding:26px"${FX(5, 'up')}><span>Cambian las arquitecturas y las máquinas. La pregunta sigue: <b>datos, modelo y optimización</b>.</span></div>`;
+  return s;
+}});
+
+P({body: () => {
+  const head = ['configuración', 'img/GPU', 'img/s', 'speedup entren.', 'época 1', 'total', 'speedup total', 'top-1 final'];
+  const cols = '330px 110px 140px 190px 130px 130px 190px 1fr', o = {b: 1, fs: 17, pad: '8px 14px', hs: 'padding:8px 14px'};
+  let s = TT(0, 0, 'AlexNet estándar', {b: 1}) + TBL(0, 26, 1428, cols, head, [
+    ['1 GPU', '512', '28,046', '1.00×', '0.76 s', '11.77 s', '1.00×', '26.0%'], ['2 GPUs · DDP FP32', '256', '12,480', '0.45×', '1.18 s', '20.18 s', '0.58×', '22.3%'], ['2 GPUs · DDP BF16', '256', '19,517', '0.70×', '0.92 s', '14.98 s', '0.78×', '26.1%'], ['2 GPUs · mapas compartidos', '256', '39,734', '1.42×', '0.68 s', '10.10 s', '1.17×', '26.2%']], {...o, mark: [C1, C32, C16, CM]});
+  s += TT(0, 268, 'AlexNet compacta', {b: 2}) + TBL(0, 294, 1428, cols, head, [
+    ['1 GPU', '512', '33,750', '1.00×', '0.71 s', '10.42 s', '1.00×', '63.4%'], ['2 GPUs · DDP FP32', '256', '52,222', '1.55×', '0.63 s', '8.68 s', '1.19×', '63.5%'], ['2 GPUs · DDP BF16', '256', '56,258', '1.67×', '0.61 s', '8.38 s', '1.24×', '63.5%']], {...o, b: 2, mark: [C1, C32, C16]});
+  s += SRCN(514, 1);
+  return s;
+}});
+
+P({body: () => {
+  let s = TBL(0, 0, 830, '200px 1fr', ['elemento', 'detalle'], [
+    ['Hardware', '2 × NVIDIA RTX 4090 en Runpod; sin acceso CUDA directo entre GPUs en este host'], ['Software', 'PyTorch 2.8.0+cu128 · CUDA 12.8'], ['Datos', 'Imagenette 160 px; recortes RGB uint8 en caché residente en GPU'], ['Preprocesamiento', 'escala a [−1, 1]; flip horizontal aleatorio al entrenar'], ['Ejecución', 'channels-last, vistas de buckets de gradientes, SGD fusionado, cuDNN por defecto'], ['No se mide', 'decodificación JPEG ni copias host → GPU dentro del bucle'], ['Alcance', 'un host, una carga, 3 semillas, 20 épocas']], {b: 1, fs: 17, pad: '12px 16px'});
+  const L_ = (u, t) => `<a href="${u}" target="_blank" rel="noopener">${t}</a>`;
+  s += `<div class="abs ap-refs" style="left:880px;top:0;width:548px"${FX(2, 'right')}><h3>Referencias</h3>${[L_(PSRC.alexnet, 'Krizhevsky et al. · AlexNet, 2012'), L_(PSRC.imagenette, 'fast.ai · Imagenette'), L_(PSRC.ddp, 'PyTorch · DistributedDataParallel'), L_(PSRC.hooks, 'PyTorch 2.8 · hooks de comunicación'), L_(PSRC.amdahl, 'Amdahl, 1967'), L_(PSRC.gpipe, 'GPipe, 2018'), L_(PSRC.megatron, 'Megatron-LM, 2019'), L_(PSRC.zero, 'ZeRO, 2019'), L_(PSRC.fsdp, 'PyTorch FSDP, 2023'), L_(PSRC.gpt3, 'Brown et al. · GPT-3, 2020'), L_(PSRC.llama2, 'Touvron et al. · Llama 2, 2023'), L_(PSRC.kaplan, 'Kaplan et al. · leyes de escala, 2020'), L_(PSRC.g4090, 'NVIDIA · RTX 4090')].map(a => `<p>${a}</p>`).join('')}</div>`;
+  s += NOTE(0, 490, 830, 'Benchmark del curso: «AlexNet on Imagenette · One GPU vs. Two», 2026-11-26 04:39 UTC.', {b: 3});
+  return s;
+}});
+
+/* ================= engine: beats, choreography, navigation ================= */
+const S = DEF.map((d, i) => Object.assign({}, META[i], d, {sources: [...new Set([...(META[i].sources || []), ...(d.src || [])])], points: d.points || META[i].points}));
+const stage = $('#stage');
+const STAG = 110, TYPE_SP = 17;
+let cur = 0, beat = 0, runId = 0, pend = [], tweens = new Set(), INSTANT = false, FINAL = false, iq = [], icur = 0, iseq = 0;
+let mode = 'auto', tempo = 1, adv = false, advTimer = null, hold = 8000;
+const RM = matchMedia('(prefers-reduced-motion: reduce)');
+const store = (k, v) => { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { /* storage unavailable */ } return null; };
+const section = i => (S[i] && S[i].sec) || '';
+
+function frame(i) {
+  const s = S[i], dark = ['cover', 'divider', 'question'].includes(s.layout), n = String(i + 1).padStart(2, '0');
+  const head = `<div class="hd"${F(0, 'fade')}><span class="wm"><img src="${LOGO.up}" alt="${LOGO_ALT.up}"></span><span class="sec">${section(i)}</span></div>`;
+  const eb = s.layout === 'cover' ? '' : `<div class="eb"${F(0, 'left', 150)}>${s.kicker || n}</div>`;
+  const tl = s.title.length, h = s.layout === 'cover' ? '' : `<h1 class="tt${tl > 54 ? ' l2' : tl > 40 ? ' l1' : ''}"${F(0, 'words', 220)}>${esc(s.title)}</h1>`;
+  const body = s.body ? s.body(i) : '';
+  return `<article class="slide s${i + 1} ${s.layout}${dark ? ' dark' : ''}" aria-label="Diapositiva ${i + 1}: ${esc(s.title)}">${head}${eb}${h}${s.free ? `<div class="free">${body}</div>` : `<div class="ct">${body}</div>`}<div class="ft"${F(0, 'fade', 450)}><span class="ft-l"><img class="ing" src="${LOGO.ing}" alt="${LOGO_ALT.ing}"><span>Deep Learning · Dr. León Palafox</span></span><span>${n} / ${S.length}</span></div><div class="prog" style="width:${((i + 1) / S.length * 100).toFixed(2)}%"></div></article>`;
+}
+/* split text into words / letters / typed characters */
+function splitText(el, make) {
+  const w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT), nodes = [];
+  while (w.nextNode()) nodes.push(w.currentNode);
+  let k = 0;
+  nodes.forEach(n => { const f = document.createDocumentFragment(); make(n.nodeValue, f, () => k++); n.parentNode.replaceChild(f, n); });
+  return k;
+}
+function prep(root) {
+  root.querySelectorAll('[data-fx=words]').forEach(e => splitText(e, (t, f, nx) => t.split(/(\s+)/).forEach(p => {
+    if (!p) return; if (/^\s+$/.test(p)) { f.appendChild(document.createTextNode(p)); return; }
+    const o = document.createElement('span'), i = document.createElement('span'); o.className = 'w'; i.textContent = p; i.style.setProperty('--wi', nx()); o.appendChild(i); f.appendChild(o);
+  })));
+  root.querySelectorAll('[data-fx=letters]').forEach(e => splitText(e, (t, f, nx) => [...t].forEach(c => {
+    if (/\s/.test(c)) { f.appendChild(document.createTextNode(c)); return; }
+    const s = document.createElement('span'); s.className = 'lt'; s.textContent = c; s.style.setProperty('--wi', nx()); f.appendChild(s);
+  })));
+  root.querySelectorAll('[data-fx=type]').forEach(e => { e._n = splitText(e, (t, f, nx) => [...t].forEach(c => { const s = document.createElement('span'); s.className = 'ch'; s.textContent = c; s.style.setProperty('--c', nx()); f.appendChild(s); })); });
+  root.querySelectorAll('[data-store]').forEach(e => { const v = store('dlup:' + e.dataset.store); if (v) e.textContent = v; });
+}
+function build(i, root) { root._ctl = null; root.innerHTML = frame(i); root.dataset.i = i; prep(root); }
+const beatsOf = root => { const s = S[+root.dataset.i], set = new Set([...root.querySelectorAll('[data-b]')].map(e => +e.dataset.b)); if (s && s.run) Object.keys(s.run).forEach(k => set.add(+k)); return [...set].sort((a, b) => a - b); };
+
+/* scheduler: real timers when live, a discrete event loop when rendering a final state */
+function sched(ms, fn) {
+  if (INSTANT) { iq.push({at: icur + Math.max(0, ms), fn, s: iseq++}); return; }
+  const my = runId, item = {due: performance.now() + ms, fn};
+  item.id = setTimeout(() => { const k = pend.indexOf(item); if (k >= 0) pend.splice(k, 1); if (my === runId) { try { fn(); } catch (err) { console.error(err); } } checkIdle(); }, ms);
+  pend.push(item);
+}
+function instantRun(seed) {
+  const pI = INSTANT, pq = iq, pc = icur; INSTANT = true; iq = []; icur = 0;
+  try {
+    seed(); let guard = 0;
+    while (iq.length && guard++ < 50000) {
+      let m = 0; for (let k = 1; k < iq.length; k++) if (iq[k].at < iq[m].at || (iq[k].at === iq[m].at && iq[k].s < iq[m].s)) m = k;
+      const it = iq.splice(m, 1)[0]; icur = it.at; try { it.fn(); } catch (err) { console.error(err); }
+    }
+  } finally { INSTANT = pI; iq = pq; icur = pc; }
+}
+const eio = p => p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+function tween(dur, step, ease = eio) {
+  if (INSTANT || RM.matches) { step(1); return; }
+  const my = runId, t0 = performance.now(), tw = {done: false, finish() { if (tw.done) return; tw.done = true; tweens.delete(tw); step(1); }};
+  tweens.add(tw);
+  const f = now => {
+    if (tw.done) return; if (my !== runId) { tw.done = true; tweens.delete(tw); return; }
+    const p = Math.min(1, Math.max(0, (now - t0) / dur)); step(ease(p));
+    if (p >= 1) { tw.done = true; tweens.delete(tw); checkIdle(); } else requestAnimationFrame(f);
+  };
+  requestAnimationFrame(f);
+}
+function countUp(e, d) {
+  const to = +e.dataset.count, dec = +(e.dataset.dec || 0), suf = e.dataset.suf || '', show = v => { e.textContent = (e.dataset.sep ? Math.round(v).toLocaleString('en-US') : v.toFixed(dec)) + suf; };
+  if (INSTANT || RM.matches) { show(to); return; }
+  show(0); sched(d, () => tween(1100, p => show(to * p), p => 1 - Math.pow(1 - p, 3)));
+}
+function revealBeat(root, b) {
+  if (!INSTANT) void root.offsetWidth;
+  let k = 0, tacc = 0;
+  root.querySelectorAll(`[data-b="${b}"]`).forEach(e => {
+    let d = +(e.dataset.d || 0);
+    if (e.dataset.fx === 'type') { const sp = +(e.dataset.sp || TYPE_SP); e.style.setProperty('--sp', sp + 'ms'); d += tacc; tacc = d + (e._n || 0) * sp + 160; }
+    else d += (e.dataset.i != null ? +e.dataset.i : k++) * (+(e.dataset.st || STAG));
+    e.style.setProperty('--dl', INSTANT ? '0ms' : Math.round(d) + 'ms');
+    e.classList.add('in');
+    if (e.dataset.count != null) countUp(e, d); else e.querySelectorAll('[data-count]:not([data-b])').forEach(x => countUp(x, d));
+  });
+  const s = S[+root.dataset.i], fn = s.run && s.run[b];
+  if (fn) fn(api(root));
+}
+function api(root) {
+  return {root, t: sched, tw: tween, ctl: c => (root._ctl = c), final: () => FINAL, q: s => root.querySelector(s), qa: s => [...root.querySelectorAll(s)],
+    k: n => root.querySelector(`[data-k="${n}"]`), ks: n => [...root.querySelectorAll(`[data-k="${n}"]`)],
+    on: (els, ms = 0, cls = 'on') => [].concat(els).forEach(e => e && sched(ms, () => e.classList.add(cls)))};
+}
+/* auto mode: when does each beat start? */
+function timesFor(root, bs) {
+  const s = S[+root.dataset.i], out = [];
+  let t = 0;
+  bs.forEach((b, k) => {
+    if (k === 0) { out.push(0); return; }
+    if (k === 1) t = 750 * tempo;
+    else {
+      const pb = bs[k - 1]; let n = 0, typ = 0, maxd = 0, st = STAG;
+      root.querySelectorAll(`[data-b="${pb}"]`).forEach(e => {
+        const d = +(e.dataset.d || 0);
+        if (e.dataset.fx === 'type') typ = Math.max(typ, d) + (e._n || 0) * (+(e.dataset.sp || TYPE_SP)) + 160;
+        else { if (e.dataset.i == null) n++; if (e.dataset.st) st = +e.dataset.st; maxd = Math.max(maxd, d); }
+      });
+      t += Math.max(700, (n - 1) * st + 650) * tempo + typ + maxd + ((s.len && s.len[pb]) || 0);
+    }
+    if (s.gap && s.gap[b]) t += s.gap[b] * tempo;
+    out.push(t);
+  });
+  return out;
+}
+const busy = () => pend.length > 0 || tweens.size > 0;
+function cancelAll() { if (stage._ctl && stage._ctl.stop) stage._ctl.stop(); runId++; pend.forEach(p => clearTimeout(p.id)); pend = []; tweens.forEach(t => { t.done = true; }); tweens.clear(); clearTimeout(advTimer); }
+function checkIdle() { updateStatus(); if (busy()) return; clearTimeout(advTimer); if (adv) advTimer = setTimeout(() => { if (adv && !busy()) next(true); }, hold); }
+function flush() {
+  const items = pend.slice().sort((a, b) => a.due - b.due), t0 = performance.now();
+  pend.forEach(p => clearTimeout(p.id)); pend = [];
+  stage.classList.add('no-anim');
+  [...tweens].forEach(t => t.finish());
+  instantRun(() => items.forEach(it => sched(Math.max(0, it.due - t0), it.fn)));
+  void stage.offsetWidth; stage.classList.remove('no-anim');
+  checkIdle();
+}
+function go(i) {
+  const oldW = (stage.querySelector('.prog') || {}).style?.width;
+  cancelAll(); cur = i; beat = 0;
+  build(i, stage);
+  const pg = stage.querySelector('.prog');
+  if (oldW && pg) { const w = pg.style.width; pg.style.width = oldW; void pg.offsetWidth; pg.style.width = w; }
+  const bs = beatsOf(stage);
+  if (mode === 'auto') { const ts = timesFor(stage, bs); bs.forEach((b, k) => sched(ts[k], () => { beat = Math.max(beat, b); revealBeat(stage, b); })); }
+  else sched(0, () => revealBeat(stage, 0));
+  setHash(); updateUI();
+}
+function show(i, upto = Infinity) {
+  cancelAll(); cur = i; stage.classList.add('no-anim');
+  build(i, stage);
+  const bs = beatsOf(stage).filter(b => b <= upto);
+  FINAL = true; try { bs.forEach(b => instantRun(() => sched(0, () => revealBeat(stage, b)))); } finally { FINAL = false; }
+  beat = bs.length ? bs[bs.length - 1] : 0;
+  void stage.offsetWidth; stage.classList.remove('no-anim');
+  setHash(); updateUI(); checkIdle();
+}
+function next(fromAuto) {
+  if (!fromAuto) stopAdv();
+  if (busy()) { flush(); return; }
+  const c = stage._ctl; if (c && c.next(fromAuto)) { updateStatus(); return; }   /* an interactive slide consumes the step first */
+  if (mode === 'click') { const nb = beatsOf(stage).find(b => b > beat); if (nb != null) { beat = nb; revealBeat(stage, nb); checkIdle(); return; } }
+  if (cur < S.length - 1) go(cur + 1); else stopAdv();
+}
+function prev() {
+  stopAdv();
+  const c = stage._ctl; if (c && c.prev()) return;
+  if (mode === 'click') { const bs = beatsOf(stage).filter(b => b > 0 && b <= beat); if (bs.length) { show(cur, bs.length > 1 ? bs[bs.length - 2] : 0); return; } }
+  if (cur > 0) show(cur - 1);
+}
+/* ---------- UI ---------- */
+function setHash() { try { history.replaceState(null, '', `#slide=${cur + 1}`); } catch (e) { /* sandboxed */ } }
+function updateStatus() {
+  const ev = $('#event'); if (!ev) return;
+  if (mode === 'click') { const bs = beatsOf(stage).filter(b => b > 0), k = bs.filter(b => b <= beat).length; ev.textContent = bs.length ? `Paso ${k} / ${bs.length}` : ''; }
+  else ev.textContent = busy() ? 'Animando… (→ completa)' : 'Listo';
+}
+function updateUI() {
+  $('#position').textContent = `${String(cur + 1).padStart(2, '0')} / ${S.length}`;
+  $('#play').classList.toggle('active', adv); $('#play').textContent = adv ? 'Ⅱ Pausa' : '▶ Auto';
+  updateStatus();
+}
+function stopAdv() { if (!adv) return; adv = false; clearTimeout(advTimer); updateUI(); }
+function toggleAdv() { adv = !adv; updateUI(); if (adv) checkIdle(); else clearTimeout(advTimer); }
+function setMode(v, replay = true) {
+  if (v === 'click') mode = 'click'; else { mode = 'auto'; tempo = +(v.split(':')[1]) || 1; store('dlup:auto', v); }
+  store('dlup:mode', v); $('#mode').value = v; if (replay) go(cur); else updateUI();
+}
+function resize() { const v = $('#viewport'), sc = Math.min(v.clientWidth / 1600, v.clientHeight / 900); stage.style.transform = `scale(${sc})`; stage.style.left = (v.clientWidth - 1600 * sc) / 2 + 'px'; stage.style.top = (v.clientHeight - 900 * sc) / 2 + 'px'; }
+function openIndex() { stopAdv(); $('#index-list').innerHTML = S.map((s, i) => `<button class="${i === cur ? 'current' : ''}" data-slide="${i}"><b>${String(i + 1).padStart(2, '0')}</b>${esc(s.title)}</button>`).join(''); $('#index-dialog').showModal(); }
+function openNotes() {
+  stopAdv(); const s = S[cur];
+  $('#notes-title').textContent = s.title;
+  $('#notes-content').innerHTML = `<b>Guía del profesor${s.min ? ` · ${s.min} min` : ''}</b>\n${esc((s.points || []).map(p => '• ' + p).join('\n'))}${s.sources.length ? `\n\n<b>Fuentes</b>${s.sources.map(u => `\n<a href="${esc(u)}" target="_blank" rel="noopener">${esc(u)}</a>`).join('')}` : ''}\n\nLogotipos: Universidad Panamericana e Ingenierías UP · Posgrados. Cada marca pertenece a su titular.`;
+  $('#notes-dialog').showModal();
+}
+function hint(t) { const h = $('#hint'); h.textContent = t; h.style.opacity = 1; setTimeout(() => { h.style.opacity = 0; }, 4000); }
+async function full() { try { if (document.fullscreenElement) await document.exitFullscreen(); else await document.documentElement.requestFullscreen(); } catch (e) { hint('Usa la opción de pantalla completa del navegador.'); } }
+
+$('#next').onclick = () => next(); $('#prev').onclick = () => prev(); $('#replay').onclick = () => { stopAdv(); go(cur); };
+$('#play').onclick = toggleAdv; $('#hold').onchange = e => { hold = +e.target.value; store('dlup:hold', e.target.value); if (adv) checkIdle(); };
+$('#mode').onchange = e => setMode(e.target.value); $('#index').onclick = openIndex; $('#notes').onclick = openNotes; $('#full').onclick = full;
+document.querySelectorAll('[data-close]').forEach(b => { b.onclick = () => $('#' + b.dataset.close).close(); });
+$('#index-list').onclick = e => { const b = e.target.closest('[data-slide]'); if (b) { $('#index-dialog').close(); go(+b.dataset.slide); } };
+$('#viewport').addEventListener('click', e => { if (window.getSelection().toString()) return; if (e.composedPath().some(n => n.matches && n.matches('[contenteditable],a,button,input,select,textarea,[data-int]'))) return; next(); });
+let tx = null;
+$('#viewport').addEventListener('touchstart', e => { tx = e.target.closest('[data-int]') ? null : e.touches[0].clientX; }, {passive: true});
+$('#viewport').addEventListener('touchend', e => { if (tx == null) return; const dx = e.changedTouches[0].clientX - tx; tx = null; if (dx > 60) prev(); else if (dx < -60) next(); }, {passive: true});
+stage.addEventListener('input', e => { const k = e.target.dataset && e.target.dataset.store; if (k) store('dlup:' + k, e.target.textContent); });
+document.addEventListener('keydown', e => {
+  if (document.querySelector('dialog[open]')) return;
+  const tg = e.target, k = e.key;
+  if (tg.isContentEditable || ['SELECT', 'INPUT', 'TEXTAREA'].includes(tg.tagName)) { if (k === 'Escape') tg.blur(); return; }
+  if (e.altKey || e.ctrlKey || e.metaKey) return;
+  if (tg.tagName === 'BUTTON' && (k === ' ' || k === 'Enter')) return;
+  if ([' ', 'ArrowRight', 'PageDown', 'Enter'].includes(k)) { e.preventDefault(); next(); }
+  else if (['ArrowLeft', 'PageUp', 'Backspace'].includes(k)) { e.preventDefault(); prev(); }
+  else if (k === 'ArrowDown') { e.preventDefault(); stopAdv(); if (cur < S.length - 1) go(cur + 1); }
+  else if (k === 'ArrowUp') { e.preventDefault(); stopAdv(); if (cur > 0) show(cur - 1); }
+  else if (k === 'Home') { stopAdv(); go(0); }
+  else if (k === 'End') { stopAdv(); go(S.length - 1); }
+  else {
+    const c = k.toLowerCase();
+    if (c === 'r') { stopAdv(); go(cur); } else if (c === 'c') setMode(mode === 'click' ? (store('dlup:auto') || 'auto:1') : 'click');
+    else if (c === 'a') toggleAdv(); else if (c === 'g') openIndex(); else if (c === 'n') openNotes(); else if (c === 'f') full();
+  }
+});
+document.addEventListener('fullscreenchange', () => { document.body.classList.toggle('fs', !!document.fullscreenElement); setTimeout(resize, 60); });
+let uiT = null;
+document.addEventListener('mousemove', () => { if (!document.body.classList.contains('fs')) return; document.body.classList.add('show-ui'); clearTimeout(uiT); uiT = setTimeout(() => document.body.classList.remove('show-ui'), 2400); });
+window.addEventListener('resize', resize);
+document.addEventListener('visibilitychange', () => { if (document.hidden) stopAdv(); });
+window.addEventListener('beforeprint', () => {
+  const deck = $('#print-deck'); deck.innerHTML = '';
+  FINAL = true;
+  try { S.forEach((s, i) => { const p = document.createElement('div'); p.className = 'print-page no-anim'; deck.appendChild(p); build(i, p); beatsOf(p).forEach(b => instantRun(() => sched(0, () => revealBeat(p, b)))); }); } finally { FINAL = false; }
+});
+window.addEventListener('afterprint', () => { $('#print-deck').innerHTML = ''; });
+(() => {
+  const m = store('dlup:mode'); if (m && [...$('#mode').options].some(o => o.value === m)) setMode(m, false);
+  const h = store('dlup:hold'); if (h) { hold = +h; $('#hold').value = h; }
+  const q = new URLSearchParams(location.hash.slice(1)), start = Math.max(0, Math.min(S.length - 1, (+q.get('slide') || 1) - 1));
+  resize(); go(start);
+  setTimeout(() => { $('#hint').style.opacity = 0; }, 8500);
+})();
+</script></body></html>

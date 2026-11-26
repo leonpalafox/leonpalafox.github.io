@@ -34,6 +34,10 @@ export const DECKS = [
     slug: 'deep-learning/class-06-transformers',
     standalone: true,
   },
+  {
+    slug: 'deep-learning/class-07-entrenamiento-paralelo',
+    standalone: true,
+  },
 ];
 
 const root = process.cwd();
