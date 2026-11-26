@@ -553,7 +553,44 @@ blend followed them about halfway. That is the blend doing what it is for, and i
 depends on a weight the data cannot pin down -- which is why the weight is stated
 on the page rather than buried here.
 
-## 12. References
+## 12. Audit notes: what a line-by-line check against the code found
+
+These were found by re-reading this document against `pollofpolls/stats.py`
+and re-running the Week 12 panel against the live source pages (the re-fetch
+reproduced the published consensus exactly, and FOX's page was read
+independently of the parser). None changes a published ranking. Each changes
+how a number should be *read*.
+
+1. **The effective number of sources is capped at the panel size, so it is not
+   informative.** `_diagnose` inverts the Spearman-Brown formula and then clips
+   the result to `S`. Whenever the stepped-up reliability exceeds roughly 0.67 the
+   unclipped value is far above `S`, so the published "9.00 effective sources" is
+   the cap, not a measurement. It also does not measure independence: ballots
+   correlate at 0.96 mostly because the teams really differ, and the quantity
+   that matters, the correlation of the *errors* once the team effect is removed,
+   cannot be estimated without a ground truth. Read it as "no evidence of
+   redundancy was detected", not "nine independent voices". The Student-t
+   critical value therefore uses `S - 1` degrees of freedom and adds no
+   correlation penalty.
+2. **"Split-half" is the stepped-up value.** The 0.994 printed as split-half in
+   the posts is the Spearman-Brown-corrected full-panel reliability, averaged over
+   200 random splits. The raw half-to-half correlation is lower (section 4 shows
+   0.983 stepping up to 0.991) and is not published.
+3. **The score interval is conservative.** In a normal-normal model the posterior
+   variance is `lambda * V[t]`. The implemented `se` adds `tau^2 * (1 - lambda)`,
+   which for homoscedastic noise equals `lambda * mean(V)`, so the interval is
+   roughly `sqrt(2)` wider than the textbook posterior. It errs toward
+   over-reporting uncertainty and it is applied identically every week, so
+   week-to-week comparisons are unaffected.
+4. **One shrinkage factor for all teams.** `lambda` uses the *mean* jackknife
+   variance, so a contested team is not shrunk harder than a settled one. With
+   `lambda` near 0.995 the effect is negligible; it would matter in a week of
+   real scatter.
+5. **Source tags.** The module docstring in `stats.py` used to describe a
+   one-way ANOVA estimator that the code does not use; it now matches this
+   document.
+
+## 13. References
 
 - Efron, B. & Stein, C. (1981). *The Jackknife Estimate of Variance.* Annals of
   Statistics 9(3) — the leave-one-out variance used in §4.

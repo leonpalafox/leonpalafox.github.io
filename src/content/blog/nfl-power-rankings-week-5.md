@@ -851,7 +851,7 @@ One result the panel is arguing with: **Minnesota is 4-0 and ranked eighth**. Th
 
 <div id="mv-root" class="mv-root">
   <div class="mv-head">
-    <div class="mv-kicker" id="mv-kicker">Week 2 → Week 3</div>
+    <div class="mv-kicker" id="mv-kicker">Week 4 → Week 5</div>
     <h3 class="mv-title" id="mv-title">Movement</h3>
     <p class="mv-summary" id="mv-summary"></p>
   </div>
@@ -1069,7 +1069,7 @@ One result the panel is arguing with: **Minnesota is 4-0 and ranked eighth**. Th
   var riser = entries.reduce(function (a, b) { return b.delta > a.delta ? b : a; }, entries[0]);
   var faller = entries.reduce(function (a, b) { return b.delta < a.delta ? b : a; }, entries[0]);
   var moved = entries.filter(function (e) { return e.delta !== 0; }).length;
-  document.getElementById('mv-kicker').textContent = 'Week ' + DATA.previousWeek + ' → this week';
+  document.getElementById('mv-kicker').textContent = 'Week ' + DATA.previousWeek + ' → Week ' + (DATA.previousWeek + 1);
   document.getElementById('mv-title').textContent =
     riser.abbr + ' up ' + riser.delta + ', ' + faller.abbr + ' down ' + Math.abs(faller.delta);
   document.getElementById('mv-summary').innerHTML =
@@ -1089,7 +1089,7 @@ Fifteen games in Week 5: Kansas City and Carolina are on bye. Every game is pric
 
 <div id="h2h-root" class="h2h-root">
   <div class="h2h-head">
-    <div class="h2h-kicker" id="h2h-kicker">2026 season · Week 2 · head to head</div>
+    <div class="h2h-kicker" id="h2h-kicker">2026 season · Week 5 · head to head</div>
     <h3 class="h2h-title">What the consensus says about this week.</h3>
     <p class="h2h-lede" id="h2h-lede">Every game, priced from the poll of polls alone. Win probability is the shaded side. The market column is shown for comparison and was <em>not</em> an input.</p>
   </div>

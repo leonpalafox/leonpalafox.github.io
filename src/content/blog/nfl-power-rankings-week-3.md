@@ -1070,7 +1070,7 @@ because someone below it won by more.
   var riser = entries.reduce(function (a, b) { return b.delta > a.delta ? b : a; }, entries[0]);
   var faller = entries.reduce(function (a, b) { return b.delta < a.delta ? b : a; }, entries[0]);
   var moved = entries.filter(function (e) { return e.delta !== 0; }).length;
-  document.getElementById('mv-kicker').textContent = 'Week ' + DATA.previousWeek + ' → this week';
+  document.getElementById('mv-kicker').textContent = 'Week ' + DATA.previousWeek + ' → Week ' + (DATA.previousWeek + 1);
   document.getElementById('mv-title').textContent =
     riser.abbr + ' up ' + riser.delta + ', ' + faller.abbr + ' down ' + Math.abs(faller.delta);
   document.getElementById('mv-summary').innerHTML =
@@ -1091,7 +1091,7 @@ Every team plays in Week 3. All 16 games are priced below from the consensus alo
 
 <div id="h2h-root" class="h2h-root">
   <div class="h2h-head">
-    <div class="h2h-kicker" id="h2h-kicker">2026 season · Week 2 · head to head</div>
+    <div class="h2h-kicker" id="h2h-kicker">2026 season · Week 3 · head to head</div>
     <h3 class="h2h-title">What the consensus says about this week.</h3>
     <p class="h2h-lede" id="h2h-lede">Every game, priced from the poll of polls alone. Win probability is the shaded side. The market column is shown for comparison and was <em>not</em> an input.</p>
   </div>

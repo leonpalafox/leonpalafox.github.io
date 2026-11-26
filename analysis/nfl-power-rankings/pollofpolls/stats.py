@@ -20,27 +20,28 @@ better** (rank 1 maps to the largest z). Because a uniform permutation fixes
 ``mu_s`` and ``sd_s`` analytically, no source can gain influence merely by
 using a wider or narrower spread.
 
-Pooling then treats each source as a replicate measurement in a one-way random
-effects model::
+Pooling then treats each source as a replicate measurement of a latent team
+quality, using a prior-weighted mean over sources::
 
-    z[s][t] = theta[t] + e[s][t],   e ~ (0, sigma_w^2)
+    z[s][t] = theta[t] + e[s][t]
+    zbar[t] = sum_s w[s] * z[s][t] / sum_s w[s]
 
-The between-team variance of the observed means is inflated by the within-team
-sampling variance, so variance components are estimated by ANOVA::
+The sampling variance of each pooled mean is estimated per team with a
+leave-one-source-out jackknife, ``V[t]``. The prior variance of true team
+quality comes from the method of moments, and the reliability factor from it::
 
-    sigma_w^2 = MSW                       (within-team mean square)
-    sigma_b^2 = max(0, (MSB - MSW) / S)   (between-team, deconvolved)
+    tau^2  = max(0, Var_t(zbar) - mean_t V[t])
+    lambda = tau^2 / (tau^2 + mean_t V[t])
 
-and each team's pooled score is shrunk toward the grand mean by the resulting
-reliability factor ``lambda = sigma_b^2 / (sigma_b^2 + sigma_w^2 / S)``::
-
-    theta_hat[t] = grand_mean + lambda * (mean_s z[s][t] - grand_mean)
-    se[t]        = sqrt(sigma_b^2 * (1 - lambda))
+    theta_hat[t] = grand_mean + lambda * (zbar[t] - grand_mean)
+    se[t]        = sqrt(lambda * V[t] + tau^2 * (1 - lambda))
 
 This is the James-Stein / empirical-Bayes estimator: it is the posterior mean
-under a normal prior, it dominates the raw mean on squared-error loss, and it
-keeps a team that one outlet loves but nobody else does from jumping the
-consensus. The unshrunk weighted mean is retained alongside it for audit.
+under a normal prior, and it keeps a team that one outlet loves but nobody else
+does from jumping the consensus. The unshrunk weighted mean is retained
+alongside it for audit. (An earlier version of this docstring described a
+one-way ANOVA estimate of the variance components; the code never did that, and
+METHODOLOGY.md section 5 is the authoritative description.)
 
 Uncertainty has two distinct sources and both are reported:
 

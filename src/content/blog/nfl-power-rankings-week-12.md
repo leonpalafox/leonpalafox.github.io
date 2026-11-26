@@ -1,12 +1,12 @@
 ---
 title: "NFL Poll of Polls: Week 12"
-description: "San Francisco takes No. 1 from Buffalo with both at 9-1, Jacksonville falls three places, and Kansas City climbs four."
+description: "San Francisco takes No. 1 from Buffalo with both at 9-1, Jacksonville falls four places, and Kansas City climbs three."
 pubDate: 2026-11-25
 lang: en
 tags: ["data-viz", "nfl", "statistics"]
 ---
 
-Week 11 produced the season's first change at the top. San Francisco beat Minnesota 35–10 at home, and with Buffalo beating Miami 26–9 the panel has moved the 49ers ahead of the Bills. Both are 9–1.
+Week 11 ended Buffalo's four-week run at No. 1. San Francisco beat Minnesota 35–10 at home, and with Buffalo beating Miami 26–9 the panel has moved the 49ers ahead of the Bills. Both are 9–1.
 
 The week's other result matters as much: **Jacksonville lost 23–18 to the Giants**, the week's biggest fall at four places, while Kansas City climbed three on the back of a 34–7 win over Arizona.
 
@@ -842,7 +842,7 @@ Here is where the panel landed after Week 11.
 })();
 </script>
 
-San Francisco takes the top spot on six of nine first-place votes, and the gap to Buffalo is 0.045 rank standard deviations — the closest the top two have been all season.
+San Francisco takes the top spot on six of nine first-place votes, and the gap to Buffalo is 0.045 rank standard deviations — the narrowest since Week 5, and a shade tighter than last week's 0.051 with the order now reversed.
 
 Chicago holds third. **Denver climbs one to fourth and Kansas City three to fifth, and the two are separated by 0.001** — a tie in everything but name, and the tightest pairing anywhere in the table.
 
@@ -854,7 +854,7 @@ Minnesota falls two to eighth and Cincinnati two to ninth. Philadelphia is the b
 
 <div id="mv-root" class="mv-root">
   <div class="mv-head">
-    <div class="mv-kicker" id="mv-kicker">Week 2 → Week 3</div>
+    <div class="mv-kicker" id="mv-kicker">Week 11 → Week 12</div>
     <h3 class="mv-title" id="mv-title">Movement</h3>
     <p class="mv-summary" id="mv-summary"></p>
   </div>
@@ -1072,7 +1072,7 @@ Minnesota falls two to eighth and Cincinnati two to ninth. Philadelphia is the b
   var riser = entries.reduce(function (a, b) { return b.delta > a.delta ? b : a; }, entries[0]);
   var faller = entries.reduce(function (a, b) { return b.delta < a.delta ? b : a; }, entries[0]);
   var moved = entries.filter(function (e) { return e.delta !== 0; }).length;
-  document.getElementById('mv-kicker').textContent = 'Week ' + DATA.previousWeek + ' → this week';
+  document.getElementById('mv-kicker').textContent = 'Week ' + DATA.previousWeek + ' → Week ' + (DATA.previousWeek + 1);
   document.getElementById('mv-title').textContent =
     riser.abbr + ' up ' + riser.delta + ', ' + faller.abbr + ' down ' + Math.abs(faller.delta);
   document.getElementById('mv-summary').innerHTML =
@@ -1088,11 +1088,13 @@ Minnesota falls two to eighth and Cincinnati two to ninth. Philadelphia is the b
 
 ## This week's matchups, priced
 
-Sixteen games in Week 12: every team plays, with the Thanksgiving slate starting on Thursday. Every game is priced below from the consensus alone, with a sandbox for building any matchup you like.
+Sixteen games in Week 12, and every team plays. The week opens Wednesday night with Green Bay at the Rams, Thanksgiving brings three more (Chicago at Detroit, Philadelphia at Dallas and Kansas City at Buffalo), and Denver at Pittsburgh follows on Friday.
+
+The consensus makes Kansas City at Buffalo the marquee game: the Bills are 4.0-point favourites at home (62%), a point wider than the market's 3.0. The two disagree on the favourite in just two games. **Chicago at Detroit**: the consensus has the Lions by 1.2, while the market has the Bears by 1.5. **New York Jets at Miami**: the consensus calls it a coin flip with Miami by 0.2, while the market has the Jets by 4.5, the widest gap on the slate. Every game is priced below from the consensus alone, with a sandbox for building any matchup you like.
 
 <div id="h2h-root" class="h2h-root">
   <div class="h2h-head">
-    <div class="h2h-kicker" id="h2h-kicker">2026 season · Week 2 · head to head</div>
+    <div class="h2h-kicker" id="h2h-kicker">2026 season · Week 12 · head to head</div>
     <h3 class="h2h-title">What the consensus says about this week.</h3>
     <p class="h2h-lede" id="h2h-lede">Every game, priced from the poll of polls alone. Win probability is the shaded side. The market column is shown for comparison and was <em>not</em> an input.</p>
   </div>
@@ -1751,9 +1753,9 @@ Sixteen games in Week 12: every team plays, with the Thanksgiving slate starting
 | USA Today | Nate Davis | 2.00 | 0.960 |
 | Sports Illustrated | Conor Orr | 2.12 | 0.949 |
 
-Agreement is the highest of the season: mean pairwise Spearman **ρ = 0.960**, split-half 0.994. FOX and Bleacher Report are joint-tightest at 0.69 positions; Sports Illustrated is furthest at 2.12.
+Agreement is the highest of the season: mean pairwise Spearman **ρ = 0.960**, split-half reliability 0.994. FOX and Bleacher Report are joint-tightest at 0.69 positions; Sports Illustrated is furthest at 2.12.
 
-**Eight of the nine ballots put San Francisco and Buffalo first and second**, split six-three on their order. USA Today is the exception, with Chicago second.
+**Eight of the nine ballots put San Francisco and Buffalo first and second**, split five–three on their order. USA Today is the exception, with Chicago second.
 
 <a id="sources"></a>
 
@@ -1794,7 +1796,7 @@ This week's panel — nine ballots, every one verified complete:
 
 Prisco's column has no derivable per-week URL, so the pipeline normally reads the
 CBS power-rankings hub, which overwrites itself each week. This week the hub was a
-day behind its own article: at build time it still served the **Week 11** table,
+week behind its own article: at build time it still served the **Week 11** table,
 dated 17 November, while the Week 12 column had already been published under a
 separate URL.
 
