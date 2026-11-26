@@ -8,7 +8,7 @@ tags: ["data-viz", "nfl", "statistics"]
 
 Week 11 produced the season's first change at the top. San Francisco beat Minnesota 35–10 at home, and with Buffalo beating Miami 26–9 the panel has moved the 49ers ahead of the Bills. Both are 9–1.
 
-The week's other result matters as much: **Jacksonville lost 23–18 to the Giants**, dropping from third to sixth, and Kansas City climbed four places on the back of a 34–7 win over Arizona.
+The week's other result matters as much: **Jacksonville lost 23–18 to the Giants**, the week's biggest fall at four places, while Kansas City climbed three on the back of a 34–7 win over Arizona.
 
 This is the same poll of polls as previous weeks: the week's rankings standardised and pooled, every team's move charted, each team's record alongside its ranking, and a simulated path to the Super Bowl.
 
@@ -842,13 +842,13 @@ Here is where the panel landed after Week 11.
 })();
 </script>
 
-San Francisco takes the top spot on six of eight first-place votes, and the gap to Buffalo is 0.067 rank standard deviations — a lead, but a narrow one, and wider than last week's 0.051, when the two were as close as they have been.
+San Francisco takes the top spot on six of nine first-place votes, and the gap to Buffalo is 0.045 rank standard deviations — the closest the top two have been all season.
 
-Chicago holds third, and **Kansas City is the week's climber, up four to fourth** after beating Arizona by 27. Denver stays fifth within 0.014 of the Chiefs.
+Chicago holds third. **Denver climbs one to fourth and Kansas City three to fifth, and the two are separated by 0.001** — a tie in everything but name, and the tightest pairing anywhere in the table.
 
-**Jacksonville falls three to sixth** after the loss in New Jersey, and Minnesota falls two to eighth after being beaten at home by the 49ers.
+**Jacksonville is the week's biggest fall, down four to seventh**, after losing 23–18 to the Giants. Detroit climbs three to sixth behind them.
 
-Cincinnati drops three to tenth, and Philadelphia is the week's other climber at four.
+Minnesota falls two to eighth and Cincinnati two to ninth. Philadelphia is the biggest climber at four.
 
 <a id="movers"></a>
 
@@ -1737,23 +1737,23 @@ Sixteen games in Week 12: every team plays, with the Thanksgiving slate starting
 
 ## The panel
 
-8 outlets this week. Mean distance from the consensus order, in rank positions:
+9 outlets this week. Mean distance from the consensus order, in rank positions:
 
 | Outlet | Analyst | Mean gap | ρ vs consensus |
 |--------|---------|----------|----------------|
-| Sharp Football Analysis | Raymond Summerlin | 0.69 | 0.993 |
-| Bleacher Report | B/R NFL staff | 0.75 | 0.992 |
-| FOX Sports | Ralph Vacchiano | 0.88 | 0.991 |
-| Sporting News | Vinnie Iyer | 1.25 | 0.983 |
-| theScore | theScore NFL desk | 1.31 | 0.983 |
-| NFL.com | Nick Shook | 1.75 | 0.968 |
-| USA Today | Nate Davis | 1.94 | 0.963 |
-| Sports Illustrated | Conor Orr | 2.06 | 0.956 |
+| FOX Sports | Ralph Vacchiano | 0.69 | 0.993 |
+| Bleacher Report | B/R NFL staff | 0.69 | 0.993 |
+| CBS Sports | Pete Prisco | 0.81 | 0.991 |
+| Sharp Football Analysis | Raymond Summerlin | 0.81 | 0.993 |
+| Sporting News | Vinnie Iyer | 1.06 | 0.986 |
+| theScore | theScore NFL desk | 1.06 | 0.988 |
+| NFL.com | Nick Shook | 1.75 | 0.967 |
+| USA Today | Nate Davis | 2.00 | 0.960 |
+| Sports Illustrated | Conor Orr | 2.12 | 0.949 |
 
-Agreement is the highest of the season: mean pairwise Spearman **ρ = 0.957**, split-half 0.993. Sharp Football is closest to the consensus at 0.69 positions; Sports Illustrated is furthest at 2.06.
+Agreement is the highest of the season: mean pairwise Spearman **ρ = 0.960**, split-half 0.994. FOX and Bleacher Report are joint-tightest at 0.69 positions; Sports Illustrated is furthest at 2.12.
 
-**Seven of the eight ballots put San Francisco and Buffalo first and second** in some order. USA Today is the exception, with Chicago second.
-
+**Eight of the nine ballots put San Francisco and Buffalo first and second**, split six-three on their order. USA Today is the exception, with Chicago second.
 
 <a id="sources"></a>
 
@@ -1776,10 +1776,11 @@ than in every post:
   method does *not* claim.
 - `analysis/nfl-power-rankings/README.md` — the pipeline and how to run it.
 
-This week's panel — eight ballots, every one verified complete:
+This week's panel — nine ballots, every one verified complete:
 
 | Outlet | Analyst | This week's ballot |
 |--------|---------|--------------------|
+| CBS Sports | Pete Prisco | [cbssports.com](https://www.cbssports.com/nfl/news/priscos-nfl-week-12-power-rankings-thanksgiving-games/) |
 | NFL.com | Nick Shook | [nfl.com](https://www.nfl.com/news/nfl-power-rankings-week-12-2026-nfl-season) |
 | FOX Sports | Ralph Vacchiano | [foxsports.com](https://www.foxsports.com/stories/nfl/2026-nfl-power-rankings-week-12) |
 | Sports Illustrated | Conor Orr | [si.com](https://www.si.com/nfl/conor-orr-week-12-nfl-power-rankings-49ers-cowboys-bengals) |
@@ -1789,32 +1790,34 @@ This week's panel — eight ballots, every one verified complete:
 | Bleacher Report | B/R NFL staff | [bleacherreport.com](https://bleacherreport.com/articles/25536885-br-experts-week-12-nfl-power-rankings) |
 | USA Today | Nate Davis | [centraloregondaily.com](https://www.centraloregondaily.com/sports/nfl-power-rankings-week-12-how-far-do-bengals-fall-after-mondays-loss-to-commanders/article_34549fa9-c6f2-5177-ade8-da2847eab2fb.html) (syndicated) |
 
-### The CBS hub had not rolled over
+### A stale hub nearly cost a ballot
 
-This is the first time a rolling hub has cost the panel a ballot, and it is worth
-describing precisely because the pipeline caught it rather than absorbing it.
+Prisco's column has no derivable per-week URL, so the pipeline normally reads the
+CBS power-rankings hub, which overwrites itself each week. This week the hub was a
+day behind its own article: at build time it still served the **Week 11** table,
+dated 17 November, while the Week 12 column had already been published under a
+separate URL.
 
-Prisco's column has no derivable per-week URL, so the pipeline reads the CBS
-power-rankings hub, which overwrites itself each week. This week the hub was still
-serving the **Week 11** table, dated 17 November, while every other outlet had
-moved to Week 12. The freshness gate refused it with the reason recorded in the
-run log:
+The freshness gate refused the hub and said exactly why:
 
 ```
 cbs-prisco: stale page dated 2026-11-17 (week 12 should be 2026-11-24..2026-11-30)
 ```
 
-That is the gate doing exactly what it was built for. Without it, a Week 11 ballot
-would have been averaged into a Week 12 consensus and nothing would have looked
-wrong. The cost is a panel of eight instead of nine, which weights each remaining
-ballot slightly more.
+That is the gate doing its job — without it a Week 11 ballot would have been
+averaged into a Week 12 consensus and nothing would have looked wrong. But the
+lesson is that the gate is a detector, not a discovery tool: the ballot was still
+available, just not where the pipeline expected it. Searching for the column by
+headline found the per-week article, which is now the primary route for CBS with
+the hub as fallback.
 
-**Neil Reynolds' UK column** is also absent again this week — it returned for one
-week after an eight-week gap and has now missed another. Its slug is a plain 404.
+**Neil Reynolds' UK column** is absent again. It returned for one week after an
+eight-week gap and has now missed another; the year-suffixed slug is a plain 404,
+verified against last week's edition which still resolves.
 
 **ESPN** remains absent permanently: every URL returns an empty `HTTP 202` to a
 plain request.
 
-Seven ballots passed the freshness gate against their own `datePublished` inside
+Eight ballots passed the freshness gate against their own `datePublished` inside
 the November 24–30 window; USA Today's reprint carries no metadata and is logged as
 unverified in the payload, as always.

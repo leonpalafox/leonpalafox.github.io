@@ -22,11 +22,12 @@
       "kind": "analyst",
       "url_tpl": "https://www.cbssports.com/nfl/news/priscos-nfl-week-{week}-power-rankings/",
       "urls": [
+        "https://www.cbssports.com/nfl/news/priscos-nfl-week-12-power-rankings-thanksgiving-games/",
         "https://www.cbssports.com/nfl/powerrankings/"
       ],
       "extract": "cbs_table",
       "prior_weight": 1.0,
-      "tier": "Analyst column; the hub is the only route and it is a rolling page. In week 12 the hub had not rolled over -- it still served the week 11 table dated 17 November -- so the freshness gate rejected it."
+      "tier": "Analyst column. The hub at /nfl/powerrankings/ is the usual route but it can lag its own article: in week 12 the hub still served the week-11 table while the per-week article /nfl/news/priscos-nfl-week-N-power-rankings-<slug>/ had already published. When the gate rejects the hub as stale, search for the article slug and put it first."
     },
     {
       "id": "fox-vacchiano",
