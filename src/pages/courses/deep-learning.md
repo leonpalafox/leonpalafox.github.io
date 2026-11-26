@@ -90,9 +90,76 @@ A comprehensive journey through the foundations and state-of-the-art of Deep Neu
 5. **Tres variantes** — solo encoder (BERT), solo decoder (GPT) y encoder–decoder (T5, BART); quién puede ver a quién y cómo elegir.
 6. **Panorama** — BERT en números, de 2017 a hoy y el precio de la escala: de 65M a ~10T parámetros.
 
-## Assessment
+## Evaluación
 
-Assessment details and grading weights have not yet been posted.
+La calificación del curso se compone de **60 % proyecto final** (en equipos de hasta 3 personas) y **40 % tareas y participación**. **Fecha de entrega del proyecto: jueves 3 de diciembre de 2026.**
+
+### Rúbrica del proyecto final
+
+El proyecto final consiste en el **despliegue completo, en un sitio web, de una solución basada en aprendizaje profundo**. El modelo debe haber sido **entrenado desde cero o ajustado (ajuste fino o *fine-tuning*)** por el equipo; no basta con usar un modelo ya entrenado tal como viene.
+
+#### Reglas sobre el modelo
+
+| Tipo de modelo | ¿Qué se permite? |
+| -------------- | ---------------- |
+| Basado en imágenes (clasificación, detección, segmentación, etc.) | Entrenamiento desde cero **o** fine-tuning de un modelo preentrenado. |
+| Series de tiempo | Entrenamiento desde cero **o** fine-tuning de un modelo preentrenado. |
+| LLM (modelos de lenguaje grandes) | **Solo entrenamiento desde cero.** No se permite hacer fine-tuning de un LLM ni limitarse a consumir uno por API. |
+| Cualquier otra modalidad (audio, texto que no sea un LLM, datos tabulares) | **Solo entrenamiento desde cero.** El fine-tuning se acepta únicamente en modelos de imágenes y de series de tiempo. |
+
+#### Qué se entrega
+
+1. **Un archivo PDF** que describa:
+   - **El dataset:** origen y licencia, tamaño, clases o variables, preprocesamiento, particiones de entrenamiento, validación y prueba, y limitaciones o sesgos conocidos.
+   - **El modelo:** el tipo de red (por ejemplo CNN, LSTM, GRU, Transformer o LLM), si fue entrenado desde cero o ajustado (y a partir de qué modelo base), procedimiento de entrenamiento, métricas y resultados.
+   - **La arquitectura:** una **explicación o un diagrama de arquitectura** del modelo de aprendizaje profundo (o ambos). Debe mostrar las capas o bloques principales y cómo fluyen los datos de la entrada a la salida.
+2. **El enlace al sitio web** con el despliegue, escrito en el PDF y en el mensaje de entrega.
+
+**El PDF no debe contener código**: ni fragmentos, ni capturas de pantalla de código, ni pseudocódigo. Las decisiones se explican con texto, tablas, figuras y el diagrama de arquitectura.
+
+#### Requisitos mínimos
+
+- El sitio es **público** y se puede abrir sin crear una cuenta ni instalar nada.
+- El sitio **ejecuta el modelo entrenado por el equipo**: una persona externa introduce una entrada y obtiene una predicción.
+- El sitio debe **seguir disponible hasta que se publiquen las calificaciones**.
+- El PDF y el sitio describen el mismo modelo.
+
+Un proyecto que no cumpla las reglas sobre el modelo obtiene **0 puntos en el criterio «Modelo y entrenamiento»**. Si el sitio no abre o no ejecuta el modelo, obtiene **0 puntos en «Despliegue»**.
+
+#### Criterios y puntos (100 en total)
+
+| Criterio | Puntos |
+| -------- | :----: |
+| Dataset | 20 |
+| Modelo y entrenamiento | 30 |
+| Despliegue | 30 |
+| Documento | 20 |
+
+Cada criterio se califica en tres niveles: **Sobresaliente** (90–100 % de los puntos del criterio), **Suficiente** (60–89 %) e **Insuficiente** (menos de 60 %).
+
+**Dataset (20 puntos)**
+
+- *Sobresaliente:* describe origen, licencia, tamaño, clases o variables, preprocesamiento y particiones; analiza sesgos, desbalance y limitaciones, y justifica por qué el dataset es adecuado para el problema.
+- *Suficiente:* describe el origen, el tamaño y las particiones, pero el análisis de sesgos o limitaciones es superficial o falta.
+- *Insuficiente:* descripción incompleta o confusa; no se puede saber cómo se dividieron los datos.
+
+**Modelo y entrenamiento (30 puntos)**
+
+- *Sobresaliente:* cumple las reglas sobre el modelo. Incluye una explicación o un diagrama de arquitectura claro y correcto, justifica la arquitectura, explica el procedimiento (hiperparámetros, regularización y modelo base si hubo fine-tuning), reporta métricas adecuadas en datos de prueba y las compara con una referencia, por ejemplo un modelo más simple.
+- *Suficiente:* cumple las reglas y reporta métricas, pero la explicación o el diagrama de la arquitectura es vago, o la justificación o la comparación con una referencia es débil.
+- *Insuficiente:* falta la explicación o el diagrama de la arquitectura; métricas ausentes o evaluadas solo con datos de entrenamiento; el procedimiento no se entiende.
+
+**Despliegue (30 puntos)**
+
+- *Sobresaliente:* sitio público y estable que ejecuta el modelo propio. La interfaz es clara, maneja entradas inválidas sin fallar y responde en un tiempo razonable.
+- *Suficiente:* el sitio funciona, pero es poco claro, es lento o falla con ciertas entradas.
+- *Insuficiente:* el sitio no abre, no ejecuta el modelo o requiere cuenta o instalación.
+
+**Documento (20 puntos)**
+
+- *Sobresaliente:* PDF claro y bien organizado, con figuras o tablas útiles, resultados y limitaciones discutidos con honestidad, el enlace al sitio visible y **sin ningún código**.
+- *Suficiente:* contiene la información pedida, pero está desordenado o tiene poco análisis de resultados.
+- *Insuficiente:* información faltante, difícil de seguir o incluye código.
 
 ## Schedule & Office Hours
 
