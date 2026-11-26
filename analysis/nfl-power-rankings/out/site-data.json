@@ -1,72 +1,72 @@
 {
-  "week": 11,
+  "week": 12,
   "season": 2026,
-  "generated": "2026-11-18T23:03:51Z",
+  "generated": "2026-11-26T02:01:57Z",
   "method": "Each source's 1-32 ballot is standardised to rank-standard-deviation units, pooled in a one-way random-effects model, and shrunk toward the panel mean (empirical Bayes), with uncertainty from both the residual disagreement and a bootstrap over sources. Full derivation in the post.",
   "movement": {
-    "previousWeek": 10,
+    "previousWeek": 11,
     "biggestRiser": {
-      "team": "Carolina Panthers",
-      "abbr": "CAR",
-      "conference": "NFC",
-      "division": "South",
-      "rank": 16,
-      "previousRank": 22,
-      "delta": 6,
-      "record": "4-5"
+      "team": "Kansas City Chiefs",
+      "abbr": "KC",
+      "conference": "AFC",
+      "division": "West",
+      "rank": 4,
+      "previousRank": 8,
+      "delta": 4,
+      "record": "8-2"
     },
     "biggestFaller": {
-      "team": "New England Patriots",
-      "abbr": "NE",
+      "team": "Jacksonville Jaguars",
+      "abbr": "JAX",
       "conference": "AFC",
-      "division": "East",
-      "rank": 19,
-      "previousRank": 14,
-      "delta": -5,
-      "record": "5-5"
+      "division": "South",
+      "rank": 6,
+      "previousRank": 3,
+      "delta": -3,
+      "record": "7-3"
     },
     "unchanged": 8,
     "moved": 24,
     "entries": [
       {
-        "team": "Buffalo Bills",
-        "abbr": "BUF",
-        "conference": "AFC",
-        "division": "East",
-        "rank": 1,
-        "previousRank": 1,
-        "delta": 0,
-        "record": "8-1"
-      },
-      {
         "team": "San Francisco 49ers",
         "abbr": "SF",
         "conference": "NFC",
         "division": "West",
-        "rank": 2,
+        "rank": 1,
         "previousRank": 2,
-        "delta": 0,
-        "record": "8-1"
+        "delta": 1,
+        "record": "9-1"
       },
       {
-        "team": "Jacksonville Jaguars",
-        "abbr": "JAX",
+        "team": "Buffalo Bills",
+        "abbr": "BUF",
         "conference": "AFC",
-        "division": "South",
-        "rank": 3,
-        "previousRank": 4,
-        "delta": 1,
-        "record": "7-2"
+        "division": "East",
+        "rank": 2,
+        "previousRank": 1,
+        "delta": -1,
+        "record": "9-1"
       },
       {
         "team": "Chicago Bears",
         "abbr": "CHI",
         "conference": "NFC",
         "division": "North",
+        "rank": 3,
+        "previousRank": 4,
+        "delta": 1,
+        "record": "8-2"
+      },
+      {
+        "team": "Kansas City Chiefs",
+        "abbr": "KC",
+        "conference": "AFC",
+        "division": "West",
         "rank": 4,
-        "previousRank": 3,
-        "delta": -1,
-        "record": "7-2"
+        "previousRank": 8,
+        "delta": 4,
+        "record": "8-2"
       },
       {
         "team": "Denver Broncos",
@@ -76,57 +76,57 @@
         "rank": 5,
         "previousRank": 5,
         "delta": 0,
-        "record": "7-2"
+        "record": "8-2"
       },
       {
-        "team": "Minnesota Vikings",
-        "abbr": "MIN",
-        "conference": "NFC",
-        "division": "North",
+        "team": "Jacksonville Jaguars",
+        "abbr": "JAX",
+        "conference": "AFC",
+        "division": "South",
         "rank": 6,
-        "previousRank": 11,
-        "delta": 5,
-        "record": "7-2"
-      },
-      {
-        "team": "Cincinnati Bengals",
-        "abbr": "CIN",
-        "conference": "AFC",
-        "division": "North",
-        "rank": 7,
-        "previousRank": 8,
-        "delta": 1,
-        "record": "7-2"
-      },
-      {
-        "team": "Kansas City Chiefs",
-        "abbr": "KC",
-        "conference": "AFC",
-        "division": "West",
-        "rank": 8,
-        "previousRank": 6,
-        "delta": -2,
-        "record": "7-2"
+        "previousRank": 3,
+        "delta": -3,
+        "record": "7-3"
       },
       {
         "team": "Detroit Lions",
         "abbr": "DET",
         "conference": "NFC",
         "division": "North",
-        "rank": 9,
-        "previousRank": 7,
+        "rank": 7,
+        "previousRank": 9,
+        "delta": 2,
+        "record": "8-2"
+      },
+      {
+        "team": "Minnesota Vikings",
+        "abbr": "MIN",
+        "conference": "NFC",
+        "division": "North",
+        "rank": 8,
+        "previousRank": 6,
         "delta": -2,
-        "record": "7-2"
+        "record": "7-3"
       },
       {
         "team": "Seattle Seahawks",
         "abbr": "SEA",
         "conference": "NFC",
         "division": "West",
-        "rank": 10,
+        "rank": 9,
         "previousRank": 10,
-        "delta": 0,
+        "delta": 1,
         "record": "6-4"
+      },
+      {
+        "team": "Cincinnati Bengals",
+        "abbr": "CIN",
+        "conference": "AFC",
+        "division": "North",
+        "rank": 10,
+        "previousRank": 7,
+        "delta": -3,
+        "record": "7-3"
       },
       {
         "team": "Los Angeles Rams",
@@ -134,8 +134,8 @@
         "conference": "NFC",
         "division": "West",
         "rank": 11,
-        "previousRank": 13,
-        "delta": 2,
+        "previousRank": 11,
+        "delta": 0,
         "record": "6-4"
       },
       {
@@ -144,28 +144,8 @@
         "conference": "NFC",
         "division": "North",
         "rank": 12,
-        "previousRank": 9,
-        "delta": -3,
-        "record": "6-4"
-      },
-      {
-        "team": "Pittsburgh Steelers",
-        "abbr": "PIT",
-        "conference": "AFC",
-        "division": "North",
-        "rank": 13,
         "previousRank": 12,
-        "delta": -1,
-        "record": "6-3"
-      },
-      {
-        "team": "Cleveland Browns",
-        "abbr": "CLE",
-        "conference": "AFC",
-        "division": "North",
-        "rank": 14,
-        "previousRank": 16,
-        "delta": 2,
+        "delta": 0,
         "record": "6-4"
       },
       {
@@ -173,30 +153,50 @@
         "abbr": "NYG",
         "conference": "NFC",
         "division": "East",
-        "rank": 15,
+        "rank": 13,
         "previousRank": 15,
+        "delta": 2,
+        "record": "6-3-1"
+      },
+      {
+        "team": "Cleveland Browns",
+        "abbr": "CLE",
+        "conference": "AFC",
+        "division": "North",
+        "rank": 14,
+        "previousRank": 14,
         "delta": 0,
-        "record": "5-3-1"
+        "record": "6-4"
       },
       {
         "team": "Carolina Panthers",
         "abbr": "CAR",
         "conference": "NFC",
         "division": "South",
-        "rank": 16,
-        "previousRank": 22,
-        "delta": 6,
-        "record": "4-5"
+        "rank": 15,
+        "previousRank": 16,
+        "delta": 1,
+        "record": "5-5"
       },
       {
-        "team": "Tampa Bay Buccaneers",
-        "abbr": "TB",
+        "team": "Pittsburgh Steelers",
+        "abbr": "PIT",
+        "conference": "AFC",
+        "division": "North",
+        "rank": 16,
+        "previousRank": 13,
+        "delta": -3,
+        "record": "6-4"
+      },
+      {
+        "team": "Dallas Cowboys",
+        "abbr": "DAL",
         "conference": "NFC",
-        "division": "South",
+        "division": "East",
         "rank": 17,
-        "previousRank": 18,
-        "delta": 1,
-        "record": "3-6"
+        "previousRank": 20,
+        "delta": 3,
+        "record": "5-6"
       },
       {
         "team": "Houston Texans",
@@ -204,27 +204,7 @@
         "conference": "AFC",
         "division": "South",
         "rank": 18,
-        "previousRank": 17,
-        "delta": -1,
-        "record": "3-6"
-      },
-      {
-        "team": "New England Patriots",
-        "abbr": "NE",
-        "conference": "AFC",
-        "division": "East",
-        "rank": 19,
-        "previousRank": 14,
-        "delta": -5,
-        "record": "5-5"
-      },
-      {
-        "team": "Dallas Cowboys",
-        "abbr": "DAL",
-        "conference": "NFC",
-        "division": "East",
-        "rank": 20,
-        "previousRank": 20,
+        "previousRank": 18,
         "delta": 0,
         "record": "4-6"
       },
@@ -233,29 +213,59 @@
         "abbr": "WAS",
         "conference": "NFC",
         "division": "East",
-        "rank": 21,
-        "previousRank": 26,
-        "delta": 5,
-        "record": "3-5-1"
+        "rank": 19,
+        "previousRank": 21,
+        "delta": 2,
+        "record": "4-5-1"
+      },
+      {
+        "team": "Tampa Bay Buccaneers",
+        "abbr": "TB",
+        "conference": "NFC",
+        "division": "South",
+        "rank": 20,
+        "previousRank": 17,
+        "delta": -3,
+        "record": "3-7"
       },
       {
         "team": "Las Vegas Raiders",
         "abbr": "LV",
         "conference": "AFC",
         "division": "West",
+        "rank": 21,
+        "previousRank": 22,
+        "delta": 1,
+        "record": "4-7"
+      },
+      {
+        "team": "New England Patriots",
+        "abbr": "NE",
+        "conference": "AFC",
+        "division": "East",
         "rank": 22,
         "previousRank": 19,
         "delta": -3,
-        "record": "4-6"
+        "record": "5-5"
+      },
+      {
+        "team": "Baltimore Ravens",
+        "abbr": "BAL",
+        "conference": "AFC",
+        "division": "North",
+        "rank": 23,
+        "previousRank": 25,
+        "delta": 2,
+        "record": "4-7"
       },
       {
         "team": "Atlanta Falcons",
         "abbr": "ATL",
         "conference": "NFC",
         "division": "South",
-        "rank": 23,
-        "previousRank": 21,
-        "delta": -2,
+        "rank": 24,
+        "previousRank": 23,
+        "delta": -1,
         "record": "3-7"
       },
       {
@@ -263,40 +273,30 @@
         "abbr": "NO",
         "conference": "NFC",
         "division": "South",
-        "rank": 24,
-        "previousRank": 23,
-        "delta": -1,
-        "record": "3-6"
-      },
-      {
-        "team": "Baltimore Ravens",
-        "abbr": "BAL",
-        "conference": "AFC",
-        "division": "North",
         "rank": 25,
         "previousRank": 24,
         "delta": -1,
-        "record": "4-6"
+        "record": "3-7"
       },
       {
-        "team": "Arizona Cardinals",
-        "abbr": "ARI",
+        "team": "Philadelphia Eagles",
+        "abbr": "PHI",
         "conference": "NFC",
-        "division": "West",
+        "division": "East",
         "rank": 26,
-        "previousRank": 25,
-        "delta": -1,
+        "previousRank": 30,
+        "delta": 4,
         "record": "3-7"
       },
       {
-        "team": "Indianapolis Colts",
-        "abbr": "IND",
+        "team": "New York Jets",
+        "abbr": "NYJ",
         "conference": "AFC",
-        "division": "South",
+        "division": "East",
         "rank": 27,
-        "previousRank": 30,
-        "delta": 3,
-        "record": "3-7"
+        "previousRank": 29,
+        "delta": 2,
+        "record": "3-8"
       },
       {
         "team": "Tennessee Titans",
@@ -306,27 +306,27 @@
         "rank": 28,
         "previousRank": 28,
         "delta": 0,
-        "record": "1-8"
+        "record": "1-9"
       },
       {
-        "team": "New York Jets",
-        "abbr": "NYJ",
-        "conference": "AFC",
-        "division": "East",
-        "rank": 29,
-        "previousRank": 29,
-        "delta": 0,
-        "record": "2-8"
-      },
-      {
-        "team": "Philadelphia Eagles",
-        "abbr": "PHI",
+        "team": "Arizona Cardinals",
+        "abbr": "ARI",
         "conference": "NFC",
-        "division": "East",
+        "division": "West",
+        "rank": 29,
+        "previousRank": 26,
+        "delta": -3,
+        "record": "3-8"
+      },
+      {
+        "team": "Indianapolis Colts",
+        "abbr": "IND",
+        "conference": "AFC",
+        "division": "South",
         "rank": 30,
-        "previousRank": 31,
-        "delta": 1,
-        "record": "2-7"
+        "previousRank": 27,
+        "delta": -3,
+        "record": "3-8"
       },
       {
         "team": "Los Angeles Chargers",
@@ -334,9 +334,9 @@
         "conference": "AFC",
         "division": "West",
         "rank": 31,
-        "previousRank": 32,
-        "delta": 1,
-        "record": "1-8"
+        "previousRank": 31,
+        "delta": 0,
+        "record": "1-9"
       },
       {
         "team": "Miami Dolphins",
@@ -344,22 +344,22 @@
         "conference": "AFC",
         "division": "East",
         "rank": 32,
-        "previousRank": 27,
-        "delta": -5,
-        "record": "1-8"
+        "previousRank": 32,
+        "delta": 0,
+        "record": "1-9"
       }
     ]
   },
-  "recordsThroughWeek": 10,
+  "recordsThroughWeek": 11,
   "playoffs": {
     "nSims": 50000,
-    "seed": 20260011,
-    "weight": 0.74,
-    "weightOnRankings": 0.74,
-    "weightOnRecords": 0.26,
+    "seed": 20260012,
+    "weight": 0.68,
+    "weightOnRankings": 0.68,
+    "weightOnRecords": 0.31999999999999995,
     "rankK": 4.59,
     "recordK": 11.010833331498233,
-    "homeField": 2.5078836690874295,
+    "homeField": 2.495856823492221,
     "sigma": 13.16,
     "seedingRule": "blended strength (power rankings + win-loss record)",
     "conferences": {
@@ -368,63 +368,63 @@
           "seed": 1,
           "team": "Buffalo Bills",
           "abbr": "BUF",
-          "record": "8-1",
-          "score": 1.6256,
-          "strength": 9.13,
+          "record": "9-1",
+          "score": 1.5745,
+          "strength": 9.823,
           "divisionWinner": true
         },
         {
           "seed": 2,
-          "team": "Jacksonville Jaguars",
-          "abbr": "JAX",
-          "record": "7-2",
-          "score": 1.3823,
-          "strength": 7.862,
+          "team": "Kansas City Chiefs",
+          "abbr": "KC",
+          "record": "8-2",
+          "score": 1.2795,
+          "strength": 8.375,
           "divisionWinner": true
         },
         {
           "seed": 3,
-          "team": "Denver Broncos",
-          "abbr": "DEN",
-          "record": "7-2",
-          "score": 1.1495,
-          "strength": 7.128,
+          "team": "Jacksonville Jaguars",
+          "abbr": "JAX",
+          "record": "7-3",
+          "score": 1.0642,
+          "strength": 7.163,
           "divisionWinner": true
         },
         {
           "seed": 4,
           "team": "Cincinnati Bengals",
           "abbr": "CIN",
-          "record": "7-2",
-          "score": 1.0744,
-          "strength": 6.89,
+          "record": "7-3",
+          "score": 0.8091,
+          "strength": 6.404,
           "divisionWinner": true
         },
         {
           "seed": 5,
-          "team": "Kansas City Chiefs",
-          "abbr": "KC",
-          "record": "7-2",
-          "score": 1.0042,
-          "strength": 6.669,
+          "team": "Denver Broncos",
+          "abbr": "DEN",
+          "record": "8-2",
+          "score": 1.2655,
+          "strength": 8.333,
           "divisionWinner": false
         },
         {
           "seed": 6,
-          "team": "Pittsburgh Steelers",
-          "abbr": "PIT",
-          "record": "6-3",
-          "score": 0.3809,
-          "strength": 4.203,
+          "team": "Cleveland Browns",
+          "abbr": "CLE",
+          "record": "6-4",
+          "score": 0.2403,
+          "strength": 4.14,
           "divisionWinner": false
         },
         {
           "seed": 7,
-          "team": "Cleveland Browns",
-          "abbr": "CLE",
+          "team": "Pittsburgh Steelers",
+          "abbr": "PIT",
           "record": "6-4",
-          "score": 0.3267,
-          "strength": 3.731,
+          "score": -0.0421,
+          "strength": 3.3,
           "divisionWinner": false
         }
       ],
@@ -433,54 +433,54 @@
           "seed": 1,
           "team": "San Francisco 49ers",
           "abbr": "SF",
-          "record": "8-1",
-          "score": 1.5744,
-          "strength": 11.589,
+          "record": "9-1",
+          "score": 1.6416,
+          "strength": 12.565,
           "divisionWinner": true
         },
         {
           "seed": 2,
           "team": "Chicago Bears",
           "abbr": "CHI",
-          "record": "7-2",
-          "score": 1.2794,
-          "strength": 9.744,
+          "record": "8-2",
+          "score": 1.3505,
+          "strength": 10.778,
           "divisionWinner": true
         },
         {
           "seed": 3,
           "team": "New York Giants",
           "abbr": "NYG",
-          "record": "5-3-1",
-          "score": 0.057,
-          "strength": 3.833,
+          "record": "6-3-1",
+          "score": 0.3948,
+          "strength": 6.228,
           "divisionWinner": true
         },
         {
           "seed": 4,
           "team": "Carolina Panthers",
           "abbr": "CAR",
-          "record": "4-5",
-          "score": -0.0687,
-          "strength": 2.344,
+          "record": "5-5",
+          "score": 0.0359,
+          "strength": 3.826,
           "divisionWinner": true
         },
         {
           "seed": 5,
-          "team": "Minnesota Vikings",
-          "abbr": "MIN",
-          "record": "7-2",
-          "score": 1.0885,
-          "strength": 8.975,
+          "team": "Detroit Lions",
+          "abbr": "DET",
+          "record": "8-2",
+          "score": 1.0525,
+          "strength": 9.705,
           "divisionWinner": false
         },
         {
           "seed": 6,
-          "team": "Detroit Lions",
-          "abbr": "DET",
-          "record": "7-2",
-          "score": 0.8742,
-          "strength": 8.111,
+          "team": "Minnesota Vikings",
+          "abbr": "MIN",
+          "record": "7-3",
+          "score": 0.8887,
+          "strength": 8.375,
           "divisionWinner": false
         },
         {
@@ -488,8 +488,8 @@
           "team": "Seattle Seahawks",
           "abbr": "SEA",
           "record": "6-4",
-          "score": 0.7547,
-          "strength": 6.581,
+          "score": 0.8301,
+          "strength": 7.425,
           "divisionWinner": false
         }
       ]
@@ -497,40 +497,40 @@
     "wildCard": {
       "AFC": [
         {
-          "home": "Jacksonville Jaguars",
-          "homeAbbr": "JAX",
+          "home": "Kansas City Chiefs",
+          "homeAbbr": "KC",
           "homeSeed": 2,
-          "homeRecord": "7-2",
-          "away": "Cleveland Browns",
-          "awayAbbr": "CLE",
-          "awaySeed": 7,
-          "awayRecord": "6-4",
-          "pHome": 0.6930219985024901,
-          "pAway": 0.30697800149750987
-        },
-        {
-          "home": "Denver Broncos",
-          "homeAbbr": "DEN",
-          "homeSeed": 3,
-          "homeRecord": "7-2",
+          "homeRecord": "8-2",
           "away": "Pittsburgh Steelers",
           "awayAbbr": "PIT",
+          "awaySeed": 7,
+          "awayRecord": "6-4",
+          "pHome": 0.7174502667222569,
+          "pAway": 0.28254973327774313
+        },
+        {
+          "home": "Jacksonville Jaguars",
+          "homeAbbr": "JAX",
+          "homeSeed": 3,
+          "homeRecord": "7-3",
+          "away": "Cleveland Browns",
+          "awayAbbr": "CLE",
           "awaySeed": 6,
-          "awayRecord": "6-3",
-          "pHome": 0.6601346713041562,
-          "pAway": 0.33986532869584385
+          "awayRecord": "6-4",
+          "pHome": 0.6625170313149913,
+          "pAway": 0.3374829686850087
         },
         {
           "home": "Cincinnati Bengals",
           "homeAbbr": "CIN",
           "homeSeed": 4,
-          "homeRecord": "7-2",
-          "away": "Kansas City Chiefs",
-          "awayAbbr": "KC",
+          "homeRecord": "7-3",
+          "away": "Denver Broncos",
+          "awayAbbr": "DEN",
           "awaySeed": 5,
-          "awayRecord": "7-2",
-          "pHome": 0.5821512264061346,
-          "pAway": 0.4178487735938654
+          "awayRecord": "8-2",
+          "pHome": 0.5171747744111551,
+          "pAway": 0.4828252255888449
         }
       ],
       "NFC": [
@@ -538,37 +538,37 @@
           "home": "Chicago Bears",
           "homeAbbr": "CHI",
           "homeSeed": 2,
-          "homeRecord": "7-2",
+          "homeRecord": "8-2",
           "away": "Seattle Seahawks",
           "awayAbbr": "SEA",
           "awaySeed": 7,
           "awayRecord": "6-4",
-          "pHome": 0.6667544189023799,
-          "pAway": 0.33324558109762015
+          "pHome": 0.6716227469733691,
+          "pAway": 0.3283772530266309
         },
         {
           "home": "New York Giants",
           "homeAbbr": "NYG",
           "homeSeed": 3,
-          "homeRecord": "5-3-1",
-          "away": "Detroit Lions",
-          "awayAbbr": "DET",
+          "homeRecord": "6-3-1",
+          "away": "Minnesota Vikings",
+          "awayAbbr": "MIN",
           "awaySeed": 6,
-          "awayRecord": "7-2",
-          "pHome": 0.4465168487601119,
-          "pAway": 0.5534831512398881
+          "awayRecord": "7-3",
+          "pHome": 0.5105501823482242,
+          "pAway": 0.48944981765177575
         },
         {
           "home": "Carolina Panthers",
           "homeAbbr": "CAR",
           "homeSeed": 4,
-          "homeRecord": "4-5",
-          "away": "Minnesota Vikings",
-          "awayAbbr": "MIN",
+          "homeRecord": "5-5",
+          "away": "Detroit Lions",
+          "awayAbbr": "DET",
           "awaySeed": 5,
-          "awayRecord": "7-2",
-          "pHome": 0.3770304073441046,
-          "pAway": 0.6229695926558954
+          "awayRecord": "8-2",
+          "pHome": 0.3985782015157526,
+          "pAway": 0.6014217984842474
         }
       ]
     },
@@ -578,140 +578,140 @@
         "abbr": "SF",
         "conference": "NFC",
         "seed": 1,
-        "record": "8-1",
-        "score": 1.5744,
-        "strength": 11.589,
+        "record": "9-1",
+        "score": 1.6416,
+        "strength": 12.565,
         "divisionWinner": true,
         "pDivisional": 1.0,
-        "pConference": 0.69934,
-        "pSuperBowl": 0.47322,
-        "pChampion": 0.28666
+        "pConference": 0.70838,
+        "pSuperBowl": 0.47852,
+        "pChampion": 0.2972
       },
       {
         "team": "Buffalo Bills",
         "abbr": "BUF",
         "conference": "AFC",
         "seed": 1,
-        "record": "8-1",
-        "score": 1.6256,
-        "strength": 9.13,
+        "record": "9-1",
+        "score": 1.5745,
+        "strength": 9.823,
         "divisionWinner": true,
         "pDivisional": 1.0,
-        "pConference": 0.68346,
-        "pSuperBowl": 0.43018,
-        "pChampion": 0.20624
+        "pConference": 0.6973,
+        "pSuperBowl": 0.44648,
+        "pChampion": 0.21212
       },
       {
         "team": "Chicago Bears",
         "abbr": "CHI",
         "conference": "NFC",
         "seed": 2,
-        "record": "7-2",
-        "score": 1.2794,
-        "strength": 9.744,
+        "record": "8-2",
+        "score": 1.3505,
+        "strength": 10.778,
         "divisionWinner": true,
-        "pDivisional": 0.66806,
-        "pConference": 0.46518,
-        "pSuperBowl": 0.21062,
-        "pChampion": 0.11834
+        "pDivisional": 0.6703,
+        "pConference": 0.4608,
+        "pSuperBowl": 0.21074,
+        "pChampion": 0.11952
+      },
+      {
+        "team": "Kansas City Chiefs",
+        "abbr": "KC",
+        "conference": "AFC",
+        "seed": 2,
+        "record": "8-2",
+        "score": 1.2795,
+        "strength": 8.375,
+        "divisionWinner": true,
+        "pDivisional": 0.71806,
+        "pConference": 0.44076,
+        "pSuperBowl": 0.20256,
+        "pChampion": 0.08606
       },
       {
         "team": "Jacksonville Jaguars",
         "abbr": "JAX",
         "conference": "AFC",
-        "seed": 2,
-        "record": "7-2",
-        "score": 1.3823,
-        "strength": 7.862,
+        "seed": 3,
+        "record": "7-3",
+        "score": 1.0642,
+        "strength": 7.163,
         "divisionWinner": true,
-        "pDivisional": 0.6937,
-        "pConference": 0.41488,
-        "pSuperBowl": 0.19364,
-        "pChampion": 0.08636
+        "pDivisional": 0.66424,
+        "pConference": 0.28892,
+        "pSuperBowl": 0.12404,
+        "pChampion": 0.04938
+      },
+      {
+        "team": "Detroit Lions",
+        "abbr": "DET",
+        "conference": "NFC",
+        "seed": 5,
+        "record": "8-2",
+        "score": 1.0525,
+        "strength": 9.705,
+        "divisionWinner": false,
+        "pDivisional": 0.60222,
+        "pConference": 0.26152,
+        "pSuperBowl": 0.11088,
+        "pChampion": 0.05954
       },
       {
         "team": "Denver Broncos",
         "abbr": "DEN",
         "conference": "AFC",
-        "seed": 3,
-        "record": "7-2",
-        "score": 1.1495,
-        "strength": 7.128,
-        "divisionWinner": true,
-        "pDivisional": 0.66008,
-        "pConference": 0.30162,
-        "pSuperBowl": 0.13492,
-        "pChampion": 0.05674
-      },
-      {
-        "team": "Minnesota Vikings",
-        "abbr": "MIN",
-        "conference": "NFC",
         "seed": 5,
-        "record": "7-2",
-        "score": 1.0885,
-        "strength": 8.975,
+        "record": "8-2",
+        "score": 1.2655,
+        "strength": 8.333,
         "divisionWinner": false,
-        "pDivisional": 0.6241,
-        "pConference": 0.27988,
-        "pSuperBowl": 0.1217,
-        "pChampion": 0.06602
+        "pDivisional": 0.4827,
+        "pConference": 0.20972,
+        "pSuperBowl": 0.09504,
+        "pChampion": 0.04012
       },
       {
         "team": "Cincinnati Bengals",
         "abbr": "CIN",
         "conference": "AFC",
         "seed": 4,
-        "record": "7-2",
-        "score": 1.0744,
-        "strength": 6.89,
+        "record": "7-3",
+        "score": 0.8091,
+        "strength": 6.404,
         "divisionWinner": true,
-        "pDivisional": 0.58264,
-        "pConference": 0.24122,
-        "pSuperBowl": 0.10422,
-        "pChampion": 0.043
+        "pDivisional": 0.5173,
+        "pConference": 0.19654,
+        "pSuperBowl": 0.0782,
+        "pChampion": 0.02952
       },
       {
-        "team": "Detroit Lions",
-        "abbr": "DET",
+        "team": "Minnesota Vikings",
+        "abbr": "MIN",
         "conference": "NFC",
         "seed": 6,
-        "record": "7-2",
-        "score": 0.8742,
-        "strength": 8.111,
+        "record": "7-3",
+        "score": 0.8887,
+        "strength": 8.375,
         "divisionWinner": false,
-        "pDivisional": 0.55296,
-        "pConference": 0.20676,
-        "pSuperBowl": 0.08182,
-        "pChampion": 0.04168
-      },
-      {
-        "team": "Kansas City Chiefs",
-        "abbr": "KC",
-        "conference": "AFC",
-        "seed": 5,
-        "record": "7-2",
-        "score": 1.0042,
-        "strength": 6.669,
-        "divisionWinner": false,
-        "pDivisional": 0.41736,
-        "pConference": 0.16864,
-        "pSuperBowl": 0.0722,
-        "pChampion": 0.02912
+        "pDivisional": 0.49116,
+        "pConference": 0.1761,
+        "pSuperBowl": 0.06594,
+        "pChampion": 0.03274
       },
       {
         "team": "New York Giants",
         "abbr": "NYG",
         "conference": "NFC",
         "seed": 3,
-        "record": "5-3-1",
-        "score": 0.057,
-        "strength": 3.833,
+        "record": "6-3-1",
+        "score": 0.3948,
+        "strength": 6.228,
         "divisionWinner": true,
-        "pDivisional": 0.44704,
-        "pConference": 0.15248,
-        "pSuperBowl": 0.046,
-        "pChampion": 0.01716
+        "pDivisional": 0.50884,
+        "pConference": 0.19144,
+        "pSuperBowl": 0.06434,
+        "pChampion": 0.02736
       },
       {
         "team": "Seattle Seahawks",
@@ -719,97 +719,97 @@
         "conference": "NFC",
         "seed": 7,
         "record": "6-4",
-        "score": 0.7547,
-        "strength": 6.581,
+        "score": 0.8301,
+        "strength": 7.425,
         "divisionWinner": false,
-        "pDivisional": 0.33194,
-        "pConference": 0.09364,
-        "pSuperBowl": 0.03978,
-        "pChampion": 0.0185
-      },
-      {
-        "team": "Pittsburgh Steelers",
-        "abbr": "PIT",
-        "conference": "AFC",
-        "seed": 6,
-        "record": "6-3",
-        "score": 0.3809,
-        "strength": 4.203,
-        "divisionWinner": false,
-        "pDivisional": 0.33992,
-        "pConference": 0.1051,
-        "pSuperBowl": 0.03664,
-        "pChampion": 0.01184
+        "pDivisional": 0.3297,
+        "pConference": 0.0921,
+        "pSuperBowl": 0.04,
+        "pChampion": 0.01948
       },
       {
         "team": "Cleveland Browns",
         "abbr": "CLE",
         "conference": "AFC",
-        "seed": 7,
+        "seed": 6,
         "record": "6-4",
-        "score": 0.3267,
-        "strength": 3.731,
+        "score": 0.2403,
+        "strength": 4.14,
         "divisionWinner": false,
-        "pDivisional": 0.3063,
-        "pConference": 0.08508,
-        "pSuperBowl": 0.0282,
-        "pChampion": 0.00936
+        "pDivisional": 0.33576,
+        "pConference": 0.09622,
+        "pSuperBowl": 0.03162,
+        "pChampion": 0.01014
       },
       {
         "team": "Carolina Panthers",
         "abbr": "CAR",
         "conference": "NFC",
         "seed": 4,
-        "record": "4-5",
-        "score": -0.0687,
-        "strength": 2.344,
+        "record": "5-5",
+        "score": 0.0359,
+        "strength": 3.826,
         "divisionWinner": true,
-        "pDivisional": 0.3759,
-        "pConference": 0.10272,
-        "pSuperBowl": 0.02686,
-        "pChampion": 0.00898
+        "pDivisional": 0.39778,
+        "pConference": 0.10966,
+        "pSuperBowl": 0.02958,
+        "pChampion": 0.01034
+      },
+      {
+        "team": "Pittsburgh Steelers",
+        "abbr": "PIT",
+        "conference": "AFC",
+        "seed": 7,
+        "record": "6-4",
+        "score": -0.0421,
+        "strength": 3.3,
+        "divisionWinner": false,
+        "pDivisional": 0.28194,
+        "pConference": 0.07054,
+        "pSuperBowl": 0.02206,
+        "pChampion": 0.00648
       }
     ],
     "superBowlMatchups": [
       {
         "a": "Buffalo Bills",
         "b": "San Francisco 49ers",
-        "probability": 0.20386
+        "probability": 0.2126
       },
       {
-        "a": "Jacksonville Jaguars",
+        "a": "Kansas City Chiefs",
         "b": "San Francisco 49ers",
-        "probability": 0.09092
+        "probability": 0.09592
       },
       {
         "a": "Buffalo Bills",
         "b": "Chicago Bears",
-        "probability": 0.09082
+        "probability": 0.0938
+      },
+      {
+        "a": "Jacksonville Jaguars",
+        "b": "San Francisco 49ers",
+        "probability": 0.06082
+      },
+      {
+        "a": "Buffalo Bills",
+        "b": "Detroit Lions",
+        "probability": 0.05014
       },
       {
         "a": "Denver Broncos",
         "b": "San Francisco 49ers",
-        "probability": 0.06358
-      },
-      {
-        "a": "Buffalo Bills",
-        "b": "Minnesota Vikings",
-        "probability": 0.05204
-      },
-      {
-        "a": "Cincinnati Bengals",
-        "b": "San Francisco 49ers",
-        "probability": 0.05034
+        "probability": 0.04632
       }
     ],
     "byConference": {
       "AFC": {
         "pSuperBowl": 1.0,
-        "pChampion": 0.44266
+        "pChampion": 0.43382
       },
       "NFC": {
         "pSuperBowl": 1.0,
-        "pChampion": 0.5573400000000001
+        "pChampion": 0.56618
       }
     },
     "bracketShift": {
@@ -822,18 +822,18 @@
     }
   },
   "weighted": {
-    "weight": 0.74,
+    "weight": 0.68,
     "weightUnregularised": 1.0,
     "precisionWeight": 0.5336161548294748,
     "sigma": 9.0,
-    "logLoss": 0.5540133351817607,
-    "logLossUnregularised": 0.5397438111616223,
+    "logLoss": 0.54567422461688,
+    "logLossUnregularised": 0.5346271082431396,
     "prior": "Beta(2,2) on the weight, centred at an even split",
-    "nEval": 43,
+    "nEval": 42,
     "weeks": [
-      8,
       9,
-      10
+      10,
+      11
     ],
     "recordModel": {
       "k": 11.010833331498233,
@@ -852,407 +852,407 @@
     "curve": [
       {
         "weight": 0.0,
-        "logLoss": 0.612785420097796
+        "logLoss": 0.5942208541796505
       },
       {
         "weight": 0.01,
-        "logLoss": 0.6123106184007068
+        "logLoss": 0.5938989733697847
       },
       {
         "weight": 0.02,
-        "logLoss": 0.6118371922074946
+        "logLoss": 0.5935783494891753
       },
       {
         "weight": 0.03,
-        "logLoss": 0.6113651411126014
+        "logLoss": 0.5932589824715
       },
       {
         "weight": 0.04,
-        "logLoss": 0.6108944647091454
+        "logLoss": 0.5929408722493663
       },
       {
         "weight": 0.05,
-        "logLoss": 0.6104251625889172
+        "logLoss": 0.592624018754311
       },
       {
         "weight": 0.06,
-        "logLoss": 0.6099572343423826
+        "logLoss": 0.5923084219167988
       },
       {
         "weight": 0.07,
-        "logLoss": 0.609490679558677
+        "logLoss": 0.5919940816662214
       },
       {
         "weight": 0.08,
-        "logLoss": 0.609025497825607
+        "logLoss": 0.5916809979308949
       },
       {
         "weight": 0.09,
-        "logLoss": 0.6085616887296486
+        "logLoss": 0.5913691706380593
       },
       {
         "weight": 0.1,
-        "logLoss": 0.6080992518559457
+        "logLoss": 0.5910585997138771
       },
       {
         "weight": 0.11,
-        "logLoss": 0.6076381867883095
+        "logLoss": 0.590749285083431
       },
       {
         "weight": 0.12,
-        "logLoss": 0.6071784931092153
+        "logLoss": 0.5904412266707249
       },
       {
         "weight": 0.13,
-        "logLoss": 0.6067201703998052
+        "logLoss": 0.590134424398679
       },
       {
         "weight": 0.14,
-        "logLoss": 0.6062632182398829
+        "logLoss": 0.5898288781891323
       },
       {
         "weight": 0.15,
-        "logLoss": 0.6058076362079156
+        "logLoss": 0.5895245879628381
       },
       {
         "weight": 0.16,
-        "logLoss": 0.6053534238810299
+        "logLoss": 0.5892215536394646
       },
       {
         "weight": 0.17,
-        "logLoss": 0.6049005808350141
+        "logLoss": 0.5889197751375929
       },
       {
         "weight": 0.18,
-        "logLoss": 0.6044491066443148
+        "logLoss": 0.588619252374716
       },
       {
         "weight": 0.19,
-        "logLoss": 0.6039990008820364
+        "logLoss": 0.5883199852672378
       },
       {
         "weight": 0.2,
-        "logLoss": 0.6035502631199396
+        "logLoss": 0.5880219737304706
       },
       {
         "weight": 0.21,
-        "logLoss": 0.6031028929284413
+        "logLoss": 0.5877252176786352
       },
       {
         "weight": 0.22,
-        "logLoss": 0.6026568898766129
+        "logLoss": 0.5874297170248595
       },
       {
         "weight": 0.23,
-        "logLoss": 0.6022122535321796
+        "logLoss": 0.5871354716811765
       },
       {
         "weight": 0.24,
-        "logLoss": 0.6017689834615183
+        "logLoss": 0.5868424815585237
       },
       {
         "weight": 0.25,
-        "logLoss": 0.6013270792296583
+        "logLoss": 0.5865507465667417
       },
       {
         "weight": 0.26,
-        "logLoss": 0.6008865404002784
+        "logLoss": 0.5862602666145731
       },
       {
         "weight": 0.27,
-        "logLoss": 0.6004473665357087
+        "logLoss": 0.5859710416096616
       },
       {
         "weight": 0.28,
-        "logLoss": 0.6000095571969262
+        "logLoss": 0.5856830714585501
       },
       {
         "weight": 0.29,
-        "logLoss": 0.599573111943556
+        "logLoss": 0.5853963560666803
       },
       {
         "weight": 0.3,
-        "logLoss": 0.5991380303338698
+        "logLoss": 0.585110895338391
       },
       {
         "weight": 0.31,
-        "logLoss": 0.598704311924785
+        "logLoss": 0.5848266891769177
       },
       {
         "weight": 0.32,
-        "logLoss": 0.5982719562718639
+        "logLoss": 0.5845437374843905
       },
       {
         "weight": 0.33,
-        "logLoss": 0.5978409629293122
+        "logLoss": 0.5842620401618333
       },
       {
         "weight": 0.34,
-        "logLoss": 0.5974113314499789
+        "logLoss": 0.5839815971091643
       },
       {
         "weight": 0.35,
-        "logLoss": 0.596983061385355
+        "logLoss": 0.5837024082251915
       },
       {
         "weight": 0.36,
-        "logLoss": 0.5965561522855723
+        "logLoss": 0.5834244734076154
       },
       {
         "weight": 0.37,
-        "logLoss": 0.5961306036994035
+        "logLoss": 0.5831477925530254
       },
       {
         "weight": 0.38,
-        "logLoss": 0.5957064151742605
+        "logLoss": 0.5828723655568995
       },
       {
         "weight": 0.39,
-        "logLoss": 0.5952835862561929
+        "logLoss": 0.5825981923136037
       },
       {
         "weight": 0.4,
-        "logLoss": 0.5948621164898895
+        "logLoss": 0.58232527271639
       },
       {
         "weight": 0.41,
-        "logLoss": 0.5944420054186748
+        "logLoss": 0.5820536066573967
       },
       {
         "weight": 0.42,
-        "logLoss": 0.5940232525845102
+        "logLoss": 0.5817831940276468
       },
       {
         "weight": 0.43,
-        "logLoss": 0.5936058575279922
+        "logLoss": 0.5815140347170458
       },
       {
         "weight": 0.44,
-        "logLoss": 0.5931898197883517
+        "logLoss": 0.5812461286143831
       },
       {
         "weight": 0.45,
-        "logLoss": 0.5927751389034536
+        "logLoss": 0.5809794756073285
       },
       {
         "weight": 0.46,
-        "logLoss": 0.5923618144097954
+        "logLoss": 0.580714075582434
       },
       {
         "weight": 0.47,
-        "logLoss": 0.5919498458425078
+        "logLoss": 0.5804499284251302
       },
       {
         "weight": 0.48,
-        "logLoss": 0.5915392327353522
+        "logLoss": 0.5801870340197273
       },
       {
         "weight": 0.49,
-        "logLoss": 0.5911299746207214
+        "logLoss": 0.5799253922494122
       },
       {
         "weight": 0.5,
-        "logLoss": 0.5907220710296377
+        "logLoss": 0.5796650029962506
       },
       {
         "weight": 0.51,
-        "logLoss": 0.5903155214917531
+        "logLoss": 0.5794058661411834
       },
       {
         "weight": 0.52,
-        "logLoss": 0.5899103255353493
+        "logLoss": 0.5791479815640259
       },
       {
         "weight": 0.53,
-        "logLoss": 0.5895064826873349
+        "logLoss": 0.5788913491434697
       },
       {
         "weight": 0.54,
-        "logLoss": 0.5891039924732469
+        "logLoss": 0.5786359687570781
       },
       {
         "weight": 0.55,
-        "logLoss": 0.588702854417248
+        "logLoss": 0.5783818402812884
       },
       {
         "weight": 0.56,
-        "logLoss": 0.5883030680421282
+        "logLoss": 0.5781289635914091
       },
       {
         "weight": 0.57,
-        "logLoss": 0.5879046328693032
+        "logLoss": 0.5778773385616199
       },
       {
         "weight": 0.58,
-        "logLoss": 0.5875075484188126
+        "logLoss": 0.5776269650649705
       },
       {
         "weight": 0.59,
-        "logLoss": 0.5871118142093212
+        "logLoss": 0.5773778429733802
       },
       {
         "weight": 0.6,
-        "logLoss": 0.5867174297581177
+        "logLoss": 0.5771299721576371
       },
       {
         "weight": 0.61,
-        "logLoss": 0.5863243945811144
+        "logLoss": 0.5768833524873965
       },
       {
         "weight": 0.62,
-        "logLoss": 0.585932708192845
+        "logLoss": 0.576637983831182
       },
       {
         "weight": 0.63,
-        "logLoss": 0.585542370106467
+        "logLoss": 0.5763938660563825
       },
       {
         "weight": 0.64,
-        "logLoss": 0.5851533798337595
+        "logLoss": 0.5761509990292532
       },
       {
         "weight": 0.65,
-        "logLoss": 0.5847657368851213
+        "logLoss": 0.5759093826149128
       },
       {
         "weight": 0.66,
-        "logLoss": 0.5843794407695733
+        "logLoss": 0.5756690166773462
       },
       {
         "weight": 0.67,
-        "logLoss": 0.5839944909947568
+        "logLoss": 0.5754299010794005
       },
       {
         "weight": 0.68,
-        "logLoss": 0.583610887066932
+        "logLoss": 0.5751920356827864
       },
       {
         "weight": 0.69,
-        "logLoss": 0.5832286284909789
+        "logLoss": 0.5749554203480752
       },
       {
         "weight": 0.7,
-        "logLoss": 0.5828477147703967
+        "logLoss": 0.5747200549347015
       },
       {
         "weight": 0.71,
-        "logLoss": 0.5824681454073026
+        "logLoss": 0.5744859393009591
       },
       {
         "weight": 0.72,
-        "logLoss": 0.5820899199024326
+        "logLoss": 0.5742530733040033
       },
       {
         "weight": 0.73,
-        "logLoss": 0.5817130377551396
+        "logLoss": 0.5740214567998481
       },
       {
         "weight": 0.74,
-        "logLoss": 0.581337498463394
+        "logLoss": 0.5737910896433667
       },
       {
         "weight": 0.75,
-        "logLoss": 0.5809633015237842
+        "logLoss": 0.5735619716882904
       },
       {
         "weight": 0.76,
-        "logLoss": 0.5805904464315134
+        "logLoss": 0.5733341027872081
       },
       {
         "weight": 0.77,
-        "logLoss": 0.580218932680403
+        "logLoss": 0.5731074827915665
       },
       {
         "weight": 0.78,
-        "logLoss": 0.5798487597628885
+        "logLoss": 0.5728821115516683
       },
       {
         "weight": 0.79,
-        "logLoss": 0.5794799271700231
+        "logLoss": 0.5726579889166721
       },
       {
         "weight": 0.8,
-        "logLoss": 0.5791124343914738
+        "logLoss": 0.5724351147345929
       },
       {
         "weight": 0.81,
-        "logLoss": 0.578746280915523
+        "logLoss": 0.5722134888522992
       },
       {
         "weight": 0.82,
-        "logLoss": 0.578381466229068
+        "logLoss": 0.5719931111155147
       },
       {
         "weight": 0.83,
-        "logLoss": 0.5780179898176222
+        "logLoss": 0.5717739813688176
       },
       {
         "weight": 0.84,
-        "logLoss": 0.5776558511653103
+        "logLoss": 0.5715560994556382
       },
       {
         "weight": 0.85,
-        "logLoss": 0.5772950497548736
+        "logLoss": 0.571339465218261
       },
       {
         "weight": 0.86,
-        "logLoss": 0.5769355850676662
+        "logLoss": 0.5711240784978219
       },
       {
         "weight": 0.87,
-        "logLoss": 0.5765774565836564
+        "logLoss": 0.5709099391343097
       },
       {
         "weight": 0.88,
-        "logLoss": 0.5762206637814263
+        "logLoss": 0.5706970469665641
       },
       {
         "weight": 0.89,
-        "logLoss": 0.5758652061381703
+        "logLoss": 0.5704854018322764
       },
       {
         "weight": 0.9,
-        "logLoss": 0.575511083129697
+        "logLoss": 0.5702750035679882
       },
       {
         "weight": 0.91,
-        "logLoss": 0.5751582942304279
+        "logLoss": 0.5700658520090918
       },
       {
         "weight": 0.92,
-        "logLoss": 0.5748068389133976
+        "logLoss": 0.5698579469898293
       },
       {
         "weight": 0.93,
-        "logLoss": 0.5744567166502527
+        "logLoss": 0.5696512883432922
       },
       {
         "weight": 0.94,
-        "logLoss": 0.5741079269112539
+        "logLoss": 0.5694458759014209
       },
       {
         "weight": 0.95,
-        "logLoss": 0.5737604691652736
+        "logLoss": 0.5692417094950054
       },
       {
         "weight": 0.96,
-        "logLoss": 0.5734143428797975
+        "logLoss": 0.5690387889536831
       },
       {
         "weight": 0.97,
-        "logLoss": 0.5730695475209237
+        "logLoss": 0.5688371141059404
       },
       {
         "weight": 0.98,
-        "logLoss": 0.5727260825533628
+        "logLoss": 0.5686366847791111
       },
       {
         "weight": 0.99,
-        "logLoss": 0.5723839474404377
+        "logLoss": 0.568437500799377
       },
       {
         "weight": 1.0,
-        "logLoss": 0.5720431416440847
+        "logLoss": 0.5682395619917656
       }
     ],
     "weightInterval": [
@@ -1261,9 +1261,9 @@
     ],
     "weightUndetermined": true,
     "atFittedSigma": {
-      "rankingsOnly": 0.5397438111616223,
-      "recordsOnly": 0.6051075291929671,
-      "blend": 0.5397438111616223,
+      "rankingsOnly": 0.5346271082431396,
+      "recordsOnly": 0.5779744109034947,
+      "blend": 0.5346271082431396,
       "coinFlip": 0.6931471805599453
     }
   },
@@ -1279,224 +1279,272 @@
     },
     "games": [
       {
-        "away": "Indianapolis Colts",
-        "home": "Houston Texans",
-        "awayAbbr": "IND",
-        "homeAbbr": "HOU",
-        "awayScore": -1.2314,
-        "homeScore": -0.3489,
-        "expectedMargin": 6.61,
-        "homeWinProbability": 0.6923,
-        "awayWinProbability": 0.3077,
-        "pick": "HOU by 6.6",
-        "gameday": "2026-11-19",
-        "kickoff": "20:15",
-        "neutral": false,
-        "marketSpread": 12.5
-      },
-      {
-        "away": "Arizona Cardinals",
-        "home": "Kansas City Chiefs",
-        "awayAbbr": "ARI",
-        "homeAbbr": "KC",
-        "awayScore": -1.1575,
-        "homeScore": 1.0042,
-        "expectedMargin": 12.48,
-        "homeWinProbability": 0.8286,
-        "awayWinProbability": 0.1714,
-        "pick": "KC by 12.5",
-        "gameday": "2026-11-22",
-        "kickoff": "13:00",
-        "neutral": false,
-        "marketSpread": 15.5
-      },
-      {
-        "away": "Baltimore Ravens",
-        "home": "Carolina Panthers",
-        "awayAbbr": "BAL",
-        "homeAbbr": "CAR",
-        "awayScore": -0.8169,
-        "homeScore": -0.0687,
-        "expectedMargin": 5.99,
-        "homeWinProbability": 0.6756,
-        "awayWinProbability": 0.3244,
-        "pick": "CAR by 6.0",
-        "gameday": "2026-11-22",
-        "kickoff": "13:00",
+        "away": "Green Bay Packers",
+        "home": "Los Angeles Rams",
+        "awayAbbr": "GB",
+        "homeAbbr": "LAR",
+        "awayScore": 0.4861,
+        "homeScore": 0.5485,
+        "expectedMargin": 2.85,
+        "homeWinProbability": 0.5856,
+        "awayWinProbability": 0.4144,
+        "pick": "LAR by 2.8",
+        "gameday": "2026-11-25",
+        "kickoff": "20:00",
         "neutral": false,
         "marketSpread": 2.5
       },
       {
-        "away": "Jacksonville Jaguars",
-        "home": "New York Giants",
-        "awayAbbr": "JAX",
-        "homeAbbr": "NYG",
-        "awayScore": 1.3823,
-        "homeScore": 0.057,
-        "expectedMargin": -3.52,
-        "homeWinProbability": 0.3945,
-        "awayWinProbability": 0.6055,
-        "pick": "JAX by 3.5",
-        "gameday": "2026-11-22",
-        "kickoff": "13:00",
-        "neutral": false,
-        "marketSpread": -6.0
-      },
-      {
-        "away": "Miami Dolphins",
-        "home": "Buffalo Bills",
-        "awayAbbr": "MIA",
-        "homeAbbr": "BUF",
-        "awayScore": -1.479,
-        "homeScore": 1.6256,
-        "expectedMargin": 16.81,
-        "homeWinProbability": 0.8993,
-        "awayWinProbability": 0.1007,
-        "pick": "BUF by 16.8",
-        "gameday": "2026-11-22",
-        "kickoff": "13:00",
-        "neutral": false,
-        "marketSpread": 16.5
-      },
-      {
-        "away": "New Orleans Saints",
-        "home": "Chicago Bears",
-        "awayAbbr": "NO",
-        "homeAbbr": "CHI",
-        "awayScore": -0.6931,
-        "homeScore": 1.2794,
-        "expectedMargin": 11.61,
-        "homeWinProbability": 0.8113,
-        "awayWinProbability": 0.1887,
-        "pick": "CHI by 11.6",
-        "gameday": "2026-11-22",
-        "kickoff": "13:00",
-        "neutral": false,
-        "marketSpread": 11.5
-      },
-      {
-        "away": "Tampa Bay Buccaneers",
+        "away": "Chicago Bears",
         "home": "Detroit Lions",
-        "awayAbbr": "TB",
+        "awayAbbr": "CHI",
         "homeAbbr": "DET",
-        "awayScore": -0.1253,
-        "homeScore": 0.8742,
-        "expectedMargin": 7.15,
-        "homeWinProbability": 0.7065,
-        "awayWinProbability": 0.2935,
-        "pick": "DET by 7.1",
-        "gameday": "2026-11-22",
+        "awayScore": 1.3505,
+        "homeScore": 1.0525,
+        "expectedMargin": 1.19,
+        "homeWinProbability": 0.5361,
+        "awayWinProbability": 0.4639,
+        "pick": "DET by 1.2",
+        "gameday": "2026-11-26",
+        "kickoff": "13:00",
+        "neutral": false,
+        "marketSpread": -1.5
+      },
+      {
+        "away": "Philadelphia Eagles",
+        "home": "Dallas Cowboys",
+        "awayAbbr": "PHI",
+        "homeAbbr": "DAL",
+        "awayScore": -0.9495,
+        "homeScore": -0.1053,
+        "expectedMargin": 6.43,
+        "homeWinProbability": 0.6876,
+        "awayWinProbability": 0.3124,
+        "pick": "DAL by 6.4",
+        "gameday": "2026-11-26",
+        "kickoff": "16:30",
+        "neutral": false,
+        "marketSpread": 8.5
+      },
+      {
+        "away": "Kansas City Chiefs",
+        "home": "Buffalo Bills",
+        "awayAbbr": "KC",
+        "homeAbbr": "BUF",
+        "awayScore": 1.2795,
+        "homeScore": 1.5745,
+        "expectedMargin": 3.91,
+        "homeWinProbability": 0.6169,
+        "awayWinProbability": 0.3831,
+        "pick": "BUF by 3.9",
+        "gameday": "2026-11-26",
+        "kickoff": "20:20",
+        "neutral": false,
+        "marketSpread": 3.0
+      },
+      {
+        "away": "Denver Broncos",
+        "home": "Pittsburgh Steelers",
+        "awayAbbr": "DEN",
+        "homeAbbr": "PIT",
+        "awayScore": 1.2655,
+        "homeScore": -0.0421,
+        "expectedMargin": -3.44,
+        "homeWinProbability": 0.3968,
+        "awayWinProbability": 0.6032,
+        "pick": "DEN by 3.4",
+        "gameday": "2026-11-27",
+        "kickoff": "15:00",
+        "neutral": false,
+        "marketSpread": -3.5
+      },
+      {
+        "away": "Atlanta Falcons",
+        "home": "Minnesota Vikings",
+        "awayAbbr": "ATL",
+        "homeAbbr": "MIN",
+        "awayScore": -0.7974,
+        "homeScore": 0.8887,
+        "expectedMargin": 10.3,
+        "homeWinProbability": 0.7831,
+        "awayWinProbability": 0.2169,
+        "pick": "MIN by 10.3",
+        "gameday": "2026-11-29",
         "kickoff": "13:00",
         "neutral": false,
         "marketSpread": 7.0
       },
       {
-        "away": "Tennessee Titans",
-        "home": "Dallas Cowboys",
-        "awayAbbr": "TEN",
-        "homeAbbr": "DAL",
-        "awayScore": -1.3127,
-        "homeScore": -0.3778,
-        "expectedMargin": 6.85,
-        "homeWinProbability": 0.6987,
-        "awayWinProbability": 0.3013,
-        "pick": "DAL by 6.9",
-        "gameday": "2026-11-22",
+        "away": "Baltimore Ravens",
+        "home": "Houston Texans",
+        "awayAbbr": "BAL",
+        "homeAbbr": "HOU",
+        "awayScore": -0.7162,
+        "homeScore": -0.1389,
+        "expectedMargin": 5.21,
+        "homeWinProbability": 0.6539,
+        "awayWinProbability": 0.3461,
+        "pick": "HOU by 5.2",
+        "gameday": "2026-11-29",
         "kickoff": "13:00",
         "neutral": false,
-        "marketSpread": 8.5
+        "marketSpread": 6.5
       },
       {
-        "away": "New York Jets",
-        "home": "Los Angeles Chargers",
-        "awayAbbr": "NYJ",
-        "homeAbbr": "LAC",
-        "awayScore": -1.3361,
-        "homeScore": -1.4624,
-        "expectedMargin": 1.98,
-        "homeWinProbability": 0.5598,
-        "awayWinProbability": 0.4402,
-        "pick": "LAC by 2.0",
-        "gameday": "2026-11-22",
-        "kickoff": "16:05",
-        "neutral": false,
-        "marketSpread": 3.0
-      },
-      {
-        "away": "Las Vegas Raiders",
-        "home": "Denver Broncos",
-        "awayAbbr": "LV",
-        "homeAbbr": "DEN",
-        "awayScore": -0.4536,
-        "homeScore": 1.1495,
-        "expectedMargin": 9.92,
-        "homeWinProbability": 0.7745,
-        "awayWinProbability": 0.2255,
-        "pick": "DEN by 9.9",
-        "gameday": "2026-11-22",
-        "kickoff": "16:25",
+        "away": "New Orleans Saints",
+        "home": "Cincinnati Bengals",
+        "awayAbbr": "NO",
+        "homeAbbr": "CIN",
+        "awayScore": -0.8777,
+        "homeScore": 0.8091,
+        "expectedMargin": 10.3,
+        "homeWinProbability": 0.7831,
+        "awayWinProbability": 0.2169,
+        "pick": "CIN by 10.3",
+        "gameday": "2026-11-29",
+        "kickoff": "13:00",
         "neutral": false,
         "marketSpread": 10.0
       },
       {
-        "away": "Pittsburgh Steelers",
-        "home": "Philadelphia Eagles",
-        "awayAbbr": "PIT",
-        "homeAbbr": "PHI",
-        "awayScore": 0.3809,
-        "homeScore": -1.3583,
-        "expectedMargin": -5.42,
-        "homeWinProbability": 0.3401,
-        "awayWinProbability": 0.6599,
-        "pick": "PIT by 5.4",
-        "gameday": "2026-11-22",
-        "kickoff": "16:25",
+        "away": "New York Giants",
+        "home": "Indianapolis Colts",
+        "awayAbbr": "NYG",
+        "homeAbbr": "IND",
+        "awayScore": 0.3948,
+        "homeScore": -1.4535,
+        "expectedMargin": -5.92,
+        "homeWinProbability": 0.3263,
+        "awayWinProbability": 0.6737,
+        "pick": "NYG by 5.9",
+        "gameday": "2026-11-29",
+        "kickoff": "13:00",
+        "neutral": false,
+        "marketSpread": -6.5
+      },
+      {
+        "away": "New York Jets",
+        "home": "Miami Dolphins",
+        "awayAbbr": "NYJ",
+        "homeAbbr": "MIA",
+        "awayScore": -0.9714,
+        "homeScore": -1.5027,
+        "expectedMargin": 0.12,
+        "homeWinProbability": 0.5037,
+        "awayWinProbability": 0.4963,
+        "pick": "MIA by 0.1",
+        "gameday": "2026-11-29",
+        "kickoff": "13:00",
         "neutral": false,
         "marketSpread": -4.5
       },
       {
-        "away": "Minnesota Vikings",
-        "home": "San Francisco 49ers",
-        "awayAbbr": "MIN",
-        "homeAbbr": "SF",
-        "awayScore": 1.0885,
-        "homeScore": 1.5744,
-        "expectedMargin": 2.23,
-        "homeWinProbability": 0.5673,
-        "awayWinProbability": 0.4327,
-        "pick": "SF by 2.2",
-        "gameday": "2026-11-22",
-        "kickoff": "20:20",
-        "neutral": true,
-        "marketSpread": 3.0
+        "away": "Tennessee Titans",
+        "home": "Jacksonville Jaguars",
+        "awayAbbr": "TEN",
+        "homeAbbr": "JAX",
+        "awayScore": -1.3552,
+        "homeScore": 1.0642,
+        "expectedMargin": 13.67,
+        "homeWinProbability": 0.8505,
+        "awayWinProbability": 0.1495,
+        "pick": "JAX by 13.7",
+        "gameday": "2026-11-29",
+        "kickoff": "13:00",
+        "neutral": false,
+        "marketSpread": 14.5
       },
       {
-        "away": "Cincinnati Bengals",
-        "home": "Washington Commanders",
-        "awayAbbr": "CIN",
-        "homeAbbr": "WAS",
-        "awayScore": 1.0744,
-        "homeScore": -0.4092,
-        "expectedMargin": -4.25,
-        "homeWinProbability": 0.3734,
-        "awayWinProbability": 0.6266,
-        "pick": "CIN by 4.2",
-        "gameday": "2026-11-23",
+        "away": "New England Patriots",
+        "home": "Los Angeles Chargers",
+        "awayAbbr": "NE",
+        "homeAbbr": "LAC",
+        "awayScore": -0.5391,
+        "homeScore": -1.4777,
+        "expectedMargin": -1.75,
+        "homeWinProbability": 0.4472,
+        "awayWinProbability": 0.5528,
+        "pick": "NE by 1.7",
+        "gameday": "2026-11-29",
+        "kickoff": "16:05",
+        "neutral": false,
+        "marketSpread": -1.5
+      },
+      {
+        "away": "Seattle Seahawks",
+        "home": "San Francisco 49ers",
+        "awayAbbr": "SEA",
+        "homeAbbr": "SF",
+        "awayScore": 0.8301,
+        "homeScore": 1.6416,
+        "expectedMargin": 6.28,
+        "homeWinProbability": 0.6835,
+        "awayWinProbability": 0.3165,
+        "pick": "SF by 6.3",
+        "gameday": "2026-11-29",
+        "kickoff": "16:25",
+        "neutral": false,
+        "marketSpread": 2.5
+      },
+      {
+        "away": "Washington Commanders",
+        "home": "Arizona Cardinals",
+        "awayAbbr": "WAS",
+        "homeAbbr": "ARI",
+        "awayScore": -0.1794,
+        "homeScore": -1.4504,
+        "expectedMargin": -3.27,
+        "homeWinProbability": 0.4018,
+        "awayWinProbability": 0.5982,
+        "pick": "WAS by 3.3",
+        "gameday": "2026-11-29",
+        "kickoff": "16:25",
+        "neutral": false,
+        "marketSpread": -7.0
+      },
+      {
+        "away": "Las Vegas Raiders",
+        "home": "Cleveland Browns",
+        "awayAbbr": "LV",
+        "homeAbbr": "CLE",
+        "awayScore": -0.5126,
+        "homeScore": 0.2403,
+        "expectedMargin": 6.02,
+        "homeWinProbability": 0.6762,
+        "awayWinProbability": 0.3238,
+        "pick": "CLE by 6.0",
+        "gameday": "2026-11-29",
+        "kickoff": "20:20",
+        "neutral": false,
+        "marketSpread": 4.5
+      },
+      {
+        "away": "Carolina Panthers",
+        "home": "Tampa Bay Buccaneers",
+        "awayAbbr": "CAR",
+        "homeAbbr": "TB",
+        "awayScore": 0.0359,
+        "homeScore": -0.3924,
+        "expectedMargin": 0.59,
+        "homeWinProbability": 0.518,
+        "awayWinProbability": 0.482,
+        "pick": "TB by 0.6",
+        "gameday": "2026-11-30",
         "kickoff": "20:15",
         "neutral": false,
-        "marketSpread": -6.5
+        "marketSpread": 3.0
       }
     ]
   },
   "diagnostics": {
-    "sources": 10,
+    "sources": 8,
     "teams": 32,
-    "withinVariance": 0.0048,
-    "betweenVariance": 0.9833,
-    "reliability": 0.9951,
-    "meanPairwiseSpearman": 0.9528,
-    "splitHalfReliability": 0.9914,
-    "effectiveSources": 10.0
+    "withinVariance": 0.0058,
+    "betweenVariance": 0.9862,
+    "reliability": 0.9941,
+    "meanPairwiseSpearman": 0.9569,
+    "splitHalfReliability": 0.993,
+    "effectiveSources": 8.0
   },
   "sources": [
     {
@@ -1504,26 +1552,13 @@
       "outlet": "NFL.com",
       "analyst": "Nick Shook",
       "kind": "analyst",
-      "tier": "League site column. Publishes Tuesday afternoon; was a day late for the first build of week 11.",
-      "url": "https://www.nfl.com/news/nfl-power-rankings-week-11-2026-nfl-season",
+      "tier": "League site column.",
+      "url": "https://www.nfl.com/news/nfl-power-rankings-week-12-2026-nfl-season",
       "prior_weight": 1.0,
-      "mean_abs_dev": 2.0,
-      "rho_consensus": 0.967,
-      "mean_rho_peers": 0.943,
-      "published": "2026-11-17"
-    },
-    {
-      "id": "cbs-prisco",
-      "outlet": "CBS Sports",
-      "analyst": "Pete Prisco",
-      "kind": "analyst",
-      "tier": "Analyst column; the per-week slug is not derivable, so the hub is used. Rolling page.",
-      "url": "https://www.cbssports.com/nfl/news/priscos-nfl-week-11-power-rankings/",
-      "prior_weight": 1.0,
-      "mean_abs_dev": 1.19,
-      "rho_consensus": 0.983,
-      "mean_rho_peers": 0.959,
-      "published": "2026-11-17"
+      "mean_abs_dev": 1.75,
+      "rho_consensus": 0.968,
+      "mean_rho_peers": 0.949,
+      "published": "2026-11-24"
     },
     {
       "id": "fox-vacchiano",
@@ -1531,12 +1566,12 @@
       "analyst": "Ralph Vacchiano",
       "kind": "analyst",
       "tier": "Analyst column; 'N. Team Name' inside h2 anchors.",
-      "url": "https://www.foxsports.com/stories/nfl/2026-nfl-power-rankings-week-11",
+      "url": "https://www.foxsports.com/stories/nfl/2026-nfl-power-rankings-week-12",
       "prior_weight": 0.9,
-      "mean_abs_dev": 1.19,
-      "rho_consensus": 0.986,
-      "mean_rho_peers": 0.958,
-      "published": "2026-11-16"
+      "mean_abs_dev": 0.88,
+      "rho_consensus": 0.991,
+      "mean_rho_peers": 0.97,
+      "published": "2026-11-23"
     },
     {
       "id": "si-orr",
@@ -1544,25 +1579,25 @@
       "analyst": "Conor Orr",
       "kind": "analyst",
       "tier": "Analyst column, found via si.com's q4 article sitemap.",
-      "url": "https://www.si.com/nfl/conor-orr-week-11-nfl-power-rankings-vikings-kirk-cousins",
+      "url": "https://www.si.com/nfl/conor-orr-week-12-nfl-power-rankings-49ers-cowboys-bengals",
       "prior_weight": 0.9,
-      "mean_abs_dev": 1.69,
-      "rho_consensus": 0.968,
-      "mean_rho_peers": 0.948,
-      "published": "2026-11-17"
+      "mean_abs_dev": 2.06,
+      "rho_consensus": 0.956,
+      "mean_rho_peers": 0.932,
+      "published": "2026-11-24"
     },
     {
       "id": "sportingnews-iyer",
       "outlet": "Sporting News",
       "analyst": "Vinnie Iyer",
       "kind": "analyst",
-      "tier": "Analyst column; the slug hash is not derivable and the word order changes weekly.",
-      "url": "https://www.sportingnews.com/us/nfl/news/nfl-power-rankings-week-11-chiefs-lions-bengals-steelers-patriots/e403f5c91ad099549cf10404",
+      "tier": "Analyst column; the search result surfaced the /en/ locale, the /us/ path of the same hash works.",
+      "url": "https://www.sportingnews.com/us/nfl/news/nfl-power-rankings-week-12-bears-lions-giants-vikings-steelers/1a41edf25b0cb242d23ca265",
       "prior_weight": 0.85,
-      "mean_abs_dev": 1.69,
-      "rho_consensus": 0.968,
-      "mean_rho_peers": 0.95,
-      "published": "2026-11-17"
+      "mean_abs_dev": 1.25,
+      "rho_consensus": 0.983,
+      "mean_rho_peers": 0.962,
+      "published": "2026-11-23"
     },
     {
       "id": "sharp-summerlin",
@@ -1572,10 +1607,10 @@
       "tier": "Fixed hub page updated in place; embeds a JSON rank table. Rolling page.",
       "url": "https://www.sharpfootballanalysis.com/analysis/nfl-power-rankings/",
       "prior_weight": 0.75,
-      "mean_abs_dev": 1.38,
-      "rho_consensus": 0.98,
-      "mean_rho_peers": 0.956,
-      "published": "2026-11-16"
+      "mean_abs_dev": 0.69,
+      "rho_consensus": 0.993,
+      "mean_rho_peers": 0.971,
+      "published": "2026-11-24"
     },
     {
       "id": "thescore-staff",
@@ -1583,12 +1618,12 @@
       "analyst": "theScore NFL desk",
       "kind": "panel",
       "tier": "Editorial panel; 'N. Team (record)' plus 'Previous rank' blocks.",
-      "url": "https://www.thescore.com/nfl/news/3656431/nfl-power-rankings-week-11-every-teams-most-important-remaining-game",
+      "url": "https://www.thescore.com/nfl/news/3663420/nfl-power-rankings-week-12-what-each-team-should-be-thankful-for",
       "prior_weight": 0.8,
       "mean_abs_dev": 1.31,
-      "rho_consensus": 0.982,
-      "mean_rho_peers": 0.957,
-      "published": "2026-11-17"
+      "rho_consensus": 0.983,
+      "mean_rho_peers": 0.963,
+      "published": "2026-11-24"
     },
     {
       "id": "br-experts",
@@ -1596,144 +1631,92 @@
       "analyst": "B/R NFL staff",
       "kind": "panel",
       "tier": "Staff panel; numbered slide headings.",
-      "url": "https://bleacherreport.com/articles/25534198-br-experts-week-11-nfl-power-rankings",
+      "url": "https://bleacherreport.com/articles/25536885-br-experts-week-12-nfl-power-rankings",
       "prior_weight": 0.8,
-      "mean_abs_dev": 1.25,
-      "rho_consensus": 0.974,
-      "mean_rho_peers": 0.956,
-      "published": "2026-11-16"
+      "mean_abs_dev": 0.75,
+      "rho_consensus": 0.992,
+      "mean_rho_peers": 0.969,
+      "published": "2026-11-23"
     },
     {
       "id": "usatoday-davis",
       "outlet": "USA Today",
       "analyst": "Nate Davis",
       "kind": "analyst",
-      "tier": "Nate Davis's national column, read from an independent TownNews reprint because usatoday.com and every Gannett domain return HTTP 402 to all user agents. Reprints carry no publication metadata, so the freshness gate logs this as unverified.",
-      "url": "https://www.centraloregondaily.com/sports/nfl-power-rankings-week-11-49ers-remain-no-1-but-who-is-afcs-best-team/article_b5e31ecd-ab34-5f14-8c02-146b4876a68b.html",
+      "tier": "Nate Davis's national column, read from an independent TownNews reprint because usatoday.com and every Gannett domain return HTTP 402 to all user agents. No publication metadata on reprints, so the freshness gate logs this as unverified.",
+      "url": "https://www.centraloregondaily.com/sports/nfl-power-rankings-week-12-how-far-do-bengals-fall-after-mondays-loss-to-commanders/article_34549fa9-c6f2-5177-ade8-da2847eab2fb.html",
       "prior_weight": 0.9,
-      "mean_abs_dev": 2.0,
-      "rho_consensus": 0.957,
-      "mean_rho_peers": 0.943,
+      "mean_abs_dev": 1.94,
+      "rho_consensus": 0.963,
+      "mean_rho_peers": 0.938,
       "published": null
-    },
-    {
-      "id": "nflcom-reynolds",
-      "outlet": "NFL.com UK",
-      "analyst": "Neil Reynolds",
-      "kind": "analyst",
-      "tier": "UK desk column. Absent for eight weeks (weeks 3-10) and returned in week 11. Only the year-suffixed slug works; the year-less form is a 404, not the live article.",
-      "url": "https://www.nfl.com/news/neil-reynolds-week-11-power-rankings-2026",
-      "prior_weight": 0.85,
-      "mean_abs_dev": 1.38,
-      "rho_consensus": 0.981,
-      "mean_rho_peers": 0.958,
-      "published": "2026-11-16"
     }
   ],
   "teams": [
-    {
-      "team": "Buffalo Bills",
-      "abbr": "BUF",
-      "conference": "AFC",
-      "division": "East",
-      "rank": 1,
-      "record": "8-1",
-      "score": 1.6256,
-      "scoreRaw": 1.6336,
-      "se": 0.0717,
-      "ciLow": 1.4633,
-      "ciHigh": 1.7878,
-      "meanRank": 1.4,
-      "medianRank": 1.0,
-      "rankSd": 0.52,
-      "rankMin": 1,
-      "rankMax": 2,
-      "rankCiLow": 1,
-      "rankCiHigh": 2,
-      "pTop1": 0.9557,
-      "pTop5": 1.0,
-      "spread": 1,
-      "bySource": {
-        "nflcom-shook": 2,
-        "cbs-prisco": 1,
-        "fox-vacchiano": 1,
-        "si-orr": 2,
-        "sportingnews-iyer": 1,
-        "sharp-summerlin": 1,
-        "thescore-staff": 1,
-        "br-experts": 1,
-        "usatoday-davis": 2,
-        "nflcom-reynolds": 2
-      }
-    },
     {
       "team": "San Francisco 49ers",
       "abbr": "SF",
       "conference": "NFC",
       "division": "West",
+      "rank": 1,
+      "record": "9-1",
+      "score": 1.6416,
+      "scoreRaw": 1.6513,
+      "se": 0.0782,
+      "ciLow": 1.4565,
+      "ciHigh": 1.8266,
+      "meanRank": 1.25,
+      "medianRank": 1.0,
+      "rankSd": 0.46,
+      "rankMin": 1,
+      "rankMax": 2,
+      "rankCiLow": 1,
+      "rankCiHigh": 2,
+      "pTop1": 0.928,
+      "pTop5": 1.0,
+      "spread": 1,
+      "bySource": {
+        "nflcom-shook": 1,
+        "fox-vacchiano": 2,
+        "si-orr": 1,
+        "sportingnews-iyer": 2,
+        "sharp-summerlin": 1,
+        "thescore-staff": 1,
+        "br-experts": 1,
+        "usatoday-davis": 1
+      }
+    },
+    {
+      "team": "Buffalo Bills",
+      "abbr": "BUF",
+      "conference": "AFC",
+      "division": "East",
       "rank": 2,
-      "record": "8-1",
-      "score": 1.5744,
-      "scoreRaw": 1.5822,
-      "se": 0.0743,
-      "ciLow": 1.4065,
-      "ciHigh": 1.7424,
-      "meanRank": 1.9,
+      "record": "9-1",
+      "score": 1.5745,
+      "scoreRaw": 1.5838,
+      "se": 0.0802,
+      "ciLow": 1.3847,
+      "ciHigh": 1.7642,
+      "meanRank": 1.88,
       "medianRank": 2.0,
-      "rankSd": 0.74,
+      "rankSd": 0.64,
       "rankMin": 1,
       "rankMax": 3,
       "rankCiLow": 1,
       "rankCiHigh": 2,
-      "pTop1": 0.0442,
+      "pTop1": 0.072,
       "pTop5": 1.0,
       "spread": 2,
       "bySource": {
-        "nflcom-shook": 1,
-        "cbs-prisco": 2,
-        "fox-vacchiano": 3,
-        "si-orr": 3,
-        "sportingnews-iyer": 2,
+        "nflcom-shook": 2,
+        "fox-vacchiano": 1,
+        "si-orr": 2,
+        "sportingnews-iyer": 1,
         "sharp-summerlin": 2,
         "thescore-staff": 2,
         "br-experts": 2,
-        "usatoday-davis": 1,
-        "nflcom-reynolds": 1
-      }
-    },
-    {
-      "team": "Jacksonville Jaguars",
-      "abbr": "JAX",
-      "conference": "AFC",
-      "division": "South",
-      "rank": 3,
-      "record": "7-2",
-      "score": 1.3823,
-      "scoreRaw": 1.3891,
-      "se": 0.0876,
-      "ciLow": 1.1842,
-      "ciHigh": 1.5803,
-      "meanRank": 3.7,
-      "medianRank": 3.0,
-      "rankSd": 1.57,
-      "rankMin": 1,
-      "rankMax": 6,
-      "rankCiLow": 3,
-      "rankCiHigh": 4,
-      "pTop1": 0.0,
-      "pTop5": 1.0,
-      "spread": 5,
-      "bySource": {
-        "nflcom-shook": 3,
-        "cbs-prisco": 3,
-        "fox-vacchiano": 6,
-        "si-orr": 1,
-        "sportingnews-iyer": 5,
-        "sharp-summerlin": 3,
-        "thescore-staff": 6,
-        "br-experts": 3,
-        "usatoday-davis": 4,
-        "nflcom-reynolds": 3
+        "usatoday-davis": 3
       }
     },
     {
@@ -1741,34 +1724,65 @@
       "abbr": "CHI",
       "conference": "NFC",
       "division": "North",
-      "rank": 4,
-      "record": "7-2",
-      "score": 1.2794,
-      "scoreRaw": 1.2857,
-      "se": 0.0818,
-      "ciLow": 1.0945,
-      "ciHigh": 1.4644,
-      "meanRank": 4.6,
-      "medianRank": 4.5,
-      "rankSd": 1.26,
-      "rankMin": 3,
+      "rank": 3,
+      "record": "8-2",
+      "score": 1.3505,
+      "scoreRaw": 1.3585,
+      "se": 0.1026,
+      "ciLow": 1.1079,
+      "ciHigh": 1.5932,
+      "meanRank": 3.88,
+      "medianRank": 3.0,
+      "rankSd": 1.64,
+      "rankMin": 2,
       "rankMax": 7,
       "rankCiLow": 3,
       "rankCiHigh": 5,
       "pTop1": 0.0,
-      "pTop5": 0.9945,
-      "spread": 4,
+      "pTop5": 0.9992,
+      "spread": 5,
       "bySource": {
-        "nflcom-shook": 6,
-        "cbs-prisco": 4,
+        "nflcom-shook": 7,
         "fox-vacchiano": 5,
-        "si-orr": 5,
-        "sportingnews-iyer": 7,
-        "sharp-summerlin": 4,
+        "si-orr": 3,
+        "sportingnews-iyer": 5,
+        "sharp-summerlin": 3,
         "thescore-staff": 3,
-        "br-experts": 4,
-        "usatoday-davis": 3,
-        "nflcom-reynolds": 5
+        "br-experts": 3,
+        "usatoday-davis": 2
+      }
+    },
+    {
+      "team": "Kansas City Chiefs",
+      "abbr": "KC",
+      "conference": "AFC",
+      "division": "West",
+      "rank": 4,
+      "record": "8-2",
+      "score": 1.2795,
+      "scoreRaw": 1.2871,
+      "se": 0.0861,
+      "ciLow": 1.0759,
+      "ciHigh": 1.4832,
+      "meanRank": 4.62,
+      "medianRank": 4.5,
+      "rankSd": 1.06,
+      "rankMin": 3,
+      "rankMax": 6,
+      "rankCiLow": 3,
+      "rankCiHigh": 5,
+      "pTop1": 0.0,
+      "pTop5": 0.9995,
+      "spread": 3,
+      "bySource": {
+        "nflcom-shook": 4,
+        "fox-vacchiano": 4,
+        "si-orr": 5,
+        "sportingnews-iyer": 3,
+        "sharp-summerlin": 4,
+        "thescore-staff": 6,
+        "br-experts": 5,
+        "usatoday-davis": 6
       }
     },
     {
@@ -1777,138 +1791,64 @@
       "conference": "AFC",
       "division": "West",
       "rank": 5,
-      "record": "7-2",
-      "score": 1.1495,
-      "scoreRaw": 1.1552,
-      "se": 0.11,
-      "ciLow": 0.9007,
-      "ciHigh": 1.3983,
-      "meanRank": 5.8,
-      "medianRank": 5.0,
-      "rankSd": 2.44,
-      "rankMin": 2,
+      "record": "8-2",
+      "score": 1.2655,
+      "scoreRaw": 1.273,
+      "se": 0.1297,
+      "ciLow": 0.9588,
+      "ciHigh": 1.5722,
+      "meanRank": 4.75,
+      "medianRank": 4.0,
+      "rankSd": 2.6,
+      "rankMin": 3,
       "rankMax": 11,
-      "rankCiLow": 4,
-      "rankCiHigh": 7,
+      "rankCiLow": 3,
+      "rankCiHigh": 6,
       "pTop1": 0.0,
-      "pTop5": 0.6428,
-      "spread": 9,
+      "pTop5": 0.9337,
+      "spread": 8,
       "bySource": {
-        "nflcom-shook": 7,
-        "cbs-prisco": 5,
-        "fox-vacchiano": 2,
+        "nflcom-shook": 3,
+        "fox-vacchiano": 3,
         "si-orr": 11,
         "sportingnews-iyer": 4,
         "sharp-summerlin": 5,
-        "thescore-staff": 5,
-        "br-experts": 5,
-        "usatoday-davis": 6,
-        "nflcom-reynolds": 8
+        "thescore-staff": 4,
+        "br-experts": 4,
+        "usatoday-davis": 4
       }
     },
     {
-      "team": "Minnesota Vikings",
-      "abbr": "MIN",
-      "conference": "NFC",
-      "division": "North",
+      "team": "Jacksonville Jaguars",
+      "abbr": "JAX",
+      "conference": "AFC",
+      "division": "South",
       "rank": 6,
-      "record": "7-2",
-      "score": 1.0885,
-      "scoreRaw": 1.0939,
-      "se": 0.0925,
-      "ciLow": 0.8792,
-      "ciHigh": 1.2978,
-      "meanRank": 6.4,
+      "record": "7-3",
+      "score": 1.0642,
+      "scoreRaw": 1.0705,
+      "se": 0.0965,
+      "ciLow": 0.836,
+      "ciHigh": 1.2924,
+      "meanRank": 6.62,
       "medianRank": 6.5,
-      "rankSd": 1.78,
+      "rankSd": 1.51,
       "rankMin": 4,
       "rankMax": 9,
       "rankCiLow": 5,
-      "rankCiHigh": 8,
+      "rankCiHigh": 7,
       "pTop1": 0.0,
-      "pTop5": 0.1827,
+      "pTop5": 0.0663,
       "spread": 5,
       "bySource": {
-        "nflcom-shook": 5,
-        "cbs-prisco": 9,
+        "nflcom-shook": 6,
         "fox-vacchiano": 7,
         "si-orr": 4,
-        "sportingnews-iyer": 6,
-        "sharp-summerlin": 9,
-        "thescore-staff": 4,
-        "br-experts": 6,
-        "usatoday-davis": 7,
-        "nflcom-reynolds": 7
-      }
-    },
-    {
-      "team": "Cincinnati Bengals",
-      "abbr": "CIN",
-      "conference": "AFC",
-      "division": "North",
-      "rank": 7,
-      "record": "7-2",
-      "score": 1.0744,
-      "scoreRaw": 1.0797,
-      "se": 0.0928,
-      "ciLow": 0.8644,
-      "ciHigh": 1.2843,
-      "meanRank": 6.6,
-      "medianRank": 7.0,
-      "rankSd": 1.78,
-      "rankMin": 4,
-      "rankMax": 9,
-      "rankCiLow": 5,
-      "rankCiHigh": 8,
-      "pTop1": 0.0,
-      "pTop5": 0.1683,
-      "spread": 5,
-      "bySource": {
-        "nflcom-shook": 4,
-        "cbs-prisco": 7,
-        "fox-vacchiano": 8,
-        "si-orr": 6,
-        "sportingnews-iyer": 9,
-        "sharp-summerlin": 8,
+        "sportingnews-iyer": 7,
+        "sharp-summerlin": 6,
         "thescore-staff": 8,
-        "br-experts": 7,
-        "usatoday-davis": 5,
-        "nflcom-reynolds": 4
-      }
-    },
-    {
-      "team": "Kansas City Chiefs",
-      "abbr": "KC",
-      "conference": "AFC",
-      "division": "West",
-      "rank": 8,
-      "record": "7-2",
-      "score": 1.0042,
-      "scoreRaw": 1.0091,
-      "se": 0.1047,
-      "ciLow": 0.7674,
-      "ciHigh": 1.2409,
-      "meanRank": 7.2,
-      "medianRank": 7.5,
-      "rankSd": 2.3,
-      "rankMin": 3,
-      "rankMax": 10,
-      "rankCiLow": 6,
-      "rankCiHigh": 9,
-      "pTop1": 0.0,
-      "pTop5": 0.0118,
-      "spread": 7,
-      "bySource": {
-        "nflcom-shook": 9,
-        "cbs-prisco": 6,
-        "fox-vacchiano": 4,
-        "si-orr": 7,
-        "sportingnews-iyer": 3,
-        "sharp-summerlin": 7,
-        "thescore-staff": 10,
-        "br-experts": 8,
-        "usatoday-davis": 9,
-        "nflcom-reynolds": 9
+        "br-experts": 6,
+        "usatoday-davis": 9
       }
     },
     {
@@ -1916,34 +1856,65 @@
       "abbr": "DET",
       "conference": "NFC",
       "division": "North",
-      "rank": 9,
-      "record": "7-2",
-      "score": 0.8742,
-      "scoreRaw": 0.8785,
-      "se": 0.0808,
-      "ciLow": 0.6914,
-      "ciHigh": 1.0571,
-      "meanRank": 8.4,
-      "medianRank": 8.5,
-      "rankSd": 1.26,
-      "rankMin": 6,
+      "rank": 7,
+      "record": "8-2",
+      "score": 1.0525,
+      "scoreRaw": 1.0587,
+      "se": 0.1008,
+      "ciLow": 0.8141,
+      "ciHigh": 1.2909,
+      "meanRank": 6.75,
+      "medianRank": 6.5,
+      "rankSd": 1.67,
+      "rankMin": 5,
       "rankMax": 10,
+      "rankCiLow": 6,
+      "rankCiHigh": 8,
+      "pTop1": 0.0,
+      "pTop5": 0.0013,
+      "spread": 5,
+      "bySource": {
+        "nflcom-shook": 5,
+        "fox-vacchiano": 6,
+        "si-orr": 10,
+        "sportingnews-iyer": 6,
+        "sharp-summerlin": 8,
+        "thescore-staff": 5,
+        "br-experts": 7,
+        "usatoday-davis": 7
+      }
+    },
+    {
+      "team": "Minnesota Vikings",
+      "abbr": "MIN",
+      "conference": "NFC",
+      "division": "North",
+      "rank": 8,
+      "record": "7-3",
+      "score": 0.8887,
+      "scoreRaw": 0.8939,
+      "se": 0.0804,
+      "ciLow": 0.6986,
+      "ciHigh": 1.0787,
+      "meanRank": 8.25,
+      "medianRank": 8.0,
+      "rankSd": 0.71,
+      "rankMin": 7,
+      "rankMax": 9,
       "rankCiLow": 8,
-      "rankCiHigh": 10,
+      "rankCiHigh": 9,
       "pTop1": 0.0,
       "pTop5": 0.0,
-      "spread": 4,
+      "spread": 2,
       "bySource": {
         "nflcom-shook": 8,
-        "cbs-prisco": 8,
-        "fox-vacchiano": 9,
+        "fox-vacchiano": 8,
         "si-orr": 9,
-        "sportingnews-iyer": 8,
-        "sharp-summerlin": 10,
+        "sportingnews-iyer": 9,
+        "sharp-summerlin": 9,
         "thescore-staff": 7,
-        "br-experts": 9,
-        "usatoday-davis": 10,
-        "nflcom-reynolds": 6
+        "br-experts": 8,
+        "usatoday-davis": 8
       }
     },
     {
@@ -1951,34 +1922,65 @@
       "abbr": "SEA",
       "conference": "NFC",
       "division": "West",
-      "rank": 10,
+      "rank": 9,
       "record": "6-4",
-      "score": 0.7547,
-      "scoreRaw": 0.7585,
-      "se": 0.0906,
-      "ciLow": 0.5498,
-      "ciHigh": 0.9597,
-      "meanRank": 9.4,
+      "score": 0.8301,
+      "scoreRaw": 0.8351,
+      "se": 0.1246,
+      "ciLow": 0.5354,
+      "ciHigh": 1.1249,
+      "meanRank": 8.75,
       "medianRank": 10.0,
-      "rankSd": 1.71,
-      "rankMin": 6,
+      "rankSd": 2.43,
+      "rankMin": 5,
       "rankMax": 12,
+      "rankCiLow": 7,
+      "rankCiHigh": 10,
+      "pTop1": 0.0,
+      "pTop5": 0.0,
+      "spread": 7,
+      "bySource": {
+        "nflcom-shook": 12,
+        "fox-vacchiano": 10,
+        "si-orr": 6,
+        "sportingnews-iyer": 10,
+        "sharp-summerlin": 7,
+        "thescore-staff": 10,
+        "br-experts": 10,
+        "usatoday-davis": 5
+      }
+    },
+    {
+      "team": "Cincinnati Bengals",
+      "abbr": "CIN",
+      "conference": "AFC",
+      "division": "North",
+      "rank": 10,
+      "record": "7-3",
+      "score": 0.8091,
+      "scoreRaw": 0.8139,
+      "se": 0.0813,
+      "ciLow": 0.6168,
+      "ciHigh": 1.0014,
+      "meanRank": 9.0,
+      "medianRank": 9.0,
+      "rankSd": 0.76,
+      "rankMin": 8,
+      "rankMax": 10,
       "rankCiLow": 9,
       "rankCiHigh": 10,
       "pTop1": 0.0,
       "pTop5": 0.0,
-      "spread": 6,
+      "spread": 2,
       "bySource": {
-        "nflcom-shook": 11,
-        "cbs-prisco": 12,
-        "fox-vacchiano": 10,
+        "nflcom-shook": 9,
+        "fox-vacchiano": 9,
         "si-orr": 8,
-        "sportingnews-iyer": 10,
-        "sharp-summerlin": 6,
+        "sportingnews-iyer": 8,
+        "sharp-summerlin": 10,
         "thescore-staff": 9,
-        "br-experts": 10,
-        "usatoday-davis": 8,
-        "nflcom-reynolds": 10
+        "br-experts": 9,
+        "usatoday-davis": 10
       }
     },
     {
@@ -1988,32 +1990,30 @@
       "division": "West",
       "rank": 11,
       "record": "6-4",
-      "score": 0.5435,
-      "scoreRaw": 0.5462,
-      "se": 0.0868,
-      "ciLow": 0.3472,
-      "ciHigh": 0.7398,
-      "meanRank": 11.4,
-      "medianRank": 11.0,
-      "rankSd": 1.35,
-      "rankMin": 10,
-      "rankMax": 15,
+      "score": 0.5485,
+      "scoreRaw": 0.5517,
+      "se": 0.1142,
+      "ciLow": 0.2785,
+      "ciHigh": 0.8184,
+      "meanRank": 11.38,
+      "medianRank": 11.5,
+      "rankSd": 2.07,
+      "rankMin": 7,
+      "rankMax": 14,
       "rankCiLow": 11,
-      "rankCiHigh": 12,
+      "rankCiHigh": 13,
       "pTop1": 0.0,
       "pTop5": 0.0,
-      "spread": 5,
+      "spread": 7,
       "bySource": {
-        "nflcom-shook": 15,
-        "cbs-prisco": 11,
-        "fox-vacchiano": 12,
-        "si-orr": 10,
-        "sportingnews-iyer": 11,
-        "sharp-summerlin": 11,
+        "nflcom-shook": 14,
+        "fox-vacchiano": 13,
+        "si-orr": 7,
+        "sportingnews-iyer": 12,
+        "sharp-summerlin": 12,
         "thescore-staff": 11,
         "br-experts": 11,
-        "usatoday-davis": 11,
-        "nflcom-reynolds": 11
+        "usatoday-davis": 11
       }
     },
     {
@@ -2023,67 +2023,63 @@
       "division": "North",
       "rank": 12,
       "record": "6-4",
-      "score": 0.4979,
-      "scoreRaw": 0.5004,
-      "se": 0.077,
-      "ciLow": 0.3237,
-      "ciHigh": 0.6721,
-      "meanRank": 11.9,
+      "score": 0.4861,
+      "scoreRaw": 0.4889,
+      "se": 0.0814,
+      "ciLow": 0.2937,
+      "ciHigh": 0.6785,
+      "meanRank": 12.0,
       "medianRank": 12.0,
-      "rankSd": 0.88,
-      "rankMin": 10,
+      "rankSd": 0.76,
+      "rankMin": 11,
       "rankMax": 13,
       "rankCiLow": 11,
       "rankCiHigh": 13,
       "pTop1": 0.0,
       "pTop5": 0.0,
-      "spread": 3,
+      "spread": 2,
       "bySource": {
-        "nflcom-shook": 10,
-        "cbs-prisco": 13,
-        "fox-vacchiano": 11,
+        "nflcom-shook": 11,
+        "fox-vacchiano": 12,
         "si-orr": 12,
         "sportingnews-iyer": 13,
-        "sharp-summerlin": 12,
-        "thescore-staff": 12,
+        "sharp-summerlin": 11,
+        "thescore-staff": 13,
         "br-experts": 12,
-        "usatoday-davis": 12,
-        "nflcom-reynolds": 12
+        "usatoday-davis": 12
       }
     },
     {
-      "team": "Pittsburgh Steelers",
-      "abbr": "PIT",
-      "conference": "AFC",
-      "division": "North",
+      "team": "New York Giants",
+      "abbr": "NYG",
+      "conference": "NFC",
+      "division": "East",
       "rank": 13,
-      "record": "6-3",
-      "score": 0.3809,
-      "scoreRaw": 0.3828,
-      "se": 0.0856,
-      "ciLow": 0.1873,
-      "ciHigh": 0.5745,
-      "meanRank": 13.0,
-      "medianRank": 13.0,
-      "rankSd": 1.33,
+      "record": "6-3-1",
+      "score": 0.3948,
+      "scoreRaw": 0.3971,
+      "se": 0.1366,
+      "ciLow": 0.0717,
+      "ciHigh": 0.7179,
+      "meanRank": 12.88,
+      "medianRank": 12.5,
+      "rankSd": 2.8,
       "rankMin": 10,
-      "rankMax": 15,
-      "rankCiLow": 12,
+      "rankMax": 19,
+      "rankCiLow": 11,
       "rankCiHigh": 14,
       "pTop1": 0.0,
       "pTop5": 0.0,
-      "spread": 5,
+      "spread": 9,
       "bySource": {
-        "nflcom-shook": 13,
-        "cbs-prisco": 10,
-        "fox-vacchiano": 15,
-        "si-orr": 14,
-        "sportingnews-iyer": 12,
-        "sharp-summerlin": 13,
-        "thescore-staff": 13,
+        "nflcom-shook": 10,
+        "fox-vacchiano": 11,
+        "si-orr": 13,
+        "sportingnews-iyer": 11,
+        "sharp-summerlin": 14,
+        "thescore-staff": 12,
         "br-experts": 13,
-        "usatoday-davis": 13,
-        "nflcom-reynolds": 14
+        "usatoday-davis": 19
       }
     },
     {
@@ -2093,67 +2089,30 @@
       "division": "North",
       "rank": 14,
       "record": "6-4",
-      "score": 0.3267,
-      "scoreRaw": 0.3283,
-      "se": 0.0741,
-      "ciLow": 0.159,
-      "ciHigh": 0.4944,
-      "meanRank": 13.5,
+      "score": 0.2403,
+      "scoreRaw": 0.2417,
+      "se": 0.0989,
+      "ciLow": 0.0064,
+      "ciHigh": 0.4742,
+      "meanRank": 14.25,
       "medianRank": 14.0,
-      "rankSd": 0.71,
-      "rankMin": 12,
-      "rankMax": 14,
+      "rankSd": 1.58,
+      "rankMin": 13,
+      "rankMax": 18,
       "rankCiLow": 13,
       "rankCiHigh": 14,
       "pTop1": 0.0,
       "pTop5": 0.0,
-      "spread": 2,
+      "spread": 5,
       "bySource": {
-        "nflcom-shook": 12,
-        "cbs-prisco": 14,
-        "fox-vacchiano": 13,
-        "si-orr": 13,
+        "nflcom-shook": 13,
+        "fox-vacchiano": 14,
+        "si-orr": 18,
         "sportingnews-iyer": 14,
-        "sharp-summerlin": 14,
+        "sharp-summerlin": 13,
         "thescore-staff": 14,
         "br-experts": 14,
-        "usatoday-davis": 14,
-        "nflcom-reynolds": 13
-      }
-    },
-    {
-      "team": "New York Giants",
-      "abbr": "NYG",
-      "conference": "NFC",
-      "division": "East",
-      "rank": 15,
-      "record": "5-3-1",
-      "score": 0.057,
-      "scoreRaw": 0.0572,
-      "se": 0.1021,
-      "ciLow": -0.174,
-      "ciHigh": 0.2879,
-      "meanRank": 16.0,
-      "medianRank": 15.0,
-      "rankSd": 2.21,
-      "rankMin": 14,
-      "rankMax": 21,
-      "rankCiLow": 15,
-      "rankCiHigh": 17,
-      "pTop1": 0.0,
-      "pTop5": 0.0,
-      "spread": 7,
-      "bySource": {
-        "nflcom-shook": 16,
-        "cbs-prisco": 15,
-        "fox-vacchiano": 14,
-        "si-orr": 15,
-        "sportingnews-iyer": 15,
-        "sharp-summerlin": 19,
-        "thescore-staff": 15,
-        "br-experts": 15,
-        "usatoday-davis": 21,
-        "nflcom-reynolds": 15
+        "usatoday-davis": 14
       }
     },
     {
@@ -2161,69 +2120,98 @@
       "abbr": "CAR",
       "conference": "NFC",
       "division": "South",
-      "rank": 16,
-      "record": "4-5",
-      "score": -0.0687,
-      "scoreRaw": -0.069,
-      "se": 0.0851,
-      "ciLow": -0.2612,
-      "ciHigh": 0.1239,
-      "meanRank": 17.1,
-      "medianRank": 17.0,
-      "rankSd": 1.45,
-      "rankMin": 15,
-      "rankMax": 19,
+      "rank": 15,
+      "record": "5-5",
+      "score": 0.0359,
+      "scoreRaw": 0.0361,
+      "se": 0.0961,
+      "ciLow": -0.1913,
+      "ciHigh": 0.2631,
+      "meanRank": 16.12,
+      "medianRank": 16.0,
+      "rankSd": 1.46,
+      "rankMin": 14,
+      "rankMax": 18,
       "rankCiLow": 15,
-      "rankCiHigh": 17,
+      "rankCiHigh": 16,
       "pTop1": 0.0,
       "pTop5": 0.0,
       "spread": 4,
       "bySource": {
-        "nflcom-shook": 19,
-        "cbs-prisco": 16,
-        "fox-vacchiano": 17,
-        "si-orr": 17,
-        "sportingnews-iyer": 19,
+        "nflcom-shook": 18,
+        "fox-vacchiano": 15,
+        "si-orr": 14,
+        "sportingnews-iyer": 18,
         "sharp-summerlin": 15,
-        "thescore-staff": 17,
+        "thescore-staff": 16,
         "br-experts": 16,
-        "usatoday-davis": 16,
-        "nflcom-reynolds": 19
+        "usatoday-davis": 17
       }
     },
     {
-      "team": "Tampa Bay Buccaneers",
-      "abbr": "TB",
-      "conference": "NFC",
-      "division": "South",
-      "rank": 17,
-      "record": "3-6",
-      "score": -0.1253,
-      "scoreRaw": -0.1259,
-      "se": 0.1244,
-      "ciLow": -0.4067,
-      "ciHigh": 0.1561,
-      "meanRank": 17.8,
-      "medianRank": 17.5,
-      "rankSd": 3.05,
-      "rankMin": 14,
-      "rankMax": 23,
+      "team": "Pittsburgh Steelers",
+      "abbr": "PIT",
+      "conference": "AFC",
+      "division": "North",
+      "rank": 16,
+      "record": "6-4",
+      "score": -0.0421,
+      "scoreRaw": -0.0424,
+      "se": 0.1399,
+      "ciLow": -0.3728,
+      "ciHigh": 0.2886,
+      "meanRank": 16.75,
+      "medianRank": 15.5,
+      "rankSd": 2.87,
+      "rankMin": 13,
+      "rankMax": 21,
       "rankCiLow": 15,
       "rankCiHigh": 19,
       "pTop1": 0.0,
       "pTop5": 0.0,
-      "spread": 9,
+      "spread": 8,
       "bySource": {
-        "nflcom-shook": 14,
-        "cbs-prisco": 17,
-        "fox-vacchiano": 16,
-        "si-orr": 18,
-        "sportingnews-iyer": 23,
-        "sharp-summerlin": 18,
-        "thescore-staff": 18,
-        "br-experts": 23,
-        "usatoday-davis": 15,
-        "nflcom-reynolds": 16
+        "nflcom-shook": 21,
+        "fox-vacchiano": 19,
+        "si-orr": 20,
+        "sportingnews-iyer": 15,
+        "sharp-summerlin": 16,
+        "thescore-staff": 15,
+        "br-experts": 15,
+        "usatoday-davis": 13
+      }
+    },
+    {
+      "team": "Dallas Cowboys",
+      "abbr": "DAL",
+      "conference": "NFC",
+      "division": "East",
+      "rank": 17,
+      "record": "5-6",
+      "score": -0.1053,
+      "scoreRaw": -0.106,
+      "se": 0.0924,
+      "ciLow": -0.3238,
+      "ciHigh": 0.1131,
+      "meanRank": 17.5,
+      "medianRank": 17.0,
+      "rankSd": 1.31,
+      "rankMin": 16,
+      "rankMax": 20,
+      "rankCiLow": 16,
+      "rankCiHigh": 19,
+      "pTop1": 0.0,
+      "pTop5": 0.0,
+      "spread": 4,
+      "bySource": {
+        "nflcom-shook": 16,
+        "fox-vacchiano": 17,
+        "si-orr": 17,
+        "sportingnews-iyer": 17,
+        "sharp-summerlin": 17,
+        "thescore-staff": 19,
+        "br-experts": 17,
+        "usatoday-davis": 20
       }
     },
     {
@@ -2232,103 +2220,31 @@
       "conference": "AFC",
       "division": "South",
       "rank": 18,
-      "record": "3-6",
-      "score": -0.3489,
-      "scoreRaw": -0.3506,
-      "se": 0.0986,
-      "ciLow": -0.5719,
-      "ciHigh": -0.1258,
-      "meanRank": 19.8,
-      "medianRank": 19.5,
-      "rankSd": 1.99,
-      "rankMin": 17,
-      "rankMax": 23,
-      "rankCiLow": 18,
-      "rankCiHigh": 22,
+      "record": "4-6",
+      "score": -0.1389,
+      "scoreRaw": -0.1397,
+      "se": 0.1144,
+      "ciLow": -0.4094,
+      "ciHigh": 0.1316,
+      "meanRank": 17.88,
+      "medianRank": 18.0,
+      "rankSd": 2.1,
+      "rankMin": 15,
+      "rankMax": 21,
+      "rankCiLow": 16,
+      "rankCiHigh": 19,
       "pTop1": 0.0,
       "pTop5": 0.0,
       "spread": 6,
       "bySource": {
-        "nflcom-shook": 17,
-        "cbs-prisco": 19,
-        "fox-vacchiano": 18,
-        "si-orr": 20,
-        "sportingnews-iyer": 22,
-        "sharp-summerlin": 20,
-        "thescore-staff": 19,
-        "br-experts": 22,
-        "usatoday-davis": 23,
-        "nflcom-reynolds": 18
-      }
-    },
-    {
-      "team": "New England Patriots",
-      "abbr": "NE",
-      "conference": "AFC",
-      "division": "East",
-      "rank": 19,
-      "record": "5-5",
-      "score": -0.3538,
-      "scoreRaw": -0.3556,
-      "se": 0.1289,
-      "ciLow": -0.6454,
-      "ciHigh": -0.0622,
-      "meanRank": 19.6,
-      "medianRank": 19.5,
-      "rankSd": 3.24,
-      "rankMin": 16,
-      "rankMax": 24,
-      "rankCiLow": 17,
-      "rankCiHigh": 22,
-      "pTop1": 0.0,
-      "pTop5": 0.0,
-      "spread": 8,
-      "bySource": {
-        "nflcom-shook": 23,
-        "cbs-prisco": 20,
-        "fox-vacchiano": 19,
-        "si-orr": 23,
-        "sportingnews-iyer": 16,
-        "sharp-summerlin": 16,
-        "thescore-staff": 16,
-        "br-experts": 17,
-        "usatoday-davis": 24,
-        "nflcom-reynolds": 22
-      }
-    },
-    {
-      "team": "Dallas Cowboys",
-      "abbr": "DAL",
-      "conference": "NFC",
-      "division": "East",
-      "rank": 20,
-      "record": "4-6",
-      "score": -0.3778,
-      "scoreRaw": -0.3797,
-      "se": 0.1197,
-      "ciLow": -0.6486,
-      "ciHigh": -0.1071,
-      "meanRank": 20.0,
-      "medianRank": 19.5,
-      "rankSd": 2.83,
-      "rankMin": 17,
-      "rankMax": 26,
-      "rankCiLow": 18,
-      "rankCiHigh": 23,
-      "pTop1": 0.0,
-      "pTop5": 0.0,
-      "spread": 9,
-      "bySource": {
-        "nflcom-shook": 18,
-        "cbs-prisco": 18,
-        "fox-vacchiano": 20,
-        "si-orr": 26,
-        "sportingnews-iyer": 17,
-        "sharp-summerlin": 17,
-        "thescore-staff": 22,
-        "br-experts": 19,
-        "usatoday-davis": 22,
-        "nflcom-reynolds": 21
+        "nflcom-shook": 15,
+        "fox-vacchiano": 16,
+        "si-orr": 16,
+        "sportingnews-iyer": 19,
+        "sharp-summerlin": 18,
+        "thescore-staff": 18,
+        "br-experts": 20,
+        "usatoday-davis": 21
       }
     },
     {
@@ -2336,34 +2252,65 @@
       "abbr": "WAS",
       "conference": "NFC",
       "division": "East",
-      "rank": 21,
-      "record": "3-5-1",
-      "score": -0.4092,
-      "scoreRaw": -0.4113,
-      "se": 0.1062,
-      "ciLow": -0.6496,
-      "ciHigh": -0.1689,
-      "meanRank": 20.3,
+      "rank": 19,
+      "record": "4-5-1",
+      "score": -0.1794,
+      "scoreRaw": -0.1805,
+      "se": 0.1,
+      "ciLow": -0.416,
+      "ciHigh": 0.0571,
+      "meanRank": 18.25,
+      "medianRank": 18.5,
+      "rankSd": 1.67,
+      "rankMin": 15,
+      "rankMax": 20,
+      "rankCiLow": 17,
+      "rankCiHigh": 20,
+      "pTop1": 0.0,
+      "pTop5": 0.0,
+      "spread": 5,
+      "bySource": {
+        "nflcom-shook": 17,
+        "fox-vacchiano": 18,
+        "si-orr": 15,
+        "sportingnews-iyer": 20,
+        "sharp-summerlin": 19,
+        "thescore-staff": 20,
+        "br-experts": 19,
+        "usatoday-davis": 18
+      }
+    },
+    {
+      "team": "Tampa Bay Buccaneers",
+      "abbr": "TB",
+      "conference": "NFC",
+      "division": "South",
+      "rank": 20,
+      "record": "3-7",
+      "score": -0.3924,
+      "scoreRaw": -0.3948,
+      "se": 0.1172,
+      "ciLow": -0.6697,
+      "ciHigh": -0.1152,
+      "meanRank": 20.25,
       "medianRank": 20.5,
       "rankSd": 2.31,
       "rankMin": 16,
       "rankMax": 23,
-      "rankCiLow": 18,
+      "rankCiLow": 20,
       "rankCiHigh": 22,
       "pTop1": 0.0,
       "pTop5": 0.0,
       "spread": 7,
       "bySource": {
-        "nflcom-shook": 20,
-        "cbs-prisco": 23,
-        "fox-vacchiano": 22,
-        "si-orr": 16,
-        "sportingnews-iyer": 20,
+        "nflcom-shook": 19,
+        "fox-vacchiano": 20,
+        "si-orr": 19,
+        "sportingnews-iyer": 23,
         "sharp-summerlin": 21,
-        "thescore-staff": 23,
-        "br-experts": 21,
-        "usatoday-davis": 20,
-        "nflcom-reynolds": 17
+        "thescore-staff": 21,
+        "br-experts": 23,
+        "usatoday-davis": 16
       }
     },
     {
@@ -2371,104 +2318,65 @@
       "abbr": "LV",
       "conference": "AFC",
       "division": "West",
-      "rank": 22,
-      "record": "4-6",
-      "score": -0.4536,
-      "scoreRaw": -0.4558,
-      "se": 0.1194,
-      "ciLow": -0.7237,
-      "ciHigh": -0.1835,
-      "meanRank": 20.7,
-      "medianRank": 20.5,
-      "rankSd": 2.83,
-      "rankMin": 17,
-      "rankMax": 25,
-      "rankCiLow": 18,
+      "rank": 21,
+      "record": "4-7",
+      "score": -0.5126,
+      "scoreRaw": -0.5156,
+      "se": 0.1366,
+      "ciLow": -0.8356,
+      "ciHigh": -0.1896,
+      "meanRank": 21.38,
+      "medianRank": 22.0,
+      "rankSd": 2.92,
+      "rankMin": 15,
+      "rankMax": 24,
+      "rankCiLow": 20,
       "rankCiHigh": 23,
       "pTop1": 0.0,
       "pTop5": 0.0,
-      "spread": 8,
+      "spread": 9,
       "bySource": {
-        "nflcom-shook": 21,
-        "cbs-prisco": 25,
-        "fox-vacchiano": 21,
-        "si-orr": 19,
-        "sportingnews-iyer": 18,
+        "nflcom-shook": 20,
+        "fox-vacchiano": 22,
+        "si-orr": 23,
+        "sportingnews-iyer": 22,
         "sharp-summerlin": 24,
         "thescore-staff": 24,
+        "br-experts": 21,
+        "usatoday-davis": 15
+      }
+    },
+    {
+      "team": "New England Patriots",
+      "abbr": "NE",
+      "conference": "AFC",
+      "division": "East",
+      "rank": 22,
+      "record": "5-5",
+      "score": -0.5391,
+      "scoreRaw": -0.5423,
+      "se": 0.1877,
+      "ciLow": -0.983,
+      "ciHigh": -0.0953,
+      "meanRank": 21.25,
+      "medianRank": 20.5,
+      "rankSd": 4.33,
+      "rankMin": 16,
+      "rankMax": 27,
+      "rankCiLow": 18,
+      "rankCiHigh": 24,
+      "pTop1": 0.0,
+      "pTop5": 0.0,
+      "spread": 11,
+      "bySource": {
+        "nflcom-shook": 27,
+        "fox-vacchiano": 21,
+        "si-orr": 27,
+        "sportingnews-iyer": 16,
+        "sharp-summerlin": 20,
+        "thescore-staff": 17,
         "br-experts": 18,
-        "usatoday-davis": 17,
-        "nflcom-reynolds": 20
-      }
-    },
-    {
-      "team": "Atlanta Falcons",
-      "abbr": "ATL",
-      "conference": "NFC",
-      "division": "South",
-      "rank": 23,
-      "record": "3-7",
-      "score": -0.6285,
-      "scoreRaw": -0.6316,
-      "se": 0.1033,
-      "ciLow": -0.8621,
-      "ciHigh": -0.3949,
-      "meanRank": 22.4,
-      "medianRank": 22.5,
-      "rankSd": 2.27,
-      "rankMin": 18,
-      "rankMax": 25,
-      "rankCiLow": 21,
-      "rankCiHigh": 25,
-      "pTop1": 0.0,
-      "pTop5": 0.0,
-      "spread": 7,
-      "bySource": {
-        "nflcom-shook": 22,
-        "cbs-prisco": 21,
-        "fox-vacchiano": 25,
-        "si-orr": 22,
-        "sportingnews-iyer": 24,
-        "sharp-summerlin": 25,
-        "thescore-staff": 20,
-        "br-experts": 24,
-        "usatoday-davis": 18,
-        "nflcom-reynolds": 23
-      }
-    },
-    {
-      "team": "New Orleans Saints",
-      "abbr": "NO",
-      "conference": "NFC",
-      "division": "South",
-      "rank": 24,
-      "record": "3-6",
-      "score": -0.6931,
-      "scoreRaw": -0.6966,
-      "se": 0.1001,
-      "ciLow": -0.9195,
-      "ciHigh": -0.4668,
-      "meanRank": 22.9,
-      "medianRank": 23.5,
-      "rankSd": 2.08,
-      "rankMin": 19,
-      "rankMax": 25,
-      "rankCiLow": 23,
-      "rankCiHigh": 25,
-      "pTop1": 0.0,
-      "pTop5": 0.0,
-      "spread": 6,
-      "bySource": {
-        "nflcom-shook": 25,
-        "cbs-prisco": 24,
-        "fox-vacchiano": 23,
-        "si-orr": 21,
-        "sportingnews-iyer": 25,
-        "sharp-summerlin": 22,
-        "thescore-staff": 21,
-        "br-experts": 25,
-        "usatoday-davis": 19,
-        "nflcom-reynolds": 24
+        "usatoday-davis": 24
       }
     },
     {
@@ -2476,104 +2384,164 @@
       "abbr": "BAL",
       "conference": "AFC",
       "division": "North",
-      "rank": 25,
-      "record": "4-6",
-      "score": -0.8169,
-      "scoreRaw": -0.821,
-      "se": 0.1116,
-      "ciLow": -1.0695,
-      "ciHigh": -0.5644,
-      "meanRank": 24.0,
-      "medianRank": 24.5,
-      "rankSd": 2.49,
-      "rankMin": 20,
-      "rankMax": 28,
+      "rank": 23,
+      "record": "4-7",
+      "score": -0.7162,
+      "scoreRaw": -0.7205,
+      "se": 0.1072,
+      "ciLow": -0.9696,
+      "ciHigh": -0.4628,
+      "meanRank": 23.12,
+      "medianRank": 22.5,
+      "rankSd": 1.96,
+      "rankMin": 21,
+      "rankMax": 26,
+      "rankCiLow": 21,
+      "rankCiHigh": 25,
+      "pTop1": 0.0,
+      "pTop5": 0.0,
+      "spread": 5,
+      "bySource": {
+        "nflcom-shook": 23,
+        "fox-vacchiano": 25,
+        "si-orr": 21,
+        "sportingnews-iyer": 21,
+        "sharp-summerlin": 22,
+        "thescore-staff": 25,
+        "br-experts": 22,
+        "usatoday-davis": 26
+      }
+    },
+    {
+      "team": "Atlanta Falcons",
+      "abbr": "ATL",
+      "conference": "NFC",
+      "division": "South",
+      "rank": 24,
+      "record": "3-7",
+      "score": -0.7974,
+      "scoreRaw": -0.8021,
+      "se": 0.0935,
+      "ciLow": -1.0185,
+      "ciHigh": -0.5762,
+      "meanRank": 23.88,
+      "medianRank": 24.0,
+      "rankSd": 1.36,
+      "rankMin": 22,
+      "rankMax": 26,
       "rankCiLow": 23,
       "rankCiHigh": 25,
       "pTop1": 0.0,
       "pTop5": 0.0,
-      "spread": 8,
+      "spread": 4,
       "bySource": {
-        "nflcom-shook": 28,
-        "cbs-prisco": 22,
-        "fox-vacchiano": 26,
+        "nflcom-shook": 26,
+        "fox-vacchiano": 24,
         "si-orr": 24,
-        "sportingnews-iyer": 21,
-        "sharp-summerlin": 23,
-        "thescore-staff": 25,
-        "br-experts": 20,
-        "usatoday-davis": 25,
-        "nflcom-reynolds": 26
+        "sportingnews-iyer": 24,
+        "sharp-summerlin": 25,
+        "thescore-staff": 22,
+        "br-experts": 24,
+        "usatoday-davis": 22
       }
     },
     {
-      "team": "Arizona Cardinals",
-      "abbr": "ARI",
+      "team": "New Orleans Saints",
+      "abbr": "NO",
       "conference": "NFC",
-      "division": "West",
+      "division": "South",
+      "rank": 25,
+      "record": "3-7",
+      "score": -0.8777,
+      "scoreRaw": -0.8829,
+      "se": 0.1075,
+      "ciLow": -1.1318,
+      "ciHigh": -0.6236,
+      "meanRank": 24.62,
+      "medianRank": 24.0,
+      "rankSd": 2.0,
+      "rankMin": 23,
+      "rankMax": 28,
+      "rankCiLow": 23,
+      "rankCiHigh": 27,
+      "pTop1": 0.0,
+      "pTop5": 0.0,
+      "spread": 5,
+      "bySource": {
+        "nflcom-shook": 25,
+        "fox-vacchiano": 23,
+        "si-orr": 28,
+        "sportingnews-iyer": 25,
+        "sharp-summerlin": 23,
+        "thescore-staff": 23,
+        "br-experts": 27,
+        "usatoday-davis": 23
+      }
+    },
+    {
+      "team": "Philadelphia Eagles",
+      "abbr": "PHI",
+      "conference": "NFC",
+      "division": "East",
       "rank": 26,
       "record": "3-7",
-      "score": -1.1575,
-      "scoreRaw": -1.1632,
-      "se": 0.094,
-      "ciLow": -1.3701,
-      "ciHigh": -0.9449,
-      "meanRank": 27.2,
-      "medianRank": 27.0,
+      "score": -0.9495,
+      "scoreRaw": -0.9551,
+      "se": 0.1014,
+      "ciLow": -1.1892,
+      "ciHigh": -0.7099,
+      "meanRank": 25.38,
+      "medianRank": 26.0,
       "rankSd": 1.69,
-      "rankMin": 25,
-      "rankMax": 31,
-      "rankCiLow": 26,
-      "rankCiHigh": 28,
+      "rankMin": 22,
+      "rankMax": 27,
+      "rankCiLow": 24,
+      "rankCiHigh": 27,
       "pTop1": 0.0,
       "pTop5": 0.0,
-      "spread": 6,
+      "spread": 5,
       "bySource": {
-        "nflcom-shook": 31,
-        "cbs-prisco": 26,
-        "fox-vacchiano": 27,
-        "si-orr": 25,
+        "nflcom-shook": 24,
+        "fox-vacchiano": 26,
+        "si-orr": 22,
         "sportingnews-iyer": 26,
-        "sharp-summerlin": 27,
-        "thescore-staff": 26,
-        "br-experts": 28,
-        "usatoday-davis": 28,
-        "nflcom-reynolds": 28
+        "sharp-summerlin": 26,
+        "thescore-staff": 27,
+        "br-experts": 25,
+        "usatoday-davis": 27
       }
     },
     {
-      "team": "Indianapolis Colts",
-      "abbr": "IND",
+      "team": "New York Jets",
+      "abbr": "NYJ",
       "conference": "AFC",
-      "division": "South",
+      "division": "East",
       "rank": 27,
-      "record": "3-7",
-      "score": -1.2314,
-      "scoreRaw": -1.2375,
-      "se": 0.0954,
-      "ciLow": -1.4472,
-      "ciHigh": -1.0157,
-      "meanRank": 27.9,
-      "medianRank": 28.0,
-      "rankSd": 1.85,
-      "rankMin": 24,
-      "rankMax": 31,
-      "rankCiLow": 26,
-      "rankCiHigh": 29,
+      "record": "3-8",
+      "score": -0.9714,
+      "scoreRaw": -0.9771,
+      "se": 0.1045,
+      "ciLow": -1.2184,
+      "ciHigh": -0.7243,
+      "meanRank": 25.62,
+      "medianRank": 26.0,
+      "rankSd": 1.69,
+      "rankMin": 22,
+      "rankMax": 27,
+      "rankCiLow": 25,
+      "rankCiHigh": 27,
       "pTop1": 0.0,
       "pTop5": 0.0,
-      "spread": 7,
+      "spread": 5,
       "bySource": {
-        "nflcom-shook": 29,
-        "cbs-prisco": 29,
-        "fox-vacchiano": 24,
-        "si-orr": 27,
-        "sportingnews-iyer": 28,
-        "sharp-summerlin": 28,
-        "thescore-staff": 27,
-        "br-experts": 29,
-        "usatoday-davis": 31,
-        "nflcom-reynolds": 27
+        "nflcom-shook": 22,
+        "fox-vacchiano": 27,
+        "si-orr": 25,
+        "sportingnews-iyer": 27,
+        "sharp-summerlin": 27,
+        "thescore-staff": 26,
+        "br-experts": 26,
+        "usatoday-davis": 25
       }
     },
     {
@@ -2582,155 +2550,81 @@
       "conference": "AFC",
       "division": "South",
       "rank": 28,
-      "record": "1-8",
-      "score": -1.3127,
-      "scoreRaw": -1.3192,
-      "se": 0.1232,
-      "ciLow": -1.5913,
-      "ciHigh": -1.0341,
-      "meanRank": 28.7,
-      "medianRank": 29.5,
-      "rankSd": 2.87,
-      "rankMin": 24,
+      "record": "1-9",
+      "score": -1.3552,
+      "scoreRaw": -1.3632,
+      "se": 0.0909,
+      "ciLow": -1.5701,
+      "ciHigh": -1.1403,
+      "meanRank": 29.12,
+      "medianRank": 29.0,
+      "rankSd": 1.36,
+      "rankMin": 28,
       "rankMax": 32,
-      "rankCiLow": 26,
+      "rankCiLow": 28,
       "rankCiHigh": 31,
       "pTop1": 0.0,
       "pTop5": 0.0,
-      "spread": 8,
+      "spread": 4,
       "bySource": {
-        "nflcom-shook": 24,
-        "cbs-prisco": 32,
-        "fox-vacchiano": 29,
-        "si-orr": 28,
-        "sportingnews-iyer": 30,
-        "sharp-summerlin": 26,
-        "thescore-staff": 32,
-        "br-experts": 31,
-        "usatoday-davis": 30,
-        "nflcom-reynolds": 25
-      }
-    },
-    {
-      "team": "New York Jets",
-      "abbr": "NYJ",
-      "conference": "AFC",
-      "division": "East",
-      "rank": 29,
-      "record": "2-8",
-      "score": -1.3361,
-      "scoreRaw": -1.3427,
-      "se": 0.1054,
-      "ciLow": -1.5744,
-      "ciHigh": -1.0978,
-      "meanRank": 29.0,
-      "medianRank": 30.0,
-      "rankSd": 2.26,
-      "rankMin": 26,
-      "rankMax": 31,
-      "rankCiLow": 26,
-      "rankCiHigh": 31,
-      "pTop1": 0.0,
-      "pTop5": 0.0,
-      "spread": 5,
-      "bySource": {
-        "nflcom-shook": 26,
-        "cbs-prisco": 27,
-        "fox-vacchiano": 31,
-        "si-orr": 31,
-        "sportingnews-iyer": 29,
-        "sharp-summerlin": 31,
-        "thescore-staff": 31,
-        "br-experts": 27,
-        "usatoday-davis": 26,
-        "nflcom-reynolds": 31
-      }
-    },
-    {
-      "team": "Philadelphia Eagles",
-      "abbr": "PHI",
-      "conference": "NFC",
-      "division": "East",
-      "rank": 30,
-      "record": "2-7",
-      "score": -1.3583,
-      "scoreRaw": -1.365,
-      "se": 0.1037,
-      "ciLow": -1.5928,
-      "ciHigh": -1.1237,
-      "meanRank": 29.1,
-      "medianRank": 28.5,
-      "rankSd": 2.28,
-      "rankMin": 26,
-      "rankMax": 32,
-      "rankCiLow": 27,
-      "rankCiHigh": 32,
-      "pTop1": 0.0,
-      "pTop5": 0.0,
-      "spread": 6,
-      "bySource": {
-        "nflcom-shook": 32,
-        "cbs-prisco": 28,
+        "nflcom-shook": 28,
         "fox-vacchiano": 28,
-        "si-orr": 30,
-        "sportingnews-iyer": 27,
-        "sharp-summerlin": 32,
-        "thescore-staff": 29,
-        "br-experts": 26,
-        "usatoday-davis": 27,
-        "nflcom-reynolds": 32
+        "si-orr": 29,
+        "sportingnews-iyer": 30,
+        "sharp-summerlin": 28,
+        "thescore-staff": 32,
+        "br-experts": 29,
+        "usatoday-davis": 29
       }
     },
     {
-      "team": "Los Angeles Chargers",
-      "abbr": "LAC",
-      "conference": "AFC",
+      "team": "Arizona Cardinals",
+      "abbr": "ARI",
+      "conference": "NFC",
       "division": "West",
-      "rank": 31,
-      "record": "1-8",
-      "score": -1.4624,
-      "scoreRaw": -1.4696,
-      "se": 0.0927,
-      "ciLow": -1.6721,
-      "ciHigh": -1.2526,
-      "meanRank": 30.1,
+      "rank": 29,
+      "record": "3-8",
+      "score": -1.4504,
+      "scoreRaw": -1.459,
+      "se": 0.1017,
+      "ciLow": -1.6909,
+      "ciHigh": -1.2099,
+      "meanRank": 29.88,
       "medianRank": 30.0,
       "rankSd": 1.73,
-      "rankMin": 27,
+      "rankMin": 28,
       "rankMax": 32,
-      "rankCiLow": 29,
+      "rankCiLow": 28,
       "rankCiHigh": 32,
       "pTop1": 0.0,
       "pTop5": 0.0,
-      "spread": 5,
+      "spread": 4,
       "bySource": {
-        "nflcom-shook": 27,
-        "cbs-prisco": 31,
+        "nflcom-shook": 32,
         "fox-vacchiano": 30,
         "si-orr": 32,
-        "sportingnews-iyer": 32,
+        "sportingnews-iyer": 28,
         "sharp-summerlin": 30,
         "thescore-staff": 28,
-        "br-experts": 32,
-        "usatoday-davis": 29,
-        "nflcom-reynolds": 30
+        "br-experts": 28,
+        "usatoday-davis": 31
       }
     },
     {
-      "team": "Miami Dolphins",
-      "abbr": "MIA",
+      "team": "Indianapolis Colts",
+      "abbr": "IND",
       "conference": "AFC",
-      "division": "East",
-      "rank": 32,
-      "record": "1-8",
-      "score": -1.479,
-      "scoreRaw": -1.4863,
-      "se": 0.0795,
-      "ciLow": -1.6588,
-      "ciHigh": -1.2991,
-      "meanRank": 30.2,
+      "division": "South",
+      "rank": 30,
+      "record": "3-8",
+      "score": -1.4535,
+      "scoreRaw": -1.4621,
+      "se": 0.0865,
+      "ciLow": -1.658,
+      "ciHigh": -1.2491,
+      "meanRank": 30.0,
       "medianRank": 30.0,
-      "rankSd": 1.14,
+      "rankSd": 1.07,
       "rankMin": 29,
       "rankMax": 32,
       "rankCiLow": 29,
@@ -2740,15 +2634,79 @@
       "spread": 3,
       "bySource": {
         "nflcom-shook": 30,
-        "cbs-prisco": 30,
-        "fox-vacchiano": 32,
-        "si-orr": 29,
-        "sportingnews-iyer": 31,
+        "fox-vacchiano": 29,
+        "si-orr": 30,
+        "sportingnews-iyer": 29,
+        "sharp-summerlin": 31,
+        "thescore-staff": 29,
+        "br-experts": 30,
+        "usatoday-davis": 32
+      }
+    },
+    {
+      "team": "Los Angeles Chargers",
+      "abbr": "LAC",
+      "conference": "AFC",
+      "division": "West",
+      "rank": 31,
+      "record": "1-9",
+      "score": -1.4777,
+      "scoreRaw": -1.4865,
+      "se": 0.0953,
+      "ciLow": -1.703,
+      "ciHigh": -1.2524,
+      "meanRank": 30.25,
+      "medianRank": 30.5,
+      "rankSd": 1.49,
+      "rankMin": 28,
+      "rankMax": 32,
+      "rankCiLow": 29,
+      "rankCiHigh": 32,
+      "pTop1": 0.0,
+      "pTop5": 0.0,
+      "spread": 4,
+      "bySource": {
+        "nflcom-shook": 29,
+        "fox-vacchiano": 31,
+        "si-orr": 31,
+        "sportingnews-iyer": 32,
         "sharp-summerlin": 29,
         "thescore-staff": 30,
-        "br-experts": 30,
-        "usatoday-davis": 32,
-        "nflcom-reynolds": 29
+        "br-experts": 32,
+        "usatoday-davis": 28
+      }
+    },
+    {
+      "team": "Miami Dolphins",
+      "abbr": "MIA",
+      "conference": "AFC",
+      "division": "East",
+      "rank": 32,
+      "record": "1-9",
+      "score": -1.5027,
+      "scoreRaw": -1.5116,
+      "se": 0.1075,
+      "ciLow": -1.757,
+      "ciHigh": -1.2484,
+      "meanRank": 30.5,
+      "medianRank": 31.0,
+      "rankSd": 1.93,
+      "rankMin": 26,
+      "rankMax": 32,
+      "rankCiLow": 28,
+      "rankCiHigh": 32,
+      "pTop1": 0.0,
+      "pTop5": 0.0,
+      "spread": 6,
+      "bySource": {
+        "nflcom-shook": 31,
+        "fox-vacchiano": 32,
+        "si-orr": 26,
+        "sportingnews-iyer": 31,
+        "sharp-summerlin": 32,
+        "thescore-staff": 31,
+        "br-experts": 31,
+        "usatoday-davis": 30
       }
     }
   ],
@@ -2757,172 +2715,126 @@
       "source": "nflcom-shook",
       "values": [
         1.0,
-        0.945,
-        0.949,
-        0.939,
-        0.918,
-        0.944,
-        0.938,
-        0.927,
-        0.945,
-        0.979
-      ]
-    },
-    {
-      "source": "cbs-prisco",
-      "values": [
-        0.945,
-        1.0,
-        0.967,
+        0.977,
         0.941,
-        0.964,
-        0.966,
-        0.971,
-        0.971,
-        0.949,
-        0.953
+        0.946,
+        0.957,
+        0.942,
+        0.951,
+        0.926
       ]
     },
     {
       "source": "fox-vacchiano",
       "values": [
-        0.949,
-        0.967,
+        0.977,
         1.0,
-        0.947,
-        0.966,
-        0.967,
-        0.971,
-        0.959,
-        0.937,
-        0.963
+        0.941,
+        0.98,
+        0.986,
+        0.982,
+        0.981,
+        0.945
       ]
     },
     {
       "source": "si-orr",
       "values": [
-        0.939,
         0.941,
-        0.947,
+        0.941,
         1.0,
-        0.937,
-        0.944,
-        0.951,
-        0.947,
-        0.953,
-        0.977
+        0.921,
+        0.948,
+        0.92,
+        0.94,
+        0.917
       ]
     },
     {
       "source": "sportingnews-iyer",
       "values": [
-        0.918,
-        0.964,
-        0.966,
-        0.937,
+        0.946,
+        0.98,
+        0.921,
         1.0,
-        0.958,
-        0.952,
+        0.981,
         0.986,
-        0.926,
-        0.941
+        0.993,
+        0.93
       ]
     },
     {
       "source": "sharp-summerlin",
       "values": [
-        0.944,
-        0.966,
-        0.967,
-        0.944,
-        0.958,
+        0.957,
+        0.986,
+        0.948,
+        0.981,
         1.0,
-        0.964,
-        0.96,
-        0.938,
-        0.961
+        0.981,
+        0.986,
+        0.956
       ]
     },
     {
       "source": "thescore-staff",
       "values": [
-        0.938,
-        0.971,
-        0.971,
-        0.951,
-        0.952,
-        0.964,
+        0.942,
+        0.982,
+        0.92,
+        0.986,
+        0.981,
         1.0,
-        0.96,
-        0.948,
-        0.956
+        0.985,
+        0.946
       ]
     },
     {
       "source": "br-experts",
       "values": [
-        0.927,
-        0.971,
-        0.959,
-        0.947,
+        0.951,
+        0.981,
+        0.94,
+        0.993,
         0.986,
-        0.96,
-        0.96,
+        0.985,
         1.0,
-        0.946,
-        0.946
+        0.948
       ]
     },
     {
       "source": "usatoday-davis",
       "values": [
-        0.945,
-        0.949,
-        0.937,
-        0.953,
         0.926,
-        0.938,
-        0.948,
-        0.946,
-        1.0,
-        0.949
-      ]
-    },
-    {
-      "source": "nflcom-reynolds",
-      "values": [
-        0.979,
-        0.953,
-        0.963,
-        0.977,
-        0.941,
-        0.961,
+        0.945,
+        0.917,
+        0.93,
         0.956,
         0.946,
-        0.949,
+        0.948,
         1.0
       ]
     }
   ],
   "mostContested": [
     {
-      "team": "Dallas Cowboys",
+      "team": "New England Patriots",
+      "spread": 11
+    },
+    {
+      "team": "Las Vegas Raiders",
+      "spread": 9
+    },
+    {
+      "team": "New York Giants",
       "spread": 9
     },
     {
       "team": "Denver Broncos",
-      "spread": 9
-    },
-    {
-      "team": "Tampa Bay Buccaneers",
-      "spread": 9
-    },
-    {
-      "team": "Baltimore Ravens",
       "spread": 8
     },
     {
-      "team": "Las Vegas Raiders",
+      "team": "Pittsburgh Steelers",
       "spread": 8
     }
   ],
@@ -2941,8 +2853,8 @@
     ],
     "AFC North": [
       "Baltimore Ravens",
-      "Cleveland Browns",
       "Pittsburgh Steelers",
+      "Cleveland Browns",
       "Cincinnati Bengals"
     ],
     "AFC East": [
@@ -2953,8 +2865,8 @@
     ],
     "NFC North": [
       "Green Bay Packers",
-      "Detroit Lions",
       "Minnesota Vikings",
+      "Detroit Lions",
       "Chicago Bears"
     ],
     "NFC East": [
@@ -2966,12 +2878,12 @@
     "AFC West": [
       "Los Angeles Chargers",
       "Las Vegas Raiders",
-      "Kansas City Chiefs",
-      "Denver Broncos"
+      "Denver Broncos",
+      "Kansas City Chiefs"
     ],
     "AFC South": [
-      "Tennessee Titans",
       "Indianapolis Colts",
+      "Tennessee Titans",
       "Houston Texans",
       "Jacksonville Jaguars"
     ]
